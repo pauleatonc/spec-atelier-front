@@ -1,27 +1,30 @@
 {
-  "name": "specatelier-frontend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "webpack --mode production"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Proskynete/specatelier-frontend.git"
-  },
-  "author": "Eduardo Alvarez",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Proskynete/specatelier-frontend/issues"
-  },
-  "homepage": "https://github.com/Proskynete/specatelier-frontend#readme",
-  "devDependencies": {
-    "@babel/core": "^7.6.2",
-    "@babel/preset-env": "^7.6.2",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.6",
-    "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9"
-  }
+	"name": "specatelier-frontend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "webpack --mode production",
+		"prettier:check": "prettier --check ./src/**/*.js",
+		"prettier:format": "prettier --config .prettierrc --write ./src/**/*.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/Proskynete/specatelier-frontend.git"
+	},
+	"author": "Eduardo Alvarez",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Proskynete/specatelier-frontend/issues"
+	},
+	"homepage": "https://github.com/Proskynete/specatelier-frontend#readme",
+	"devDependencies": {
+		"@babel/core": "^7.6.2",
+		"@babel/preset-env": "^7.6.2",
+		"@babel/preset-react": "^7.0.0",
+		"babel-loader": "^8.0.6",
+		"prettier": "1.18.2",
+		"webpack": "^4.41.0",
+		"webpack-cli": "^3.3.9"
+	}
 }
