@@ -28,6 +28,14 @@ module.exports = env => {
 						loader: 'babel-loader',
 					},
 				},
+				{
+					test: /\.html$/,
+					use: [
+						{
+							loader: 'html-loader',
+						},
+					],
+				},
 			],
 		},
 		externals: ['window'],

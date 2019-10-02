@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"build": "webpack -p --mode production --env.NODE_ENV=production",
+		"build:production": "webpack -p --mode production --env.NODE_ENV=production",
+		"build:development": "webpack --color --mode development --env.NODE_ENV=development",
 		"dev": "webpack-dev-server --mode development --env.NODE_ENV=development",
 		"start": "npm run dev",
 		"prettier:check": "prettier --check ./src/**/*.js",
