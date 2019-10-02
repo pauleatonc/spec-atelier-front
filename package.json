@@ -1,0 +1,19 @@
+{
+  "name": "specatelier-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Proskynete/specatelier-frontend.git"
+  },
+  "author": "Eduardo Alvarez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Proskynete/specatelier-frontend/issues"
+  },
+  "homepage": "https://github.com/Proskynete/specatelier-frontend#readme"
+}
