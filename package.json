@@ -9,6 +9,8 @@
     "dev": "webpack-dev-server --mode development --env.NODE_ENV=development",
     "start": "npm run dev",
     "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage",
     "prettier:check": "prettier --check ./src/**/*.js",
     "prettier:format": "prettier --config .prettierrc --write ./src/**/*.js"
   },
@@ -49,5 +51,15 @@
   "dependencies": {
     "react": "^16.10.1",
     "react-dom": "^16.10.1"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": -10
+      }
+    }
   }
 }
