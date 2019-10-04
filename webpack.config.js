@@ -6,7 +6,7 @@ module.exports = env => {
 	return {
 		entry: path.resolve(__dirname, 'src', 'main.js'),
 		output: {
-			path: path.resolve(__dirname, 'dist'),
+			path: path.resolve(__dirname, 'build'),
 			filename: 'bundle.js',
 		},
 		devServer: {
