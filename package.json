@@ -24,7 +24,7 @@
     "url": "git+ssh://git@github.com/Proskynete/specatelier-frontend.git"
   },
   "author": "Eduardo Alvarez <eduardo.a1993@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Proskynete/specatelier-frontend/issues"
   },
