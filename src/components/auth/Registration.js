@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from '../../axios';
 
 export default class Registration extends Component {
 
@@ -12,7 +12,7 @@ export default class Registration extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { email, password } = this.state;
-    axios.post(process.env.API_URL + '/registrations',
+    axios.post('/registrations',
      { user: { email: email, password: password} },
      { withCredentials: true }
     ).then(response => {
