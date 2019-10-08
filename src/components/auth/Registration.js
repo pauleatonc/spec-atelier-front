@@ -6,7 +6,6 @@ export default class Registration extends Component {
   state = {
     email: '',
     password: '',
-    password_confirmation: '',
     registrationErrors: null
   }
 
