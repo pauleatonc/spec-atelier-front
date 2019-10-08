@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../../axios';
 
-export default class Registration extends Component {
+export default class Login extends Component {
 
   state = {
     email: '',
@@ -12,11 +12,11 @@ export default class Registration extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { email, password } = this.state;
-    axios.post('/registrations',
+    axios.post('/sessions',
      { user: { email: email, password: password} },
      { withCredentials: true }
     ).then(response => {
-      if (response.data.status === 'created'){
+      if (response.data.logged_in){
         this.props.handleSuccessfullAuth(response.data)
       }
     }).catch(error => {
@@ -37,7 +37,7 @@ export default class Registration extends Component {
           {this.state.registrationErrors}
           <input type="email" name='email' value={this.state.email} onChange={this.handleChange} required/>
           <input type="password" name='password' value={this.state.password} onChange={this.handleChange} required/>
-          <button type='submit'>Register</button>
+          <button type='submit'>Login</button>
         </form>
       </div>
     )
