@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build:production": "webpack -p --mode production --env.NODE_ENV=production",
-    "dev": "webpack-dev-server --env.API_URL=http://localhost:3000 --mode development --env.NODE_ENV=development",
+    "start:integration": "webpack-dev-server --mode development --env.NODE_ENV=integration",
+    "start:development": "webpack-dev-server --mode development --env.NODE_ENV=development",
     "start": "node ./server.js",
     "heroku-postbuild": "npm run build:production",
     "test": "jest",
@@ -29,7 +30,6 @@
   },
   "homepage": "https://github.com/Proskynete/specatelier-frontend#readme",
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "babel-jest": "^24.9.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",

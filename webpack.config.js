@@ -3,12 +3,6 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = env => {
-
-  const envKeys = Object.keys(env).reduce((prev, next) => {
-    prev[`process.env.${next}`] = JSON.stringify(env[next]);
-    return prev;
-  }, {});
-
 	return {
 		entry: path.resolve(__dirname, 'src', 'main.js'),
 		output: {
@@ -50,7 +44,9 @@ module.exports = env => {
 			new HtmlWebPackPlugin({
 				template: './src/index.html',
 			}),
-			new webpack.DefinePlugin(envKeys),
+			new webpack.DefinePlugin({
+				ENVIRONMENT: JSON.stringify(env.NODE_ENV),
+			}),
 		],
 	};
 };
