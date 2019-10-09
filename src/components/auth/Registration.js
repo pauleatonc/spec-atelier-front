@@ -31,6 +31,11 @@ const Registration = () => {
 				setRegistrationErrors(err);
 			});
 	};
+	state = {
+		email: '',
+		password: '',
+		registrationErrors: null,
+	};
 
 	return (
 		<Fragment>
