@@ -9,7 +9,6 @@
   },
   "scripts": {
     "build:production": "webpack -p --mode production --env.NODE_ENV=production",
-    "start:integration": "webpack-dev-server --mode development --env.NODE_ENV=integration",
     "start:development": "webpack-dev-server --mode development --env.NODE_ENV=development",
     "start": "node ./server.js",
     "heroku-postbuild": "npm run build:production",
