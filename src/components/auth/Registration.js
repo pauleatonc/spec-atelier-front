@@ -1,46 +1,59 @@
-import React, { Component } from 'react';
+import React, { useState, Fragment } from 'react';
 import axios from 'axios';
 
-export default class Registration extends Component {
+const Registration = () => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [registrationErrors, setRegistrationErrors] = useState(null);
 
-  state = {
-    email: '',
-    password: '',
-    password_confirmation: '',
-    registrationErrors: null
-  }
+	const handleSubmit = e => {
+		e.preventDefault();
 
-  handleSubmit = event => {
-    event.preventDefault();
-    const { email, password } = this.state;
-    axios.post(process.env.API_URL + '/registrations',
-     { user: { email: email, password: password} },
-     { withCredentials: true }
-    ).then(response => {
-      if (response.data.status === 'created'){
-        this.props.handleSuccessfullAuth(response.data)
-      }
-    }).catch(error => {
-      this.setState({ registrationErrors: error })
-    })
-  };
+		axios
+			.post(
+				process.env.API_URL + '/registrations',
+				{
+					user: {
+						email,
+						password,
+					},
+				},
+				{
+					withCredentials: true,
+				},
+			)
+			.then(response => {
+				if (response.data.status === 'created') {
+					this.props.handleSuccessfullAuth(response.data);
+				}
+			})
+			.catch(err => {
+				setRegistrationErrors(err);
+			});
+	};
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
+	return (
+		<Fragment>
+			<form onSubmit={handleSubmit}>
+				{registrationErrors}
+				<input
+					type="email"
+					name="email"
+					value={email}
+					onChange={email => setEmail(email)}
+					required
+				/>
+				<input
+					type="password"
+					name="password"
+					value={password}
+					onChange={pass => setPassword(pass)}
+					required
+				/>
+				<button type="submit">Register</button>
+			</form>
+		</Fragment>
+	);
+};
 
-  render() {
-    return(
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          {this.state.registrationErrors}
-          <input type="email" name='email' value={this.state.email} onChange={this.handleChange} required/>
-          <input type="password" name='password' value={this.state.password} onChange={this.handleChange} required/>
-          <button type='submit'>Register</button>
-        </form>
-      </div>
-    )
-  }
-}
+export default Registration;
