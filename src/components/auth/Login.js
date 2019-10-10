@@ -1,45 +1,52 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import axios from '../../axios';
 
-export default class Login extends Component {
+const Login = () => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [registrationErrors, setRegistrationErrors] = useState(null);
 
-  state = {
-    email: '',
-    password: '',
-    registrationErrors: null
-  }
+	const handleSubmit = e => {
+		e.preventDefault();
 
-  handleSubmit = event => {
-    event.preventDefault();
-    const { email, password } = this.state;
-    axios.post('/sessions',
-     { user: { email: email, password: password} },
-     { withCredentials: true }
-    ).then(response => {
-      if (response.data.logged_in){
-        this.props.handleSuccessfullAuth(response.data)
-      }
-    }).catch(error => {
-      console.log(error);
-    })
-  };
+		axios
+			.post(
+				'/sessions',
+				{ user: { email, password } },
+				{ withCredentials: true },
+			)
+			.then(response => {
+				if (response.data.logged_in) {
+					this.props.handleSuccessfullAuth(response.data);
+				}
+			})
+			.catch(err => {
+				setRegistrationErrors(err);
+			});
+	};
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
+	return (
+		<>
+			<form onSubmit={handleSubmit}>
+				{registrationErrors}
+				<input
+					type="email"
+					name="email"
+					value={email}
+					onChange={mail => setEmail(mail)}
+					required
+				/>
+				<input
+					type="password"
+					name="password"
+					value={password}
+					onChange={pass => setPassword(pass)}
+					required
+				/>
+				<button type="submit">Login</button>
+			</form>
+		</>
+	);
+};
 
-  render() {
-    return(
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          {this.state.registrationErrors}
-          <input type="email" name='email' value={this.state.email} onChange={this.handleChange} required/>
-          <input type="password" name='password' value={this.state.password} onChange={this.handleChange} required/>
-          <button type='submit'>Login</button>
-        </form>
-      </div>
-    )
-  }
-}
+export default Login;

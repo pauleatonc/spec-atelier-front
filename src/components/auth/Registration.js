@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const Registration = () => {
@@ -11,7 +11,7 @@ const Registration = () => {
 
 		axios
 			.post(
-				process.env.API_URL + '/registrations',
+				`${process.env.API_URL}/registrations`,
 				{
 					user: {
 						email,
@@ -31,21 +31,16 @@ const Registration = () => {
 				setRegistrationErrors(err);
 			});
 	};
-	state = {
-		email: '',
-		password: '',
-		registrationErrors: null,
-	};
 
 	return (
-		<Fragment>
+		<>
 			<form onSubmit={handleSubmit}>
 				{registrationErrors}
 				<input
 					type="email"
 					name="email"
 					value={email}
-					onChange={email => setEmail(email)}
+					onChange={mail => setEmail(mail)}
 					required
 				/>
 				<input
@@ -57,7 +52,7 @@ const Registration = () => {
 				/>
 				<button type="submit">Register</button>
 			</form>
-		</Fragment>
+		</>
 	);
 };
 
