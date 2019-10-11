@@ -1,6 +1,10 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Home from 'Views/home';
 
-const Main = () => <h1>Hello SpecAtelier</h1>;
+const Main = () => {
+	return <Home />;
+};
 
 ReactDOM.render(<Main />, document.querySelector('#specAtelier'));

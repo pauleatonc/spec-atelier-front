@@ -1,5 +1,7 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-undef */
 import React, { useState } from 'react';
-import axios from '../../axios';
+import getEnpoint from 'Configuration/config';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
@@ -9,19 +11,26 @@ const Login = () => {
 	const handleSubmit = e => {
 		e.preventDefault();
 
-		axios
-			.post(
-				'/sessions',
-				{ user: { email, password } },
-				{ withCredentials: true },
-			)
+		const body = {
+			email,
+			password,
+		};
+
+		fetch(getEnpoint('registrations'), {
+			method: 'POST',
+			body: JSON.stringify(body),
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Controll-Allow-Origin': '*',
+			},
+		})
+			.then(data => data.json())
 			.then(response => {
-				if (response.data.logged_in) {
-					this.props.handleSuccessfullAuth(response.data);
-				}
+				console.log(response);
 			})
-			.catch(err => {
-				setRegistrationErrors(err);
+			.catch(error => {
+				console.log(error);
+				setRegistrationErrors(error);
 			});
 	};
 
@@ -33,14 +42,14 @@ const Login = () => {
 					type="email"
 					name="email"
 					value={email}
-					onChange={mail => setEmail(mail)}
+					onChange={e => setEmail(e.target.value)}
 					required
 				/>
 				<input
 					type="password"
 					name="password"
 					value={password}
-					onChange={pass => setPassword(pass)}
+					onChange={e => setPassword(e.target.value)}
 					required
 				/>
 				<button type="submit">Login</button>

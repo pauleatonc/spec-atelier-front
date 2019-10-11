@@ -1,5 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import axios from 'axios';
+import getEnpoint from 'Configuration/config';
 
 const Registration = () => {
 	const [email, setEmail] = useState('');
@@ -9,45 +11,45 @@ const Registration = () => {
 	const handleSubmit = e => {
 		e.preventDefault();
 
-		axios
-			.post(
-				`${process.env.API_URL}/registrations`,
-				{
-					user: {
-						email,
-						password,
-					},
-				},
-				{
-					withCredentials: true,
-				},
-			)
+		const body = {
+			email,
+			password,
+		};
+
+		fetch(getEnpoint('registrations'), {
+			method: 'POST',
+			body: JSON.stringify(body),
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Controll-Allow-Origin': '*',
+			},
+		})
+			.then(data => data.json())
 			.then(response => {
-				if (response.data.status === 'created') {
-					this.props.handleSuccessfullAuth(response.data);
-				}
+				console.log(response);
 			})
-			.catch(err => {
-				setRegistrationErrors(err);
+			.catch(error => {
+				console.log(error);
+				setRegistrationErrors(error);
 			});
 	};
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} autoComplete="off">
 				{registrationErrors}
 				<input
 					type="email"
 					name="email"
 					value={email}
-					onChange={mail => setEmail(mail)}
+					onChange={e => setEmail(e.target.value)}
 					required
 				/>
 				<input
 					type="password"
 					name="password"
 					value={password}
-					onChange={pass => setPassword(pass)}
+					onChange={e => setPassword(e.target.value)}
 					required
 				/>
 				<button type="submit">Register</button>
