@@ -28,15 +28,15 @@
 
 ## Environments
 
-| Environment | Description                                                          |
-| ----------- | -------------------------------------------------------------------- |
-| development | Run project with stubbs for development new features and fixing bugs |
-| integration | Run project for test with backend in local                           |
-| production  | Run project in production with backend                               |
+| Environment | Script     | Description                                                             |
+| ----------- | ---------- | ----------------------------------------------------------------------- |
+| development | start:dev  | Run project with stubbs for development new features and/or fixing bugs |
+| integration | start:int  | Run project for testing with backend in local                           |
+| production  | start:prod | Run project in production with backend                                  |
 
 ## Clone project
 
-To clone proyect, copy and paste yhe next snippet in you terminal
+To clone proyect, copy and paste the next snippet in you terminal
 
 ```sh
 git clone https://github.com/Proskynete/specatelier-frontend.git
@@ -48,7 +48,7 @@ Then move to the folder created by writing the next snippet
 cd specatelier-frontend
 ```
 
-## Run the project
+## Run project
 
 First, we must install the project dependencies with this snippet (in the project path)
 

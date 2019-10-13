@@ -8,8 +8,9 @@
 		"npm": "6.10.3"
 	},
 	"scripts": {
-		"build:production": "webpack -p --mode production --env.NODE_ENV=production",
-		"start:development": "webpack-dev-server --mode development --env.NODE_ENV=development",
+		"build:prod": "webpack -p --mode production --env.NODE_ENV=production",
+		"start:int": "webpack-dev-server --mode development --env.NODE_ENV=integration",
+		"start:dev": "webpack-dev-server --mode development --env.NODE_ENV=development",
 		"start": "node ./server.js",
 		"heroku-postbuild": "npm run build:production",
 		"test": "jest",
