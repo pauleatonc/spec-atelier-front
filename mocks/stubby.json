@@ -1,10 +1,10 @@
 [
 	{
 		"request": {
-			"url": "^/sessions/$",
+			"url": "^/api/sessions",
 			"status": 200,
 			"method": "POST",
-			"json": "{\"email\":\"lalo\",\"password\":\"abc123\"}"
+			"json": "{\"email\":\"admin@specatelier.com\",\"password\":\"specatelier2019\"}"
 		},
 		"response": {
 			"status": 200,
