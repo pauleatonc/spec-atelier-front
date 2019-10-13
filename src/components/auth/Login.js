@@ -14,8 +14,10 @@ const Login = props => {
 		e.preventDefault();
 
 		const body = {
-			email,
-			password,
+			user: {
+				email,
+				password,
+			},
 		};
 
 		loginMethod(body);
