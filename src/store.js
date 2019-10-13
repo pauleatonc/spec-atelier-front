@@ -1,5 +1,5 @@
 import { combineReducers, createStore } from 'redux';
-import { loginReducer } from './_reducers';
+import { loginReducer } from './reducers';
 
 const rootReducer = combineReducers({
 	login: loginReducer,
