@@ -10,7 +10,9 @@
 	"scripts": {
 		"build:prod": "webpack -p --mode production --env.NODE_ENV=production",
 		"start:int": "webpack-dev-server --mode development --env.NODE_ENV=integration",
-		"start:dev": "webpack-dev-server --mode development --env.NODE_ENV=development",
+		"start:dev": "concurrently \"npm run stubby\" \"npm run dev\"",
+		"dev": "webpack-dev-server --mode development --env.NODE_ENV=development",
+		"stubby": "stubby -w -d stubs/stubby.json",
 		"start": "node ./server.js",
 		"heroku-postbuild": "npm run build:production",
 		"test": "jest",
@@ -32,6 +34,7 @@
 	"devDependencies": {
 		"babel-eslint": "^10.0.3",
 		"babel-jest": "^24.9.0",
+		"concurrently": "^5.0.0",
 		"enzyme": "^3.10.0",
 		"enzyme-adapter-react-16": "^1.14.0",
 		"eslint": "^6.1.0",
@@ -45,6 +48,7 @@
 		"jest": "^24.9.0",
 		"prettier": "1.18.2",
 		"react-test-renderer": "^16.10.1",
+		"stubby": "^4.1.1",
 		"webpack-dev-server": "^3.8.1"
 	},
 	"dependencies": {
@@ -53,7 +57,6 @@
 		"@babel/preset-react": "^7.0.0",
 		"axios": "^0.19.0",
 		"babel-loader": "^8.0.6",
-		"concurrently": "^5.0.0",
 		"express": "^4.17.1",
 		"html-loader": "^0.5.5",
 		"html-webpack-plugin": "^3.2.0",
