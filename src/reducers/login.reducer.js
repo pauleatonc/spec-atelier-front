@@ -1,7 +1,8 @@
 import { LOG_IN } from '../config/constants';
 
 const initialState = {
-	isLogin: '',
+	isLogin: false,
+	userData: {},
 };
 
 export default (state = initialState, action) => {
@@ -10,6 +11,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				isLogin: action.payload.isLogin,
+				userData: action.payload.userData,
 			};
 		default:
 			return state;

@@ -1,7 +1,6 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-undef */
 import React, { useState } from 'react';
-import getEnpoint from 'Configuration/config';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
