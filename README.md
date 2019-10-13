@@ -1,52 +1,60 @@
-# Proyecto Front-end de SpecAtelier
+# Front-end project - SpecAtelier
 
-**Recomendaciones:**
+**Recomendations:**
 
-- Este proyecto está desarrollado con la versión `12.10.0` de [Node.js](https://nodejs.org/), por lo cual, se recomienda tener una versión igual o superior.
-- Se recomienda utilizar `npm` por sobre `yarn` por temas de seguridad y vulnerabilidad
+- This project is development with `12.10.0` [Node.js](https://nodejs.org/) version, it is recommended have equal version or up.
+- It is recomended use `npm` and not `yarn`.
 
 ---
 
-## Dependencias
+## Dependencies
 
-| Dependencia | Versión |
-| ------ | ------ |
-| [react](https://es.reactjs.org/) | 16.10.1 |
-| [react-dom](https://es.reactjs.org/docs/react-dom.html) | 16.10.1 |
-| [webpack](https://webpack.js.org/) | 4.41.0 |
-| [webpack-cli](https://www.npmjs.com/package/webpack-cli) | 3.3.9 |
-| [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) | 3.8.1 |
-| [babel-loader](https://www.npmjs.com/package/babel-loader) | 8.0.6 |
-| [prop-type](https://www.npmjs.com/package/prop-types) | 15.7.2 |
-| [prettier](https://prettier.io/) | 1.18.2 |
-| [eslint](https://www.npmjs.com/package/eslint) | 6.1.0 |
+| Dependency                                                             | Version |
+| ---------------------------------------------------------------------- | ------- |
+| [react](https://es.reactjs.org/)                                       | 16.10.1 |
+| [react-dom](https://es.reactjs.org/docs/react-dom.html)                | 16.10.1 |
+| [webpack](https://webpack.js.org/)                                     | 4.41.0  |
+| [webpack-cli](https://www.npmjs.com/package/webpack-cli)               | 3.3.9   |
+| [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) | 3.8.1   |
+| [babel-loader](https://www.npmjs.com/package/babel-loader)             | 8.0.6   |
+| [prop-type](https://www.npmjs.com/package/prop-types)                  | 15.7.2  |
+| [prettier](https://prettier.io/)                                       | 1.18.2  |
+| [eslint](https://www.npmjs.com/package/eslint)                         | 6.1.0   |
 
-## Clonar proyecto
+## Environments
 
-Para clonar el proyecto será necesario correr el siguiente comando
+| Environment | Description                                                          |
+| ----------- | -------------------------------------------------------------------- |
+| development | Run project with stubbs for development new features and fixing bugs |
+| integration | Run project for test with backend in local                           |
+| production  | Run project in production with backend                               |
+
+## Clone project
+
+To clone proyect, copy and paste yhe next snippet in you terminal
 
 ```sh
 git clone https://github.com/Proskynete/specatelier-frontend.git
 ```
 
-Luego nos movemos a la carpeta clonada con el siguiente comando
+Then move to the folder created by writing the next snippet
 
 ```sh
 cd specatelier-frontend
 ```
 
-## Hacer correr el proyecto
+## Run the project
 
-Para que el proyecto se pueda levantar correctamente, primero deberemos instalar las dependencias instaladas en el mismo (las cuales estan descritas en el archivo `package.json`), mediante el siguiente comando
+First, we must install the project dependencies with this snippet (in the project path)
 
 ```sh
 npm install
 ```
 
-Una vez termine la instalación podremos correr el siguiente comando
+When finish the installation, copy and past in the terminal next snippet
 
 ```sh
-npm start
+npm run start:dev
 ```
 
-Esto hará que nuestro proyecto se pueda visualizar desde un navegador accediendo a `http://localhost:8080/`
+With these steps, the project will be executed and we can see it by copying `http://localhost:8080` in your preferred browser
