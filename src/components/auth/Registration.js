@@ -1,43 +1,31 @@
 /* eslint-disable no-undef */
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
-import getEnpoint from 'Configuration/config';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { registrationAction } from '../../actions';
 
-const Registration = () => {
+const Registration = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [registrationErrors, setRegistrationErrors] = useState(null);
+	const { registrationMethod } = props;
 
 	const handleSubmit = e => {
 		e.preventDefault();
 
 		const body = {
-			email,
-			password,
+			user: {
+				email,
+				password,
+			},
 		};
 
-		fetch(getEnpoint('registrations'), {
-			method: 'POST',
-			body: JSON.stringify(body),
-			headers: {
-				'Content-Type': 'application/json',
-				'Access-Controll-Allow-Origin': '*',
-			},
-		})
-			.then(data => data.json())
-			.then(response => {
-				console.log(response);
-			})
-			.catch(error => {
-				console.log(error);
-				setRegistrationErrors(error);
-			});
+		registrationMethod(body);
 	};
 
 	return (
 		<>
 			<form onSubmit={handleSubmit} autoComplete="off">
-				{registrationErrors}
 				<input
 					type="email"
 					name="email"
@@ -58,4 +46,13 @@ const Registration = () => {
 	);
 };
 
-export default Registration;
+Registration.propTypes = {
+	registrationMethod: PropTypes.func.isRequired,
+};
+
+export default connect(
+	state => state,
+	dispatch => ({
+		registrationMethod: registrationAction(dispatch),
+	}),
+)(Registration);

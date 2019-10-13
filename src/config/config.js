@@ -9,7 +9,7 @@ const handleGetEnvironment = () => ENVIRONMENT;
 const handleGetUrl = () => mapUrls[handleGetEnvironment()];
 const handleGetEntryPointApi = path => `/api/${path}`;
 
-const getEnpoint = (path = '') =>
+const getEndPoint = (path = '') =>
 	`${handleGetUrl()}${handleGetEntryPointApi(path)}`;
 
-export default getEnpoint;
+export default getEndPoint;

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import loginAction from '../../actions';
+import { loginAction } from '../../actions';
 
 const Login = props => {
 	const [email, setEmail] = useState('');

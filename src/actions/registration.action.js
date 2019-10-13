@@ -2,11 +2,11 @@
 /* eslint-disable import/no-unresolved */
 import axios from 'axios';
 import getEndPoint from 'Configuration/config';
-import { LOG_IN, LOG_IN_ERROR } from 'Configuration/constants';
+import { REGISTRATION, REGISTRATION_ERROR } from 'Configuration/constants';
 
-export const loginAction = dispatch => data => {
+export const registrationAction = dispatch => data => {
 	axios({
-		url: `${getEndPoint('sessions')}`,
+		url: `${getEndPoint('registration')}`,
 		method: 'post',
 		headers: {
 			'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ export const loginAction = dispatch => data => {
 	})
 		.then(response => {
 			return dispatch({
-				type: LOG_IN,
+				type: REGISTRATION,
 				payload: {
 					isLogin: response.data.logged_in,
 					userData: response.userData,
@@ -24,7 +24,7 @@ export const loginAction = dispatch => data => {
 		})
 		.catch(error => {
 			return dispatch({
-				type: LOG_IN_ERROR,
+				type: REGISTRATION_ERROR,
 				payload: {
 					isLogin: false,
 					error,
