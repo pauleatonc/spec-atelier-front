@@ -19,9 +19,11 @@ module.exports = env => {
 		resolve: {
 			extensions: ['.jsx', '.js'],
 			alias: {
+				Actions: path.resolve(__dirname, 'src/actions/'),
 				Components: path.resolve(__dirname, 'src/components/'),
-				Views: path.resolve(__dirname, 'src/views/'),
 				Configuration: path.resolve(__dirname, 'src/config/'),
+				Reducers: path.resolve(__dirname, 'src/reducers/'),
+				Views: path.resolve(__dirname, 'src/views/'),
 			},
 		},
 		module: {
