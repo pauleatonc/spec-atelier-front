@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -30,12 +28,14 @@ const Registration = props => {
 					type="email"
 					name="email"
 					value={email}
+					placeholder="email"
 					onChange={e => setEmail(e.target.value)}
 					required
 				/>
 				<input
 					type="password"
 					name="password"
+					placeholder="*********"
 					value={password}
 					onChange={e => setPassword(e.target.value)}
 					required
