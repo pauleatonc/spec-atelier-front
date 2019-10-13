@@ -13,13 +13,18 @@
 | ---------------------------------------------------------------------- | ------- |
 | [react](https://es.reactjs.org/)                                       | 16.10.1 |
 | [react-dom](https://es.reactjs.org/docs/react-dom.html)                | 16.10.1 |
+| [react-router-dom](https://www.npmjs.com/package/react-router-dom)     | 5.1.2   |
+| [react-redux](https://www.npmjs.com/package/react-redux)               | 7.1.1   |
+| [redux](https://www.npmjs.com/package/redux)                           | 4.0.4   |
 | [webpack](https://webpack.js.org/)                                     | 4.41.0  |
 | [webpack-cli](https://www.npmjs.com/package/webpack-cli)               | 3.3.9   |
 | [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) | 3.8.1   |
+| [express](https://www.npmjs.com/package/express)                       | 4.17.1  |
 | [babel-loader](https://www.npmjs.com/package/babel-loader)             | 8.0.6   |
 | [prop-type](https://www.npmjs.com/package/prop-types)                  | 15.7.2  |
 | [prettier](https://prettier.io/)                                       | 1.18.2  |
 | [eslint](https://www.npmjs.com/package/eslint)                         | 6.1.0   |
+| [axios](https://www.npmjs.com/package/axios)                           | 0.19.0  |
 
 ## Environments
 
