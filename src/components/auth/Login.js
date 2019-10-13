@@ -1,11 +1,14 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-undef */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import loginAction from '../../actions';
 
-const Login = () => {
+const Login = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [registrationErrors, setRegistrationErrors] = useState(null);
+	const { loginMethod } = props;
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -15,28 +18,12 @@ const Login = () => {
 			password,
 		};
 
-		fetch(getEnpoint('registrations'), {
-			method: 'POST',
-			body: JSON.stringify(body),
-			headers: {
-				'Content-Type': 'application/json',
-				'Access-Controll-Allow-Origin': '*',
-			},
-		})
-			.then(data => data.json())
-			.then(response => {
-				console.log(response);
-			})
-			.catch(error => {
-				console.log(error);
-				setRegistrationErrors(error);
-			});
+		loginMethod(body);
 	};
 
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
-				{registrationErrors}
 				<input
 					type="email"
 					name="email"
@@ -57,4 +44,13 @@ const Login = () => {
 	);
 };
 
-export default Login;
+Login.propTypes = {
+	loginMethod: PropTypes.func.isRequired,
+};
+
+export default connect(
+	state => state,
+	dispatch => ({
+		loginMethod: loginAction(dispatch),
+	}),
+)(Login);
