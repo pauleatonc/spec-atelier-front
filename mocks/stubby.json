@@ -1,0 +1,18 @@
+[
+	{
+		"request": {
+			"url": "^/sessions/$",
+			"status": 200,
+			"method": "POST",
+			"json": "{\"email\":\"lalo\",\"password\":\"abc123\"}"
+		},
+		"response": {
+			"status": 200,
+			"latency": 5000,
+			"headers": {
+				"Content-Type": "application/json"
+			},
+			"file": "./auth/login-response.json"
+		}
+	}
+]
