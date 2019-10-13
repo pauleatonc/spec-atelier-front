@@ -1,12 +1,12 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 import axios from 'axios';
-import getEnpoint from 'Configuration/config';
+import getEndPoint from 'Configuration/config';
 import { LOG_IN, LOG_IN_ERROR } from 'Configuration/constants';
 
 export const loginAction = dispatch => data => {
 	axios({
-		url: `${getEnpoint('sessions')}`,
+		url: `${getEndPoint('sessions')}`,
 		method: 'post',
 		headers: {
 			'Content-Type': 'application/json',
