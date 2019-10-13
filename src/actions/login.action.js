@@ -1,11 +1,12 @@
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 import axios from 'axios';
 import getEnpoint from 'Configuration/config';
 import { LOG_IN, LOG_IN_ERROR } from 'Configuration/constants';
 
-const loginAction = dispatch => data => {
+export const loginAction = dispatch => data => {
 	axios({
-		url: `${getEnpoint('registrations')}`,
+		url: `${getEnpoint('sessions')}`,
 		method: 'post',
 		headers: {
 			'Content-Type': 'application/json',
@@ -31,5 +32,3 @@ const loginAction = dispatch => data => {
 			});
 		});
 };
-
-export default loginAction;
