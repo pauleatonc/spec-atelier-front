@@ -3,8 +3,7 @@
 		"request": {
 			"url": "^/api/sessions",
 			"status": 200,
-			"method": "POST",
-			"json": "{\"user\":{\"email\":\"admin@specatelier.com\",\"password\":\"specatelier2019\"}}"
+			"method": "GET"
 		},
 		"response": {
 			"status": 200,
@@ -19,8 +18,7 @@
 		"request": {
 			"url": "^/api/registrations",
 			"status": 200,
-			"method": "POST",
-			"json": "{\"user\":{\"email\":\"admin@specatelier.com\",\"password\":\"specatelier2019\"}}"
+			"method": "POST"
 		},
 		"response": {
 			"status": 200,

@@ -7,7 +7,7 @@ import { LOG_IN, LOG_IN_ERROR } from 'Configuration/constants';
 export const loginAction = dispatch => data => {
 	axios({
 		url: `${getEndPoint('sessions')}`,
-		method: 'POST',
+		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
 		},
