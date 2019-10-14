@@ -14,7 +14,7 @@
 		"dev": "webpack-dev-server --mode development --env.NODE_ENV=development",
 		"stubby": "stubby -w -d mocks/stubby.json",
 		"start": "node ./server.js",
-		"heroku-postbuild": "npm run build:production",
+		"heroku-postbuild": "npm run build:prod",
 		"test": "jest",
 		"test:watch": "jest --watchAll",
 		"test:coverage": "jest --coverage",
