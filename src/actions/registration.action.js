@@ -6,8 +6,8 @@ import { REGISTRATION, REGISTRATION_ERROR } from 'Configuration/constants';
 
 export const registrationAction = dispatch => data => {
 	axios({
-		url: `${getEndPoint('registration')}`,
-		method: 'post',
+		url: `${getEndPoint('registrations')}`,
+		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
