@@ -35,7 +35,9 @@ const Login = props => {
 					onChange={e => setPassword(e.target.value)}
 					required
 				/>
-				<button type="button" onClick={() => handleSubmit()}>Login</button>
+				<button type="button" onClick={() => handleSubmit()}>
+					Login
+				</button>
 			</form>
 		</>
 	);

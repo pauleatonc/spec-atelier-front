@@ -37,7 +37,9 @@ const Registration = props => {
 					onChange={e => setPassword(e.target.value)}
 					required
 				/>
-				<button type="button" onClick={() => handleSubmit()}>Register</button>
+				<button type="button" onClick={() => handleSubmit()}>
+					Register
+				</button>
 			</form>
 		</>
 	);

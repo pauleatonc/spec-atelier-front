@@ -1,11 +1,11 @@
 {
-    "logged_in": true,
-    "user": {
-        "id": 1,
-        "email": "lalo@lalo.cl",
-        "password_digest": "$2a$12$JSpgR46cHKopflZSyKI2..EJC.JIbNguWcufgrMBxlXa088.g58/u",
-        "created_at": "2019-10-17T20:30:20.002Z",
-        "updated_at": "2019-10-17T20:30:20.002Z"
-    },
-    "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHBpcmVzIjoxNTcxNDMwNjM2fQ.DcrBaExPT3lv9RVGhaURKr3vG0RR1z0YFRfMFZ4BWGI"
+	"logged_in": true,
+	"user": {
+		"id": 1,
+		"email": "lalo@lalo.cl",
+		"password_digest": "$2a$12$JSpgR46cHKopflZSyKI2..EJC.JIbNguWcufgrMBxlXa088.g58/u",
+		"created_at": "2019-10-17T20:30:20.002Z",
+		"updated_at": "2019-10-17T20:30:20.002Z"
+	},
+	"jwt": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHBpcmVzIjoxNTcxNDMwNjM2fQ.DcrBaExPT3lv9RVGhaURKr3vG0RR1z0YFRfMFZ4BWGI"
 }
