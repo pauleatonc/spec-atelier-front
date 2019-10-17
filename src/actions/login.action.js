@@ -3,6 +3,7 @@
 import axios from 'axios';
 import getEndPoint from 'Configuration/config';
 import { LOG_IN, LOG_IN_ERROR } from 'Configuration/constants';
+import setLocalStorage from 'Helpers/localstorage.helper';
 
 export const loginAction = dispatch => data => {
 	axios({
@@ -14,11 +15,15 @@ export const loginAction = dispatch => data => {
 		data,
 	})
 		.then(response => {
+			setLocalStorage({
+				key: 'token',
+				value: response.data.jwt
+			});
 			return dispatch({
 				type: LOG_IN,
 				payload: {
 					isLogin: response.data.logged_in,
-					userData: response.userData,
+					userData: response.data.user,
 				},
 			});
 		})

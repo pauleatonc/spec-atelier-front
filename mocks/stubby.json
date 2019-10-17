@@ -3,7 +3,7 @@
 		"request": {
 			"url": "^/api/sessions",
 			"status": 200,
-			"method": "GET"
+			"method": "POST"
 		},
 		"response": {
 			"status": 200,
