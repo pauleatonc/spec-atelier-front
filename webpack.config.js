@@ -21,6 +21,7 @@ module.exports = env => {
 			alias: {
 				Actions: path.resolve(__dirname, 'src/actions/'),
 				Components: path.resolve(__dirname, 'src/components/'),
+				Helpers: path.resolve(__dirname, 'src/helpers/'),
 				Configuration: path.resolve(__dirname, 'src/config/'),
 				Reducers: path.resolve(__dirname, 'src/reducers/'),
 				Views: path.resolve(__dirname, 'src/views/'),
