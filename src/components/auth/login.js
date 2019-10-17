@@ -8,22 +8,19 @@ const Login = props => {
 	const [password, setPassword] = useState('');
 	const { loginMethod } = props;
 
-	const handleSubmit = e => {
-		e.preventDefault();
-
+	const handleSubmit = () => {
 		const body = {
 			user: {
 				email,
 				password,
 			},
 		};
-
 		loginMethod(body);
 	};
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+			<form>
 				<input
 					type="email"
 					name="email"
@@ -38,7 +35,7 @@ const Login = props => {
 					onChange={e => setPassword(e.target.value)}
 					required
 				/>
-				<button type="submit">Login</button>
+				<button type="button" onClick={() => handleSubmit()}>Login</button>
 			</form>
 		</>
 	);
