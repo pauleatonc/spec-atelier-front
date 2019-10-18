@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { recoverPasswordAction } from '../../actions';
 
-const Recover = () => {
+const Recover = props => {
 	const [email, setEmail] = useState('');
+	const { recoverPAsswordMethod } = props;
 
-	const handleRecoverPassword = () => {};
+	const handleRecoverPassword = () => {
+		recoverPAsswordMethod(email);
+	};
 
 	return (
 		<>
@@ -24,4 +30,13 @@ const Recover = () => {
 	);
 };
 
-export default Recover;
+Recover.propTypes = {
+	recoverPAsswordMethod: PropTypes.func.isRequired,
+};
+
+export default connect(
+	state => state,
+	dispatch => ({
+		recoverPAsswordMethod: recoverPasswordAction(dispatch),
+	}),
+)(Recover);
