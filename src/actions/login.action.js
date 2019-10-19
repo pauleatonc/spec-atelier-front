@@ -17,7 +17,7 @@ export const loginAction = dispatch => data => {
 		.then(response => {
 			setLocalStorage({
 				key: 'token',
-				value: response.data.jwt
+				value: response.data.jwt,
 			});
 			return dispatch({
 				type: LOG_IN,

@@ -8,16 +8,13 @@ const Registration = props => {
 	const [password, setPassword] = useState('');
 	const { registrationMethod } = props;
 
-	const handleSubmit = e => {
-		e.preventDefault();
-
+	const handleSubmit = () => {
 		const body = {
 			user: {
 				email,
 				password,
 			},
 		};
-
 		registrationMethod(body);
 	};
 
@@ -40,7 +37,9 @@ const Registration = props => {
 					onChange={e => setPassword(e.target.value)}
 					required
 				/>
-				<button type="submit">Register</button>
+				<button type="button" onClick={() => handleSubmit()}>
+					Register
+				</button>
 			</form>
 		</>
 	);
