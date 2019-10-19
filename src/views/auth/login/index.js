@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { registrationAction } from '../../actions';
+import { loginAction } from 'Actions/';
 
-const Registration = props => {
+const Login = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const { registrationMethod } = props;
+	const { loginMethod } = props;
 
 	const handleSubmit = () => {
 		const body = {
@@ -15,43 +15,41 @@ const Registration = props => {
 				password,
 			},
 		};
-		registrationMethod(body);
+		loginMethod(body);
 	};
 
 	return (
 		<>
-			<form onSubmit={handleSubmit} autoComplete="off">
+			<form>
 				<input
 					type="email"
 					name="email"
 					value={email}
-					placeholder="email"
 					onChange={e => setEmail(e.target.value)}
 					required
 				/>
 				<input
 					type="password"
 					name="password"
-					placeholder="*********"
 					value={password}
 					onChange={e => setPassword(e.target.value)}
 					required
 				/>
 				<button type="button" onClick={() => handleSubmit()}>
-					Register
+					Login
 				</button>
 			</form>
 		</>
 	);
 };
 
-Registration.propTypes = {
-	registrationMethod: PropTypes.func.isRequired,
+Login.propTypes = {
+	loginMethod: PropTypes.func.isRequired,
 };
 
 export default connect(
 	state => state,
 	dispatch => ({
-		registrationMethod: registrationAction(dispatch),
+		loginMethod: loginAction(dispatch),
 	}),
-)(Registration);
+)(Login);
