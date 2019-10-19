@@ -3,12 +3,14 @@ import {
 	loginReducer,
 	registrationReducer,
 	recoverPasswordReducer,
+	newPasswordReducer,
 } from './reducers';
 
 const rootReducer = combineReducers({
 	login: loginReducer,
 	registration: registrationReducer,
 	recoverPassword: recoverPasswordReducer,
+	newPassword: newPasswordReducer,
 });
 
 const store = createStore(rootReducer);

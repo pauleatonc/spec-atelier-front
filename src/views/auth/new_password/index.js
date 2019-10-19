@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router';
 import handleGetQueryParam from 'Helpers/get-query-params.helper';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { newPasswordAction } from 'Actions/';
 
-const NewPassword = () => {
+const NewPassword = props => {
 	const [password, setPassword] = useState('');
 	const [repeatPassword, setRepeatPassword] = useState('');
-
+	const { newPasswordMethod } = props;
 	const token = handleGetQueryParam({
 		uri: useLocation().search,
 		param: 'token',
 	});
+
+	const handleResetPassword = () => {
+		if (password === repeatPassword) {
+			newPasswordMethod({ token, password });
+		}
+	};
 
 	return (
 		<>
@@ -32,10 +41,21 @@ const NewPassword = () => {
 					placeholder="Repetir nueva contraseña"
 					required
 				/>
-				<button type="button">Cambiar contraseña</button>
+				<button type="button" onClick={() => handleResetPassword()}>
+					Cambiar contraseña
+				</button>
 			</form>
 		</>
 	);
 };
 
-export default NewPassword;
+NewPassword.propTypes = {
+	newPasswordMethod: PropTypes.func.isRequired,
+};
+
+export default connect(
+	state => state,
+	dispatch => ({
+		newPasswordMethod: newPasswordAction(dispatch),
+	}),
+)(NewPassword);
