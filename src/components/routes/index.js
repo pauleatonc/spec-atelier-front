@@ -1,9 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from 'Views/home';
-import Login from 'Views/auth/login';
-import Registration from 'Views/auth/registration';
-import RecoverPassword from 'Views/auth/recover_password';
+import { Home, Login, Registration, RecoverPassword } from 'Views';
 
 const Routes = () => (
 	<Router>
