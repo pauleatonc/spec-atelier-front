@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -31,12 +33,12 @@ const RecoverPassword = props => {
 };
 
 RecoverPassword.propTypes = {
-	recoverPAsswordMethod: PropTypes.func.isRequired,
+	recoverPasswordMethod: PropTypes.func.isRequired,
 };
 
 export default connect(
 	state => state,
 	dispatch => ({
-		recoverPAsswordMethod: recoverPasswordAction(dispatch),
+		recoverPasswordMethod: recoverPasswordAction(dispatch),
 	}),
 )(RecoverPassword);

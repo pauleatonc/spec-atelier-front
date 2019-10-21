@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { useLocation } from 'react-router';
 import handleGetQueryParam from 'Helpers/get-query-params.helper';
@@ -9,6 +11,7 @@ const NewPassword = props => {
 	const [password, setPassword] = useState('');
 	const [repeatPassword, setRepeatPassword] = useState('');
 	const { newPasswordMethod } = props;
+
 	const token = handleGetQueryParam({
 		uri: useLocation().search,
 		param: 'token',
