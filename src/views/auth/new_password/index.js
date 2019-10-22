@@ -25,6 +25,7 @@ const NewPassword = props => {
 
 	return (
 		<>
+			<h1>Crear nueva contraseña</h1>
 			<span>El token es: {token}</span>
 			<form>
 				<input

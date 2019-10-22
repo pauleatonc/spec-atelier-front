@@ -15,6 +15,7 @@ const RecoverPassword = props => {
 
 	return (
 		<>
+			<h1>Olvidaste tu contraseña?</h1>
 			<form>
 				<input
 					type="email"

@@ -21,6 +21,7 @@ const Login = props => {
 
 	return (
 		<>
+			<h1>Login</h1>
 			<form>
 				<input
 					type="email"

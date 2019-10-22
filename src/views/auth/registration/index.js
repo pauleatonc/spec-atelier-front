@@ -21,6 +21,7 @@ const Registration = props => {
 
 	return (
 		<>
+			<h1>Crear un nuevo usuario</h1>
 			<form onSubmit={handleSubmit} autoComplete="off">
 				<input
 					type="email"
