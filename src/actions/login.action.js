@@ -1,9 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 import axios from 'axios';
-import getEndPoint from 'Configuration/config';
-import { LOG_IN, LOG_IN_ERROR } from 'Configuration/constants';
-import setLocalStorage from 'Helpers/localstorage.helper';
+import getEndPoint from '@Configurations/config';
+import { LOG_IN, LOG_IN_ERROR } from '@Configurations/constants';
+import setLocalStorage from '@Helpers/localstorage.helper';
 
 export const loginAction = dispatch => data => {
 	axios({

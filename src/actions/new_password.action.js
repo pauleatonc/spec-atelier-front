@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 import axios from 'axios';
-import getEndPoint from 'Configuration/config';
-import { NEW_PASSWORD, NEW_PASSWORD_ERROR } from 'Configuration/constants';
+import getEndPoint from '@Configurations/config';
+import { NEW_PASSWORD, NEW_PASSWORD_ERROR } from '@Configurations/constants';
 
 export const newPasswordAction = dispatch => ({ token, password }) => {
 	axios({

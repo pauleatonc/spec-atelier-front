@@ -1,11 +1,11 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 import axios from 'axios';
-import getEndPoint from 'Configuration/config';
+import getEndPoint from '@Configurations/config';
 import {
 	RECOVER_PASSWORD,
 	RECOVER_PASSWORD_ERROR,
-} from 'Configuration/constants';
+} from '@Configurations/constants';
 
 export const recoverPasswordAction = dispatch => email => {
 	axios({

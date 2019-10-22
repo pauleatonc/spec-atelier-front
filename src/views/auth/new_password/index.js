@@ -2,10 +2,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { useLocation } from 'react-router';
-import handleGetQueryParam from 'Helpers/get-query-params.helper';
+import handleGetQueryParam from '@Helpers/get-query-params.helper';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { newPasswordAction } from 'Actions/';
+import { newPasswordAction } from '@Actions/';
 
 const NewPassword = props => {
 	const [password, setPassword] = useState('');

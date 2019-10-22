@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { recoverPasswordAction } from 'Actions/';
+import { recoverPasswordAction } from '@Actions/';
 
 const RecoverPassword = props => {
 	const [email, setEmail] = useState('');
