@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { registrationAction } from 'Actions/';
+import { registrationAction } from '@Actions/';
 
 const Registration = props => {
 	const [email, setEmail] = useState('');
@@ -21,6 +21,7 @@ const Registration = props => {
 
 	return (
 		<>
+			<h1>Crear un nuevo usuario</h1>
 			<form onSubmit={handleSubmit} autoComplete="off">
 				<input
 					type="email"

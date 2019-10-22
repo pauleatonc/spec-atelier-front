@@ -2,7 +2,7 @@
 import {
 	RECOVER_PASSWORD,
 	RECOVER_PASSWORD_ERROR,
-} from 'Configuration/constants';
+} from '@Configurations/constants';
 
 const initialState = {
 	sended: false,

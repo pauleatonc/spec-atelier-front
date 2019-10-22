@@ -1,4 +1,5 @@
-import { LOG_IN, LOG_IN_ERROR } from '../config/constants';
+/* eslint-disable import/no-unresolved */
+import { LOG_IN, LOG_IN_ERROR } from '@Configurations/constants';
 
 const initialState = {
 	isLogin: false,

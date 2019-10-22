@@ -1,4 +1,5 @@
-import { REGISTRATION, REGISTRATION_ERROR } from '../config/constants';
+/* eslint-disable import/no-unresolved */
+import { REGISTRATION, REGISTRATION_ERROR } from '@Configurations/constants';
 
 const initialState = {
 	isLogin: false,

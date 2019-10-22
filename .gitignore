@@ -3,6 +3,5 @@ dist/
 public/
 build/
 coverage/
-.vscode
 
 package-lock.json

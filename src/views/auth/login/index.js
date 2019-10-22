@@ -1,7 +1,8 @@
+/* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loginAction } from 'Actions/';
+import { loginAction } from '@Actions/';
 
 const Login = props => {
 	const [email, setEmail] = useState('');
@@ -20,6 +21,7 @@ const Login = props => {
 
 	return (
 		<>
+			<h1>Login</h1>
 			<form>
 				<input
 					type="email"

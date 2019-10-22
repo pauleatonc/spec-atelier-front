@@ -58,7 +58,9 @@ module.exports = {
 	// globalTeardown: null,
 
 	// A set of global variables that need to be available in all test environments
-	// globals: {},
+	globals: {
+		ENVIRONMENT: 'development',
+	},
 
 	// The maximum amount of workers used to run your tests. Can be specified as % or a number. E.g. maxWorkers: 10% will use 10% of your CPU amount + 1 as the maximum worker number. maxWorkers: 2 will use a maximum of 2 workers.
 	// maxWorkers: "50%",
@@ -79,7 +81,14 @@ module.exports = {
 	// ],
 
 	// A map from regular expressions to module names that allow to stub out resources with a single module
-	// moduleNameMapper: {},
+	moduleNameMapper: {
+		'^@Actions(.*)$': '<rootDir>/src/actions$1',
+		'^@Components(.*)$': '<rootDir>/src/components$1',
+		'^@Configurations(.*)$': '<rootDir>/src/config$1',
+		'^@Helpers(.*)$': '<rootDir>/src/helpers$1',
+		'^@Reducers(.*)$': '<rootDir>/src/reducers$1',
+		'^@Views(.*)$': '<rootDir>/src/views$1',
+	},
 
 	// An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
 	// modulePathIgnorePatterns: [],
