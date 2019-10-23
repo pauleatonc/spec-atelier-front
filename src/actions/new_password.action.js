@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 import axios from 'axios';
