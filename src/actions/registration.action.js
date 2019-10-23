@@ -3,7 +3,7 @@
 import axios from 'axios';
 import getEndPoint from '@Configurations/config';
 import { REGISTRATION, REGISTRATION_ERROR } from '@Configurations/constants';
-import setLocalStorage from '@Helpers/localstorage.helper';
+import { setLocalStorage } from '@Helpers/localstorage.helper';
 
 export const registrationAction = dispatch => data => {
 	axios({
