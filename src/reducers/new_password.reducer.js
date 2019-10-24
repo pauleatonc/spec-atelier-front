@@ -8,10 +8,12 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case NEW_PASSWORD:
-			return {
-				...state,
-				status: action.payload.status,
-			};
+			return action.payload.status
+				? {
+						...state,
+						status: action.payload.status,
+				  }
+				: state;
 		case NEW_PASSWORD_ERROR:
 			return {
 				...state,
