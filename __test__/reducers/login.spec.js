@@ -18,14 +18,6 @@ describe('Login Reducer', () => {
 		expect(resultState).toEqual(state);
 	});
 
-	it('should return LOG_IN state but default state', () => {
-		const resultState = loginReducer(state, {
-			type: LOG_IN,
-			payload: {},
-		});
-		expect(resultState).toEqual(state);
-	});
-
 	it('should return LOG_IN state with new state', () => {
 		const resultState = loginReducer(state, {
 			type: LOG_IN,

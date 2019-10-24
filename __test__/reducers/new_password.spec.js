@@ -2,7 +2,7 @@
 import { NEW_PASSWORD, NEW_PASSWORD_ERROR } from '../../src/config/constants';
 import { newPasswordReducer } from '../../src/reducers';
 
-describe('Login Reducer', () => {
+describe('New Password Reducer', () => {
 	let state;
 
 	beforeEach(() => {
@@ -14,14 +14,6 @@ describe('Login Reducer', () => {
 	it('should return default state', () => {
 		const resultState = newPasswordReducer(state, {
 			type: 'NEW_PASSWORD_YEAH',
-		});
-		expect(resultState).toEqual(state);
-	});
-
-	it('should return NEW_PASSWORD state but default state', () => {
-		const resultState = newPasswordReducer(state, {
-			type: NEW_PASSWORD,
-			payload: {},
 		});
 		expect(resultState).toEqual(state);
 	});
