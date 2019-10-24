@@ -24,13 +24,13 @@ describe('Login Reducer', () => {
 			payload: {
 				isLogin: true,
 				userData: {
-					text: 'New user',
+					text: 'You are logged in',
 				},
 			},
 		});
 
 		expect(resultState.isLogin).toBeTruthy();
-		expect(resultState.userData).toEqual({ text: 'New user' });
+		expect(resultState.userData).toEqual({ text: 'You are logged in' });
 	});
 
 	it('should return LOG_IN_ERROR state with new state', () => {
