@@ -10,11 +10,13 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case LOG_IN:
-			return {
-				...state,
-				isLogin: action.payload.isLogin,
-				userData: action.payload.userData,
-			};
+			return action.payload.userData
+				? {
+						...state,
+						isLogin: action.payload.isLogin,
+						userData: action.payload.userData,
+				  }
+				: state;
 		case LOG_IN_ERROR:
 			return {
 				...state,
