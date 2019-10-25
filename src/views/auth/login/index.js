@@ -4,20 +4,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginAction } from '@Actions/';
 
+export const handleSubmit = (email, password, loginMethod) => {
+	const body = {
+		user: {
+			email,
+			password,
+		},
+	};
+	loginMethod(body);
+};
+
 const Login = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const { loginMethod } = props;
-
-	const handleSubmit = () => {
-		const body = {
-			user: {
-				email,
-				password,
-			},
-		};
-		loginMethod(body);
-	};
 
 	return (
 		<>
@@ -37,7 +37,10 @@ const Login = props => {
 					onChange={e => setPassword(e.target.value)}
 					required
 				/>
-				<button type="button" onClick={() => handleSubmit()}>
+				<button
+					type="button"
+					onClick={() => handleSubmit(email, password, loginMethod)}
+				>
 					Login
 				</button>
 			</form>
