@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import { LOG_IN, LOG_IN_ERROR } from '@Configurations/constants';
 
-const initialState = {
+export const initialState = {
 	isLogin: false,
 	userData: {},
 	error: '',

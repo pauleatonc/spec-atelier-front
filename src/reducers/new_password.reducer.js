@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import { NEW_PASSWORD, NEW_PASSWORD_ERROR } from '@Configurations/constants';
 
-const initialState = {
+export const initialState = {
 	status: false,
 };
 

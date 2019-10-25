@@ -1,27 +1,18 @@
 /* eslint-disable no-undef */
 import { REGISTRATION, REGISTRATION_ERROR } from '../../src/config/constants';
 import { registrationReducer } from '../../src/reducers';
+import { initialState } from '../../src/reducers/registration.reducer';
 
 describe('Login Reducer', () => {
-	let state;
-
-	beforeEach(() => {
-		state = {
-			isLogin: false,
-			userData: {},
-			error: '',
-		};
-	});
-
 	it('should return default state', () => {
-		const resultState = registrationReducer(state, {
+		const resultState = registrationReducer(initialState, {
 			type: 'REGISTRATION_NEW',
 		});
-		expect(resultState).toEqual(state);
+		expect(resultState).toEqual(initialState);
 	});
 
 	it('should return REGISTRATION state with new state', () => {
-		const resultState = registrationReducer(state, {
+		const resultState = registrationReducer(initialState, {
 			type: REGISTRATION,
 			payload: {
 				isLogin: true,
@@ -36,7 +27,7 @@ describe('Login Reducer', () => {
 	});
 
 	it('should return REGISTRATION_ERROR state with new state', () => {
-		const resultState = registrationReducer(state, {
+		const resultState = registrationReducer(initialState, {
 			type: REGISTRATION_ERROR,
 			payload: {
 				isLogin: false,

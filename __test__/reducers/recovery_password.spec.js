@@ -4,25 +4,18 @@ import {
 	RECOVER_PASSWORD_ERROR,
 } from '../../src/config/constants';
 import { recoverPasswordReducer } from '../../src/reducers';
+import { initialState } from '../../src/reducers/recover_password.reducer';
 
 describe('Recovery Password Reducer', () => {
-	let state;
-
-	beforeEach(() => {
-		state = {
-			sended: false,
-		};
-	});
-
 	it('should return default state', () => {
-		const resultState = recoverPasswordReducer(state, {
+		const resultState = recoverPasswordReducer(initialState, {
 			type: 'RECOVER_PASSWORD_NEW',
 		});
-		expect(resultState).toEqual(state);
+		expect(resultState).toEqual(initialState);
 	});
 
 	it('should return RECOVER_PASSWORD state with new state', () => {
-		const resultState = recoverPasswordReducer(state, {
+		const resultState = recoverPasswordReducer(initialState, {
 			type: RECOVER_PASSWORD,
 			payload: {
 				sended: true,
@@ -33,7 +26,7 @@ describe('Recovery Password Reducer', () => {
 	});
 
 	it('should return RECOVER_PASSWORD_ERROR state with new state', () => {
-		const resultState = recoverPasswordReducer(state, {
+		const resultState = recoverPasswordReducer(initialState, {
 			type: RECOVER_PASSWORD_ERROR,
 			payload: {
 				sended: false,

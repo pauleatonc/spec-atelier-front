@@ -1,25 +1,16 @@
 /* eslint-disable no-undef */
 import { LOG_IN, LOG_IN_ERROR } from '../../src/config/constants';
 import { loginReducer } from '../../src/reducers';
+import { initialState } from '../../src/reducers/login.reducer';
 
 describe('Login Reducer', () => {
-	let state;
-
-	beforeEach(() => {
-		state = {
-			isLogin: false,
-			userData: {},
-			error: '',
-		};
-	});
-
 	it('should return default state', () => {
-		const resultState = loginReducer(state, { type: 'LOG_IN_NEW' });
-		expect(resultState).toEqual(state);
+		const resultState = loginReducer(initialState, { type: 'LOG_IN_NEW' });
+		expect(resultState).toEqual(initialState);
 	});
 
 	it('should return LOG_IN state with new state', () => {
-		const resultState = loginReducer(state, {
+		const resultState = loginReducer(initialState, {
 			type: LOG_IN,
 			payload: {
 				isLogin: true,
@@ -34,7 +25,7 @@ describe('Login Reducer', () => {
 	});
 
 	it('should return LOG_IN_ERROR state with new state', () => {
-		const resultState = loginReducer(state, {
+		const resultState = loginReducer(initialState, {
 			type: LOG_IN_ERROR,
 			payload: {
 				isLogin: false,

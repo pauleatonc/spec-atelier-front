@@ -4,7 +4,7 @@ import {
 	RECOVER_PASSWORD_ERROR,
 } from '@Configurations/constants';
 
-const initialState = {
+export const initialState = {
 	sended: false,
 };
 
