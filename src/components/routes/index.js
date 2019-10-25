@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { Router, Route, Switch } from 'react-router-dom';
 import {
 	Home,
 	Login,
@@ -9,8 +10,10 @@ import {
 	NewPassword,
 } from '@Views';
 
+const history = createBrowserHistory();
+
 const Routes = () => (
-	<Router>
+	<Router history={history}>
 		<Switch>
 			<Route exact path="/" component={Home} />
 			<Route exact path="/login" component={Login} />

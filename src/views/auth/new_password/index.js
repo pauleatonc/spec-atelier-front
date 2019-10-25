@@ -1,27 +1,28 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
-import { useLocation } from 'react-router';
 import handleGetQueryParam from '@Helpers/get-query-params.helper';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { newPasswordAction } from '@Actions/';
 
+export const handleResetPassword = (
+	password,
+	repeatPassword,
+	token,
+	newPasswordMethod,
+) => {
+	if (password === repeatPassword) {
+		newPasswordMethod({ token, password });
+	}
+};
+
 const NewPassword = props => {
 	const [password, setPassword] = useState('');
 	const [repeatPassword, setRepeatPassword] = useState('');
-	const { newPasswordMethod } = props;
+	const { newPasswordMethod, location } = props;
 
-	const token = handleGetQueryParam({
-		uri: useLocation().search,
-		param: 'token',
-	});
-
-	const handleResetPassword = () => {
-		if (password === repeatPassword) {
-			newPasswordMethod({ token, password });
-		}
-	};
+	const token = handleGetQueryParam({ uri: location.search, param: 'token' });
 
 	return (
 		<>
@@ -45,7 +46,18 @@ const NewPassword = props => {
 					placeholder="Repetir nueva contraseña"
 					required
 				/>
-				<button type="button" onClick={() => handleResetPassword()}>
+
+				<button
+					type="button"
+					onClick={() =>
+						handleResetPassword(
+							password,
+							repeatPassword,
+							token,
+							newPasswordMethod,
+						)
+					}
+				>
 					Cambiar contraseña
 				</button>
 			</form>
