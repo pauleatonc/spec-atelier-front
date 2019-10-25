@@ -7,7 +7,6 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import NewPassword, {
-	handleGetTokenFromUrl,
 	handleResetPassword,
 } from '../../src/views/auth/new_password';
 
@@ -47,13 +46,13 @@ describe('New Password View', () => {
 		expect(NewPasswordView.find('button')).toHaveLength(1);
 	});
 
-	xit('should be default value the password input', () => {
+	it('should be default value the password input', () => {
 		expect(NewPasswordView.find("input[name='password']").props().value).toBe(
 			'',
 		);
 	});
 
-	xit('should change the password input', () => {
+	it('should change the password input', () => {
 		NewPasswordView.find("input[name='password']").simulate('change', {
 			target: { value: 'new password' },
 		});
@@ -63,13 +62,13 @@ describe('New Password View', () => {
 		);
 	});
 
-	xit('should be default value the repeatPassword input', () => {
+	it('should be default value the repeatPassword input', () => {
 		expect(
 			NewPasswordView.find("input[name='repeatPassword']").props().value,
 		).toBe('');
 	});
 
-	xit('should change the repeatPassword input', () => {
+	it('should change the repeatPassword input', () => {
 		NewPasswordView.find("input[name='repeatPassword']").simulate('change', {
 			target: { value: 'repeat new password' },
 		});
@@ -79,9 +78,9 @@ describe('New Password View', () => {
 		).toBe('repeat new password');
 	});
 
-	xit('should handleResetPassword function', () => {
+	it('should handleResetPassword function with same password value', () => {
 		const password = 'password';
-		const repeatPassword = 'repeatPassword';
+		const repeatPassword = 'password';
 		const token = '123456';
 		const functionMock = jest.fn();
 
@@ -92,5 +91,20 @@ describe('New Password View', () => {
 		NewPasswordView.find('button').simulate('click');
 
 		expect(functionMock).toBeCalledWith({ token, password });
+	});
+
+	it('should handleResetPassword function wiathout same password value', () => {
+		const password = 'password';
+		const repeatPassword = 'other password';
+		const token = '123456';
+		const functionMock = jest.fn();
+
+		NewPasswordView.find('button').prop('onClick')(
+			handleResetPassword(password, repeatPassword, token, functionMock),
+		);
+
+		NewPasswordView.find('button').simulate('click');
+
+		expect(functionMock).not.toBeCalled();
 	});
 });
