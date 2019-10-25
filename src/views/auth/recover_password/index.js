@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { recoverPasswordAction } from '@Actions/';
 
+export const handleRecoverPassword = (email, recoverPasswordMethod) => {
+	recoverPasswordMethod(email);
+};
+
 const RecoverPassword = props => {
 	const [email, setEmail] = useState('');
 	const { recoverPasswordMethod } = props;
-
-	const handleRecoverPassword = () => {
-		recoverPasswordMethod(email);
-	};
 
 	return (
 		<>
@@ -25,7 +25,10 @@ const RecoverPassword = props => {
 					placeholder="correo"
 					required
 				/>
-				<button type="button" onClick={() => handleRecoverPassword()}>
+				<button
+					type="button"
+					onClick={() => handleRecoverPassword(email, recoverPasswordMethod)}
+				>
 					Recuperar contraseña
 				</button>
 			</form>
