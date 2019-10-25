@@ -4,25 +4,25 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { registrationAction } from '@Actions/';
 
+export const handleSubmit = (email, password, registrationMethod) => {
+	const body = {
+		user: {
+			email,
+			password,
+		},
+	};
+	registrationMethod(body);
+};
+
 const Registration = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const { registrationMethod } = props;
 
-	const handleSubmit = () => {
-		const body = {
-			user: {
-				email,
-				password,
-			},
-		};
-		registrationMethod(body);
-	};
-
 	return (
 		<>
 			<h1>Crear un nuevo usuario</h1>
-			<form onSubmit={handleSubmit} autoComplete="off">
+			<form autoComplete="off">
 				<input
 					type="email"
 					name="email"
@@ -39,7 +39,10 @@ const Registration = props => {
 					onChange={e => setPassword(e.target.value)}
 					required
 				/>
-				<button type="button" onClick={() => handleSubmit()}>
+				<button
+					type="button"
+					onClick={() => handleSubmit(email, password, registrationMethod)}
+				>
 					Register
 				</button>
 			</form>
