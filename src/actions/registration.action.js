@@ -17,7 +17,7 @@ export const registrationAction = dispatch => data => {
 		.then(response => {
 			setLocalStorage({
 				key: 'token',
-				value: response.data.jwt,
+				value: response.data.user.jwt,
 			});
 
 			return dispatch({

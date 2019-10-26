@@ -8,7 +8,7 @@ import { setLocalStorage } from '@Helpers/localstorage.helper';
 export const loginAction = dispatch => data => {
 	fetch(`${getEndPoint('sessions')}`, {
 		method: 'POST',
-		header: {
+		headers: {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify(data),
@@ -17,7 +17,7 @@ export const loginAction = dispatch => data => {
 		.then(response => {
 			setLocalStorage({
 				key: 'token',
-				value: response.data.jwt,
+				value: response.data.user.jwt,
 			});
 
 			return dispatch({
