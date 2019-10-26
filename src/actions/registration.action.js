@@ -6,7 +6,9 @@ import { REGISTRATION, REGISTRATION_ERROR } from '@Configurations/constants';
 import { setLocalStorage } from '@Helpers/localstorage.helper';
 
 export const registrationAction = dispatch => data => {
-	fetch(`${getEndPoint('registrations')}`, {
+	const endpoint = getEndPoint({ service: 'registrations' });
+
+	fetch(`${endpoint}`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

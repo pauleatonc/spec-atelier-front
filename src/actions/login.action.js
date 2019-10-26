@@ -6,7 +6,9 @@ import { LOG_IN, LOG_IN_ERROR } from '@Configurations/constants';
 import { setLocalStorage } from '@Helpers/localstorage.helper';
 
 export const loginAction = dispatch => data => {
-	fetch(`${getEndPoint('sessions')}`, {
+	const endpoint = getEndPoint({ service: 'sessions' });
+
+	fetch(`${endpoint}`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

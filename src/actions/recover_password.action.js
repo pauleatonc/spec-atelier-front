@@ -9,7 +9,9 @@ import {
 } from '@Configurations/constants';
 
 export const recoverPasswordAction = dispatch => email => {
-	fetch(`${getEndPoint('password_forgot')}?email=${email}`, {
+	const endpoint = getEndPoint({ service: 'password_forgot' });
+
+	fetch(`${endpoint}?email=${email}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',

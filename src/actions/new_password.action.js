@@ -6,15 +6,14 @@ import getEndPoint from '@Configurations/config';
 import { NEW_PASSWORD, NEW_PASSWORD_ERROR } from '@Configurations/constants';
 
 export const newPasswordAction = dispatch => ({ token, password }) => {
-	fetch(
-		`${getEndPoint('password_reset')}?token=${token}&password=${password}`,
-		{
-			method: 'GET',
-			header: {
-				'Content-Type': 'application/json',
-			},
+	const endpoint = getEndPoint({ service: 'password_reset' });
+
+	fetch(`${endpoint}?token=${token}&password=${password}`, {
+		method: 'GET',
+		header: {
+			'Content-Type': 'application/json',
 		},
-	)
+	})
 		.then(res => res.json())
 		.then(response => {
 			return dispatch({

@@ -7,9 +7,19 @@ const mapUrls = {
 
 const handleGetEnvironment = () => ENVIRONMENT;
 const handleGetUrl = () => mapUrls[handleGetEnvironment()];
-const handleGetEntryPointApi = path => `/api/${path}`;
 
-const getEndPoint = (path = '') =>
-	`${handleGetUrl()}${handleGetEntryPointApi(path)}`;
+const handleGetEntryPointApi = path => {
+	switch (path) {
+		case 'api':
+			return '/api/';
+		case 'googleOauth':
+			return '/auth/';
+		default:
+			return '/api/';
+	}
+};
+
+const getEndPoint = ({ path = 'api', service = '' }) =>
+	`${handleGetUrl()}${handleGetEntryPointApi(path)}${service}`;
 
 export default getEndPoint;
