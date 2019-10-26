@@ -1,19 +1,19 @@
+/* eslint-disable no-undef */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
-import axios from 'axios';
 import getEndPoint from '@Configurations/config';
 import { LOG_IN, LOG_IN_ERROR } from '@Configurations/constants';
 import { setLocalStorage } from '@Helpers/localstorage.helper';
 
 export const loginAction = dispatch => data => {
-	axios({
-		url: `${getEndPoint('sessions')}`,
+	fetch(`${getEndPoint('sessions')}`, {
 		method: 'POST',
-		headers: {
+		header: {
 			'Content-Type': 'application/json',
 		},
-		data,
+		body: JSON.stringify(data),
 	})
+		.then(res => res.json())
 		.then(response => {
 			setLocalStorage({
 				key: 'token',

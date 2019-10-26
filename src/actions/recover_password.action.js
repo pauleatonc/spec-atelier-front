@@ -1,7 +1,7 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
-import axios from 'axios';
 import getEndPoint from '@Configurations/config';
 import {
 	RECOVER_PASSWORD,
@@ -9,13 +9,13 @@ import {
 } from '@Configurations/constants';
 
 export const recoverPasswordAction = dispatch => email => {
-	axios({
-		url: `${getEndPoint('password_forgot')}?email=${email}`,
+	fetch(`${getEndPoint('password_forgot')}?email=${email}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 	})
+		.then(res => res.json())
 		.then(response => {
 			return dispatch({
 				type: RECOVER_PASSWORD,

@@ -1,19 +1,19 @@
+/* eslint-disable no-undef */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
-import axios from 'axios';
 import getEndPoint from '@Configurations/config';
 import { REGISTRATION, REGISTRATION_ERROR } from '@Configurations/constants';
 import { setLocalStorage } from '@Helpers/localstorage.helper';
 
 export const registrationAction = dispatch => data => {
-	axios({
-		url: `${getEndPoint('registrations')}`,
+	fetch(`${getEndPoint('registrations')}`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		data,
+		body: JSON.stringify(data),
 	})
+		.then(res => res.json())
 		.then(response => {
 			setLocalStorage({
 				key: 'token',
