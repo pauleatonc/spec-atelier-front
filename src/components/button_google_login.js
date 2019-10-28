@@ -19,7 +19,7 @@ const ButtonGoogleLogin = props => {
 
 	return (
 		<GoogleLogin
-			clientId={token}
+			clientId={process.env.GOOGLE_CLIENT_ID}
 			buttonText={label}
 			onSuccess={res =>
 				handleManagerResponseGoogleService(res, googleOuathMethod)
