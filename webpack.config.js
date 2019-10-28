@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
@@ -49,6 +50,12 @@ module.exports = env => {
 		externals: ['window'],
 		plugins: [
 			new webpack.ProgressPlugin(),
+			new Dotenv({
+				path: './src/config/.env',
+				safe: true,
+				defaults: false,
+				systemvars: true,
+			}),
 			new HtmlWebPackPlugin({
 				template: './src/index.html',
 			}),
