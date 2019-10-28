@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { GoogleLogin } from 'react-google-login';
+import ButtonGoogleLogin from '@Components/button_google_login';
 import { loginAction } from '@Actions/';
 
 export const handleSubmit = (email, password, loginMethod) => {
@@ -13,10 +13,6 @@ export const handleSubmit = (email, password, loginMethod) => {
 		},
 	};
 	loginMethod(body);
-};
-
-export const handleManagerResponseGoogleService = payload => {
-	console.log(payload);
 };
 
 const Login = props => {
@@ -49,12 +45,7 @@ const Login = props => {
 					Login
 				</button>
 
-				<GoogleLogin
-					clientId="291675161560-sqjc3v9p0doqfas5mvbomd7oviuems6r.apps.googleusercontent.com"
-					buttonText="Iniciar sesión con Google"
-					onSuccess={handleManagerResponseGoogleService}
-					onFailure={handleManagerResponseGoogleService}
-				/>
+				<ButtonGoogleLogin label="Iniciar sesión con Google" />
 			</form>
 		</>
 	);
