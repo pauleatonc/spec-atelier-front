@@ -5,12 +5,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { GoogleLogin } from 'react-google-login';
 import { connect } from 'react-redux';
+import toCapitalize from '@Helpers/prettie-format-strings.helper';
 import { googleOuathAction } from '@Actions/';
 
 export const handleFormatResponse = googleResponse => ({
 	user: {
-		name: googleResponse.w3.ofa,
-		last_name: googleResponse.w3.wea,
+		name: toCapitalize(googleResponse.w3.ofa),
+		last_name: toCapitalize(googleResponse.w3.wea),
 		email: googleResponse.profileObj.email,
 		google_token: googleResponse.accessToken,
 	},
