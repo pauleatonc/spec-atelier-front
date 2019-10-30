@@ -7,19 +7,21 @@ import { GoogleLogin } from 'react-google-login';
 import { connect } from 'react-redux';
 import { googleOuathAction } from '@Actions/';
 
+export const handleFormatResponse = googleResponse => ({
+	user: {
+		name: googleResponse.w3.ofa,
+		last_name: googleResponse.w3.wea,
+		email: googleResponse.profileObj.email,
+		google_token: googleResponse.accessToken,
+	},
+});
+
 export const handleManagerResponseGoogleService = (
 	response,
 	googleOuathMethod,
 ) => {
-	const objectResponse = {
-		user: {
-			name: response.w3.ofa,
-			last_name: response.w3.wea,
-			email: response.profileObj.email,
-			google_token: response.accessToken,
-		},
-	};
-	googleOuathMethod(objectResponse);
+	const prettieFormatResponse = handleFormatResponse(response);
+	googleOuathMethod(prettieFormatResponse);
 };
 
 const ButtonGoogleLogin = props => {
