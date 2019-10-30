@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ButtonGoogleLogin from '@Components/button_google_login';
 import { loginAction } from '@Actions/';
 
 export const handleSubmit = (email, password, loginMethod) => {
@@ -43,6 +44,8 @@ const Login = props => {
 				>
 					Login
 				</button>
+
+				<ButtonGoogleLogin label="Iniciar sesión con Google" />
 			</form>
 		</>
 	);

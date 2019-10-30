@@ -34,7 +34,7 @@ describe('Login View', () => {
 	it('should show login view', () => {
 		expect(loginView.find('h1').text()).toBe('Login');
 		expect(loginView.find('input')).toHaveLength(2);
-		expect(loginView.find('button')).toHaveLength(1);
+		expect(loginView.find('button')).toHaveLength(2);
 	});
 
 	it('should be default value the email input', () => {
@@ -70,11 +70,15 @@ describe('Login View', () => {
 		const password = 'password';
 		const functionMock = jest.fn();
 
-		loginView.find('button').prop('onClick')(
-			handleSubmit(email, password, functionMock),
-		);
+		loginView
+			.find('button')
+			.at(1)
+			.prop('onClick')(handleSubmit(email, password, functionMock));
 
-		loginView.find('button').simulate('click');
+		loginView
+			.find('button')
+			.at(1)
+			.simulate('click');
 
 		expect(functionMock).toBeCalledWith({ user: { email, password } });
 	});
