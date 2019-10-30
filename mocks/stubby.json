@@ -1,32 +1,43 @@
-[
-	{
-		"request": {
-			"url": "^/api/sessions",
-			"status": 200,
-			"method": "POST"
-		},
-		"response": {
-			"status": 200,
-			"latency": 5000,
-			"headers": {
-				"Content-Type": "application/json"
-			},
-			"file": "./auth/login-response.json"
-		}
-	},
-	{
-		"request": {
-			"url": "^/api/registrations",
-			"status": 200,
-			"method": "POST"
-		},
-		"response": {
-			"status": 200,
-			"latency": 5000,
-			"headers": {
-				"Content-Type": "application/json"
-			},
-			"file": "./auth/registration-response.json"
-		}
-	}
-]
+[{
+  "request": {
+    "url": "^/api/sessions",
+    "status": 200,
+    "method": "POST"
+  },
+  "response": {
+    "status": 200,
+    "latency": 5000,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "file": "./auth/login-response.json"
+  }
+}, {
+  "request": {
+    "url": "^/auth/google-login-service",
+    "status": 200,
+    "method": "POST"
+  },
+  "response": {
+    "status": 200,
+    "latency": 5000,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "file": "./auth/login-response-google.json"
+  }
+}, {
+  "request": {
+    "url": "^/api/registrations",
+    "status": 200,
+    "method": "POST"
+  },
+  "response": {
+    "status": 200,
+    "latency": 5000,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "file": "./auth/registration-response.json"
+  }
+}]
