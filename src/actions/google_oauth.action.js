@@ -9,7 +9,7 @@ import { setLocalStorage } from '@Helpers/localstorage.helper';
 export const googleOuathAction = dispatch => data => {
 	const endpoint = getEndPoint({
 		path: 'googleOauth',
-		service: 'google-login-service',
+		service: 'google_login_service',
 	});
 
 	fetch(`${endpoint}`, {

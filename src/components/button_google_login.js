@@ -11,7 +11,15 @@ export const handleManagerResponseGoogleService = (
 	response,
 	googleOuathMethod,
 ) => {
-	googleOuathMethod(response);
+	const objectResponse = {
+		user: {
+			name: response.w3.ofa,
+			last_name: response.w3.wea,
+			email: response.profileObj.email,
+			google_token: response.accessToken,
+		},
+	};
+	googleOuathMethod(objectResponse);
 };
 
 const ButtonGoogleLogin = props => {
