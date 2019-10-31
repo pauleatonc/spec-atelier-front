@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = env => {
@@ -38,6 +39,10 @@ module.exports = env => {
 					},
 				},
 				{
+					test: /\.scss$/,
+					loader: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+				},
+				{
 					test: /\.html$/,
 					use: [
 						{
@@ -58,6 +63,10 @@ module.exports = env => {
 			}),
 			new HtmlWebPackPlugin({
 				template: './src/index.html',
+				hash: true,
+			}),
+			new MiniCssExtractPlugin({
+				filename: 'styles.css',
 			}),
 			new webpack.DefinePlugin({
 				ENVIRONMENT: JSON.stringify(env.NODE_ENV),
