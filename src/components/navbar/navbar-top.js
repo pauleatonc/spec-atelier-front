@@ -1,6 +1,7 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LOGO from '../assets/images/logo.png';
+import LOGO from '@Assets/images/logo.png';
 
 const NavBar = () => (
 	<nav className="navbar">

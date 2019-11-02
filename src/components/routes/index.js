@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import NavBar from '@Components/navbar';
+import NavBar from '@Components/navbar/navbar-top';
 import {
 	Home,
 	Login,
