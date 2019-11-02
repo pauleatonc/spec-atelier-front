@@ -16,6 +16,14 @@
 		padding-right: 40px;
 		width: 100%;
 
+		&__logo-content {
+			height: 100%;
+
+			&__image {
+				width: 260px;
+			}
+		}
+
 		&__section {
 			display: flex;
 

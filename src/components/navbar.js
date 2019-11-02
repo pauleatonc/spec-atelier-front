@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LOGO from '../assets/images/logo.png';
 
 const NavBar = () => (
 	<nav className="navbar">
 		<div className="navbar__inner">
-			<div className="navbar__inner__logo">
-				<img src="" alt="" />
+			<div className="navbar__inner__logo-content">
+				<img
+					className="navbar__inner__logo-content__image"
+					src={LOGO}
+					alt="Logotipo de SpecAtelier"
+				/>
 			</div>
 
 			<ul className="navbar__inner__section">
