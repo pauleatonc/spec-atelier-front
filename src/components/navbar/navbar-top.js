@@ -28,8 +28,11 @@ const NavBar = () => (
 						Marcas
 					</Link>
 				</li>
-				<li>
-					<LoginDropdown text="Iniciar Sesión" />
+				<li className="navbar__inner__section__item">
+					<LoginDropdown
+						text="Iniciar sesión"
+						customClass="navbar__inner__section__item__link"
+					 />
 				</li>
 			</ul>
 		</div>
