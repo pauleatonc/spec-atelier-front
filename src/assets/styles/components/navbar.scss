@@ -2,24 +2,24 @@
 	align-items: center;
 	background-color: $white-color;
 	display: flex;
-	height: 80px;
+	height: $navbar-height;
 	position: relative;
-	width: 100%;
+	width: $total-width-view;
 
 	&__inner {
 		align-items: center;
 		color: $black-color;
 		display: flex;
-		height: 100%;
+		height: $total-parent;
 		justify-content: space-between;
 		margin-left: auto;
 		margin-right: auto;
-		width: 70%;
+		width: $with-70;
 
 		&__logo-content {
 			align-items: center;
 			display: flex;
-			height: 100%;
+			height: $total-parent;
 
 			&__image {
 				width: 260px;
@@ -29,11 +29,11 @@
 		&__section {
 			align-items: center;
 			display: flex;
-			height: 100%;
+			height: $total-parent;
 
 			&__item {
 				cursor: pointer;
-				height: 100%;
+				height: $total-parent;
 				width: 130px;
 
 				&:hover {
@@ -45,7 +45,7 @@
 					color: $secondary-color;
 					display: flex;
 					font-size: 0.9rem;
-					height: 100%;
+					height: $total-parent;
 					justify-content: center;
 					position: relative;
 					text-transform: uppercase;

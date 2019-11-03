@@ -1,8 +1,8 @@
 .dropdown {
 	align-items: center;
 	display: flex;
-	font-size: 0.9rem;
-	height: 100%;
+	font-size: $font-size;
+	height: $total-parent;
 	justify-content: center;
 	position: relative;
 	text-transform: uppercase;
@@ -18,7 +18,7 @@
 		position: absolute;
 		right: 0;
 		bottom: -76px;
-		z-index: 1;
+		z-index: $z-index-one-level;
 
 		&.show {
 			display: block;
