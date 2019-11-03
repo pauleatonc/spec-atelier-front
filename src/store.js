@@ -5,6 +5,7 @@ import {
 	registrationReducer,
 	recoverPasswordReducer,
 	newPasswordReducer,
+	dropdownLoginbReducer,
 } from './reducers';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
 	registration: registrationReducer,
 	recoverPassword: recoverPasswordReducer,
 	newPassword: newPasswordReducer,
+	showLoginDropdown: dropdownLoginbReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

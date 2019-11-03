@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LOGO from '@Assets/images/logo.png';
-import LoginDropdown from '../buttons/login-dropdown';
+import LoginDropdown from '../buttons/login_dropdown';
 
 const NavBar = () => (
 	<nav className="navbar">
@@ -32,7 +32,7 @@ const NavBar = () => (
 					<LoginDropdown
 						text="Iniciar sesión"
 						customClass="navbar__inner__section__item__link"
-					 />
+					/>
 				</li>
 			</ul>
 		</div>
