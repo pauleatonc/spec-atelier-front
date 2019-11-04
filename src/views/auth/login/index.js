@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ButtonGoogleLogin from '@Components/button_google_login';
+import ButtonGoogleLogin from '@Components/buttons/button_google_login';
 import { loginAction } from '@Actions/';
 
 export const handleSubmit = (email, password, loginMethod) => {

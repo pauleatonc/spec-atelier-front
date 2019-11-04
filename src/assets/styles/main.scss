@@ -1,5 +1,7 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
+@import './reset';
+@import './colors';
+@import './variables';
+@import './common';
+
+@import './components/navbar.scss';
+@import './components/dropdown.scss';

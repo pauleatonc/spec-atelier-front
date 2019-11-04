@@ -22,6 +22,7 @@ module.exports = env => {
 			extensions: ['.jsx', '.js'],
 			alias: {
 				'@Actions': path.resolve(__dirname, 'src', 'actions'),
+				'@Assets': path.resolve(__dirname, 'src', 'assets'),
 				'@Components': path.resolve(__dirname, 'src', 'components'),
 				'@Configurations': path.resolve(__dirname, 'src', 'config'),
 				'@Helpers': path.resolve(__dirname, 'src', 'helpers'),
@@ -41,6 +42,12 @@ module.exports = env => {
 				{
 					test: /\.scss$/,
 					loader: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+				},
+				{
+					test: /\.(png|jpe?g|gif)$/i,
+					use: {
+						loader: 'file-loader',
+					},
 				},
 				{
 					test: /\.html$/,

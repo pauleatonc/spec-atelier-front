@@ -1,7 +1,0 @@
-{
-  "logged_in": true,
-  "user": {
-    "email": "front@specatelier.com",
-    "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJleHBpcmVzIjoxNTcyMTg2NzkxfQ.vkGDjd44kXFlEntGccSkk02amykUm-re72ENgQN7zDU"
-  }
-}
