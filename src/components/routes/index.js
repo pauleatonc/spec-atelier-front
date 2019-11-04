@@ -8,6 +8,8 @@ import {
 	Registration,
 	RecoverPassword,
 	NewPassword,
+	Products,
+	Brands,
 } from '@Views';
 
 const Routes = () => (
@@ -21,6 +23,8 @@ const Routes = () => (
 					<Route exact path="/registration" component={Registration} />
 					<Route exact path="/recover_password" component={RecoverPassword} />
 					<Route path="/new_password" component={NewPassword} />
+					<Route path="/products" component={Products} />
+					<Route path="/brands" component={Brands} />
 				</Switch>
 			</div>
 		</Router>

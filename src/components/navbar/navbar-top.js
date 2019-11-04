@@ -19,12 +19,12 @@ const NavBar = () => (
 
 			<ul className="navbar__inner__section">
 				<li className="navbar__inner__section__item">
-					<Link to="/productos" className="navbar__inner__section__item__link">
+					<Link to="/products" className="navbar__inner__section__item__link">
 						Productos
 					</Link>
 				</li>
 				<li className="navbar__inner__section__item">
-					<Link to="/marcas" className="navbar__inner__section__item__link">
+					<Link to="/brands" className="navbar__inner__section__item__link">
 						Marcas
 					</Link>
 				</li>
