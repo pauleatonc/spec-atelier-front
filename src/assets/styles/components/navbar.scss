@@ -22,7 +22,7 @@
 			height: $total-parent;
 
 			&__image {
-				width: 260px;
+				width: 324px;
 			}
 		}
 
@@ -34,7 +34,7 @@
 			&__item {
 				cursor: pointer;
 				height: $total-parent;
-				width: 130px;
+				width: $navbar-width-items;
 
 				&:hover {
 					background-color: $secondary-color;
@@ -44,7 +44,9 @@
 					align-items: center;
 					color: $secondary-color;
 					display: flex;
-					font-size: 0.9rem;
+					font-size: $navbar-font-size-items;
+					font-weight: $navbar-font-weight;
+					line-height: $nabvar-line-height-items;
 					height: $total-parent;
 					justify-content: center;
 					position: relative;

@@ -1,7 +1,9 @@
 .dropdown {
 	align-items: center;
 	display: flex;
-	font-size: $font-size;
+	font-size: $navbar-font-size-items;
+	font-weight: $navbar-font-weight;
+	line-height: $nabvar-line-height-items;
 	height: $total-parent;
 	justify-content: center;
 	position: relative;
