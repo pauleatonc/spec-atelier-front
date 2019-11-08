@@ -12,6 +12,10 @@
 
 	&:hover {
 		color: $white-color;
+
+		.dropdown__content {
+			display: block;
+		}
 	}
 
 	&__content {
@@ -21,12 +25,8 @@
 		min-width: 200px;
 		position: absolute;
 		right: 0;
-		bottom: -88px;
+		bottom: $dropdown-bottom-position;
 		z-index: $z-index-one-level;
-
-		&.show {
-			display: block;
-		}
 
 		a {
 			color: $white-color;

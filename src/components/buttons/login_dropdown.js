@@ -3,20 +3,15 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { toggleDropdownContentAction } from '@Actions/';
 
 const LoginDropdown = props => {
-	const { toggleDropdownContentMethod, text, showDropdown } = props;
+	const { text } = props;
 
 	return (
-		<div
-			className="dropdown"
-			onClick={() => toggleDropdownContentMethod(showDropdown)}
-		>
+		<div className="dropdown">
 			{text}
-			<div className={`dropdown__content ${showDropdown ? 'show' : ''}`}>
+			<div className="dropdown__content">
 				<Link to="/login">Login</Link>
 				<Link to="/registration">Registrarse</Link>
 			</div>
@@ -25,16 +20,7 @@ const LoginDropdown = props => {
 };
 
 LoginDropdown.propTypes = {
-	toggleDropdownContentMethod: PropTypes.func.isRequired,
 	text: PropTypes.string.isRequired,
-	showDropdown: PropTypes.bool.isRequired,
 };
 
-export default connect(
-	state => ({
-		showDropdown: state.showLoginDropdown.show,
-	}),
-	dispatch => ({
-		toggleDropdownContentMethod: toggleDropdownContentAction(dispatch),
-	}),
-)(LoginDropdown);
+export default LoginDropdown;
