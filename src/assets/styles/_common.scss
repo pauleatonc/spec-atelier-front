@@ -1,3 +1,7 @@
 body {
 	background-color: $suport-grey-color;
 }
+
+.main-section {
+	height: calc(#{$total-height-view} - (#{$navbar-height} + #{$footer-height}));
+}

@@ -1,7 +1,10 @@
 .dropdown {
 	align-items: center;
 	display: flex;
-	font-size: $font-size;
+	font-family: 'Akzidenz Grotesk - bold condenced';
+	font-size: $navbar-font-size-items;
+	font-weight: $navbar-font-weight;
+	line-height: $nabvar-line-height-items;
 	height: $total-parent;
 	justify-content: center;
 	position: relative;
@@ -9,6 +12,10 @@
 
 	&:hover {
 		color: $white-color;
+
+		.dropdown__content {
+			display: block;
+		}
 	}
 
 	&__content {
@@ -18,12 +25,8 @@
 		min-width: 200px;
 		position: absolute;
 		right: 0;
-		bottom: -88px;
+		bottom: $dropdown-bottom-position;
 		z-index: $z-index-one-level;
-
-		&.show {
-			display: block;
-		}
 
 		a {
 			color: $white-color;

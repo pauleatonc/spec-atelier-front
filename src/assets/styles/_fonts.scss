@@ -1,0 +1,73 @@
+@font-face {
+	font-family: 'Akzidenz Grotesk - bold condenced';
+	src: url('../fonts/akzidenz_sv/be_bold_condenced/akzidenz-grotesk-be-bold-condensed-webfont.woff2')
+			format('woff2'),
+		url('../fonts/akzidenz_sv/be_bold_condenced/akzidenz-grotesk-be-bold-condensed-webfont.woff')
+			format('woff'),
+		url('../fonts/akzidenz_sv/be_bold_condenced/akzidenz-grotesk-be-bold-condensed-webfont.ttf')
+			format('ttf');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Akzidenz Grotesk - black';
+	src: url('../fonts/akzidenz_sv/black/akzidenz-grotesk-black-webfont.woff2')
+			format('woff2'),
+		url('../fonts/akzidenz_sv/black/akzidenz-grotesk-black-webfont.woff')
+			format('woff');
+	font-weight: 800;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Akzidenz Grotesk - bold';
+	src: url('../fonts/akzidenz_sv/black/akzidenz-grotesk-black-webfont.woff2')
+			format('woff2'),
+		url('../fonts/akzidenz_sv/black/akzidenz-grotesk-black-webfont.woff')
+			format('woff');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Akzidenz Grotesk - light';
+	src: url('../fonts/akzidenz_sv/light/akzidenz-grotesk-light-webfont.woff2')
+			format('woff2'),
+		url('../fonts/akzidenz_sv/light/akzidenz-grotesk-light-webfont.woff')
+			format('woff');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Akzidenz Grotesk - light condenced';
+	src: url('../fonts/akzidenz_sv/light_condensed/berthold-akzidenz-grotesk-be-light-condensed-webfont.woff2')
+			format('woff2'),
+		url('../fonts/akzidenz_sv/light_condensed/berthold-akzidenz-grotesk-be-light-condensed-webfont.woff')
+			format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Akzidenz Grotesk';
+	src: url('../fonts/akzidenz_sv/medium_extended/berthold-akzidenz-grotesk-be-medium-extended-webfont.woff2')
+			format('woff2'),
+		url('../fonts/akzidenz_sv/medium_extended/berthold-akzidenz-grotesk-be-medium-extended-webfont.woff')
+			format('woff'),
+		url('../fonts/akzidenz_sv/medium_extended/berthold-akzidenz-grotesk-be-medium-extended-webfont.ttf')
+			format('ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Akzidenz Grotesk - roman';
+	src: url('../fonts/akzidenz_sv/roman/akzidenz-grotesk-roman-webfont.woff2')
+			format('woff2'),
+		url('../fonts/akzidenz_sv/roman/akzidenz-grotesk-roman-webfont.woff')
+			format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
