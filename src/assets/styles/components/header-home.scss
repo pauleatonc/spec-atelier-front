@@ -11,18 +11,18 @@
 	&__inner {
 		background-color: $bg-color-card-header-home;
 		height: $header-home-height-card;
-		padding-bottom: 30px;
-		padding-left: 25px;
-		padding-right: 25px;
+		padding-bottom: $header-home-padding-vertical;
+		padding-left: $header-home-padding-horizontal;
+		padding-right: $header-home-padding-horizontal;
 		text-align: center;
-		padding-top: 30px;
+		padding-top: $header-home-padding-vertical;
 		width: $header-home-width-card;
 
 		&__text {
 			font-family: 'Akzidenz Grotesk - light';
-			font-size: 24px;
+			font-size: $header-home-font-size;
 			font-weight: 600;
-			line-height: 26px;
+			line-height: $header-home-line-height;
 			color: $black-color;
 
 			&:first-child {
@@ -32,8 +32,8 @@
 			&--title {
 				font-family: 'Akzidenz Grotesk - bold condenced';
 				color: $secondary-color;
-				font-size: 40px;
-				line-height: 40px;
+				font-size: $header-home-title;
+				line-height: $header-home-title;
 				text-transform: uppercase;
 			}
 		}
