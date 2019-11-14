@@ -3,5 +3,7 @@ body {
 }
 
 .main-section {
-	height: calc(#{$total-height-view} - (#{$navbar-height} + #{$footer-height}));
+	min-height: calc(
+		#{$total-height-view} - (#{$navbar-height} + #{$footer-height})
+	);
 }

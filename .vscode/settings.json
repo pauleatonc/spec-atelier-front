@@ -13,9 +13,6 @@
 	},
 	"eslint.autoFixOnSave": true,
 	"eslint.enable": true,
-	"files.autoSave": "onFocusChange",
-	"prettier.singleQuote": true,
-	"prettier.tabWidth": 2,
-	"prettier.useTabs": true,
+  "files.autoSave": "onFocusChange",
 	"javascript.updateImportsOnFileMove.enabled": "always"
 }

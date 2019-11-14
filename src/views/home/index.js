@@ -1,9 +1,11 @@
 import React from 'react';
-import HeaderHome from '../../components/header_home';
+import HeaderHome from '../../components/home/header';
+import WhoWeUs from '../../components/home/who-we-us';
 
 const Home = () => (
 	<>
 		<HeaderHome />
+		<WhoWeUs />
 	</>
 );
 
