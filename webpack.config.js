@@ -44,13 +44,9 @@ module.exports = env => {
 					loader: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
 				},
 				{
-					test: /\.(png|jpe?g|gif|ttf|eot|woff|woff2)$/i,
+					test: /\.(png|jpg|gif|ttf|eot|woff|woff2)$/i,
 					use: {
 						loader: 'file-loader',
-						options: {
-							name: '[name].[ext]',
-							outputPath: 'fonts/',
-						},
 					},
 				},
 				{

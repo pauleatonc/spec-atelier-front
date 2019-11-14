@@ -1,0 +1,42 @@
+.who-we-us {
+	background-color: $principal-color;
+	color: $white-color;
+	height: $who-we-us-height;
+	width: $total-parent;
+
+	&__inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+		height: $total-parent;
+
+		&__section {
+			width: 386px;
+			text-align: center;
+
+			&__icon {
+				height: 100px;
+				width: 100px;
+				margin-bottom: 30px;
+			}
+
+			&__descent {
+				font-family: 'Akzidenz Grotesk - light';
+				margin-bottom: 10px;
+				font-size: 24px;
+				font-style: italic;
+			}
+
+			&__title {
+				font-family: 'Akzidenz Grotesk - bold condenced';
+				margin-bottom: 10px;
+				font-size: 40px;
+			}
+
+			&__description {
+				font-family: 'Akzidenz Grotesk - light';
+				font-size: 24px;
+			}
+		}
+	}
+}
