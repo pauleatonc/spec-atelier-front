@@ -1,0 +1,41 @@
+.header-home {
+	align-items: center;
+	background-image: url('~@Assets/images/bg-header-home.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+	height: $header-home-height;
+	width: $total-parent;
+
+	&__inner {
+		background-color: $bg-color-card-header-home;
+		height: $header-home-height-card;
+		padding-bottom: 30px;
+		padding-left: 25px;
+		padding-right: 25px;
+		text-align: center;
+		padding-top: 30px;
+		width: $header-home-width-card;
+
+		&__text {
+			font-family: 'Akzidenz Grotesk - light';
+			font-size: 24px;
+			font-weight: 600;
+			line-height: 26px;
+			color: $black-color;
+
+			&:first-child {
+				margin-bottom: 10px;
+			}
+
+			&--title {
+				font-family: 'Akzidenz Grotesk - bold condenced';
+				color: $secondary-color;
+				font-size: 40px;
+				line-height: 40px;
+				text-transform: uppercase;
+			}
+		}
+	}
+}
