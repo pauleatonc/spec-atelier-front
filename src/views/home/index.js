@@ -1,11 +1,14 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
-import HeaderHome from '../../components/home/header';
-import WhoWeUs from '../../components/home/who-we-us';
+import HeaderHome from '@Components/home/header';
+import WhoWeUs from '@Components/home/who-we-us';
+import WhyBeSupplier from '@Components/home/why-be-supplier';
 
 const Home = () => (
 	<>
 		<HeaderHome />
 		<WhoWeUs />
+		<WhyBeSupplier />
 	</>
 );
 

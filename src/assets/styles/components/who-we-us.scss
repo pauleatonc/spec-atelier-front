@@ -11,31 +11,32 @@
 		height: $total-parent;
 
 		&__section {
-			width: 386px;
+			width: $who-we-us-section-width;
 			text-align: center;
 
 			&__icon {
-				height: 100px;
-				width: 100px;
-				margin-bottom: 30px;
+				height: $who-we-us-icon-size;
+				width: $who-we-us-icon-size;
+				margin-bottom: $margin-lg;
 			}
 
 			&__descent {
 				font-family: 'Akzidenz Grotesk - light';
-				margin-bottom: 10px;
-				font-size: 24px;
+				margin-bottom: $margin-m;
+				font-size: $font-size-l;
 				font-style: italic;
 			}
 
 			&__title {
 				font-family: 'Akzidenz Grotesk - bold condenced';
-				margin-bottom: 10px;
-				font-size: 40px;
+				margin-bottom: $margin-m;
+				font-size: $font-size-xl;
 			}
 
 			&__description {
 				font-family: 'Akzidenz Grotesk - light';
-				font-size: 24px;
+				font-size: $font-size-l;
+				line-height: 26px;
 			}
 		}
 	}

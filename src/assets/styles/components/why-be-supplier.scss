@@ -1,0 +1,48 @@
+.supplier {
+	background-color: $suport-grey-color;
+	color: $black-color;
+	font-size: $font-size-l;
+	height: $why-be-supplier-height;
+	width: $total-parent;
+
+	&__inner {
+		align-items: center;
+		display: flex;
+		height: $total-parent;
+		flex-direction: column;
+		justify-content: space-evenly;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+		width: $with-70;
+
+		&__title {
+			color: $principal-color;
+			font-family: 'Akzidenz Grotesk - bold condenced';
+			font-size: $font-size-xl;
+			text-transform: uppercase;
+		}
+
+		&__description {
+			font-family: 'Akzidenz Grotesk - light';
+		}
+
+		&__bottom {
+			&__btn {
+				@include button-base;
+				text-transform: uppercase;
+				background-color: $principal-color;
+				color: $white-color;
+
+				&:active,
+				&:focus {
+					@include button-base-clicked;
+				}
+
+				&:hover {
+					background-color: $support-orange-color;
+				}
+			}
+		}
+	}
+}
