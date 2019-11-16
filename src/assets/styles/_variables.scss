@@ -5,16 +5,26 @@ $total-parent: 100%;
 $with-70: 70%;
 $z-index-one-level: 5;
 $margin-lg: 30px;
-$margin-m: 10;
+$margin-m: 10px;
 
 $line-height: 26px;
 
 $font-size-xl: 40px;
 $font-size-l: 24px;
-$font-size: 14px;
+$font-size-m: 20px;
+$font-size-s: 14px;
+
+// buttons variables
+$btn-padding-y: 6px;
+$button-radius: 8px;
+$button-font-size: $font-size-m;
+$button-font-family: 'Akzidenz Grotesk - light';
+$button-font-weight: bold;
+$button-line-height: $line-height;
+$button-min-width: 145px;
 
 // Navbar variables
-$navbar-font-size-items: 21px;
+$navbar-font-size-items: $font-size-m;
 $navbar-font-weight: bold;
 $navbar-height: 105px;
 $nabvar-line-height-items: $line-height;
@@ -38,6 +48,9 @@ $header-home-line-height: $line-height;
 $who-we-us-height: 410px;
 $who-we-us-section-width: 386px;
 $who-we-us-icon-size: 100px;
+
+// Why be a Supplier variables
+$why-be-supplier-height: 400px;
 
 // Footer variables
 $footer-height: 260px;
