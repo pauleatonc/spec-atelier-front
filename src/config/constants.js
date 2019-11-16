@@ -1,6 +1,12 @@
 /* eslint-disable import/prefer-default-export */
 
 /**
+ * Presenter actions
+ */
+export const APP_PRESENTER = 'APP_PRESENTER';
+export const LOGIN_PRESENTER = 'LOGIN_PRESENTER';
+
+/**
  * Login actions
  */
 export const LOG_IN = 'LOG_IN';
