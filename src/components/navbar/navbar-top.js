@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LOGO from '@Assets/images/logo.png';
+import { getLocalStorage } from '@Helpers/localstorage.helper';
 import LoginDropdown from '../buttons/login_dropdown';
 import { presenterAction } from '@Actions';
 
@@ -43,6 +44,17 @@ const NavBar = props => {
 							Marcas
 						</Link>
 					</li>
+					{!!getLocalStorage && (
+						<li className="navbar__inner__section__item">
+							<Link
+								to="/proyects"
+								className="navbar__inner__section__item__link"
+								onClick={() => presenterMethod('app')}
+							>
+								Proyectos
+							</Link>
+						</li>
+					)}
 					<li className="navbar__inner__section__item">
 						<LoginDropdown
 							text="Iniciar sesión"
