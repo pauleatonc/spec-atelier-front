@@ -23,9 +23,9 @@ const Routes = () => (
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/registration" component={Registration} />
 					<Route exact path="/recover_password" component={RecoverPassword} />
-					<Route path="/new_password" component={NewPassword} />
-					<Route path="/products" component={Products} />
-					<Route path="/brands" component={Brands} />
+					<Route exact path="/new_password" component={NewPassword} />
+					<Route exact path="/products" component={Products} />
+					<Route exact path="/brands" component={Brands} />
 				</Switch>
 			</div>
 			<Footer />
