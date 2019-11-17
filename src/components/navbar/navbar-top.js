@@ -6,8 +6,20 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LOGO from '@Assets/images/logo.png';
 import { getLocalStorage } from '@Helpers/localstorage.helper';
+import removeClassToAllItems from '@Helpers/remove-class';
 import LoginDropdown from '../buttons/login_dropdown';
 import { presenterAction } from '@Actions';
+
+const handleAddActiveClassAndCallMethod = (e, presenter, method) => {
+	const element = e.target || e.srcElement;
+	const links = document.querySelectorAll(
+		'.navbar__inner__section__item__link',
+	);
+
+	removeClassToAllItems(links, 'current');
+	element.classList.add('current');
+	method(presenter);
+};
 
 const NavBar = props => {
 	const { presenterMethod } = props;
@@ -16,7 +28,12 @@ const NavBar = props => {
 		<nav className="navbar">
 			<div className="navbar__inner">
 				<div className="navbar__inner__logo-content">
-					<Link to="/" onClick={() => presenterMethod('app')}>
+					<Link
+						to="/"
+						onClick={e =>
+							handleAddActiveClassAndCallMethod(e, 'app', presenterMethod)
+						}
+					>
 						<img
 							className="navbar__inner__logo-content__image"
 							src={LOGO}
@@ -30,7 +47,9 @@ const NavBar = props => {
 						<Link
 							to="/products"
 							className="navbar__inner__section__item__link"
-							onClick={() => presenterMethod('app')}
+							onClick={e =>
+								handleAddActiveClassAndCallMethod(e, 'app', presenterMethod)
+							}
 						>
 							Productos
 						</Link>
@@ -39,7 +58,9 @@ const NavBar = props => {
 						<Link
 							to="/brands"
 							className="navbar__inner__section__item__link"
-							onClick={() => presenterMethod('app')}
+							onClick={e =>
+								handleAddActiveClassAndCallMethod(e, 'app', presenterMethod)
+							}
 						>
 							Marcas
 						</Link>
@@ -49,7 +70,9 @@ const NavBar = props => {
 							<Link
 								to="/projects"
 								className="navbar__inner__section__item__link"
-								onClick={() => presenterMethod('app')}
+								onClick={e =>
+									handleAddActiveClassAndCallMethod(e, 'app', presenterMethod)
+								}
 							>
 								Proyectos
 							</Link>

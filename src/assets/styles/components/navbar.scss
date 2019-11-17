@@ -54,7 +54,13 @@
           text-transform: uppercase;
           text-decoration: none;
 
+          &.current {
+            color: $white-color;
+            background-color: $secondary-color;
+          }
+
           &:hover {
+            background-color: $secondary-color;
             color: $white-color;
           }
         }
