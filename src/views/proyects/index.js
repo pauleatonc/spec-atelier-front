@@ -4,8 +4,8 @@ import HeaderProjects from '../../components/projects/header';
 const Proyects = () => (
 	<>
 		<HeaderProjects
-			title="mis proyectos"
-			description="crea y administra tus proyectos"
+			title="Mis proyectos"
+			description="Crea y administra tus proyectos"
 		/>
 	</>
 );
