@@ -1,5 +1,13 @@
 import React from 'react';
+import HeaderProjects from '../../components/projects/header';
 
-const Proyects = () => <h1>Proyectos</h1>;
+const Proyects = () => (
+	<>
+		<HeaderProjects
+			title="mis proyectos"
+			description="crea y administra tus proyectos"
+		/>
+	</>
+);
 
 export default Proyects;

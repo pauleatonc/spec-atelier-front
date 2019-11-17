@@ -1,27 +1,53 @@
 // Commons variables
-$total-height-view: 100vh;
-$total-width-view: 100vw;
-$total-parent: 100%;
-$with-70: 70%;
-$z-index-one-level: 5;
-$margin-lg: 30px;
-$margin-m: 10px;
+$font-size-xxs: 5px;
+$font-size-xs: 9px;
+$font-size-s: 14px;
+$font-size-m: 20px;
+$font-size-l: 24px;
+$font-size-xl: 30px;
+$font-size-xxl: 40px;
 
 $line-height: 26px;
 
-$font-size-xl: 40px;
-$font-size-l: 24px;
-$font-size-m: 20px;
-$font-size-s: 14px;
+$margin-xxs: 5px;
+$margin-xs: 10px;
+$margin-s: 15px;
+$margin-m: 20px;
+$margin-l: 25px;
+$margin-xl: 30px;
+$margin-xxl: 35px;
 
-// buttons variables
-$btn-padding-y: 6px;
-$button-radius: 8px;
-$button-font-size: $font-size-m;
-$button-font-family: 'Akzidenz Grotesk - bold condenced';
-$button-font-weight: bold;
-$button-line-height: $line-height;
-$button-min-width: 145px;
+$padding-xxs: 5px;
+$padding-xs: 10px;
+$padding-s: 15px;
+$padding-m: 20px;
+$padding-l: 25px;
+$padding-xl: 30px;
+$padding-xxl: 35px;
+
+$total-height-view: 100vh;
+$total-width-view: 100vw;
+
+$with-10: 10%;
+$with-20: 20%;
+$with-30: 30%;
+$with-40: 40%;
+$with-50: 50%;
+$with-60: 60%;
+$with-70: 70%;
+$with-80: 80%;
+$with-90: 90%;
+$with-100: 100%;
+
+$z-index-xxs: 5;
+$z-index-xs: 10;
+$z-index-s: 15;
+$z-index-m: 20;
+$z-index-l: 25;
+$z-index-xl: 30;
+$z-index-xxl: 35;
+
+$total-parent: $with-100;
 
 // Navbar variables
 $navbar-font-size-items: $font-size-m;
@@ -30,9 +56,6 @@ $navbar-height: 105px;
 $nabvar-line-height-items: $line-height;
 $navbar-logo: 324px;
 $navbar-width-items: 165px;
-
-// Dropdown variables
-$dropdown-bottom-position: -112px;
 
 // Header Home variable
 $header-home-height: 500px;
@@ -44,6 +67,18 @@ $header-home-title: $font-size-xl;
 $header-home-font-size: $font-size-l;
 $header-home-line-height: $line-height;
 
+// buttons variables
+$btn-padding-y: 6px;
+$button-radius: 8px;
+$button-font-size: $font-size-m;
+$button-font-family: 'Akzidenz Grotesk - bold condenced';
+$button-font-weight: bold;
+$button-line-height: $line-height;
+$button-min-width: 145px;
+
+// Dropdown variables
+$dropdown-bottom-position: -112px;
+
 // Who We Us Home variables
 $who-we-us-height: 410px;
 $who-we-us-section-width: 386px;
@@ -51,6 +86,9 @@ $who-we-us-icon-size: 100px;
 
 // Why be a Supplier variables
 $why-be-supplier-height: 400px;
+
+// Header Projects variables
+$header-projects-height: 165px;
 
 // Footer variables
 $footer-height: 260px;

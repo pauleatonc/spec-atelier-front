@@ -1,44 +1,44 @@
 .dropdown {
-	color: $secondary-color;
-	align-items: center;
-	display: flex;
-	font-family: 'Akzidenz Grotesk - bold condenced';
-	font-size: $navbar-font-size-items;
-	font-weight: $navbar-font-weight;
-	line-height: $nabvar-line-height-items;
-	height: $total-parent;
-	justify-content: center;
-	position: relative;
-	text-transform: uppercase;
+  color: $secondary-color;
+  align-items: center;
+  display: flex;
+  font-family: 'Akzidenz Grotesk - bold condenced';
+  font-size: $navbar-font-size-items;
+  font-weight: $navbar-font-weight;
+  line-height: $nabvar-line-height-items;
+  height: $total-parent;
+  justify-content: center;
+  position: relative;
+  text-transform: uppercase;
 
-	&:hover {
-		color: $white-color;
+  &:hover {
+    color: $white-color;
 
-		.dropdown__content {
-			display: block;
-		}
-	}
+    .dropdown__content {
+      display: block;
+    }
+  }
 
-	&__content {
-		background-color: $principal-color;
-		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-		display: none;
-		min-width: 200px;
-		position: absolute;
-		right: 0;
-		bottom: $dropdown-bottom-position;
-		z-index: $z-index-one-level;
+  &__content {
+    background-color: $principal-color;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    display: none;
+    min-width: 200px;
+    position: absolute;
+    right: 0;
+    bottom: $dropdown-bottom-position;
+    z-index: $z-index-xxs;
 
-		a {
-			color: $white-color;
-			display: block;
-			padding: 15px 16px;
-			text-decoration: none;
+    a {
+      color: $white-color;
+      display: block;
+      padding: 15px 16px;
+      text-decoration: none;
 
-			&:hover {
-				background-color: $white-color;
-				color: $principal-color;
-			}
-		}
-	}
+      &:hover {
+        background-color: $white-color;
+        color: $principal-color;
+      }
+    }
+  }
 }
