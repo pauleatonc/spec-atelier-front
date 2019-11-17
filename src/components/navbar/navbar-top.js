@@ -47,7 +47,7 @@ const NavBar = props => {
 					{!!getLocalStorage && (
 						<li className="navbar__inner__section__item">
 							<Link
-								to="/proyects"
+								to="/projects"
 								className="navbar__inner__section__item__link"
 								onClick={() => presenterMethod('app')}
 							>

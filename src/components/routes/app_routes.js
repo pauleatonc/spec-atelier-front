@@ -9,7 +9,7 @@ const AppRoutes = () => (
 			<Route exact path="/" component={Home} />
 			<Route exact path="/products" component={Products} />
 			<Route exact path="/brands" component={Brands} />
-			<Route exact path="/proyects" component={Proyects} />
+			<Route exact path="/projects" component={Proyects} />
 		</Switch>
 	</main>
 );
