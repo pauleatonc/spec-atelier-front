@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const prettyLocationFormat = (city, country) => `${city}, ${country}`;
+const prettyLocationFormat = (city, country) =>
+	`${city}, ${country.charAt(0).toUpperCase() + country.slice(1)}`;
 
 const Project = props => {
 	const {
@@ -32,11 +33,18 @@ const Project = props => {
 			</div>
 			<div className="project__content">
 				<p className="project__content__title">{name}</p>
-				<p className="project__content__description">{project_type}</p>
-				<p className="project__content__description">{delivery_date}</p>
-				<p className="project__content__description">{updated_at}</p>
 				<p className="project__content__description">
-					{prettyLocationFormat(city, country)}
+					Tipo de proyecto:{' '}
+					{project_type.charAt(0).toUpperCase() + project_type.slice(1)}
+				</p>
+				<p className="project__content__description">
+					Fecha inicio: {delivery_date}
+				</p>
+				<p className="project__content__description">
+					Última modificación: {updated_at}
+				</p>
+				<p className="project__content__description">
+					Ubicación: {prettyLocationFormat(city, country)}
 				</p>
 			</div>
 		</article>
