@@ -1,22 +1,23 @@
 @mixin button-base {
-	display: inline-block;
-	font-size: $button-font-size;
-	font-family: $button-font-family;
-	font-weight: $button-font-weight;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	user-select: none;
-	border: 1px solid transparent;
-	cursor: pointer;
-	line-height: $button-line-height;
-	padding-top: $btn-padding-y;
-	padding-bottom: $btn-padding-y;
-	border-radius: $button-radius;
-	min-width: $button-min-width;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: $button-font-size;
+  font-family: $button-font-family;
+  font-weight: $button-font-weight;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  line-height: $button-line-height;
+  padding-top: $btn-padding-y;
+  padding-bottom: $btn-padding-y;
+  border-radius: $button-radius;
+  min-width: $button-min-width;
 }
 
 @mixin button-base-clicked {
-	border-color: transparent;
-	outline: 0;
+  border-color: transparent;
+  outline: 0;
 }

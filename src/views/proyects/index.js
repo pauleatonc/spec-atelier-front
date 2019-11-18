@@ -24,6 +24,9 @@ const Proyects = props => {
 						<Project key={project.id} {...project} />
 					))}
 				</div>
+				<div className="projects__footer">
+					<button className="projects__footer__button-more">Ver más</button>
+				</div>
 			</section>
 		</>
 	);

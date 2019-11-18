@@ -1,6 +1,28 @@
 .projects {
   height: $total-parent;
   width: $total-parent;
+  display: flex;
+  flex-direction: column;
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+
+    &__button-more {
+      @include button-base;
+      background-color: $principal-color;
+      color: $white-color;
+
+      &:active,
+      &:focus {
+        @include button-base-clicked;
+      }
+
+      &:hover {
+        background-color: $support-orange-color;
+      }
+    }
+  }
 
   &__inner {
     display: flex;
@@ -8,6 +30,7 @@
     justify-content: space-around;
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 55px;
     width: $width-90;
 
     .project {
