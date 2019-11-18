@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
+import 'moment/locale/es';
 
 const prettyLocationFormat = (city, country) =>
 	`${city}, ${country.charAt(0).toUpperCase() + country.slice(1)}`;
@@ -34,14 +36,15 @@ const Project = props => {
 			<div className="project__content">
 				<p className="project__content__title">{name}</p>
 				<p className="project__content__description">
-					Tipo de proyecto:{' '}
+					Tipo Proyecto:{' '}
 					{project_type.charAt(0).toUpperCase() + project_type.slice(1)}
 				</p>
 				<p className="project__content__description">
-					Fecha inicio: {delivery_date}
+					Fecha Inicio:{' '}
+					<Moment format="DD/MM/YYYY" local="es" date={delivery_date} />
 				</p>
 				<p className="project__content__description">
-					Última modificación: {updated_at}
+					Última Modificación: <Moment local="es" date={updated_at} fromNow />
 				</p>
 				<p className="project__content__description">
 					Ubicación: {prettyLocationFormat(city, country)}
