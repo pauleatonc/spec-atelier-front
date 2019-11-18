@@ -1,0 +1,28 @@
+.header-projects {
+  background-color: $principal-color;
+  height: $header-projects-height;
+  width: $total-parent;
+  color: $white-color;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    height: $total-parent;
+    width: $width-90;
+
+    &__title {
+      font-family: 'Akzidenz Grotesk - bold condenced';
+      text-transform: uppercase;
+      font-size: $font-size-xxl;
+      margin-bottom: $margin-xxs;
+    }
+
+    &__description {
+      font-family: 'Akzidenz Grotesk - light';
+      font-size: $font-size-l;
+    }
+  }
+}

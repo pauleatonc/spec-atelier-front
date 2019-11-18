@@ -43,5 +43,20 @@
 			},
 			"file": "./auth/registration-response.json"
 		}
+	},
+	{
+		"request": {
+			"url": "^/api/users/([a-zA-Z0-9]+)/projects",
+			"status": 200,
+			"method": "GET"
+		},
+		"response": {
+			"status": 200,
+			"latency": 5000,
+			"headers": {
+				"Content-Type": "application/json"
+			},
+			"file": "./projects/projects-response-<% url[1] %>.json"
+		}
 	}
 ]

@@ -19,7 +19,12 @@ export const registrationAction = dispatch => data => {
 		.then(response => {
 			setLocalStorage({
 				key: 'token',
-				value: response.data.user.jwt,
+				value: response.user.jwt,
+			});
+
+			setLocalStorage({
+				key: 'userID',
+				value: response.user.id,
 			});
 
 			return dispatch({

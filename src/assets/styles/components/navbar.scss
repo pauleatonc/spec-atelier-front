@@ -1,64 +1,70 @@
 .navbar {
-	align-items: center;
-	background-color: $white-color;
-	display: flex;
-	font-family: 'Akzidenz Grotesk - bold condenced';
-	height: $navbar-height;
-	position: relative;
-	width: $total-parent;
+  align-items: center;
+  background-color: $white-color;
+  display: flex;
+  font-family: 'Akzidenz Grotesk - bold condenced';
+  height: $navbar-height;
+  position: relative;
+  width: $total-parent;
 
-	&__inner {
-		align-items: center;
-		color: $black-color;
-		display: flex;
-		height: $total-parent;
-		justify-content: space-between;
-		margin-left: auto;
-		margin-right: auto;
-		width: $with-70;
+  &__inner {
+    align-items: center;
+    color: $black-color;
+    display: flex;
+    height: $total-parent;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+    width: $width-90;
 
-		&__logo-content {
-			align-items: center;
-			display: flex;
-			height: $total-parent;
+    &__logo-content {
+      align-items: center;
+      display: flex;
+      height: $total-parent;
 
-			&__image {
-				width: 324px;
-			}
-		}
+      &__image {
+        width: $navbar-logo;
+      }
+    }
 
-		&__section {
-			align-items: center;
-			display: flex;
-			height: $total-parent;
+    &__section {
+      align-items: center;
+      display: flex;
+      height: $total-parent;
 
-			&__item {
-				cursor: pointer;
-				height: $total-parent;
-				width: $navbar-width-items;
+      &__item {
+        cursor: pointer;
+        height: $total-parent;
+        width: $navbar-width-items;
 
-				&:hover {
-					background-color: $secondary-color;
-				}
+        &:hover {
+          background-color: $secondary-color;
+        }
 
-				&__link {
-					align-items: center;
-					color: $secondary-color;
-					display: flex;
-					font-size: $navbar-font-size-items;
-					font-weight: $navbar-font-weight;
-					line-height: $nabvar-line-height-items;
-					height: $total-parent;
-					justify-content: center;
-					position: relative;
-					text-transform: uppercase;
-					text-decoration: none;
+        &__link {
+          align-items: center;
+          color: $secondary-color;
+          display: flex;
+          font-size: $navbar-font-size-items;
+          font-weight: $navbar-font-weight;
+          line-height: $nabvar-line-height-items;
+          height: $total-parent;
+          justify-content: center;
+          position: relative;
+          text-transform: uppercase;
+          text-decoration: none;
 
-					&:hover {
-						color: $white-color;
-					}
-				}
-			}
-		}
-	}
+          &.current {
+            color: $white-color;
+            background-color: $secondary-color;
+          }
+
+          &:hover {
+            background-color: $secondary-color;
+            color: $white-color;
+          }
+        }
+      }
+    }
+  }
 }

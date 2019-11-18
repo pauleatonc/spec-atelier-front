@@ -31,3 +31,13 @@ export const RECOVER_PASSWORD_ERROR = 'RECOVER_PASSWORD_ERROR';
  */
 export const NEW_PASSWORD = 'NEW_PASSWORD';
 export const NEW_PASSWORD_ERROR = 'NEW_PASSWORD_ERROR';
+
+/**
+ * Projects actions
+ */
+
+export const GET_ALL_PROJECTS = 'GET_ALL_PROJECTS';
+export const CREATE_NEW_PROJECT = 'CREATE_NEW_PROJECT';
+export const GET_ONE_PROJECT = 'GET_ONE_PROJECT';
+export const EDIT_PROJECT = 'EDIT_PROJECT';
+export const DELETE_PROJECT = 'DELETE_PROJECT';
