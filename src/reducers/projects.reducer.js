@@ -3,6 +3,7 @@ import { GET_ALL_PROJECTS } from '@Configurations/constants';
 
 export const initialState = {
 	projects: [],
+	loader: true,
 };
 
 export default (state = initialState, action) => {
@@ -11,6 +12,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				projects: action.payload.projects,
+				loader: action.payload.loader,
 			};
 		default:
 			return state;

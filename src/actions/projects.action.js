@@ -1,3 +1,7 @@
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-undef */
+/* eslint-disable no-console */
+/* eslint-disable import/no-unresolved */
 import getEndPoint from '@Configurations/config';
 import { getLocalStorage } from '@Helpers/localstorage.helper';
 import { GET_ALL_PROJECTS } from '@Configurations/constants';
@@ -20,6 +24,7 @@ export const getAllProjectsAction = dispatch => () => {
 				type: GET_ALL_PROJECTS,
 				payload: {
 					projects: response.projects,
+					loader: false,
 				},
 			});
 		})

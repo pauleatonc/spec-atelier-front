@@ -1,6 +1,18 @@
 {
 	"projects": [
 		{
+			"id": 7,
+			"name": "Ampliación casa particular",
+			"project_type": "recidencial",
+			"work_type": "ampliación",
+			"country": "Chile",
+			"city": "Santiago Centro",
+			"delivery_date": "2014-06-01",
+			"status": "active",
+			"created_at": "2019-11-18T01:43:13.310-03:00",
+			"updated_at": "2019-11-18T01:43:13.310-03:00"
+		},
+		{
 			"id": 6,
 			"name": "Ampliación casa particular",
 			"project_type": "recidencial",
