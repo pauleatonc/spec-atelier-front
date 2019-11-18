@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Moment from 'react-moment';
-import 'moment/locale/es';
+import {
+	firstLetterToUppercase,
+	handleChangeToPrettyFormat,
+	handleChangeToprettyFormatToNow,
+} from '@Helpers/pretty-format.helper';
 
 const prettyLocationFormat = (city, country) =>
-	`${city}, ${country.charAt(0).toUpperCase() + country.slice(1)}`;
+	`${firstLetterToUppercase(city)}, ${firstLetterToUppercase(country)}`;
 
 const Project = props => {
 	const {
@@ -40,11 +43,10 @@ const Project = props => {
 					{project_type.charAt(0).toUpperCase() + project_type.slice(1)}
 				</p>
 				<p className="project__content__description">
-					Fecha Inicio:{' '}
-					<Moment format="DD/MM/YYYY" local="es" date={delivery_date} />
+					Fecha Inicio: {handleChangeToPrettyFormat(delivery_date)}
 				</p>
 				<p className="project__content__description">
-					Última Modificación: <Moment local="es" date={updated_at} fromNow />
+					Última Modificación: {handleChangeToprettyFormatToNow(updated_at)}
 				</p>
 				<p className="project__content__description">
 					Ubicación: {prettyLocationFormat(city, country)}
