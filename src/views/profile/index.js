@@ -2,8 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Brands = () => {
-	return <h1>Marcas</h1>;
+const Profile = () => {
+	return <h1>Perfil</h1>;
 };
 
-export default connect(state => state)(Brands);
+export default connect(state => state)(Profile);
