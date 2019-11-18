@@ -1,0 +1,51 @@
+{
+  "projects": [{
+      "id": 4,
+      "name": "Ampliación",
+      "project_type": "institucional",
+      "work_type": "obra nueva",
+      "country": "chile",
+      "city": null,
+      "delivery_date": "2019-11-24",
+      "status": "active",
+      "created_at": "2019-11-17T19:38:49.859-03:00",
+      "updated_at": "2019-11-17T19:38:49.859-03:00"
+    },
+    {
+      "id": 3,
+      "name": "Ampliación",
+      "project_type": "institucional",
+      "work_type": "obra nueva",
+      "country": "chile",
+      "city": null,
+      "delivery_date": "2019-11-24",
+      "status": "active",
+      "created_at": "2019-11-17T19:38:44.872-03:00",
+      "updated_at": "2019-11-17T19:38:44.872-03:00"
+    },
+    {
+      "id": 2,
+      "name": "Ampliación casa lalo",
+      "project_type": "institucional",
+      "work_type": "obra nueva",
+      "country": "chile",
+      "city": null,
+      "delivery_date": "2019-11-24",
+      "status": "active",
+      "created_at": "2019-11-17T19:21:56.558-03:00",
+      "updated_at": "2019-11-17T19:21:56.558-03:00"
+    },
+    {
+      "id": 1,
+      "name": "Ampliación casa lalo",
+      "project_type": "institucional",
+      "work_type": "obra nueva",
+      "country": "chile",
+      "city": null,
+      "delivery_date": "2019-11-24",
+      "status": "active",
+      "created_at": "2019-11-17T19:21:50.201-03:00",
+      "updated_at": "2019-11-17T19:21:50.201-03:00"
+    }
+  ]
+}

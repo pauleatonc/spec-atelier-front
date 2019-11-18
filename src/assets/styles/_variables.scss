@@ -28,16 +28,16 @@ $padding-xxl: 35px;
 $total-height-view: 100vh;
 $total-width-view: 100vw;
 
-$with-10: 10%;
-$with-20: 20%;
-$with-30: 30%;
-$with-40: 40%;
-$with-50: 50%;
-$with-60: 60%;
-$with-70: 70%;
-$with-80: 80%;
-$with-90: 90%;
-$with-100: 100%;
+$width-10: 10%;
+$width-20: 20%;
+$width-30: 30%;
+$width-40: 40%;
+$width-50: 50%;
+$width-60: 60%;
+$width-70: 70%;
+$width-80: 80%;
+$width-90: 90%;
+$width-100: 100%;
 
 $z-index-xxs: 5;
 $z-index-xs: 10;
@@ -47,7 +47,7 @@ $z-index-l: 25;
 $z-index-xl: 30;
 $z-index-xxl: 35;
 
-$total-parent: $with-100;
+$total-parent: $width-100;
 
 // Navbar variables
 $navbar-font-size-items: $font-size-m;

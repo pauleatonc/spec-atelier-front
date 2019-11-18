@@ -65,7 +65,7 @@ const NavBar = props => {
 							Marcas
 						</Link>
 					</li>
-					{!!getLocalStorage && (
+					{!!getLocalStorage('token') && (
 						<li className="navbar__inner__section__item">
 							<Link
 								to="/projects"
