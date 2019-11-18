@@ -1,0 +1,76 @@
+{
+	"projects": [
+		{
+			"id": 6,
+			"name": "Ampliación casa particular",
+			"project_type": "recidencial",
+			"work_type": "ampliación",
+			"country": "Chile",
+			"city": "Santiago Centro",
+			"delivery_date": "2014-06-01",
+			"status": "active",
+			"created_at": "2019-11-18T01:43:13.310-03:00",
+			"updated_at": "2019-11-18T01:43:13.310-03:00"
+		},
+		{
+			"id": 5,
+			"name": "Sala de ensayo de música",
+			"project_type": "comercial",
+			"work_type": "obra nueva",
+			"country": "chile",
+			"city": "Peñalolen",
+			"delivery_date": "2014-06-01",
+			"status": "active",
+			"created_at": "2019-11-18T01:40:56.344-03:00",
+			"updated_at": "2019-11-18T01:40:56.344-03:00"
+		},
+		{
+			"id": 4,
+			"name": "Ampliación casa particular",
+			"project_type": "recidencial",
+			"work_type": "ampliación",
+			"country": "Chile",
+			"city": "Santiago Centro",
+			"delivery_date": "2014-06-01",
+			"status": "active",
+			"created_at": "2019-11-18T01:43:13.310-03:00",
+			"updated_at": "2019-11-18T01:43:13.310-03:00"
+		},
+		{
+			"id": 3,
+			"name": "Sala de ensayo de música",
+			"project_type": "comercial",
+			"work_type": "obra nueva",
+			"country": "chile",
+			"city": "Peñalolen",
+			"delivery_date": "2014-06-01",
+			"status": "active",
+			"created_at": "2019-11-18T01:40:56.344-03:00",
+			"updated_at": "2019-11-18T01:40:56.344-03:00"
+		},
+		{
+			"id": 2,
+			"name": "Ampliación casa particular",
+			"project_type": "recidencial",
+			"work_type": "ampliación",
+			"country": "Chile",
+			"city": "Santiago Centro",
+			"delivery_date": "2014-06-01",
+			"status": "active",
+			"created_at": "2019-11-18T01:43:13.310-03:00",
+			"updated_at": "2019-11-18T01:43:13.310-03:00"
+		},
+		{
+			"id": 1,
+			"name": "Sala de ensayo de música",
+			"project_type": "comercial",
+			"work_type": "obra nueva",
+			"country": "chile",
+			"city": "Peñalolen",
+			"delivery_date": "2014-06-01",
+			"status": "active",
+			"created_at": "2019-11-18T01:40:56.344-03:00",
+			"updated_at": "2019-11-18T01:40:56.344-03:00"
+		}
+	]
+}

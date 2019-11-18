@@ -52,11 +52,11 @@
 		},
 		"response": {
 			"status": 200,
-			"latency": 5000,
+			"latency": 2500,
 			"headers": {
 				"Content-Type": "application/json"
 			},
-			"file": "./auth/projects-response-<% url[1] %>.json"
+			"file": "./projects/projects-response-<% url[1] %>.json"
 		}
 	}
 ]
