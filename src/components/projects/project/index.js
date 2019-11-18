@@ -39,8 +39,7 @@ const Project = props => {
 			<div className="project__content">
 				<p className="project__content__title">{name}</p>
 				<p className="project__content__description">
-					Tipo Proyecto:{' '}
-					{project_type.charAt(0).toUpperCase() + project_type.slice(1)}
+					Tipo Proyecto: {firstLetterToUppercase(project_type)}
 				</p>
 				<p className="project__content__description">
 					Fecha Inicio: {handleChangeToPrettyFormat(delivery_date)}
