@@ -15,6 +15,11 @@ export const GOOGLE_LOG_IN = 'GOOGLE_LOG_IN';
 export const GOOGLE_LOG_IN_ERROR = 'GOOGLE_LOG_IN_ERROR';
 
 /**
+ * Logout actinos
+ */
+export const LOG_OUT = 'LOG_OUT';
+
+/**
  * Registration actions
  */
 export const REGISTRATION = 'REGISTRATION';

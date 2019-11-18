@@ -33,7 +33,7 @@
 		bottom: $dropdown-bottom-position;
 		z-index: $z-index-xxs;
 
-		a {
+		&__link {
 			color: $white-color;
 			display: block;
 			padding: 15px 16px;

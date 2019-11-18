@@ -2,8 +2,11 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-unresolved */
 import getEndPoint from '@Configurations/config';
-import { LOG_IN, LOG_IN_ERROR } from '@Configurations/constants';
-import { setLocalStorage } from '@Helpers/localstorage.helper';
+import { LOG_IN, LOG_IN_ERROR, LOG_OUT } from '@Configurations/constants';
+import {
+	setLocalStorage,
+	deleteLocalStorage,
+} from '@Helpers/localstorage.helper';
 
 export const loginAction = dispatch => data => {
 	const endpoint = getEndPoint({ service: 'sessions' });
@@ -40,6 +43,29 @@ export const loginAction = dispatch => data => {
 				payload: {
 					isLogin: false,
 					error,
+				},
+			});
+		});
+};
+
+export const logoutAction = dispatch => () => {
+	const endpoint = getEndPoint({ service: 'sessions' });
+
+	fetch(`${endpoint}`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	})
+		.then(res => res.json())
+		.then(() => {
+			deleteLocalStorage('token');
+			deleteLocalStorage('userID');
+			return dispatch({
+				type: LOG_OUT,
+				payload: {
+					isLogin: false,
+					userData: [],
 				},
 			});
 		});
