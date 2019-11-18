@@ -5,21 +5,46 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getLocalStorage } from '@Helpers/localstorage.helper';
+import LOGO_USER_GENERIC from '@Assets/images/user-generic.png';
 import { presenterAction } from '@Actions';
+
+const getTabsWhenUserIsLogin = method => {
+	return (
+		<>
+			<Link to="/login" onClick={() => method('login')}>
+				Login
+			</Link>
+			<Link to="/registration" onClick={() => method('login')}>
+				Registrarse
+			</Link>
+		</>
+	);
+};
+
+const getTabsWhenUserIsNotLogin = method => {
+	return (
+		<>
+			<Link to="/profile" onClick={() => method('app')}>
+				Perfil
+			</Link>
+			<Link to="/registration" onClick={() => method('app')}>
+				Cerrar sesión
+			</Link>
+		</>
+	);
+};
 
 const LoginDropdown = props => {
 	const { text, presenterMethod } = props;
 
 	return (
 		<div className="dropdown">
-			{text}
+			{!getLocalStorage('token') ? text : 'Sesión iniciada'}
 			<div className="dropdown__content">
-				<Link to="/login" onClick={() => presenterMethod('login')}>
-					Login
-				</Link>
-				<Link to="/registration" onClick={() => presenterMethod('login')}>
-					Registrarse
-				</Link>
+				{!getLocalStorage('token')
+					? getTabsWhenUserIsLogin(presenterMethod)
+					: getTabsWhenUserIsNotLogin(presenterMethod)}
 			</div>
 		</div>
 	);
