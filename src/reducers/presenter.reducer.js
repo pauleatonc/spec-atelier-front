@@ -2,7 +2,7 @@
 import { APP_PRESENTER, LOGIN_PRESENTER } from '@Configurations/constants';
 
 export const initialState = {
-	presenterView: 'app',
+	presenterView: '',
 };
 
 export default (state = initialState, action) => {

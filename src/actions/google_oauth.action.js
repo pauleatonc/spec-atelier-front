@@ -23,14 +23,14 @@ export const googleOuathAction = dispatch => data => {
 		.then(response => {
 			setLocalStorage({
 				key: 'token',
-				value: response.data.user.jwt,
+				value: response.user.jwt,
 			});
 
 			return dispatch({
 				type: GOOGLE_LOG_IN,
 				payload: {
-					isLogin: response.data.logged_in,
-					userData: response.data.user,
+					isLogin: response.logged_in,
+					userData: response.user,
 				},
 			});
 		})

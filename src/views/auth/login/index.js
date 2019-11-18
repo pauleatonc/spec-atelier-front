@@ -1,5 +1,6 @@
 /* eslint-disable import/no-unresolved */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ButtonGoogleLogin from '@Components/buttons/button_google_login';
@@ -18,7 +19,13 @@ export const handleSubmit = (email, password, loginMethod) => {
 const Login = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const { loginMethod } = props;
+	const { loginMethod, loginState, history } = props;
+
+	useEffect(() => {
+		if (loginState) {
+			history.push('/');
+		}
+	}, [loginState]);
 
 	return (
 		<>
@@ -52,12 +59,17 @@ const Login = props => {
 };
 
 Login.propTypes = {
+	loginState: PropTypes.bool.isRequired,
 	loginMethod: PropTypes.func.isRequired,
 };
 
-export default connect(
-	state => state,
-	dispatch => ({
-		loginMethod: loginAction(dispatch),
-	}),
-)(Login);
+export default withRouter(
+	connect(
+		state => ({
+			loginState: state.login.isLogin,
+		}),
+		dispatch => ({
+			loginMethod: loginAction(dispatch),
+		}),
+	)(Login),
+);

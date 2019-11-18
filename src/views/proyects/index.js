@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllProjectsAction } from '@Actions';
+
 import HeaderProjects from '../../components/projects/header';
 import Project from '../../components/projects/project';
 
@@ -47,8 +48,8 @@ Proyects.defaultProps = {
 };
 
 Proyects.propTypes = {
-	getAllProjectsMethod: PropTypes.func.isRequired,
 	projectsArray: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+	getAllProjectsMethod: PropTypes.func.isRequired,
 };
 
 export default connect(

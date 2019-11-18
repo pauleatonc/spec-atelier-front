@@ -26,12 +26,11 @@ export const loginAction = dispatch => data => {
 				key: 'userID',
 				value: response.user.id,
 			});
-
 			return dispatch({
 				type: LOG_IN,
 				payload: {
-					isLogin: response.data.logged_in,
-					userData: response.data.user,
+					isLogin: response.logged_in,
+					userData: response.user,
 				},
 			});
 		})

@@ -10,7 +10,11 @@ import removeClassToAllItems from '@Helpers/remove-class';
 import LoginDropdown from '../buttons/login_dropdown';
 import { presenterAction } from '@Actions';
 
-const handleAddActiveClassAndCallMethod = (e, presenter, method) => {
+const handleAddActiveClassToNavbarAndCallPresenterAction = (
+	e,
+	presenter,
+	method,
+) => {
 	const element = e.target || e.srcElement;
 	const links = document.querySelectorAll(
 		'.navbar__inner__section__item__link',
@@ -31,7 +35,11 @@ const NavBar = props => {
 					<Link
 						to="/"
 						onClick={e =>
-							handleAddActiveClassAndCallMethod(e, 'app', presenterMethod)
+							handleAddActiveClassToNavbarAndCallPresenterAction(
+								e,
+								'app',
+								presenterMethod,
+							)
 						}
 					>
 						<img
@@ -48,7 +56,11 @@ const NavBar = props => {
 							to="/products"
 							className="navbar__inner__section__item__link"
 							onClick={e =>
-								handleAddActiveClassAndCallMethod(e, 'app', presenterMethod)
+								handleAddActiveClassToNavbarAndCallPresenterAction(
+									e,
+									'app',
+									presenterMethod,
+								)
 							}
 						>
 							Productos
@@ -59,7 +71,11 @@ const NavBar = props => {
 							to="/brands"
 							className="navbar__inner__section__item__link"
 							onClick={e =>
-								handleAddActiveClassAndCallMethod(e, 'app', presenterMethod)
+								handleAddActiveClassToNavbarAndCallPresenterAction(
+									e,
+									'app',
+									presenterMethod,
+								)
 							}
 						>
 							Marcas
@@ -71,7 +87,11 @@ const NavBar = props => {
 								to="/projects"
 								className="navbar__inner__section__item__link"
 								onClick={e =>
-									handleAddActiveClassAndCallMethod(e, 'app', presenterMethod)
+									handleAddActiveClassToNavbarAndCallPresenterAction(
+										e,
+										'app',
+										presenterMethod,
+									)
 								}
 							>
 								Proyectos

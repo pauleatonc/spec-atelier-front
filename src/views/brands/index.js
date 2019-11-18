@@ -1,5 +1,9 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Brands = () => <h1>Brands</h1>;
+const Brands = () => {
+	return <h1>Brands</h1>;
+};
 
-export default Brands;
+export default connect(state => state)(Brands);

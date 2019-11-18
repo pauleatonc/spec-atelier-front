@@ -1,5 +1,9 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Products = () => <h1>Products</h1>;
+const Products = () => {
+	return <h1>Products</h1>;
+};
 
-export default Products;
+export default connect(state => state)(Products);

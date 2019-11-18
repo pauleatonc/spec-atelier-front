@@ -22,7 +22,7 @@ export const recoverPasswordAction = dispatch => email => {
 			return dispatch({
 				type: RECOVER_PASSWORD,
 				payload: {
-					sended: response.data.status,
+					sended: response.status,
 				},
 			});
 		})

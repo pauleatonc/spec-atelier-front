@@ -19,7 +19,7 @@ export const newPasswordAction = dispatch => ({ token, password }) => {
 			return dispatch({
 				type: NEW_PASSWORD,
 				payload: {
-					status: response.data.status,
+					status: response.status,
 				},
 			});
 		})

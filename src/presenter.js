@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { AppRoutes, LoginRoutes } from '@Components/routes';
+import getPortalView from '@Helpers/portal-view.helper';
 import NavBar from '@Components/navbar/navbar-top';
 import Footer from '@Components/footer';
 
@@ -21,20 +22,25 @@ const LoginView = () => (
 );
 
 const Presenter = props => {
-	const { viewToRender } = props;
+	const { portalToRender } = props;
+	let portal = portalToRender;
+
+	if (portal === '') {
+		portal = getPortalView();
+	}
 
 	const presenter = {
 		app: <AppView />,
 		login: <LoginView />,
 	};
 
-	return presenter[viewToRender];
+	return presenter[portal];
 };
 
 Presenter.propTypes = {
-	viewToRender: PropTypes.string.isRequired,
+	portalToRender: PropTypes.string.isRequired,
 };
 
 export default connect(state => ({
-	viewToRender: state.presenter.presenterView,
+	portalToRender: state.presenter.presenterView,
 }))(Presenter);

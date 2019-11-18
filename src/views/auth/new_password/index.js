@@ -21,7 +21,6 @@ const NewPassword = props => {
 	const [password, setPassword] = useState('');
 	const [repeatPassword, setRepeatPassword] = useState('');
 	const { newPasswordMethod, location } = props;
-
 	const token = handleGetQueryParam({ uri: location.search, param: 'token' });
 
 	return (
