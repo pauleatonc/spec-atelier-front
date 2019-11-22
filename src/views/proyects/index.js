@@ -3,12 +3,14 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import removeClassAndAddCurrentToThisView from '@Helpers/remove-class-navbar.helper';
 import { getAllProjectsAction } from '@Actions';
 
 import HeaderProjects from '../../components/projects/header';
 import Project from '../../components/projects/project';
 
 const Proyects = props => {
+	removeClassAndAddCurrentToThisView();
 	const { getAllProjectsMethod, projectsArray, loader } = props;
 
 	useEffect(() => {
