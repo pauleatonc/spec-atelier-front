@@ -1,12 +1,18 @@
 /* eslint-disable no-undef */
-const mapUrls = {
+const mapApiUrls = {
 	development: 'http://localhost:8882',
 	integration: 'http://localhost:3000',
 	production: 'https://spec-atelier.herokuapp.com',
 };
 
-const handleGetEnvironment = () => ENVIRONMENT;
-const handleGetUrl = () => mapUrls[handleGetEnvironment()];
+export const mapFrontUrls = {
+	development: 'http://localhost:8080',
+	integration: 'http://localhost:8080',
+	production: 'https://specatelier-front.herokuapp.com/',
+};
+
+export const handleGetEnvironment = () => ENVIRONMENT;
+const handleGetApiUrl = () => mapApiUrls[handleGetEnvironment()];
 
 const handleGetEntryPointApi = path => {
 	switch (path) {
@@ -20,6 +26,6 @@ const handleGetEntryPointApi = path => {
 };
 
 const getEndPoint = ({ path = 'api', service = '' }) =>
-	`${handleGetUrl()}${handleGetEntryPointApi(path)}${service}`;
+	`${handleGetApiUrl()}${handleGetEntryPointApi(path)}${service}`;
 
 export default getEndPoint;

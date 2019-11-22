@@ -2,17 +2,21 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import LOGO from '@Assets/images/logo.png';
 import { getLocalStorage } from '@Helpers/localstorage.helper';
+import { presenterAction } from '@Actions';
 import LoginDropdown from '../buttons/login_dropdown';
 
-const NavBar = () => {
+const NavBar = props => {
+	const { presenterMethod } = props;
+
 	return (
 		<nav className="navbar">
 			<div className="navbar__inner">
 				<div className="navbar__inner__logo-content">
-					<Link to="/" data-view="home">
+					<Link to="/" data-view="home" onClick={() => presenterMethod('app')}>
 						<img
 							className="navbar__inner__logo-content__image"
 							src={LOGO}
@@ -27,6 +31,7 @@ const NavBar = () => {
 							to="/products"
 							className="navbar__inner__section__item__link"
 							data-view="products"
+							onClick={() => presenterMethod('app')}
 						>
 							Productos
 						</Link>
@@ -36,6 +41,7 @@ const NavBar = () => {
 							to="/brands"
 							className="navbar__inner__section__item__link"
 							data-view="brands"
+							onClick={() => presenterMethod('app')}
 						>
 							Marcas
 						</Link>
@@ -46,6 +52,7 @@ const NavBar = () => {
 								to="/projects"
 								className="navbar__inner__section__item__link"
 								data-view="projects"
+								onClick={() => presenterMethod('app')}
 							>
 								Proyectos
 							</Link>
@@ -63,4 +70,13 @@ const NavBar = () => {
 	);
 };
 
-export default connect(state => state)(NavBar);
+NavBar.propTypes = {
+	presenterMethod: PropTypes.func.isRequired,
+};
+
+export default connect(
+	state => state,
+	dispatch => ({
+		presenterMethod: presenterAction(dispatch),
+	}),
+)(NavBar);

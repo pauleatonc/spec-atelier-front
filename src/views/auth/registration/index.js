@@ -1,7 +1,8 @@
 /* eslint-disable import/no-unresolved */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import redirectToHomeWhenIsLogin from '@Helpers/redirect.helper';
 import { registrationAction } from '@Actions/';
 
 export const handleSubmit = (email, password, registrationMethod) => {
@@ -17,7 +18,13 @@ export const handleSubmit = (email, password, registrationMethod) => {
 const Registration = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const { registrationMethod } = props;
+	const { registrationMethod, loginState } = props;
+
+	useEffect(() => {
+		if (loginState) {
+			redirectToHomeWhenIsLogin();
+		}
+	}, [loginState]);
 
 	return (
 		<>
@@ -51,11 +58,14 @@ const Registration = props => {
 };
 
 Registration.propTypes = {
+	loginState: PropTypes.bool.isRequired,
 	registrationMethod: PropTypes.func.isRequired,
 };
 
 export default connect(
-	state => state,
+	state => ({
+		loginState: state.login.isLogin,
+	}),
 	dispatch => ({
 		registrationMethod: registrationAction(dispatch),
 	}),

@@ -12,16 +12,19 @@ const mapPathnameToUrl = {
 
 const removeClassAndAddCurrentToThisView = () => {
 	const { pathname } = window.location;
-	const links = document.querySelectorAll(
-		'.navbar .navbar__inner__section__item__link',
-	);
 
-	removeClassToAllItems(links, 'current');
-	links.forEach(link => {
-		if (link.dataset.view === mapPathnameToUrl[pathname]) {
-			link.classList.add('current');
-		}
-	});
+	setTimeout(() => {
+		const links = document.querySelectorAll(
+			'.navbar .navbar__inner__section__item__link',
+		);
+
+		removeClassToAllItems(links, 'current');
+		links.forEach(link => {
+			if (link.dataset.view === mapPathnameToUrl[pathname]) {
+				link.classList.add('current');
+			}
+		});
+	}, 5);
 };
 
 export default removeClassAndAddCurrentToThisView;

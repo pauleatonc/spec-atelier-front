@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { Home, Products, Brands, Proyects, Profile } from '@Views';
 
 const AppRoutes = () => (
-	<main className="main-section">
+	<section className="main-section">
 		<Switch>
 			<Route exact path="/" component={Home} />
 			<Route exact path="/products" component={Products} />
@@ -12,7 +12,7 @@ const AppRoutes = () => (
 			<Route exact path="/projects" component={Proyects} />
 			<Route exact path="/profile" component={Profile} />
 		</Switch>
-	</main>
+	</section>
 );
 
 export default AppRoutes;

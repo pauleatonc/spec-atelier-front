@@ -25,9 +25,7 @@ const Presenter = props => {
 	const { portalToRender } = props;
 	let portal = portalToRender;
 
-	if (portal === '') {
-		portal = getPortalView();
-	}
+	portal = getPortalView();
 
 	const presenter = {
 		app: <AppView />,

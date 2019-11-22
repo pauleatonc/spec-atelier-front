@@ -1,9 +1,9 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ButtonGoogleLogin from '@Components/buttons/button_google_login';
+import redirectToHomeWhenIsLogin from '@Helpers/redirect.helper';
 import { loginAction } from '@Actions/';
 
 export const handleSubmit = (email, password, loginMethod) => {
@@ -19,11 +19,11 @@ export const handleSubmit = (email, password, loginMethod) => {
 const Login = props => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const { loginMethod, loginState, history } = props;
+	const { loginMethod, loginState } = props;
 
 	useEffect(() => {
 		if (loginState) {
-			history.push('/');
+			redirectToHomeWhenIsLogin();
 		}
 	}, [loginState]);
 
@@ -63,13 +63,11 @@ Login.propTypes = {
 	loginMethod: PropTypes.func.isRequired,
 };
 
-export default withRouter(
-	connect(
-		state => ({
-			loginState: state.login.isLogin,
-		}),
-		dispatch => ({
-			loginMethod: loginAction(dispatch),
-		}),
-	)(Login),
-);
+export default connect(
+	state => ({
+		loginState: state.login.isLogin,
+	}),
+	dispatch => ({
+		loginMethod: loginAction(dispatch),
+	}),
+)(Login);

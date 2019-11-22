@@ -6,24 +6,37 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getLocalStorage } from '@Helpers/localstorage.helper';
+import { presenterAction } from '@Actions';
 
-const getTabsWhenUserIsLogin = () => {
+const getTabsWhenUserIsLogin = method => {
 	return (
 		<>
-			<Link to="/login" className="dropdown__content__link">
+			<Link
+				to="/login"
+				className="dropdown__content__link"
+				onClick={() => method('login')}
+			>
 				Login
 			</Link>
-			<Link to="/registration" className="dropdown__content__link">
+			<Link
+				to="/registration"
+				className="dropdown__content__link"
+				onClick={() => method('login')}
+			>
 				Registrarse
 			</Link>
 		</>
 	);
 };
 
-const getTabsWhenUserIsNotLogin = () => {
+const getTabsWhenUserIsNotLogin = method => {
 	return (
 		<>
-			<Link to="/profile" className="dropdown__content__link">
+			<Link
+				to="/profile"
+				className="dropdown__content__link"
+				onClick={() => method('login')}
+			>
 				Perfil
 			</Link>
 			<span className="dropdown__content__link">Cerrar sesión</span>
@@ -32,15 +45,15 @@ const getTabsWhenUserIsNotLogin = () => {
 };
 
 const LoginDropdown = props => {
-	const { text } = props;
+	const { text, presenterMethod } = props;
 
 	return (
 		<div className="dropdown">
 			{!getLocalStorage('token') ? text : 'Sesión iniciada'}
 			<div className="dropdown__content">
 				{!getLocalStorage('token')
-					? getTabsWhenUserIsLogin()
-					: getTabsWhenUserIsNotLogin()}
+					? getTabsWhenUserIsLogin(presenterMethod)
+					: getTabsWhenUserIsNotLogin(presenterMethod)}
 			</div>
 		</div>
 	);
@@ -48,6 +61,12 @@ const LoginDropdown = props => {
 
 LoginDropdown.propTypes = {
 	text: PropTypes.string.isRequired,
+	presenterMethod: PropTypes.func.isRequired,
 };
 
-export default connect(state => state)(LoginDropdown);
+export default connect(
+	state => state,
+	dispatch => ({
+		presenterMethod: presenterAction(dispatch),
+	}),
+)(LoginDropdown);
