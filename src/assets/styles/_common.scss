@@ -6,5 +6,4 @@ body {
 	min-height: calc(
 		#{$total-height-view} - (#{$navbar-height} + #{$footer-height})
 	);
-	padding-bottom: $common-padding-bottom;
 }
