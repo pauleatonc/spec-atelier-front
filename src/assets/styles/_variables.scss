@@ -49,6 +49,9 @@ $z-index-xxl: 35;
 
 $total-parent: $width-100;
 
+//Common variables
+$common-padding-bottom: 62px;
+
 // Navbar variables
 $navbar-font-size-items: $font-size-m;
 $navbar-font-weight: bold;
@@ -91,4 +94,5 @@ $why-be-supplier-height: 400px;
 $header-projects-height: 165px;
 
 // Footer variables
-$footer-height: 260px;
+$footer-height: 200px;
+$footer-margin-bottom-copyright: 48px;

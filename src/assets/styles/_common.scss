@@ -1,7 +1,10 @@
 body {
-  background-color: $white-color;
+	background-color: $white-color;
 }
 
 .main-section {
-  min-height: calc(#{$total-height-view} - (#{$navbar-height} + #{$footer-height}));
+	min-height: calc(
+		#{$total-height-view} - (#{$navbar-height} + #{$footer-height})
+	);
+	padding-bottom: $common-padding-bottom;
 }

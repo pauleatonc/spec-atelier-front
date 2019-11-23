@@ -1,3 +1,69 @@
 .footer {
+	background-color: $secondary-color;
+	color: $white-color;
 	height: $footer-height;
+
+	&__inner {
+		padding-bottom: $padding-xxl;
+		padding-top: $padding-xxl;
+		display: flex;
+		justify-content: space-between;
+		height: $total-parent;
+		margin-left: auto;
+		margin-right: auto;
+		width: $width-90;
+
+		&__info {
+			height: $total-parent;
+			width: $total-parent;
+
+			&__description {
+				height: $total-parent;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+
+				&__inner {
+					&__title {
+						color: $principal-color;
+						font-family: 'Akzidenz Grotesk - bold condenced';
+						line-height: $line-height;
+						font-size: $font-size-m;
+						text-transform: uppercase;
+					}
+
+					&__content {
+						display: flex;
+						flex-direction: column;
+						font-family: 'Akzidenz Grotesk - light';
+
+						&__data {
+							margin-top: 4px;
+						}
+					}
+				}
+			}
+		}
+
+		&__social {
+			height: $total-parent;
+			width: $width-50;
+
+			&__menu {
+				display: flex;
+				justify-content: space-between;
+
+				&__link {
+					color: $white-color;
+					text-decoration: none;
+					text-transform: uppercase;
+					font-family: 'Akzidenz Grotesk - bold condenced';
+
+					&:hover {
+						color: $support-orange-color;
+					}
+				}
+			}
+		}
+	}
 }
