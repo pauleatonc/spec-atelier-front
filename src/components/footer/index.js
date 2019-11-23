@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
 
 const Footer = () => (
@@ -48,7 +47,25 @@ const Footer = () => (
 				</div>
 
 				<div className="footer__inner__social__networking">
-					Facebook Twitter Instagram
+					<h3 className="footer__inner__social__networking__title">
+						Síguenos en redes sociales
+					</h3>
+					<a
+						className="footer__inner__social__networking__link"
+						href="https://facebook.com"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<i className="footer__inner__social__networking__link__icon fab fa-facebook-square" />
+					</a>
+					<a
+						className="footer__inner__social__networking__link"
+						href="https://instagram.com"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<i className="footer__inner__social__networking__link__icon fab fa-instagram" />
+					</a>
 				</div>
 			</div>
 		</div>

@@ -46,6 +46,9 @@
 		}
 
 		&__social {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
 			height: $total-parent;
 			width: $width-50;
 
@@ -60,7 +63,33 @@
 					font-family: 'Akzidenz Grotesk - bold condenced';
 
 					&:hover {
-						color: $support-orange-color;
+						color: $principal-color;
+					}
+				}
+			}
+
+			&__networking {
+				text-align: right;
+
+				&__title {
+					color: $principal-color;
+					font-family: 'Akzidenz Grotesk - bold condenced';
+					line-height: $line-height;
+					font-size: $font-size-m;
+					text-transform: uppercase;
+					margin-bottom: $margin-xs;
+				}
+
+				&__link {
+					color: $white-color;
+
+					&__icon {
+						font-size: $font-size-xl;
+						margin-left: $margin-xs;
+
+						&:hover {
+							color: $principal-color;
+						}
 					}
 				}
 			}
