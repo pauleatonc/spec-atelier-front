@@ -1,0 +1,89 @@
+.slide {
+	height: 350px;
+	position: relative;
+	width: $total-parent;
+
+	&__control {
+		display: flex;
+		align-items: center;
+		top: $width-50;
+		width: $width-80;
+		position: relative;
+		margin-left: auto;
+		margin-right: auto;
+
+		&__buttons {
+			cursor: pointer;
+			justify-content: center;
+			position: absolute;
+			display: flex;
+			font-size: 40px;
+			align-items: center;
+			z-index: 1;
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			color: $white-color;
+			background-color: transparentize($principal-color, 0.5);
+
+			&.prev_buttton {
+				padding-right: 5px;
+			}
+
+			&.next_buttton {
+				padding-left: 5px;
+			}
+
+			&:last-of-type {
+				right: 0;
+			}
+		}
+	}
+
+	&__inner {
+		margin-left: auto;
+		margin-right: auto;
+		padding-bottom: 56px;
+		padding-top: 46px;
+		height: $total-parent;
+		width: $width-70;
+		overflow: hidden;
+		position: relative;
+
+		&__title {
+			font-family: 'Akzidenz Grotesk - bold condenced';
+			text-transform: uppercase;
+			color: $principal-color;
+			font-size: $font-size-xl;
+			margin-bottom: $margin-xxs;
+			text-align: center;
+		}
+
+		&__container {
+			display: flex;
+			align-items: center;
+			height: 300px;
+			transform: translateX(0px);
+			transition: transform 0.3s;
+
+			&__item {
+				width: 250px;
+				margin-left: 70px;
+
+				&__content {
+					display: table;
+					height: $total-parent;
+					width: $total-parent;
+
+					&__image {
+						max-width: $total-parent;
+						display: table-cell;
+						vertical-align: middle;
+						text-align: center;
+						font-size: 50px;
+					}
+				}
+			}
+		}
+	}
+}

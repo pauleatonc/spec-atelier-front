@@ -46,10 +46,15 @@ const getTabsWhenUserIsNotLogin = method => {
 
 const LoginDropdown = props => {
 	const { text, presenterMethod } = props;
+	const userIcon = (
+		<div className="dropdown__inner">
+			<i className="dropdown__inner__icon fas fa-user-circle" />
+		</div>
+	);
 
 	return (
 		<div className="dropdown">
-			{!getLocalStorage('token') ? text : 'Sesión iniciada'}
+			{!getLocalStorage('token') ? text : userIcon}
 			<div className="dropdown__content">
 				{!getLocalStorage('token')
 					? getTabsWhenUserIsLogin(presenterMethod)
