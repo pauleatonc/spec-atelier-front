@@ -110,6 +110,7 @@ const Slider = () => {
 				</span>
 			</div>
 			<div className="slide__inner">
+				<h1 className="slide__inner__title">Principales colaboradores</h1>
 				<ul className="slide__inner__container" ref={productList}>
 					{data.map((item, i) => itemSlide(item, i))}
 				</ul>

@@ -50,6 +50,15 @@
 		overflow: hidden;
 		position: relative;
 
+		&__title {
+			font-family: 'Akzidenz Grotesk - bold condenced';
+			text-transform: uppercase;
+			color: $principal-color;
+			font-size: $font-size-xl;
+			margin-bottom: $margin-xxs;
+			text-align: center;
+		}
+
 		&__container {
 			display: flex;
 			align-items: center;
