@@ -1,44 +1,43 @@
 .who-we-us {
-  background-color: $principal-color;
-  color: $white-color;
-  height: $who-we-us-height;
-  width: $total-parent;
+	background-color: $principal-color;
+	color: $white-color;
+	height: $who-we-us-height;
+	width: $total-parent;
 
-  &__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    height: $total-parent;
+	&__inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+		height: $total-parent;
 
-    &__section {
-      width: $who-we-us-section-width;
-      text-align: center;
+		&__section {
+			width: $who-we-us-section-width;
+			text-align: center;
 
-      &__icon {
-        height: $who-we-us-icon-size;
-        width: $who-we-us-icon-size;
-        margin-bottom: $margin-m;
-      }
+			&__icon {
+				height: $who-we-us-icon-size;
+				width: $who-we-us-icon-size;
+				margin-bottom: $margin-m;
+			}
 
-      &__descent {
-        font-family: 'Akzidenz Grotesk - light';
-        margin-bottom: $margin-m;
-        font-size: $font-size-l;
-        font-style: italic;
-      }
+			&__descent {
+				font-family: 'Akzidenz Grotesk - light';
+				margin-bottom: $margin-m;
+				font-size: $font-size-l;
+			}
 
-      &__title {
-        font-family: 'Akzidenz Grotesk - bold condenced';
-        margin-bottom: $margin-m;
-        font-size: $font-size-xxl;
-      }
+			&__title {
+				font-family: 'Akzidenz Grotesk - bold condenced';
+				margin-bottom: $margin-m;
+				font-size: $font-size-xxl;
+			}
 
-      &__description {
-        font-family: 'Akzidenz Grotesk - light';
-        font-size: $font-size-l;
-        line-height: $line-height;
-        min-height: 104px;
-      }
-    }
-  }
+			&__description {
+				font-family: 'Akzidenz Grotesk - light';
+				font-size: $font-size-l;
+				line-height: $line-height;
+				min-height: 104px;
+			}
+		}
+	}
 }

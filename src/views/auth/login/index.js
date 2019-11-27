@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ButtonGoogleLogin from '@Components/buttons/button_google_login';
-import redirectToHomeWhenIsLogin from '@Helpers/redirect.helper';
+import redirectToProyectWhenIsLogin from '@Helpers/redirect.helper';
 import { loginAction } from '@Actions/';
 
 export const handleSubmit = (email, password, loginMethod) => {
@@ -23,7 +23,7 @@ const Login = props => {
 
 	useEffect(() => {
 		if (loginState) {
-			redirectToHomeWhenIsLogin();
+			redirectToProyectWhenIsLogin();
 		}
 	}, [loginState]);
 

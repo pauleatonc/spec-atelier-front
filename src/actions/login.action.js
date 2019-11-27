@@ -49,12 +49,14 @@ export const loginAction = dispatch => data => {
 };
 
 export const logoutAction = dispatch => () => {
-	const endpoint = getEndPoint({ service: 'sessions' });
+	const endpoint = getEndPoint({ service: 'logout' });
+	const token = getLocalStorage('token');
 
 	fetch(`${endpoint}`, {
-		method: 'POST',
+		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
 		},
 	})
 		.then(res => res.json())

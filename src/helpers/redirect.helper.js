@@ -5,4 +5,8 @@ const redirectToHomeWhenIsLogin = () => {
 	window.location.href = mapFrontUrls[handleGetEnvironment()];
 };
 
-export default redirectToHomeWhenIsLogin;
+const redirectToProyectWhenIsLogin = () => {
+	window.location.href = `${mapFrontUrls[handleGetEnvironment()]}/projects`;
+};
+
+export default { redirectToHomeWhenIsLogin, redirectToProyectWhenIsLogin };
