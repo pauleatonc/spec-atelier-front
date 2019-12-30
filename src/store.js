@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 	registration: registrationReducer,
 	recoverPassword: recoverPasswordReducer,
 	newPassword: newPasswordReducer,
-	proyects: projectsReducer,
+	projects: projectsReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
