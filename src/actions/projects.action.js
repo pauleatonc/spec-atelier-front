@@ -11,7 +11,7 @@ const endpoint = getEndPoint({ service: 'users' });
 const userID = getLocalStorage('userID');
 const token = getLocalStorage('token');
 const apiHost = `${endpoint}/${userID}/projects`;
-const toQueryString = obj => `?${Object.keys(obj).map(key => key + '=' + obj[key]).join('&')}`;
+const toQueryString = obj => `?${Object.keys(obj).map(key => `${key}=${obj[key]}`).join('&')}`;
 const dispatchFormat = (type, payload) => ({ type, payload });
 
 export const getAllProjectsAction = dispatch => _ => {
@@ -26,7 +26,7 @@ export const getOrderedProjectsAction = dispatch => ordered_by => {
   ));
 }
 
-async function request(url = '', params = '', method = 'GET') {
+const request = async (url = '', params = '', method = 'GET') => {
   const options = {
     method,
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }

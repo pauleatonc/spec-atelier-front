@@ -33,7 +33,7 @@ const Projects = props => {
 			) : (
 				<section className="projects">
 
-          <select onChange={getOrderedProjects} Style="width: 200px">
+          <select onChange={getOrderedProjects} style={{width: '200px'}}>
             <option value="created_at_asc">Creadas asc</option>
             <option value="created_at_desc">Creadas desc</option>
             <option value="updated_at_asc">Actualizado asc</option>
