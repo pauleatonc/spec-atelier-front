@@ -2,33 +2,37 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
 /* eslint-disable import/no-unresolved */
+import 'babel-polyfill';
 import getEndPoint from '@Configurations/config';
 import { getLocalStorage } from '@Helpers/localstorage.helper';
-import { GET_ALL_PROJECTS } from '@Configurations/constants';
+import { GET_ALL_PROJECTS, GET_ORDERED_PROJECTS } from '@Configurations/constants';
 
-export const getAllProjectsAction = dispatch => () => {
-	const endpoint = getEndPoint({ service: 'users' });
-	const userID = getLocalStorage('userID');
-	const token = getLocalStorage('token');
+const endpoint = getEndPoint({ service: 'users' });
+const userID = getLocalStorage('userID');
+const token = getLocalStorage('token');
+const apiHost = `${endpoint}/${userID}/projects`;
+const toQueryString = obj => `?${Object.keys(obj).map(key => key + '=' + obj[key]).join('&')}`;
+const dispatchFormat = (type, payload) => ({ type, payload });
 
-	fetch(`${endpoint}/${userID}/projects`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${token}`,
-		},
-	})
-		.then(res => res.json())
-		.then(response => {
-			return dispatch({
-				type: GET_ALL_PROJECTS,
-				payload: {
-					projects: response.projects,
-					loader: false,
-				},
-			});
-		})
-		.catch(error => {
-			console.log(error);
-		});
-};
+export const getAllProjectsAction = dispatch => _ => {
+  request().then( result => dispatch(
+    dispatchFormat(GET_ALL_PROJECTS, { projects: result.projects, loader: false })
+  ));
+}
+
+export const getOrderedProjectsAction = dispatch => ordered_by => {
+  request('/ordered', { ordered_by }).then( result => dispatch(
+    dispatchFormat(GET_ORDERED_PROJECTS, { projects: result.projects, loader: false })
+  ));
+}
+
+async function request(url = '', params = '', method = 'GET') {
+  const options = {
+    method,
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
+  };
+  if (params) (method === 'GET') ? url += toQueryString(params) : options.body = JSON.stringify(params);
+  const response = await fetch(apiHost + url, options);
+  const result = await response.json();
+  return result;
+}
