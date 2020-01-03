@@ -2,33 +2,58 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
 /* eslint-disable import/no-unresolved */
-import getEndPoint from '@Configurations/config';
-import { getLocalStorage } from '@Helpers/localstorage.helper';
-import { GET_ALL_PROJECTS } from '@Configurations/constants';
+import request from '@Helpers/request.helper';
+import {
+	GET_ALL_PROJECTS,
+	GET_PROJECTS_ERROR,
+	GET_ORDERED_PROJECTS,
+} from '@Configurations/constants';
 
-export const getAllProjectsAction = dispatch => () => {
-	const endpoint = getEndPoint({ service: 'users' });
-	const userID = getLocalStorage('userID');
-	const token = getLocalStorage('token');
+const dispatchFormat = (type, payload) => ({ type, payload });
 
-	fetch(`${endpoint}/${userID}/projects`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${token}`,
-		},
-	})
-		.then(res => res.json())
-		.then(response => {
-			return dispatch({
-				type: GET_ALL_PROJECTS,
-				payload: {
-					projects: response.projects,
-					loader: false,
-				},
-			});
-		})
-		.catch(error => {
-			console.log(error);
+export const getAllProjectsAction = dispatch => async () => {
+	try {
+		const result = await request({ url: '/projects' });
+
+		if (result.error) throw new Error(result.error);
+
+		dispatch(
+			dispatchFormat(GET_ALL_PROJECTS, {
+				projects: result.projects,
+				loader: false,
+			}),
+		);
+	} catch (error) {
+		dispatch(
+			dispatchFormat(GET_PROJECTS_ERROR, {
+				loader: false,
+				error: true,
+			}),
+		);
+	}
+};
+
+export const getOrderedProjectsAction = dispatch => async ordered_by => {
+	try {
+		const result = await request({
+			url: '/projects/ordered',
+			params: { ordered_by },
 		});
+
+		if (result.error) throw new Error(result.error);
+
+		dispatch(
+			dispatchFormat(GET_ORDERED_PROJECTS, {
+				projects: result.projects,
+				loader: false,
+			}),
+		);
+	} catch (error) {
+		dispatch(
+			dispatchFormat(GET_PROJECTS_ERROR, {
+				loader: false,
+				error: true,
+			}),
+		);
+	}
 };

@@ -5,6 +5,6 @@ export { default as NewPassword } from './auth/new_password';
 export { default as Home } from './home';
 export { default as Products } from './products';
 export { default as Brands } from './brands';
-export { default as Proyects } from './proyects';
+export { default as Projects } from './projects';
 export { default as Profile } from './profile';
 export { default as Us } from './us';
