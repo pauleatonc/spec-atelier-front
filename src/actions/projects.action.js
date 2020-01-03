@@ -14,7 +14,9 @@ const dispatchFormat = (type, payload) => ({ type, payload });
 export const getAllProjectsAction = dispatch => async () => {
 	try {
 		const result = await request({ url: '/projects' });
+
 		if (result.error) throw new Error(result.error);
+
 		dispatch(
 			dispatchFormat(GET_ALL_PROJECTS, {
 				projects: result.projects,
@@ -31,13 +33,27 @@ export const getAllProjectsAction = dispatch => async () => {
 	}
 };
 
-export const getOrderedProjectsAction = dispatch => ordered_by => {
-	request({ url: '/projects/ordered', params: { ordered_by } }).then(result =>
+export const getOrderedProjectsAction = dispatch => async ordered_by => {
+	try {
+		const result = await request({
+			url: '/projects/ordered',
+			params: { ordered_by },
+		});
+
+		if (result.error) throw new Error(result.error);
+
 		dispatch(
 			dispatchFormat(GET_ORDERED_PROJECTS, {
 				projects: result.projects,
 				loader: false,
 			}),
-		),
-	);
+		);
+	} catch (error) {
+		dispatch(
+			dispatchFormat(GET_PROJECTS_ERROR, {
+				loader: false,
+				error: true,
+			}),
+		);
+	}
 };
