@@ -1,71 +1,73 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LOGO from '../../assets/images/logo_footer.png';
 
 const Footer = () => (
 	<footer className="footer">
 		<div className="footer__inner">
-			<div className="footer__inner__info">
-				<div className="footer__inner__info__description">
-					<div className="footer__inner__info__description__inner">
-						<h2 className="footer__inner__info__description__inner__title">
-							Contáctanos
-						</h2>
-						<div className="footer__inner__info__description__inner__content">
-							<p className="footer__inner__info__description__inner__content__data">
-								contacto@specatelier.com
-							</p>
-							<p className="footer__inner__info__description__inner__content__data">
-								+56 9 8765 4321
-							</p>
-						</div>
+			<div className="footer__inner__menu">
+				<div className="footer__inner__menu__container">
+					<div className="footer__inner__menu__container__logo">
+						<img
+							className="footer__inner__menu__container__logo__content"
+							src={LOGO}
+						/>
 					</div>
-
-					<div className="footer__inner__info__description__inner">
-						<div className="footer__inner__info__description__inner__content">
-							<p className="footer__inner__info__description__inner__content__data">
-								Copyright &copy; 2019 Spec Atelier. Todos los derechos
-								reservados.
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="footer__inner__social">
-				<div className="footer__inner__social__menu">
-					<Link className="footer__inner__social__menu__link" to="/">
-						Inicio
-					</Link>
-					<Link className="footer__inner__social__menu__link" to="/products">
-						Productos
-					</Link>
-					<Link className="footer__inner__social__menu__link" to="/brands">
-						Marcas
-					</Link>
-					<Link className="footer__inner__social__menu__link" to="/us">
+					<Link className="footer__inner__menu__container__link" to="/us">
 						Nosotros
 					</Link>
+					<Link className="footer__inner__menu__container__link" to="/products">
+						Productos
+					</Link>
+					<Link className="footer__inner__menu__container__link" to="/brands">
+						Marcas
+					</Link>
 				</div>
+			</div>
 
-				<div className="footer__inner__social__networking">
-					<h3 className="footer__inner__social__networking__title">
-						Síguenos en redes sociales
-					</h3>
-					<a
-						className="footer__inner__social__networking__link"
-						href="https://facebook.com"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<i className="footer__inner__social__networking__link__icon fab fa-facebook-square" />
-					</a>
-					<a
-						className="footer__inner__social__networking__link"
-						href="https://instagram.com"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<i className="footer__inner__social__networking__link__icon fab fa-instagram" />
-					</a>
+			<div className="footer__inner__info">
+				<div className="footer__inner__info__container">
+					<div className="footer__inner__info__container__contacts">
+						<h3 className="footer__inner__info__container__contacts__title">
+							Contáctanos
+						</h3>
+						<p className="footer__inner__info__container__contacts__contact">
+							<i className="far fa-envelope footer__inner__info__container__contacts__contact__icon" />
+							<span className="footer__inner__info__container__contacts__contact__text">
+								<a href="mailto:contacto@specatelier.com">
+									contacto@specatelier.com
+								</a>
+							</span>
+						</p>
+						<p className="footer__inner__info__container__contacts__contact">
+							<i className="fab fa-whatsapp footer__inner__info__container__contacts__contact__icon" />
+							<span className="footer__inner__info__container__contacts__contact__text">
+								<a
+									href="tel:+56987654321"
+									onClick={() =>
+										navigator.userAgent.match(
+											/Android|iPhone|iPad|iPod|Mobile/i,
+										) != null
+									}
+								>
+									+569 8765 4321
+								</a>
+							</span>
+						</p>
+					</div>
+					<div className="footer__inner__info__container__social_network">
+						<h3 className="footer__inner__info__container__social_network__title">
+							Síguenos en
+						</h3>
+						<a className="footer__inner__info__container__social_network__link">
+							<i className="fab fa-instagram footer__inner__info__container__social_network__link__icon" />
+						</a>
+					</div>
+				</div>
+				<div className="footer__inner__info__container">
+					<p className="footer__inner__info__container__copyright">
+						Copyright &copy; 2020 Spec Atelier. Todos los derechos reservados.
+					</p>
 				</div>
 			</div>
 		</div>
