@@ -1,87 +1,71 @@
 .slide {
-	height: 350px;
+	height: 382px;
 	position: relative;
 	width: $total-parent;
-
-	&__control {
-		display: flex;
-		align-items: center;
-		top: $width-50;
-		width: $width-80;
-		position: relative;
-		margin-left: auto;
-		margin-right: auto;
-
-		&__buttons {
-			cursor: pointer;
-			justify-content: center;
-			position: absolute;
-			display: flex;
-			font-size: 40px;
-			align-items: center;
-			z-index: 1;
-			width: 70px;
-			height: 70px;
-			border-radius: 50%;
-			color: $white-color;
-			background-color: transparentize($principal-color, 0.5);
-
-			&.prev_buttton {
-				padding-right: 5px;
-			}
-
-			&.next_buttton {
-				padding-left: 5px;
-			}
-
-			&:last-of-type {
-				right: 0;
-			}
-		}
-	}
 
 	&__inner {
 		margin-left: auto;
 		margin-right: auto;
 		padding-bottom: 56px;
-		padding-top: 46px;
+		padding-top: 105px;
 		height: $total-parent;
-		width: $width-70;
+		width: $width-90;
 		overflow: hidden;
 		position: relative;
 
 		&__title {
 			font-family: 'Akzidenz Grotesk - bold condenced';
-			text-transform: uppercase;
-			color: $principal-color;
+			color: $black-color;
 			font-size: $font-size-xl;
-			margin-bottom: $margin-xxs;
+			letter-spacing: 1.5px;
 			text-align: center;
+			padding-bottom: 60px;
 		}
 
-		&__container {
+		.container {
+			width: $width-80;
+			margin-left: auto;
+			margin-right: auto;
 			display: flex;
 			align-items: center;
-			height: 300px;
-			transform: translateX(0px);
-			transition: transform 0.3s;
 
-			&__item {
-				width: 250px;
-				margin-left: 70px;
+			.slick-slide {
+				max-width: $total-parent !important;
+			}
 
-				&__content {
-					display: table;
-					height: $total-parent;
-					width: $total-parent;
+			&__row {
+				line-height: 0;
+				width: 32px;
+				height: 32px;
+				cursor: pointer;
+				color: $support-orange-color;
+				border: 1px solid $support-orange-color;
+				border-radius: 50%;
+				outline: 0;
+				position: absolute;
+				text-align: center;
+				padding-top: 7px;
 
-					&__image {
-						max-width: $total-parent;
-						display: table-cell;
-						vertical-align: middle;
-						text-align: center;
-						font-size: 50px;
-					}
+				&.prev {
+					display: block;
+					left: -36px;
+					padding-right: 1px;
+				}
+
+				&.next {
+					display: block;
+					padding-left: 1px;
+					right: -36px;
+				}
+			}
+
+			&__images_content {
+				width: $total-parent;
+
+				&__image {
+					margin-left: auto;
+					margin-right: auto;
+					width: 85px;
 				}
 			}
 		}
