@@ -1,5 +1,7 @@
 .supplier {
-  background-color: $suport-grey-color;
+  background: url('~@Assets/images/home/bg-header-supplier.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   color: $black-color;
   font-size: $font-size-l;
   height: 475px;

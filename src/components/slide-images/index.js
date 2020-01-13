@@ -1,11 +1,10 @@
 import React from 'react';
 import Slider from 'react-slick';
 import ANDREU from '@Assets/images/home/slide/andreu.png';
-import ANSELMI from '@Assets/images/home/slide/anselmi.jpg';
-import HOPPE from '@Assets/images/home/slide/hoppe.jpg';
-import SIMONSWERK from '@Assets/images/home/slide/simonswerk.jpg';
+import ANSELMI from '@Assets/images/home/slide/anselmi.png';
+import HOPPE from '@Assets/images/home/slide/hoppe.png';
+import SIMONSWERK from '@Assets/images/home/slide/simonswerk.png';
 import SOLECO from '@Assets/images/home/slide/soleco.png';
-import TESLA from '@Assets/images/home/slide/tesla.png';
 
 const data = [
 	{
@@ -16,26 +15,26 @@ const data = [
 	{
 		id: 2,
 		altImage: 'Anselmi',
-		pathImage: ANDREU,
+		pathImage: ANSELMI,
 	},
 	{
 		id: 3,
-		altImage: 'Hpppe',
-		pathImage: ANDREU,
+		altImage: 'Hoppe',
+		pathImage: HOPPE,
 	},
 	{
 		id: 4,
 		altImage: 'Simonswerk',
-		pathImage: ANDREU,
+		pathImage: SIMONSWERK,
 	},
 	{
 		id: 5,
 		altImage: 'Soleco',
-		pathImage: ANDREU,
+		pathImage: SOLECO,
 	},
 	{
 		id: 6,
-		altImage: 'Tesls',
+		altImage: 'Tesla',
 		pathImage: ANDREU,
 	},
 ];

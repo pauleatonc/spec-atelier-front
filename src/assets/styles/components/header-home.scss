@@ -1,7 +1,9 @@
 .header-home {
   align-items: center;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #000000),
-    url('~@Assets/images/home/bg-header-home.jpg') center no-repeat;
+    url('~@Assets/images/home/bg-header-home.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   justify-content: flex-end;
   height: 485px;
