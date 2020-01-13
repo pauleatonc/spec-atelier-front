@@ -13,7 +13,6 @@ import { getLocalStorage } from '@Helpers/localstorage.helper';
 const Projects = props => {
 	removeClassAndAddCurrentToThisView();
 	const {
-		loginState,
 		getAllProjectsMethod,
 		getOrderedProjectsMethod,
 		projectsArray,
@@ -27,7 +26,7 @@ const Projects = props => {
 		if (!getLocalStorage('token')) {
 			redirectToHomesWhenIsLogout();
 		}
-	}, [error, loginState]);
+	}, [error]);
 
 	const getOrderedProjects = event =>
 		getOrderedProjectsMethod(event.target.value);
@@ -73,7 +72,6 @@ const Projects = props => {
 };
 
 Projects.propTypes = {
-	loginState: PropTypes.bool.isRequired,
 	projectsArray: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 	loader: PropTypes.bool.isRequired,
 	error: PropTypes.bool.isRequired,
@@ -83,7 +81,6 @@ Projects.propTypes = {
 
 export default connect(
 	state => ({
-		loginState: state.login.isLogin,
 		projectsArray: state.projects.projects,
 		loader: state.projects.loader,
 		error: state.projects.error,

@@ -3,7 +3,6 @@ import thunk from 'redux-thunk';
 import {
 	presenterReducer,
 	loginReducer,
-	registrationReducer,
 	recoverPasswordReducer,
 	newPasswordReducer,
 	projectsReducer,
@@ -12,7 +11,6 @@ import {
 const rootReducer = combineReducers({
 	presenter: presenterReducer,
 	login: loginReducer,
-	registration: registrationReducer,
 	recoverPassword: recoverPasswordReducer,
 	newPassword: newPasswordReducer,
 	projects: projectsReducer,

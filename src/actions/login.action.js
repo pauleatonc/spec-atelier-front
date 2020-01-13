@@ -33,7 +33,7 @@ export const loginAction = dispatch => data => {
 			return dispatch({
 				type: LOG_IN,
 				payload: {
-					isLogin: response.logged_in,
+					isLogin: true,
 					userData: response.user,
 				},
 			});
