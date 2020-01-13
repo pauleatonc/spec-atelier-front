@@ -2,29 +2,38 @@
   background-color: $suport-grey-color;
   color: $black-color;
   font-size: $font-size-l;
-  height: $why-be-supplier-height;
+  height: 475px;
   width: $total-parent;
 
   &__inner {
     align-items: center;
     display: flex;
-    height: $total-parent;
-    flex-direction: column;
-    justify-content: space-evenly;
-    text-align: center;
+    height: 100%;
+    justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    width: $width-70;
+    width: 35%;
 
     &__title {
-      color: $principal-color;
+      color: $white-color;
       font-family: 'Akzidenz Grotesk - bold condenced';
-      font-size: $font-size-xl;
-      text-transform: uppercase;
+      font-size: 25px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: 1.5px;
     }
 
     &__description {
-      font-family: 'Akzidenz Grotesk - light';
+      color: $white-color;
+      font-family: 'lato';
+      font-size: 16px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: 1.5px;
     }
 
     &__bottom {
