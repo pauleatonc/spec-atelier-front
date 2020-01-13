@@ -4,6 +4,7 @@
 import getEndPoint from '@Configurations/config';
 import { LOG_IN, LOG_IN_ERROR, LOG_OUT } from '@Configurations/constants';
 import {
+	getLocalStorage,
 	setLocalStorage,
 	deleteLocalStorage,
 } from '@Helpers/localstorage.helper';

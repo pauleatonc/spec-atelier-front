@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import redirectToHomeWhenIsLogin from '@Helpers/redirect.helper';
+import { redirectToProjectsWhenIsLogin } from '@Helpers/redirect.helper';
 import { registrationAction } from '@Actions/';
 
 export const handleSubmit = (email, password, registrationMethod) => {
@@ -22,7 +22,7 @@ const Registration = props => {
 
 	useEffect(() => {
 		if (loginState) {
-			redirectToHomeWhenIsLogin();
+			redirectToProjectsWhenIsLogin();
 		}
 	}, [loginState]);
 

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import LOGO from '@Assets/images/logo.png';
 import { getLocalStorage } from '@Helpers/localstorage.helper';
 import { presenterAction } from '@Actions';
+import Dropdown from '../dropdown';
 
 const NavBar = props => {
 	const { presenterMethod } = props;
@@ -57,7 +58,7 @@ const NavBar = props => {
 							</Link>
 						</li>
 					)}
-					{!getLocalStorage('token') && (
+					{!getLocalStorage('token') ? (
 						<>
 							<li className="navbar__inner__section__item">
 								<Link
@@ -81,6 +82,8 @@ const NavBar = props => {
 								</Link>
 							</li>
 						</>
+					) : (
+						<Dropdown />
 					)}
 				</ul>
 			</div>
