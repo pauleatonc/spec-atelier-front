@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import LOGO from '@Assets/images/logo.png';
 import { getLocalStorage } from '@Helpers/localstorage.helper';
 import { presenterAction } from '@Actions';
-import LoginDropdown from '../buttons/login_dropdown';
 
 const NavBar = props => {
 	const { presenterMethod } = props;
@@ -59,10 +58,25 @@ const NavBar = props => {
 						</li>
 					)}
 					<li className="navbar__inner__section__item">
-						<LoginDropdown
-							text="Iniciar sesión"
-							customClass="navbar__inner__section__item__link"
-						/>
+						<Link
+							to="/registration"
+							className="navbar__inner__section__item__link button--registration"
+							data-view="brands"
+							onClick={() => presenterMethod('app')}
+						>
+							Regístrate
+						</Link>
+					</li>
+					<li className="navbar__inner__section__item">
+						<Link
+							to="/login"
+							className="navbar__inner__section__item__link button--login"
+							data-view="brands"
+							onClick={() => presenterMethod('app')}
+						>
+							<i className="fas fa-user-circle" />
+							Iniciar sesión
+						</Link>
 					</li>
 				</ul>
 			</div>
