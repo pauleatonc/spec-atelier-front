@@ -57,27 +57,31 @@ const NavBar = props => {
 							</Link>
 						</li>
 					)}
-					<li className="navbar__inner__section__item">
-						<Link
-							to="/registration"
-							className="navbar__inner__section__item__link button--registration"
-							data-view="brands"
-							onClick={() => presenterMethod('app')}
-						>
-							Regístrate
-						</Link>
-					</li>
-					<li className="navbar__inner__section__item">
-						<Link
-							to="/login"
-							className="navbar__inner__section__item__link button--login"
-							data-view="brands"
-							onClick={() => presenterMethod('app')}
-						>
-							<i className="fas fa-user-circle" />
-							Iniciar sesión
-						</Link>
-					</li>
+					{!getLocalStorage('token') && (
+						<>
+							<li className="navbar__inner__section__item">
+								<Link
+									to="/registration"
+									className="navbar__inner__section__item__link button--registration"
+									data-view="brands"
+									onClick={() => presenterMethod('app')}
+								>
+									Regístrate
+								</Link>
+							</li>
+							<li className="navbar__inner__section__item">
+								<Link
+									to="/login"
+									className="navbar__inner__section__item__link button--login"
+									data-view="brands"
+									onClick={() => presenterMethod('app')}
+								>
+									<i className="fas fa-user-circle" />
+									Iniciar sesión
+								</Link>
+							</li>
+						</>
+					)}
 				</ul>
 			</div>
 		</nav>
