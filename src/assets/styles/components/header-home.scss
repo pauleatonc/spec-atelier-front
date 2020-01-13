@@ -1,29 +1,26 @@
 .header-home {
   align-items: center;
-  background-image: url('~@Assets/images/home/bg-header-home.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #000000),
+    url('~@Assets/images/home/bg-header-home.jpg') center no-repeat;
   display: flex;
-  justify-content: center;
-  height: $header-home-height;
+  justify-content: flex-end;
+  height: 485px;
   width: $total-parent;
 
   &__inner {
-    background-color: $bg-color-card-header-home;
     height: $header-home-height-card;
-    padding-bottom: $header-home-padding-vertical;
-    padding-left: $header-home-padding-horizontal;
-    padding-right: $header-home-padding-horizontal;
-    text-align: center;
-    padding-top: $header-home-padding-vertical;
     width: $header-home-width-card;
+    margin-right: 120px;
 
     &__text {
-      font-family: 'Akzidenz Grotesk - light';
-      font-size: $header-home-font-size;
-      font-weight: 600;
-      line-height: $header-home-line-height;
-      color: $black-color;
+      font-family: 'lato';
+      font-size: 16px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.58;
+      letter-spacing: 1px;
+      color: $white-color;
 
       &:first-child {
         margin-bottom: $margin-xs;
@@ -31,10 +28,13 @@
 
       &--title {
         font-family: 'Akzidenz Grotesk - bold condenced';
-        color: $secondary-color;
-        font-size: $header-home-title;
-        line-height: $header-home-title;
-        text-transform: uppercase;
+        color: $white-color;
+        font-size: 30px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 1.88px;
       }
     }
   }
