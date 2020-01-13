@@ -29,4 +29,17 @@
 	<body>
 		<main id="specAtelier"></main>
 	</body>
+
+	<script>
+		window.onscroll = function() {
+			if (
+				document.body.scrollTop > 50 ||
+				document.documentElement.scrollTop > 50
+			) {
+				document.querySelector('.navbar').classList.add('scrolling');
+			} else {
+				document.querySelector('.navbar').classList.remove('scrolling');
+			}
+		};
+	</script>
 </html>

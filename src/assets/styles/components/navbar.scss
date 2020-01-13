@@ -4,9 +4,16 @@
   display: flex;
   font-family: 'Lato', sans-serif;
   height: $navbar-height;
-  position: absolute;
+  position: fixed;
   top: 0;
   width: $total-parent;
+  transition: ease-in-out .5s;
+
+
+  &.scrolling {
+    background-color: $secondary-color;
+    z-index: 999;
+  }
 
   &__inner {
     align-items: center;
