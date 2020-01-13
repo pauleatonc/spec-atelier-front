@@ -7,7 +7,7 @@
   position: fixed;
   top: 0;
   width: $total-parent;
-  transition: ease-in-out .5s;
+  transition: all .2s ease-in-out;
 
 
   &.scrolling {
@@ -40,7 +40,7 @@
       display: flex;
       height: $total-parent;
       justify-content: flex-end;
-      width: $width-50;
+      width: $width-60;
 
       &__item {
         cursor: pointer;
