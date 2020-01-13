@@ -8,7 +8,7 @@ const mapApiUrls = {
 export const mapFrontUrls = {
 	development: 'http://localhost:8080',
 	integration: 'http://localhost:8080',
-	production: 'https://specatelier-front.herokuapp.com/',
+	production: 'https://specatelier-front.herokuapp.com',
 };
 
 export const handleGetEnvironment = () => ENVIRONMENT;
