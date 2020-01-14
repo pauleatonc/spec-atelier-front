@@ -1,7 +1,7 @@
 .footer {
   font-family: 'Lato', sans-serif;
   background-color: $secondary-color;
-  height: $footer-height;
+  min-height: $footer-height;
 
   &__inner {
     padding-bottom: 73px;
@@ -14,13 +14,27 @@
     margin-right: auto;
     width: $width-80;
 
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+
     &__menu {
       font-size: 14px;
       font-weight: bold;
 
+      @media only screen and (max-width: 768px) {
+        display: flex;
+        align-items: flex-start;
+      }
+
       &__container {
         display: flex;
         align-items: center;
+
+        @media only screen and (max-width: 768px) {
+          flex-direction: column;
+          align-items: flex-start;
+        }
 
         &__logo {
           display: inline-flex;
@@ -37,10 +51,17 @@
           text-decoration: none;
           padding-left: 22px;
 
-          &:not(:last-child) {
-            &:after {
-              content: "|";
-              padding-left: 25px;
+          @media only screen and (max-width: 768px) {
+            padding-left: 0;
+            margin-top: 25px;
+          }
+
+          @media only screen and (min-width: 769px) {
+            &:not(:last-child) {
+              &:after {
+                content: "|";
+                padding-left: 25px;
+              }
             }
           }
         }
@@ -56,8 +77,25 @@
         display: flex;
         flex-direction: row;
 
+        @media only screen and (max-width: 768px) {
+          flex-direction: column;
+        }
+
         &__contacts {
           width: $width-70;
+
+          @media only screen and (max-width: 768px) {
+            margin-top: 25px;
+
+            &:first-child {
+              &:before {
+                content: "_";
+                padding-bottom: 25px;
+                display: block;
+                position: relative;
+              }
+            }
+          }
 
           &__title {
             margin-bottom: 15px;
@@ -90,6 +128,17 @@
         &__social_network {
           width: $width-30;
 
+          @media only screen and (max-width: 768px) {
+            margin-top: 25px;
+
+            &:before {
+              content: "_";
+              padding-bottom: 25px;
+              display: block;
+              position: relative;
+            }
+          }
+
           &__title {
             margin-bottom: 15px;
           }
@@ -101,6 +150,22 @@
 
         &__copyright {
           font-size: 12px;
+
+          @media only screen and (max-width: 768px) {
+            margin-top: 25px;
+          }
+
+          &__text {
+            display: inline;
+
+            @media only screen and (max-width: 768px) {
+              display: block;
+
+              &:last-child {
+                margin-top: 5px;
+              }
+            }
+          }
         }
       }
     }

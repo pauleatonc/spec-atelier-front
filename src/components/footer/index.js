@@ -66,7 +66,12 @@ const Footer = () => (
 				</div>
 				<div className="footer__inner__info__container">
 					<p className="footer__inner__info__container__copyright">
-						Copyright &copy; 2020 Spec Atelier. Todos los derechos reservados.
+						<span className="footer__inner__info__container__copyright__text">
+							Copyright &copy; 2020 Spec Atelier.
+						</span>{' '}
+						<span className="footer__inner__info__container__copyright__text">
+							Todos los derechos reservados.
+						</span>
 					</p>
 				</div>
 			</div>
