@@ -50,12 +50,23 @@
           display: block;
           left: -36px;
           padding-right: 1px;
+
+          @media only screen and (max-width: 768px) {
+            bottom: -30px;
+            left: initial;
+            right: 50px;
+          }
         }
 
         &.next {
           display: block;
           padding-left: 1px;
           right: -36px;
+
+          @media only screen and (max-width: 768px) {
+            bottom: -30px;
+            right: 0;
+          }
         }
       }
 

@@ -67,6 +67,26 @@ const settings = {
 	arrows: true,
 	nextArrow: <NextArrow />,
 	prevArrow: <PrevArrow />,
+	responsive: [
+		{
+			breakpoint: 1024,
+			settings: {
+				slidesToShow: 5,
+			},
+		},
+		{
+			breakpoint: 768,
+			settings: {
+				slidesToShow: 2,
+			},
+		},
+		{
+			breakpoint: 375,
+			settings: {
+				slidesToShow: 1,
+			},
+		},
+	],
 };
 
 const handlePrintImages = obj =>
