@@ -15,6 +15,11 @@
   padding-bottom: $btn-padding-y;
   border-radius: 20px;
   min-width: $button-min-width;
+
+  @media only screen and (max-width: 768px) {
+    width: 80%;
+  }
+
 }
 
 @mixin button-base-clicked {
