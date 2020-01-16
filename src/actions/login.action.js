@@ -4,6 +4,7 @@
 import getEndPoint from '@Configurations/config';
 import { LOG_IN, LOG_IN_ERROR, LOG_OUT } from '@Configurations/constants';
 import {
+	getLocalStorage,
 	setLocalStorage,
 	deleteLocalStorage,
 } from '@Helpers/localstorage.helper';
@@ -32,7 +33,7 @@ export const loginAction = dispatch => data => {
 			return dispatch({
 				type: LOG_IN,
 				payload: {
-					isLogin: response.logged_in,
+					isLogin: true,
 					userData: response.user,
 				},
 			});

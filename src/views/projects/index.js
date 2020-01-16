@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import removeClassAndAddCurrentToThisView from '@Helpers/remove-class-navbar.helper';
 import { getAllProjectsAction, getOrderedProjectsAction } from '@Actions';
-
+import { redirectToHomesWhenIsLogout } from '@Helpers/redirect.helper';
 import HeaderProjects from '../../components/projects/header';
 import Project from '../../components/projects/project';
+import { getLocalStorage } from '@Helpers/localstorage.helper';
 
 const Projects = props => {
 	removeClassAndAddCurrentToThisView();
@@ -21,6 +22,10 @@ const Projects = props => {
 
 	useEffect(() => {
 		getAllProjectsMethod();
+
+		if (!getLocalStorage('token')) {
+			redirectToHomesWhenIsLogout();
+		}
 	}, [error]);
 
 	const getOrderedProjects = event =>

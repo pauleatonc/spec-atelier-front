@@ -1,11 +1,19 @@
 .navbar {
   align-items: center;
-  background-color: $white-color;
+  background-color: transparent;
   display: flex;
-  font-family: 'Akzidenz Grotesk - bold condenced';
+  font-family: 'Lato', sans-serif;
   height: $navbar-height;
-  position: relative;
+  position: fixed;
+  top: 0;
   width: $total-parent;
+  transition: all .2s ease-in-out;
+
+
+  &.scrolling {
+    background-color: $secondary-color;
+    z-index: 999;
+  }
 
   &__inner {
     align-items: center;
@@ -13,9 +21,9 @@
     display: flex;
     height: $total-parent;
     justify-content: space-between;
-    margin-left: auto;
-    margin-right: auto;
-    width: $width-90;
+    padding-left: 45px;
+    padding-right: 45px;
+    width: 100%;
 
     &__logo-content {
       align-items: center;
@@ -23,7 +31,19 @@
       height: $total-parent;
 
       &__image {
-        width: $navbar-logo;
+        width: 150px;
+
+        @media only screen and (max-width: 768px) {
+          display: none;
+        }
+
+        &__mobile {
+          display: none;
+
+          @media only screen and (max-width: 768px) {
+            display: block;
+          }
+        }
       }
     }
 
@@ -31,27 +51,34 @@
       align-items: center;
       display: flex;
       height: $total-parent;
+      justify-content: flex-end;
+      width: $width-60;
+
+      @media only screen and (max-width: 768px) {
+        display: none;
+      }
 
       &__item {
         cursor: pointer;
         height: $total-parent;
-        width: $navbar-width-items;
-
-        &:hover {
-          background-color: $secondary-color;
-        }
 
         &__link {
           align-items: center;
-          color: $secondary-color;
+          color: $white-color;
           display: flex;
-          font-size: $navbar-font-size-items;
+          font-size: 16px;
           font-weight: $navbar-font-weight;
           line-height: $nabvar-line-height-items;
-          height: $total-parent;
           justify-content: center;
+          margin-top: 9px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          padding-left: 20px;
+          padding-right: 20px;
+          margin-bottom: 9px;
+          margin-left: 5px;
+          margin-right: 5px;
           position: relative;
-          text-transform: uppercase;
           text-decoration: none;
 
           &.current {
@@ -59,12 +86,53 @@
             background-color: $secondary-color;
           }
 
-          &:hover {
-            background-color: $secondary-color;
-            color: $white-color;
+          &.button--registration {
+            border-radius: 20px;
+            background-color: $principal-color;
+          }
+
+          &.button--login {
+            border-radius: 20px;
+            border: 1px solid $white-color;
+
+            >i {
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+
+      &--mobile {
+        &__button {
+          &__icon {
+            color: white;
+            font-size: 24px;
           }
         }
       }
     }
+  }
+}
+
+
+.lateral_menu {
+  font-family: "Lato";
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #fff;
+  z-index: 9999;
+  min-width: 260px;
+  overflow: auto;
+  display: none;
+  box-shadow: -1px 2px 6px 1px #9e9e9e;
+
+  &.show {
+    display: block;
+  }
+
+  &__inner {
+    
   }
 }

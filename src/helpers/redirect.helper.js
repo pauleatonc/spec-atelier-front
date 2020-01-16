@@ -1,8 +1,10 @@
 /* eslint-disable import/no-unresolved */
 import { mapFrontUrls, handleGetEnvironment } from '@Configurations/config';
 
-const redirectToProjectsWhenIsLogin = () => {
+export const redirectToProjectsWhenIsLogin = () => {
 	window.location.href = `${mapFrontUrls[handleGetEnvironment()]}/projects`;
 };
 
-export default redirectToProjectsWhenIsLogin;
+export const redirectToHomesWhenIsLogout = () => {
+	window.location.href = `${mapFrontUrls[handleGetEnvironment()]}/`;
+};

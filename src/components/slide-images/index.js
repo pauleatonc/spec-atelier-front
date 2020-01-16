@@ -1,122 +1,114 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable import/no-unresolved */
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
+import Slider from 'react-slick';
 import ANDREU from '@Assets/images/home/slide/andreu.png';
-import ANSELMI from '@Assets/images/home/slide/anselmi.jpg';
-import HOPPE from '@Assets/images/home/slide/hoppe.jpg';
-import SIMONSWERK from '@Assets/images/home/slide/simonswerk.jpg';
+import ANSELMI from '@Assets/images/home/slide/anselmi.png';
+import HOPPE from '@Assets/images/home/slide/hoppe.png';
+import SIMONSWERK from '@Assets/images/home/slide/simonswerk.png';
 import SOLECO from '@Assets/images/home/slide/soleco.png';
-import TESLA from '@Assets/images/home/slide/tesla.png';
 
 const data = [
 	{
-		name: 'Andreu',
-		pathUrl: ANDREU,
+		id: 1,
+		altImage: 'Andreu',
+		pathImage: ANDREU,
 	},
 	{
-		name: 'anselmi',
-		pathUrl: ANSELMI,
+		id: 2,
+		altImage: 'Anselmi',
+		pathImage: ANSELMI,
 	},
 	{
-		name: 'hoppe',
-		pathUrl: HOPPE,
+		id: 3,
+		altImage: 'Hoppe',
+		pathImage: HOPPE,
 	},
 	{
-		name: 'simonswerk',
-		pathUrl: SIMONSWERK,
+		id: 4,
+		altImage: 'Simonswerk',
+		pathImage: SIMONSWERK,
 	},
 	{
-		name: 'soleco',
-		pathUrl: SOLECO,
+		id: 5,
+		altImage: 'Soleco',
+		pathImage: SOLECO,
 	},
 	{
-		name: 'tesla',
-		pathUrl: TESLA,
+		id: 6,
+		altImage: 'Tesla',
+		pathImage: ANDREU,
 	},
 ];
 
-const itemSlide = (item, i) => {
+const NextArrow = props => {
+	const { onClick } = props;
 	return (
-		<li key={i} className="slide__inner__container__item">
-			<div
-				data-slide={i + 1}
-				className="slide__inner__container__item__content"
-			>
-				<img
-					className="slide__inner__container__item__content__image"
-					src={item.pathUrl}
-					alt={item.name}
-				/>
-			</div>
-		</li>
+		<div className="container__row next" onClick={onClick}>
+			<i className="fas fa-angle-right" />
+		</div>
 	);
 };
 
-const Slider = () => {
-	const [productListWidth, setProductListWidth] = useState(0);
-	const [productListSteps, setProductListSteps] = useState(0);
-	const [productAmount, setProductAmount] = useState(0);
-	const productList = useRef();
-	const productAmountVisible = 4;
-	const imagesLength = data.length;
+const PrevArrow = props => {
+	const { onClick } = props;
+	return (
+		<div className="container__row prev" onClick={onClick}>
+			<i className="fas fa-angle-left" />
+		</div>
+	);
+};
 
-	useEffect(() => {
-		setProductAmount(productAmount + imagesLength);
-		setProductListWidth(productListWidth + imagesLength * 350);
-	}, []);
+const settings = {
+	className: 'container',
+	dots: false,
+	infinite: true,
+	slidesToShow: 5,
+	slidesToScroll: 1,
+	swipeToSlide: true,
+	arrows: true,
+	nextArrow: <NextArrow />,
+	prevArrow: <PrevArrow />,
+	responsive: [
+		{
+			breakpoint: 1024,
+			settings: {
+				slidesToShow: 5,
+			},
+		},
+		{
+			breakpoint: 768,
+			settings: {
+				slidesToShow: 2,
+			},
+		},
+		{
+			breakpoint: 375,
+			settings: {
+				slidesToShow: 1,
+			},
+		},
+	],
+};
 
-	if (productList.current) {
-		productList.current.style.width = `${productListWidth}px`;
-	}
+const handlePrintImages = obj =>
+	obj.map(data => (
+		<div key={data.id} className="container__images_content">
+			<img
+				className="container__images_content__image"
+				src={data.pathImage}
+				alt={data.altImage}
+			/>
+		</div>
+	));
 
-	const handleMoveSlide = () => {
-		productList.current.style.transform = `translateX(-${305 *
-			productListSteps}px)`;
-	};
-
-	const previousPressed = () => {
-		if (productListSteps > 0) {
-			setProductListSteps(productListSteps - 1);
-		}
-		handleMoveSlide();
-	};
-
-	const nextPressed = () => {
-		if (productListSteps < productAmount - productAmountVisible) {
-			setProductListSteps(productListSteps + 1);
-		}
-		handleMoveSlide();
-	};
-
+const SliderImages = () => {
 	return (
 		<div className="slide">
-			<div className="slide__control">
-				<span
-					type="button"
-					className="slide__control__buttons prev_buttton"
-					data-type="previous"
-					onClick={previousPressed}
-				>
-					<i className="fas fa-chevron-left" />
-				</span>
-				<span
-					type="button"
-					className="slide__control__buttons next_buttton"
-					data-type="next"
-					onClick={nextPressed}
-				>
-					<i className="fas fa-chevron-right" />
-				</span>
-			</div>
 			<div className="slide__inner">
 				<h1 className="slide__inner__title">Principales colaboradores</h1>
-				<ul className="slide__inner__container" ref={productList}>
-					{data.map((item, i) => itemSlide(item, i))}
-				</ul>
+				<Slider {...settings}>{handlePrintImages(data)}</Slider>
 			</div>
 		</div>
 	);
 };
 
-export default Slider;
+export default SliderImages;
