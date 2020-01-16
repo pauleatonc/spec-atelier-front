@@ -10,10 +10,11 @@ import { googleOuathAction } from '@Actions/';
 
 export const handleFormatResponse = googleResponse => ({
 	user: {
-		name: toCapitalize(googleResponse.w3.ofa),
+		first_name: toCapitalize(googleResponse.w3.ofa),
 		last_name: toCapitalize(googleResponse.w3.wea),
 		email: googleResponse.profileObj.email,
 		google_token: googleResponse.accessToken,
+		profile_image: googleResponse.profileObj.imageUrl,
 	},
 });
 
