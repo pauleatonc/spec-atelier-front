@@ -32,6 +32,18 @@
 
       &__image {
         width: 150px;
+
+        @media only screen and (max-width: 768px) {
+          display: none;
+        }
+
+        &__mobile {
+          display: none;
+
+          @media only screen and (max-width: 768px) {
+            display: block;
+          }
+        }
       }
     }
 
@@ -41,6 +53,10 @@
       height: $total-parent;
       justify-content: flex-end;
       width: $width-60;
+
+      @media only screen and (max-width: 768px) {
+        display: none;
+      }
 
       &__item {
         cursor: pointer;
@@ -85,6 +101,38 @@
           }
         }
       }
+
+      &--mobile {
+        &__button {
+          &__icon {
+            color: white;
+            font-size: 24px;
+          }
+        }
+      }
     }
+  }
+}
+
+
+.lateral_menu {
+  font-family: "Lato";
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #fff;
+  z-index: 9999;
+  min-width: 260px;
+  overflow: auto;
+  display: none;
+  box-shadow: -1px 2px 6px 1px #9e9e9e;
+
+  &.show {
+    display: block;
+  }
+
+  &__inner {
+    
   }
 }

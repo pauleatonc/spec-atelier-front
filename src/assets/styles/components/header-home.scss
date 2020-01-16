@@ -10,9 +10,15 @@
   width: $total-parent;
 
   &__inner {
-    height: $header-home-height-card;
-    width: $header-home-width-card;
-    margin-right: 120px;
+    width: $total-parent;
+    padding-left: 45px;
+    padding-right: 45px;
+
+     @media only screen and (min-width: 768px) {
+       height: $header-home-height-card;
+       width: $header-home-width-card;
+       margin-right: 120px;
+     }
 
     &__text {
       font-family: 'lato';
