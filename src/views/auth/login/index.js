@@ -2,9 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import ButtonGoogleLogin from '@Components/buttons/button_google_login';
 import { redirectToProjectsWhenIsLogin } from '@Helpers/redirect.helper';
 import { loginAction } from '@Actions/';
+import LOGO from '@Assets/images/logo.png';
 
 export const handleSubmit = (email, password, loginMethod) => {
 	const body = {
@@ -28,33 +30,81 @@ const Login = props => {
 	}, [loginState]);
 
 	return (
-		<>
-			<h1>Login</h1>
-			<form>
-				<input
-					type="email"
-					name="email"
-					value={email}
-					onChange={e => setEmail(e.target.value)}
-					required
-				/>
-				<input
-					type="password"
-					name="password"
-					value={password}
-					onChange={e => setPassword(e.target.value)}
-					required
-				/>
-				<button
-					type="button"
-					onClick={() => handleSubmit(email, password, loginMethod)}
-				>
-					Login
-				</button>
+		<section className="auth">
+			<div className="auth__inner">
+				<div className="auth__inner__section auth__inner__section--login">
+					<img className="auth__inner__section__logo" src={LOGO} alt="logo" />
+				</div>
+				<div className="auth__inner__section">
+					<div className="auth__inner__section__inner">
+						<div className="auth__inner__section__inner__header">
+							<p className="auth__inner__section__inner__header__title">
+								¿Aún no eres usuario?
+								<Link
+									to="/registration"
+									className="auth__inner__section__inner__header__title__link"
+								>
+									Regístrate ahora
+								</Link>
+							</p>
+						</div>
+						<div className="auth__inner__section__inner__body">
+							<p className="auth__inner__section__inner__body__title">
+								Inicia sesión
+							</p>
 
-				<ButtonGoogleLogin label="Iniciar sesión con Google" />
-			</form>
-		</>
+							<div className="auth__inner__section__inner__body__google">
+								<ButtonGoogleLogin label="Iniciar con Google" />
+							</div>
+
+							<form
+								className="auth__inner__section__inner__body__inner"
+								autoComplete="off"
+							>
+								<p className="auth__inner__section__inner__body__inner__descent">
+									O si prefieres inicia con tu cuenta Spec
+								</p>
+								<input
+									type="email"
+									name="email"
+									className="auth__inner__section__inner__body__inner__input"
+									value={email}
+									onChange={e => setEmail(e.target.value)}
+									placeholder="Correo electrónico"
+									required
+								/>
+								<input
+									type="password"
+									name="password"
+									className="auth__inner__section__inner__body__inner__input"
+									value={password}
+									onChange={e => setPassword(e.target.value)}
+									placeholder="Contraseña"
+									required
+								/>
+
+								<div className="auth__inner__section__inner__body__inner__keep_session">
+									<div className="auth__inner__section__inner__body__inner__keep_session__text">
+										Mantener mi sesión iniciada
+										<label className="switch" htmlFor="checkbox">
+											<input type="checkbox" id="checkbox" />
+											<div className="slider round" />
+										</label>
+									</div>
+								</div>
+								<button
+									type="button"
+									className="auth__inner__section__inner__body__inner__button"
+									onClick={() => handleSubmit(email, password, loginMethod)}
+								>
+									Iniciar sesión
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 	);
 };
 

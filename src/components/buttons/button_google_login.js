@@ -33,12 +33,19 @@ const ButtonGoogleLogin = props => {
 		<GoogleLogin
 			clientId={process.env.GOOGLE_CLIENT_ID}
 			buttonText={label}
+			cookiePolicy={'single_host_origin'}
 			onSuccess={res =>
 				handleManagerResponseGoogleService(res, googleOuathMethod)
 			}
 			onFailure={res =>
 				handleManagerResponseGoogleService(res, googleOuathMethod)
 			}
+			render={renderProps => (
+				<button className="btn_login_google" onClick={renderProps.onClick} disabled={renderProps.disabled}>
+					<i className="fab fa-google" />
+					{label}
+				</button>
+			)}
 		/>
 	);
 };

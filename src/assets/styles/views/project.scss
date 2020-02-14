@@ -10,9 +10,7 @@
 		justify-content: center;
 
 		&__button-more {
-			@include button-base;
-			background-color: $principal-color;
-			color: $white-color;
+			@include button-base($principal-color, $white-color);
 
 			&:active,
 			&:focus {
