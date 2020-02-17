@@ -51,7 +51,7 @@ const NavbarTop = props => {
 						<Link
 							to="/registration"
 							className="navbar__inner__section__item__link button--registration"
-							data-view="brands"
+							data-view="registration"
 							onClick={() => presenterMethod('app')}
 						>
 							Regístrate
@@ -61,7 +61,7 @@ const NavbarTop = props => {
 						<Link
 							to="/login"
 							className="navbar__inner__section__item__link button--login"
-							data-view="brands"
+							data-view="login"
 							onClick={() => presenterMethod('app')}
 						>
 							<i className="fas fa-user-circle" />
