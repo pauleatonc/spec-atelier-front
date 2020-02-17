@@ -1,54 +1,27 @@
 .dropdown {
-	color: $secondary-color;
-	align-items: center;
-	display: flex;
-	font-family: 'Akzidenz Grotesk - bold condenced';
-	font-size: $navbar-font-size-items;
-	font-weight: $navbar-font-weight;
-	line-height: $nabvar-line-height-items;
-	height: $total-parent;
-	justify-content: center;
-	position: relative;
-	text-transform: uppercase;
+  width: 150px;
+  position: relative;
+  display: none;
 
-	&__inner {
-		&__icon {
-			font-size: 70px;
-		}
-	}
+  &.show {
+    display: block;
+  }
 
-	&__image {
-		max-width: $total-parent;
-	}
+  &__inner {
+    background-color: #08262c;
+    padding: 5px 10px 10px;
 
-	&:hover {
-		color: $white-color;
+    &__link {
+      color: #fff;
+      text-decoration: none;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      width: 100%;
+      display: block;
 
-		.dropdown__content {
-			display: block;
-		}
-	}
-
-	&__content {
-		background-color: $principal-color;
-		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-		display: none;
-		min-width: 200px;
-		position: absolute;
-		right: 0;
-		bottom: $dropdown-bottom-position;
-		z-index: $z-index-xxs;
-
-		&__link {
-			color: $white-color;
-			display: block;
-			padding: 15px 16px;
-			text-decoration: none;
-
-			&:hover {
-				background-color: $white-color;
-				color: $principal-color;
-			}
-		}
-	}
+      &:first-child {
+        border-top: 1px solid #ccc;
+      }
+    }
+  }
 }
