@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import ButtonGoogleLogin from '@Components/buttons/button_google_login';
 import { redirectToProjectsWhenIsLogin } from '@Helpers/redirect.helper';
 import { loginAction } from '@Actions/';
 import LOGO from '@Assets/images/logo.png';
+import FULL_LOGO from '@Assets/images/full_logo.png';
+import LoginChangeAuthView from '@Components/login_change_auth_view';
 
 export const handleSubmit = (email, password, loginMethod) => {
 	const body = {
@@ -38,15 +39,17 @@ const Login = props => {
 				<div className="auth__inner__section">
 					<div className="auth__inner__section__inner">
 						<div className="auth__inner__section__inner__header">
-							<p className="auth__inner__section__inner__header__title">
-								¿Aún no eres usuario?
-								<Link
-									to="/registration"
-									className="auth__inner__section__inner__header__title__link"
-								>
-									Regístrate ahora
-								</Link>
-							</p>
+							<LoginChangeAuthView
+								label="¿Aún no eres usuario?"
+								path="registration"
+								textLink="Regístrate ahora"
+								style="auth__inner__section__inner__header__title"
+							/>
+
+							<img
+								className="auth__inner__section__inner__header__logo"
+								src={FULL_LOGO}
+							/>
 						</div>
 						<div className="auth__inner__section__inner__body">
 							<p className="auth__inner__section__inner__body__title">
@@ -100,6 +103,12 @@ const Login = props => {
 									Iniciar sesión
 								</button>
 							</form>
+							<LoginChangeAuthView
+								label="¿Aún no eres usuario?"
+								path="registration"
+								textLink="Regístrate ahora"
+								style="auth__inner__section__inner__header__title"
+							/>
 						</div>
 					</div>
 				</div>

@@ -19,17 +19,25 @@
 
       &--registration {
         background: url('~@Assets/images/auth/registration.png');
-       
+
       }
 
       &:first-of-type {
         width: 40%;
         background-repeat: no-repeat;
         background-size: cover;
+
+        @media only screen and (max-width: 768px) {
+          display: none;
+        }
       }
 
       &:last-of-type {
         width: 60%;
+
+        @media only screen and (max-width: 768px) {
+          width: 100%;
+        }
       }
 
       &__logo {
@@ -44,7 +52,20 @@
         padding-left: 121px;
         padding-right: 180px;
 
+        @media only screen and (max-width: 768px) {
+          padding-left: 36px;
+          padding-right: 36px;
+        }
+
         &__header {
+          &__logo {
+            display: none;
+
+            @media only screen and (max-width: 768px) {
+              display: flex;
+            }
+          }
+
           &__title {
             display: flex;
             font-size: 12px;
@@ -54,6 +75,19 @@
             line-height: normal;
             letter-spacing: 1px;
             justify-content: flex-end;
+
+            @media only screen and (max-width: 768px) {
+              display: none;
+            }
+
+            &:last-child {
+              display: none;
+              margin-top: 60px;
+
+              @media only screen and (max-width: 768px) {
+                display: block;
+              }
+            }
 
             &__link {
               font-weight: bold;
@@ -134,6 +168,11 @@
                 letter-spacing: 1px;
                 justify-content: flex-end;
 
+                @media only screen and (max-width: 768px) {
+                  justify-content: flex-start;
+                  margin-bottom: 30px;
+                }
+
                 .switch {
                   display: inline-block;
                   height: 15px;
@@ -190,7 +229,7 @@
             }
 
             &__button {
-              @include button-base(#ff7e45, #ffffff);
+              @include button-base(background-color, #ff7e45, #ffffff);
             }
 
             &__label {
@@ -200,7 +239,7 @@
             }
           }
         }
-      }   
+      }
     }
   }
 }

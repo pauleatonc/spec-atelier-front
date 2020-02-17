@@ -1,5 +1,5 @@
 .btn_login_google {
-  @include button-base(linear-gradient(101deg, #31cbb7 17%, #17bda7 76%), #fff);
+  @include button-base(background-image, linear-gradient(101deg, #31cbb7 17%, #17bda7 76%), #fff);
 
   i {
     margin-right: 14px;
