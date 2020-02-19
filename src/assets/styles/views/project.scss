@@ -100,6 +100,7 @@
           &__bottom {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             color: #212121;
             padding-bottom: 15px;
             border-bottom: 1px solid #ececec;
@@ -111,6 +112,45 @@
               font-style: normal;
               line-height: normal;
               letter-spacing: 1px;
+              width: 50%;
+              display: flex;
+              justify-content: flex-start;
+
+              &__content {
+                align-items: center;
+                display: flex;
+
+                &.commercial {
+                  color: #f5a623;
+                }
+
+                &.educational {
+                  color: #9f50e6;
+                }
+
+                &.institutional {
+                  color: #ff7644;
+                }
+
+                &.office {
+                  color: #384c8c;
+                }
+
+                &.real_state {
+                  color: #4a90e2;
+                }
+
+                &.residential {
+                  color: #88ac5d;
+                }
+
+                &__icon {
+                  width: 25px;
+                  margin-top: -4px;
+                }
+
+                &__text {}
+              }
             }
 
             &__work {
@@ -120,6 +160,9 @@
               font-style: normal;
               line-height: normal;
               letter-spacing: 1px;
+              width: 50%;
+              display: flex;
+              justify-content: flex-end;
             }
           }
         }

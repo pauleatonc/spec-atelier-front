@@ -5,29 +5,45 @@ import {
 	handleChangeToPrettyFormat,
 } from '@Helpers/pretty-format.helper';
 
-import COMERCIAL from '@Assets/images/project/comercial.png';
-import EDUCACIONAL from '@Assets/images/project/educacional.png';
-import HOSPITALARIO from '@Assets/images/project/hospitalario.png';
-import INMOBILIARIO from '@Assets/images/project/inmobiliario.png';
-import INSTITUCIONAL from '@Assets/images/project/institucional.png';
-import RESIDENCIAL from '@Assets/images/project/residencial.png';
+import COMMERCIAL from '@Assets/images/project/project_type/commercial.png';
+import EDUCATIONAL from '@Assets/images/project/project_type/educational.png';
+import INSTITUTIONAL from '@Assets/images/project/project_type/institutional.png';
+import OFFICE from '@Assets/images/project/project_type/office.png';
+import HOSPITALARIO from '@Assets/images/project/project_type/hospitalario.png';
+import RESIDENTIAL from '@Assets/images/project/project_type/residential.png';
+
+import COMMERCIAL_ICON from '@Assets/images/project/icon_type/commercial.png';
+import EDUCATIONAL_ICON from '@Assets/images/project/icon_type/educational.png';
+import INSTITUTIONAL_ICON from '@Assets/images/project/icon_type/institutional.png';
+import OFFICE_ICON from '@Assets/images/project/icon_type/office.png';
+import HOSPITALARIO_ICON from '@Assets/images/project/icon_type/hospitalario.png';
+import RESIDENTIAL_ICON from '@Assets/images/project/icon_type/residential.png';
 
 const mapImages = {
-	residential: RESIDENCIAL,
-	commercial: COMERCIAL,
-	educational: EDUCACIONAL,
-	office: INMOBILIARIO,
-	institutional: INSTITUCIONAL,
+	commercial: COMMERCIAL,
+	educational: EDUCATIONAL,
+	institutional: INSTITUTIONAL,
+	office: OFFICE,
 	real_state: HOSPITALARIO,
+	residential: RESIDENTIAL,
+};
+
+const mapIconsProjectType = {
+	commercial: COMMERCIAL_ICON,
+	educational: EDUCATIONAL_ICON,
+	institutional: INSTITUTIONAL_ICON,
+	office: OFFICE_ICON,
+	real_state: HOSPITALARIO_ICON,
+	residential: RESIDENTIAL_ICON,
 };
 
 const mapProjectType = {
-	residential: 'Residencial',
 	commercial: 'Comercial',
 	educational: 'Eduacional',
-	office: 'Inmobiliario',
 	institutional: 'Institucional',
+	office: 'Inmobiliario',
 	real_state: 'Hospitalario',
+	residential: 'Residencial',
 };
 
 const mapWorkType = {
@@ -39,6 +55,21 @@ const mapWorkType = {
 const hanlePrintImage = type => mapImages[type];
 
 const handlePrintProyectType = type => mapProjectType[type];
+
+const handlePrintProjectTypeIcon = type => (
+	<span
+		className={`project__content__header__bottom__project__content ${type}`}
+	>
+		<img
+			src={mapIconsProjectType[type]}
+			alt={type}
+			className="project__content__header__bottom__project__content__icon"
+		/>
+		<span className="project__content__header__bottom__project__content__text">
+			{handlePrintProyectType(type)}
+		</span>
+	</span>
+);
 
 const prettyLocationFormat = (city, country) =>
 	`${firstLetterToUppercase(city)}, ${firstLetterToUppercase(country)}`;
@@ -79,7 +110,7 @@ const Project = props => {
 					</div>
 					<div className="project__content__header__bottom">
 						<p className="project__content__header__bottom__project">
-							{handlePrintProyectType(project_type)}
+							{handlePrintProjectTypeIcon(project_type)}
 						</p>
 						<p className="project__content__header__bottom__work">
 							{mapWorkType[work_type]}
