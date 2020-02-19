@@ -1,8 +1,14 @@
-@mixin button-base {
-  display: inline-block;
+@mixin button-base($background, $bg, $c) {
+  #{$background}: $bg;
+  color: $c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-transform: uppercase;
-  font-size: $button-font-size;
+  height: 34px;
+  font-size: 12px;
   font-family: $button-font-family;
+  font-stretch: normal;
   font-weight: $button-font-weight;
   text-align: center;
   white-space: nowrap;
@@ -11,10 +17,10 @@
   border: 1px solid transparent;
   cursor: pointer;
   line-height: $button-line-height;
-  padding-top: $btn-padding-y;
-  padding-bottom: $btn-padding-y;
-  border-radius: 20px;
+  border-radius: $button-radius;
   min-width: $button-min-width;
+  padding-left: 20px;
+  padding-right: 20px;
 
   @media only screen and (max-width: 768px) {
     width: 80%;

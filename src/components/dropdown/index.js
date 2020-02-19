@@ -4,34 +4,37 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { presenterAction, logoutAction } from '@Actions';
 
+const handleShowHiddenDropdown = (method, option) => {
+	method(!option);
+};
+
 const Dropdown = props => {
 	const { presenterMethod, logoutMethod } = props;
-	const [showOtions, setShowOtions] = useState(true);
+	const [showOtions, setShowOtions] = useState(false);
 
 	return (
 		<div
 			className="navbar__inner__section__item"
 			onClick={() => {
-				setShowOtions(!showOtions);
+				handleShowHiddenDropdown(setShowOtions, showOtions);
 			}}
 		>
 			<div className="navbar__inner__section__item__link">
 				<i className="fas fa-user-circle" />
 			</div>
-			<div className="menu">
-				<Link
-					to="/profile"
-					className="navbar__inner__section__item__link"
-					onClick={() => logoutMethod()}
-				>
-					Perfil
-				</Link>
+			<div className={`dropdown ${showOtions ? ' show' : ''}`}>
+				<div className="dropdown__inner">
+					<Link
+						to="/profile"
+						className="dropdown__inner__link"
+						onClick={() => presenterMethod('app')}
+					>
+						Perfil
+					</Link>
 
-				<div
-					className="navbar__inner__section__item__link"
-					onClick={logoutMethod}
-				>
-					Cerrar sesión
+					<div className="dropdown__inner__link" onClick={logoutMethod}>
+						Cerrar sesión
+					</div>
 				</div>
 			</div>
 		</div>

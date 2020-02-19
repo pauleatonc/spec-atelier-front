@@ -77,9 +77,7 @@
         }
 
         &__btn {
-          @include button-base;
-          background-color: $principal-color;
-          color: $white-color;
+          @include button-base(background-image, $principal-color, $white-color);
 
           &:active,
           &:focus {

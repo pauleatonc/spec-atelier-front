@@ -1,0 +1,245 @@
+.auth {
+  background-color: white;
+  color: #212121;
+  font-family: 'Lato', sans-serif;
+  height: 100vh;
+  width: 100vw;
+
+  &__inner {
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    &__section {
+      height: 100%;
+
+      &--login {
+        background: url('~@Assets/images/auth/login.png');
+      }
+
+      &--registration {
+        background: url('~@Assets/images/auth/registration.png');
+
+      }
+
+      &:first-of-type {
+        width: 40%;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        @media only screen and (max-width: 768px) {
+          display: none;
+        }
+      }
+
+      &:last-of-type {
+        width: 60%;
+
+        @media only screen and (max-width: 768px) {
+          width: 100%;
+        }
+      }
+
+      &__logo {
+        position: absolute;
+        top: 66px;
+        left: 90px;
+        width: 135px;
+      }
+
+      &__inner {
+        padding-top: 66px;
+        padding-left: 121px;
+        padding-right: 180px;
+
+        @media only screen and (max-width: 768px) {
+          padding-left: 36px;
+          padding-right: 36px;
+        }
+
+        &__header {
+          &__logo {
+            display: none;
+
+            @media only screen and (max-width: 768px) {
+              display: flex;
+            }
+          }
+
+          &__title {
+            display: flex;
+            font-size: 12px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: 1px;
+            justify-content: flex-end;
+
+            @media only screen and (max-width: 768px) {
+              display: none;
+            }
+
+            &:last-child {
+              display: none;
+              margin-top: 60px;
+
+              @media only screen and (max-width: 768px) {
+                display: block;
+              }
+            }
+
+            &__link {
+              font-weight: bold;
+              color: #27c5b0;
+              text-decoration: none;
+              margin-left: 5px;
+            }
+          }
+        }
+
+        &__body {
+          display: flex;
+          margin-top: 120px;
+          flex-direction: column;
+
+          &__title {
+            font-family: 'Akzidenz Grotesk - black';
+            font-size: 30px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: 1.88px;
+          }
+
+          &__google {
+            margin-top: 40px;
+          }
+
+          &__inner {
+            margin-top: 35px;
+
+            &__descent {
+              font-family: 'Lato', sans-serif;
+              font-size: 14px;
+              font-weight: normal;
+              font-stretch: normal;
+              font-style: normal;
+              line-height: normal;
+              letter-spacing: 1px;
+              margin-bottom: 35px;
+            }
+
+            &__input {
+              border-radius: 22px;
+              background-color: #eeeeee;
+              border: none;
+              height: 36px;
+              padding-left: 25px;
+              width: 100%;
+              margin-bottom: 23px;
+              opacity: .5;
+              font-family: "Lato";
+              font-size: 12px;
+              font-weight: normal;
+              font-stretch: normal;
+              font-style: normal;
+              line-height: normal;
+              letter-spacing: 1px;
+              color: #212121;
+
+              &:focus {
+                outline: none;
+              }
+            }
+
+            &__keep_session {
+              margin-top: 12px;
+              margin-bottom: 22px;
+
+              &__text {
+                display: flex;
+                font-size: 12px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: 1px;
+                justify-content: flex-end;
+
+                @media only screen and (max-width: 768px) {
+                  justify-content: flex-start;
+                  margin-bottom: 30px;
+                }
+
+                .switch {
+                  display: inline-block;
+                  height: 15px;
+                  position: relative;
+                  margin-left: 25px;
+                  width: 38px;
+                }
+
+                .switch input {
+                  display: none;
+                }
+
+                .slider {
+                  background-color: #ccc;
+                  bottom: 0;
+                  cursor: pointer;
+                  left: 0;
+                  position: absolute;
+                  right: 0;
+                  top: 0;
+                  transition: .4s;
+                }
+
+                .slider:before {
+                  background-color: #fff;
+                  bottom: -1px;
+                  content: "";
+                  height: 20px;
+                  left: -1px;
+                  position: absolute;
+                  transition: .4s;
+                  width: 20px;
+                  box-shadow: 0px 10px 10px -4px rgba(143, 143, 143, 0.65);
+                }
+
+                input:checked+.slider {
+                  background-color: #27c5b0;
+                  color: #fff;
+                  content: "oui";
+                }
+
+                input:checked+.slider:before {
+                  transform: translateX(26px);
+                }
+
+                .slider.round {
+                  border-radius: 34px;
+                }
+
+                .slider.round:before {
+                  border-radius: 50%;
+                }
+              }
+            }
+
+            &__button {
+              @include button-base(background-color, #ff7e45, #ffffff);
+            }
+
+            &__label {
+              @include checkbox-base;
+
+              margin-bottom: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

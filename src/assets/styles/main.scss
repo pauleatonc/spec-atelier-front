@@ -5,8 +5,10 @@
 @import './common';
 
 @import './mixins/button';
+@import './mixins/checkbox';
 
 @import './components/navbar.scss';
+@import './components/navbar_mobile.scss';
 @import './components/dropdown.scss';
 @import './components/header-home.scss';
 @import './components/slide-images.scss';
@@ -14,5 +16,7 @@
 @import './components/who-we-us.scss';
 @import './components/why-be-supplier.scss';
 @import './components/footer.scss';
+@import './components/button_google.scss';
 
+@import './views/auth.scss';
 @import './views/project.scss';

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { AppRoutes, LoginRoutes } from '@Components/routes';
 import getPortalView from '@Helpers/portal-view.helper';
-import NavBar from '@Components/navbar/navbar-top';
+import NavBar from '@Components/navbar';
 import Footer from '@Components/footer';
 
 const AppView = () => (

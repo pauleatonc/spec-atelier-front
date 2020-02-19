@@ -1,65 +1,190 @@
 .projects {
-	height: $total-parent;
-	width: $total-parent;
-	display: flex;
-	flex-direction: column;
-	padding-bottom: $common-padding-bottom;
+  height: $total-parent;
+  width: $total-parent;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: $common-padding-bottom;
 
-	&__footer {
-		display: flex;
-		justify-content: center;
+  &__footer {
+    display: flex;
+    justify-content: center;
 
-		&__button-more {
-			@include button-base;
-			background-color: $principal-color;
-			color: $white-color;
+    &__button-more {
+      @include button-base(background-color, $principal-color, $white-color);
 
-			&:active,
-			&:focus {
-				@include button-base-clicked;
-			}
+      &:active,
+      &:focus {
+        @include button-base-clicked;
+      }
 
-			&:hover {
-				background-color: $support-orange-color;
-			}
-		}
-	}
+      &:hover {
+        background-color: $support-orange-color;
+      }
+    }
+  }
 
-	&__inner {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-around;
-		margin-right: auto;
-		margin-left: auto;
-		margin-bottom: 55px;
-		width: $width-90;
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 55px;
+    width: $width-90;
 
-		.project {
-			width: 387px;
-			margin-top: 55px;
+    .project {
+      width: 380px;
+      height: 490px;
+      margin-bottom: 18px;
+      cursor: pointer;
+      transition: all .2s ease-in-out;
+      border-radius: 20px;
 
-			&__header {
-				width: $total-parent;
-				height: 254px;
-			}
+      &:hover {
+        box-shadow: 7px 11px 22px -5px rgba(0, 0, 0, 0.75);
 
-			&__content {
-				margin-top: $margin-xs;
-				width: $total-parent;
-				height: 125px;
-				padding: 12px 16px;
-				background-color: $suport-darkgrey-color;
+        .project__header__image {
+          filter: none;
+        }
+      }
 
-				&__title {
-					font-family: 'Akzidenz Grotesk - bold condenced';
-					font-size: $font-size-m;
-					margin-bottom: $margin-xxs;
-				}
+      &__header {
+        width: $total-parent;
+        height: 257px;
 
-				&__description {
-					font-family: 'Akzidenz Grotesk - light';
-				}
-			}
-		}
-	}
+        &__image {
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+          filter: grayscale(100%);
+          max-width: 100%;
+        }
+      }
+
+      &__content {
+        width: $total-parent;
+        height: 233px;
+        padding: 15px 30px;
+        background-color: #fff;
+        border: solid 1px rgba(0, 0, 0, 0.12);
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+
+        &__header {
+          font-family: 'Lato', sans-serif;
+          height: 100px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          &__top {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &__title {
+              font-size: 16px;
+              font-weight: bold;
+              font-stretch: normal;
+              font-style: normal;
+              line-height: normal;
+              letter-spacing: 1px;
+              color: #212121;
+            }
+
+            i {
+              color: #aaaaaa;
+            }
+          }
+
+          &__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #212121;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ececec;
+
+            &__project {
+              font-size: 12px;
+              font-weight: normal;
+              font-stretch: normal;
+              font-style: normal;
+              line-height: normal;
+              letter-spacing: 1px;
+              width: 50%;
+              display: flex;
+              justify-content: flex-start;
+
+              &__content {
+                align-items: center;
+                display: flex;
+
+                &.commercial {
+                  color: #f5a623;
+                }
+
+                &.educational {
+                  color: #9f50e6;
+                }
+
+                &.institutional {
+                  color: #ff7644;
+                }
+
+                &.office {
+                  color: #384c8c;
+                }
+
+                &.real_state {
+                  color: #4a90e2;
+                }
+
+                &.residential {
+                  color: #88ac5d;
+                }
+
+                &__icon {
+                  width: 25px;
+                  margin-top: -4px;
+                }
+
+                &__text {}
+              }
+            }
+
+            &__work {
+              font-size: 12px;
+              font-weight: bold;
+              font-stretch: normal;
+              font-style: normal;
+              line-height: normal;
+              letter-spacing: 1px;
+              width: 50%;
+              display: flex;
+              justify-content: flex-end;
+            }
+          }
+        }
+
+        &__body {
+          font-family: 'Lato', sans-serif;
+
+          &__text {
+            font-size: 12px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 2.25;
+            letter-spacing: 1px;
+            color: rgba(33, 33, 33, 0.53);
+
+            &:first-child {
+              margin-top: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
