@@ -8,14 +8,14 @@ import {
 import COMMERCIAL from '@Assets/images/project/project_type/commercial.png';
 import EDUCATIONAL from '@Assets/images/project/project_type/educational.png';
 import INSTITUTIONAL from '@Assets/images/project/project_type/institutional.png';
-import OFFICE from '@Assets/images/project/project_type/office.png';
+import REAL_STATE from '@Assets/images/project/project_type/real_state.png';
 import HOSPITALARIO from '@Assets/images/project/project_type/hospitalario.png';
 import RESIDENTIAL from '@Assets/images/project/project_type/residential.png';
 
 import COMMERCIAL_ICON from '@Assets/images/project/icon_type/commercial.png';
 import EDUCATIONAL_ICON from '@Assets/images/project/icon_type/educational.png';
 import INSTITUTIONAL_ICON from '@Assets/images/project/icon_type/institutional.png';
-import OFFICE_ICON from '@Assets/images/project/icon_type/office.png';
+import REAL_STATE_ICON from '@Assets/images/project/icon_type/real_state.png';
 import HOSPITALARIO_ICON from '@Assets/images/project/icon_type/hospitalario.png';
 import RESIDENTIAL_ICON from '@Assets/images/project/icon_type/residential.png';
 
@@ -23,8 +23,8 @@ const mapImages = {
 	commercial: COMMERCIAL,
 	educational: EDUCATIONAL,
 	institutional: INSTITUTIONAL,
-	office: OFFICE,
-	real_state: HOSPITALARIO,
+	real_state: REAL_STATE,
+	hospital: HOSPITALARIO,
 	residential: RESIDENTIAL,
 };
 
@@ -32,8 +32,8 @@ const mapIconsProjectType = {
 	commercial: COMMERCIAL_ICON,
 	educational: EDUCATIONAL_ICON,
 	institutional: INSTITUTIONAL_ICON,
-	office: OFFICE_ICON,
-	real_state: HOSPITALARIO_ICON,
+	real_state: REAL_STATE_ICON,
+	hospital: HOSPITALARIO_ICON,
 	residential: RESIDENTIAL_ICON,
 };
 
@@ -41,8 +41,8 @@ const mapProjectType = {
 	commercial: 'Comercial',
 	educational: 'Eduacional',
 	institutional: 'Institucional',
-	office: 'Inmobiliario',
-	real_state: 'Hospitalario',
+	real_state: 'Inmobiliario',
+	hospital: 'Hospitalario',
 	residential: 'Residencial',
 };
 
