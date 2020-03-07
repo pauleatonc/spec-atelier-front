@@ -1,0 +1,38 @@
+.sidebar {
+  position: fixed;
+  top: 100px;
+  width: 55px;
+  height: 200px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.27);
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__item {
+    height: 33%;
+    display: flex;
+    cursor: pointer;
+
+    &--icon {
+      display: block;
+      width: 28px;
+      height: 28px;
+      margin: auto;
+
+      &.products { background-image: url('~@Assets/images/project-specification/sidebar/products.svg'); }
+      &.index { background-image: url('~@Assets/images/project-specification/sidebar/index.svg'); }
+      &.config { background-image: url('~@Assets/images/project-specification/sidebar/index.svg'); }
+    }
+    &:hover &--icon.products, &--icon.products.active  {
+      background-image: url('~@Assets/images/project-specification/sidebar/products_active.svg');
+    }
+    &:hover &--icon.index,  &--icon.index.active {
+      background-image: url('~@Assets/images/project-specification/sidebar/index_active.svg');
+    }
+    &:hover &--icon.config,  &--icon.config.active {
+      background-image: url('~@Assets/images/project-specification/sidebar/index_active.svg');
+    }
+  }
+}

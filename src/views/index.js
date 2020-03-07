@@ -8,4 +8,4 @@ export { default as Brands } from './brands';
 export { default as Projects } from './projects';
 export { default as Profile } from './profile';
 export { default as Us } from './us';
-export { default as ProjectSpecification } from './project-specification';
+export { default as ProjectSpecification } from './project-specification/project-specification';

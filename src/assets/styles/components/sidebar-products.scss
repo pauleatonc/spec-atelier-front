@@ -1,0 +1,71 @@
+.sidebar-products {
+  width: 319px;
+  background-color: #ffffff;
+  position: absolute;
+  left: 60px;
+  top: 100px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.27);
+  font-family: Lato;
+  overflow: scroll;
+
+
+  &-sections {
+    padding: 33px 33px 33px 20px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    height: 100px;
+    width: 50%;
+    cursor: pointer;
+
+    &--title{
+      display: block;
+      margin-top: 8px;
+      text-align: center;
+      font-size: 12px;
+    }
+    &--icon {
+      margin-top: 12px;
+      display: block;
+      width: 34px;
+      height: 34px;
+      margin: 0 auto;
+
+      &.endings { background-image: url('~@Assets/images/project-specification/sidebar-products/endings.svg'); }
+      &.ground-clearance { background-image: url('~@Assets/images/project-specification/sidebar-products/ground-clearance.svg'); }
+      &.generalities { background-image: url('~@Assets/images/project-specification/sidebar-products/generalities.svg'); }
+      &.transport-mechanic-system { background-image: url('~@Assets/images/project-specification/sidebar-products/transport-mechanic-system.svg'); }
+      &.urbanization { background-image: url('~@Assets/images/project-specification/sidebar-products/urbanization.svg'); }
+      &.complementary-provisory { background-image: url('~@Assets/images/project-specification/sidebar-products/complementary-provisory.svg'); }
+      &.installation { background-image: url('~@Assets/images/project-specification/sidebar-products/installation.svg'); }
+      &.exterior { background-image: url('~@Assets/images/project-specification/sidebar-products/exterior.svg'); }
+    }
+    &:hover &--icon.endings, &--icon.endings.active  {
+      background-image: url('~@Assets/images/project-specification/sidebar-products/endings_active.svg');
+    }
+    &:hover &--icon.ground-clearance,  &--icon.ground-clearance.active {
+      background-image: url('~@Assets/images/project-specification/sidebar-products/ground-clearance_active.svg');
+    }
+    &:hover &--icon.generalities,  &--icon.generalities.active {
+      background-image: url('~@Assets/images/project-specification/sidebar-products/generalities_active.svg');
+    }
+    &:hover &--icon.transport-mechanic-system,  &--icon.transport-mechanic-system.active {
+      background-image: url('~@Assets/images/project-specification/sidebar-products/transport-mechanic-system_active.svg');
+    }
+    &:hover &--icon.urbanization,  &--icon.urbanization.active {
+      background-image: url('~@Assets/images/project-specification/sidebar-products/urbanization_active.svg');
+    }
+    &:hover &--icon.complementary-provisory,  &--icon.complementary-provisory.active {
+      background-image: url('~@Assets/images/project-specification/sidebar-products/complementary-provisory_active.svg');
+    }
+    &:hover &--icon.installation,  &--icon.installation.active {
+      background-image: url('~@Assets/images/project-specification/sidebar-products/installation_active.svg');
+    }
+    &:hover &--icon.exterior,  &--icon.exterior.active {
+      background-image: url('~@Assets/images/project-specification/sidebar-products/exterior_active.svg');
+    }
+  }
+}
