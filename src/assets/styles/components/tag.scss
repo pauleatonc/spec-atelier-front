@@ -1,0 +1,39 @@
+.tag {
+  background-color: $white-color;
+  border: solid 1px #CCC;
+  border-radius: 18px;
+  color: #9C9C9C;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: Lato;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  height: 26px;
+  justify-content: center;
+  letter-spacing: 0.86px;
+  line-height: 2;
+  margin: 0 5px;
+  padding: 0 13px;
+  white-space: nowrap;
+
+  &:first-child {
+    margin: 0 5px 0 0;
+  }
+
+  &:last-child {
+    margin: 0 0 0 5px;
+  }
+
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+
+  &.selected {
+    background-color: #FFF6F2;
+    border: solid 1px #FF7E45;
+    color: #FF7E45;
+  }
+}

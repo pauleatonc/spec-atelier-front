@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getLocalStorage } from '@Helpers/localstorage.helper';
+import getEndPoint from '@Configurations/config';
+import { onSelectMenu } from '@Actions/project-specification.actions';
 import SidebarProducts from '../../components/project-specification/sidebar-products';
 import SidebarProductsItems from '../../components/project-specification/sidebar-products-items';
 import SidebarIndex from '../../components/project-specification/sidebar-index';
-import { getLocalStorage } from '@Helpers/localstorage.helper';
-import getEndPoint from '@Configurations/config';
 
 const Sidebar = props => {
 
   const [currentlyActive, ItemClickHandler] = useState('index');
   const [items, getItems] = useState(false);
+  const dispatch = useDispatch();
 
   const SectionClickHandler = type => {
     const endpoint = getEndPoint({ service: `general/items_by_section?section=${type}` });
@@ -28,6 +31,7 @@ const Sidebar = props => {
     <div key={type} className="sidebar__item" onClick={() => {
       getItems(false)
       ItemClickHandler(type)
+      dispatch(onSelectMenu({ menu: type }));
     }}>
       <span className={`sidebar__item--icon ${type} ${currentlyActive == type ? 'active' : ''}`} />
     </div>

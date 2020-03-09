@@ -1,0 +1,50 @@
+.products-by-item {
+  background-color: $white-color;
+  margin: 15px 0 0;
+  padding: 28px 0;
+  width: 100%;
+
+  &__breadcrumbs {
+    margin: 0 0 21px;
+    padding: 0 28px;
+  }
+
+  &__search {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 24px;
+    padding: 0 23px;
+  }
+
+  &__filters {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 23px;
+    padding: 0 23px;
+  }
+
+  &__list {
+    border-top: solid 1px #E5E5E5;
+    padding: 15px 46px;
+
+    &--total {
+      color: #212121;
+      font-family: Lato;
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin: 0 0 21px;
+    }
+
+    &--cards {
+      display: grid;
+      grid-column-gap: 38px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+
+  &__load-more {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0 37px;
+  }
+}

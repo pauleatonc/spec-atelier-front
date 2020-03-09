@@ -1,0 +1,29 @@
+.breadcrumbs {
+  height: 15px;
+
+  &__item,
+  &__selected-item {
+    align-items: center;
+    cursor: default;
+    display: inline-flex;
+    font-family: Lato;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  &__item {
+    color: #757575;
+  }
+
+  &__selected-item {
+    color: #212121;
+  }
+
+  &__icon {
+    background-image: url('~@Assets/images/breadcrumbs/arrow-left.svg');
+    background-size: 14px 14px;
+    display: inline-block;
+    height: 14px;
+    width: 14px;
+  }
+}
