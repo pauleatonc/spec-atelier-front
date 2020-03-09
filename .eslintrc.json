@@ -2,16 +2,18 @@
 	"extends": ["airbnb", "prettier", "prettier/react"],
 	"plugins": ["prettier"],
 	"rules": {
-		"react/jsx-filename-extension": [
-			1,
-			{
-				"extensions": [".js", ".jsx"]
-			}
-		],
-		"react/prop-types": 0,
+    "import/imports-first": ["error", "absolute-first"],
+    "import/newline-after-import": "error",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
 		"no-underscore-dangle": 0,
-		"import/imports-first": ["error", "absolute-first"],
-		"import/newline-after-import": "error"
+		"react/prop-types": 0,
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ]
 	},
 	"globals": {
 		"window": true,
@@ -20,7 +22,24 @@
 		"FormData": true,
 		"FileReader": true,
 		"Blob": true,
-		"navigator": true
+    "navigator": true,
+    "fetch": true
 	},
-	"parser": "babel-eslint"
+  "parser": "babel-eslint",
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@Actions",  "./src/actions"],
+          ["@Assets", "./src/assets"],
+          ["@Components", "./src/components"],
+          ["@Configurations", "./src/config"],
+          ["@Helpers", "./src/helpers"],
+          ["@Reducers", "./src/reducers"],
+          ["@Views", "./src/views"]
+        ],
+        "extensions": [".js", ".jsx", ".json"]
+      }
+    }
+  }
 }
