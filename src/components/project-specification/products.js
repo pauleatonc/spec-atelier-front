@@ -110,7 +110,6 @@ const Products = () => {
                 key={`product-card-${product.id}`}
                 reference={product.reference}
                 selected={Boolean(selected)}
-                technical="https://google.cl/"
                 title={product.name}
                 onClickCard={handleCardClick(product.id)}
                 // TODO: handle the see more link
