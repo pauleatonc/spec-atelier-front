@@ -4,6 +4,7 @@ import { onGetProductsByItem } from '@Actions/project-specification.actions';
 import Breadcrumbs from '@Components/basics/breadcrumbs';
 import SearchBar from '@Components/filters/search-bar';
 import Tag from '@Components/filters/tag';
+import SnackBar from '@Components/basics/snack-bar';
 import ProductCard from '@Components/cards/product-card';
 import LoadButton from '@Components/buttons/load-button';
 
@@ -20,6 +21,7 @@ const Products = () => {
     productsTotal: total,
     selectedSectionItemID,
   } = useSelector(state => state.projectSpecification);
+  const [showSnackBar, setShowSnackBar] = useState(false);
   const [search, setSearch] = useState('');
   const [selectedFilters, setSelectedFilters] = useState(['all']);
   const [selectedProducts, setSelectedProducts] = useState([]);
@@ -56,6 +58,7 @@ const Products = () => {
       updatedProducts = updatedProducts.filter(productID => productID !== currentProductID);
     } else {
       updatedProducts = updatedProducts.concat(currentProductID);
+      setShowSnackBar(true);
     }
 
     setSelectedProducts(updatedProducts);
@@ -72,8 +75,19 @@ const Products = () => {
     dispatch(onGetProductsByItem());
   }, [selectedSectionItemID]);
 
+  useEffect(() => {
+    if (!showSnackBar) {
+      return;
+    }
+
+    setTimeout(() => {
+      setShowSnackBar(false);
+    }, 2000);
+  }, [showSnackBar]);
+
   return (
     <div className="products-by-item">
+      {showSnackBar && <SnackBar message="Añadiste productos a una sección" />}
       <section className="products-by-item__breadcrumbs">
         <Breadcrumbs labels={breadcrumbsLabels} />
       </section>
