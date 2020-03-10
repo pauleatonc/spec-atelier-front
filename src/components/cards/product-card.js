@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import noPhoto from '@Assets/images/project-specification/products/no-photo.svg';
 
@@ -20,18 +20,34 @@ const ProductCard = props => {
     onClickCard,
     onClickSeeMore,
   } = props;
-  const wrapperClass = selected ? 'product-card selected' : 'product-card'; 
+  const [hover, setHover] = useState(false);
+  const handleCardMouseEnter = () => setHover(true);
+  const handleCardMouseLeave = () => setHover(false);
+  const handleIconClick = location => event => {
+    event.stopPropagation();
+    
+    window.open(location, '_blank');
+  };
   const photoStyles = {
     backgroundImage: `url('${photo || noPhoto}')`,
   };
-  const handleIconClick = location => event => {
-    event.stopPropagation();
+  let wrapperClass = 'product-card'; 
 
-    window.open(location, '_blank');
-  };
+  if (hover) {
+    wrapperClass = `${wrapperClass} hover`;
+  }
+
+  if (selected) {
+    wrapperClass = `${wrapperClass} selected`;
+  }
 
   return (
-    <div className={wrapperClass} onClick={onClickCard}>
+    <div
+      className={wrapperClass}
+      onClick={onClickCard}
+      onMouseEnter={handleCardMouseEnter}
+      onMouseLeave={handleCardMouseLeave}
+    >
       <section className="product-card__content">
         <section className="product-card__content--photo" style={photoStyles} />
         <section className="product-card__content--details">
@@ -62,9 +78,8 @@ const ProductCard = props => {
           )}
         </section>
       </section>
-      {selected && (
-        <section className="product-card__check" />
-      )}
+      {hover && !selected && <section className="product-card__add" />}
+      {selected && <section className="product-card__check" />}
     </div>
   );
 };

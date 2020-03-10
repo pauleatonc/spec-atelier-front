@@ -130,8 +130,8 @@
     }
   }
 
+  &__add,
   &__check {
-    background-image: url('~@Assets/images/project-specification/products/check.svg');
     background-size: 15px 15px;
     height: 15px;
     margin: 11px 14px 0 0;
@@ -139,6 +139,18 @@
     right: 0; 
     top: 0;
     width: 15px;
+  }
+
+  &__add {
+    background-image: url('~@Assets/images/project-specification/products/plus.svg');
+  }
+
+  &__check {
+    background-image: url('~@Assets/images/project-specification/products/check.svg');
+  }
+
+  &.hover {
+    border: solid 1px #31cbb7;
   }
 
   &.selected {
