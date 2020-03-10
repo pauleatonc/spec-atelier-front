@@ -33,7 +33,7 @@ const ProductCard = props => {
   };
   let wrapperClass = 'product-card'; 
 
-  if (hover) {
+  if (hover && !selected) {
     wrapperClass = `${wrapperClass} hover`;
   }
 
