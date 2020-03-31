@@ -1,6 +1,4 @@
-import React, {
-  useState
-} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import noPhoto from '@Assets/images/project-specification/products/no-photo.svg';
 

@@ -1,14 +1,6 @@
-import React, {
-  useEffect,
-  useState
-} from 'react';
-import {
-  useDispatch,
-  useSelector
-} from 'react-redux';
-import {
-  onGetProductsByItem
-} from '@Actions/project-specification.actions';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { onGetProductsByItem } from '@Actions/project-specification.actions';
 import Breadcrumbs from '@Components/basics/breadcrumbs';
 import SearchBar from '@Components/filters/search-bar';
 import Tag from '@Components/filters/tag';
@@ -35,10 +27,7 @@ const Products = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const handleSearchChange = event => {
     setSearch(event.target.value);
-    dispatch(onGetProductsByItem({
-      search: event.target.value,
-      filters: selectedFilters
-    }));
+    dispatch(onGetProductsByItem({ search: event.target.value, filters: selectedFilters }));
   };
   const handleFilterClick = currentFilterTag => () => {
     const hasFilterTag = selectedFilters.find(filterTag => filterTag === currentFilterTag);
@@ -59,10 +48,7 @@ const Products = () => {
     }
 
     setSelectedFilters(updatedFilters);
-    dispatch(onGetProductsByItem({
-      search,
-      filters: updatedFilters
-    }));
+    dispatch(onGetProductsByItem({ search, filters: updatedFilters }));
   };
   const handleCardClick = currentProductID => () => {
     const hasProduct = selectedProducts.find(productID => productID === currentProductID);
@@ -78,10 +64,7 @@ const Products = () => {
     setSelectedProducts(updatedProducts);
   };
   const handleLoadMoreClick = () => {
-    dispatch(onGetProductsByItem({
-      search,
-      filters: selectedFilters
-    }));
+    dispatch(onGetProductsByItem({ search, filters: selectedFilters }));
   };
 
   useEffect(() => {
@@ -96,9 +79,7 @@ const Products = () => {
       return;
     }
 
-    setTimeout(() => {
-      setShowSnackBar(false);
-    }, 2000);
+    setTimeout(() => setShowSnackBar(false), 2000);
   }, [showSnackBar]);
 
   return (
