@@ -31,18 +31,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      padding: 15px 15px 18px;
-
-      &__reference {
-        color: #212121;
-        font-family: Lato;
-        font-size: 10px;
-        letter-spacing: 0.83px;
-        margin: 0 0 10px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
+      padding: 24px 15px 15px;
 
       &__title,
       &__description {
@@ -72,7 +61,18 @@
         font-family: Lato;
         font-size: 10px;
         letter-spacing: 0.83px;
-        margin: auto 0 0;
+        margin: auto 0 7px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      &__reference {
+        color: #212121;
+        font-family: Lato;
+        font-size: 10px;
+        letter-spacing: 0.83px;
+        margin: 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -136,7 +136,7 @@
     height: 15px;
     margin: 11px 14px 0 0;
     position: absolute;
-    right: 0; 
+    right: 0;
     top: 0;
     width: 15px;
   }

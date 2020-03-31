@@ -2,6 +2,7 @@
 	"extends": ["airbnb", "prettier", "prettier/react"],
 	"plugins": ["prettier"],
 	"rules": {
+    "camelcase": "off",
     "import/imports-first": ["error", "absolute-first"],
     "import/newline-after-import": "error",
     "jsx-a11y/click-events-have-key-events": "off",
