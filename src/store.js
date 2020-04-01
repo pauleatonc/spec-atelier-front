@@ -7,6 +7,7 @@ import {
 	newPasswordReducer,
   projectsReducer,
   projectSpecificationReducer,
+  productsReducer,
 } from './reducers';
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
 	newPassword: newPasswordReducer,
   projects: projectsReducer,
   projectSpecification: projectSpecificationReducer,
+  products: productsReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
