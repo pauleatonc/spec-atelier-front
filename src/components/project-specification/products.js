@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { onGetProductsByItem } from '@Actions/project-specification.actions';
+import { getProduct } from '@Actions/product.action';
 import Breadcrumbs from '@Components/basics/breadcrumbs';
 import SearchBar from '@Components/filters/search-bar';
 import Tag from '@Components/filters/tag';
 import SnackBar from '@Components/basics/snack-bar';
 import ProductCard from '@Components/cards/product-card';
 import LoadButton from '@Components/buttons/load-button';
+import Modal from '@Components/modal/modal';
+import ProductInfo from '@Components/product-info/product-info';
 
 /**
  * The Products' component.
@@ -21,10 +24,14 @@ const Products = () => {
     productsTotal: total,
     selectedSectionItemID,
   } = useSelector(state => state.projectSpecification);
+  const {
+    product,
+  } = useSelector(state => state.products);
   const [showSnackBar, setShowSnackBar] = useState(false);
   const [search, setSearch] = useState('');
   const [selectedFilters, setSelectedFilters] = useState(['all']);
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [modalProduct, toggleModal] = useState(false);
   const handleSearchChange = event => {
     setSearch(event.target.value);
     dispatch(onGetProductsByItem({ search: event.target.value, filters: selectedFilters }));
@@ -65,6 +72,10 @@ const Products = () => {
   };
   const handleLoadMoreClick = () => {
     dispatch(onGetProductsByItem({ search, filters: selectedFilters }));
+  }
+  const handleSeeMoreClick = selectedProduct => () => {
+    dispatch(getProduct(selectedProduct.id));
+    toggleModal(true);
   };
 
   useEffect(() => {
@@ -124,10 +135,13 @@ const Products = () => {
                 selected={Boolean(selected)}
                 title={product.name}
                 onClickCard={handleCardClick(product.id)}
-                // TODO: handle the see more link by using the onClickSeeMore property
+                onClickSeeMore={handleSeeMoreClick(product)}
               />
             );
           })}
+          <Modal isOpen={modalProduct} toggle={toggleModal} size="md">
+            <ProductInfo product={product} />
+          </Modal>
         </section>
       </section>
       {nextPage !== null && (
