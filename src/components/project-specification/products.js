@@ -73,7 +73,7 @@ const Products = () => {
   };
 
   const handleSeeMoreClick = selectedProduct => () => {
-    dispatch(getProduct(selectedProduct.id));
+    dispatch(getProduct(selectedProduct));
     toggleModal(true);
   };
 

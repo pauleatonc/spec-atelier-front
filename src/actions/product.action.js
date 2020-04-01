@@ -16,7 +16,7 @@ export const get = async url => fetch(url, {
   },
 });
 
-export const getProduct = id => async dispatch => {
+export const getProduct = ({ id }) => async dispatch => {
   try {
     const url = getEndPoint({ service: `product/${id}` });
     return get(url)
