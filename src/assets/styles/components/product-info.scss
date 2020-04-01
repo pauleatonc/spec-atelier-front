@@ -1,0 +1,185 @@
+@import "~@Assets/styles/variables";
+@import "~@Assets/styles/colors";
+
+$height-content: 300px;
+$color-primary: rgb(66, 191, 173);
+$color-secondary: rgb(244, 130, 80);
+
+.product-container {
+  background-color: $white-color;
+  border-radius: 4px;
+  min-height: 200px;
+
+  & > .product-content {
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    min-height: $height-content;
+    display: flex;
+    flex-direction: column;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 1px;
+    font-family: Lato;
+    & > .header {
+      display: flex;
+      justify-content: space-between;
+      & > .title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 0 $padding-m $padding-m 0;
+      }
+    }
+    & > .content {
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      display: flex;
+      & > .images-container {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        display: flex;
+        & > .image-content {
+          align-items: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+          padding: $padding-xxs;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex: 1;
+          overflow-y: auto;
+          &:focus {
+            border: none;
+            outline: none;
+          }
+          & > .image {
+            cursor: pointer;
+            width: auto;
+            max-height: 90px;
+            display: block;
+            &.active {
+              border: 2px solid;
+              border-color: $color-primary;
+            }
+          }
+        }
+      }
+      & > .image-selected {
+        justify-content: center;
+        align-self: center;
+        flex: 3;
+        display: flex;
+      }
+      & > .info-container {
+        flex: 3;
+        display: flex;
+        & > .info-content {
+          flex-direction: column;
+          flex: 1;
+          display: flex;
+          justify-content: space-between;
+          letter-spacing: 0.83px;
+          color: #212121;
+          & > .name {
+            font-size: 12px;
+            margin: $margin-m 0px;
+            font-weight: bold;
+            color: #212121;
+          }
+          & > .long-description {
+            font-size: 12px;
+            overflow-y: auto;
+            max-height: 100%;
+          }
+          & > .brand {
+            margin: $margin-m 0px;
+            font-size: 10px;
+            color: grey;
+          }
+          & > .actions {
+            display: flex;
+            & .button-contact {
+              outline: none;
+              cursor: pointer;
+              color: $white-color;
+              border-radius: 16px;
+              padding: 8px 28px;
+              background-color: $color-secondary;
+              font-size: 16px;
+              font-weight: bold;
+              text-align: center;
+            }
+            & .icons {
+              display: flex;
+              align-items: center;
+              margin: auto;
+              & > .icon {
+                width: 28px;
+                height: 28px;
+                margin: auto;
+                background-position: center center;
+                background-repeat: no-repeat;
+                display: block;
+                &.dwg {
+                  background-image: url("~@Assets/images/project-specification/products/dwg.svg");
+                  &.active {
+                    cursor: pointer;
+                    background-image: url("~@Assets/images/project-specification/products/dwg_active.svg");
+                  }
+                }
+
+                &.bim {
+                  background-image: url("~@Assets/images/project-specification/products/bim.svg");
+                  &.active {
+                    cursor: pointer;
+                    background-image: url("~@Assets/images/project-specification/products/bim_active.svg");
+                  }
+                }
+
+                &.tech {
+                  background-image: url("~@Assets/images/project-specification/products/tech.svg");
+                  &.active {
+                    cursor: pointer;
+                    background-image: url("~@Assets/images/project-specification/products/tech_active.svg");
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .product-container {
+    border-radius: 0;
+    height: 100%;
+    width: $width-100 !important;
+    padding: $padding-xl;
+    & > .product-content {
+      & > .content {
+        height: 100%;
+        flex-direction: column;
+        & > .images-container {
+          display: none;
+        }
+        & > .info-container {
+          flex: 1;
+          min-height: $height-content;
+          margin-bottom: $margin-xxl;
+        }
+      }
+    }
+  }
+}
