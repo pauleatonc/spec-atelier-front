@@ -15,7 +15,7 @@ const SidebarProducts = props => {
 
   if (!sections) {
     (() => {
-      const endpoint = getEndPoint({ service: 'general/sections' });
+      const endpoint = getEndPoint({ service: 'sections' });
       fetch(`${endpoint}`, {
         method: 'GET',
         headers: {

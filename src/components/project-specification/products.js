@@ -62,9 +62,8 @@ const Products = () => {
     }
 
     setSelectedProducts(updatedProducts);
-    // TODO: attach the selected product to the related draft.
   };
-  const handleSeeMoreClick = () => {
+  const handleLoadMoreClick = () => {
     dispatch(onGetProductsByItem({ search, filters: selectedFilters }));
   };
 
@@ -80,9 +79,7 @@ const Products = () => {
       return;
     }
 
-    setTimeout(() => {
-      setShowSnackBar(false);
-    }, 2000);
+    setTimeout(() => setShowSnackBar(false), 2000);
   }, [showSnackBar]);
 
   return (
@@ -99,7 +96,7 @@ const Products = () => {
           const selected = selectedFilters.find(selectedFilter => selectedFilter === filter.tag);
 
           return (
-            <Tag 
+            <Tag
               key={`products-by-item__filter--${filter.tag}`}
               selected={Boolean(selected)}
               onClick={handleFilterClick(filter.tag)}
@@ -111,7 +108,7 @@ const Products = () => {
       </section>
       <section className="products-by-item__list">
         <section className="products-by-item__list--total">
-          {`${total} productos`}
+          {`${total} producto(s)`}
         </section>
         <section className="products-by-item__list--cards">
           {products.map(product => {
@@ -119,14 +116,15 @@ const Products = () => {
 
             return (
               <ProductCard
-                category="Sistema constructivo: Profesional Arquitectura"
+                category={`Sistema constructivo: ${product.system.name}`}
                 description={product.short_desc}
                 key={`product-card-${product.id}`}
+                photo={product.images[0]}
                 reference={product.reference}
                 selected={Boolean(selected)}
                 title={product.name}
                 onClickCard={handleCardClick(product.id)}
-                // TODO: handle the see more link
+                // TODO: handle the see more link by using the onClickSeeMore property
               />
             );
           })}
@@ -134,7 +132,7 @@ const Products = () => {
       </section>
       {nextPage !== null && (
         <section className="products-by-item__load-more">
-          <LoadButton onClick={handleSeeMoreClick}>
+          <LoadButton onClick={handleLoadMoreClick}>
             Ver más
           </LoadButton>
         </section>

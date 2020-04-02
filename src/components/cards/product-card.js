@@ -25,13 +25,14 @@ const ProductCard = props => {
   const handleCardMouseLeave = () => setHover(false);
   const handleIconClick = location => event => {
     event.stopPropagation();
-    
+
     window.open(location, '_blank');
   };
   const photoStyles = {
     backgroundImage: `url('${photo || noPhoto}')`,
+    backgroundSize: photo ? 'cover' : 'initial',
   };
-  let wrapperClass = 'product-card'; 
+  let wrapperClass = 'product-card';
 
   if (hover && !selected) {
     wrapperClass = `${wrapperClass} hover`;
@@ -42,28 +43,23 @@ const ProductCard = props => {
   }
 
   return (
-    <div
-      className={wrapperClass}
-      onClick={onClickCard}
-      onMouseEnter={handleCardMouseEnter}
-      onMouseLeave={handleCardMouseLeave}
-    >
+    <div className={wrapperClass} onClick={onClickCard} onMouseEnter={handleCardMouseEnter} onMouseLeave={handleCardMouseLeave}>
       <section className="product-card__content">
         <section className="product-card__content--photo" style={photoStyles} />
         <section className="product-card__content--details">
-          <p className="product-card__content--details__reference">{`Referencia ${reference}`}</p>
           <p className="product-card__content--details__title" title={title}>{title}</p>
           <p className="product-card__content--details__description" title={description}>{description}</p>
           <p className="product-card__content--details__category" title={category}>{category}</p>
+          <p className="product-card__content--details__reference">{`Referencia ${reference}`}</p>
         </section>
       </section>
       <section className="product-card__footer">
         <section className="product-card__footer--actions">
           {dwg !== '#' && (
-            <span className="product-card__footer--actions__icon dwg"  onClick={handleIconClick(dwg)} />
+            <span className="product-card__footer--actions__icon dwg" onClick={handleIconClick(dwg)} />
           )}
           {bim !== '#' && (
-            <span className="product-card__footer--actions__icon bim"  onClick={handleIconClick(bim)} />
+            <span className="product-card__footer--actions__icon bim" onClick={handleIconClick(bim)} />
           )}
           {technical !== '#' && (
             <span className="product-card__footer--actions__icon tech" onClick={handleIconClick(technical)} />
