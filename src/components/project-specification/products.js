@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { onGetProductsByItem } from '@Actions/project-specification.actions';
-import { getProduct } from '@Actions/product.action';
+import { getProduct, toggleModalProduct } from '@Actions/product.action';
 import Breadcrumbs from '@Components/basics/breadcrumbs';
 import SearchBar from '@Components/filters/search-bar';
 import Tag from '@Components/filters/tag';
@@ -76,6 +76,10 @@ const Products = () => {
   const handleSeeMoreClick = selectedProduct => () => {
     dispatch(getProduct(selectedProduct));
     toggleModal(true);
+  };
+  const handleSeeMoreClick = selectedProduct => () => {
+    dispatch(getProduct(selectedProduct));
+    dispatch(toggleModalProduct(true));
   };
 
   useEffect(() => {

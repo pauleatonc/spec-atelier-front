@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Sidebar from '@Components/project-specification/sidebar';
 import Products from '@Components/project-specification/products';
+import ModalProductInfo from '@Components/modal/modal-product-info';
 
 const ProjectSpecification = () => {
   const { selectedMenu, selectedSectionItemID } = useSelector(state => state.projectSpecification);
@@ -18,6 +19,7 @@ const ProjectSpecification = () => {
           <Products />
           )}
         </section>
+        <ModalProductInfo />
       </section>
     </div>
   );
