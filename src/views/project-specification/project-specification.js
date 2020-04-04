@@ -15,7 +15,7 @@ const ProjectSpecification = () => {
         </section>
         <section className="project-specification__content--section">
           {selectedMenu && selectedSectionItemID && (
-            <Products />
+          <Products />
           )}
         </section>
       </section>
