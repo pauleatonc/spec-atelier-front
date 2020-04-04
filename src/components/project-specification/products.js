@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { onGetProductsByItem } from '@Actions/project-specification.actions';
+import { getProduct, toggleModalProduct } from '@Actions/product.action';
 import Breadcrumbs from '@Components/basics/breadcrumbs';
 import SearchBar from '@Components/filters/search-bar';
 import Tag from '@Components/filters/tag';
@@ -72,6 +73,10 @@ const Products = () => {
   const handleLoadMoreClick = () => {
     dispatch(onGetProductsByItem({ search, filters: selectedFilters }));
   };
+  const handleSeeMoreClick = selectedProduct => () => {
+    dispatch(getProduct(selectedProduct));
+    dispatch(toggleModalProduct(true));
+  };
 
   useEffect(() => {
     setSearch('');
@@ -130,7 +135,7 @@ const Products = () => {
                 selected={Boolean(selected)}
                 title={product.name}
                 onClickCard={handleCardClick(product.id)}
-                // TODO: handle the see more link by using the onClickSeeMore property
+                onClickSeeMore={handleSeeMoreClick(product)}
               />
             );
           })}

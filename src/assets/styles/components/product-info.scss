@@ -4,27 +4,22 @@
 $height-content: 300px;
 $color-primary: rgb(66, 191, 173);
 $color-secondary: rgb(244, 130, 80);
+$padding-content: 8px 2px 8px 8px;
 
 .product-container {
   background-color: $white-color;
   border-radius: 4px;
-  min-height: 200px;
-
+  min-height: $height-content;
   & > .product-content {
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
-    min-height: $height-content;
-    display: flex;
     flex-direction: column;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
     letter-spacing: 1px;
     font-family: Lato;
     & > .header {
+      padding: $padding-content;
       display: flex;
       justify-content: space-between;
       & > .title {
@@ -37,16 +32,15 @@ $color-secondary: rgb(244, 130, 80);
       }
     }
     & > .content {
-      font-weight: normal;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: normal;
       display: flex;
+      height: $height-content;
+      padding: $padding-content;
       & > .images-container {
         display: flex;
         flex: 1;
         flex-direction: column;
         display: flex;
+        overflow-y: auto;
         & > .image-content {
           align-items: center;
           -webkit-justify-content: center;
@@ -56,16 +50,14 @@ $color-secondary: rgb(244, 130, 80);
           justify-content: center;
           align-items: center;
           flex: 1;
-          overflow-y: auto;
           &:focus {
             border: none;
             outline: none;
           }
           & > .image {
             cursor: pointer;
-            width: auto;
-            max-height: 90px;
-            display: block;
+            max-height: 80px;
+            max-width: 100%;
             &.active {
               border: 2px solid;
               border-color: $color-primary;
@@ -75,13 +67,20 @@ $color-secondary: rgb(244, 130, 80);
       }
       & > .image-selected {
         justify-content: center;
-        align-self: center;
+        align-items: center;
         flex: 3;
+        padding: 16px;
         display: flex;
+        & > .image {
+          object-fit: scale-down;
+          max-width: auto;
+          max-height: 250px;
+        }
       }
       & > .info-container {
         flex: 3;
         display: flex;
+        padding: $padding-content 0px;
         & > .info-content {
           flex-direction: column;
           flex: 1;
@@ -91,14 +90,21 @@ $color-secondary: rgb(244, 130, 80);
           color: #212121;
           & > .name {
             font-size: 12px;
-            margin: $margin-m 0px;
             font-weight: bold;
             color: #212121;
           }
           & > .long-description {
+            margin-top: $margin-s;
             font-size: 12px;
             overflow-y: auto;
-            max-height: 100%;
+            height: 100%;
+            font-size: 12px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: 1px;
+            color: #212121;
           }
           & > .brand {
             margin: $margin-m 0px;
@@ -165,9 +171,13 @@ $color-secondary: rgb(244, 130, 80);
   .product-container {
     border-radius: 0;
     height: 100%;
-    width: $width-100 !important;
-    padding: $padding-xl;
+    padding: $padding-xxs;
     & > .product-content {
+      & > .header {
+        & > .title {
+          padding: 0px $padding-m 0px 0px;
+        }
+      }
       & > .content {
         height: 100%;
         flex-direction: column;
