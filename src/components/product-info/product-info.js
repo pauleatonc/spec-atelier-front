@@ -46,7 +46,7 @@ const ProductInfo = ({ product }) => {
               <div
                 key={img.url}
                 role="button"
-                tabIndex={img.order}
+                tabIndex={img}
                 className="image-content"
                 onKeyDown={() => selectImg(img)}
                 onClick={() => selectImg(img)}
