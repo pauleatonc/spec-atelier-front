@@ -2,28 +2,36 @@
 import {
   GET_PRODUCT,
   GET_PRODUCT_ERROR,
+  TOGGLE_MODAL,
 } from '@Configurations/constants';
 
 export const initialState = {
-  product: null,
+  product: undefined,
   error: false,
   loader: true,
+  showModalProduct: false,
 };
 
 const productsReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { payload, type } = action;
+  switch (type) {
     case GET_PRODUCT:
       return {
         ...state,
-        product: action.payload.product,
-        loader: action.payload.loader,
+        product: payload.product,
+        loader: payload.loader,
       };
     case GET_PRODUCT_ERROR:
       return {
         ...state,
-        error: action.payload.error,
-        loader: action.payload.loader,
+        error: payload.error,
+        loader: payload.loader,
       };
+    case TOGGLE_MODAL:
+      return {
+        ...state,
+        showModalProduct: !state.showModalProduct,
+      }
     default:
       return state;
   }

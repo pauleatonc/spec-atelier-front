@@ -10,7 +10,7 @@ const Loading = () => (
 
 const ProductInfo = ({ product }) => {
   if (!product || !product.id) return <Loading />
-  const [selectedImg, selectImg] = useState((product.images.length && product.images[0]) || {});
+  const [selectedImg, selectImg] = useState((product?.images?.length && product.images[0]) || '');
   const onContact = e => {
     // e.stopPropagation();
     // TODO: Add code 
@@ -35,38 +35,37 @@ const ProductInfo = ({ product }) => {
         {/* Header Product */}
         <div className="header">
           <div className="title">
-            {`${product.name} / ${product.short_description}`}
+            {`${product.name} / ${product.short_desc}`}
           </div>
         </div>
         {/* Content product */}
         <div className="content" >
           {/* Images list */}
           <div className="images-container">
-            {product.images && product.images.length && product.images.map(img => (
+            {product?.images?.length && product.images.map((img, i) => (
               <div
-                key={img.order}
+                key={img}
                 role="button"
-                tabIndex={img.order}
+                tabIndex={img}
                 className="image-content"
                 onKeyDown={() => selectImg(img)}
                 onClick={() => selectImg(img)}
               >
                 <img
-                  className={`image ${img.order === selectedImg.order ? 'active' : ''}`}
-                  src={img.url}
-                  alt={`product-${product.order}`}
+                  className={`image ${img === selectedImg ? 'active' : ''}`}
+                  src={img}
+                  alt={`product-${img}`}
                 />
               </div>
             ))}
           </div>
           {/* Image primay */}
           <div className="image-selected">
-            <div className="image" >
-              <img
-                src={selectedImg.url}
-                alt={`product-${product.order}`}
-              />
-            </div>
+            <img
+              className="image"
+              src={selectedImg}
+              alt={`product-${selectedImg}`}
+            />
           </div>
           {/* Info Product */}
           <div className="info-container">
@@ -75,10 +74,10 @@ const ProductInfo = ({ product }) => {
                 {product.reference}
               </div>
               <div className="long-description">
-                {product.long_description}
+                {product.long_desc}
               </div>
               <div className="brand">
-                {`${product.system.name}: ${product.brand.name}`}
+                {`${product?.system?.name || ''}: ${product?.brand?.name || ''}`}
               </div>
 
               <div className="actions">
@@ -153,5 +152,4 @@ const product = {
 ProductInfo.defaultProps = {
   product
 }
-
 export default ProductInfo;
