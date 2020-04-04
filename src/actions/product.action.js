@@ -1,6 +1,7 @@
 import {
   GET_PRODUCT,
   GET_PRODUCT_ERROR,
+  TOGGLE_MODAL,
 } from '@Configurations/constants';
 
 import { getLocalStorage } from '@Helpers/localstorage.helper';
@@ -16,12 +17,15 @@ export const get = async url => fetch(url, {
   },
 });
 
+export const toggleModalProduct = payload => ({ payload, type: TOGGLE_MODAL });
+
 export const getProduct = ({ id }) => async dispatch => {
   try {
-    const url = getEndPoint({ service: `product/${id}` });
+    const url = getEndPoint({ service: `products/${id}` });
     return get(url)
       .then(response => response.json())
-      .then(payload => dispatchFormat(GET_PRODUCT, payload));
+      .then(payload => dispatch(dispatchFormat(GET_PRODUCT, payload))
+      );
   } catch (error) {
     return dispatch(dispatchFormat(GET_PRODUCT_ERROR, {
       error: true,
