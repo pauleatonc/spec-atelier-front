@@ -5,3 +5,4 @@ export { default as recoverPasswordReducer } from './recover_password.reducer';
 export { default as newPasswordReducer } from './new_password.reducer';
 export { default as projectsReducer } from './projects.reducer';
 export { default as projectSpecificationReducer } from './project-specification.reducer';
+export { default as productsReducer } from './product.reducer';
