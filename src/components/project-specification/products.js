@@ -8,8 +8,6 @@ import Tag from '@Components/filters/tag';
 import SnackBar from '@Components/basics/snack-bar';
 import ProductCard from '@Components/cards/product-card';
 import LoadButton from '@Components/buttons/load-button';
-import Modal from '@Components/modal/modal';
-import ProductInfo from '@Components/product-info/product-info';
 
 /**
  * The Products' component.
@@ -24,14 +22,10 @@ const Products = () => {
     productsTotal: total,
     selectedSectionItemID,
   } = useSelector(state => state.projectSpecification);
-  const {
-    product,
-  } = useSelector(state => state.products);
   const [showSnackBar, setShowSnackBar] = useState(false);
   const [search, setSearch] = useState('');
   const [selectedFilters, setSelectedFilters] = useState(['all']);
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [modalProduct, toggleModal] = useState(false);
   const handleSearchChange = event => {
     setSearch(event.target.value);
     dispatch(onGetProductsByItem({ search: event.target.value, filters: selectedFilters }));
@@ -139,9 +133,6 @@ const Products = () => {
               />
             );
           })}
-          <Modal isOpen={modalProduct} toggle={toggleModal} size="md">
-            <ProductInfo product={product} />
-          </Modal>
         </section>
       </section>
       {nextPage !== null && (
