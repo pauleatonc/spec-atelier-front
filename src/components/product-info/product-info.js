@@ -42,19 +42,19 @@ const ProductInfo = ({ product }) => {
         <div className="content" >
           {/* Images list */}
           <div className="images-container">
-            {product?.images?.length && product.images.map((img, i) => (
+            {product?.images?.length && product.images.map(img => (
               <div
-                key={img}
+                key={img.url}
                 role="button"
-                tabIndex={img}
+                tabIndex={img.order}
                 className="image-content"
                 onKeyDown={() => selectImg(img)}
                 onClick={() => selectImg(img)}
               >
                 <img
-                  className={`image ${img === selectedImg ? 'active' : ''}`}
-                  src={img}
-                  alt={`product-${img}`}
+                  className={`image ${img.order === selectedImg.order ? 'active' : ''}`}
+                  src={img.url}
+                  alt={`product-${img.order}`}
                 />
               </div>
             ))}
@@ -63,8 +63,8 @@ const ProductInfo = ({ product }) => {
           <div className="image-selected">
             <img
               className="image"
-              src={selectedImg}
-              alt={`product-${selectedImg}`}
+              src={selectedImg.url}
+              alt={`product-${selectedImg.id}`}
             />
           </div>
           {/* Info Product */}
@@ -112,16 +112,16 @@ ProductInfo.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    short_description: PropTypes.string.isRequired,
-    long_description: PropTypes.string.isRequired,
+    short_desc: PropTypes.string,
+    long_desc: PropTypes.string,
     system: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
+      name: PropTypes.string,
+      id: PropTypes.number,
     }),
     reference: PropTypes.string.isRequired,
     brand: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
+      id: PropTypes.number,
+      name: PropTypes.string,
     }),
     dwg_url: PropTypes.string.isRequired,
     bim_url: PropTypes.string.isRequired,
@@ -138,8 +138,8 @@ ProductInfo.propTypes = {
 const product = {
   id: 0,
   name: '',
-  short_description: '',
-  long_description: '',
+  short_desc: '',
+  long_desc: '',
   system: {},
   reference: '',
   brand: {},
