@@ -1,25 +1,41 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { toggleModalProduct } from '@Actions/product.action';
+import { toggleModalProduct } from '@Actions/product.actions';
 
 const Modal = ({ isOpen, size, children }) => {
+  if (!isOpen) return null;
   const dispatch = useDispatch();
   const onToogle = () => dispatch(toggleModalProduct());
+  const refModal = useRef(null);
+  const { body } = document;
 
-  useEffect(() => {
-    const { body } = document;
-    if (isOpen) body.style['overflow-y'] = 'hidden';
-    return () => {
-      body.style['overflow-y'] = 'scroll';
-    };
-  }, [isOpen]);
-  if (!isOpen) return null;
+  const outsideClick = ref => {
+    const handleClickOutside = event => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        onToogle();
+      }
+    }
+    // Click Outside Modal
+    useEffect(() => {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    });
+
+    // Disable Scroll Body when is Open
+    useEffect(() => {
+      if (isOpen) body.style['overflow-y'] = 'hidden';
+      return () => {
+        body.style['overflow-y'] = 'scroll';
+      };
+    }, [isOpen]);
+  }
+  outsideClick(refModal);
   return (
     <div tabIndex="-1" className="modal" role="dialog">
-      <div className="modal-dialog" role="document">
-        <div className={`modal-container ${size}`}>
+      <div className="modal-dialog">
+        <div ref={refModal} className={`modal-container ${size}`}>
           <div
             className="button-close"
             role="button"
