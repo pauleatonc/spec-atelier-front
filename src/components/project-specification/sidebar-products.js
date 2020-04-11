@@ -6,8 +6,8 @@ const SidebarProducts = props => {
 
   const [sections, getSections] = useState(false);
 
-  const item = (type, translation) => (
-    <div key={type} className='sidebar-products__item' onClick={() => props.itemClick(type)} >
+  const item = (id, type, translation) => (
+    <div key={type} className='sidebar-products__item' onClick={() => props.itemClick(id)} >
       <span className={`sidebar-products__item--icon ${type} ${props.activeItem == type ? 'active' : ''}`} />
       <h6 className="sidebar-products__item--title">{translation}</h6>
     </div>
@@ -32,7 +32,7 @@ const SidebarProducts = props => {
         sections &&
         <div className="sidebar-products">
           <div className="sidebar-products-sections">
-            {sections.map(section => item(section.eng_name, section.name))}
+            {sections.map(section => item(section.id, section.eng_name, section.name))}
           </div>
         </div>
       }

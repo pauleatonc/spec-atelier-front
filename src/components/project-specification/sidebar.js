@@ -14,7 +14,7 @@ const Sidebar = props => {
   const dispatch = useDispatch();
 
   const SectionClickHandler = type => {
-    const endpoint = getEndPoint({ service: `general/items_by_section?section=${type}` });
+    const endpoint = getEndPoint({ service: `sections/${type}/items` });
     fetch(`${endpoint}`, {
       method: 'GET',
       headers: {
