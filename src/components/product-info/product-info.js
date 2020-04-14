@@ -11,17 +11,17 @@ const Loading = () => (
 const ProductInfo = ({ product }) => {
   if (!product || !product.id) return <Loading />
   const [selectedImg, selectImg] = useState((product?.images?.length && product.images[0]) || '');
-  const onContact = e => {
-    // e.stopPropagation();
-    // TODO: Add code 
-  };
+  const onSelectImg = img => () => selectImg(img);
+  
+  // TODO: This will go to contact view.
+  const onContact = () => {};
 
+  // Download documents 
   const handleIconClick = documents => () => {
     documents.forEach(async doc => {
       const link = document.createElement("a");
       link.download = doc;
       link.href = doc;
-      // TODO: test
       link.target = '_blank';
       link.id = 'doc';
       document.body.appendChild(link);
@@ -33,42 +33,42 @@ const ProductInfo = ({ product }) => {
     <div className="product-container">
       <div className="product-content">
         {/* Header Product */}
-        <div className="header">
+        <section className="header">
           <div className="title">
             {`${product.name} / ${product.short_desc}`}
           </div>
-        </div>
+        </section>
         {/* Content product */}
-        <div className="content" >
+        <section className="content">
           {/* Images list */}
-          <div className="images-container">
+          <section className="images-container">
             {product?.images?.length && product.images.map(img => (
               <div
                 key={img.url}
                 role="button"
                 tabIndex={img.order}
                 className="image-content"
-                onKeyDown={() => selectImg(img)}
-                onClick={() => selectImg(img)}
+                onKeyDown={onSelectImg(img)}
+                onClick={onSelectImg(img)}
               >
                 <img
                   className={`image ${img.order === selectedImg.order ? 'active' : ''}`}
-                  src={img.url}
+                  src={img}
                   alt={`product-${img.order}`}
                 />
               </div>
             ))}
-          </div>
-          {/* Image primay */}
-          <div className="image-selected">
+          </section>
+          {/* Image primary */}
+          <section className="image-selected">
             <img
               className="image"
-              src={selectedImg.url}
+              src={selectedImg}
               alt={`product-${selectedImg.id}`}
             />
-          </div>
+          </section>
           {/* Info Product */}
-          <div className="info-container">
+          <section className="info-container">
             <div className="info-content">
               <div className="name">
                 {product.reference}
@@ -80,9 +80,14 @@ const ProductInfo = ({ product }) => {
                 {`${product?.system?.name || ''}: ${product?.brand?.name || ''}`}
               </div>
 
-              <div className="actions">
+              <section className="actions">
                 <div>
-                  <input type="button" value="Contactar" className="button-contact" />
+                  <input 
+                    type="button" 
+                    value="Contactar" 
+                    className="button-contact"
+                    onClick={onContact}
+                  />
                 </div>
                 <div className="icons">
                   <span
@@ -98,10 +103,10 @@ const ProductInfo = ({ product }) => {
                     onClick={handleIconClick(product.spec_pdf_url)}
                   />
                 </div>
-              </div>
+              </section>
             </div>
-          </div>
-        </div>
+          </section>
+        </section>
       </div>
     </div>
   );
@@ -114,24 +119,13 @@ ProductInfo.propTypes = {
     name: PropTypes.string.isRequired,
     short_desc: PropTypes.string,
     long_desc: PropTypes.string,
-    system: PropTypes.shape({
-      name: PropTypes.string,
-      id: PropTypes.number,
-    }),
+    system: PropTypes.object,
     reference: PropTypes.string.isRequired,
-    brand: PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    }),
+    brand: PropTypes.object,
     dwg_url: PropTypes.string.isRequired,
     bim_url: PropTypes.string.isRequired,
     spec_pdf_url: PropTypes.arrayOf(PropTypes.string).isRequired,
-    images: PropTypes.arrayOf(
-      PropTypes.shape({
-        order: PropTypes.number,
-        url: PropTypes.string,
-      })
-    ),
+    images: PropTypes.array,
   })
 };
 
