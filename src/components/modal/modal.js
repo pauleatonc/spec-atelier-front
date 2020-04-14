@@ -3,13 +3,17 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { toggleModalProduct } from '@Actions/product.actions';
+import { createPortal } from 'react-dom';
+
+const modalRoot = document.getElementById('modal');
+const element = document.createElement('div');
+const { body } = document;
 
 const Modal = ({ isOpen, size, children }) => {
   if (!isOpen) return null;
   const dispatch = useDispatch();
   const onToogle = () => dispatch(toggleModalProduct());
   const refModal = useRef(null);
-  const { body } = document;
 
   const outsideClick = ref => {
     const handleClickOutside = event => {
@@ -19,8 +23,8 @@ const Modal = ({ isOpen, size, children }) => {
     }
     // Click Outside Modal
     useEffect(() => {
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
+      modalRoot.addEventListener("click", handleClickOutside);
+      return () => modalRoot.removeEventListener("click", handleClickOutside);
     });
 
     // Disable Scroll Body when is Open
@@ -32,7 +36,14 @@ const Modal = ({ isOpen, size, children }) => {
     }, [isOpen]);
   }
   outsideClick(refModal);
-  return (
+
+  // We append the created div to the div#modal
+  useEffect(() => {
+    modalRoot.appendChild(element);
+    return () => modalRoot.removeChild(element);
+  });
+
+  return createPortal(
     <div tabIndex="-1" className="modal" role="dialog">
       <div className="modal-dialog">
         <div ref={refModal} className={`modal-container ${size}`}>
@@ -48,18 +59,18 @@ const Modal = ({ isOpen, size, children }) => {
           {children}
         </div >
       </div>
-    </div>
+    </div>,
+    element
   );
 };
 
 Modal.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  children: PropTypes.element,
+  children: PropTypes.element.isRequired,
 };
 
 Modal.defaultProps = {
   size: 'md',
-  children: null,
-}
+};
 
 export default Modal;
