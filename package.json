@@ -1,17 +1,17 @@
 {
 	"name": "specatelier-frontend",
 	"version": "1.0.0",
-	"description": "SpectAtelier - Software para Arquitectos",
+	"description": "SpecAtelier - Software para Arquitectos",
 	"private": true,
 	"engines": {
 		"node": "12.10.0",
 		"npm": "6.10.3"
 	},
 	"scripts": {
-		"build:prod": "webpack -p --mode production --env.NODE_ENV=production",
-		"start:int": "webpack-dev-server --mode development --env.NODE_ENV=integration",
+		"build:prod": "eval $(grep -v '^#' .env.prod | xargs) webpack -p --mode production --env.NODE_ENV=production",
+		"start:int": "eval $(grep -v '^#' .env.stage | xargs) webpack-dev-server --mode development --env.NODE_ENV=integration",
 		"start:dev": "concurrently \"npm run stubby\" \"npm run dev\"",
-		"dev": "webpack-dev-server --mode development --env.NODE_ENV=development",
+		"dev": "eval $(grep -v '^#' .env.dev | xargs) webpack-dev-server --mode development --env.NODE_ENV=development",
 		"stubby": "stubby -w -d mocks/stubby.json",
 		"start": "node ./server.js",
 		"heroku-postbuild": "npm run build:prod",
@@ -25,8 +25,7 @@
 		"type": "git",
 		"url": "git+ssh://git@github.com/Proskynete/specatelier-frontend.git"
 	},
-	"author": "Eduardo Alvarez <eduardo.a1993@gmail.com>",
-	"license": "MIT",
+	"author": "SpecAtelier <contacto@specatelier.cl>",
 	"bugs": {
 		"url": "https://github.com/Proskynete/specatelier-frontend/issues"
 	},
@@ -36,6 +35,7 @@
 		"babel-jest": "^24.9.0",
 		"babel-plugin-styled-components": "^1.10.7",
 		"concurrently": "^5.0.0",
+		"copy-webpack-plugin": "^5.1.1",
 		"css-loader": "^3.2.0",
 		"enzyme": "^3.10.0",
 		"enzyme-adapter-react-16": "^1.14.0",
@@ -57,6 +57,7 @@
 		"mini-css-extract-plugin": "^0.8.0",
 		"node-sass": "^4.13.0",
 		"prettier": "1.18.2",
+		"redux-devtools-extension": "^2.13.8",
 		"redux-mock-store": "^1.5.3",
 		"sass-loader": "^8.0.0",
 		"stubby": "^4.1.1",
@@ -84,6 +85,7 @@
 		"react-router": "^5.1.2",
 		"react-router-dom": "^5.1.2",
 		"react-slick": "^0.25.2",
+		"react-transition-group": "^4.3.0",
 		"redux": "^4.0.4",
 		"redux-thunk": "^2.3.0",
 		"resolve-url-loader": "^3.1.1",

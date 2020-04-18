@@ -1,11 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
-/**
- * Presenter actions
- */
-export const APP_PRESENTER = 'APP_PRESENTER';
-export const LOGIN_PRESENTER = 'LOGIN_PRESENTER';
-
 /**
  * Login actions
  */
@@ -48,12 +40,3 @@ export const GET_PROJECTS_ERROR = 'GET_PROJECTS_ERROR';
 export const GET_ONE_PROJECT = 'GET_ONE_PROJECT';
 export const EDIT_PROJECT = 'EDIT_PROJECT';
 export const DELETE_PROJECT = 'DELETE_PROJECT';
-
-/**
- * Project Specification's type actions
- */
-export const GET_PRODUCTS_BY_ITEM = 'GET_PRODUCTS_BY_ITEM';
-export const GET_PRODUCTS_BY_ITEM_ERROR = 'GET_PRODUCTS_BY_ITEM_ERROR';
-export const GET_PRODUCTS_BY_ITEM_SUCCESS = 'GET_PRODUCTS_BY_ITEM_SUCCESS';
-export const SELECT_MENU = 'SELECT_MENU';
-export const SELECT_SECTION_ITEM = 'SELECT_SECTION_ITEM';
