@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import arrowLeftSource from '../../assets/images/icons/arrow-left.svg';
 
 export const Root = styled.div`
   align-items: center;
@@ -44,7 +45,7 @@ export const Underline = styled.div`
 `;
 
 export const ArrowLeft = styled.span`
-  background-image: url('/src/assets/images/icons/arrow-left.svg');
+  background-image: url('${arrowLeftSource}');
   background-position: center center;
   background-repeat: no-repeat;
   display: inline-block;

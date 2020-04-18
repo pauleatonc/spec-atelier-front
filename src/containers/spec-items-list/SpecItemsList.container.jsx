@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onShowSectionsListSuccess } from '../spec-sections-list/SpecSectionsList.actions';
+import { onShowSpecSectionsListSuccess } from '../spec-sections-list/SpecSectionsList.actions';
 import { onGetProductsByItem } from '../spec-products-list/SpecProductsList.actions';
 import Breadcrumbs from '../../components/basics/Breadcrumbs';
 import { Root, Header, Body, Item } from './SpecItemsList.styles';
@@ -11,7 +11,7 @@ import { Root, Header, Body, Item } from './SpecItemsList.styles';
 const SpecItemsList = () => {
   const { collection: items, show } = useSelector(state => state.specItemsList);
   const dispatch = useDispatch();
-  const handleShowSectionsListClick = () => dispatch(onShowSectionsListSuccess());
+  const handleShowSectionsListClick = () => dispatch(onShowSpecSectionsListSuccess());
   const handleItemClick = itemID => () => dispatch(onGetProductsByItem({ itemID })); 
 
   if (!show) {

@@ -16,7 +16,7 @@ export const onGetSections = () => async dispatch => {
   }
 };
 
-export const HIDE_SECTIONS_LIST_SUCCESS = 'HIDE_SECTIONS_LIST_SUCCESS';
-export const SHOW_SECTIONS_LIST_SUCCESS = 'SHOW_SECTIONS_LIST_SUCCESS';
-export const onHideSectionsListSuccess = () => ({ type: HIDE_SECTIONS_LIST_SUCCESS });
-export const onShowSectionsListSuccess = () => ({ type: SHOW_SECTIONS_LIST_SUCCESS });
+export const HIDE_SPEC_SECTIONS_LIST_SUCCESS = 'HIDE_SPEC_SECTIONS_LIST_SUCCESS';
+export const SHOW_SPEC_SECTIONS_LIST_SUCCESS = 'SHOW_SPEC_SECTIONS_LIST_SUCCESS';
+export const onHideSpecSectionsListSuccess = () => ({ type: HIDE_SPEC_SECTIONS_LIST_SUCCESS });
+export const onShowSpecSectionsListSuccess = () => ({ type: SHOW_SPEC_SECTIONS_LIST_SUCCESS });

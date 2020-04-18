@@ -17,7 +17,7 @@ export const onGetSectionItems = ({ sectionID }) => async dispatch => {
   }
 };
 
-export const HIDE_ITEMS_LIST_SUCCESS = 'HIDE_ITEMS_LIST_SUCCESS';
-export const SHOW_ITEMS_LIST_SUCCESS = 'SHOW_ITEMS_LIST_SUCCESS';
-export const onHideItemsListSuccess = () => ({ type: HIDE_ITEMS_LIST_SUCCESS });
-export const onShowItemsListSuccess = () => ({ type: SHOW_ITEMS_LIST_SUCCESS });
+export const HIDE_SPEC_ITEMS_LIST_SUCCESS = 'HIDE_SPEC_ITEMS_LIST_SUCCESS';
+export const SHOW_SPEC_ITEMS_LIST_SUCCESS = 'SHOW_SPEC_ITEMS_LIST_SUCCESS';
+export const onHideSpecItemsListSuccess = () => ({ type: HIDE_SPEC_ITEMS_LIST_SUCCESS });
+export const onShowSpecItemsListSuccess = () => ({ type: SHOW_SPEC_ITEMS_LIST_SUCCESS });

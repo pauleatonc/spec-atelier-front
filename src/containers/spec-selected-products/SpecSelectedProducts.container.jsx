@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onShowSectionsListSuccess } from '../spec-sections-list/SpecSectionsList.actions';
-import { onShowItemsListSuccess } from '../spec-items-list/SpecItemsList.actions';
+import { onShowSpecSectionsListSuccess } from '../spec-sections-list/SpecSectionsList.actions';
+import { onShowSpecItemsListSuccess } from '../spec-items-list/SpecItemsList.actions';
 import Breadcrumbs from '../../components/basics/Breadcrumbs';
 import { Root, Header, Body } from './SpecSelectedProducts.styles'
 
@@ -11,8 +11,8 @@ import { Root, Header, Body } from './SpecSelectedProducts.styles'
 const SpecSelectedProducts = () => {
   const { show } = useSelector(state => state.specSelectedProducts);
   const dispatch = useDispatch();
-  const handleShowSectionsListClick = () => dispatch(onShowSectionsListSuccess());
-  const handleShowItemsListClick = () => dispatch(onShowItemsListSuccess());
+  const handleShowSectionsListClick = () => dispatch(onShowSpecSectionsListSuccess());
+  const handleShowItemsListClick = () => dispatch(onShowSpecItemsListSuccess());
 
   if (!show) {
     return null;

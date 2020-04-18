@@ -1,11 +1,11 @@
-import { HIDE_SECTIONS_LIST_SUCCESS, SHOW_SECTIONS_LIST_SUCCESS } from '../spec-sections-list/SpecSectionsList.actions';
-import { SHOW_ITEMS_LIST_SUCCESS } from '../spec-items-list/SpecItemsList.actions';
+import { HIDE_SPEC_SECTIONS_LIST_SUCCESS, SHOW_SPEC_SECTIONS_LIST_SUCCESS } from '../spec-sections-list/SpecSectionsList.actions';
+import { SHOW_SPEC_ITEMS_LIST_SUCCESS } from '../spec-items-list/SpecItemsList.actions';
 import {
   GET_PRODUCTS_BY_ITEM,
   GET_PRODUCTS_BY_ITEM_ERROR,
   GET_PRODUCTS_BY_ITEM_SUCCESS,
-  HIDE_PRODUCTS_LIST_SUCCESS,
-  SHOW_PRODUCTS_LIST_SUCCESS,
+  HIDE_SPEC_PRODUCTS_LIST_SUCCESS,
+  SHOW_SPEC_PRODUCTS_LIST_SUCCESS,
 } from './SpecProductsList.actions';
 
 const specProductsListState = {
@@ -44,14 +44,14 @@ const specProductsListReducer = (state = specProductsListState, { payload, type 
         total: payload.total,
       };
     }
-    case HIDE_PRODUCTS_LIST_SUCCESS:
-    case HIDE_SECTIONS_LIST_SUCCESS:
+    case HIDE_SPEC_PRODUCTS_LIST_SUCCESS:
+    case HIDE_SPEC_SECTIONS_LIST_SUCCESS:
     case GET_PRODUCTS_BY_ITEM_ERROR:
-    case SHOW_ITEMS_LIST_SUCCESS:
-    case SHOW_SECTIONS_LIST_SUCCESS: {
+    case SHOW_SPEC_ITEMS_LIST_SUCCESS:
+    case SHOW_SPEC_SECTIONS_LIST_SUCCESS: {
       return { ...state, loading: false, show: false };
     }
-    case SHOW_PRODUCTS_LIST_SUCCESS: {
+    case SHOW_SPEC_PRODUCTS_LIST_SUCCESS: {
       return { ...state, loading: false, show: true };
     }
     default: {
