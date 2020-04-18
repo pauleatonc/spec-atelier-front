@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { toggleModalProduct } from '@Actions/product.actions';
 import { createPortal } from 'react-dom';
 
-
 const modalRoot = document.getElementById('modal');
 const element = document.createElement('div');
 const { body } = document;
