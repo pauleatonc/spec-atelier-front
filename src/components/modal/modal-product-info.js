@@ -44,7 +44,7 @@ const ModalProductInfo = () => {
           <section className="content">
             {/* Images list */}
             <section className="images-container">
-              {product?.images?.length && product.images.map((img = {}) => (
+              {!!product?.images?.length && product.images.map((img = {}) => (
                 <div
                   key={img.url}
                   role="button"
