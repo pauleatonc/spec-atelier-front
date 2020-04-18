@@ -5,8 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const ENVIRONMENT = process.env.APP_ENV;
-
 module.exports = env => {
   return {
     entry: {
@@ -55,34 +53,19 @@ module.exports = env => {
             loader: 'file-loader',
           },
         },
-        {
-          test: /\.html$/,
-          use: [
-            {
-              loader: 'html-loader',
-            },
-          ],
-        },
       ],
     },
     externals: ['window'],
     plugins: [
       new webpack.ProgressPlugin(),
-      new Dotenv({
-        path: './src/config/.env',
-        safe: true,
-        defaults: false,
-        systemvars: true,
-      }),
+      new Dotenv({ systemvars: true }),
       new HtmlWebpackPlugin({
         hash: true,
         inject: true,
         template: path.resolve(__dirname, 'static', 'index.html'),
       }),
-      new MiniCssExtractPlugin({
-        filename: 'styles.css',
-      }),
-      ENVIRONMENT === 'production' && new CopyWebpackPlugin([{ from: './static/images', to: './images' }]),
+      new MiniCssExtractPlugin({ filename: 'styles.css' }),
+      new CopyWebpackPlugin([{ from: './static/images', to: './images' }]),
       new webpack.DefinePlugin({ ENVIRONMENT: JSON.stringify(env.NODE_ENV) }),
     ],
   };
