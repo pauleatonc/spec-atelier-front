@@ -1,11 +1,9 @@
-/* eslint-disable import/imports-first */
-/* eslint-disable import/no-unresolved */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getLocalStorage } from '@Helpers/localstorage.helper';
-import { presenterAction, logoutAction } from '@Actions';
+import { logoutAction } from '@Actions';
 import FULL_LOGO from '@Assets/images/full_logo.png';
 
 const handleShowLateralMenu = () => {
@@ -14,7 +12,7 @@ const handleShowLateralMenu = () => {
 };
 
 const NavBarTopMobile = props => {
-	const { presenterMethod, logoutMethod } = props;
+	const { logoutMethod } = props;
 
 	return (
 		<ul className="navbar__inner__section--mobile">
@@ -35,7 +33,6 @@ const NavBarTopMobile = props => {
 									to="/projects"
 									className="lateral_menu__inner__content__item__link"
 									data-view="projects"
-									onClick={() => presenterMethod('app')}
 								>
 									Proyectos
 								</Link>
@@ -46,7 +43,6 @@ const NavBarTopMobile = props => {
 								to="/products"
 								className="lateral_menu__inner__content__item__link"
 								data-view="products"
-								onClick={() => presenterMethod('app')}
 							>
 								Productos
 							</Link>
@@ -56,7 +52,6 @@ const NavBarTopMobile = props => {
 								to="/brands"
 								className="lateral_menu__inner__content__item__link"
 								data-view="brands"
-								onClick={() => presenterMethod('app')}
 							>
 								Marcas
 							</Link>
@@ -69,7 +64,6 @@ const NavBarTopMobile = props => {
 										to="/registration"
 										className="navbar__inner__section__item__link button--registration"
 										data-view="registration"
-										onClick={() => presenterMethod('app')}
 									>
 										Regístrate
 									</Link>
@@ -79,7 +73,6 @@ const NavBarTopMobile = props => {
 										to="/login"
 										className="navbar__inner__section__item__link button--login"
 										data-view="login"
-										onClick={() => presenterMethod('app')}
 									>
 										<i className="fas fa-user-circle" />
 										Iniciar sesión
@@ -115,14 +108,12 @@ const NavBarTopMobile = props => {
 };
 
 NavBarTopMobile.propTypes = {
-	presenterMethod: PropTypes.func.isRequired,
 	logoutMethod: PropTypes.func.isRequired,
 };
 
 export default connect(
 	state => state,
 	dispatch => ({
-		presenterMethod: presenterAction(dispatch),
 		logoutMethod: logoutAction(dispatch),
 	}),
 )(NavBarTopMobile);

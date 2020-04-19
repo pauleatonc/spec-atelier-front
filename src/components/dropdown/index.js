@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { presenterAction, logoutAction } from '@Actions';
+import { logoutAction } from '@Actions';
 
 const handleShowHiddenDropdown = (method, option) => {
 	method(!option);
 };
 
 const Dropdown = props => {
-	const { presenterMethod, logoutMethod } = props;
+	const { logoutMethod } = props;
 	const [showOtions, setShowOtions] = useState(false);
 
 	return (
@@ -24,11 +24,7 @@ const Dropdown = props => {
 			</div>
 			<div className={`dropdown ${showOtions ? ' show' : ''}`}>
 				<div className="dropdown__inner">
-					<Link
-						to="/profile"
-						className="dropdown__inner__link"
-						onClick={() => presenterMethod('app')}
-					>
+					<Link className="dropdown__inner__link" to="/profile">
 						Perfil
 					</Link>
 
@@ -42,14 +38,12 @@ const Dropdown = props => {
 };
 
 Dropdown.propTypes = {
-	presenterMethod: PropTypes.func.isRequired,
 	logoutMethod: PropTypes.func.isRequired,
 };
 
 export default connect(
 	state => state,
 	dispatch => ({
-		presenterMethod: presenterAction(dispatch),
 		logoutMethod: logoutAction(dispatch),
 	}),
 )(Dropdown);

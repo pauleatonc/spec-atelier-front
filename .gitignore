@@ -5,8 +5,4 @@ build/
 coverage/
 
 .env
-package-lock.json
-src/assets/images/.DS_Store
-src/assets/.DS_Store
-.DS_Store
-src/.DS_Store
+**/.DS_Store
