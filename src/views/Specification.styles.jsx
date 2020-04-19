@@ -6,6 +6,7 @@ export const Root = styled.div`
   grid-template-rows: 115px auto;
   height: 100%;
   margin: 0;
+  overflow: auto;
   padding: 0;
   width: 100%;
 `;
@@ -19,6 +20,7 @@ export const Header = styled.header`
 export const Main = styled.div`
   display: flex;
   justify-content: center;
+  padding: 0 0 10px;
   position: relative;
   width: 100%;
 `;
