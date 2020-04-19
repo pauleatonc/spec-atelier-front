@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Transition } from 'react-transition-group';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
-import { onGetProductsByItem } from './SpecProductsList.actions';
+import { onGetProductsByItem } from './SpecProducts.actions';
 import SearchBar from '../../components/filters/SearchBar';
 import Tag from '../../components/filters/Tag';
 import ProductCard from '../../components/cards/ProductCard';
 import LoadButton from '../../components/buttons/LoadButton';
-import { Root, Header, HeaderSpace, HeaderSearch, HeaderFilters, Body, Total, Cards, LoadMore } from './SpecProductsList.styles';
+import { Root, Header, HeaderSpace, HeaderSearch, HeaderFilters, Body, Total, Cards, LoadMore } from './SpecProducts.styles';
 
 const TRANSITION_DURATION = 150;
 const defaultStyle = {
@@ -25,15 +25,15 @@ const transitionStyles = {
  * The SpecProductsList's container.
  */
 const SpecProductsList = () => {
-  const { selectedItemID } = useSelector(state => state.specItemsList);
-  const { filters, nextPage, collection: products = [], show, total } = useSelector(state => state.specProductsList);
+  const { selectedItemID } = useSelector(state => state.specProductsItems);
+  const { filters, nextPage, collection: products = [], show, total } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const [selectedFilters, setSelectedFilters] = useState(['all']);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const handleSearchChange = event => {
     setSearch(event.target.value);
-    dispatch(onGetProductsByItem({ search: event.target.value, filters: selectedFilters }));
+    dispatch(onGetProductsByItem({ itemID: selectedItemID, search: event.target.value, filters: selectedFilters }));
   };
   const handleFilterClick = currentFilterTag => () => {
     const hasFilterTag = selectedFilters.find(filterTag => filterTag === currentFilterTag);
@@ -54,7 +54,7 @@ const SpecProductsList = () => {
     }
 
     setSelectedFilters(updatedFilters);
-    dispatch(onGetProductsByItem({ search, filters: updatedFilters }));
+    dispatch(onGetProductsByItem({ search, itemID: selectedItemID, filters: updatedFilters }));
   };
   const handleCardClick = currentProductID => () => {
     const hasProduct = selectedProducts.find(productID => productID === currentProductID);
@@ -70,14 +70,16 @@ const SpecProductsList = () => {
     setSelectedProducts(updatedProducts);
   };
   const handleLoadMoreClick = () => {
-    dispatch(onGetProductsByItem({ search, filters: selectedFilters }));
+    dispatch(onGetProductsByItem({ search, itemID: selectedItemID, filters: selectedFilters }));
   };
 
   useEffect(() => {
-    setSearch('');
-    setSelectedFilters(['all']);
-    setSelectedProducts([]);
-  }, [selectedItemID]);
+    if (!selectedItemID || !show) {
+      return;
+    }
+
+    dispatch(onGetProductsByItem({ itemID: selectedItemID }));
+  }, [show, selectedItemID]);
 
   return (
     <Transition in={show} timeout={TRANSITION_DURATION}>

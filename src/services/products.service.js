@@ -2,14 +2,14 @@ import { API_BASE_URL } from '../config/constants/environment';
 import { getJsonRequest } from '../modules/requests';
 
 /**
- * Gets the list of sections available.
+ * Gets the list of products' sections available.
  */
-export const getSections = () => getJsonRequest(`${API_BASE_URL}/api/sections`);
+export const getProductsSections = () => getJsonRequest(`${API_BASE_URL}/api/sections`);
 
 /**
- * Gets the list of items by the given section.
+ * Gets the list of products' items by the given section.
  */
-export const getItems = sectionID => getJsonRequest(`${API_BASE_URL}/api/sections/${sectionID}/items`);
+export const getProductsItems = sectionID => getJsonRequest(`${API_BASE_URL}/api/sections/${sectionID}/items`);
 
 /**
  * Gets a list of products by the given item. 

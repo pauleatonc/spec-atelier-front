@@ -4,10 +4,10 @@ import recoverPasswordReducer from '../../reducers/recover_password.reducer';
 import newPasswordReducer from '../../reducers/new_password.reducer';
 import projectsReducer from '../../reducers/projects.reducer';
 import alertReducer from '../../containers/alert/Alert.reducer';
-import specSectionsListReducer from '../../containers/spec-sections-list/SpecSectionsList.reducer';
-import specItemsListReducer from '../../containers/spec-items-list/SpecItemsList.reducer';
-import specSelectedProductsReducer from '../../containers/spec-selected-products/SpecSelectedProducts.reducer';
-import specProductsListReducer from '../../containers/spec-products-list/SpecProductsList.reducer';
+import specProductsSectionsReducer from '../../containers/spec-products-sections/SpecProductsSections.reducer';
+import specProductsItemsReducer from '../../containers/spec-products-items/SpecProductsItems.reducer';
+import specDocumentPreviewReducer from '../../containers/spec-document-preview/SpecDocumentPreview.reducer';
+import specProductsReducer from '../../containers/spec-products/SpecProducts.reducer';
 
 export default combineReducers({
 	login: loginReducer,
@@ -15,8 +15,8 @@ export default combineReducers({
 	newPassword: newPasswordReducer,
   projects: projectsReducer,
   alert: alertReducer,
-  specSectionsList: specSectionsListReducer,
-  specItemsList: specItemsListReducer,
-  specSelectedProducts: specSelectedProductsReducer,
-  specProductsList: specProductsListReducer,
+  specProductsSections: specProductsSectionsReducer,
+  specProductsItems: specProductsItemsReducer,
+  specDocumentPreview: specDocumentPreviewReducer,
+  specProducts: specProductsReducer,
 });

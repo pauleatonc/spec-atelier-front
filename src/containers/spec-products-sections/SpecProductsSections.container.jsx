@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Transition } from 'react-transition-group';
-import { onGetSections } from './SpecSectionsList.actions';
-import { onGetSectionItems } from '../spec-items-list/SpecItemsList.actions';
+import { onGetProductsSections } from './SpecProductsSections.actions';
+import { onShowSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
 import useSpecPanelsLayout from '../../components/layouts/SpecPanelsLayout.hook';
 import SearchBar from '../../components/filters/SearchBar';
-import { Root, Header, Body, Item, ItemIcon, ItemText } from './SpecSectionsList.styles';
+import { Root, Header, Body, Item, ItemIcon, ItemText } from './SpecProductsSections.styles';
 
 const TRANSITION_DURATION = 150;
 const defaultStyle = {
@@ -18,18 +18,22 @@ const transitionStyles = {
 };
 
 /**
- * The SpecSectionsList's container.
+ * The SpecProductsSections' container.
  */
-const SpecSectionsList = () => {
-  const { collection: sections, show } = useSelector(state => state.specSectionsList);
+const SpecProductsSections = () => {
+  const { collection: sections, show } = useSelector(state => state.specProductsSections);
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const handleSearchChange = event => setSearch(event.target.value);
-  const handleSectionClick = sectionID => () => dispatch(onGetSectionItems({ sectionID }));
+  const handleSectionClick = sectionID => () => dispatch(onShowSpecProductsItemsSuccess({ sectionID }));
   
   useEffect(() => {
-    dispatch(onGetSections());
-  }, []);
+    if (!show) {
+      return;
+    }
+
+    dispatch(onGetProductsSections());
+  }, [show]);
   useSpecPanelsLayout(show);
 
   return (
@@ -53,4 +57,4 @@ const SpecSectionsList = () => {
   )
 };
 
-export default SpecSectionsList;
+export default SpecProductsSections;
