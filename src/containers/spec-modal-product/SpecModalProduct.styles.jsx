@@ -1,15 +1,30 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { 
-  COLOR_WHITE, 
+import {
+  COLOR_WHITE,
   COLOR_PRIMARY,
   COLOR_TERTIARY,
   MEDIA_QUERY_SMALL,
- } from '../../assets/styles/styled-vars'
+} from '../../assets/styles/styled-vars';
+
+import IconDwg from '../../assets/images/icons/dwg.svg';
+import IconDwgActive from '../../assets/images/icons/dwg_active.svg';
+import IconBim from '../../assets/images/icons/bim.svg';
+import IconBimActive from '../../assets/images/icons/bim_active.svg';
+import IconTech from '../../assets/images/icons/tech.svg';
+import IconTechActive from '../../assets/images/icons/tech_active.svg';
+
+const icons = {
+  'dwg': `url('${IconDwg}')`,
+  'dwg_active': `url('${IconDwgActive}')`,
+  'bim': `url('${IconBim}')`,
+  'bim_active': `url('${IconBimActive}')`,
+  'tech': `url('${IconTech}')`,
+  'tech_active': `url('${IconTechActive}')`,
+}
 
 const HEIGHT_CONTENT = '350px';
 const PADDING_CONTENT = '8px 2px 8px 8px';
-const ICON_PATH = '../../assets/images/project-specification/products/';
 
 export const Container = styled.div`
   background-color: ${COLOR_WHITE};
@@ -80,7 +95,7 @@ export const ImagesContainer = styled.section`
 
 export const ImagesContent = styled.div`
   -webkit-justify-content: center;
-  padding: 35px;
+  padding: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -198,14 +213,17 @@ export const Icon = styled.span`
   margin: auto;
   background-position: center center;
   background-repeat: no-repeat;
-  display: block;
-  cursor: ${({ active }) => active ? 'pointer' : 'none'}
-  background-image: ${({ type, active }) => `url(${ICON_PATH}${type}${active ? '_active' : '' }.svg);`}}
+  display: ${({ active }) => active ? 'block' : 'none'};
+  cursor: pointer;
+  background-image: ${({ type }) => icons[type]};
+  &:hover {
+    background-image: ${({ active, type }) => active && icons[`${type}_active`]};
+  }
 `;
 
 Icon.propTypes = {
   active: PropTypes.bool,
-  type: PropTypes.oneOf(['dwg','bim','tech']),
+  type: PropTypes.oneOf(['dwg', 'bim', 'tech']),
 };
 
 Icon.defaultProps = {

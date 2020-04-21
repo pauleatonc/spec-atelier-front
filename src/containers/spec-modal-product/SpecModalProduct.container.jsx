@@ -22,12 +22,12 @@ import {
   Icons,
   Icon,
 } from './SpecModalProduct.styles';
+import noPhoto from '../../assets/images/icons/no-photo.svg';
 
 const SpecModalProduct = () => {
   const { product } = useSelector(state => state.specModalPorduct);
   const { isOpen } = useSelector(state => state.specModal);
-console.log('isadsadad', isOpen, product);
-  const [selectedImg, selectImg] = useState((product?.images?.length && product.images[0]) || '');
+  const [selectedImg, selectImg] = useState((product?.images?.length && product.images[0]) || {});
   const onSelectImg = img => () => selectImg(img);
 
   const noImgText = 'sin imágen';
@@ -62,26 +62,26 @@ console.log('isadsadad', isOpen, product);
           </Header>
           <Section>
             <ImagesContainer>
-              {!!product?.images?.length && product.images.map((img = {}) => (
+              {!!product?.images?.length && product.images.map(img =>
                 <ImagesContent
-                  key={img.order}
+                  key={img.id}
                   role="button"
-                  tabIndex={img.order}
-                  onKeyDown={onSelectImg(img.url)}
-                  onClick={onSelectImg(img.url)}
+                  tabIndex={img.id}
+                  onKeyDown={onSelectImg(img)}
+                  onClick={onSelectImg(img)}
                 >
                   <ProductImage
-                    active={img.order === selectedImg.order}
+                    active={img.id === selectedImg.id}
                     src={img.url}
-                    alt={`producto ${img.order || noImgText}`}
+                    alt={`producto ${img.id || noImgText}`}
                   />
                 </ImagesContent>
-              ))}
+              )}
             </ImagesContainer>
             {/* Image primary */}
             <ProductImageSelectedContainer>
               <ProductImageSelected
-                src={selectedImg}
+                src={selectedImg.url || noPhoto}
                 alt={`producto ${selectedImg.id || noImgText}`}
               />
             </ProductImageSelectedContainer>
@@ -104,7 +104,7 @@ console.log('isadsadad', isOpen, product);
                     onClick={onContact}
                   />
                   <Icons>
-                    <Icon 
+                    <Icon
                       type="dwg"
                       active={!!product.dwg_url}
                       onClick={handleIconClick([product.dwg_url])}
