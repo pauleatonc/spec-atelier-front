@@ -21,3 +21,8 @@ export const getProductsByItem = (itemID, page = null) => {
 
   return getJsonRequest(`${API_BASE_URL}/api/items/${itemID}/products?limit=20&page=${page}`);
 };
+
+/**
+ * Gets a product by the given item. 
+ */
+export const getProductById = productID => getJsonRequest(`${API_BASE_URL}/api/products/${productID}`);
