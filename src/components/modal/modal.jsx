@@ -1,26 +1,19 @@
-
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { toggleModalProduct } from '@Actions/product.actions';
 import { createPortal } from 'react-dom';
+import { useDispatch } from 'react-redux';
+import { Root, Container, Content, ButtonClose } from './modal.styles';
+import { hideModal } from './modal.actions';
 
 const modalRoot = document.getElementById('modal');
-const element = document.createElement('div');
 const { body } = document;
 
-const Modal = ({ isOpen, size, children }) => {
-  if (!isOpen) return null;
-  const dispatch = useDispatch();
-  const onToogle = () => dispatch(toggleModalProduct());
+const Modal = ({ size, children, isOpen }) => {
   const refModal = useRef(null);
-
+  const dispacth = useDispatch();
+  const hide = () => dispacth(hideModal());
   const outsideClick = ref => {
-    const handleClickOutside = event => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        onToogle();
-      }
-    }
+    const handleClickOutside = event => ref.current && !ref.current.contains(event.target) && hide();
     // Click Outside Modal
     useEffect(() => {
       modalRoot.addEventListener("click", handleClickOutside);
@@ -35,32 +28,28 @@ const Modal = ({ isOpen, size, children }) => {
       };
     }, [isOpen]);
   }
+
   outsideClick(refModal);
 
-  // We append the created div to the div#modal
-  useEffect(() => {
-    modalRoot.appendChild(element);
-    return () => modalRoot.removeChild(element);
-  });
+  if (!isOpen) return null;
 
   return createPortal(
-    <div tabIndex="-1" className="modal" role="dialog">
-      <div className="modal-dialog">
-        <div ref={refModal} className={`modal-container ${size}`}>
-          <div
-            className="button-close"
+    <Root tabIndex="-1" role="dialog">
+      <Container>
+        <Content ref={refModal} size={size}>
+          <ButtonClose
             role="button"
             tabIndex="0"
-            onKeyDown={onToogle}
-            onClick={onToogle}
+            onKeyDown={hide}
+            onClick={hide}
           >
             <i className="fas fa-times" />
-          </div>
+          </ButtonClose>
           {children}
-        </div >
-      </div>
-    </div>,
-    element
+        </Content>
+      </Container>
+    </Root>,
+    modalRoot
   );
 };
 
