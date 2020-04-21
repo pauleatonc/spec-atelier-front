@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Transition } from 'react-transition-group';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { onGetProductsByItem } from './SpecProducts.actions';
+import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import SearchBar from '../../components/filters/SearchBar';
 import Tag from '../../components/filters/Tag';
 import ProductCard from '../../components/cards/ProductCard';
@@ -73,6 +74,11 @@ const SpecProductsList = () => {
     dispatch(onGetProductsByItem({ search, itemID: selectedItemID, filters: selectedFilters }));
   };
 
+  const handleSeeMoreClick = selectedProduct => e => {
+    e.stopPropagation();
+    dispatch(getProduct(selectedProduct));
+  }
+
   useEffect(() => {
     if (!selectedItemID || !show) {
       return;
@@ -122,7 +128,7 @@ const SpecProductsList = () => {
                     selected={Boolean(selected)}
                     title={product.name}
                     onClickCard={handleCardClick(product.id)}
-                    // TODO: handle the see more link by using the onClickSeeMore property
+                    onClickSeeMore={handleSeeMoreClick(product)}
                   />
                 );
               })}
