@@ -7,6 +7,7 @@ import SpecProductsSectionsContainer from '../containers/spec-products-sections/
 import SpecProductsItemsContainer from '../containers/spec-products-items/SpecProductsItems.container';
 import SpecDocumentPreviewContainer from '../containers/spec-document-preview/SpecDocumentPreview.container';
 import SpecProductsContainer from '../containers/spec-products/SpecProducts.container';
+import SpecModalProduct from '../containers/spec-modal-product/SpecModalProduct.container';
 import SpecPanelsLayout from '../components/layouts/SpecPanelsLayout';
 import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
 
@@ -36,6 +37,7 @@ const Specification = () => {
         </Main>
       </Root>
       <AlertContainer />
+      <SpecModalProduct />
     </>
   );
 };
