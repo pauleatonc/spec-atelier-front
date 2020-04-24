@@ -10,6 +10,7 @@ import specDocumentPreviewReducer from '../../containers/spec-document-preview/S
 import specProductsReducer from '../../containers/spec-products/SpecProducts.reducer';
 import specModalPorductReducer from '../../containers/spec-modal-product/SpecModalProduct.reducer';
 import specModalReducer from '../../components/modal/modal.reducer';
+import specCreateProductReducer from '../../containers/spec-create-product/SpecCreateProduct.reducer';
 
 export default combineReducers({
 	login: loginReducer,
@@ -23,4 +24,5 @@ export default combineReducers({
   specProducts: specProductsReducer,
   specModalPorduct: specModalPorductReducer,
   specModal: specModalReducer,
+  specCreateProduct: specCreateProductReducer,
 });
