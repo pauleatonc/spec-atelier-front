@@ -49,7 +49,7 @@ const SpecCreateProductStepOne = () => {
     item: itemValue,
     system: systemValue,
   }));
-  const disabledNext = !nameValue || !sectionValue.label || !itemValue.label || !systemValue.label;
+  const disabledNext = !nameValue || !sectionValue.label || !itemValue.label;
 
   useEffect(() => {
     if (!show) {
