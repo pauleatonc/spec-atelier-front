@@ -27,7 +27,15 @@ export const postFormRequest = (url, payload) => {
   const formData = new FormData();
   const headers = generateHeaders('application/x-www-form-urlencoded');
 
-  Object.keys(payload).forEach(key => formData.append(key, payload[key]));
+  Object.keys(payload).forEach(key => {
+    if (!Array.isArray(payload[key])) {
+      formData.append(key, payload[key]);
+
+      return; 
+    }
+
+    payload[key].forEach(item => formData.append(key, item));
+  });
 
   return fetch(url, { headers, body: formData, method: 'POST' }).then(response => response.json());
 };
