@@ -15,6 +15,10 @@ export const AddIcon = styled.img`
   position: absolute;
   right: 14px;
   top: 15px;
+
+  &:active {
+    transform: scale(.95);
+  }
 `;
 
 export const MenuItem = styled.section`
