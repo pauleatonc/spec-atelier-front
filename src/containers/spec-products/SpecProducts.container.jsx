@@ -123,7 +123,7 @@ const SpecProductsList = () => {
                     category={`Sistema constructivo: ${product.system.name}`}
                     description={product.short_desc}
                     key={`product-card-${product.id}`}
-                    photo={product.images[0]}
+                    photo={product.images[0]?.urls?.thumb}
                     reference={product.reference}
                     selected={Boolean(selected)}
                     title={product.name}
