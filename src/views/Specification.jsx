@@ -5,7 +5,6 @@ import SpecDocumentContainer from '../containers/spec-document/SpecDocument.cont
 import SpecNavigatorContainer from '../containers/spec-navigator/SpecNavigator.container';
 import SpecProductsSectionsContainer from '../containers/spec-products-sections/SpecProductsSections.container';
 import SpecProductsItemsContainer from '../containers/spec-products-items/SpecProductsItems.container';
-import SpecDocumentPreviewContainer from '../containers/spec-document-preview/SpecDocumentPreview.container';
 import SpecProductsContainer from '../containers/spec-products/SpecProducts.container';
 import SpecModalProduct from '../containers/spec-modal-product/SpecModalProduct.container';
 import SpecCreateProductOneContainer from '../containers/spec-create-product/SpecCreateProductStepOne.container';
@@ -32,7 +31,6 @@ const Specification = () => {
               <SpecPanelsLayout>
                 <SpecProductsSectionsContainer />
                 <SpecProductsItemsContainer />
-                <SpecDocumentPreviewContainer />
               </SpecPanelsLayout>
               <SpecProductsContainer />
             </Panels>

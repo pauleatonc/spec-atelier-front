@@ -6,9 +6,9 @@ import { onGetProductsByItem } from './SpecProducts.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import SearchBar from '../../components/filters/SearchBar';
 import Tag from '../../components/filters/Tag';
+import Button from '../../components/buttons/Button';
 import ProductCard from '../../components/cards/ProductCard';
-import LoadButton from '../../components/buttons/LoadButton';
-import { Root, Header, HeaderSpace, HeaderSearch, HeaderFilters, Body, Total, Cards, LoadMore } from './SpecProducts.styles';
+import { Root, Header, HeaderSpace, HeaderSearch, HeaderFilters, Body, Total, Cards, LoadMore, Loading } from './SpecProducts.styles';
 
 const TRANSITION_DURATION = 150;
 const defaultStyle = {
@@ -19,22 +19,32 @@ const defaultStyle = {
 };
 const transitionStyles = {
   exited: { transform: 'scaleX(0)', width: 0 },
-  entered: { transform: 'scaleX(1)', width: 'calc(100vw - 422px)' },
+  entered: { minWidth: 944, transform: 'scaleX(1)', width: 'calc(100vw - 422px)' },
 };
+const filters = [
+  { label: 'Todos', tag: 'all' },
+  { label: 'Recientes', tag: 'latest' },
+  { label: 'Más usados', tag: 'most_used' },
+  { label: 'Marcas', tag: 'brands' },
+  { label: 'Tipo de proyecto', tag: 'project_type' },
+  { label: 'Mis especificaciones', tag: 'my_specifications' },
+  { label: 'Otros usuarios', tag: 'other_users' },
+  { label: 'Recintos', tag: 'enclosures' },
+];
 
 /**
  * The SpecProductsList's container.
  */
 const SpecProductsList = () => {
   const { selectedItemID } = useSelector(state => state.specProductsItems);
-  const { filters, nextPage, collection: products = [], show, total } = useSelector(state => state.specProducts);
+  const { nextPage, collection: products = [], loading, show, total } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const [selectedFilters, setSelectedFilters] = useState(['all']);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const handleSearchChange = event => {
     setSearch(event.target.value);
-    dispatch(onGetProductsByItem({ itemID: selectedItemID, search: event.target.value, filters: selectedFilters }));
+    dispatch(onGetProductsByItem({ filters: selectedFilters.sort(), itemID: selectedItemID, search: event.target.value }));
   };
   const handleFilterClick = currentFilterTag => () => {
     const hasFilterTag = selectedFilters.find(filterTag => filterTag === currentFilterTag);
@@ -55,7 +65,7 @@ const SpecProductsList = () => {
     }
 
     setSelectedFilters(updatedFilters);
-    dispatch(onGetProductsByItem({ search, itemID: selectedItemID, filters: updatedFilters }));
+    dispatch(onGetProductsByItem({ search, filters: updatedFilters.sort(), itemID: selectedItemID }));
   };
   const handleCardClick = currentProductID => () => {
     const hasProduct = selectedProducts.find(productID => productID === currentProductID);
@@ -71,7 +81,7 @@ const SpecProductsList = () => {
     setSelectedProducts(updatedProducts);
   };
   const handleLoadMoreClick = () => {
-    dispatch(onGetProductsByItem({ search, itemID: selectedItemID, filters: selectedFilters }));
+    dispatch(onGetProductsByItem({ search, filters: selectedFilters.sort(), itemID: selectedItemID }));
   };
 
   const handleSeeMoreClick = selectedProduct => e => {
@@ -84,8 +94,14 @@ const SpecProductsList = () => {
       return;
     }
 
-    dispatch(onGetProductsByItem({ itemID: selectedItemID }));
+    dispatch(onGetProductsByItem({ search, filters: selectedFilters.sort(), itemID: selectedItemID }));
   }, [show, selectedItemID]);
+
+  useEffect(() => {
+    setSearch('');
+    setSelectedFilters(['all']);
+    setSelectedProducts([]);
+  }, [selectedItemID]);
 
   return (
     <Transition in={show} timeout={TRANSITION_DURATION}>
@@ -113,7 +129,7 @@ const SpecProductsList = () => {
             </HeaderFilters>
           </Header>
           <Body>
-            <Total>{`${total} producto(s)`}</Total>
+            <Total>{loading ? 'Cargando...' : `${products.length} de ${total} producto(s)`}</Total>
             <Cards>
               {products.map(product => {
                 const selected = selectedProducts.find(selectedProduct => selectedProduct === product.id);
@@ -122,7 +138,7 @@ const SpecProductsList = () => {
                   <ProductCard
                     category={`Sistema constructivo: ${product.system.name}`}
                     description={product.short_desc}
-                    key={`product-card-${product.id}`}
+                    key={`product-card-${selectedItemID}-${product.id}`}
                     photo={product.images[0]?.urls?.thumb}
                     reference={product.reference}
                     selected={Boolean(selected)}
@@ -135,7 +151,8 @@ const SpecProductsList = () => {
             </Cards>
             {nextPage !== null && (
               <LoadMore>
-                <LoadButton onClick={handleLoadMoreClick}>Ver más</LoadButton>
+                {loading && <Loading>Cargando...</Loading>}
+                {!loading && <Button variant="gray" onClick={handleLoadMoreClick}>Ver más</Button>}
               </LoadMore>
             )}
           </Body>

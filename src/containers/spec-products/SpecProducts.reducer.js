@@ -8,18 +8,10 @@ import {
 
 const specProductsState = {
   collection: [],
-  filters: [
-    { label: 'Todos', tag: 'all' },
-    { label: 'Recientes', tag: 'latest' },
-    { label: 'Más usados', tag: 'most_used' },
-    { label: 'Marcas', tag: 'brands' },
-    { label: 'Tipo de proyecto', tag: 'project_type' },
-    { label: 'Mis especificaciones', tag: 'my_specifications' },
-    { label: 'Otros usuarios', tag: 'other_users' },
-    { label: 'Recintos', tag: 'enclosures' },
-  ],
+  filters: [],
   loading: false,
   nextPage: null,
+  search: '',
   show: false,
   total: 0,
 };
@@ -36,8 +28,10 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
       return {
         ...state,
         collection: payload.products,
+        filters: payload.filters,
         loading: false,
         nextPage: payload.nextPage,
+        search: payload.search,
         total: payload.total,
       };
     }
@@ -47,7 +41,7 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
       return { ...state, show: false };
     }
     case SHOW_SPEC_PRODUCTS_SUCCESS: {
-      return { ...state, show: true };
+      return { ...specProductsState, show: true };
     }
     default: {
       return state;

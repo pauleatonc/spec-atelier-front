@@ -64,8 +64,9 @@ export const DefaultButton = styled(BaseButton)`
 export const GrayButton = styled(BaseButton)`
   background-color: rgba(33, 33, 33, 0.25);
   border: 1px solid rgba(33, 33, 33, 0.25);
-  color: rgba(33, 33, 33, 0.45);
-  font-size: 14px;
+  color: #FFF;
+  font-size: 16px;
+  font-weight: bold;
   line-height: 1.71;
   letter-spacing: 1px;
 `;

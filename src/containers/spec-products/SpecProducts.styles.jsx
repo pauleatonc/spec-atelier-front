@@ -4,7 +4,8 @@ export const Root = styled.div`
   background-color: #FFF;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(100vh - 115px);
+  max-height: calc(100vh - 115px);
   position: relative;
   width: 100%;
   z-index: 4;
@@ -32,8 +33,8 @@ export const HeaderFilters = styled.section`
   border-bottom: 1px solid #E5E5E5;
   border-left: 1px solid #E5E5E5;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  overflow: hidden;
   padding: 0 0 24px;
   width: 100%;
 `;
@@ -41,6 +42,7 @@ export const HeaderFilters = styled.section`
 export const Body = styled.section`
   border-left: 1px solid #E5E5E5;
   height: 100%;
+  overflow-y: auto;
   padding: 15px 46px;
   width: 100%;
 `;
@@ -63,4 +65,13 @@ export const LoadMore = styled.section`
   display: flex;
   justify-content: center;
   margin: 50px 0 37px;
+`;
+
+export const Loading = styled.span`
+  align-items: center;
+  color: #212121;
+  display: inline-flex;
+  font-family: Lato;
+  font-size: 16px;
+  height: 34px;
 `;
