@@ -5,20 +5,29 @@ export const GET_PRODUCTS_BY_ITEM = 'GET_PRODUCTS_BY_ITEM';
 export const GET_PRODUCTS_BY_ITEM_ERROR = 'GET_PRODUCTS_BY_ITEM_ERROR';
 export const GET_PRODUCTS_BY_ITEM_SUCCESS = 'GET_PRODUCTS_BY_ITEM_SUCCESS';
 
-export const onGetProductsByItem = ({ itemID }) => async (dispatch, getState) => {
+export const onGetProductsByItem = ({ filters, itemID, search = '' }) => async (dispatch, getState) => {
   dispatch(onActionCreator(GET_PRODUCTS_BY_ITEM));
 
   try {
     const state = getState();
-    const { nextPage } = state.specProducts;
+    const { collection, filters: storedFilters, nextPage, search: storedSearch } = state.specProducts;
 
     // TODO: support filters and search
     const response = await getProductsByItem(itemID, nextPage);
+    const updatedCollection = filters.join(',') !== storedFilters.join(',') || search !== storedSearch
+      ? response?.products?.list || []
+      : collection.concat(response?.products?.list || []);
 
     return dispatch(
       onActionCreator(
         GET_PRODUCTS_BY_ITEM_SUCCESS,
-        { nextPage: response?.products?.next_page, products: response?.products?.list || [], total: response?.products?.total || 0  }
+        {
+          filters,
+          search,
+          nextPage: response?.products?.next_page,
+          products: updatedCollection,
+          total: response?.products?.total || 0,
+        },
       )
     );
   } catch (error) {

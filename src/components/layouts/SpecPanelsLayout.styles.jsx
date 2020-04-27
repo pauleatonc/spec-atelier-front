@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Root = styled.div`
   display: ${({ show = false }) => show ? 'initial' : 'none'};
-  min-height: 710px;
+  height: 100%;
   position: relative;
   width: 360px;
 `;

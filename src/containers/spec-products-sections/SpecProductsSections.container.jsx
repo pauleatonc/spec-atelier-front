@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Transition } from 'react-transition-group';
 import { onGetProductsSections } from './SpecProductsSections.actions';
 import { onShowSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
 import useSpecPanelsLayout from '../../components/layouts/SpecPanelsLayout.hook';
-import SearchBar from '../../components/filters/SearchBar';
-import { Root, Header, Body, Item, ItemIcon, ItemText } from './SpecProductsSections.styles';
+import { Root, Loading, Body, Item, ItemIcon, ItemText } from './SpecProductsSections.styles';
 
 const TRANSITION_DURATION = 150;
 const defaultStyle = {
@@ -23,8 +22,6 @@ const transitionStyles = {
 const SpecProductsSections = () => {
   const { collection: sections, show } = useSelector(state => state.specProductsSections);
   const dispatch = useDispatch();
-  const [search, setSearch] = useState('');
-  const handleSearchChange = event => setSearch(event.target.value);
   const handleSectionClick = sectionID => () => dispatch(onShowSpecProductsItemsSuccess({ sectionID }));
   
   useEffect(() => {
@@ -40,17 +37,17 @@ const SpecProductsSections = () => {
     <Transition in={show} timeout={TRANSITION_DURATION}>
       {state => (
         <Root style={{ ...defaultStyle, ...transitionStyles[state] }}>
-          <Header>
-            <SearchBar placeholder="Buscar" value={search} onChange={handleSearchChange} />
-          </Header>
-          <Body>
-            {sections.map(section => (
-              <Item key={section.id} onClick={handleSectionClick(section.id)}>
-                <ItemIcon icon={section.eng_name} iconHover={`${section.eng_name}_active`} />
-                <ItemText>{section.name}</ItemText>
-              </Item>
-            ))}
-          </Body>
+          {sections.length === 0 && <Loading>Cargando...</Loading>}
+          {sections.length > 0 && (
+            <Body>
+              {sections.map(section => (
+                <Item key={section.id} onClick={handleSectionClick(section.id)}>
+                  <ItemIcon icon={section.eng_name} iconHover={`${section.eng_name}_active`} />
+                  <ItemText>{section.name}</ItemText>
+                </Item>
+              ))}
+            </Body>
+          )}
         </Root>
       )}
     </Transition>

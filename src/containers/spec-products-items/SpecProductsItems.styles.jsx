@@ -17,7 +17,20 @@ export const Header = styled.section`
 `;
 
 export const Body = styled.section`
+  height: calc(100% - 46px);
   padding: 37px 35px 0;
+  overflow-y: auto;
+  width: 100%;
+`;
+
+export const Loading = styled.div`
+  align-items: center;
+  color: #212121;
+  display: flex;
+  font-family: Lato;
+  font-size: 16px;
+  height: calc(100% - 46px);
+  justify-content: center;
   width: 100%;
 `;
 

@@ -13,13 +13,20 @@ html, body {
   width: 100%;
 }
 
-#__alerts {
+#__alerts, #__modals {
   height: auto;
   left: 0;
   position: absolute;
   top: 0;
   width: 100%;
+}
+
+#__alerts {
   z-index: 80;
+}
+
+#__modals {
+  z-index: 70;
 }
 
 .main-section {

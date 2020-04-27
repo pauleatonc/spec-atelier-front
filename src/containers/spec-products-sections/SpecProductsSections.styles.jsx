@@ -11,8 +11,14 @@ export const Root = styled.div`
   z-index: 2;
 `;
 
-export const Header = styled.section`
-  padding: 17px 19px 40px;
+export const Loading = styled.div`
+  align-items: center;
+  color: #212121;
+  display: flex;
+  font-family: Lato;
+  font-size: 16px;
+  height: 100%;
+  justify-content: center;
   width: 100%;
 `;
 
@@ -20,7 +26,7 @@ export const Body = styled.section`
   box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(auto-fit, 50%);
-  padding: 0 35px;
+  padding: 40px 35px 15px;
   width: 100%;
 `;
 

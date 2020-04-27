@@ -5,12 +5,10 @@ import { Transition } from 'react-transition-group';
 import { Root, Content } from './Snackbar.styles';
 
 const TRANSITION_DURATION = 200;
-
 const defaultStyle = {
   transition: `opacity ${TRANSITION_DURATION}ms ease-in-out`,
   opacity: 0,
 };
-
 const transitionStyles = {
   exited: { opacity: 0 },
   entered: { opacity: 1 },
@@ -34,14 +32,13 @@ const Snackbar = props => {
       )}
     </Transition>
   );
+  const snackbarElement = document.getElementById('__alerts');
 
-  const snackBarElement = document.getElementById('__alerts');
-
-  if (!snackBarElement) {
+  if (!snackbarElement) {
     return null;
   }
 
-  return createPortal(content, snackBarElement);
+  return createPortal(content, snackbarElement);
 };
 
 Snackbar.defaultProps = {

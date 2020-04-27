@@ -26,7 +26,7 @@ const specProductsItemsReducer = (state = specProductsItemsState, { payload, typ
     }
     case HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS:
     case SHOW_SPEC_PRODUCTS_SECTIONS_SUCCESS: {
-      return { ...state, show: false };
+      return specProductsItemsState;
     }
     case SHOW_SPEC_PRODUCTS_ITEMS_SUCCESS: {
       return { ...state, show: true };

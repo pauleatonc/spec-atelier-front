@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const mapApiUrls = {
   development: 'http://localhost:8882',
-  integration: 'http://localhost:3000',
+  integration: 'http://spec-atelier.herokuapp.com',
   production: 'https://spec-atelier.herokuapp.com',
 };
 

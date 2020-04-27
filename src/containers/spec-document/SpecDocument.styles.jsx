@@ -10,9 +10,33 @@ export const Root = styled.div`
   width: 587px;
 `;
 
-export const Add = styled.img`
+export const AddIcon = styled.img`
   cursor: pointer;
   position: absolute;
   right: 14px;
   top: 15px;
+
+  &:active {
+    transform: scale(.95);
+  }
+`;
+
+export const MenuItem = styled.section`
+  background-color: transparent;
+  border-bottom: 1px solid #B3B3B3;
+  color: #212121;
+  cursor: pointer;
+  font-family: Lato;
+  font-size: 14px;
+  letter-spacing: 1px;
+  padding: 26px 0 26px 55px;
+  width: 256px;
+
+  &:hover {
+    background-color: #EEE;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
 `;

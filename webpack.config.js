@@ -58,7 +58,7 @@ module.exports = env => {
     externals: ['window'],
     plugins: [
       new webpack.ProgressPlugin(),
-      new Dotenv({ systemvars: true }),
+      new Dotenv({ silent: true, systemvars: true }),
       new HtmlWebpackPlugin({
         hash: true,
         inject: true,

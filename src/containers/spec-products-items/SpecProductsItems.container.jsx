@@ -4,7 +4,7 @@ import { onShowSpecProductsSectionsSuccess } from '../spec-products-sections/Spe
 import { onGetProductsItems } from './SpecProductsItems.actions';
 import { onShowSpecProductsSuccess } from '../spec-products/SpecProducts.actions';
 import Breadcrumbs from '../../components/basics/Breadcrumbs';
-import { Root, Header, Body, Item } from './SpecProductsItems.styles';
+import { Root, Header, Body, Loading, Item } from './SpecProductsItems.styles';
 
 /**
  * The SpecProductsItems' container.
@@ -33,9 +33,12 @@ const SpecProductsItems = () => {
       <Header>
         <Breadcrumbs items={[{ label: 'Sección', onClick: handleShowSections }, { label: 'Partidas' }]} />
       </Header>
-      <Body>
-        {items.map(item => <Item key={item.id} onClick={handleItemClick(item.id)}>{item.name}</Item>)}
-      </Body>
+      {items.length === 0 && <Loading>Cargando...</Loading>}
+      {items.length > 0 && (
+        <Body>
+          {items.map(item => <Item key={item.id} onClick={handleItemClick(item.id)}>{item.name}</Item>)}
+        </Body>
+      )}
     </Root>
   )
 };
