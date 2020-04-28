@@ -49,3 +49,14 @@ export const postJsonRequest = (url, payload) => {
 
   return fetch(url, { body, headers, method: 'POST' }).then(response => response.json());
 };
+
+
+/**
+ * To do a put request with JSON as content type.
+ */
+export const putJsonRequest = (url, payload) => {
+  const body = JSON.stringify(payload);
+  const headers = generateHeaders('application/json');
+
+  return fetch(url, { body, headers, method: 'PUT' }).then(response => response.json());
+};
