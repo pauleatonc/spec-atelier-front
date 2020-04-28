@@ -44,7 +44,6 @@ export const loginAction = data => async dispatch => {
 /**
  * Logout action
  */
-
 export const logoutAction = data => async dispatch => {
   try {
     await logOut(data);
@@ -64,24 +63,33 @@ export const logoutAction = data => async dispatch => {
 
 export const registrationAction = data => async dispatch => {
   try {
-    const response = await register(data);
-    setLocalStorage({ key: 'token', value: response.user.jwt });
-    setLocalStorage({ key: 'userID', value: response.user.id });
-    return dispatch({
+    const { user, error } = await register(data);
+    if (error) {
+      return dispatch(onActionCreator({
+        type: REGISTRATION_ERROR,
+        payload: {
+          isLogin: false,
+          error,
+        },
+      }));
+    }
+    setLocalStorage({ key: 'token', value: user.jwt });
+    setLocalStorage({ key: 'userID', value: user.id });
+    return dispatch(onActionCreator({
       type: REGISTRATION,
       payload: {
-        isLogin: response.logged_in,
-        user: response.user,
+        isLogin: true,
+        user,
       },
-    });
+    }));
   } catch (error) {
-    return dispatch({
+    return dispatch(onActionCreator({
       type: REGISTRATION_ERROR,
       payload: {
         isLogin: false,
         error,
       },
-    });
+    }));
   };
 };
 

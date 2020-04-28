@@ -4,3 +4,5 @@ export const APP_BASE_URL = process.env.APP_BASE_URL || window.location.host;
 
 // App Environment
 export const APP_ENV = process.env.APP_ENV || 'development';
+
+export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';

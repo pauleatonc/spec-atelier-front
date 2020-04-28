@@ -1,17 +1,13 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { GoogleLogin } from 'react-google-login';
-import { connect } from 'react-redux';
-import toCapitalize from '@Helpers/prettie-format-strings.helper';
-import { googleOuathAction } from '@Actions/';
+import toCapitalize from '../../helpers/prettie-format-strings.helper';
+import { GOOGLE_CLIENT_ID } from '../../config/constants/environment';
 
 export const handleFormatResponse = googleResponse => ({
   user: {
-    first_name: toCapitalize(googleResponse.w3.ofa),
-    last_name: toCapitalize(googleResponse.w3.wea),
+    first_name: toCapitalize(googleResponse.profileObj.givenName),
+    last_name: toCapitalize(googleResponse.profileObj.familyName),
     email: googleResponse.profileObj.email,
     google_token: googleResponse.accessToken,
     profile_image: googleResponse.profileObj.imageUrl,
@@ -26,14 +22,14 @@ export const handleManagerResponseGoogleService = (
   googleOuathMethod(prettieFormatResponse);
 };
 
+
 const ButtonGoogleLogin = props => {
   const { label, googleOuathMethod } = props;
-
   return (
     <GoogleLogin
-      clientId={process.env.GOOGLE_CLIENT_ID}
+      clientId={GOOGLE_CLIENT_ID}
       buttonText={label}
-      cookiePolicy={'single_host_origin'}
+      cookiePolicy="single_host_origin"
       onSuccess={res =>
         handleManagerResponseGoogleService(res, googleOuathMethod)
       }
@@ -55,9 +51,5 @@ ButtonGoogleLogin.propTypes = {
   googleOuathMethod: PropTypes.func.isRequired,
 };
 
-export default connect(
-  state => state,
-  dispatch => ({
-    googleOuathMethod: googleOuathAction(dispatch),
-  }),
-)(ButtonGoogleLogin);
+export default ButtonGoogleLogin;
+
