@@ -4,12 +4,12 @@ import Navbar from '../components/navbar/Navbar.container';
 import Footer from '../components/footer';
 
 /**
- * The Profile's view.
+ * The Colaboration's view.
  */
 const Profile = () => {
-	return (
+  return (
     <AppLayout footer={<Footer />} header={<Navbar />}>
-      <h1>Perfil</h1>
+      <h1>Colaborations</h1>
     </AppLayout>
   );
 };
