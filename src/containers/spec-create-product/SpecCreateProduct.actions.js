@@ -86,7 +86,7 @@ export const onCreateProduct = ({ documents, images }) => async (dispatch, getSt
     });
   } catch (error) {
     return batch(() => {
-      dispatch(onActionCreator(GET_PRODUCTS_SYSTEMS_ERROR, { error }));
+      dispatch(onActionCreator(CREATE_PRODUCT_ERROR, { error }));
       dispatch(onShowAlertSuccess({ message: 'Error al crear producto' }));
     });
   }
