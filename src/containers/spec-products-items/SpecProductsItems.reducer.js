@@ -22,7 +22,7 @@ const specProductsItemsReducer = (state = specProductsItemsState, { payload, typ
       return { ...state, loading: true };
     }
     case GET_PRODUCTS_ITEMS_SUCCESS: {
-      return { ...state, collection: payload.items, loading: false };
+      return { ...state, collection: payload.items || [], loading: false };
     }
     case HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS:
     case SHOW_SPEC_PRODUCTS_SECTIONS_SUCCESS: {

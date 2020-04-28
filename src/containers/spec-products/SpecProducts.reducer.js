@@ -27,12 +27,12 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
     case GET_PRODUCTS_BY_ITEM_SUCCESS: {
       return {
         ...state,
-        collection: payload.products,
+        collection: payload.products || [],
         filters: payload.filters,
         loading: false,
-        nextPage: payload.nextPage,
+        nextPage: payload.nextPage || null,
         search: payload.search,
-        total: payload.total,
+        total: payload.total || 0,
       };
     }
     case HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS:

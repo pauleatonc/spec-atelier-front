@@ -20,10 +20,14 @@ const SpecCreateProductStepThree = () => {
   const [imagesValues, setImagesValues] = useState(images || []);
   const [documentsValues, setDocumentsValues] = useState(documents || []);
   const handleImagesChange = attachedImages => setImagesValues(attachedImages);
-  const handleDocumentsChange = attachedFiles => setDocumentsValues(attachedFiles);
+  const handleDocumentsChange = attachedDocuments => setDocumentsValues(attachedDocuments);
   const handleAttachReject = reason => dispatch(onShowAlertSuccess({ message: reason }));
   const handleClose = () => dispatch(onHideSpecCreateProduct());
-  const handleExiting = () => {
+  const handleEntering = () => {
+    setImagesValues(images || []);
+    setDocumentsValues(documents || []);
+  };
+  const handleExited = () => {
     setImagesValues([]);
     setDocumentsValues([]);
   };
@@ -35,7 +39,14 @@ const SpecCreateProductStepThree = () => {
   const disabledNext = imagesValues.length === 0 || documentsValues.length === 0;
 
   return (
-    <ModalLayout overlay={false} show={show} transition={false} onClose={handleClose} onExiting={handleExiting}>
+    <ModalLayout
+      overlay={false}
+      show={show}
+      transition={false}
+      onClose={handleClose}
+      onEntering={handleEntering}
+      onExited={handleExited}
+    >
       <Root shadow={false}>
         <Header>
           <Title>Crear producto</Title>

@@ -17,6 +17,16 @@ export const getProductsItems = sectionID => getJsonRequest(`${API_BASE_URL}/api
 export const getProductsSystems = itemID => getJsonRequest(`${API_BASE_URL}/api/items/${itemID}/systems`);
 
 /**
+ * Gets the list of products' brands.
+ */
+export const getProductsBrands = () => getJsonRequest(`${API_BASE_URL}/api/brands`);
+
+/**
+ * Gets the list of products' brands by the given query.
+ */
+export const searchProductsBrands = query => getJsonRequest(`${API_BASE_URL}/api/brands?${query}`);
+
+/**
  * Gets a list of products by the given item. 
  */
 export const getProductsByItem = (itemID, page = null) => {
@@ -37,15 +47,14 @@ export const getProductById = productID => getJsonRequest(`${API_BASE_URL}/api/p
  */
 export const createProduct = data => {
   const body = {
-    // name:
-    // brand_id:
-    // long_desc:
-    // project_type:
-    // room_type:
-    // short_desc:
-    // subitem_id:
-    // work_type:
-    ...data,
+    product: {
+      brand: data.brand,
+      item_id: data.item,
+      long_desc: data.description,
+      name: data.name,
+      price: data.price,
+      system_id: data.system,
+    },
   };
 
   return postJsonRequest(`${API_BASE_URL}/api/products`, body);

@@ -18,7 +18,7 @@ const transitionStyles = {
  * The ModalLayout's component.
  */
 const ModalLayout = props => {
-  const { children, overlay, show, transition, onClose, onExiting } = props;
+  const { children, overlay, show, transition, onClose, onExited, onEntering, onExiting } = props;
   const rootRef = useRef(undefined);
   const handleClick = event => onClose(event);
   const handleKey = event => {
@@ -30,7 +30,15 @@ const ModalLayout = props => {
   };
   const handleEscape = event => event.stopPropagation();
   const content = (
-    <Transition mountOnEnter unmountOnExit in={show} timeout={TRANSITION_DURATION} onExiting={onExiting}>
+    <Transition
+      mountOnEnter
+      unmountOnExit
+      in={show}
+      timeout={TRANSITION_DURATION}
+      onEntering={onEntering}
+      onExited={onExited}
+      onExiting={onExiting}
+    >
       {state => (
         <Root
           overlay={overlay}
@@ -66,6 +74,8 @@ ModalLayout.defaultProps = {
   overlay: true,
   transition: true,
   onClose: () => undefined,
+  onEntering: () => undefined,
+  onExited: () => undefined,
   onExiting: () => undefined,
 };
 ModalLayout.propTypes = {
@@ -74,6 +84,8 @@ ModalLayout.propTypes = {
   transition: PropTypes.bool,
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func,
+  onExited: PropTypes.func,
+  onEntering: PropTypes.func,
   onExiting: PropTypes.func,
 };
 
