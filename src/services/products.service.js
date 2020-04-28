@@ -64,7 +64,7 @@ export const createProduct = data => {
  * Upload images to the given product. 
  */
 export const uploadProductImages = (productID, images) => {
-  const body = { 'images': images };
+  const body = { 'images[]': images };
 
   return postFormRequest(`${API_BASE_URL}/api/products/${productID}/associate_images`, body);
 };
@@ -72,8 +72,8 @@ export const uploadProductImages = (productID, images) => {
 /**
  * Upload documents to the given product.
  */
-export const uploadProductDocuments = (productID, files) => {
-  const body = { 'documents': files };
+export const uploadProductDocuments = (productID, documents) => {
+  const body = { 'documents[]': documents };
 
   return postFormRequest(`${API_BASE_URL}/api/products/${productID}/associate_documents`, body);
 };
