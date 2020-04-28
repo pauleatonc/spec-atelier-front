@@ -3,7 +3,7 @@ import AppLayout from '../components/layouts/AppLayout';
 import { NavbarApp } from '../components/SpecComponents';
 import Footer from '../components/footer';
 
-import ProjectHeader from '../containers/project-header/ProjectHeader';
+import ProjectsHeader from '../containers/projects-header/ProjectsHeader';
 import ProjectsListContainer from '../containers/projects-list/ProjectsList.container';
 import ProjectFilterContainer from '../containers/projects-filters/ProjectsFilters.container';
 
@@ -14,7 +14,7 @@ const Projects = () => {
 
   return (
     <AppLayout footer={<Footer />} header={<NavbarApp />}>
-      <ProjectHeader
+      <ProjectsHeader
         title="Mis proyectos"
         description="Crea y administra tus proyectos"
         background={HEADER_IMG}
