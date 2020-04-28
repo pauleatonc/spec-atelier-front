@@ -5,7 +5,7 @@ import {
   COLOR_PRIMARY,
   COLOR_TERTIARY,
   MEDIA_QUERY_SMALL,
-} from '../../assets/styles/styled-vars';
+} from '../../config/constants/styled-vars';
 
 import IconDwg from '../../assets/images/icons/dwg.svg';
 import IconDwgActive from '../../assets/images/icons/dwg_active.svg';
