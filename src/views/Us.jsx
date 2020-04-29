@@ -1,6 +1,6 @@
 import React from 'react';
 import AppLayout from '../components/layouts/AppLayout';
-import NavBar from '../components/navbar/Navbar.container';
+import NavBar from '../containers/navbar/Navbar.container';
 import Footer from '../components/footer';
 
 /**

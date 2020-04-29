@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import NavbarApp from './navbar-app/NavbarApp.container';
-import NavbarLogin from './navbar-login/NavbarLogin.container';
+import NavbarApp from '../../components/navbar/navbar-app/NavbarApp.container';
+import NavbarLogin from '../../components/navbar/navbar-login/NavbarLogin.container';
 
 const NavBar = ({ fixed }) => {
   const { isLogin } = useSelector(state => state.auth);
