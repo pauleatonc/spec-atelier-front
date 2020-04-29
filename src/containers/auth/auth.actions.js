@@ -65,23 +65,23 @@ export const registrationAction = data => async dispatch => {
   try {
     const { user, error } = await register(data);
     if (error) {
-      return dispatch(onActionCreator({
+      return dispatch({
         type: REGISTRATION_ERROR,
         payload: {
           isLogin: false,
           error,
         },
-      }));
+      });
     }
     setLocalStorage({ key: 'token', value: user.jwt });
     setLocalStorage({ key: 'userID', value: user.id });
-    return dispatch(onActionCreator({
+    return dispatch({
       type: REGISTRATION,
       payload: {
         isLogin: true,
         user,
       },
-    }));
+    });
   } catch (error) {
     return dispatch(onActionCreator({
       type: REGISTRATION_ERROR,

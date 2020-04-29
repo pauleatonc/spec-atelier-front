@@ -19,9 +19,12 @@ import {
 const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const onChangePass = e => setPassword(e.target.value);
+  const onChangeEmail = e => setEmail(e.target.value);
 
   const dispatch = useDispatch();
-  const handleSubmit = data => dispatch(googleLoginAction(data));
+  const handleSubmitGoogle = data => dispatch(googleLoginAction(data));
+  const handleSubmit = () => dispatch(registrationAction({ user: { email, password } }))
 
   return (
     <Container>
@@ -54,7 +57,7 @@ const Registration = () => {
 
             <div className="auth__inner__section__inner__body__google">
               <ButtonGoogleLogin
-                googleOuathMethod={handleSubmit}
+                googleOuathMethod={handleSubmitGoogle}
                 label="Regístrate con Google"
               />
             </div>
@@ -70,7 +73,7 @@ const Registration = () => {
                 type="email"
                 name="email"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={onChangeEmail}
                 placeholder="Correo electrónico"
                 required
               />
@@ -78,7 +81,7 @@ const Registration = () => {
                 type="password"
                 name="password"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={onChangePass}
                 placeholder="Contraseña"
                 required
               />
