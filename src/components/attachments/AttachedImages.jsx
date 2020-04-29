@@ -52,7 +52,7 @@ const AttachedImages = props => {
     }
 
     onChange(attachedImages);
-  }, []);
+  }, [images]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: '.jpg, .jpeg, .png',
     onDrop: handleDrop,
