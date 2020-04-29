@@ -16,5 +16,6 @@ export const MEDIA_QUERY_SMALL = `@media (max-width: ${MAX_SCREEN_SMALL}px)`;
 export const MEDIA_QUERY_MEDIUM = `@media (min-width: ${MAX_SCREEN_SMALL + 1}px) and (max-width: ${MAX_SCREEN_MEDIUM}px)`;
 
 // Navbar 
-
 export const NAVBAR_HEIGHT = '64px';
+export const Z_INDEX_NAVBAR = 'z-index: 600';
+

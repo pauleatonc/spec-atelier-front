@@ -6,6 +6,7 @@ import {
   COLOR_PRIMARY,
   MEDIA_QUERY_SMALL,
   MEDIA_QUERY_MEDIUM,
+  Z_INDEX_NAVBAR,
 } from '../../../config/constants/styled-vars';
 
 import LOGO from '../../../assets/images/logo.png';
@@ -24,6 +25,7 @@ export const NavbarContainer = styled.nav`
   transition: all .2s ease-in-out;
   color: ${({ transparent }) => transparent ? COLOR_BLACK : COLOR_WHITE};
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.26);
+  z-index: ${Z_INDEX_NAVBAR};
 `;
 
 export const NavbarContent = styled.div`
