@@ -57,7 +57,7 @@ export const RegisterLink = styled(Link)`
 `;
 
 export const ButtonGoogleContainer = styled.section`
-  margin: 40px 0px;
+  margin: 40px 0;
 `;
 
 export const LoginInfo = styled.p`
