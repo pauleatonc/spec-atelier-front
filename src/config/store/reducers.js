@@ -11,14 +11,10 @@ import specModalPorductReducer from '../../containers/spec-modal-product/SpecMod
 import specModalReducer from '../../components/modal/modal.reducer';
 import specCreateProductReducer from '../../containers/spec-create-product/SpecCreateProduct.reducer';
 import authReducer from '../../containers/auth/auth.reducer';
-import navBarAppReducer from '../../components/navbar/navbar-app/NavbarApp.reducer';
-import navBarLoginReducer from '../../components/navbar/navbar-login/NavbarLogin.reducer';
 import projectsFiltersReducer from '../../containers/projects-filters/ProjectsFilters.reducer';
 import projectsListReducer from '../../containers/projects-list/ProjectsList.reducer';
 
 export default combineReducers({
-  navbarApp: navBarAppReducer,
-  navbarLogin: navBarLoginReducer,
   auth: authReducer,
 	login: loginReducer,
 	recoverPassword: recoverPasswordReducer,

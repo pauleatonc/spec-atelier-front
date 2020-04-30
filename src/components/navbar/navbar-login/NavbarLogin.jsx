@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { selectItem } from './NavbarLogin.actions';
-import NavProfile from '../navbar-profile/NavProfile.container';
+import NavProfile from '../navbar-profile/NavProfile';
 
 import {
   NavbarContainer,
@@ -17,30 +16,28 @@ import {
   LinkLogin,
 } from './NavbarLogin.styles';
 
+const items = [
+  { id: 'us', label: 'Nosotros', to: '/us' },
+  { id: 'products', label: 'Productos', to: '/products' },
+  { id: 'brands', label: 'Marcas', to: '/brands' },
+];
+
 const NavBarLogin = ({ fixed }) => {
-  const dispatch = useDispatch();
   const location = useLocation();
   const [isTransparent, setTransparent] = useState(true);
-  const { items = [], selectedItem = {} } = useSelector(state => state.navbarLogin);
-  const  { isLogin } = useSelector(state => state.auth);
+  const { isLogin } = useSelector(state => state.auth);
   const currentLocation = location?.pathname.split('/')[1];
 
-  const onClickItem = item => () => dispatch(selectItem(item));
-  const onScroll = () => {
+  const onScroll = useCallback(() => {
     if (!fixed) return;
-    if (
-      document.body.scrollTop > 50 ||
-      document.documentElement.scrollTop > 50
-    ) {
-      setTransparent(false);
-    } else {
-      setTransparent(true);
-    }
-  };
+    setTransparent(!(document.body.scrollTop > 50 || document.documentElement.scrollTop > 50));
+  });
+
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
   const transparentize = isTransparent && fixed;
   return (
     <NavbarContainer transparent={transparentize} fixed={fixed}>
@@ -62,8 +59,6 @@ const NavBarLogin = ({ fixed }) => {
               style={{ textDecoration: 'none' }}
             >
               <Item
-                onClick={onClickItem(item)}
-                onKeyPress={onClickItem(item)}
                 active={item.id === currentLocation}
                 transparent={transparentize}
               >

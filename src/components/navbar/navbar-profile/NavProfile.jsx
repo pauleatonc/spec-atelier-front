@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { logoutAction } from '../../../containers/auth/auth.actions';
 import {
   ProfileButton,

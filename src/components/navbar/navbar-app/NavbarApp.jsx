@@ -1,10 +1,8 @@
 import React from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useLocation, useHistory } from 'react-router-dom';
 import LOGO from '../../../assets/images/logo-spec.png';
 import LOGO_MOBILE from '../../../assets/images/logo_footer.png';
-import { selectItem } from './NavbarApp.actions';
-import NavProfile from '../navbar-profile/NavProfile.container';
+import NavProfile from '../navbar-profile/NavProfile';
 
 import {
   NavbarContainer,
@@ -17,12 +15,17 @@ import {
   UnderLine,
 } from './NavbarApp.styles';
 
+
+const items = [
+  { id: 'projects', label: 'Proyectos', to: '/projects' },
+  { id: 'products', label: 'Productos', to: '/products' },
+  { id: 'colaborations', label: 'Colaboradores', to: '/colaborations' },
+];
+
 const NavbarApp = () => {
   const location = useLocation();
   const history = useHistory();
   const [, currentLocation] = location?.pathname.split('/');
-  const { items } = useSelector(state => state.navbarApp);
-
   const goTo = url => () => history.push(url);
 
   return (
