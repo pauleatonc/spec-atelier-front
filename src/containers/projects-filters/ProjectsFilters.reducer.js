@@ -1,5 +1,5 @@
 import {
-  SELECT_FILTER,
+  PROJECTS_SORT_FILTER,
 } from './ProjectsFilters.actions';
 
 const filters = [
@@ -25,7 +25,7 @@ const initialProjectsFilters = {
  */
 const projectsFiltersReducer = (state = initialProjectsFilters, { payload, type }) => {
   switch (type) {
-    case SELECT_FILTER:
+    case PROJECTS_SORT_FILTER:
       return {
         ...state,
         selected: payload.selected,
