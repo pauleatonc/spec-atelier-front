@@ -24,9 +24,8 @@ const middleware = APP_ENV === 'production'
 const store = createStore(persistedReducer, middleware);
 
 /**
- * Persist store "auth" to keep de user data
+ * Persist reducer "auth" to keep de user data
  */
-
 const persistor = persistStore(store);
 
 export { store, persistor };
