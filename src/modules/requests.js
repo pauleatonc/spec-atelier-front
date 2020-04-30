@@ -2,13 +2,19 @@
  * To generate the request's headers.
  */
 const generateHeaders = (contentType, isPublic) => {
+  let headers = {};
+
+  if (contentType) {
+    headers = { 'Content-Type': contentType };
+  }
+
   if (isPublic) {
-    return { 'Content-Type': contentType };
+    return headers;
   }
 
   const token = window?.localStorage.getItem('token') || '';
   
-  return { Authorization: `Bearer ${token}`, 'Content-Type': contentType };
+  return { ...headers, Authorization: `Bearer ${token}` };
 };
 
 /**
@@ -25,7 +31,8 @@ export const getJsonRequest = url => {
  */
 export const postFormRequest = (url, payload) => {
   const formData = new FormData();
-  const headers = generateHeaders('application/x-www-form-urlencoded');
+  // FIXME: https://medium.com/@jugtuttle/formdata-and-strong-params-ruby-on-rails-react-c230d050e26e
+  const headers = generateHeaders();
 
   Object.keys(payload).forEach(key => {
     if (!Array.isArray(payload[key])) {

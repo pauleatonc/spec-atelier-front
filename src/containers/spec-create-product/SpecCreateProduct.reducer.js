@@ -1,16 +1,19 @@
 import {
   CREATE_PRODUCT,
+  CREATE_PRODUCT_ERROR,
   CREATE_PRODUCT_SUCCESS,
+  GET_PRODUCTS_BRANDS_SUCCESS,
+  GET_PRODUCTS_SYSTEMS_SUCCESS,
   HIDE_SPEC_CREATE_PRODUCT,
   HIDE_SPEC_CREATE_PRODUCT_STEP_TWO,
   HIDE_SPEC_CREATE_PRODUCT_STEP_THREE,
-  GET_PRODUCTS_SYSTEMS_SUCCESS,
   SHOW_SPEC_CREATE_PRODUCT,
   SHOW_SPEC_CREATE_PRODUCT_STEP_TWO,
   SHOW_SPEC_CREATE_PRODUCT_STEP_THREE,
 } from './SpecCreateProduct.actions';
 
 const createProductState = {
+  brandsCollection: [],
   stepOne: { show: false },
   stepTwo: { show: false },
   stepThree: { show: false },
@@ -25,14 +28,23 @@ const createProductReducer = (state = createProductState, { payload, type }) => 
     case CREATE_PRODUCT: {
       return { ...state, loading: true };
     }
+    case CREATE_PRODUCT_ERROR: {
+      return { ...state, loading: false };
+    }
     case CREATE_PRODUCT_SUCCESS:
     case HIDE_SPEC_CREATE_PRODUCT: {
       return createProductState;
     }
+    case GET_PRODUCTS_BRANDS_SUCCESS: {
+      return { ...state, brandsCollection: payload.brands };
+    }
+    case GET_PRODUCTS_SYSTEMS_SUCCESS: {
+      return { ...state, systemsCollection: payload.systems };
+    }
     case HIDE_SPEC_CREATE_PRODUCT_STEP_TWO: {
       return {
         ...state,
-        stepTwo: { ...state.stepTwo, show: false },
+        stepTwo: { ...state.stepTwo, ...payload, show: false },
       };
     }
     case HIDE_SPEC_CREATE_PRODUCT_STEP_THREE: {
@@ -40,9 +52,6 @@ const createProductReducer = (state = createProductState, { payload, type }) => 
         ...state,
         stepThree: { ...state.stepThree, ...payload, show: false },
       };
-    }
-    case GET_PRODUCTS_SYSTEMS_SUCCESS: {
-      return { ...state, systemsCollection: payload.systems };
     }
     case SHOW_SPEC_CREATE_PRODUCT: {
       return {

@@ -35,34 +35,34 @@ const AttachedImages = props => {
   const [show, setShow] = useState(false);
   const handleOpen = () => setShow(true);
   const handleClose = () => setShow(false);
-  const handleDrop = useCallback((attachedImages, rejectedImages = []) => {
-    const allImages = [...images, ...attachedImages];
+  const handleDrop = useCallback((acceptedImages = []) => {
+    const allImages = [...images, ...acceptedImages];
+    const attachedImages = acceptedImages.reduce((imgs, image) => {
+      if (imgs.length >= 5) {
+        return imgs;
+      }
 
-    if (allImages.length > 5) {
-      onReject('Puedes subir hasta 5 imágenes');
-
-      return;
-    }
-
-    if (rejectedImages.length > 0) {
-      onReject('Puedes subir solo imágenes JPG o PNG');
-
-      return;
-    }
+      return imgs.concat(image);
+    }, [].concat(images));
 
     handleClose();
+
+    if (allImages.length > 5) {
+      onReject('Puedes subir solo hasta 5 imágenes');
+    }
+
     onChange(attachedImages);
-  }, []);
+  }, [images]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: '.jpg, .jpeg, .png',
     onDrop: handleDrop,
   });
   const { onClick: handleAttach, ...dropProps } = getRootProps();
-  const handleRemove = attachedImage => () => {
-    const updatedAttachedImages = images.filter(
-      image => image.path !== attachedImage.path && image.name !== attachedImage.name,
+  const handleRemove = (attachedImage, attachedIndex) => () => {
+    const updatedAttachedImages = images.filter((image, index) =>
+      !(image.name === attachedImage.name && index === attachedIndex),
     );
-      
+
     onChange(updatedAttachedImages);
   };
 
@@ -85,7 +85,7 @@ const AttachedImages = props => {
           <List>
             {images.map((image, index) => (
               <Item key={index} source={URL.createObjectURL(image)}>
-                <Square onClick={handleRemove(image)}>
+                <Square onClick={handleRemove(image, index)}>
                   <img alt="" src={removeSource} />
                 </Square>
               </Item>
@@ -93,7 +93,7 @@ const AttachedImages = props => {
           </List>
         )}
       </Box>
-      {images.length > 0 && images.length < 5 && <Action onClick={handleOpen}>Sube imágenes</Action>}
+      {images.length > 0 && <Action onClick={handleOpen}>Sube imágenes</Action>}
       <ModalLayout show={show} onClose={handleClose}>
         <DropContent>
           <DropCloseIcon alt="" src={closeSource} onClick={handleClose} />

@@ -38,29 +38,51 @@ const AttachedFiles = props => {
   const [show, setShow] = useState(false);
   const handleOpen = () => setShow(true);
   const handleClose = () => setShow(false);
-  const handleDrop = useCallback((attachedDocuments, rejectedFiles = []) => {
-    const allFiles = [...documents, ...attachedDocuments];
+  const handleDrop = useCallback((acceptedDocuments = []) => {
+    const allDocuments = [...documents, ...acceptedDocuments];
+    const attachedDocuments = acceptedDocuments.reduce((docs, document) => {
+      const pdfDocuments = docs.filter(doc => doc.name.includes('.pdf'));
+      const dwgDocument = docs.find(doc => doc.name.includes('.dwg'));
+      const rvtDocument = docs.find(doc => doc.name.includes('.rvt')); 
 
-    if (allFiles.length > 4 || rejectedFiles.length > 0) {
-      onReject('Puedes subir solo 2 PDF, 1 DWG o 1 RVT');
+      if (document.name.includes('.pdf') && pdfDocuments.length >= 2) {
+        return docs;
+      }
 
-      return;
-    }
+      if (document.name.includes('.dwg') && dwgDocument) {
+        return docs;
+      }
+
+      if (document.name.includes('.rvt') && rvtDocument) {
+        return docs;
+      }
+
+      if (docs.length >= 4) {
+        return docs;
+      }
+
+      return docs.concat(document);
+    }, [].concat(documents));
 
     handleClose();
+
+    if (allDocuments.length > 4) {
+      onReject('Puedes subir hasta 4 documentos: 2 PDF, 1 DWG y 1 RVT');
+    }
+
     onChange(attachedDocuments);
-  }, []);
+  }, [documents]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: '.pdf, .dwg, .rvt',
     onDrop: handleDrop,
   });
   const { onClick: handleAttach, ...dropProps } = getRootProps();
-  const handleRemove = attachedFile => () => {
-    const updatedAttachedFiles = documents.filter(
-      image => image.path !== attachedFile.path && image.name !== attachedFile.name,
+  const handleRemove = (attachedDocument, attachedIndex) => () => {
+    const updatedAttachedDocuments = documents.filter((document, index) =>
+      !(document.name === attachedDocument.name && index === attachedIndex),
     );
       
-    onChange(updatedAttachedFiles);
+    onChange(updatedAttachedDocuments);
   };
 
   return (
@@ -80,14 +102,14 @@ const AttachedFiles = props => {
         )}
         {documents.length > 0 && (
           <List>
-            {documents.map((file, index) => (
+            {documents.map((document, index) => (
               <Item key={index}>
                 <img alt="" src={documentUploadSource} />
                 <ItemDetails>
-                  <ItemText>{file.name}</ItemText>
-                  <ItemText>{`${Math.round(file.size / 1024)} Kb`}</ItemText>
+                  <ItemText>{document.name}</ItemText>
+                  <ItemText>{`${Math.round(document.size / 1024)} Kb`}</ItemText>
                 </ItemDetails>
-                <RemoveIcon alt="" src={removeSource} onClick={handleRemove(file)} />
+                <RemoveIcon alt="" src={removeSource} onClick={handleRemove(document, index)} />
               </Item>
             ))}
           </List>

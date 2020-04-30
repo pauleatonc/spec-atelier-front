@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onHideSpecCreateProduct, onHideSpecCreateProductStepTwo, onShowSpecCreateProductStepThree } from './SpecCreateProduct.actions';
+import {
+  onGetProductsBrands,
+  onHideSpecCreateProduct,
+  onHideSpecCreateProductStepTwo,
+  onShowSpecCreateProductStepThree,
+} from './SpecCreateProduct.actions';
 import { useTextarea, useAutocomplete, useInput } from '../../components/inputs/Inputs.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import StepsBubbles from '../../components/basics/StepsBubbles';
@@ -16,17 +21,27 @@ import closeSource from '../../assets/images/icons/close.svg';
  */
 const SpecCreateProductStepTwo = () => {
   const { brand, description, price, show } = useSelector(state => state.specCreateProduct.stepTwo);
+  const { brandsCollection: brands } = useSelector(state => state.specCreateProduct);
   const dispatch = useDispatch();
   const { handler: handleDescriptionChange, set: setDescriptionValue, value: descriptionValue } = useTextarea(description);
   const { handler: handleBrandChange, set: setBrandValue, value: brandValue } = useAutocomplete(brand);
   const { handler: handlePriceChange, set: setPriceValue, value: priceValue } = useInput(price, 'currency');
   const handleClose = () => dispatch(onHideSpecCreateProduct());
-  const handleExiting = () => {
+  const handleEntering = () => {
+    setDescriptionValue(description || '');
+    setBrandValue(brand || {});
+    setPriceValue(price || '');
+  };
+  const handleExited = () => {
     setDescriptionValue('');
     setBrandValue({});
     setPriceValue('');
   };
-  const handlePrev = () => dispatch(onHideSpecCreateProductStepTwo());
+  const handlePrev = () => dispatch(onHideSpecCreateProductStepTwo({
+    description: descriptionValue,
+    brand: brandValue,
+    price: priceValue,
+  }));
   const handleNext = () => dispatch(onShowSpecCreateProductStepThree({
     description: descriptionValue,
     brand: brandValue,
@@ -34,8 +49,23 @@ const SpecCreateProductStepTwo = () => {
   }));
   const disabledNext = !descriptionValue || !brandValue.label || !priceValue;
 
+  useEffect(() => {
+    if (!show) {
+      return;
+    }
+
+    dispatch(onGetProductsBrands());
+  }, [show]);
+
   return (
-    <ModalLayout overlay={false} show={show} transition={false} onClose={handleClose} onExiting={handleExiting}>
+    <ModalLayout
+      overlay={false}
+      show={show}
+      transition={false}
+      onClose={handleClose}
+      onEntering={handleEntering}
+      onExited={handleExited}
+    >
       <Root shadow={false}>
         <Header>
           <Title>Crear producto</Title>
@@ -55,7 +85,7 @@ const SpecCreateProductStepTwo = () => {
             <Section display="grid" gridGap="46px" gridTemplateRows="1fr 1fr">
               <Autocomplete
                 label="¿Qué marca es?"
-                options={[]}
+                options={brands.map(availableBrand => ({ label: availableBrand.name, value: availableBrand.name }))}
                 placeholder="Elige una marca"
                 value={brandValue}
                 onChange={handleBrandChange}

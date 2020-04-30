@@ -9,9 +9,9 @@
 	},
 	"scripts": {
 		"build:prod": "eval $(grep -v '^#' .env.prod | xargs) webpack -p --mode production --env.NODE_ENV=production",
-    "start:int": "eval $(grep -v '^#' .env.stage | xargs) webpack-dev-server --mode development --env.NODE_ENV=integration",
+		"start:int": "eval $(grep -v '^#' .env.stage | xargs) webpack-dev-server --mode development --env.NODE_ENV=integration",
 		"start:dev": "concurrently \"npm run stubby\" \"npm run dev\"",
-    "start:stage": "eval $(grep -v '^#' .env.stage | xargs) webpack-dev-server --mode development --env.NODE_ENV=integration",
+		"start:stage": "eval $(grep -v '^#' .env.stage | xargs) webpack-dev-server --mode development --env.NODE_ENV=integration",
 		"dev": "eval $(grep -v '^#' .env.dev | xargs) webpack-dev-server --mode development --env.NODE_ENV=development",
 		"stubby": "stubby -w -d mocks/stubby.json",
 		"start": "node ./server.js",
