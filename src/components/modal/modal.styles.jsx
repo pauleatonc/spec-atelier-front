@@ -3,7 +3,7 @@ import {
   MEDIA_QUERY_MEDIUM,
   MEDIA_QUERY_SMALL,
   COLOR_WHITE,
-} from '../../assets/styles/styled-vars';
+} from '../../config/constants/styled-vars';
 
 const padding = '35px';
 

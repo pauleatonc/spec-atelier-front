@@ -1,5 +1,5 @@
 // Colors
-export const COLOR_PRIMARY = 'rgb(64, 191, 174)';
+export const COLOR_PRIMARY = 'rgb(49, 203, 183)';
 export const COLOR_SECONDARY = 'rgb(8, 38, 44)';
 export const COLOR_TERTIARY = 'rgb(244, 130, 80)'
 export const COLOR_GREEN = 'rgb(160, 217, 179)';
@@ -14,3 +14,8 @@ export const MAX_SCREEN_SMALL = 768;
 export const MAX_SCREEN_MEDIUM = 1080;
 export const MEDIA_QUERY_SMALL = `@media (max-width: ${MAX_SCREEN_SMALL}px)`;
 export const MEDIA_QUERY_MEDIUM = `@media (min-width: ${MAX_SCREEN_SMALL + 1}px) and (max-width: ${MAX_SCREEN_MEDIUM}px)`;
+
+// Navbar 
+export const NAVBAR_HEIGHT = '64px';
+export const Z_INDEX_NAVBAR = '600';
+

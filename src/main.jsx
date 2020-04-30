@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import store from './config/store/store';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from './config/store/store';
 import Home from './views/Home';
 import Login from './views/Login';
 import Registration from './views/Registration';
@@ -14,26 +15,34 @@ import Projects from './views/Projects';
 import Profile from './views/Profile';
 import Us from './views/Us';
 import Specification from './views/Specification';
+import Colaborations from './views/Colaborations';
 import './assets/styles/main.scss';
 
+import PublicRoute from './containers/routes/PublicRoute';
+import PrivateRoute from './containers/routes/PrivateRoute';
+
 const Main = () => (
-	<Provider store={store}>
-		<Router>
-      <Switch>
-        <Route exact component={Home} path="/" />
-        <Route exact component={Login} path="/login" />
-        <Route exact component={Registration} path="/registration" />
-        <Route exact component={RecoverPassword} path="/recover_password" />
-        <Route exact component={NewPassword} path="/new_password" />
-        <Route exact component={Products} path="/products" />
-        <Route exact component={Brands} path="/brands" />
-        <Route exact component={Projects} path="/projects" />
-        <Route exact component={Profile} path="/profile" />
-        <Route exact component={Us} path="/us" />
-        <Route exact component={Specification} path="/projects/:id/specification" />
-      </Switch>
-		</Router>
-	</Provider>
+  <Provider store={store}>
+    {/* TODO: Add App Loading component */}
+    <PersistGate loading={null} persistor={persistor}>
+      <Router>
+        <Switch>
+          <PublicRoute exact component={Home} path="/" />
+          <PublicRoute exact restricted component={Login} path="/login" />
+          <PublicRoute exact restricted component={Registration} path="/registration" />
+          <PublicRoute exact restricted component={RecoverPassword} path="/recover_password" />
+          <PublicRoute exact restricted component={NewPassword} path="/new_password" />
+          <PublicRoute exact component={Products} path="/products" />
+          <PublicRoute exact component={Brands} path="/brands" />
+          <PublicRoute exact component={Us} path="/us" />
+          <PublicRoute exact component={Colaborations} path="/colaborations" />
+          <PrivateRoute exact component={Projects} path="/projects" />
+          <PrivateRoute exact component={Profile} path="/profile" />
+          <PrivateRoute exact component={Specification} path="/projects/:id/specification" />
+        </Switch>
+      </Router>
+    </PersistGate>
+  </Provider>
 );
 
 ReactDOM.render(<Main />, document.querySelector('#specAtelier'));
