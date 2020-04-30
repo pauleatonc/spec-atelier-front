@@ -77,12 +77,12 @@ const AttachedFiles = props => {
     onDrop: handleDrop,
   });
   const { onClick: handleAttach, ...dropProps } = getRootProps();
-  const handleRemove = attachedFile => () => {
-    const updatedAttachedFiles = documents.filter(
-      image => image.path !== attachedFile.path && image.name !== attachedFile.name,
+  const handleRemove = (attachedDocument, attachedIndex) => () => {
+    const updatedAttachedDocuments = documents.filter((document, index) =>
+      !(document.name === attachedDocument.name && index === attachedIndex),
     );
       
-    onChange(updatedAttachedFiles);
+    onChange(updatedAttachedDocuments);
   };
 
   return (
@@ -102,14 +102,14 @@ const AttachedFiles = props => {
         )}
         {documents.length > 0 && (
           <List>
-            {documents.map((file, index) => (
+            {documents.map((document, index) => (
               <Item key={index}>
                 <img alt="" src={documentUploadSource} />
                 <ItemDetails>
-                  <ItemText>{file.name}</ItemText>
-                  <ItemText>{`${Math.round(file.size / 1024)} Kb`}</ItemText>
+                  <ItemText>{document.name}</ItemText>
+                  <ItemText>{`${Math.round(document.size / 1024)} Kb`}</ItemText>
                 </ItemDetails>
-                <RemoveIcon alt="" src={removeSource} onClick={handleRemove(file)} />
+                <RemoveIcon alt="" src={removeSource} onClick={handleRemove(document, index)} />
               </Item>
             ))}
           </List>

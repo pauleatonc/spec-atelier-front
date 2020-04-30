@@ -58,11 +58,11 @@ const AttachedImages = props => {
     onDrop: handleDrop,
   });
   const { onClick: handleAttach, ...dropProps } = getRootProps();
-  const handleRemove = attachedImage => () => {
-    const updatedAttachedImages = images.filter(
-      image => image.path !== attachedImage.path && image.name !== attachedImage.name,
+  const handleRemove = (attachedImage, attachedIndex) => () => {
+    const updatedAttachedImages = images.filter((image, index) =>
+      !(image.name === attachedImage.name && index === attachedIndex),
     );
-      
+
     onChange(updatedAttachedImages);
   };
 
@@ -85,7 +85,7 @@ const AttachedImages = props => {
           <List>
             {images.map((image, index) => (
               <Item key={index} source={URL.createObjectURL(image)}>
-                <Square onClick={handleRemove(image)}>
+                <Square onClick={handleRemove(image, index)}>
                   <img alt="" src={removeSource} />
                 </Square>
               </Item>
