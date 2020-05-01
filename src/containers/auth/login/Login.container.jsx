@@ -10,10 +10,10 @@ import {
   RegisterText,
   LogInTittle,
   ButtonGoogleContainer,
-  LoginInfo,
+  TextInfo,
   ButtonLogin,
   KeepSessionContainer,
-} from './Login.styles';
+} from '../Auth.styles';
 import { TextInput } from '../../../components/SpecComponents';
 import { loginAction, googleLoginAction } from '../auth.actions';
 
@@ -49,9 +49,9 @@ const Login = () => {
           />
         </ButtonGoogleContainer>
 
-        <LoginInfo>
+        <TextInfo size={14}>
           O si prefieres inicia con tu cuenta Spec
-        </LoginInfo>
+        </TextInfo>
         <form autoComplete="off">
           <TextInput
             type="email"
@@ -69,8 +69,16 @@ const Login = () => {
             placeholder="Contraseña"
             required
           />
+          <TextInfo size={12}>
+            <RegisterText>
+              ¿Se te olvidó la contraseña? 
+            </RegisterText>
+            <RegisterLink to="/registration" data-view="recover_password" >
+              Recuperar Contraseña 
+            </RegisterLink>
+          </TextInfo>
 
-          <KeepSessionContainer>
+          {/* <KeepSessionContainer>
             <div className="auth__inner__section__inner__body__inner__keep_session__text">
               Mantener mi sesión iniciada
 										<label className="switch" htmlFor="checkbox">
@@ -78,7 +86,7 @@ const Login = () => {
                 <div className="slider round" />
               </label>
             </div>
-          </KeepSessionContainer>
+          </KeepSessionContainer> */}
           <ButtonLogin type="button" onClick={handleSubmit}>
             Iniciar sesión
 					</ButtonLogin>

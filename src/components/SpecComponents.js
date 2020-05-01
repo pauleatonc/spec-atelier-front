@@ -5,6 +5,7 @@ import NavbarApp from './navbar/navbar-app/NavbarApp';
 import TextInput from './inputs/TextInput';
 import ErrorMessage from './basics/ErrorMessage';
 import Button from './buttons/Button';
+import Input from './inputs/Input';
 
 export {
   Button,
@@ -14,4 +15,5 @@ export {
   NavbarLogin,
   NavbarApp,
   TextInput,
+  Input,
 }

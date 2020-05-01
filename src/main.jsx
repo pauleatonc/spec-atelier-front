@@ -5,10 +5,10 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './config/store/store';
 import Home from './views/Home';
-import Login from './views/Login';
-import Registration from './views/Registration';
-import RecoverPassword from './views/RecoverPassword';
-import NewPassword from './views/NewPassword';
+import Login from './views/auth/Login';
+import Registration from './views/auth/Registration';
+import RecoverPassword from './views/auth/RecoverPassword';
+import NewPassword from './views/auth/NewPassword';
 import Products from './views/Products';
 import Brands from './views/Brands';
 import Projects from './views/Projects';
