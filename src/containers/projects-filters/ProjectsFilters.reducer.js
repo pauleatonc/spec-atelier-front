@@ -3,8 +3,8 @@ import {
 } from './ProjectsFilters.actions';
 
 const filters = [
-  { value: 'created_at_asc', label: 'Creadas asc' },
   { value: 'created_at_desc', label: 'Creadas desc' },
+  { value: 'created_at_asc', label: 'Creadas asc' },
   { value: 'updated_at_asc', label: 'Actualizado asc' },
   { value: 'updated_at_desc', label: 'Actualizado desc' },
   { value: 'name_asc', label: 'Nombre asc' },
