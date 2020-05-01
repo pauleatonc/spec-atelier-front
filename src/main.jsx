@@ -27,7 +27,7 @@ const Main = () => (
     <PersistGate loading={null} persistor={persistor}>
       <Router>
         <Switch>
-          <PublicRoute exact component={Home} path="/" />
+          <PublicRoute exact restricted component={Home} path="/" />
           <PublicRoute exact restricted component={Login} path="/login" />
           <PublicRoute exact restricted component={Registration} path="/registration" />
           <PublicRoute exact restricted component={RecoverPassword} path="/recover_password" />
