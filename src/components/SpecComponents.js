@@ -6,6 +6,7 @@ import TextInput from './inputs/TextInput';
 import ErrorMessage from './basics/ErrorMessage';
 import Button from './buttons/Button';
 import Input from './inputs/Input';
+import StepBubbles from './basics/StepsBubbles';
 
 export {
   Button,
@@ -16,4 +17,5 @@ export {
   NavbarApp,
   TextInput,
   Input,
+  StepBubbles,
 }

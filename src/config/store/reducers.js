@@ -13,12 +13,14 @@ import specCreateProductReducer from '../../containers/spec-create-product/SpecC
 import authReducer from '../../containers/auth/auth.reducer';
 import projectsFiltersReducer from '../../containers/projects-filters/ProjectsFilters.reducer';
 import projectsListReducer from '../../containers/projects-list/ProjectsList.reducer';
+import newProjectReducer from '../../containers/project-create/ProjectCreate.reducer';
 
 export default combineReducers({
   auth: authReducer,
 	login: loginReducer,
 	recoverPassword: recoverPasswordReducer,
-	newPassword: newPasswordReducer,
+  newPassword: newPasswordReducer,
+  newProject: newProjectReducer,
   projects: projectsReducer,
   projectsFilters: projectsFiltersReducer,
   projectsList: projectsListReducer,

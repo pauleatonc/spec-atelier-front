@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '../config/constants/environment';
-import { getJsonRequest } from '../modules/requests';
+import { getJsonRequest, postJsonRequest } from '../modules/requests';
 
 /** 
  * Format Object of params to string
@@ -17,4 +17,12 @@ export const getProjectsByUserID = userId => getJsonRequest(`${API_BASE_URL}/api
  * Gets the list of products' items by the given section.
  */
 export const getOrderedProjects = (userId, params) => getJsonRequest(`${API_BASE_URL}/api/users/${userId}/projects/ordered${formatParams(params)}`);
+
+
+/**
+ * Create new Project.
+ */
+export const createNewProject = project => postJsonRequest(`${API_BASE_URL}/api/users/${userId}/projects/ordered${formatParams(params)}`);
+
+
 

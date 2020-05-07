@@ -3,7 +3,7 @@ import {
     COLOR_BLACK,
 } from '../../config/constants/styled-vars';
 
-const HEADER_HEIGHT = '220px';
+const HEADER_HEIGHT = '140px';
 
 export const Container = styled.section`
   background-image: url('${({ background }) => background}');
@@ -11,6 +11,8 @@ export const Container = styled.section`
   width: 100%;
   color: ${COLOR_BLACK};
   font-family: 'Akzidenz Grotesk - bold condenced';
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 export const Content = styled.div`
