@@ -22,7 +22,6 @@ export const getOrderedProjects = (userId, params) => getJsonRequest(`${API_BASE
 /**
  * Create new Project.
  */
-export const createNewProject = project => postJsonRequest(`${API_BASE_URL}/api/users/${userId}/projects/ordered${formatParams(params)}`);
-
+export const createNewProject = (userId, project) => postJsonRequest(`${API_BASE_URL}/api/users/${userId}/projects/`, project);
 
 
