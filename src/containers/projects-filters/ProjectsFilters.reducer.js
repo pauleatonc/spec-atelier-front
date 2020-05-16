@@ -18,6 +18,7 @@ const initialProjectsFilters = {
   filters,
   nextPage: null,
   total: 0,
+  visibility: false,
 };
 
 /**

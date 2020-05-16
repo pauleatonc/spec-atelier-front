@@ -1,28 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOrderedProjectsAction } from '../projects-list/ProjectsList.actions';
+import { Input } from '../../components/SpecComponents';
+import {
+  Container,
+  InputContainer,
+  IconSearch,
+  SortContainer,
+} from './ProjectsFilters.styles';
 
 const ProjectsFilters = () => {
+  const [search, setSearch] = useState('');
   const { filters } = useSelector(state => state.projectsFilters);
   const dispatch = useDispatch();
-  const onSelectFilter = ({ target }) => dispatch(getOrderedProjectsAction(target.value));
-
+  const onSelectFilter = ({ target }) => dispatch(getOrderedProjectsAction({
+    ...filters,
+    [target.name]: target.value,
+  }));
   return (
-    <div className="projects__inner__header__filters__content">
-      <span className="projects__inner__header__filters__content__text">
-        Ver por:&nbsp;
-      </span>
-      <select
-        onChange={onSelectFilter}
-        className="projects__inner__header__filters__content__select"
-      >
-        {filters.map(f => (
-          <option key={f.value} value={f.value}>
-            {f.label}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Container>
+      <InputContainer >
+        <IconSearch />
+        <Input value={search} onChange={onSelectFilter} />
+      </InputContainer>
+      <SortContainer>
+        <span>
+          Ver por:&nbsp;
+        </span>
+        <select
+          onChange={onSelectFilter}
+        >
+          {filters.map(f => (
+            <option key={f.value} value={f.value}>
+              {f.label}
+            </option>
+          ))}
+        </select>
+      </SortContainer>
+    </Container>
   );
 };
 
