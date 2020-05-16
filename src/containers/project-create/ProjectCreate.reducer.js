@@ -6,8 +6,26 @@ import {
 
 
 const initialProject = {
-  newProject: { name: '' },
-  view: 'data',
+  newProject: { 
+    name: 'dsfsfsf',
+    city: {
+      id: 'asdadsadasdadasd',
+      name: '',
+    },
+    project_type: {
+      id: 1,
+      name: '',
+    },
+    work_type: {
+      id: 1,
+      name: '',
+    },
+    visibility: 0,
+    description: 'sdsddas',
+    size: 12,
+    delivery_date: new Date().toLocaleDateString(),
+  },
+  view: 'details',
 };
 
 /**

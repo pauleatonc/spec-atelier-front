@@ -1,36 +1,44 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   StepBubbles,
 } from '../../components/SpecComponents';
-import ProjectDataContainer from './project-data/ProjectData.container';
-import ProjectDetailsContainer from './project-detail/ProjectDetails.container';
+import ProjectDataContainer from './ProjectData.container';
+import ProjectDetailsContainer from './ProjectDetails.container';
+import ProjectPermissionContainer from './ProjectPermission.container';
 import {
   Container,
   Content,
+  StepperContainer,
 } from './ProjectCreate.styles';
+import { getAppData } from '../../config/store/app-store/app.actions';
 
 const ProjectsCreate = () => {
   const { view } = useSelector(state => state.newProject);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const steps = [
+    { active: true, }, 
+    { active: view === 'details' || view === 'permission' },
+    { active: view === 'permission' },
+  ];
 
-  // const onSave = () => dispatch(setNewProjectData('details', tempNewProject));
+  useEffect(() => {
+    dispatch(getAppData());
+  }, []);
+
   return (
     <Container>
-      <StepBubbles
-        prefix="step-1"
-        steps={[{ active: true }, { active: false }]}
+      <StepperContainer>
+        <StepBubbles
+          prefix="step-create"
+          steps={steps}
         />
+      </StepperContainer>
       <Content>
         {view === 'data' && <ProjectDataContainer />}
         {view === 'details' && <ProjectDetailsContainer />}
+        {view === 'permission' && <ProjectPermissionContainer />}
       </Content>
-      {/* <SubHeader>
-        <Title>
-          Detalle del proyecto
-        </Title>
-      </SubHeader> */}
-
     </Container>
   );
 };
