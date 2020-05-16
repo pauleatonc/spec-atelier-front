@@ -14,9 +14,11 @@ import authReducer from '../../containers/auth/auth.reducer';
 import projectsFiltersReducer from '../../containers/projects-filters/ProjectsFilters.reducer';
 import projectsListReducer from '../../containers/projects-list/ProjectsList.reducer';
 import newProjectReducer from '../../containers/project-create/ProjectCreate.reducer';
+import appReducer from '../../config/store/app-store/app.reducer';
 
 export default combineReducers({
   auth: authReducer,
+  app: appReducer,
 	login: loginReducer,
 	recoverPassword: recoverPasswordReducer,
   newPassword: newPasswordReducer,
