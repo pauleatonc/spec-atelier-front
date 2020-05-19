@@ -10,7 +10,6 @@ import {
 
 import {
   Button as ButtonItem,
-  Input as SpecInput,
 } from '../../components/SpecComponents';
 
 import INSTITUTIONAL from '../../assets/images/project/project_type/ic-institutional_grey.svg';
@@ -164,6 +163,19 @@ export const Text = styled.div`
   margin: 16px 0;
 `;
 
+export const Label = styled.div`
+  height: 16px;
+  font-family: Lato;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.42;
+  letter-spacing: 0.86px;
+  color: ${COLOR_BLACK};
+  margin: 10px 0;
+`;
+
 export const PermissionOptions = styled.section`
   display: grid;
   grid-gap: 32px;
@@ -225,4 +237,34 @@ export const Suffix = styled.span`
 
 export const Section = styled.section`
   width: ${({ width }) => width ? width : '100%'};
+`;
+
+export const SelectorDate = styled.button`
+  opacity: 0.62;
+  font-family: Lato;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  color: ${COLOR_BLACK};
+  display: inline-block;
+  width: 100%;
+  padding: 8px 0;
+  background-color: ${COLOR_WHITE};
+  border: none;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SelectorDateContainer = styled.div`
+  min-width: 140px;
+  display:flex;
+  flex: 1;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 2px solid ${COLOR_DARKGREY};
 `;

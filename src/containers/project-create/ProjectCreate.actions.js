@@ -3,7 +3,9 @@ import { createNewProject } from '../../services/projects.service';
 
 export const SET_PROJECT = 'SET_PROJECT';
 export const CHANGE_VIEW = 'CHANGE_VIEW';
-export const CREATE_NEW_PROJECT = 'CREATE_NEW_PROJECT';
+export const CREATE_PROJECT = 'CREATE_PROJECT';
+export const CREATE_PROJECT_ERROR = 'CREATE_PROJECT_ERROR';
+export const TEMP_NEW_PROJECT = 'TEMP_NEW_PROJECT';
 export const GET_DEFAULT_DATA = 'CREATE_DEFAULT_DATA';
 export const GET_DEFAULT_DATA_ERROR = 'CREATE_DEFAULT_DATA_ERROR';
 
@@ -14,12 +16,10 @@ export const changeView = (view, project) => dispatch => dispatch(onActionCreato
 export const createProject = newProject => async (dispatch, getState) => {
   try {
     const { user } = getState().auth;
-    console.log(user, newProject);
-    const { project, response } = await createNewProject(user.id, { project: cleanObject(newProject) });
-    return dispatch(onActionCreator(CREATE_NEW_PROJECT, { project, loading: false }));
-    console.log('eeror', response);
+    const response = await createNewProject(user.id, { project: cleanObject(newProject) });
+    if (response?.status >= 400) return dispatch(onActionCreator(CREATE_PROJECT_ERROR, { loading: false, error }));
+    return dispatch(onActionCreator(CREATE_PROJECT, { loading: false }));
   } catch (error) {
-    console.log('eeror', error);
-    return dispatch(onActionCreator(CREATE_NEW_PROJECT, { loading: false, error: true }));
+    return dispatch(onActionCreator(CREATE_PROJECT_ERROR, { loading: false, error }));
   }
 };

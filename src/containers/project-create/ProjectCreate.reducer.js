@@ -1,31 +1,37 @@
 import {
   SET_PROJECT,
   CHANGE_VIEW,
-  CREATE_NEW_PROJECT,
+  TEMP_NEW_PROJECT,
+  CREATE_PROJECT,
+  CREATE_PROJECT_ERROR,
 } from './ProjectCreate.actions';
 
 
 const initialProject = {
-  newProject: { 
-    name: 'dsfsfsf',
+  newProject: {
+    name: '',
     city: {
-      id: 'asdadsadasdadasd',
+      id: '',
       name: '',
     },
     project_type: {
-      id: 1,
+      id: 0,
       name: '',
     },
     work_type: {
-      id: 1,
+      id: 0,
       name: '',
     },
     visibility: 0,
-    description: 'sdsddas',
-    size: 12,
-    delivery_date: new Date().toLocaleDateString(),
+    description: '',
+    size: '',
+    delivery_date: new Date(),
   },
-  view: 'details',
+  loading: false,
+  view: 'data',
+  error: undefined,
+  created: false,
+  message: undefined,
 };
 
 /**
@@ -44,10 +50,25 @@ const newProjectReducer = (state = initialProject, { payload, type }) => {
         view: payload.view,
         newProject: payload.project,
       };
-    case CREATE_NEW_PROJECT:
+    case TEMP_NEW_PROJECT:
       return {
         ...state,
         newProjec: payload.project,
+        loading: false,
+      };
+    case CREATE_PROJECT:
+      return {
+        ...state,
+        created: true,
+        loading: false,
+        message: 'Se ha creado el Proyecto con éxito'
+      };
+    case CREATE_PROJECT_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: payload.error,
+        message: 'Error al crear el proyecto',
       };
     default: {
       return state;

@@ -17,7 +17,7 @@ export const SubHeaderProjectData = ({
       </Col>
       <Col>
         <Label>Trabajo:</Label>
-        <Text>{work_type.name}</Text>
+        <Text>{work_type.translation_spa}</Text>
       </Col>
     </SubHeader>
   );
@@ -35,15 +35,15 @@ export const SubHeaderProjectDescription = ({
       </Col>
       <Col>
         <Label>Ciudad</Label>
-        <Text>{city.translation_spa}</Text>
+        <Text>{city.name}</Text>
       </Col>
       <Col>
         <Label>Tamaño:</Label>
-        <Text>{city.size}</Text>
+        <Text>{size} m2</Text>
       </Col>
       <Col>
         <Label>Deadline:</Label>
-        <Text>{city.delivery_date}</Text>
+        <Text>{delivery_date.toLocaleDateString()}</Text>
       </Col>
     </SubHeader>
   );

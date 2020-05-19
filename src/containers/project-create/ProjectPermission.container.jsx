@@ -18,20 +18,12 @@ import { SubHeaderProjectData, SubHeaderProjectDescription } from '../../compone
 
 import { createProject, changeView } from './ProjectCreate.actions';
 
-const defaultProject = {
-  name: '',
-};
-
 const ProjectPermission = () => {
-  const { newProject = defaultProject } = useSelector(state => state.newProject);
-  const [tempNewProject, setNewProject] = useState({ ...newProject });
+  const { newProject } = useSelector(state => state.newProject);
+  const [tempNewProject, setNewProject] = useState(newProject);
   const dispatch = useDispatch();
-  const onChangeProjectData = ({ name, value }) => () => {
-    setNewProject({
-      ...tempNewProject,
-      [name]: value,
-    });
-  };
+
+  const onChangeProjectData = ({ name, value }) => () => setNewProject({ ...tempNewProject, [name]: value });
 
   const onSave = () => dispatch(createProject(tempNewProject));
   const onBack = () => dispatch(changeView('details', tempNewProject))
@@ -48,11 +40,11 @@ const ProjectPermission = () => {
         </Text>
         <PermissionOptions>
           <PermissionOption
-            onClick={onChangeProjectData({ name: 'visibility', value: true })}
-            active={tempNewProject.visibility}
+            onClick={onChangeProjectData({ name: 'visibility', value: 0 })}
+            active={!tempNewProject.visibility}
           >
             <PermissionTitle>
-              <i className="fas fa-lock"/>
+              <i className="fas fa-lock" />
               &nbsp;&nbsp;Privado
             </PermissionTitle>
             <PermissionDescription>
@@ -60,11 +52,11 @@ const ProjectPermission = () => {
             </PermissionDescription>
           </PermissionOption>
           <PermissionOption
-            onClick={onChangeProjectData({ name: 'visibility', value: false })}
-            active={!tempNewProject.visibility}
+            onClick={onChangeProjectData({ name: 'visibility', value: 1 })}
+            active={tempNewProject.visibility}
           >
             <PermissionTitle>
-              <i className="fas fa-globe-americas" /> 
+              <i className="fas fa-globe-americas" />
               Público
             </PermissionTitle>
             <PermissionDescription>

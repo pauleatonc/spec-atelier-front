@@ -15,56 +15,25 @@ import {
   IconCheck,
 } from './ProjectCreate.styles';
 
-const buttonsProjectTypes = [
-  { id: 1, name: 'Institucional', icon: 'INSTITUTIONAL', active: false },
-  { id: 2, name: 'Hospitalario', icon: 'HOSPITALER', active: false },
-  { id: 3, name: 'Inmobiliario', icon: 'REAL_STATE', active: false },
-  { id: 4, name: 'Residencial', icon: 'RESIDENTIAL', active: false },
-  { id: 5, name: 'Comercial', icon: 'COMERCIAL', active: false },
-  { id: 6, name: 'Educacional', icon: 'EDUCATIONAL', active: false },
-];
-
-const buttonsWorkTypes = [
-  { id: 1, name: 'Expansión', },
-  { id: 2, name: 'Ampliación' },
-  { id: 3, name: 'Obra Nueva' },
-  { id: 4, name: 'Remodelación' },
-];
-
-const defaultProject = {
-  name: '',
-};
-
 const ProjectData = () => {
-  const { newProject = defaultProject } = useSelector(state => state.newProject);
-  const { cities, work_types, project_types } = useSelector(state => state.app);
-  const [tempNewProject, setNewProject] = useState({ ...newProject });
+  const { newProject } = useSelector(state => state.newProject);
+  const { work_types, project_types } = useSelector(state => state.app);
+  const [tempNewProject, setNewProject] = useState(newProject);
   const dispatch = useDispatch();
-  console.log('zadasda',cities, work_types )
-  const onChangeProjectData = ({ target: { name, value } }) => {
+
+  const onChangeProjectData = ({ name, value }) => () => {
     setNewProject({
       ...tempNewProject,
       [name]: value,
     });
   };
 
-  const onSelectProjectType = project_type => () => {
-    setNewProject({
-      ...tempNewProject,
-      project_type,
-    })
-  };
-
-  const onSelectWorkType = work_type => () => {
-    setNewProject({
-      ...tempNewProject,
-      work_type,
-    })
-  };
+  const onChangeName = ({ target: { name, value } }) => setNewProject({ ...tempNewProject, [name]: value });
 
   const onSave = () => dispatch(changeView('details', tempNewProject));
 
   const canSave = tempNewProject.work_type.id && tempNewProject.project_type.id && tempNewProject.name;
+
   return (
     <>
       <ContentData>
@@ -75,7 +44,7 @@ const ProjectData = () => {
           name="name"
           value={tempNewProject.name}
           placeholder="Nombre"
-          onChange={onChangeProjectData}
+          onChange={onChangeName}
         />
         <br />
         <Title>
@@ -86,7 +55,7 @@ const ProjectData = () => {
             <ButtonContainer key={pt.id}>
               <IconCheck show={pt.id === tempNewProject.project_type.id} />
               <Button
-                onClick={onSelectProjectType(pt)}
+                onClick={onChangeProjectData({ name: 'project_type', value: pt })}
                 variant={pt.id === tempNewProject.project_type.id ? 'primary' : 'default'}
                 inverse
               >
@@ -104,7 +73,7 @@ const ProjectData = () => {
             <ButtonContainer key={wt.id}>
               <IconCheck show={wt.id === tempNewProject.work_type.id} />
               <Button
-                onClick={onSelectWorkType(wt)}
+                onClick={onChangeProjectData({ name: 'work_type', value: wt })}
                 variant={wt.id === tempNewProject.work_type.id ? 'primary' : 'default'}
                 inverse
               >

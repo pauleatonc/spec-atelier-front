@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import DatePicker from 'react-datepicker';
 import {
   TextArea,
   Input,
   Select,
+  SnackBar,
 } from '../../components/SpecComponents';
 import {
   ContentData,
@@ -12,19 +14,16 @@ import {
   Row,
   ButtonContainer,
   Button,
+  Label,
   Text,
   InputContent,
   Section,
   Suffix,
+  SelectorDate,
+  SelectorDateContainer,
 } from './ProjectCreate.styles';
 import { SubHeaderProjectData } from '../../components/project/sub-headers/ProjectSubHeaders';
 import { changeView } from './ProjectCreate.actions';
-
-const cities = [
-  { id: 1, name: 'Viña del Mar' },
-  { id: 2, name: 'Valparaiso' },
-  { id: 3, name: 'Santiago' },
-];
 
 const ProjectDetails = () => {
   const { newProject } = useSelector(state => state.newProject);
@@ -44,11 +43,22 @@ const ProjectDetails = () => {
     setNewProject({
       ...tempNewProject,
       city,
+    });
+  };
+
+  const onSelectDeliveryDate = delivery_date => {
+    setNewProject({
+      ...tempNewProject,
+      delivery_date,
     })
   };
 
-  const onSave = () => dispatch(changeView('permission', tempNewProject))
-  const onBack = () => dispatch(changeView('data', tempNewProject))
+  const onSave = () => dispatch(changeView('permission', tempNewProject));
+  const onBack = () => dispatch(changeView('data', tempNewProject));
+
+  const canSave = tempNewProject.city && !Number.isNaN(tempNewProject.size);
+
+  const citiesOptions = cities.map(c => ({ label: c.name, value: c.id, ...c }));
   return (
     <>
       <SubHeaderProjectData {...tempNewProject} />
@@ -61,7 +71,7 @@ const ProjectDetails = () => {
         </Text>
         <Section width="40%">
           <Select
-            options={cities.map(c => ({ label: c, value: c, id: c }))}
+            options={citiesOptions}
             placeholder="Elige una sección"
             value={tempNewProject.city}
             onChange={onSelectCity}
@@ -84,13 +94,24 @@ const ProjectDetails = () => {
             />
           </InputContent>
         </Section>
-        <br />
-        <Text>
+        <Label>
           Deadline
-        </Text>
-        <input type="date" />
-        <br />
-        <br />
+        </Label>
+        <DatePicker
+          selected={tempNewProject.delivery_date}
+          onChange={onSelectDeliveryDate}
+          customInput={(
+            <SelectorDate
+              type="button"
+              name="delivery_date"
+            >
+              <SelectorDateContainer>
+                {tempNewProject.delivery_date.toLocaleDateString()}
+                <i className="far fa-calendar" />
+              </SelectorDateContainer>
+            </SelectorDate>
+          )}
+        />
         <Text>
           Detalla un poco más el proyecto
         </Text>
@@ -106,7 +127,7 @@ const ProjectDetails = () => {
             </Button>
           </ButtonContainer>
           <ButtonContainer>
-            <Button variant="primary" onClick={onSave}>
+            <Button variant="primary" onClick={onSave} disabled={!canSave}>
               Guardar
             </Button>
           </ButtonContainer>
