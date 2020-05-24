@@ -29,8 +29,8 @@ const ProjectPermission = () => {
   const onBack = () => dispatch(changeView('details', tempNewProject))
   return (
     <>
-      <SubHeaderProjectData {...newProject} />
-      <SubHeaderProjectDescription {...newProject} />
+      <SubHeaderProjectData showInfo {...newProject} />
+      <SubHeaderProjectDescription showInfo {...newProject} />
       <ContentData>
         <Title>
           Permisos del Projecto

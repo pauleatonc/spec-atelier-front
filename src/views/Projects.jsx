@@ -27,7 +27,7 @@ const Projects = () => {
           <ButtonSection>
             <Button variant="primary" onClick={goToNewProject}>
               <i className="fas fa-plus" />
-              Crear nuevo
+              &emsp;Crear nuevo
             </Button>
           </ButtonSection>
           <ProjectFilterContainer />

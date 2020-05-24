@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   COLOR_WHITE,
   COLOR_PRIMARY,
-  COLOR_TERTIARY,
+  COLOR_SECONDARY,
   MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
@@ -195,7 +195,7 @@ export const ButtonContact = styled.input`
   color: ${COLOR_WHITE};
   border-radius: 16px;
   padding: 8px 28px;
-  background-color: ${COLOR_TERTIARY};
+  background-color: ${COLOR_SECONDARY};
   font-size: 16px;
   font-weight: bold;
   text-align: center;

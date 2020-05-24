@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import { COLOR_DARKESTGREY, COLOR_BLACK } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   width: 100%;
@@ -11,18 +11,27 @@ export const Container = styled.section`
 
 export const InputContainer = styled.div`
   flex-basis: 40%;
+  position: relative;
 `;
 
-const iconSearch = () =>  <i className="fas fa-search" />;
-
-export const IconSearch = styled(iconSearch)`
+export const IconSearch = styled.span`
   position: absolute;
-  left: 50px;
+  left: 16px;
+  top: 12px;
 `;
 
 export const SortContainer = styled.section`
   padding-left: 32px;
-  flex-basis: 60%;
+  font-family: Lato;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  color: ${COLOR_BLACK};
+  display: flex;
+  align-items: center;
 `
 
 export const Filters = styled.div`
@@ -67,4 +76,23 @@ export const FilterOption = styled.option`
   line-height: normal;
   letter-spacing: 1px;
   color: #212121;
+`;
+
+export const Selector = styled.select`
+  border: 0; 
+  outline: 0;
+  min-width: 140px;
+  display:flex;
+  flex: 1;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 2px solid ${COLOR_DARKESTGREY};
+  font-family: Lato;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  color: ${COLOR_BLACK};
 `;

@@ -17,7 +17,7 @@ export const getMyProjects = ({ id }) => async (dispatch) => {
 export const getOrderedProjectsAction = params => async (dispatch, getState) => {
   try {
     const { user } = getState().auth;
-    const { projects } = await getOrderedProjects(user.id, { ordered_by: params });
+    const { projects } = await getOrderedProjects(user.id, params);
     dispatch(onActionCreator(GET_ORDERED_PROJECTS, { projects, loading: false }));
   } catch (error) {
     dispatch(onActionCreator(GET_PROJECTS_ERROR, { loading: false, error: true }));

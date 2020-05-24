@@ -22,7 +22,7 @@ import {
   SelectorDate,
   SelectorDateContainer,
 } from './ProjectCreate.styles';
-import { SubHeaderProjectData } from '../../components/project/sub-headers/ProjectSubHeaders';
+import { SubHeaderProjectData, SubHeaderProjectPermission } from '../../components/project/sub-headers/ProjectSubHeaders';
 import { changeView } from './ProjectCreate.actions';
 
 const ProjectDetails = () => {
@@ -61,7 +61,7 @@ const ProjectDetails = () => {
   const citiesOptions = cities.map(c => ({ label: c.name, value: c.id, ...c }));
   return (
     <>
-      <SubHeaderProjectData {...tempNewProject} />
+      <SubHeaderProjectData showInfo {...newProject} />
       <ContentData>
         <Title>
           Detalla el Proyecto
@@ -71,8 +71,9 @@ const ProjectDetails = () => {
         </Text>
         <Section width="40%">
           <Select
+            type="underline"
             options={citiesOptions}
-            placeholder="Elige una sección"
+            placeholder="Elige una ciudad"
             value={tempNewProject.city}
             onChange={onSelectCity}
           />
@@ -97,21 +98,23 @@ const ProjectDetails = () => {
         <Label>
           Deadline
         </Label>
-        <DatePicker
-          selected={tempNewProject.delivery_date}
-          onChange={onSelectDeliveryDate}
-          customInput={(
-            <SelectorDate
+        <Section>
+          <DatePicker
+            selected={tempNewProject.delivery_date}
+            onChange={onSelectDeliveryDate}
+            customInput={(
+              <SelectorDate
               type="button"
               name="delivery_date"
-            >
-              <SelectorDateContainer>
-                {tempNewProject.delivery_date.toLocaleDateString()}
-                <i className="far fa-calendar" />
-              </SelectorDateContainer>
-            </SelectorDate>
-          )}
-        />
+              >
+                <SelectorDateContainer>
+                  {tempNewProject?.delivery_date.toLocaleDateString()}
+                  <i className="far fa-calendar" />
+                </SelectorDateContainer>
+              </SelectorDate>
+            )}
+            />
+        </Section>
         <Text>
           Detalla un poco más el proyecto
         </Text>
@@ -133,11 +136,7 @@ const ProjectDetails = () => {
           </ButtonContainer>
         </Row>
       </ContentData>
-      <SubHeader>
-        <Title>
-          Permisos
-        </Title>
-      </SubHeader>
+      <SubHeaderProjectPermission visibility={newProject.visibility}/>
     </>
   );
 };

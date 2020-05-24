@@ -20,20 +20,20 @@ const projectsReducer = (state = initialProjectState, { payload, type }) => {
         ...state,
         projects: payload.projects,
         loading: false,
-        error: false,
+        error: undefined,
       };
     case GET_ORDERED_PROJECTS:
       return {
         ...state,
         projects: payload.projects,
         loading: payload.loading,
-        error: false,
+        error: undefined,
       };
     case GET_PROJECTS_ERROR:
       return {
         ...state,
         error: payload.error,
-        loading: payload.loading,
+        loading: false,
       };
     default: {
       return state;

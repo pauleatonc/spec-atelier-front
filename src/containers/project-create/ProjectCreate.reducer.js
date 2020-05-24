@@ -4,8 +4,8 @@ import {
   TEMP_NEW_PROJECT,
   CREATE_PROJECT,
   CREATE_PROJECT_ERROR,
+  CLEAN_STORE,
 } from './ProjectCreate.actions';
-
 
 const initialProject = {
   newProject: {
@@ -28,7 +28,7 @@ const initialProject = {
     delivery_date: new Date(),
   },
   loading: false,
-  view: 'data',
+  view: 'details',
   error: undefined,
   created: false,
   message: undefined,
@@ -61,7 +61,7 @@ const newProjectReducer = (state = initialProject, { payload, type }) => {
         ...state,
         created: true,
         loading: false,
-        message: 'Se ha creado el Proyecto con éxito'
+        message: `Creaste el proyecto ${payload?.project?.name}`,
       };
     case CREATE_PROJECT_ERROR:
       return {
@@ -70,6 +70,8 @@ const newProjectReducer = (state = initialProject, { payload, type }) => {
         error: payload.error,
         message: 'Error al crear el proyecto',
       };
+    case CLEAN_STORE:
+      return initialProject;
     default: {
       return state;
     }

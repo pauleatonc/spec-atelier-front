@@ -16,14 +16,14 @@ import INSTITUTIONAL from '../../assets/images/project/project_type/ic-instituti
 import HOSPITAL from '../../assets/images/project/project_type/ic-hospitaler_grey.svg';
 import REAL_STATE from '../../assets/images/project/project_type/ic-real_state_grey.svg';
 import RESIDENTIAL from '../../assets/images/project/project_type/ic-residential_grey.svg';
-import COMMERCIAL from '../../assets/images/project/project_type/ic-comercial_grey.svg';
+import HOTEL from '../../assets/images/project/project_type/ic-hotel_grey.svg';
 import EDUCATIONAL from '../../assets/images/project/project_type/ic-educational_grey.svg';
 
 import INSTITUTIONAL_ACTIVE from '../../assets/images/project/project_type/ic-institutional_green.svg';
 import HOSPITAL_ACTIVE from '../../assets/images/project/project_type/ic-hospitaler_green.svg';
 import REAL_STATE_ACTIVE from '../../assets/images/project/project_type/ic-real_state_green.svg';
 import RESIDENTIAL_ACTIVE from '../../assets/images/project/project_type/ic-residential_green.svg';
-import COMMERCIAL_ACTIVE from '../../assets/images/project/project_type/ic-comercial_green.svg';
+import HOTEL_ACTIVE from '../../assets/images/project/project_type/ic-hotel_green.svg';
 import EDUCATIONAL_ACTIVE from '../../assets/images/project/project_type/ic-educational_green.svg';
 
 import ICON_CHECK from '../../assets/images/icons/check.svg';
@@ -33,7 +33,7 @@ const types = {
   HOSPITAL,
   REAL_STATE,
   RESIDENTIAL,
-  COMMERCIAL,
+  HOTEL,
   EDUCATIONAL,
 };
 
@@ -42,7 +42,7 @@ const activeTypes = {
   HOSPITAL: HOSPITAL_ACTIVE,
   REAL_STATE: REAL_STATE_ACTIVE,
   RESIDENTIAL: RESIDENTIAL_ACTIVE,
-  COMMERCIAL: COMMERCIAL_ACTIVE,
+  HOTEL: HOTEL_ACTIVE,
   EDUCATIONAL: EDUCATIONAL_ACTIVE,
 };
 
@@ -63,7 +63,7 @@ export const ContentData = styled.section`
   border-radius: 15px;
   border: solid 1px ${BORDER_COLOR};
   margin: 24px 0;
-  padding: 44px 40% 44px 104px;
+  padding: 44px 50% 44px 104px;
   ${MEDIA_QUERY_MEDIUM} {
     padding: 44px 104px;
   }
@@ -81,6 +81,8 @@ export const Row = styled.div`
   grid-template-columns: repeat(3, 1fr);
   padding: 16px 0;
   fit-content(33%);
+  grid-column-gap: 1em;
+  grid-row-gap: 32px;
   ${MEDIA_QUERY_SMALL} {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -99,11 +101,11 @@ export const Title = styled.section`
 `;
 
 export const ButtonContainer = styled.div`
-  padding: 8px 16px;
   position: relative;
 `;
 
 export const Button = styled(ButtonItem)`
+  text-transform: capitalize;
   width: 100%;
 `;
 
@@ -114,19 +116,21 @@ export const IconCheck = styled.span`
   background-size: cover;
   width: 16px;
   height: 16px;
-  left: 24px;
-  top: 2px;
+  left: 10%;
+  top: -6px;
   background-color: ${COLOR_WHITE};
   display: ${({ show }) => show ? 'initial' : 'none'}
 `;
 
 export const ButtonIcon = styled.div`
+  font-family: Lato;
+  font-size: 12px;
   background-image: url('${({ type, active }) => active ? activeTypes[type] : types[type] }');
   background-repeat: no-repeat;
   background-size: cover;
   width: 20px;
   height: 20px;
-  margin: auto 4px auto 0;
+  margin: auto 8px auto 0;
 `;
 
 export const SubHeader = styled.section`
@@ -239,32 +243,46 @@ export const Section = styled.section`
   width: ${({ width }) => width ? width : '100%'};
 `;
 
-export const SelectorDate = styled.button`
+export const SelectorDate = styled.div`
   opacity: 0.62;
   font-family: Lato;
   font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: 1px;
   color: ${COLOR_BLACK};
-  display: inline-block;
   width: 100%;
-  padding: 8px 0;
-  background-color: ${COLOR_WHITE};
-  border: none;
-  cursor: pointer;
-  &:focus {
-    outline: none;
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid ${COLOR_DARKGREY};
+  align-items: center;
+  background-color: transparent;
+  display: inline-flex;
+  height: 38px;
+  letter-spacing: 1px;
+  overflow: hidden;
+  padding: 0 32px 0 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  min-width: 140px;
+
+  &:active, &:focus {
+    outline: 0;
+  }
+
+  &::placeholder {
+    color: ${COLOR_DARKGREY};
+  }
+
+  &:disabled {
+    background-color: #DDD;
   }
 `;
 
 export const SelectorDateContainer = styled.div`
   min-width: 140px;
+  width: 100%;
   display:flex;
   flex: 1;
   justify-content: space-between;
   padding: 4px 0;
-  border-bottom: 2px solid ${COLOR_DARKGREY};
+
 `;

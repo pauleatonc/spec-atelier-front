@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Transition } from 'react-transition-group';
 import {
   ROUTE_PROJECTS,
 } from '../../config/constants/routes';
@@ -17,6 +18,7 @@ import {
   StepperContainer,
 } from './ProjectCreate.styles';
 import { getAppData } from '../../config/store/app-store/app.actions';
+import { cleanStore } from './ProjectCreate.actions';
 
 const ProjectsCreate = () => {
   const { view, created, error, message } = useSelector(state => state.newProject);
@@ -33,19 +35,28 @@ const ProjectsCreate = () => {
 
   useEffect(() => {
     dispatch(getAppData());
+    return () => dispatch(cleanStore());
   }, []);
 
   useEffect(() => {
-    setShowSanckBar(true);
-    setTimeout(() => setShowSanckBar(false), 2000);
-    if (created) setTimeout(() => history.push(ROUTE_PROJECTS), 3000);   
+    if (created) {
+      setShowSanckBar(true);
+      setTimeout(() => setShowSanckBar(false), 1500);
+      setTimeout(() => history.push(ROUTE_PROJECTS), 2000);
+    }
+    if (error) {
+      setShowSanckBar(true);
+      setTimeout(() => setShowSanckBar(false), 2000);
+    }
   }, [created, error]);
 
   return (
     <Container>
-      <SnackBar show={showSnackBar}>
-        {message}
-      </SnackBar>
+      {showSnackBar && (
+        <SnackBar show={showSnackBar}>
+          {message}
+        </SnackBar>
+      )}
       <StepperContainer>
         <StepBubbles
           prefix="step-create"
@@ -53,7 +64,7 @@ const ProjectsCreate = () => {
         />
       </StepperContainer>
       <Content>
-        {view === 'data' && <ProjectDataContainer />}
+        {view === 'data' && <ProjectDataContainer showInfo />}
         {view === 'details' && <ProjectDetailsContainer />}
         {view === 'permission' && <ProjectPermissionContainer />}
       </Content>

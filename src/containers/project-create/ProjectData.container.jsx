@@ -5,6 +5,10 @@ import {
   Input,
 } from '../../components/SpecComponents';
 import {
+  SubHeaderProjectDescription,
+  SubHeaderProjectPermission,
+} from '../../components/project/sub-headers/ProjectSubHeaders';
+import {
   Title,
   ButtonIcon,
   SubHeader,
@@ -60,7 +64,7 @@ const ProjectData = () => {
                 inverse
               >
                 <ButtonIcon type={pt?.value.toUpperCase()} active={pt.id === tempNewProject.project_type.id} />
-                {pt.translation_spa}
+                {pt.name}
               </Button>
             </ButtonContainer>
           ))}
@@ -77,7 +81,7 @@ const ProjectData = () => {
                 variant={wt.id === tempNewProject.work_type.id ? 'primary' : 'default'}
                 inverse
               >
-                {wt.translation_spa}
+                {wt.name}
               </Button>
             </ButtonContainer>
           ))}
@@ -94,16 +98,8 @@ const ProjectData = () => {
           </ButtonContainer>
         </Row>
       </ContentData>
-      <SubHeader>
-        <Title>
-          Detalle del proyecto
-        </Title>
-      </SubHeader>
-      <SubHeader>
-        <Title>
-          Permisos
-        </Title>
-      </SubHeader>
+      <SubHeaderProjectDescription {...newProject} />
+      <SubHeaderProjectPermission {...newProject} />
     </>
   );
 };

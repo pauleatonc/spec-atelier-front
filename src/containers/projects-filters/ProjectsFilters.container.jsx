@@ -1,41 +1,54 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOrderedProjectsAction } from '../projects-list/ProjectsList.actions';
-import { Input } from '../../components/SpecComponents';
+import { SearchBar } from '../../components/SpecComponents';
 import {
   Container,
-  InputContainer,
-  IconSearch,
   SortContainer,
+  Selector,
 } from './ProjectsFilters.styles';
 
+import { cleanObject } from '../../config/store/helpers';
+
 const ProjectsFilters = () => {
-  const [search, setSearch] = useState('');
-  const { filters } = useSelector(state => state.projectsFilters);
   const dispatch = useDispatch();
-  const onSelectFilter = ({ target }) => dispatch(getOrderedProjectsAction({
-    ...filters,
-    [target.name]: target.value,
-  }));
+  const { filters } = useSelector(state => state.projectsFilters);
+
+  const [params, setParams] = useState({ searchText: '', sort: filters[0].value });
+
+  const handleSearchChange = ({ target: { name, value } }) => {
+    setParams({ ...params, [name]: value });
+    // Quitar IF cuando el searchText sea cambiado a parametro en el backend. 
+    return;
+    if (value.length > 3) {
+      dispatch(getOrderedProjectsAction(cleanObject({ ...params, searchText: value })));
+    }
+  };
+
   return (
     <Container>
-      <InputContainer >
-        <IconSearch />
-        <Input value={search} onChange={onSelectFilter} />
-      </InputContainer>
+      <SearchBar
+        name="searchText"
+        justifyContent="flex-start"
+        maxWidth="432px"
+        placeholder="Buscar"
+        value={params.searchText}
+        onChange={handleSearchChange}
+      />
       <SortContainer>
         <span>
-          Ver por:&nbsp;
+          &nbsp;Ver por:&nbsp;
         </span>
-        <select
-          onChange={onSelectFilter}
+        <Selector
+          name="sort"
+          onChange={handleSearchChange}
         >
           {filters.map(f => (
             <option key={f.value} value={f.value}>
               {f.label}
             </option>
           ))}
-        </select>
+        </Selector>
       </SortContainer>
     </Container>
   );
