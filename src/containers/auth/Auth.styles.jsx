@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   COLOR_WHITE,
   COLOR_PRIMARY,
-  COLOR_TERTIARY,
+  COLOR_SECONDARY,
   MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
@@ -81,7 +81,7 @@ export const Form = styled.form`
 `;
 
 export const ButtonLogin = styled.button`
-  background-color: ${COLOR_TERTIARY};
+  background-color: ${COLOR_SECONDARY};
   color: ${COLOR_WHITE};
   display: flex;
   justify-content: center;
