@@ -127,7 +127,7 @@ const Project = props => {
 						Creada el {handleChangeToPrettyFormat(created_at)}
 					</p>
 					<p className="project__content__body__text">
-						{prettyLocationFormat(city, country)}
+						{prettyLocationFormat(city  || '', country || '')}
 					</p>
 					<p className="project__content__body__text">
 						{handlePrintEditDate(created_at, updated_at)}
@@ -145,7 +145,11 @@ Project.propTypes = {
 	created_at: PropTypes.string.isRequired,
 	updated_at: PropTypes.string.isRequired,
 	city: PropTypes.string.isRequired,
-	country: PropTypes.string.isRequired,
+	country: PropTypes.string,
 };
+
+Project.defaultProps = {
+	country: '',
+}
 
 export default Project;
