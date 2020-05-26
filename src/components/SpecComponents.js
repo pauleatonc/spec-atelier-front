@@ -9,6 +9,8 @@ import Button from './buttons/Button';
 import Input from './inputs/Input';
 import StepBubbles from './basics/StepsBubbles';
 import Select from './inputs/Select';
+import SnackBar from './basics/Snackbar';
+import SearchBar from './filters/SearchBar';
 
 export {
   Button,
@@ -22,4 +24,6 @@ export {
   Input,
   StepBubbles,
   Select,
+  SnackBar,
+  SearchBar,
 }
