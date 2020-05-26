@@ -52,7 +52,7 @@ const Register = () => {
         </ButtonGoogleContainer>
 
         <TextInfo>
-          O si prefieres registrate con tu cuenta
+          O si prefieres regístrate con tu cuenta
         </TextInfo>
         <form autoComplete="off">
           <TextInput
