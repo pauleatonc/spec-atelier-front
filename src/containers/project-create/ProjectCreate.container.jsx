@@ -17,7 +17,6 @@ import {
   Content,
   StepperContainer,
 } from './ProjectCreate.styles';
-import { getAppData } from '../../config/store/app-store/app.actions';
 import { cleanStore } from './ProjectCreate.actions';
 
 const ProjectsCreate = () => {
@@ -34,7 +33,6 @@ const ProjectsCreate = () => {
   ];
 
   useEffect(() => {
-    dispatch(getAppData());
     return () => dispatch(cleanStore());
   }, []);
 
@@ -64,9 +62,9 @@ const ProjectsCreate = () => {
         />
       </StepperContainer>
       <Content>
-        {view === 'data' && <ProjectDataContainer showInfo />}
-        {view === 'details' && <ProjectDetailsContainer />}
-        {view === 'permission' && <ProjectPermissionContainer />}
+        <ProjectDataContainer />
+        <ProjectDetailsContainer />
+        <ProjectPermissionContainer />
       </Content>
     </Container>
   );

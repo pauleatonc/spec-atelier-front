@@ -1,3 +1,5 @@
+import { formatDate } from  '../../helpers/helpers';
+import moment from 'moment';
 import {
   SET_PROJECT,
   CHANGE_VIEW,
@@ -6,6 +8,10 @@ import {
   CREATE_PROJECT_ERROR,
   CLEAN_STORE,
 } from './ProjectCreate.actions';
+
+
+const delivery_date = new Date();
+delivery_date.setFullYear(delivery_date.getFullYear() + 1);
 
 const initialProject = {
   newProject: {
@@ -25,10 +31,10 @@ const initialProject = {
     visibility: 0,
     description: '',
     size: '',
-    delivery_date: new Date(),
+    delivery_date,
   },
   loading: false,
-  view: 'details',
+  view: 'data',
   error: undefined,
   created: false,
   message: undefined,
@@ -45,6 +51,7 @@ const newProjectReducer = (state = initialProject, { payload, type }) => {
         newProject: payload.project,
       };
     case CHANGE_VIEW:
+      console.log('newProject',payload.project );
       return {
         ...state,
         view: payload.view,

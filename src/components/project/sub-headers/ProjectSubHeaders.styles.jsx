@@ -22,9 +22,10 @@ export const SubHeader = styled.section`
   grid-template-columns: repeat(4, 1fr);
   ${MEDIA_QUERY_MEDIUM} {
     padding-left: 64px;
+    grid-template-columns: repeat(1, 1fr);
   }
   ${MEDIA_QUERY_SMALL} {
-    padding-left: 32px;
+    padding-left: 16px;
     grid-template-columns: repeat(1, 1fr);
   }
 `;
@@ -45,9 +46,11 @@ export const Label = styled.section`
   letter-spacing: 1px;
   margin-right: 8px;
   color: ${COLOR_BLACK};
+  text-transform: capitalize;
 `;
 
 export const Text = styled.section`
+  text-transform: capitalize;
   font-family: Lato;
   font-size: 12px;
   font-weight: normal;

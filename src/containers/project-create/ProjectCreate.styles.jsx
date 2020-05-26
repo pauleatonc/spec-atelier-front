@@ -6,6 +6,7 @@ import {
   COLOR_WHITE,
   COLOR_DARKGREY,
   COLOR_PRIMARY,
+  COLOR_DARKESTGREY,
 } from '../../config/constants/styled-vars';
 
 import {
@@ -181,6 +182,7 @@ export const Label = styled.div`
 `;
 
 export const PermissionOptions = styled.section`
+  margin: 48px 0;
   display: grid;
   grid-gap: 32px;
   flex: 1;
@@ -237,6 +239,7 @@ export const Suffix = styled.span`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
+  color: ${COLOR_DARKESTGREY};
 `;
 
 export const Section = styled.section`

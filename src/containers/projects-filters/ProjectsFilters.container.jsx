@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOrderedProjectsAction } from '../projects-list/ProjectsList.actions';
-import { SearchBar } from '../../components/SpecComponents';
+import { SearchBar, Select } from '../../components/SpecComponents';
 import {
   Container,
   SortContainer,
@@ -14,9 +14,9 @@ const ProjectsFilters = () => {
   const dispatch = useDispatch();
   const { filters } = useSelector(state => state.projectsFilters);
 
-  const [params, setParams] = useState({ searchText: '', sort: filters[0].value });
+  const [params, setParams] = useState({ searchText: '', sort: filters[0] });
 
-  const handleSearchChange = ({ target: { name, value } }) => {
+  const onChangeParams = ({ target: { name, value } }) => {
     setParams({ ...params, [name]: value });
     // Quitar IF cuando el searchText sea cambiado a parametro en el backend. 
     return;
@@ -24,6 +24,7 @@ const ProjectsFilters = () => {
       dispatch(getOrderedProjectsAction(cleanObject({ ...params, searchText: value })));
     }
   };
+  const onChangeSort = value => setParams({ ...params, sort: value });
 
   return (
     <Container>
@@ -33,22 +34,20 @@ const ProjectsFilters = () => {
         maxWidth="432px"
         placeholder="Buscar"
         value={params.searchText}
-        onChange={handleSearchChange}
+        onChange={onChangeParams}
       />
       <SortContainer>
         <span>
           &nbsp;Ver por:&nbsp;
         </span>
-        <Selector
+        <Select
           name="sort"
-          onChange={handleSearchChange}
-        >
-          {filters.map(f => (
-            <option key={f.value} value={f.value}>
-              {f.label}
-            </option>
-          ))}
-        </Selector>
+          type="underline"
+          options={filters}
+          placeholder=""
+          value={params.sort}
+          onChange={onChangeSort}
+        />
       </SortContainer>
     </Container>
   );
