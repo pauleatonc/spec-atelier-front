@@ -96,3 +96,8 @@ export const Selector = styled.select`
   letter-spacing: 1px;
   color: ${COLOR_BLACK};
 `;
+
+export const FilterSortText = styled.span`
+  white-space: nowrap;
+  padding: 4px 16px;
+`

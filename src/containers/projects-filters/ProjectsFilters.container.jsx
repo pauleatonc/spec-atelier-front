@@ -5,7 +5,7 @@ import { SearchBar, Select } from '../../components/SpecComponents';
 import {
   Container,
   SortContainer,
-  Selector,
+  FilterSortText,
 } from './ProjectsFilters.styles';
 
 import { cleanObject } from '../../config/store/helpers';
@@ -37,9 +37,9 @@ const ProjectsFilters = () => {
         onChange={onChangeParams}
       />
       <SortContainer>
-        <span>
-          &nbsp;Ver por:&nbsp;
-        </span>
+        <FilterSortText>
+          Ver por:
+        </FilterSortText>
         <Select
           name="sort"
           type="underline"
