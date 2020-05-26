@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR_BLACK, COLOR_DARKGREY } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
@@ -82,4 +83,19 @@ export const Option = styled.section`
   &:last-child {
     margin: 0 0 6px;
   }
+`;
+
+export const InputUnderline = styled(Input)`
+  border: 0; 
+  outline: 0;
+  min-width: 140px;
+  display:flex;
+  flex: 1;
+  justify-content: space-between;
+  border-bottom: 2px solid ${COLOR_DARKGREY};
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: ${COLOR_BLACK};
+  border-radius: 0;
 `;
