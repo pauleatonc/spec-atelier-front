@@ -9,12 +9,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isLogin) dispatch(getAppData());
-  }, []);
-
-  useEffect(() => {
     if (isLogin && !loaded) dispatch(getAppData());
-  }, [isLogin]);
+  }, []);
 
   return (
     // Show the component only when the user is logged in
