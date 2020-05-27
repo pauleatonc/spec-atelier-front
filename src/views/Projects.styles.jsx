@@ -20,5 +20,5 @@ export const ButtonSection = styled.section`
   margin: 16px 0 38px;
   display: flex;
   flex: 1;
-  justify-content: flex-end;
+  justify-content: ${({ justify }) => justify || 'flex-star' };
 `;

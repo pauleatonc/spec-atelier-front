@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AppLayout from '../components/layouts/AppLayout';
-import { NavbarApp, Button } from '../components/SpecComponents';
+import { NavbarApp } from '../components/SpecComponents';
 import Footer from '../components/footer';
-import { useHistory } from 'react-router';
 
 import ProjectsHeader from '../containers/projects-header/ProjectsHeader';
 import ProjectsListContainer from '../containers/projects-list/ProjectsList.container';
 import ProjectFilterContainer from '../containers/projects-filters/ProjectsFilters.container';
-
+import ProjectsCreateButtonContainer from '../containers/projects-buttons/ProjectsCreateButton';
+import ProjectsSeeMoreButtonContainer from '../containers/projects-buttons/ProjectsSeeMoreButton';
+import ProjectsNoneContainer from '../containers/projects-list/ProjectsNone.container';
 import HEADER_IMG from '../assets/images/project/project_background_header.png';
 
 import { Container, Content, ButtonSection } from './Projects.styles';
 
 const Projects = () => {
-  const history = useHistory();
-  const goToNewProject = () => history.push('./projects/project');
   return (
     <AppLayout footer={<Footer />} header={<NavbarApp />}>
       <ProjectsHeader
@@ -24,14 +23,11 @@ const Projects = () => {
       />
       <Container>
         <Content>
-          <ButtonSection>
-            <Button variant="primary" onClick={goToNewProject}>
-              <i className="fas fa-plus" />
-              &emsp;Crear nuevo
-            </Button>
-          </ButtonSection>
+          <ProjectsCreateButtonContainer />
           <ProjectFilterContainer />
+          <ProjectsNoneContainer />
           <ProjectsListContainer />
+          <ProjectsSeeMoreButtonContainer />
         </Content>
       </Container>
     </AppLayout>
