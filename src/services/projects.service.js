@@ -9,7 +9,7 @@ const formatParams = obj => obj
     : '';
 
 /**
- * Gets the list of products by params (page, limit, sort, keyword).
+ * Gets the list of products by params (page, limit, sort, keywords).
  */
 export const getProjects = (userId, params) => getJsonRequest(`${API_BASE_URL}/api/users/${userId}/projects/${formatParams(params)}`);
 

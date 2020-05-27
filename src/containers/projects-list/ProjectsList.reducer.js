@@ -1,6 +1,7 @@
 import {
   GET_PROJECTS,
   GET_PROJECTS_ERROR,
+  GET_MORE_PROJECTS,
 } from './ProjectsList.actions';
 
 const sortFilters = [
@@ -21,7 +22,7 @@ const initialProjectState = {
   show: false,
   sortFilters,
   params: {
-    keyword: undefined,
+    keywords: undefined,
     page: 0,
     limit: 6,
     sort: sortFilters[0],
@@ -34,6 +35,15 @@ const initialProjectState = {
 const projectsReducer = (state = initialProjectState, { payload, type }) => {
   switch (type) {
     case GET_PROJECTS:
+      return {
+        ...state,
+        projects: payload?.projects?.list || [],
+        total: payload?.projects?.total || 0,
+        loading: false,
+        error: undefined,
+        params: initialProjectState.params,
+      };
+    case GET_MORE_PROJECTS:
       const newProjects = payload?.projects?.list || [];
       return {
         ...state,

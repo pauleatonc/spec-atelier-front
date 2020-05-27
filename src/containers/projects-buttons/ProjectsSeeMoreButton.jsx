@@ -2,7 +2,7 @@ import React, { useState, useEffect }  from 'react';
 import { Button } from '../../components/SpecComponents';
 import { ButtonSection } from '../../views/Projects.styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { getMyProjects } from '../projects-list/ProjectsList.actions';
+import { getMoreProjects } from '../projects-list/ProjectsList.actions';
 
 const ProjectsSeeMoreButton = () => {
   const { projects, loading, error, params, total } = useSelector(state => state.projectsList);
@@ -11,8 +11,8 @@ const ProjectsSeeMoreButton = () => {
 
   const dispatch = useDispatch();
 
-  const getMoreProjects = () => {
-    dispatch(getMyProjects({ 
+  const onClickSeeMore = () => {
+    dispatch(getMoreProjects({ 
       ...params,
       page: params.limit * seeMoreCount,
     }))
@@ -30,7 +30,7 @@ const ProjectsSeeMoreButton = () => {
       {showButton && (
         <Button 
           variant="primary" 
-          onClick={getMoreProjects} 
+          onClick={onClickSeeMore} 
           disabled={loading}
         >
           Ver más

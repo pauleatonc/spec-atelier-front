@@ -23,7 +23,7 @@ const ProjectsList = () => {
     <div className="projects__inner__body">
       {projects.length &&
         projects.map(project => (
-          <ProjectCard {...project} key={project.id} onClick={goToSpecification} />
+          <ProjectCard key={project.id} {...project} key={project.id} onClick={goToSpecification} />
         ))}
     </div>
   );

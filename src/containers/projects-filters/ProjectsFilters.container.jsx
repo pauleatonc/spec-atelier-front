@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getMyProjects } from '../projects-list/ProjectsList.actions';
 import { SearchBar, Select } from '../../components/SpecComponents';
@@ -11,13 +11,17 @@ import {
 const ProjectsFilters = () => {
   const dispatch = useDispatch();
   const { sortFilters, params, projects } = useSelector(state => state.projectsList);
+  const [keywords, setKeywords] = useState(params.keywords || ''); 
 
-  const getProjects = params => dispatch(getMyProjects(params));
+  const getProjects = values => dispatch(getMyProjects(values));
 
-  const onChangeParams = ({ target: { name, value } }) => getProjects({
-    ...params,
-    [name]: value,
-  });
+  const onChangeParams = ({ target: { name, value } }) => {
+    setKeywords(value);
+    getProjects({
+      ...params,
+      [name]: value,
+    });
+}
 
   const onChangeSort = value => getProjects({ ...params, sort: value });
   
@@ -26,11 +30,11 @@ const ProjectsFilters = () => {
   return (
     <Container>
       <SearchBar
-        name="keyword"
+        name="keywords"
         justifyContent="flex-start"
         maxWidth="432px"
         placeholder="Buscar"
-        value={params.keyword || ''}
+        value={keywords}
         onChange={onChangeParams}
       />
       <SortContainer>
