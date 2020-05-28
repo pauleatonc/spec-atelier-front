@@ -22,7 +22,7 @@ const initialProjectState = {
   show: false,
   sortFilters,
   params: {
-    keywords: undefined,
+    keyword: '',
     page: 0,
     limit: 6,
     sort: sortFilters[0],
