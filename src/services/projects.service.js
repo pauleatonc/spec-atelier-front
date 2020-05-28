@@ -1,12 +1,6 @@
 import { API_BASE_URL } from '../config/constants/environment';
 import { getJsonRequest, postJsonRequest } from '../modules/requests';
-
-/** 
- * Format Object of params to string
- */
-const formatParams = obj => obj
-    ? `?${Object.keys(obj).map(key => `${key}=${obj[key]}`).join('&')}`
-    : '';
+import { formatParams } from './services.helpers';
 
 /**
  * Gets the list of products by params (page, limit, sort, keywords).
