@@ -77,16 +77,6 @@ const Login = () => {
               Recuperar Contraseña 
             </RegisterLink>
           </TextInfo>
-
-          {/* <KeepSessionContainer>
-            <div className="auth__inner__section__inner__body__inner__keep_session__text">
-              Mantener mi sesión iniciada
-										<label className="switch" htmlFor="checkbox">
-                <input type="checkbox" id="checkbox" />
-                <div className="slider round" />
-              </label>
-            </div>
-          </KeepSessionContainer> */}
           <ButtonLogin type="button" onClick={handleSubmit}>
             Iniciar sesión
 					</ButtonLogin>
