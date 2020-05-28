@@ -1,11 +1,12 @@
 import {
   GET_DEFAULT_DATA,
+  GET_DEFAULT_DATA_ERROR,
 } from './app.actions';
 
 
 const initialProject = {
   cities: [],
-  project_types: [], 
+  project_types: [],
   room_types: [],
   work_types: [],
   loaded: false,
@@ -23,6 +24,10 @@ const appReducer = (state = initialProject, { payload, type }) => {
         room_types: payload.room_types,
         work_types: payload.work_types,
         loaded: payload.loaded,
+      };
+    case GET_DEFAULT_DATA_ERROR:
+      return {
+        loaded: false,
       };
     default: {
       return state;
