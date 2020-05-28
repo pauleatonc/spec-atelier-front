@@ -61,88 +61,85 @@ const ProjectDetails = () => {
     setNewProject(newProject);
   }, [newProject]);
 
+  if (view !== 'details') {
+    return <SubHeaderProjectDescription {...newProject} />;
+  }
+
   return (
-    <>
-      {view === 'details'
-        ? (
-          <ContentData>
-            <Title>
-              Detalla el Proyecto
+    <ContentData>
+      <Title>
+        Detalla el Proyecto
             </Title>
-            <Text>
-              Elige la ciudad donde se realizará tu proyecto
+      <Text>
+        Elige la ciudad donde se realizará tu proyecto
             </Text>
-            <Section width="40%">
-              <Select
-                type="underline"
-                options={citiesOptions}
-                placeholder="Elige una ciudad"
-                value={tempNewProject.city}
-                onChange={onSelectCity}
-              />
-            </Section>
-            <Text>
-              ¿Qué tamaño tiene el proyecto?
+      <Section width="40%">
+        <Select
+          type="underline"
+          options={citiesOptions}
+          placeholder="Elige una ciudad"
+          value={tempNewProject.city}
+          onChange={onSelectCity}
+        />
+      </Section>
+      <Text>
+        ¿Qué tamaño tiene el proyecto?
             </Text>
-            <Section width="40%">
-              <InputContent>
-                <Suffix value="m2" >
-                  m2
+      <Section width="40%">
+        <InputContent>
+          <Suffix value="m2" >
+            m2
             </Suffix>
-                <Input
-                  width="100%"
-                  name="size"
-                  placeholder="EJ: 600"
-                  value={tempNewProject.size}
-                  onChange={onChangeProjectData}
-                />
-              </InputContent>
-            </Section>
-            <Label>
-              Deadline
+          <Input
+            width="100%"
+            name="size"
+            placeholder="EJ: 600"
+            value={tempNewProject.size}
+            onChange={onChangeProjectData}
+          />
+        </InputContent>
+      </Section>
+      <Label>
+        Deadline
             </Label>
-            <Section>
-              <DatePicker
-                selected={tempNewProject.delivery_date}
-                onChange={onSelectDeliveryDate}
-                customInput={(
-                  <SelectorDate
-                    type="button"
-                    name="delivery_date"
-                  >
-                    <SelectorDateContainer>
-                      {formatDate(tempNewProject?.delivery_date)}
-                      <i className="far fa-calendar" />
-                    </SelectorDateContainer>
-                  </SelectorDate>
-                )}
-              />
-            </Section>
-            <Text>
-              Detalla un poco más el proyecto
+      <Section>
+        <DatePicker
+          selected={tempNewProject.delivery_date}
+          onChange={onSelectDeliveryDate}
+          customInput={(
+            <SelectorDate
+              type="button"
+              name="delivery_date"
+            >
+              <SelectorDateContainer>
+                {formatDate(tempNewProject?.delivery_date)}
+                <i className="far fa-calendar" />
+              </SelectorDateContainer>
+            </SelectorDate>
+          )}
+        />
+      </Section>
+      <Text>
+        Detalla un poco más el proyecto
             </Text>
-            <TextArea
-              name="description"
-              value={tempNewProject.description}
-              onChange={onChangeProjectData}
-            />
-            <Row>
-              <ButtonContainer>
-                <Button variant="gray" onClick={onBack}>
-                  Atrás
+      <TextArea
+        name="description"
+        value={tempNewProject.description}
+        onChange={onChangeProjectData}
+      />
+      <Row>
+        <ButtonContainer>
+          <Button variant="gray" onClick={onBack}>
+            Atrás
             </Button>
-              </ButtonContainer>
-              <ButtonContainer>
-                <Button variant="primary" onClick={onSave} disabled={!canSave}>
-                  Guardar
+        </ButtonContainer>
+        <ButtonContainer>
+          <Button variant="primary" onClick={onSave} disabled={!canSave}>
+            Guardar
             </Button>
-              </ButtonContainer>
-            </Row>
-          </ContentData>
-        ) : (
-          <SubHeaderProjectDescription {...newProject} />
-        )}
-    </>
+        </ButtonContainer>
+      </Row>
+    </ContentData>
   );
 };
 

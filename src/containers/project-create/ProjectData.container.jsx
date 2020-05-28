@@ -54,73 +54,70 @@ const ProjectData = () => {
   useEffect(() => {
     setNewProject(newProject);
   }, [newProject]);
+  
+  if (view !== 'data') {
+    return <SubHeaderProjectData {...newProject} />;
+  } 
 
   return (
-    <>
-      {view === 'data'
-        ? (
-          <ContentData>
-            <Title>
-              ¿Cómo se llama el proyecto?
+    <ContentData>
+      <Title>
+        ¿Cómo se llama el proyecto?
            </Title>
-            <Input
-              name="name"
-              value={tempNewProject.name}
-              placeholder="Nombre"
-              onChange={onChangeName}
-            />
-            <br />
-            <Title>
-              ¿Qué tipo de proyecto es?
+      <Input
+        name="name"
+        value={tempNewProject.name}
+        placeholder="Nombre"
+        onChange={onChangeName}
+      />
+      <br />
+      <Title>
+        ¿Qué tipo de proyecto es?
            </Title>
-            <Row>
-              {project_types.map(pt => (
-                <ButtonContainer key={pt.id}>
-                  <IconCheck show={pt.id === tempNewProject.project_type.id} />
-                  <Button
-                    onClick={onChangeProjectData({ name: 'project_type', value: pt })}
-                    variant={pt.id === tempNewProject.project_type.id ? 'primary' : 'default'}
-                    inverse
-                  >
-                    <ButtonIcon type={pt?.value.toUpperCase()} active={pt.id === tempNewProject.project_type.id} />
-                    {pt.name}
-                  </Button>
-                </ButtonContainer>
-              ))}
-            </Row>
-            <Title>
-              ¿Qué tipo de trabajo es?
-            </Title>
-            <Row>
-              {work_types.map(wt => (
-                <ButtonContainer key={wt.id}>
-                  <IconCheck show={wt.id === tempNewProject.work_type.id} />
-                  <Button
-                    onClick={onChangeProjectData({ name: 'work_type', value: wt })}
-                    variant={wt.id === tempNewProject.work_type.id ? 'primary' : 'default'}
-                    inverse
-                  >
-                    {wt.name}
-                  </Button>
-                </ButtonContainer>
-              ))}
-            </Row>
-            <Row>
-              <ButtonContainer>
-                <Button
-                  variant={canSave ? 'primary' : 'gray'}
-                  onClick={onSave}
-                  disabled={!canSave}
-                >
-                  Guardar
+      <Row>
+        {project_types.map(pt => (
+          <ButtonContainer key={pt.id}>
+            <IconCheck show={pt.id === tempNewProject.project_type.id} />
+            <Button
+              onClick={onChangeProjectData({ name: 'project_type', value: pt })}
+              variant={pt.id === tempNewProject.project_type.id ? 'primary' : 'default'}
+              inverse
+            >
+              <ButtonIcon type={pt?.value.toUpperCase()} active={pt.id === tempNewProject.project_type.id} />
+              {pt.name}
             </Button>
-              </ButtonContainer>
-            </Row>
-          </ContentData>
-        ): (
-          <SubHeaderProjectData {...newProject} />
-        )}
-    </>
+          </ButtonContainer>
+        ))}
+      </Row>
+      <Title>
+        ¿Qué tipo de trabajo es?
+            </Title>
+      <Row>
+        {work_types.map(wt => (
+          <ButtonContainer key={wt.id}>
+            <IconCheck show={wt.id === tempNewProject.work_type.id} />
+            <Button
+              onClick={onChangeProjectData({ name: 'work_type', value: wt })}
+              variant={wt.id === tempNewProject.work_type.id ? 'primary' : 'default'}
+              inverse
+            >
+              {wt.name}
+            </Button>
+          </ButtonContainer>
+        ))}
+      </Row>
+      <Row>
+        <ButtonContainer>
+          <Button
+            variant={canSave ? 'primary' : 'gray'}
+            onClick={onSave}
+            disabled={!canSave}
+          >
+            Guardar
+            </Button>
+        </ButtonContainer>
+      </Row>
+    </ContentData>
   );
 };
 

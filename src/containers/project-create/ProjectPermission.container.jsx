@@ -49,60 +49,57 @@ const ProjectPermission = () => {
     setNewProject(newProject);
   }, [newProject]);
 
+  if (view !== 'permission') {
+    return <SubHeaderProjectPermission visibility={newProject.visibility} />;
+  }
+
   return (
-    <>
-      {view === 'permission'
-        ? (
-          <ContentData>
-            <Title>
-              Permisos del Proyecto
+    <ContentData>
+      <Title>
+        Permisos del Proyecto
             </Title>
-            <Text>
-              Visibilidad
+      <Text>
+        Visibilidad
             </Text>
-            <PermissionOptions>
-              <PermissionOption
-                onClick={onChangeProjectData({ name: 'visibility', value: 0 })}
-                active={!tempNewProject.visibility}
-              >
-                <PermissionTitle>
-                  <i className="fas fa-lock" />
+      <PermissionOptions>
+        <PermissionOption
+          onClick={onChangeProjectData({ name: 'visibility', value: 0 })}
+          active={!tempNewProject.visibility}
+        >
+          <PermissionTitle>
+            <i className="fas fa-lock" />
                   &nbsp;&nbsp;Privado
                 </PermissionTitle>
-                <PermissionDescription>
-                  Solo tendrán acceso las personas que elegiste para que puedan ver o editar el proyecto.
+          <PermissionDescription>
+            Solo tendrán acceso las personas que elegiste para que puedan ver o editar el proyecto.
                     </PermissionDescription>
-              </PermissionOption>
-              <PermissionOption
-                onClick={onChangeProjectData({ name: 'visibility', value: 1 })}
-                active={tempNewProject.visibility}
-              >
-                <PermissionTitle>
-                  <i className="fas fa-globe-americas" />
+        </PermissionOption>
+        <PermissionOption
+          onClick={onChangeProjectData({ name: 'visibility', value: 1 })}
+          active={tempNewProject.visibility}
+        >
+          <PermissionTitle>
+            <i className="fas fa-globe-americas" />
                   &nbsp;&nbsp;Público
                 </PermissionTitle>
-                <PermissionDescription>
-                  Cualquier persona puede ver y editar este proyecto.
+          <PermissionDescription>
+            Cualquier persona puede ver y editar este proyecto.
                 </PermissionDescription>
-              </PermissionOption>
-            </PermissionOptions>
-            <Row>
-              <ButtonContainer>
-                <Button variant="gray" onClick={onBack}>
-                  Atrás
+        </PermissionOption>
+      </PermissionOptions>
+      <Row>
+        <ButtonContainer>
+          <Button variant="gray" onClick={onBack}>
+            Atrás
                   </Button>
-              </ButtonContainer>
-              <ButtonContainer>
-                <Button variant="primary" onClick={onSave}>
-                  Guardar
+        </ButtonContainer>
+        <ButtonContainer>
+          <Button variant="primary" onClick={onSave}>
+            Guardar
                     </Button>
-              </ButtonContainer>
-            </Row>
-          </ContentData>
-        ) : (
-          <SubHeaderProjectPermission visibility={newProject.visibility} />
-        )}
-    </>
+        </ButtonContainer>
+      </Row>
+    </ContentData>
   );
 };
 
