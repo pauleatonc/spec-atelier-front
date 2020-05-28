@@ -1,6 +1,9 @@
+// Borders 
+export const BORDER_GREY = 'rgb(201, 201, 201)';
+
 // Colors
 export const COLOR_PRIMARY = 'rgb(49, 203, 183)';
-export const COLOR_SECONDARY = 'rgb(244, 130, 80)'
+export const COLOR_SECONDARY = 'rgb(244, 130, 80)';
 export const COLOR_TERTIARY = 'rgb(8, 38, 44)';
 export const COLOR_GREEN = 'rgb(160, 217, 179)';
 export const COLOR_ORNGE = 'rgb(255, 108, 54)';
