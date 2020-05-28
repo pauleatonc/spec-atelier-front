@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {
+  BORDER_GREY,
   COLOR_BLACK,
   MEDIA_QUERY_SMALL,
   MEDIA_QUERY_MEDIUM,
@@ -47,8 +48,6 @@ const activeTypes = {
   EDUCATIONAL: EDUCATIONAL_ACTIVE,
 };
 
-const BORDER_COLOR = '#c9c9c9';
-const BACKGROUND_SUB_HEADER = '#f5f5f5';
 
 export const Container = styled.section`
   padding: 24px 0;
@@ -62,7 +61,7 @@ export const Content = styled.div`
 
 export const ContentData = styled.section`
   border-radius: 15px;
-  border: solid 1px ${BORDER_COLOR};
+  border: solid 1px ${BORDER_GREY};
   margin: 24px 0;
   padding: 44px 50% 44px 104px;
   ${MEDIA_QUERY_MEDIUM} {
@@ -138,7 +137,7 @@ export const SubHeader = styled.section`
   width: 100%;
   height: 62px;
   border-radius: 9px;
-  background-color: ${BACKGROUND_SUB_HEADER};
+  background-color: ${COLOR_DARKESTGREY};
   font-family: Lato;
   font-size: 16px;
   font-weight: bold;
@@ -193,7 +192,7 @@ export const PermissionOption = styled.section`
   cursor: pointer;
   min-height: 120px;
   border-radius: 4px;
-  border: solid 1px ${({ active }) => active ? COLOR_PRIMARY : COLOR_DARKGREY};
+  border: solid 1px ${({ active }) => active ? COLOR_PRIMARY : BORDER_GREY};
   background-color: ${({ active }) => active ? COLOR_DARKGREY : COLOR_WHITE};
   padding: 24px 36px;
 `;
