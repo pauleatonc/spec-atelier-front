@@ -51,7 +51,6 @@ const newProjectReducer = (state = initialProject, { payload, type }) => {
         newProject: payload.project,
       };
     case CHANGE_VIEW:
-      console.log('newProject',payload.project );
       return {
         ...state,
         view: payload.view,
@@ -78,7 +77,7 @@ const newProjectReducer = (state = initialProject, { payload, type }) => {
         message: 'Error al crear el proyecto',
       };
     case CLEAN_STORE:
-      return initialProject;
+      return { ...initialProject };
     default: {
       return state;
     }

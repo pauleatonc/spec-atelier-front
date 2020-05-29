@@ -1,4 +1,4 @@
-import onActionCreator, { cleanObject } from '../../config/store/helpers';
+import onActionCreator from '../../config/store/helpers';
 import { createNewProject } from '../../services/projects.service';
 
 export const SET_PROJECT = 'SET_PROJECT';
@@ -19,7 +19,7 @@ export const cleanStore = () => dispatch => dispatch(onActionCreator(CLEAN_STORE
 export const createProject = newProject => async (dispatch, getState) => {
   try {
     const { user } = getState().auth;
-    const response = await createNewProject(user.id, { project: cleanObject(newProject) });
+    const response = await createNewProject(user.id, newProject);
     if (response?.status >= 400) return dispatch(onActionCreator(CREATE_PROJECT_ERROR, { loading: false, error }));
     return dispatch(onActionCreator(CREATE_PROJECT, { project: response.project, loading: false }));
   } catch (error) {
