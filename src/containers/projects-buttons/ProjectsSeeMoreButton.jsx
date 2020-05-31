@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getMoreProjects } from '../projects-list/ProjectsList.actions';
 
 const ProjectsSeeMoreButton = () => {
-  const { projects, loading, error, params, total } = useSelector(state => state.projectsList);
-  const [seeMoreCount, setSeeMoreCount]  = useState(0);
+  const { projects, loading, params, total } = useSelector(state => state.projectsList);
   const [showButton, setShowButton] = useState(true);
 
   const dispatch = useDispatch();
@@ -14,14 +13,13 @@ const ProjectsSeeMoreButton = () => {
   const onClickSeeMore = () => {
     dispatch(getMoreProjects({ 
       ...params,
-      page: params.limit * seeMoreCount,
+      page: params.page + 1,
     }))
   };
 
   useEffect(() => {
-    if (!error) setSeeMoreCount(setSeeMoreCount + 1);
     setShowButton(!!total && projects.length < total); 
-  }, [projects, error]);
+  }, [projects]);
 
   if (!projects.length) return null;
 
