@@ -12,7 +12,7 @@ const ProjectsList = () => {
   const goToSpecification = ({ id }) => history.push(`/projects/${id}/specification`); 
 
   useEffect(() => {
-    dispatch(getMyProjects(params));
+    if (!projects.length) dispatch(getMyProjects(params));
   }, []);
 
   if (loading) return <Loading />;
