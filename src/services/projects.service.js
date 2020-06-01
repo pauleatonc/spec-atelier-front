@@ -1,20 +1,16 @@
 import { API_BASE_URL } from '../config/constants/environment';
-import { getJsonRequest } from '../modules/requests';
-
-/** 
- * Format Object of params to string
- */
-const formatParams = obj => obj
-    ? `?${Object.keys(obj).map(key => `${key}=${obj[key]}`).join('&')}`
-    : '';
+import { getJsonRequest, postJsonRequest } from '../modules/requests';
+import { formatParams, cleanObject } from './services.helpers';
 
 /**
- * Gets the list of current user projects sections available.
+ * Gets the list of products by params (page, limit, sort, keywords).
  */
-export const getProjectsByUserID = userId => getJsonRequest(`${API_BASE_URL}/api/users/${userId}/projects`);
+export const getProjects = (userId, params) => getJsonRequest(`${API_BASE_URL}/api/users/${userId}/projects/${formatParams(params)}`);
+
 
 /**
- * Gets the list of products' items by the given section.
+ * Create new Project.
  */
-export const getOrderedProjects = (userId, params) => getJsonRequest(`${API_BASE_URL}/api/users/${userId}/projects/ordered${formatParams(params)}`);
+export const createNewProject = (userId, project) => postJsonRequest(`${API_BASE_URL}/api/users/${userId}/projects/`, { project: cleanObject(project) });
+
 

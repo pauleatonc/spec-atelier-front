@@ -1,13 +1,17 @@
+// Borders 
+export const BORDER_GREY = 'rgb(201, 201, 201)';
+
 // Colors
 export const COLOR_PRIMARY = 'rgb(49, 203, 183)';
-export const COLOR_SECONDARY = 'rgb(8, 38, 44)';
-export const COLOR_TERTIARY = 'rgb(244, 130, 80)'
+export const COLOR_SECONDARY = 'rgb(244, 130, 80)';
+export const COLOR_TERTIARY = 'rgb(8, 38, 44)';
 export const COLOR_GREEN = 'rgb(160, 217, 179)';
 export const COLOR_ORNGE = 'rgb(255, 108, 54)';
 export const COLOR_GREY = 'rgba(207, 207, 207, 0.13)';
 export const COLOR_DARKGREY = 'rgb(242, 242, 242)';
 export const COLOR_BLACK = 'rgb(33, 33, 33)';
 export const COLOR_WHITE = 'rgb(255, 255, 255)';
+export const COLOR_DARKESTGREY = 'rgb(153, 153, 153)';
 
 // Media Queries 
 export const MAX_SCREEN_SMALL = 768;

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import {
   COLOR_WHITE,
   COLOR_PRIMARY,
-  COLOR_TERTIARY,
+  COLOR_SECONDARY,
   MEDIA_QUERY_SMALL,
-} from '../../../config/constants/styled-vars';
+} from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   height: 100vh;
@@ -54,15 +54,20 @@ export const RegisterLink = styled(Link)`
   color: ${COLOR_PRIMARY};
   text-decoration: none;
   margin-left: 5px;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  font-style: normal;
+  font-size: 12px;
 `;
 
 export const ButtonGoogleContainer = styled.section`
   margin: 40px 0;
 `;
 
-export const LoginInfo = styled.p`
+export const TextInfo = styled.p`
   font-family: 'Lato', sans-serif;
-  font-size: 14px;
+  font-size: ${({ size = 14 }) => size}px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -76,7 +81,7 @@ export const Form = styled.form`
 `;
 
 export const ButtonLogin = styled.button`
-  background-color: ${COLOR_TERTIARY};
+  background-color: ${COLOR_SECONDARY};
   color: ${COLOR_WHITE};
   display: flex;
   justify-content: center;

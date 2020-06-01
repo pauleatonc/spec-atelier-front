@@ -1,28 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getOrderedProjectsAction } from '../projects-list/ProjectsList.actions';
+import { getMyProjects } from '../projects-list/ProjectsList.actions';
+import { SearchBar, Select } from '../../components/SpecComponents';
+import {
+  Container,
+  SortContainer,
+  FilterSortText,
+} from './ProjectsFilters.styles';
 
 const ProjectsFilters = () => {
-  const { filters } = useSelector(state => state.projectsFilters);
   const dispatch = useDispatch();
-  const onSelectFilter = ({ target }) => dispatch(getOrderedProjectsAction(target.value));
+  const { sortFilters, params, projects } = useSelector(state => state.projectsList);
+  const [keywords, setKeywords] = useState(params.keywords || ''); 
+
+  const getProjects = values => dispatch(getMyProjects(values));
+
+  const onChangeParams = ({ target: { name, value } }) => {
+    setKeywords(value);
+    getProjects({
+      ...params,
+      [name]: value,
+    });
+}
+
+  const onChangeSort = value => getProjects({ ...params, sort: value });
+  
+  if (!projects.length) return null;
 
   return (
-    <div className="projects__inner__header__filters__content">
-      <span className="projects__inner__header__filters__content__text">
-        Ver por:&nbsp;
-      </span>
-      <select
-        onChange={onSelectFilter}
-        className="projects__inner__header__filters__content__select"
-      >
-        {filters.map(f => (
-          <option key={f.value} value={f.value}>
-            {f.label}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Container>
+      <SearchBar
+        name="keywords"
+        justifyContent="flex-start"
+        maxWidth="432px"
+        placeholder="Buscar"
+        value={keywords}
+        onChange={onChangeParams}
+      />
+      <SortContainer>
+        <FilterSortText>
+          Ver por:
+        </FilterSortText>
+        <Select
+          name="sort"
+          type="underline"
+          options={sortFilters}
+          placeholder=""
+          value={params.sort}
+          onChange={onChangeSort}
+        />
+      </SortContainer>
+    </Container>
   );
 };
 

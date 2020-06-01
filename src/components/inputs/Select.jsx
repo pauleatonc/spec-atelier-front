@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import DropdownMenu from '../menus/DropdownMenu';
-import { Root, Label, Section, Input, DropIcon, Option } from './Select.styles';
+import { Root, Label, Section, Input, DropIcon, Option, InputUnderline } from './Select.styles';
 import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
 
 /**
  * The Select' component.
  */
 const Select = props => {
-  const { disabled, label, options, placeholder, value: selectedOption, onChange } = props;
+  const { disabled, label, options, placeholder, value: selectedOption, onChange, type } = props;
   const [anchor, setAnchor] = useState(undefined);
   const [width, setWidth] = useState('initial');
   const handleOpen = event => {
@@ -25,7 +25,8 @@ const Select = props => {
     <Root>
       {label && <Label>{label}</Label>}
       <Section onClick={disabled ? undefined : handleOpen}>
-        <Input readOnly disabled={disabled} placeholder={placeholder} value={selectedOption.label || ''} />
+        {type === 'default' && <Input readOnly disabled={disabled} placeholder={placeholder} value={selectedOption.label || ''} />}
+        {type === 'underline' && <InputUnderline readOnly disabled={disabled} placeholder={placeholder} value={selectedOption.label || ''} /> }
         <DropIcon alt="" src={dropArrowSource} />
       </Section>
       <DropdownMenu 
@@ -48,6 +49,7 @@ Select.defaultProps = {
   disabled: false,
   label: '',
   placeholder: '',
+  type: 'default',
 };
 Select.propTypes = {
   disabled: PropTypes.bool,
@@ -64,6 +66,7 @@ Select.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }).isRequired,
   onChange: PropTypes.func.isRequired,
+  type: PropTypes.oneOf(['default', 'underline']),
 };
 
 export default Select;

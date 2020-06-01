@@ -11,7 +11,7 @@ import {
 } from '../../../config/constants/styled-vars';
 
 import LOGO from '../../../assets/images/logo-spec.png';
-import LOGO_SMALL from '../../../assets/images/logo_footer.png';
+import LOGO_SMALL from '../../../assets/images/logo-icon.png';
 
 export const NavbarContainer = styled.nav`
   top: 0;

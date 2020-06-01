@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import {
+  COLOR_WHITE,
+  COLOR_PRIMARY,
+  COLOR_SECONDARY,
+} from '../../config/constants/styled-vars';
+
 const BaseButton = styled.button`
   align-items: center;
-  color: #FFF;
+  color: ${COLOR_WHITE};
   cursor: pointer;
   border-radius: 18px;
   display: inline-flex;
@@ -32,21 +38,26 @@ const BaseButton = styled.button`
 
 BaseButton.propTypes = {
   width: PropTypes.string.isRequired,
+  inverse: PropTypes.bool,
+};
+
+BaseButton.defaultProps = {
+  inverse: false,
 };
 
 export const PrimaryButton = styled(BaseButton)`
-  background-color: #31CBB6;
-  border: 1px solid #31CBB6;
-  color: #FFF;
+  background-color: ${({ inverse }) => inverse ? COLOR_WHITE : COLOR_PRIMARY};
+  border: 1px solid ${({ inverse }) => inverse ? COLOR_PRIMARY : COLOR_WHITE};
+  color: ${({ inverse }) => inverse ? COLOR_PRIMARY : COLOR_WHITE};
   font-size: 16px;
   font-weight: bold;
   line-height: 1;
 `;
 
 export const SecondaryButton = styled(BaseButton)`
-  background-color: #FF7E45;
-  border: 1px solid #FF7E45;
-  color: #FFF;
+  background-color: ${({ inverse }) => inverse ? COLOR_WHITE : COLOR_SECONDARY};
+  border: 1px solid ${({ inverse }) => inverse ? COLOR_SECONDARY : COLOR_WHITE};
+  color: ${({ inverse }) => inverse ? COLOR_SECONDARY : COLOR_WHITE};
   font-size: 16px;
   font-weight: bold;
   line-height: 1;

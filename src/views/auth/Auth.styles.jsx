@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import IMAGE_LOGIN from '../assets/images/auth/login.png';
+import IMAGE_LOGIN from '../../assets/images/auth/login.png';
 
-import LOGO from '../assets/images/logo.png';
-import FULL_LOGO from '../assets/images/full_logo.png';
+import LOGO from '../../assets/images/logo.png';
+import FULL_LOGO from '../../assets/images/full_logo.png';
 
-import { 
+import {
   COLOR_WHITE,
   MEDIA_QUERY_SMALL,
- } from '../config/constants/styled-vars';
+} from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   background-color: ${COLOR_WHITE};
