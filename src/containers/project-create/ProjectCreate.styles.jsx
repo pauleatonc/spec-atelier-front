@@ -68,7 +68,7 @@ export const ContentData = styled.section`
     padding: 44px 104px;
   }
   ${MEDIA_QUERY_SMALL} {
-    padding: 0px 16px;
+    padding: 0 16px;
   }
 `;
 
