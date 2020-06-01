@@ -20,7 +20,7 @@ import {
   SelectorDate,
   SelectorDateContainer,
 } from './ProjectCreate.styles';
-import { SubHeaderProjectDescription } from '../../components/project/sub-headers/ProjectSubHeaders';
+import { SubHeaderProjectDescription } from '../../components/sub-headers/ProjectSubHeaders';
 import { changeView } from './ProjectCreate.actions';
 import { formatDate } from '../../helpers/helpers';
 

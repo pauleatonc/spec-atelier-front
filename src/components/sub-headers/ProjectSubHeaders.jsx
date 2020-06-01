@@ -1,6 +1,6 @@
 import React from 'react';
 import { SubHeader, Label, Text, Col } from './ProjectSubHeaders.styles';
-import { formatDate } from '../../../helpers/helpers';
+import { formatDate } from '../../helpers/helpers';
 export const SubHeaderProjectData = ({
   name,
   project_type,

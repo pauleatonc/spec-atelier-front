@@ -13,7 +13,7 @@ import {
   PermissionTitle,
   PermissionDescription,
 } from './ProjectCreate.styles';
-import { SubHeaderProjectPermission } from '../../components/project/sub-headers/ProjectSubHeaders';
+import { SubHeaderProjectPermission } from '../../components/sub-headers/ProjectSubHeaders';
 import { createProject, changeView } from './ProjectCreate.actions';
 
 

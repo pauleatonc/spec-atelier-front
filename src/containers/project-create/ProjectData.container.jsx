@@ -6,7 +6,7 @@ import {
 } from '../../components/SpecComponents';
 import {
   SubHeaderProjectData,
-} from '../../components/project/sub-headers/ProjectSubHeaders';
+} from '../../components/sub-headers/ProjectSubHeaders';
 import {
   Title,
   ButtonIcon,
