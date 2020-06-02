@@ -35,7 +35,7 @@ const Content = styled.div`
   padding: ${padding};
   min-height: 200px;
   max-height: 100%;
-  overflow: scroll;
+  overflow: auto;
   position: relative;
   width: ${(size = 'md') => {
     if (size === 'sm') return '50%;'
