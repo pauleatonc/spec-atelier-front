@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../../components/SpecComponents';
 import { ButtonSection } from '../../views/Projects.styles';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,29 +11,29 @@ const ProjectsSeeMoreButton = () => {
   const dispatch = useDispatch();
 
   const onClickSeeMore = () => {
-    dispatch(getMoreProjects({ 
+    dispatch(getMoreProjects({
       ...params,
       page: params.page + 1,
     }))
   };
 
   useEffect(() => {
-    setShowButton(!!total && projects.length < total); 
+    setShowButton(!!total && projects.length < total);
   }, [projects]);
 
   if (!projects.length) return null;
 
   return (
     <ButtonSection justify="center">
-      {showButton && (
-        <Button 
-          variant="primary" 
-          onClick={onClickSeeMore} 
-          disabled={loading}
+      <ButtonSection justify="center">
+        <Button
+          variant={showButton ? 'primary' : 'gray'}
+          onClick={onClickSeeMore}
+          disabled={loading || !showButton}
         >
-          Ver más
+          {showButton ? 'Ver más' : 'No hay más proyectos'}
         </Button>
-      )}
+      </ButtonSection>
     </ButtonSection>
   );
 };

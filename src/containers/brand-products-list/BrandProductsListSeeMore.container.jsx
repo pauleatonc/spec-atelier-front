@@ -25,15 +25,13 @@ const BrandProductsListSeeMore = () => {
 
   return (
     <ButtonSection justify="center">
-      {showButton && (
-        <Button 
-          variant="primary" 
-          onClick={onClickSeeMore} 
-          disabled={loading}
-        >
-          Ver más
-        </Button>
-      )}
+      <Button 
+        variant={showButton ? 'primary' : 'gray'}
+        onClick={onClickSeeMore} 
+        disabled={loading || !showButton}
+      >
+        {showButton ? 'Ver más' : 'No hay más productos'}
+      </Button>
     </ButtonSection>
   );
 };
