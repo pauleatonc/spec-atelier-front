@@ -2,8 +2,6 @@ import {
   GET_BRANDS,
   GET_BRANDS_ERROR,
   GET_MORE_BRANDS,
-  OPEN_BRAND_MODAL,
-  CLOSE_BRAND_MODAL,
 } from './BrandsList.actions';
 
 const initialBrandState = {
@@ -15,8 +13,8 @@ const initialBrandState = {
     page: 0,
     limit: 6,
   },
-  selectedBrand: undefined,
-  showBrandModal: false,
+  error: undefined,
+  total: 0,
 };
 
 /**
@@ -49,18 +47,6 @@ const brandsReducer = (state = initialBrandState, { payload, type }) => {
         ...state,
         error: payload.error,
         loading: false,
-      };
-    case OPEN_BRAND_MODAL:
-      return {
-        ...state,
-        selectedBrand: payload?.selectedBrand,
-        showBrandModal: true,
-      };
-    case CLOSE_BRAND_MODAL:
-      return {
-        ...state,
-        selectedBrand: undefined,
-        showBrandModal: false,
       };
     default: {
       return state;

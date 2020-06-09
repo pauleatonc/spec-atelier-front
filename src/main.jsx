@@ -16,6 +16,7 @@ import Profile from './views/Profile';
 import Us from './views/Us';
 import Specification from './views/Specification';
 import Collaborators from './views/Collaborators';
+import Collaborator from './views/Collaborator';
 import './assets/styles/main.scss';
 
 import PublicRoute from './containers/routes/PublicRoute';
@@ -36,6 +37,7 @@ const Main = () => {
             <PublicRoute exact component={Products} path="/products" />
             <PublicRoute exact component={Us} path="/us" />
             <PublicRoute exact component={Collaborators} path="/Collaborators" />
+            <PublicRoute exact component={Collaborator} path="/Collaborators/:id" />
             <PrivateRoute exact component={Projects} path="/projects" />
             <PrivateRoute exact component={Project} path="/projects/project" />
             <PrivateRoute exact component={Profile} path="/profile" />

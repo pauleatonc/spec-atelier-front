@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { COLOR_BLACK, MEDIA_QUERY_MEDIUM, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
-  padding: 16px 80px;
+  padding: 16px 100px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 24px;
   ${MEDIA_QUERY_MEDIUM} {
     grid-gap: 24px;

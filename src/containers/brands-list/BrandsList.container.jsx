@@ -5,21 +5,19 @@ import { Loading, ErrorMessage } from '../../components/SpecComponents';
 import { Container } from './BrandsList.style';
 import BrandCard from '../../components/brand/BrandCard';
 
-import { getBrands, openBrandModal } from './BrandsList.actions';
+import { getBrands } from './BrandsList.actions';
+import { openContactModal } from '../modal-contact-form/ModalContactForm.actions';
 
 const BrandsList = () => {
   const { brands, error, loading, params } = useSelector(state => state.brandsList);
   const dispatch = useDispatch();
   const history = useHistory();
+
   const onClickBrand = selectedBrand => {
-    console.log('selectedBrand', selectedBrand)
-    dispatch(openBrandModal(selectedBrand));
+    history.push(`/collaborators/${selectedBrand.id}`);
   };
-
-  const onClickContact = () => {
-
-  };
-
+  
+  const onClickContact = selectedBrand => dispatch(openContactModal(selectedBrand));
 
   useEffect(() => {
     if (!brands.length) dispatch(getBrands(params));
