@@ -30,7 +30,7 @@ const ContactForm = () => {
   const sendForm = () => {
     dispatch(sendContactData({
       ...contactForm,
-      user_id: user?.id,
+      user_id: user?.id || 0,
       brand_id: selectedBrand?.id,
     }));
   };
@@ -60,7 +60,7 @@ const ContactForm = () => {
             contact={contactForm}
             onChange={onChangeData}
             brand={selectedBrand.name}
-            user={`${user.first_name} ${user.last_name}`}
+            contactType={selectedBrand.contact_type}
           />
           <BottonContainer>
             <Button variant="primary" onClick={sendForm}>

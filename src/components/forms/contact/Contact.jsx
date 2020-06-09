@@ -13,7 +13,7 @@ import {
   TextArea,
 } from '../../SpecComponents';
 
-const Contact = ({ brand, user, contact, onChange }) => (
+const Contact = ({ brand, contactType, contact, onChange }) => (
   <Container>
     <Title>
       Contactar
@@ -24,7 +24,7 @@ const Contact = ({ brand, user, contact, onChange }) => (
     </InputContainer>
     <InputContainer>
       <Label>Cargo del Contacto</Label>
-      <Input name="user" type="underline" onChange={onChange} value={user} disabled />
+      <Input name="user" type="underline" onChange={onChange} value={contactType} disabled />
     </InputContainer>
     <InputContainer>
       <Label>Teléfono</Label>
@@ -39,7 +39,7 @@ const Contact = ({ brand, user, contact, onChange }) => (
 
 Contact.propTypes = {
   brand: PropTypes.string,
-  user: PropTypes.string,
+  contactType: PropTypes.string,
   contact: PropTypes.shape({
     user_phone: PropTypes.string,
     message: PropTypes.string,
@@ -49,7 +49,7 @@ Contact.propTypes = {
 
 Contact.defaultProps = {
   brand:'',
-  user: '',
+  contactType: '',
   contact: {},
   onChange: () => {},
 };
