@@ -76,7 +76,7 @@ export const LinksContainer = styled.section`
   margin: 16px 0;
 `;
   
-export const LinkText = styled.div`
+export const LinkText = styled.a`
   max-width: 140px;
   min-width: 110px;
   flex: 1;

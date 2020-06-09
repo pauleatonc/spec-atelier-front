@@ -19,7 +19,9 @@ import {
 } from '../SpecComponents';
 
 const BrandInfo = ({ onClickContact, brand }) => {
+
   if (!brand) return <BrandContainer />;
+  const addressToQuery = brand?.address.replace(/\s+/g, '-') || ''; 
   return (
     <BrandContainer>
       <Header>
@@ -37,14 +39,14 @@ const BrandInfo = ({ onClickContact, brand }) => {
           Contactar
         </Button>
         <LinksContainer>
-          <ButtonLink type="web" target="_blank" to={brand.web}>
-            <LinkText>{brand.web}</LinkText>
+          <ButtonLink type="web">
+            <LinkText target="_blank" href={brand.web}>{brand.web}</LinkText>
           </ButtonLink>
-          <ButtonLink type="address" target="_blank" to={brand.address}>
-            <LinkText>{brand.address}</LinkText>
+          <ButtonLink type="address">
+            <LinkText target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${addressToQuery}`}>{brand.address}</LinkText>
           </ButtonLink>
-          <ButtonLink type="phone" target="_blank" to="/">
-            <LinkText><a href={`tel:${brand.phone}`}>{brand.phone}</a></LinkText>
+          <ButtonLink type="phone">
+            <LinkText a target="_blank" href={`tel:${brand.phone}`}>{brand.phone}</LinkText>
           </ButtonLink>
         </LinksContainer>
       </Buttons>
