@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import ButtonGoogleLogin from '../../../components/buttons/button_google_login';
 
 import {
   Container,
@@ -13,19 +12,20 @@ import {
   TextInfo,
   ButtonLogin,
 } from '../Auth.styles';
-import { TextInput } from '../../../components/SpecComponents';
-import { registrationAction, googleLoginAction } from '../auth.actions';
+import { TextInput, Button } from '../../../components/SpecComponents';
+import { registrationAction } from '../auth.actions';
+import ButtonGoogleLogin from '../../../components/buttons/ButtonGoogle';
+
+const defaultUser = {
+  email: '',
+  password: '',
+};
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const onChangePass = e => setPassword(e.target.value);
-  const onChangeEmail = e => setEmail(e.target.value);
-
+  const [user, setUser] = useState(defaultUser);
   const dispatch = useDispatch();
-  const handleSubmitGoogle = data => dispatch(googleLoginAction(data));
-  const handleSubmit = () => dispatch(registrationAction({ user: { email, password } }))
-
+  const handleSubmit = () => dispatch(registrationAction({ user }));
+  const onChangeUser = ({ target: { name, value }}) => setUser({ ...user, [name]: value });
   return (
     <Container>
       <Content>
@@ -44,36 +44,32 @@ const Register = () => {
 				</LogInTittle>
 
         <ButtonGoogleContainer>
-          <ButtonGoogleLogin
-            label="Registrar con Google"
-            googleOuathMethod={handleSubmitGoogle}
-            onClick={handleSubmitGoogle}
-          />
+          <ButtonGoogleLogin label="Regístrate con Google" />
         </ButtonGoogleContainer>
 
         <TextInfo>
-          O si prefieres regístrate con tu cuenta
+          O si prefieres crea una cuenta en Spec
         </TextInfo>
         <form autoComplete="off">
           <TextInput
             type="email"
             name="email"
-            value={email}
-            onChange={onChangeEmail}
+            value={user.email}
+            onChange={onChangeUser}
             placeholder="Correo electrónico"
             required
           />
           <TextInput
             type="password"
             name="password"
-            value={password}
-            onChange={onChangePass}
+            value={user.password}
+            onChange={onChangeUser}
             placeholder="Contraseña"
             required
           />
-          <ButtonLogin type="button" onClick={handleSubmit}>
-            Regístrate
-					</ButtonLogin>
+          <Button variant="secondary" onClick={handleSubmit} width="164px">
+            Crear Cuenta
+					</Button>
         </form>
       </Content>
     </Container >

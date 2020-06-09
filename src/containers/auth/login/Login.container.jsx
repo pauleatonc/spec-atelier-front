@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import ButtonGoogleLogin from '../../../components/buttons/button_google_login';
+import ButtonGoogleLogin from '../../../components/buttons/ButtonGoogle';
 
 import {
   Container,
@@ -14,20 +14,23 @@ import {
   ButtonLogin,
   KeepSessionContainer,
 } from '../Auth.styles';
-import { TextInput } from '../../../components/SpecComponents';
-import { loginAction, googleLoginAction } from '../auth.actions';
+import { TextInput, Button } from '../../../components/SpecComponents';
+import { loginAction } from '../auth.actions';
+
+const defaultUser = {
+  email: '',
+  password: '',
+};
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState(defaultUser);
   const dispatch = useDispatch();
-  const handleSubmit = () => dispatch(loginAction({ user: { email, password } }));
-  const handleGoogleSubmit = () => dispatch(googleLoginAction({ user: { email, password } }));
+  const handleSubmit = () => dispatch(loginAction({ user }));
+  const onChangeUser = ({ target: { name, value }}) => setUser({ ...user, [name]: value });
 
   return (
     <Container>
       <Content>
-
         <HeaderText>
           <RegisterText>
             ¿Aún no eres usuario?
@@ -42,11 +45,7 @@ const Login = () => {
 				</LogInTittle>
 
         <ButtonGoogleContainer>
-          <ButtonGoogleLogin
-            label="Iniciar con Google"
-            googleOuathMethod={handleGoogleSubmit}
-            onClick={handleGoogleSubmit}
-          />
+          <ButtonGoogleLogin label="Iniciar con Google" />
         </ButtonGoogleContainer>
 
         <TextInfo size={14}>
@@ -56,30 +55,30 @@ const Login = () => {
           <TextInput
             type="email"
             name="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
+            value={user.email}
+            onChange={onChangeUser}
             placeholder="Correo electrónico"
             required
           />
           <TextInput
             type="password"
             name="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+            value={user.password}
+            onChange={onChangeUser}
             placeholder="Contraseña"
             required
           />
           <TextInfo size={12}>
             <RegisterText>
-              ¿Se te olvidó la contraseña? 
+              ¿Se te olvidó la contraseña?
             </RegisterText>
             <RegisterLink to="/registration" data-view="recover_password" >
-              Recuperar Contraseña 
+              Recuperar Contraseña
             </RegisterLink>
           </TextInfo>
-          <ButtonLogin type="button" onClick={handleSubmit}>
+          <Button variant="secondary" onClick={handleSubmit} width="164px">
             Iniciar sesión
-					</ButtonLogin>
+					</Button>
         </form>
       </Content>
     </Container >
