@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { COLOR_DARKGREY, COLOR_PRIMARY, COLOR_DARKESTGREY } from '../../config/constants/styled-vars';
+import { COLOR_LIGHTGREY, COLOR_LIGHTERGREY } from '../../config/constants/styled-vars';
 
 export const Card = styled.section`
-  border: 1px solid ${COLOR_DARKGREY};
+  border: solid 1px ${COLOR_LIGHTGREY};
   border-radius: 16px;
   padding: 24px 40px;
   transition: all .2s ease-in-out;
@@ -35,7 +35,7 @@ export const Title = styled.div`
 
 export const Line = styled.div`
   height: 2px;
-  border: solid 1px ${COLOR_DARKGREY};
+  border: solid 1px ${COLOR_LIGHTERGREY};
 `
 
 export const DescriptionContainer = styled.section`

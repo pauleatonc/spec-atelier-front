@@ -5,9 +5,10 @@ import {
   MEDIA_QUERY_SMALL,
   MEDIA_QUERY_MEDIUM,
   COLOR_WHITE,
-  COLOR_DARKGREY,
+  COLOR_LIGHTERGREY,
   COLOR_PRIMARY,
   COLOR_DARKESTGREY,
+  COLOR_GREY,
 } from '../../config/constants/styled-vars';
 
 import {
@@ -137,7 +138,7 @@ export const SubHeader = styled.section`
   width: 100%;
   height: 62px;
   border-radius: 9px;
-  background-color: ${COLOR_DARKESTGREY};
+  background-color: ${COLOR_GREY};
   font-family: Lato;
   font-size: 16px;
   font-weight: bold;
@@ -193,7 +194,7 @@ export const PermissionOption = styled.section`
   min-height: 120px;
   border-radius: 4px;
   border: solid 1px ${({ active }) => active ? COLOR_PRIMARY : BORDER_GREY};
-  background-color: ${({ active }) => active ? COLOR_DARKGREY : COLOR_WHITE};
+  background-color: ${({ active }) => active ? COLOR_LIGHTERGREY : COLOR_WHITE};
   padding: 24px 36px;
 `;
 
@@ -253,7 +254,7 @@ export const SelectorDate = styled.div`
   width: 100%;
   border: 0;
   outline: 0;
-  border-bottom: 2px solid ${COLOR_DARKGREY};
+  border-bottom: 2px solid ${COLOR_GREY};
   align-items: center;
   background-color: transparent;
   display: inline-flex;
@@ -271,7 +272,7 @@ export const SelectorDate = styled.div`
   }
 
   &::placeholder {
-    color: ${COLOR_DARKGREY};
+    color: ${COLOR_GREY};
   }
 
   &:disabled {
