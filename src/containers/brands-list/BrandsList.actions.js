@@ -18,7 +18,6 @@ export const getBrands = params => async dispatch => {
 export const getMoreBrands = params => async dispatch => {
   try {
     const { brands } = await getBrandsData(params);
-    console.log('brands',brands)
     dispatch(onActionCreator(GET_MORE_BRANDS, { brands, loading: false, params }));
   } catch (error) {
     dispatch(onActionCreator(GET_BRANDS_ERROR, { loading: false, error: true, params }));

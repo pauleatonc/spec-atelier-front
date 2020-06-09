@@ -32,7 +32,6 @@ const brandsReducer = (state = initialBrandState, { payload, type }) => {
         params: initialBrandState.params,
       };
     case GET_MORE_BRANDS:
-      console.log('brands',payload);
       const newBrands = payload?.brands?.list || [];
       return {
         ...state,

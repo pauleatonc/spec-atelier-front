@@ -12,7 +12,6 @@ export const CLEAN_PRODUCTS_LIST = 'CLEAN_PRODUCTS_LIST';
 export const getProducts = params => async dispatch => {
   try {
     const  { products, status } = await getProductsService(params);
-    console.log('prod', products, status);
     dispatch(onActionCreator(GET_PRODUCTS, { products, loading: false, params }));
   } catch (error) {
     dispatch(onActionCreator(GET_PRODUCTS_ERROR, { loading: false, error: true, params }));

@@ -25,7 +25,7 @@ const ButtonGoogleLogin = props => {
   };
 
   const responseError  = googleResponse => {
-    console.log('erasdsadasd');
+    //TODO: Handle and create Snackbar to this error
   };
 
   return (

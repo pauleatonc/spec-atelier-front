@@ -36,7 +36,6 @@ const productsReducer = (state = initialProductState, { payload, type }) => {
         params: initialProductState.params,
       };
     case GET_MORE_PRODUCTS:
-      console.log('products',payload);
       const newProducts = payload?.products?.list || [];
       return {
         ...state,
