@@ -38,7 +38,7 @@ export const ButtonContainer = styled.section`
   align-items: center;
 `;
 
-export const ButtonIcon = styled.a`
+export const ButtonIcon = styled.div`
   height: 18px;
   width: 18px;
   margin: 2px 4px 2px 2px;
@@ -46,7 +46,7 @@ export const ButtonIcon = styled.a`
   background-repeat: no-repeat;
   background-size: cover;
   :hover {
-    color: ${({ disabled }) => disabled ?  mapVariantsToColors[disabled] :  mapVariantsToColors['primary']};
+    color: ${({ disabled }) => disabled ? mapVariantsToColors.disabled :  mapVariantsToColors['primary']};
   }
 `;
 
@@ -69,6 +69,7 @@ export const ButtonText = styled.span`
   height: ${({ show }) => show ? '12px' : '0'};
   opacity: ${({ show }) => show ? 1 : 0};
   transition: all 0.2s ${({ show }) => show ? 'ease-in' : 'ease-out'};
+  pointer-events: ${({ show }) => show ? 'initial': 'none'};
 `;
 
 export const TextContainer = styled.div`

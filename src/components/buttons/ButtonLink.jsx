@@ -17,15 +17,14 @@ const ButtonLink = props => {
   const { variant, type, children, to, target, ...buttonProps } = props;
   const [showAsInfo, setShowAsInfo] = useState(false);
   const toggle = () => setShowAsInfo(!showAsInfo);
+  const showInfo = () => setShowAsInfo(true);
+  
   return (
     <ButtonContainer variant={variant} {...buttonProps} >
       <ButtonIcon
         type="button"
-        href={to}
-        value={to}
-        target={target}
-        rel="noreferrer noopener"
         type={type}
+        onClick={toggle}
       >
       </ButtonIcon>
       <TextContainer>
@@ -36,7 +35,6 @@ const ButtonLink = props => {
           target={target}
           rel="noreferrer noopener"
           show={showAsInfo}
-          onClick={toggle}
         >
           {children}
         </ButtonText>
@@ -47,7 +45,7 @@ const ButtonLink = props => {
           target={target}
           rel="noreferrer noopener"
           show={!showAsInfo}
-          onClick={toggle}
+          onClick={showInfo}
         >
           {mapTypesToName[type]}
         </ButtonText>
