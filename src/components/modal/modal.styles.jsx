@@ -37,12 +37,13 @@ const Content = styled.div`
   max-height: 100%;
   overflow: auto;
   position: relative;
-  width: ${(size = 'md') => {
-    if (size === 'sm') return '50%;'
-    if (size === 'md') return '70%;'
-    if (size === 'lg') return '90%;'
-    return '70%;';
-  }}
+  width: ${({ size }) => {
+    if (size === 'xs') return '30%'
+    if (size === 'sm') return '50%'
+    if (size === 'md') return '70%'
+    if (size === 'lg') return '90%'
+    return '50%';
+  }};
   ${MEDIA_QUERY_SMALL} {
     border-radius: 0;
     height: 100%;

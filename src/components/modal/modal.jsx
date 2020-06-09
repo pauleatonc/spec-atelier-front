@@ -57,7 +57,7 @@ const Modal = ({ size, children, isOpen, onClose }) => {
 };
 
 Modal.propTypes = {
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
   children: PropTypes.element.isRequired,
   onClose: PropTypes.func,
 };
