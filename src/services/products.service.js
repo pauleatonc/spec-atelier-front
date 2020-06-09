@@ -1,5 +1,6 @@
 import { API_BASE_URL } from '../config/constants/environment';
 import { getJsonRequest, postFormRequest, postJsonRequest } from '../modules/requests';
+import { formatParams } from './services.helpers';
 
 /**
  * Gets the list of products' sections available.
@@ -24,7 +25,7 @@ export const getProductsBrands = () => getJsonRequest(`${API_BASE_URL}/api/brand
 /**
  * Gets the list of products' brands by the given query.
  */
-export const searchProductsBrands = query => getJsonRequest(`${API_BASE_URL}/api/brands?${query}`);
+export const searchProductsBrands = query => getJsonRequest(`${API_BASE_URL}/api/brands${formatParams(query)}`);
 
 /**
  * Gets a list of products by the given item. 
@@ -77,3 +78,8 @@ export const uploadProductDocuments = (productID, documents) => {
 
   return postFormRequest(`${API_BASE_URL}/api/products/${productID}/associate_documents`, body);
 };
+
+/**
+ * Gets a list of products by brand. 
+ */
+export const getProducts = params => getJsonRequest(`${API_BASE_URL}/api/products${formatParams(params)}`);

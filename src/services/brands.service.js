@@ -14,3 +14,8 @@ export const getBrands = (params) => getJsonRequest(`${API_BASE_URL}/api/brands$
 export const createNewBrand = (userId, brand) => postJsonRequest(`${API_BASE_URL}/api/users/${userId}/brands/`, { brand: cleanObject(brand) });
 
 
+/**
+ * Gets the list of collaboratos by params (page, limit, sort, keywords).
+ */
+export const getBrand = brandId => getJsonRequest(`${API_BASE_URL}/api/brands/${brandId}`);
+
