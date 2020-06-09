@@ -5,6 +5,7 @@ import { showModal } from '../../components/modal/modal.actions';
 
 export const GET_PRODUCT = 'GET_PRODUCT';
 export const GET_PRODUCT_ERROR = 'GET_PRODUCT_ERROR';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
 
 export const getProduct = ({ id }) => async dispatch => {
   try {
@@ -18,3 +19,5 @@ export const getProduct = ({ id }) => async dispatch => {
     }));
   }
 };
+
+export const closeModal = () => dispatch => dispatch(onActionCreator(CLOSE_MODAL, {}));
