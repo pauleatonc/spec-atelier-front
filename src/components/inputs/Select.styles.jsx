@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_BLACK, COLOR_DARKGREY } from '../../config/constants/styled-vars';
+import { COLOR_BLACK, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
@@ -92,7 +92,7 @@ export const InputUnderline = styled(Input)`
   display:flex;
   flex: 1;
   justify-content: space-between;
-  border-bottom: 2px solid ${COLOR_DARKGREY};
+  border-bottom: 2px solid ${COLOR_LIGHTGREY};
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
