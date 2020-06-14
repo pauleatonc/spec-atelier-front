@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../../components/SpecComponents';
 import { ButtonSection } from './brandsSeeMore.styles';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,29 +11,27 @@ const BrandsSeeMoreButton = () => {
   const dispatch = useDispatch();
 
   const onClickSeeMore = () => {
-    dispatch(getMoreBrands({ 
+    dispatch(getMoreBrands({
       ...params,
       page: params.page + 1,
     }))
   };
 
   useEffect(() => {
-    setShowButton(!!total && brands.length < total); 
+    setShowButton(!!total && brands.length < total);
   }, [brands]);
 
   if (!brands.length) return null;
 
   return (
     <ButtonSection justify="center">
-      {showButton && (
-        <Button 
-          variant="primary" 
-          onClick={onClickSeeMore} 
-          disabled={loading}
-        >
-          Ver más
-        </Button>
-      )}
+      <Button
+        variant={showButton ? 'primary' : 'gray'}
+        onClick={onClickSeeMore}
+        disabled={loading || !showButton}
+      >
+        {showButton ? 'Ver más' : 'No hay más Collaboradores'}
+      </Button>
     </ButtonSection>
   );
 };

@@ -8,6 +8,7 @@ import TextInput from './inputs/TextInput';
 import ErrorMessage from './basics/ErrorMessage';
 import Button from './buttons/Button';
 import ButtonLink from './buttons/ButtonLink';
+import ButtonSocialMedia from './buttons/ButtonSocialMedia';
 import Input from './inputs/Input';
 import StepBubbles from './basics/StepsBubbles';
 import Select from './inputs/Select';
@@ -17,6 +18,7 @@ import SearchBar from './filters/SearchBar';
 export {
   Button,
   ButtonLink,
+  ButtonSocialMedia,
   ErrorMessage,
   Image,
   Loading,

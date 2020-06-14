@@ -9,28 +9,26 @@ import {
 const BrandsFilters = () => {
   const dispatch = useDispatch();
   const { params, brands } = useSelector(state => state.brandsList);
-  const [keywords, setKeywords] = useState(params.keywords || ''); 
-
-  const getBrands = values => dispatch(getBrands(values));
+  const [keyword, setKeywords] = useState(params.keyword || ''); 
 
   const onChangeParams = ({ target: { name, value } }) => {
     setKeywords(value);
-    getBrands({
+    dispatch(getBrands({
       ...params,
       [name]: value,
-    });
+    }));
   }
   
-  if (!brands.length) return null;
+  if (!brands.length && !params.keyword) return null;
 
   return (
     <Container>
       <SearchBar
-        name="keywords"
+        name="keyword"
         justifyContent="flex-start"
         maxWidth="432px"
         placeholder="Buscar"
-        value={keywords}
+        value={keyword}
         onChange={onChangeParams}
       />
     </Container>

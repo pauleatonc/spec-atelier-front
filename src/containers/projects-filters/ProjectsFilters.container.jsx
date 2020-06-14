@@ -8,33 +8,34 @@ import {
   FilterSortText,
 } from './ProjectsFilters.styles';
 
+const minLengthSearch = 3;
+
 const ProjectsFilters = () => {
   const dispatch = useDispatch();
   const { sortFilters, params, projects } = useSelector(state => state.projectsList);
-  const [keywords, setKeywords] = useState(params.keywords || ''); 
+  const [keyword, setKeywords] = useState(params.keywords || ''); 
 
-  const getProjects = values => dispatch(getMyProjects(values));
-
+  
   const onChangeParams = ({ target: { name, value } }) => {
     setKeywords(value);
-    getProjects({
+    dispatch(getMyProjects({
       ...params,
-      [name]: value,
-    });
-}
+      [name]: value.length >= minLengthSearch ? value : '',
+    }));
+  };
 
-  const onChangeSort = value => getProjects({ ...params, sort: value });
+  const onChangeSort = value => dispatch(getMyProjects({ ...params, sort: value }));
   
-  if (!projects.length) return null;
-
+  if (!projects.length && !params.keyword) return null;
+  
   return (
     <Container>
       <SearchBar
-        name="keywords"
+        name="keyword"
         justifyContent="flex-start"
         maxWidth="432px"
         placeholder="Buscar"
-        value={keywords}
+        value={keyword}
         onChange={onChangeParams}
       />
       <SortContainer>

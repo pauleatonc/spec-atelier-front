@@ -6,6 +6,8 @@ import {
   InputContainer,
   Label,
   Title,
+  CodeNumber,
+  CellPhone,
 } from './Contact.styles';
 
 import {
@@ -28,7 +30,10 @@ const Contact = ({ brand, contactType, contact, onChange }) => (
     </InputContainer>
     <InputContainer>
       <Label>Teléfono</Label>
-      <Input name="user_phone" type="underline" onChange={onChange} value={contact.user_phone} />
+      <CellPhone>
+        <CodeNumber>+56</CodeNumber>
+        <Input name="user_phone" type="underline" onChange={onChange} value={contact.user_phone} />
+      </CellPhone>
     </InputContainer>
     <InputContainer>
       <Label style={{ marginBottom: 12 }} strong>Deja un mensaje para el colaborador</Label>
@@ -48,10 +53,10 @@ Contact.propTypes = {
 };
 
 Contact.defaultProps = {
-  brand:'',
+  brand: '',
   contactType: '',
   contact: {},
-  onChange: () => {},
+  onChange: () => { },
 };
 
 export default Contact;

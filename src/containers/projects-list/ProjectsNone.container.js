@@ -9,14 +9,14 @@ import {
   Icon,
   TextContent,
   Text,
- } from './ProjectsList.style';
+ } from './ProjectsNone.styles';
 import ICON_NEW_PROJECT from '../../assets/images/project/design_project.png'
 
 const ProjectsNone = () => {
-  const { projects, loading } = useSelector(state => state.projectsList);
+  const { projects, loading, params } = useSelector(state => state.projectsList);
   const history = useHistory();
   const goToNewProject = () => history.push('./projects/project');
-  if (projects.length || loading) return null;
+  if (projects.length || loading || params.keyword) return null;
   return (
     <Container>
       <IconContent>

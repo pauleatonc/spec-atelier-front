@@ -5,6 +5,7 @@ import {
   COLOR_PRIMARY,
   COLOR_SECONDARY,
   MEDIA_QUERY_SMALL,
+  COLOR_BLACK,
 } from '../../config/constants/styled-vars';
 
 import IconDwg from '../../assets/images/icons/dwg.svg';
@@ -62,6 +63,7 @@ export const Title = styled.div`
   padding: 0 8px 8px 0;
   width: 318px;
   height: 17px;
+  height: 17px;
   font-family: Lato;
   font-size: 14px;
   font-weight: bold;
@@ -69,7 +71,7 @@ export const Title = styled.div`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1.17px;
-  color: #212121;
+  color: ${COLOR_BLACK};
   ${MEDIA_QUERY_SMALL} {
     padding: 0px 20px 0px 0px;
   }
@@ -144,17 +146,16 @@ export const InfoContent = styled.section`
   display: flex;
   justify-content: space-between;
   letter-spacing: 0.83px;
-  color: #212121;
 `;
 
 export const ProductName = styled.div`
-  color: #212121;
   font-family: Lato;
   font-size: 12px;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
+  color: ${COLOR_BLACK};
   font-weight: bold;
 `;
 
@@ -169,12 +170,12 @@ export const ProductDescription = styled.div`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: #212121;
+  color: ${COLOR_BLACK};
 `;
 
 export const ProductBrand = styled.div`
   margin: 8px 0px;
-  color: grey;
+  color: ${COLOR_BLACK};
   font-family: Lato;
   font-size: 10px;
   font-weight: normal;

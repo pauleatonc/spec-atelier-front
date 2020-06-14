@@ -16,6 +16,7 @@ import {
 import {
   Button,
   ButtonLink,
+  ButtonSocialMedia,
 } from '../SpecComponents';
 
 const BrandInfo = ({ onClickContact, brand }) => {
@@ -46,13 +47,13 @@ const BrandInfo = ({ onClickContact, brand }) => {
             <LinkText target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${addressToQuery}`}>{brand.address}</LinkText>
           </ButtonLink>
           <ButtonLink type="phone">
-            <LinkText a target="_blank" href={`tel:${brand.phone}`}>{brand.phone}</LinkText>
+            <LinkText target="_blank" href={`tel:${brand.phone}`}>{brand.phone}</LinkText>
           </ButtonLink>
         </LinksContainer>
       </Buttons>
       <LinksContainer>
         {brand.social_media.map(sm => (
-          <ButtonLink key={sm.name} type={sm.name} target="_blank" to={sm.url} />
+          <ButtonSocialMedia key={sm.name} type={sm.name} target="_blank" to={sm.url} />
         ))}
       </LinksContainer>
     </BrandContainer>

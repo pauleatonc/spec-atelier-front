@@ -40,8 +40,6 @@ const BrandProductsList = () => {
           photo={product.images[0]?.urls?.thumb}
           reference={product.reference}
           title={product.name}
-          // onClickCard={handleCardClick(product.id)}
-          // onClickSeeMore={handleSeeMoreClick(product)}
           onClickCard={onClickProduct(product)}
           onClickSeeMore={onClickProduct(product)}
         />

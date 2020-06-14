@@ -39,9 +39,9 @@ const projectsReducer = (state = initialProjectState, { payload, type }) => {
         ...state,
         projects: payload?.projects?.list || [],
         total: payload?.projects?.total || 0,
+        params: payload?.params,
         loading: false,
         error: undefined,
-        params: initialProjectState.params,
       };
     case GET_MORE_PROJECTS:
       const newProjects = payload?.projects?.list || [];
@@ -51,7 +51,7 @@ const projectsReducer = (state = initialProjectState, { payload, type }) => {
         total: payload?.projects?.total || 0,
         loading: false,
         error: undefined,
-        params: payload.params,
+        params: payload?.params,
       };
     case GET_PROJECTS_ERROR:
       return {

@@ -25,7 +25,7 @@ const BrandsList = () => {
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage />;
-  if (!brands.length) return null;
+  if (!brands.length && !params.keyword) return null;
 
   return (
     <Container>

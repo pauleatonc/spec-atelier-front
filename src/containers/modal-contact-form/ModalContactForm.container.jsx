@@ -21,6 +21,7 @@ const ContactForm = () => {
   const onCloseModal = () => dispatch(closeContactModal());
 
   const onChangeData = ({ target: { name, value } }) => {
+    if (name === 'user_phone' && Number.isNaN(+value)) return;
     setContactForm({
       ...contactForm,
       [name]: value,
@@ -30,10 +31,15 @@ const ContactForm = () => {
   const sendForm = () => {
     dispatch(sendContactData({
       ...contactForm,
+      user_phone: `+56${contactForm.user_phone}`,
       user_id: user?.id || 0,
       brand_id: selectedBrand?.id,
     }));
   };
+
+  useEffect(() => {
+    return () => setShowSnackBar(false);
+  });
 
   useEffect(() => {
     if (sended) {

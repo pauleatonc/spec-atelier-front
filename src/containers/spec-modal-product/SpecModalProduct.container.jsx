@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Loading, Modal } from '../../components/SpecComponents';
+import { Loading, Modal, Button } from '../../components/SpecComponents';
 import {
   Container,
   Content,
@@ -101,11 +101,12 @@ const SpecModalProduct = () => {
                   {`${product?.system?.name || ''}: ${product?.brand?.name || ''}`}
                 </ProductBrand>
                 <Actions>
-                  <ButtonContact
-                    type="button"
-                    value="Contactar"
+                  <Button
+                    variant="secondary"
                     onClick={onContact}
-                  />
+                  >
+                    Contactar
+                  </Button>
                   <Icons>
                     <Icon
                       type="dwg"
