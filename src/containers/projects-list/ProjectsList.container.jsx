@@ -17,11 +17,13 @@ const ProjectsList = () => {
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage />;
-  if (!projects.length) return null;
+  if (!projects.length && !params.keyword) return null;
+
+  if (!projects.length && params.keyword) return <div className="projects__inner__body" />;
 
   return (
     <div className="projects__inner__body">
-      {projects.length &&
+      {!!projects.length &&
         projects.map(project => (
           <ProjectCard key={project.id} {...project} key={project.id} onClick={goToSpecification} />
         ))}

@@ -7,6 +7,7 @@ import {
   MEDIA_QUERY_SMALL,
   MEDIA_QUERY_MEDIUM,
   Z_INDEX_NAVBAR,
+  COLOR_GREY,
 } from '../../../config/constants/styled-vars';
 
 import LOGO from '../../../assets/images/logo.png';
@@ -122,15 +123,24 @@ export const LinkItem = styled.div`
 export const LinkRegister = styled(LinkItem)`
   border-radius: 20px;
   background-color: ${COLOR_PRIMARY};
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: ${COLOR_WHITE};
+  width: 120px;
 `;
 
 export const LinkLogin = styled(LinkItem)`
   margin-left: 16px;
   border-radius: 20px;
-  border: 1px solid ${({ transparentize }) => transparentize ? COLOR_WHITE : COLOR_BLACK};
+  border: 1px solid ${({ transparentize }) => transparentize ? COLOR_WHITE : COLOR_GREY};
   display: flex;
   justify-content: space-between;
   min-width: 150px;
   background-color: ${({ transparentize }) => transparentize ? 'transparent' : COLOR_WHITE};
-  color: ${({ transparentize }) => transparentize ? COLOR_WHITE : COLOR_BLACK};
+  color: ${({ transparentize }) => transparentize ? COLOR_WHITE : COLOR_GREY};
 `;

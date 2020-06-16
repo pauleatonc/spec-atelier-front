@@ -11,7 +11,7 @@ import ProjectsSeeMoreButtonContainer from '../containers/projects-buttons/Proje
 import ProjectsNoneContainer from '../containers/projects-list/ProjectsNone.container';
 import HEADER_IMG from '../assets/images/project/project_background_header.png';
 
-import { Container, Content, ButtonSection } from './Projects.styles';
+import { Container, Content } from './Projects.styles';
 
 const Projects = () => {
   return (

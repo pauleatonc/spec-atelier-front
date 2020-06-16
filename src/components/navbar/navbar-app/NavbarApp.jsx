@@ -19,7 +19,7 @@ import {
 const items = [
   { id: 'projects', label: 'Proyectos', to: '/projects' },
   { id: 'products', label: 'Productos', to: '/products' },
-  { id: 'colaborations', label: 'Colaboradores', to: '/colaborations' },
+  { id: 'collaborators', label: 'Colaboradores', to: '/collaborators' },
 ];
 
 const NavbarApp = () => {

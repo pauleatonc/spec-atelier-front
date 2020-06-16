@@ -8,10 +8,13 @@ import { hideModal } from './modal.actions';
 const modalRoot = document.getElementById('modal');
 const { body } = document;
 
-const Modal = ({ size, children, isOpen }) => {
+const Modal = ({ size, children, isOpen, onClose }) => {
   const refModal = useRef(null);
   const dispacth = useDispatch();
-  const hide = () => dispacth(hideModal());
+  const hide = () => {
+    dispacth(hideModal());
+    onClose();
+  };
   const outsideClick = ref => {
     const handleClickOutside = event => ref.current && !ref.current.contains(event.target) && hide();
     // Click Outside Modal
@@ -54,12 +57,14 @@ const Modal = ({ size, children, isOpen }) => {
 };
 
 Modal.propTypes = {
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
   children: PropTypes.element.isRequired,
+  onClose: PropTypes.func,
 };
 
 Modal.defaultProps = {
   size: 'md',
+  onClose: () => {},
 };
 
 export default Modal;

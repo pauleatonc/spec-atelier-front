@@ -21,6 +21,7 @@ export const ProfileOptions = styled.section`
   right: 0;
   display: ${({ show }) => !show && 'none'};
   top: ${NAVBAR_HEIGHT};
+  z-index: 2;
 `;
 
 export const Option = styled.div`

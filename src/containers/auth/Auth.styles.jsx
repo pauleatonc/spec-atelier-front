@@ -5,6 +5,7 @@ import {
   COLOR_PRIMARY,
   COLOR_SECONDARY,
   MEDIA_QUERY_SMALL,
+  COLOR_BLACK,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
@@ -74,6 +75,8 @@ export const TextInfo = styled.p`
   line-height: normal;
   letter-spacing: 1px;
   margin-bottom: 35px;
+  font-family: Lato;
+  color: ${COLOR_BLACK};
 `;
 
 export const Form = styled.form`
@@ -88,7 +91,7 @@ export const ButtonLogin = styled.button`
   align-items: center;
   text-transform: uppercase;
   height: 34px;
-  font-size: 12px;
+  font-size: 16px;
   font-family: 'Lato';
   font-stretch: normal;
   font-weight: bold;

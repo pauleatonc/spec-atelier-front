@@ -38,6 +38,7 @@ const ProductCard = props => {
     title,
     onClickCard,
     onClickSeeMore,
+    canAdd,
   } = props;
   const [hover, setHover] = useState(false);
   const handleCardMouseEnter = () => setHover(true);
@@ -75,7 +76,7 @@ const ProductCard = props => {
           Ver más
         </SeeMore>
       </Footer>
-      {hover && !selected && <Add />}
+      {hover && !selected && canAdd && <Add />}
       {selected && <Check />}
     </Root>
   );

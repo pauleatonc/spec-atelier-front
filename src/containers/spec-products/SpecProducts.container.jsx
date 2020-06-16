@@ -136,6 +136,7 @@ const SpecProductsList = () => {
 
                 return (
                   <ProductCard
+                    canAdd
                     category={`Sistema constructivo: ${product.system.name}`}
                     description={product.short_desc}
                     key={`product-card-${selectedItemID}-${product.id}`}

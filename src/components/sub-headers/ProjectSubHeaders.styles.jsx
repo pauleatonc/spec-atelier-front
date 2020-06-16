@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { COLOR_BLACK, COLOR_DARKGREY, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../../config/constants/styled-vars';
+import { COLOR_BLACK, COLOR_LIGHTERGREY, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../../config/constants/styled-vars';
 
 export const SubHeader = styled.section`
   width: 100%;
   min-height: 62px;
   border-radius: 9px;
-  background-color: ${COLOR_DARKGREY};
+  background-color: ${COLOR_LIGHTERGREY};
   font-family: Lato;
   font-size: 16px;
   font-weight: bold;

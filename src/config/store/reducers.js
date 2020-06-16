@@ -13,16 +13,24 @@ import authReducer from '../../containers/auth/auth.reducer';
 import projectsListReducer from '../../containers/projects-list/ProjectsList.reducer';
 import newProjectReducer from '../../containers/project-create/ProjectCreate.reducer';
 import appReducer from '../../config/store/app-store/app.reducer';
+import brandListReducer from '../../containers/brands-list/BrandsList.reducer';
+import brandReducer from '../../containers/brand/brand.reducer';
+import brandProductsListReducer from '../../containers/brand-products-list/BrandProductsList.reducer';
+import modalContactFormReducer from '../../containers/modal-contact-form/ModalContactForm.reducers';
 
 export default combineReducers({
   auth: authReducer,
   app: appReducer,
+  brand: brandReducer,
+  brandsList: brandListReducer,
 	login: loginReducer,
 	recoverPassword: recoverPasswordReducer,
+  modalContactForm: modalContactFormReducer,
   newPassword: newPasswordReducer,
   newProject: newProjectReducer,
   projectsList: projectsListReducer,
   alert: alertReducer,
+  brandProductsList: brandProductsListReducer,
   specProductsSections: specProductsSectionsReducer,
   specProductsItems: specProductsItemsReducer,
   specProducts: specProductsReducer,

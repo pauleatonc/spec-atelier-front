@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Loading, Modal } from '../../components/SpecComponents';
+import { useSelector, useDispatch } from 'react-redux';
+import { Loading, Modal, Button } from '../../components/SpecComponents';
 import {
   Container,
   Content,
@@ -23,17 +23,19 @@ import {
   Icon,
 } from './SpecModalProduct.styles';
 import noPhoto from '../../assets/images/icons/no-photo.svg';
+import { closeModal } from './SpecModalProduct.actions';
+
 
 const SpecModalProduct = () => {
-  const { product } = useSelector(state => state.specModalPorduct);
-  const { isOpen } = useSelector(state => state.specModal);
+  const { product, showModalProduct } = useSelector(state => state.specModalPorduct);
   const [selectedImg, selectImg] = useState((product?.images?.length && product.images[0]) || {});
   const onSelectImg = img => () => selectImg(img);
-
+  const dispatch = useDispatch();
   const noImgText = 'sin imágen';
 
   // TODO: This will go to contact view.
   const onContact = () => { };
+  const onCloseModal = () => dispatch(closeModal());
 
   // Download documents 
   const handleIconClick = documents => () => {
@@ -48,11 +50,12 @@ const SpecModalProduct = () => {
       return setTimeout(() => document.body.removeChild(link), 2000);
     });
   }
-  if (!isOpen) return null;
+  
+  if (!showModalProduct) return null;
   if (!product || !product.id) return <Loading />
 
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={showModalProduct} onClose={onCloseModal}>
       <Container>
         <Content>
           <Header>
@@ -98,11 +101,12 @@ const SpecModalProduct = () => {
                   {`${product?.system?.name || ''}: ${product?.brand?.name || ''}`}
                 </ProductBrand>
                 <Actions>
-                  <ButtonContact
-                    type="button"
-                    value="Contactar"
+                  <Button
+                    variant="secondary"
                     onClick={onContact}
-                  />
+                  >
+                    Contactar
+                  </Button>
                   <Icons>
                     <Icon
                       type="dwg"
