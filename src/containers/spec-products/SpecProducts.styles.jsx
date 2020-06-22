@@ -42,7 +42,6 @@ export const Body = styled.section`
 export const BodyHeader = styled.section`
   align-items: center;
   color: ${COLOR_MINE_SHAFT};
-  color: #212121;
   display: grid;
   font-family: Lato;
   font-size: 12px;
