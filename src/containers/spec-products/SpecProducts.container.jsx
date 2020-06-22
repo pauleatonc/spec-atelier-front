@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
-import { onGetSpecProducts } from './SpecProducts.actions';
+import { onGetSpecProductsByFilters, onGetSpecProductsByPage, onGetSpecProductsBySearch } from './SpecProducts.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import SearchBar from '../../components/filters/SearchBar';
 import Tag from '../../components/filters/Tag';
@@ -12,7 +12,7 @@ import { Root, Header, HeaderSearch, HeaderFilters, Body, Total, Cards, LoadMore
 const filters = [
   { label: 'Todos', tag: 'all' },
   { label: 'Marcas', tag: 'brands' },
-  { label: 'Tipo de proyecto', tag: 'project_type' },
+  { label: 'Tipo de proyecto', tag: 'projects_types' },
   { label: 'Mis especificaciones', tag: 'my_specifications' },
   { label: 'Creado por usuarios', tag: 'created_by_users' },
   { label: 'Recintos', tag: 'enclosures' },
@@ -26,32 +26,15 @@ const SpecProductsList = () => {
   const { nextPage, collection: products = [], loading, show, total } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
-  const [selectedFilters, setSelectedFilters] = useState(['all']);
+  const [selectedFilters] = useState(['all']);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const handleSearchChange = event => {
     setSearch(event.target.value);
-    dispatch(onGetSpecProducts({ filters: selectedFilters.sort(), itemID: selectedItemID, search: event.target.value }));
+    dispatch(onGetSpecProductsBySearch({ search: event.target.value }));
   };
-  const handleFilterClick = currentFilterTag => () => {
-    const hasFilterTag = selectedFilters.find(filterTag => filterTag === currentFilterTag);
-    let updatedFilters = [].concat(selectedFilters);
-
-    if (currentFilterTag === 'all') {
-      updatedFilters = ['all'];
-    } else if (hasFilterTag) {
-      updatedFilters = updatedFilters.filter(filterTag => filterTag !== currentFilterTag);
-    } else {
-      updatedFilters = updatedFilters
-        .filter(filterTag => filterTag !== 'all')
-        .concat(currentFilterTag);
-    }
-
-    if (updatedFilters.length === 0) {
-      updatedFilters.push('all');
-    }
-
-    setSelectedFilters(updatedFilters);
-    dispatch(onGetProductsByItem({ search, filters: updatedFilters.sort(), itemID: selectedItemID }));
+  const handleFiltersClick = () => () => {
+    // TODO: handle filters tags.
+    dispatch(onGetSpecProductsByFilters({}));
   };
   const handleCardClick = currentProductID => () => {
     const hasProduct = selectedProducts.find(productID => productID === currentProductID);
@@ -67,27 +50,12 @@ const SpecProductsList = () => {
     setSelectedProducts(updatedProducts);
   };
   const handleLoadMoreClick = () => {
-    dispatch(onGetProductsByItem({ search, filters: selectedFilters.sort(), itemID: selectedItemID }));
+    dispatch(onGetSpecProductsByPage());
   };
-
-  const handleSeeMoreClick = selectedProduct => e => {
-    e.stopPropagation();
+  const handleSeeMoreClick = selectedProduct => event => {
+    event.stopPropagation();
     dispatch(getProduct(selectedProduct));
   }
-
-  useEffect(() => {
-    if (!selectedItemID || !show) {
-      return;
-    }
-
-    dispatch(onGetProductsByItem({ search, filters: selectedFilters.sort(), itemID: selectedItemID }));
-  }, [show, selectedItemID]);
-
-  useEffect(() => {
-    setSearch('');
-    setSelectedFilters(['all']);
-    setSelectedProducts([]);
-  }, [selectedItemID]);
 
   return (
     <Root>
@@ -97,13 +65,14 @@ const SpecProductsList = () => {
         </HeaderSearch>
         <HeaderFilters>
           {filters.map(filter => {
-            const selected = selectedFilters.find(selectedFilter => selectedFilter === filter.tag);
+            // TODO: handle filters tags
+            // const selected = selectedFilters.find(selectedFilter => selectedFilter === filter.tag);
 
             return (
               <Tag
+                selected
                 key={`products-by-item__filter--${filter.tag}`}
-                selected={Boolean(selected)}
-                onClick={handleFilterClick(filter.tag)}
+                onClick={handleFiltersClick(filter.tag)}
               >
                 {filter.label}
               </Tag>
