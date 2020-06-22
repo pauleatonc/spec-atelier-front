@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import DropdownMenu from '../menus/DropdownMenu';
+import useDropdown from '../basics/Dropdown.hooks';
+import Dropdown from '../basics/Dropdown';
 import { Root, Label, Section, Input, DropIcon, Option, InputUnderline } from './Select.styles';
 import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
 
@@ -9,17 +10,13 @@ import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
  */
 const Select = props => {
   const { disabled, label, options, placeholder, value: selectedOption, onChange, type } = props;
-  const [anchor, setAnchor] = useState(undefined);
-  const [width, setWidth] = useState('initial');
-  const handleOpen = event => {
-    setAnchor(event.currentTarget);
-    setWidth(`${event.currentTarget.clientWidth - 18}px`);
-  };
-  const handleClose = () => setAnchor(undefined);
-  const handleClick = option => () => {
-    onChange(option);
-    handleClose();
-  };
+  const {
+    anchor,
+    width,
+    onClick: handleClick,
+    onClose: handleClose,
+    onOpen: handleOpen,
+  } = useDropdown({ clickCallback: option => onChange(option) });
 
   return (
     <Root>
@@ -29,7 +26,7 @@ const Select = props => {
         {type === 'underline' && <InputUnderline readOnly disabled={disabled} placeholder={placeholder} value={selectedOption.label || ''} /> }
         <DropIcon alt="" src={dropArrowSource} />
       </Section>
-      <DropdownMenu 
+      <Dropdown 
         anchorRef={anchor}
         maxHeight="212px"
         offset={{ x: 9, y: 0 }}
@@ -40,7 +37,7 @@ const Select = props => {
         {options.map(option => (
           <Option key={option.value} onClick={handleClick(option)}>{option.label}</Option>
         ))}
-      </DropdownMenu>
+      </Dropdown>
     </Root>
   );
 };

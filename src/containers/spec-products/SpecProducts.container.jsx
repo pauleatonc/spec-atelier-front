@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
-import { onGetSpecProductsByFilters, onGetSpecProductsByPage, onGetSpecProductsBySearch } from './SpecProducts.actions';
+import { onGetSpecProductsByFilters, onGetSpecProductsByPage, onGetSpecProductsBySearch, onGetSpecProductsBySort } from './SpecProducts.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import SearchBar from '../../components/filters/SearchBar';
 import Tag from '../../components/filters/Tag';
+import DropdownMenu from '../../components/menus/DropdownMenu';
 import Button from '../../components/buttons/Button';
 import ProductCard from '../../components/cards/ProductCard';
-import { Root, Header, HeaderSearch, HeaderFilters, Body, Total, Cards, LoadMore, Loading } from './SpecProducts.styles';
+import { Root, Header, HeaderSearch, HeaderFilters, Body, BodyHeader, Sort, Total, Cards, LoadMore, Loading } from './SpecProducts.styles';
 
 const filters = [
   { label: 'Todos', tag: 'all' },
@@ -22,19 +23,22 @@ const filters = [
  * The SpecProductsList's container.
  */
 const SpecProductsList = () => {
-  const { selectedItemID } = useSelector(state => state.specProductsItems);
   const { nextPage, collection: products = [], loading, show, total } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
-  const [search, setSearch] = useState('');
-  const [selectedFilters] = useState(['all']);
+  const [searchValue, setSearchValue] = useState('');
+  const [sortValue, setSortValue] = useState({});
   const [selectedProducts, setSelectedProducts] = useState([]);
   const handleSearchChange = event => {
-    setSearch(event.target.value);
+    setSearchValue(event.target.value);
     dispatch(onGetSpecProductsBySearch({ search: event.target.value }));
   };
   const handleFiltersClick = () => () => {
     // TODO: handle filters tags.
     dispatch(onGetSpecProductsByFilters({}));
+  };
+  const handleSortChange = option => {
+    setSortValue(option);
+    dispatch(onGetSpecProductsBySort({ sort: option.value }));
   };
   const handleCardClick = currentProductID => () => {
     const hasProduct = selectedProducts.find(productID => productID === currentProductID);
@@ -57,11 +61,19 @@ const SpecProductsList = () => {
     dispatch(getProduct(selectedProduct));
   }
 
+  useEffect(() => {
+    if (show) {
+      return;
+    }
+
+    setSortValue({});
+  }, [show]);
+
   return (
     <Root>
       <Header>
         <HeaderSearch>
-          <SearchBar justifyContent="center" maxWidth="432px" placeholder="Buscar" value={search} onChange={handleSearchChange} />
+          <SearchBar justifyContent="center" maxWidth="432px" placeholder="Buscar" value={searchValue} onChange={handleSearchChange} />
         </HeaderSearch>
         <HeaderFilters>
           {filters.map(filter => {
@@ -70,8 +82,8 @@ const SpecProductsList = () => {
 
             return (
               <Tag
-                selected
                 key={`products-by-item__filter--${filter.tag}`}
+                selected={false}
                 onClick={handleFiltersClick(filter.tag)}
               >
                 {filter.label}
@@ -81,7 +93,26 @@ const SpecProductsList = () => {
         </HeaderFilters>
       </Header>
       <Body>
-        <Total>{loading ? 'Cargando...' : `${products.length} de ${total} producto(s)`}</Total>
+        <BodyHeader>
+          {loading && 'Cargando...'}
+          {!loading && (
+            <>
+              <Sort>
+                <DropdownMenu
+                  options={[
+                    { label: 'Nuevos', value: 'created_at' },
+                    { label: 'Más usados', value: 'most_used' },
+                  ]}
+                  placeholder="Ordenar por"
+                  value={sortValue}
+                  width="179px"
+                  onChange={handleSortChange}
+                />
+              </Sort>
+              <Total>{`${products.length} de ${total} producto(s)`}</Total>
+            </>
+          )}
+        </BodyHeader>
         <Cards>
           {products.map(product => {
             const selected = selectedProducts.find(selectedProduct => selectedProduct === product.id);
@@ -91,7 +122,7 @@ const SpecProductsList = () => {
                 canAdd
                 category={`Sistema constructivo: ${product.system.name}`}
                 description={product.short_desc}
-                key={`product-card-${selectedItemID}-${product.id}`}
+                key={`product-card-${product.id}`}
                 photo={product.images[0]?.urls?.thumb}
                 reference={product.reference}
                 selected={Boolean(selected)}

@@ -35,16 +35,32 @@ export const HeaderFilters = styled.section`
 export const Body = styled.section`
   height: 100%;
   overflow-y: auto;
-  padding: 15px 46px;
+  padding: 20px 46px 15px;
   width: 100%;
 `;
 
-export const Total = styled.section`
+export const BodyHeader = styled.section`
+  align-items: center;
   color: ${COLOR_MINE_SHAFT};
+  color: #212121;
+  display: grid;
   font-family: Lato;
   font-size: 12px;
+  grid-template-columns: 50% 50%;
+  height: 24px;
   letter-spacing: 1px;
   margin: 0 0 21px;
+`;
+
+export const Sort = styled.section`
+  display: flex;
+  justify-content: flex-start;
+`;
+
+export const Total = styled.section`
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const Cards = styled.section`

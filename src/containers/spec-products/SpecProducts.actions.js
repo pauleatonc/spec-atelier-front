@@ -58,6 +58,7 @@ export const UPDATE_SPEC_PRODUCTS_FILTERS = 'UPDATE_SPEC_PRODUCTS_FILTERS';
 export const UPDATE_SPEC_PRODUCTS_FILTER_ITEM = 'UPDATE_SPEC_PRODUCTS_FILTER_ITEM';
 export const UPDATE_SPEC_PRODUCTS_FILTER_SEARCH = 'UPDATE_SPEC_PRODUCTS_FILTER_SEARCH';
 export const UPDATE_SPEC_PRODUCTS_FILTER_SECTION = 'UPDATE_SPEC_PRODUCTS_FILTER_SECTION';
+export const UPDATE_SPEC_PRODUCTS_FILTER_SORT = 'UPDATE_SPEC_PRODUCTS_FILTER_SORT';
 
 export const GET_SPEC_PRODUCTS_BY_FILTERS = 'GET_SPEC_PRODUCTS_BY_FILTERS';
 export const onGetSpecProductsByFilters = payload => dispatch =>
@@ -85,6 +86,13 @@ export const onGetSpecProductsBySection = payload => dispatch =>
   batch(() => {
     dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SECTION, payload));
     dispatch(onShowSpecProductsItems());
+    dispatch(onGetSpecProducts());
+  });
+
+export const GET_SPEC_PRODUCTS_BY_SORT = 'GET_SPEC_PRODUCTS_BY_SORT';
+export const onGetSpecProductsBySort = payload => dispatch =>
+  batch(() => {
+    dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SORT, payload));
     dispatch(onGetSpecProducts());
   });
 

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import { onShowSpecProductsSuccess } from '../spec-products/SpecProducts.actions';
-import DropdownMenu from '../../components/menus/DropdownMenu';
+import useDropdown from '../../components/basics/Dropdown.hooks';
+import Dropdown from '../../components/basics/Dropdown';
 import { Root, AddIcon, MenuItem } from './SpecDocument.styles';
 import specAddSource from '../../assets/images/icons/spec-add.svg';
 
@@ -11,9 +12,11 @@ import specAddSource from '../../assets/images/icons/spec-add.svg';
  */
 const SpecDocument = () => {
   const dispatch = useDispatch();
-  const [anchor, setAnchor] = useState(undefined);
-  const handleMenuOpen = event => setAnchor(event.currentTarget);
-  const handleMenuClose = () => setAnchor(undefined);
+  const {
+    anchor,
+    onClose: handleMenuClose,
+    onOpen: handleMenuOpen,
+  } = useDropdown({ clickCallback: option => onChange(option) });
   const handleShowProducts = () => {
     handleMenuClose();
     dispatch(onShowSpecProductsSuccess());
@@ -26,7 +29,7 @@ const SpecDocument = () => {
   return (
     <Root>
       <AddIcon alt="Agregar sección" src={specAddSource} onClick={handleMenuOpen} />
-      <DropdownMenu
+      <Dropdown
         anchorRef={anchor}
         offset={{ x: -15, y: -16 }}
         open={Boolean(anchor)}
@@ -36,7 +39,7 @@ const SpecDocument = () => {
         <MenuItem>Añadir texto</MenuItem>
         <MenuItem onClick={handleShowProducts}>Añadir producto</MenuItem>
         <MenuItem onClick={handleCreateProduct}>Crear producto</MenuItem>
-      </DropdownMenu>
+      </Dropdown>
     </Root>
   );
 };

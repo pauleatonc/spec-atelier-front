@@ -11,6 +11,7 @@ import {
   UPDATE_SPEC_PRODUCTS_FILTER_ITEM,
   UPDATE_SPEC_PRODUCTS_FILTER_SEARCH,
   UPDATE_SPEC_PRODUCTS_FILTER_SECTION,
+  UPDATE_SPEC_PRODUCTS_FILTER_SORT,
 } from './SpecProducts.actions';
 
 const specProductsState = {
@@ -19,6 +20,7 @@ const specProductsState = {
     item: '',
     search: '',
     section: '',
+    sort: '',
   },
   loading: false,
   nextPage: null,
@@ -88,6 +90,15 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
         filters: {
           ...state.filters,
           section: payload.sectionID,
+        },
+      };
+    }
+    case UPDATE_SPEC_PRODUCTS_FILTER_SORT: {
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          sort: payload.sort,
         },
       };
     }
