@@ -5,5 +5,5 @@ import { cleanObject } from './services.helpers';
 /**
  * Send Contact Info.
  */
-export const postContact = (brandId, contact) => postJsonRequest(`${API_BASE_URL}/api/brands/${brandId}/contact_form`, { brand_contact_form: cleanObject(contact) });
+export const postContact = (brandId, contact) => postJsonRequest(`${API_BASE_URL}/brands/${brandId}/contact_form`, { brand_contact_form: cleanObject(contact) });
 

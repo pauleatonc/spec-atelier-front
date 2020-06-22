@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  onGetProductsBrands,
+  onGetSpecProductsBrands,
   onHideSpecCreateProduct,
-  onHideSpecCreateProductStepTwo,
-  onShowSpecCreateProductStepThree,
+  onHideSpecCreateProductStepTwoSuccess,
+  onShowSpecCreateProductStepThreeSuccess,
 } from './SpecCreateProduct.actions';
 import { useTextarea, useAutocomplete, useInput } from '../../components/inputs/Inputs.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
@@ -37,12 +37,12 @@ const SpecCreateProductStepTwo = () => {
     setBrandValue({});
     setPriceValue('');
   };
-  const handlePrev = () => dispatch(onHideSpecCreateProductStepTwo({
+  const handlePrev = () => dispatch(onHideSpecCreateProductStepTwoSuccess({
     description: descriptionValue,
     brand: brandValue,
     price: priceValue,
   }));
-  const handleNext = () => dispatch(onShowSpecCreateProductStepThree({
+  const handleNext = () => dispatch(onShowSpecCreateProductStepThreeSuccess({
     description: descriptionValue,
     brand: brandValue,
     price: priceValue,
@@ -54,7 +54,7 @@ const SpecCreateProductStepTwo = () => {
       return;
     }
 
-    dispatch(onGetProductsBrands());
+    dispatch(onGetSpecProductsBrands());
   }, [show]);
 
   return (

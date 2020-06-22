@@ -1,20 +1,38 @@
+import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
 import { getProductsItems } from '../../services/products.service';
+import { UPDATE_SPEC_PRODUCTS_FILTER_ITEM, onGetSpecProducts } from '../spec-products/SpecProducts.actions';
 
-export const GET_PRODUCTS_ITEMS = 'GET_PRODUCTS_ITEMS';
-export const GET_PRODUCTS_ITEMS_ERROR = 'GET_PRODUCTS_ITEMS_ERROR';
-export const GET_PRODUCTS_ITEMS_SUCCESS = 'GET_PRODUCTS_ITEMS_SUCCESS';
-export const onGetProductsItems = ({ sectionID }) => async dispatch => {
-  dispatch(onActionCreator(GET_PRODUCTS_ITEMS));
+export const GET_SPEC_PRODUCTS_ITEMS = 'GET_SPEC_PRODUCTS_ITEMS';
+export const GET_SPEC_PRODUCTS_ITEMS_ERROR = 'GET_SPEC_PRODUCTS_ITEMS_ERROR';
+export const GET_SPEC_PRODUCTS_ITEMS_SUCCESS = 'GET_SPEC_PRODUCTS_ITEMS_SUCCESS';
+export const onGetSpecProductsItems = ({ sectionID } = {}) => async (dispatch, getState) => {
+  dispatch(onActionCreator(GET_SPEC_PRODUCTS_ITEMS));
 
   try {
-    const response = await getProductsItems(sectionID);
+    const { specProducts } = getState();
+    const response = await getProductsItems(sectionID || specProducts.filters.section);
 
-    return dispatch(onActionCreator(GET_PRODUCTS_ITEMS_SUCCESS, { items: response.items }));
+    return dispatch(onActionCreator(GET_SPEC_PRODUCTS_ITEMS_SUCCESS, { items: response.items }));
   } catch (error) {
-    return dispatch(onActionCreator(GET_PRODUCTS_ITEMS_ERROR, { error }));
+    return dispatch(onActionCreator(GET_SPEC_PRODUCTS_ITEMS_ERROR, { error }));
   }
 };
 
+export const GET_SPEC_PRODUCTS_BY_ITEM = 'GET_SPEC_PRODUCTS_BY_ITEM';
+export const onGetSpecProductsByItem = payload => dispatch =>
+  batch(() => {
+    dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_ITEM, payload));
+    dispatch(onGetSpecProducts());
+  });
+
+export const HIDE_SPEC_PRODUCTS_ITEMS_SUCCESS = 'HIDE_SPEC_PRODUCTS_ITEMS_SUCCESS';
+export const onHideSpecProductsItemsSuccess = () => ({ type: HIDE_SPEC_PRODUCTS_ITEMS_SUCCESS });
+
+export const SHOW_SPEC_PRODUCTS_ITEMS = 'SHOW_SPEC_PRODUCTS_ITEMS';
 export const SHOW_SPEC_PRODUCTS_ITEMS_SUCCESS = 'SHOW_SPEC_PRODUCTS_ITEMS_SUCCESS';
-export const onShowSpecProductsItemsSuccess = payload => ({ payload, type: SHOW_SPEC_PRODUCTS_ITEMS_SUCCESS });
+export const onShowSpecProductsItems = () => dispatch =>
+  batch(() => {
+    dispatch(onActionCreator(SHOW_SPEC_PRODUCTS_ITEMS_SUCCESS));
+    dispatch(onGetSpecProductsItems());
+  });

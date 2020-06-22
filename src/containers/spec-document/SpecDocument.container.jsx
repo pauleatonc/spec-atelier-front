@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { onShowSpecCreateProduct } from '../spec-create-product/SpecCreateProduct.actions';
+import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
+import { onShowSpecProductsSuccess } from '../spec-products/SpecProducts.actions';
 import DropdownMenu from '../../components/menus/DropdownMenu';
 import { Root, AddIcon, MenuItem } from './SpecDocument.styles';
 import specAddSource from '../../assets/images/icons/spec-add.svg';
@@ -13,9 +14,13 @@ const SpecDocument = () => {
   const [anchor, setAnchor] = useState(undefined);
   const handleMenuOpen = event => setAnchor(event.currentTarget);
   const handleMenuClose = () => setAnchor(undefined);
+  const handleShowProducts = () => {
+    handleMenuClose();
+    dispatch(onShowSpecProductsSuccess());
+  };
   const handleCreateProduct = () => {
     handleMenuClose();
-    dispatch(onShowSpecCreateProduct());
+    dispatch(onShowSpecCreateProductSuccess());
   }; 
 
   return (
@@ -29,7 +34,7 @@ const SpecDocument = () => {
         onClose={handleMenuClose}
       >
         <MenuItem>Añadir texto</MenuItem>
-        <MenuItem>Añadir producto</MenuItem>
+        <MenuItem onClick={handleShowProducts}>Añadir producto</MenuItem>
         <MenuItem onClick={handleCreateProduct}>Crear producto</MenuItem>
       </DropdownMenu>
     </Root>

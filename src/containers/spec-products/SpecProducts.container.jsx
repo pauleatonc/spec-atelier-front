@@ -1,34 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Transition } from 'react-transition-group';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
-import { onGetProductsByItem } from './SpecProducts.actions';
+import { onGetSpecProducts } from './SpecProducts.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import SearchBar from '../../components/filters/SearchBar';
 import Tag from '../../components/filters/Tag';
 import Button from '../../components/buttons/Button';
 import ProductCard from '../../components/cards/ProductCard';
-import { Root, Header, HeaderSpace, HeaderSearch, HeaderFilters, Body, Total, Cards, LoadMore, Loading } from './SpecProducts.styles';
+import { Root, Header, HeaderSearch, HeaderFilters, Body, Total, Cards, LoadMore, Loading } from './SpecProducts.styles';
 
-const TRANSITION_DURATION = 150;
-const defaultStyle = {
-  transform: 'scaleX(0)',
-  transformOrigin: '0 100%',
-  transition: `width ${TRANSITION_DURATION}ms cubic-bezier(0, 0, 0.2, 1) 0ms, transform ${TRANSITION_DURATION - 10}ms linear 0ms`,
-  width: 0,
-};
-const transitionStyles = {
-  exited: { transform: 'scaleX(0)', width: 0 },
-  entered: { minWidth: 944, transform: 'scaleX(1)', width: 'calc(100vw - 422px)' },
-};
 const filters = [
   { label: 'Todos', tag: 'all' },
-  { label: 'Recientes', tag: 'latest' },
-  { label: 'Más usados', tag: 'most_used' },
   { label: 'Marcas', tag: 'brands' },
   { label: 'Tipo de proyecto', tag: 'project_type' },
   { label: 'Mis especificaciones', tag: 'my_specifications' },
-  { label: 'Otros usuarios', tag: 'other_users' },
+  { label: 'Creado por usuarios', tag: 'created_by_users' },
   { label: 'Recintos', tag: 'enclosures' },
 ];
 
@@ -44,7 +30,7 @@ const SpecProductsList = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const handleSearchChange = event => {
     setSearch(event.target.value);
-    dispatch(onGetProductsByItem({ filters: selectedFilters.sort(), itemID: selectedItemID, search: event.target.value }));
+    dispatch(onGetSpecProducts({ filters: selectedFilters.sort(), itemID: selectedItemID, search: event.target.value }));
   };
   const handleFilterClick = currentFilterTag => () => {
     const hasFilterTag = selectedFilters.find(filterTag => filterTag === currentFilterTag);
@@ -104,62 +90,57 @@ const SpecProductsList = () => {
   }, [selectedItemID]);
 
   return (
-    <Transition in={show} timeout={TRANSITION_DURATION}>
-      {state => (
-        <Root style={{ ...defaultStyle, ...transitionStyles[state] }}>
-          <Header>
-            <HeaderSpace />
-            <HeaderSearch>
-              <SearchBar justifyContent="center" maxWidth="432px" placeholder="Buscar" value={search} onChange={handleSearchChange} />
-            </HeaderSearch>
-            <HeaderFilters>
-              {filters.map(filter => {
-                const selected = selectedFilters.find(selectedFilter => selectedFilter === filter.tag);
-    
-                return (
-                  <Tag
-                    key={`products-by-item__filter--${filter.tag}`}
-                    selected={Boolean(selected)}
-                    onClick={handleFilterClick(filter.tag)}
-                  >
-                    {filter.label}
-                  </Tag>
-                );
-              })}
-            </HeaderFilters>
-          </Header>
-          <Body>
-            <Total>{loading ? 'Cargando...' : `${products.length} de ${total} producto(s)`}</Total>
-            <Cards>
-              {products.map(product => {
-                const selected = selectedProducts.find(selectedProduct => selectedProduct === product.id);
+    <Root>
+      <Header>
+        <HeaderSearch>
+          <SearchBar justifyContent="center" maxWidth="432px" placeholder="Buscar" value={search} onChange={handleSearchChange} />
+        </HeaderSearch>
+        <HeaderFilters>
+          {filters.map(filter => {
+            const selected = selectedFilters.find(selectedFilter => selectedFilter === filter.tag);
 
-                return (
-                  <ProductCard
-                    canAdd
-                    category={`Sistema constructivo: ${product.system.name}`}
-                    description={product.short_desc}
-                    key={`product-card-${selectedItemID}-${product.id}`}
-                    photo={product.images[0]?.urls?.thumb}
-                    reference={product.reference}
-                    selected={Boolean(selected)}
-                    title={product.name}
-                    onClickCard={handleCardClick(product.id)}
-                    onClickSeeMore={handleSeeMoreClick(product)}
-                  />
-                );
-              })}
-            </Cards>
-            {nextPage !== null && (
-              <LoadMore>
-                {loading && <Loading>Cargando...</Loading>}
-                {!loading && <Button variant="gray" onClick={handleLoadMoreClick}>Ver más</Button>}
-              </LoadMore>
-            )}
-          </Body>
-        </Root>
-      )}
-    </Transition>
+            return (
+              <Tag
+                key={`products-by-item__filter--${filter.tag}`}
+                selected={Boolean(selected)}
+                onClick={handleFilterClick(filter.tag)}
+              >
+                {filter.label}
+              </Tag>
+            );
+          })}
+        </HeaderFilters>
+      </Header>
+      <Body>
+        <Total>{loading ? 'Cargando...' : `${products.length} de ${total} producto(s)`}</Total>
+        <Cards>
+          {products.map(product => {
+            const selected = selectedProducts.find(selectedProduct => selectedProduct === product.id);
+
+            return (
+              <ProductCard
+                canAdd
+                category={`Sistema constructivo: ${product.system.name}`}
+                description={product.short_desc}
+                key={`product-card-${selectedItemID}-${product.id}`}
+                photo={product.images[0]?.urls?.thumb}
+                reference={product.reference}
+                selected={Boolean(selected)}
+                title={product.name}
+                onClickCard={handleCardClick(product.id)}
+                onClickSeeMore={handleSeeMoreClick(product)}
+              />
+            );
+          })}
+        </Cards>
+        {nextPage !== null && (
+          <LoadMore>
+            {loading && <Loading>Cargando...</Loading>}
+            {!loading && <Button variant="gray" onClick={handleLoadMoreClick}>Ver más</Button>}
+          </LoadMore>
+        )}
+      </Body>
+    </Root>
   );
 };
 

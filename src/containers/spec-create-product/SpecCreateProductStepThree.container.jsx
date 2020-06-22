@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
-import { onCreateProduct, onHideSpecCreateProduct, onHideSpecCreateProductStepThree } from './SpecCreateProduct.actions';
+import { onCreateSpecProduct, onHideSpecCreateProduct, onHideSpecCreateProductStepThreeSuccess } from './SpecCreateProduct.actions';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import StepsBubbles from '../../components/basics/StepsBubbles';
 import AttachedImages from '../../components/attachments/AttachedImages';
@@ -31,11 +31,11 @@ const SpecCreateProductStepThree = () => {
     setImagesValues([]);
     setDocumentsValues([]);
   };
-  const handlePrev = () => dispatch(onHideSpecCreateProductStepThree({
+  const handlePrev = () => dispatch(onHideSpecCreateProductStepThreeSuccess({
     images: imagesValues,
     documents: documentsValues,
   }));
-  const handleCreate = () => dispatch(onCreateProduct({ images: imagesValues, documents: documentsValues }));
+  const handleCreate = () => dispatch(onCreateSpecProduct({ images: imagesValues, documents: documentsValues }));
   const disabledNext = imagesValues.length === 0 || documentsValues.length === 0;
 
   return (

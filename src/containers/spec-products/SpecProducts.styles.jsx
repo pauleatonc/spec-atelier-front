@@ -7,7 +7,7 @@ export const Root = styled.div`
   height: calc(100vh - 115px);
   max-height: calc(100vh - 115px);
   position: relative;
-  width: 100%;
+  width: calc(100% - 360px);
   z-index: 4;
 `;
 
@@ -15,14 +15,7 @@ export const Header = styled.section`
   width: 100%;
 `;
 
-export const HeaderSpace = styled.section`
-  border-bottom: 1px solid #E5E5E5;
-  height: 46px;
-  width: 100%;
-`;
-
 export const HeaderSearch = styled.section`
-  border-left: 1px solid #E5E5E5;
   display: flex;
   justify-content: center;
   padding: 23px 0 20px;
@@ -31,7 +24,6 @@ export const HeaderSearch = styled.section`
 
 export const HeaderFilters = styled.section`
   border-bottom: 1px solid #E5E5E5;
-  border-left: 1px solid #E5E5E5;
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -40,7 +32,6 @@ export const HeaderFilters = styled.section`
 `;
 
 export const Body = styled.section`
-  border-left: 1px solid #E5E5E5;
   height: 100%;
   overflow-y: auto;
   padding: 15px 46px;
