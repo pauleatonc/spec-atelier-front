@@ -51,3 +51,16 @@ export const useAutocomplete = (initialValue = {}, callback = () => undefined) =
 
   return { handler, value, set: setValue };
 };
+
+/**
+ * The MultiSelect custom's hook.
+ */
+export const useMultiSelect = (initialValue = [], callback = () => undefined) => {
+  const [values, setValues] = useState(initialValue);
+  const handler = options => {
+    setValues(options);
+    callback(options);
+  };
+
+  return { handler, values, set: setValues };
+};

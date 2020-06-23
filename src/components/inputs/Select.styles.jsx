@@ -53,6 +53,21 @@ export const Input = styled.input`
   }
 `;
 
+export const InputUnderline = styled(Input)`
+  border: 0; 
+  outline: 0;
+  min-width: 140px;
+  display:flex;
+  flex: 1;
+  justify-content: space-between;
+  border-bottom: 2px solid ${COLOR_LIGHTGREY};
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: ${COLOR_BLACK};
+  border-radius: 0;
+`;
+
 export const DropIcon = styled.img`
   bottom: 0;
   cursor: pointer;
@@ -83,19 +98,4 @@ export const Option = styled.section`
   &:last-child {
     margin: 0 0 6px;
   }
-`;
-
-export const InputUnderline = styled(Input)`
-  border: 0; 
-  outline: 0;
-  min-width: 140px;
-  display:flex;
-  flex: 1;
-  justify-content: space-between;
-  border-bottom: 2px solid ${COLOR_LIGHTGREY};
-  font-family: Lato;
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: ${COLOR_BLACK};
-  border-radius: 0;
 `;

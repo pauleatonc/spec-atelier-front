@@ -4,6 +4,7 @@ import { useState } from 'react';
  * The Dropdown custom's hook.
  */
 const useDropdown = ({
+  closeOnClick = true,
   clickCallback = () => undefined,
   closeCallback = () => undefined,
   openCallback = () => undefined,
@@ -19,9 +20,12 @@ const useDropdown = ({
     setAnchor(undefined);
     closeCallback();
   };
-  const handleClick = option => () => {
-    handleClose();
-    clickCallback(option);
+  const handleClick = (...args) => () => {
+    if (closeOnClick) {
+      handleClose();
+    }
+
+    clickCallback(...args);
   };
 
   return { anchor, width, onClick: handleClick, onClose: handleClose, onOpen: handleOpen };

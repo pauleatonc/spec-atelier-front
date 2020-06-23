@@ -53,6 +53,21 @@ export const Input = styled.input`
   }
 `;
 
+export const InputUnderline = styled(Input)`
+  border: 0; 
+  outline: 0;
+  min-width: 140px;
+  display:flex;
+  flex: 1;
+  justify-content: space-between;
+  border-bottom: 2px solid ${COLOR_LIGHTGREY};
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: ${COLOR_BLACK};
+  border-radius: 0;
+`;
+
 export const DropIcon = styled.img`
   bottom: 0;
   cursor: pointer;
@@ -63,13 +78,15 @@ export const DropIcon = styled.img`
 `;
 
 export const Option = styled.section`
+  align-items: center;
   box-sizing: border-box;
   color: #212121;
   cursor: pointer;
+  display: flex;
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 0.86px;
-  padding: 10px 23px;
+  padding: 10px 16px;
   width: 100%;
 
   &:hover {
@@ -85,17 +102,14 @@ export const Option = styled.section`
   }
 `;
 
-export const InputUnderline = styled(Input)`
-  border: 0; 
-  outline: 0;
-  min-width: 140px;
-  display:flex;
-  flex: 1;
-  justify-content: space-between;
-  border-bottom: 2px solid ${COLOR_LIGHTGREY};
-  font-family: Lato;
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: ${COLOR_BLACK};
-  border-radius: 0;
+export const OptionCheckboxIcon = styled.img`
+  height: 18px;
+  margin: 0 8px 0 0;
+  width: 18px;
+`;
+
+export const OptionText = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;

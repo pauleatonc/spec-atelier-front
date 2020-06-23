@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import useDropdown from '../basics/Dropdown.hooks';
 import Dropdown from '../basics/Dropdown';
-import { Root, Label, Section, Input, DropIcon, Option, InputUnderline } from './Select.styles';
+import { Root, Label, Section, Input, InputUnderline, DropIcon, Option } from './Select.styles';
 import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
 
 /**
