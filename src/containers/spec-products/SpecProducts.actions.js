@@ -41,7 +41,7 @@ export const onGetSpecProductsByPage = () => async (dispatch, getState) => {
 
     return dispatch(
       onActionCreator(
-        UPDATE_SPEC_PRODUCTS_SUCCESS,
+        GET_SPEC_PRODUCTS_BY_PAGE_SUCCESS,
         {
           nextPage: response?.products?.next_page,
           products: specProducts.collection.concat(response?.products?.list || []),
@@ -50,7 +50,7 @@ export const onGetSpecProductsByPage = () => async (dispatch, getState) => {
       ),
     );
   } catch (error) {
-    return dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_ERROR, { error: true, nativeError: error }));
+    return dispatch(onActionCreator(GET_SPEC_PRODUCTS_BY_PAGE_ERROR, { error: true, nativeError: error }));
   }
 };
 
