@@ -37,7 +37,7 @@ export const onGetSpecProductsByPage = () => async (dispatch, getState) => {
 
   try {
     const { specProducts } = getState();
-    const response = await getProducts({ page: specProducts.nextPage });
+    const response = await getProducts({ ...specProducts.filters, page: specProducts.nextPage });
 
     return dispatch(
       onActionCreator(

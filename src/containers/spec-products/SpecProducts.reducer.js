@@ -18,6 +18,7 @@ const specProductsState = {
   collection: [],
   filters: {
     item: '',
+    limit: 20,
     search: '',
     section: '',
     sort: '',
