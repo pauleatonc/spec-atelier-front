@@ -66,7 +66,7 @@ module.exports = env => {
       }),
       new MiniCssExtractPlugin({ filename: 'styles.css' }),
       new CopyWebpackPlugin({ patterns: [{ from: './static/images', to: './images' }] }),
-      new webpack.DefinePlugin({ ENVIRONMENT: JSON.stringify(env.NODE_ENV) }),
+      new webpack.DefinePlugin({ ENVIRONMENT: JSON.stringify(env.ENVIRONMENT) }),
     ],
   };
 };

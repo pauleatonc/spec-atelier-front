@@ -11,6 +11,19 @@ export const useComboBox = (initialValue = [], callback = () => undefined) => {
   };
 
   return { values, set: setValues, onChange: handleChange };
+}
+
+/*
+ * The Autocomplete custom's hook.
+ */
+export const useAutocomplete = (initialValue = {}, callback = () => undefined) => {
+  const [value, setValue] = useState(initialValue);
+  const handleChange = option => {
+    setValue(option);
+    callback(option);
+  };
+
+  return { value, set: setValue, onChange: handleChange };
 };
 
 /**
@@ -18,7 +31,7 @@ export const useComboBox = (initialValue = [], callback = () => undefined) => {
  */
 export const useInput = (initialValue = '', type = 'text') => {
   const [value, setValue] = useState(initialValue);
-  const handler = event => {
+  const handleChange = event => {
     if (type === 'currency' && event.target.value !== '' && !/^[0-9]+$/.test(event.target.value)) {
       return;
     }
@@ -26,43 +39,7 @@ export const useInput = (initialValue = '', type = 'text') => {
     setValue(event.target.value);
   }; 
 
-  return { handler, type, value, set: setValue };
-};
-
-/**
- * The Textarea custom's hook. 
- */
-export const useTextarea = (initialValue = '') => {
-  const [value, setValue] = useState(initialValue);
-  const handler = event => setValue(event.target.value); 
-
-  return { handler, value, set: setValue };
-};
-
-/**
- * The Select custom's hook.
- */
-export const useSelect = (initialValue = {}, callback = () => undefined) => {
-  const [value, setValue] = useState(initialValue);
-  const handler = option => {
-    setValue(option);
-    callback(option);
-  };
-
-  return { handler, value, set: setValue };
-};
-
-/**
- * The Autocomplete custom's hook.
- */
-export const useAutocomplete = (initialValue = {}, callback = () => undefined) => {
-  const [value, setValue] = useState(initialValue);
-  const handler = option => {
-    setValue(option);
-    callback(option);
-  };
-
-  return { handler, value, set: setValue };
+  return { type, value, set: setValue, onChange: handleChange };
 };
 
 /**
@@ -70,10 +47,33 @@ export const useAutocomplete = (initialValue = {}, callback = () => undefined) =
  */
 export const useMultiSelect = (initialValue = [], callback = () => undefined) => {
   const [values, setValues] = useState(initialValue);
-  const handler = options => {
+  const handleChange = options => {
     setValues(options);
     callback(options);
   };
 
-  return { handler, values, set: setValues };
+  return { values, set: setValues, onChange: handleChange };
+};
+
+/**
+ * The Select custom's hook.
+ */
+export const useSelect = (initialValue = {}, callback = () => undefined) => {
+  const [value, setValue] = useState(initialValue);
+  const handleChange = option => {
+    setValue(option);
+    callback(option);
+  };
+
+  return { value, set: setValue, onChange: handleChange };
+};
+
+/**
+ * The Textarea custom's hook. 
+ */
+export const useTextarea = (initialValue = '') => {
+  const [value, setValue] = useState(initialValue);
+  const handleChange = event => setValue(event.target.value); 
+
+  return { value, set: setValue, onChange: handleChange };
 };
