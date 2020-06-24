@@ -73,7 +73,7 @@ export const onGetSpecProductsByFilters = payload => dispatch =>
 export const GET_SPEC_PRODUCTS_BY_FILTERS_ALL = 'GET_SPEC_PRODUCTS_BY_FILTERS_ALL';
 export const onGetSpecProductsByFiltersAll = () => dispatch =>
   batch(() => {
-    dispatch(onActionCreator(GET_SPEC_PRODUCTS_BY_FILTERS_ALL));
+    dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTERS_ALL));
     dispatch(onGetSpecProducts());
   });
 

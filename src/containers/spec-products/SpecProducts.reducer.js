@@ -72,6 +72,7 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
       return {
         ...state,
         filters: {
+          ...specProductsState.filters,
           item: state.filters.item,
           search: state.filters.search,
           section: state.filters.section,
