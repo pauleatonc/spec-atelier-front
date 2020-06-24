@@ -83,14 +83,6 @@ const SpecProductsList = () => {
     setSortValue({});
   }, [show]);
 
-  useEffect(() => {
-    if (show) {
-      return;
-    }
-
-    setSortValue({});
-  }, [show]);
-
   return (
     <Root>
       <Header>
