@@ -25,8 +25,8 @@ const brandsReducer = (state = initialBrandState, { payload, type }) => {
     case GET_BRANDS:
       return {
         ...state,
-        brands: payload?.brands?.list || [],
-        total: payload?.brands?.total || 0,
+        brands: payload?.brands || [],
+        total: payload?.total || 0,
         loading: false,
         error: undefined,
         params: initialBrandState.params,

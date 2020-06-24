@@ -1,6 +1,8 @@
 import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
 import { getProducts } from '../../services/products.service';
+import { getAppData as onGetAppData } from '../../config/store/app-store/app.actions';
+import { getBrands as onGetBrands } from '../brands-list/BrandsList.actions';
 import { HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS, onShowSpecProductsSections } from '../spec-products-sections/SpecProductsSections.actions';
 import { HIDE_SPEC_PRODUCTS_ITEMS_SUCCESS, onShowSpecProductsItems } from '../spec-products-items/SpecProductsItems.actions';
 
@@ -55,6 +57,7 @@ export const onGetSpecProductsByPage = () => async (dispatch, getState) => {
 };
 
 export const UPDATE_SPEC_PRODUCTS_FILTERS = 'UPDATE_SPEC_PRODUCTS_FILTERS';
+export const UPDATE_SPEC_PRODUCTS_FILTERS_ALL = 'UPDATE_SPEC_PRODUCTS_FILTERS_ALL';
 export const UPDATE_SPEC_PRODUCTS_FILTER_ITEM = 'UPDATE_SPEC_PRODUCTS_FILTER_ITEM';
 export const UPDATE_SPEC_PRODUCTS_FILTER_SEARCH = 'UPDATE_SPEC_PRODUCTS_FILTER_SEARCH';
 export const UPDATE_SPEC_PRODUCTS_FILTER_SECTION = 'UPDATE_SPEC_PRODUCTS_FILTER_SECTION';
@@ -65,6 +68,13 @@ export const onGetSpecProductsByFilters = payload => dispatch =>
   batch(() => {
     dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTERS, payload));
     dispatch(onGetSpecProducts())
+  });
+
+export const GET_SPEC_PRODUCTS_BY_FILTERS_ALL = 'GET_SPEC_PRODUCTS_BY_FILTERS_ALL';
+export const onGetSpecProductsByFiltersAll = () => dispatch =>
+  batch(() => {
+    dispatch(onActionCreator(GET_SPEC_PRODUCTS_BY_FILTERS_ALL));
+    dispatch(onGetSpecProducts());
   });
 
 export const GET_SPEC_PRODUCTS_BY_ITEM = 'GET_SPEC_PRODUCTS_BY_ITEM';
@@ -109,5 +119,7 @@ export const onShowSpecProductsSuccess = () => dispatch =>
   batch(() => {
     dispatch(onShowSpecProductsSections());
     dispatch(onActionCreator(SHOW_SPEC_PRODUCTS_SUCCESS));
+    dispatch(onGetAppData());
+    dispatch(onGetBrands());
     dispatch(onGetSpecProducts());
   });

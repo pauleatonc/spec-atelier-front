@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
-import { onGetSpecProductsByFilters, onGetSpecProductsByPage, onGetSpecProductsBySearch, onGetSpecProductsBySort } from './SpecProducts.actions';
+import {
+  onGetSpecProductsByFilters,
+  onGetSpecProductsByFiltersAll,
+  onGetSpecProductsByPage,
+  onGetSpecProductsBySearch,
+  onGetSpecProductsBySort,
+} from './SpecProducts.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
+import { useComboBox } from '../../components/inputs/Inputs.hooks';
 import SearchBar from '../../components/filters/SearchBar';
 import Tag from '../../components/filters/Tag';
+import ToggleMenu from '../../components/menus/ToggleMenu';
+import ComboBox from '../../components/inputs/ComboBox';
 import DropdownMenu from '../../components/menus/DropdownMenu';
 import Button from '../../components/buttons/Button';
 import ProductCard from '../../components/cards/ProductCard';
 import { Root, Header, HeaderSearch, HeaderFilters, Body, BodyHeader, Sort, Total, Cards, LoadMore, Loading } from './SpecProducts.styles';
 
-const filters = [
-  { label: 'Todos', tag: 'all' },
-  { label: 'Marcas', tag: 'brands' },
-  { label: 'Tipo de proyecto', tag: 'projects_types' },
-  { label: 'Mis especificaciones', tag: 'my_specifications' },
-  { label: 'Creado por usuarios', tag: 'created_by_users' },
-  { label: 'Recintos', tag: 'enclosures' },
-];
-
 /**
  * The SpecProductsList's container.
  */
 const SpecProductsList = () => {
+  const { project_types: projectTypes, room_types: roomTypes } = useSelector(state => state.app);
+  const { brands } = useSelector(state => state.brandsList);
   const { nextPage, collection: products = [], loading, show, total } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
@@ -31,10 +33,6 @@ const SpecProductsList = () => {
   const handleSearchChange = event => {
     setSearchValue(event.target.value);
     dispatch(onGetSpecProductsBySearch({ search: event.target.value }));
-  };
-  const handleFiltersClick = () => () => {
-    // TODO: handle filters tags.
-    dispatch(onGetSpecProductsByFilters({}));
   };
   const handleSortChange = option => {
     setSortValue(option);
@@ -60,12 +58,29 @@ const SpecProductsList = () => {
     event.stopPropagation();
     dispatch(getProduct(selectedProduct));
   }
+  const { values: brandsValues, set: setBrandsValues, onChange: handleBrandsChange } =
+    useComboBox([], values => dispatch(onGetSpecProductsByFilters({ key: 'brand', value: values })));
+  const { values: projectTypeValues, set: setProjectTypeValues, onChange: handleProjectTypeChange } =
+    useComboBox([], values => dispatch(onGetSpecProductsByFilters({ key: 'project_type', value: values })));
+  const { values: roomTypeValues, set: setRoomTypeValues, onChange: handleRoomTypeChange } =
+    useComboBox([], values => dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: values })));
+  const handleFilterAll = () => {
+    setBrandsValues([]);
+    setProjectTypeValues([]);
+    setRoomTypeValues([]);
+    dispatch(onGetSpecProductsByFiltersAll());
+  };
+  const allFilterIsSelected = brandsValues.length === 0 && projectTypeValues.length === 0 && roomTypeValues.length === 0;
+
 
   useEffect(() => {
     if (show) {
       return;
     }
 
+    setBrandsValues([]);
+    setProjectTypeValues([]);
+    setRoomTypeValues([]);
     setSortValue({});
   }, [show]);
 
@@ -76,20 +91,32 @@ const SpecProductsList = () => {
           <SearchBar justifyContent="center" maxWidth="432px" placeholder="Buscar" value={searchValue} onChange={handleSearchChange} />
         </HeaderSearch>
         <HeaderFilters>
-          {filters.map(filter => {
-            // TODO: handle filters tags
-            // const selected = selectedFilters.find(selectedFilter => selectedFilter === filter.tag);
-
-            return (
-              <Tag
-                key={`products-by-item__filter--${filter.tag}`}
-                selected={false}
-                onClick={handleFiltersClick(filter.tag)}
-              >
-                {filter.label}
-              </Tag>
-            );
-          })}
+          <Tag selected={allFilterIsSelected} onClick={handleFilterAll}>Todos</Tag>
+          <ToggleMenu anchor={<Tag selected={brandsValues.length > 0}>Marcas</Tag>} width="215px">
+            <ComboBox
+              options={brands.map(brand => ({ label: brand.name, value: brand.id }))}
+              placeholder="Selecciona"
+              values={brandsValues}
+              onChange={handleBrandsChange}
+            />
+          </ToggleMenu>
+          <ToggleMenu anchor={<Tag selected={projectTypeValues.length > 0}>Tipo de proyecto</Tag>} width="215px">
+            <ComboBox
+              options={projectTypes.map(projectType => ({ label: projectType.name, value: projectType.id }))}
+              placeholder="Selecciona"
+              values={projectTypeValues}
+              onChange={handleProjectTypeChange}
+            />
+          </ToggleMenu>
+          <Tag selected={false}>Mis especificaciones</Tag>
+          <ToggleMenu anchor={<Tag selected={roomTypeValues.length > 0}>Recintos</Tag>} width="215px">
+            <ComboBox
+              options={roomTypes.map(roomType => ({ label: roomType.name, value: roomType.id }))}
+              placeholder="Selecciona"
+              values={roomTypeValues}
+              onChange={handleRoomTypeChange}
+            />
+          </ToggleMenu>
         </HeaderFilters>
       </Header>
       <Body>

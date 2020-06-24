@@ -8,7 +8,7 @@ const useDropdown = ({
   clickCallback = () => undefined,
   closeCallback = () => undefined,
   openCallback = () => undefined,
-}) => {
+} = {}) => {
   const [anchor, setAnchor] = useState(undefined);
   const [width, setWidth] = useState('initial');
   const handleOpen = event => {

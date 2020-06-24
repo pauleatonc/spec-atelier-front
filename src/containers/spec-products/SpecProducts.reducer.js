@@ -8,6 +8,7 @@ import {
   HIDE_SPEC_PRODUCTS_SUCCESS,
   SHOW_SPEC_PRODUCTS_SUCCESS,
   UPDATE_SPEC_PRODUCTS_FILTERS,
+  UPDATE_SPEC_PRODUCTS_FILTERS_ALL,
   UPDATE_SPEC_PRODUCTS_FILTER_ITEM,
   UPDATE_SPEC_PRODUCTS_FILTER_SEARCH,
   UPDATE_SPEC_PRODUCTS_FILTER_SECTION,
@@ -63,7 +64,18 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
         ...state,
         filters: {
           ...state.filters,
-          [payload.key]: payload.value,
+          [payload.key]: payload.value.map(val => val.value),
+        },
+      };
+    }
+    case UPDATE_SPEC_PRODUCTS_FILTERS_ALL: {
+      return {
+        ...state,
+        filters: {
+          item: state.filters.item,
+          search: state.filters.search,
+          section: state.filters.section,
+          sort: state.filters.sort,
         },
       };
     }

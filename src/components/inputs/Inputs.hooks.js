@@ -1,6 +1,19 @@
 import { useState } from 'react';
 
 /**
+ * The ComboBox custom's hook.
+ */
+export const useComboBox = (initialValue = [], callback = () => undefined) => {
+  const [values, setValues] = useState(initialValue);
+  const handleChange = options => {
+    setValues(options);
+    callback(options);
+  };
+
+  return { values, set: setValues, onChange: handleChange };
+};
+
+/**
  * The Input custom's hook. 
  */
 export const useInput = (initialValue = '', type = 'text') => {
