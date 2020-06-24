@@ -18,16 +18,6 @@ export const getProductsItems = sectionID => getJsonRequest(`${API_BASE_URL}/sec
 export const getProductsSystems = itemID => getJsonRequest(`${API_BASE_URL}/items/${itemID}/systems`);
 
 /**
- * Gets the list of products' brands.
- */
-export const getProductsBrands = () => getJsonRequest(`${API_BASE_URL}/brands`);
-
-/**
- * Gets the list of products' brands by the given query.
- */
-export const searchProductsBrands = query => getJsonRequest(`${API_BASE_URL}/brands${formatParams(query)}`);
-
-/**
  * Gets a list of products. 
  */
 export const getProducts = filters => getJsonRequest(`${API_BASE_URL}/products${formatParams(filters)}`);

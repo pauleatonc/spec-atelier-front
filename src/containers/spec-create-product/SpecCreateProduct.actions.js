@@ -1,10 +1,9 @@
 import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
+import { getBrands } from '../../services/brands.service';
 import {
   createProduct,
-  getProductsBrands,
   getProductsSystems,
-  searchProductsBrands,
   uploadProductImages,
   uploadProductDocuments,
 } from '../../services/products.service';
@@ -34,26 +33,11 @@ export const onGetSpecProductsBrands = () => async dispatch => {
   dispatch(onActionCreator(GET_SPEC_PRODUCTS_BRANDS));
 
   try {
-    const response = await getProductsBrands();
+    const response = await getBrands();
 
     return dispatch(onActionCreator(GET_SPEC_PRODUCTS_BRANDS_SUCCESS, { brands: response.brands.filter(brand => brand.name !== null) }));
   } catch (error) {
     return dispatch(onActionCreator(GET_SPEC_PRODUCTS_BRANDS_ERROR, { error }));
-  }
-};
-
-export const SEARCH_SPEC_PRODUCTS_BRANDS = 'SEARCH_SPEC_PRODUCTS_BRANDS';
-export const SEARCH_SPEC_PRODUCTS_BRANDS_ERROR = 'SEARCH_SPEC_PRODUCTS_BRANDS_ERROR';
-export const SEARCH_SPEC_PRODUCTS_BRANDS_SUCCESS = 'SEARCH_SPEC_PRODUCTS_BRANDS_SUCCESS';
-export const onSearchProductsBrands = ({ query }) => async dispatch => {
-  dispatch(onActionCreator(SEARCH_SPEC_PRODUCTS_BRANDS));
-
-  try {
-    const response = await searchProductsBrands(query);
-
-    return dispatch(onActionCreator(SEARCH_SPEC_PRODUCTS_BRANDS_SUCCESS, { brands: response.brands.filter(brand => brand.name !== null) }));
-  } catch (error) {
-    return dispatch(onActionCreator(SEARCH_SPEC_PRODUCTS_BRANDS_ERROR, { error }));
   }
 };
 
