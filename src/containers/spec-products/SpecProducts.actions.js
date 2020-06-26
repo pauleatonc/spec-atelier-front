@@ -59,7 +59,7 @@ export const onGetSpecProductsByPage = () => async (dispatch, getState) => {
 export const UPDATE_SPEC_PRODUCTS_FILTERS = 'UPDATE_SPEC_PRODUCTS_FILTERS';
 export const UPDATE_SPEC_PRODUCTS_FILTERS_ALL = 'UPDATE_SPEC_PRODUCTS_FILTERS_ALL';
 export const UPDATE_SPEC_PRODUCTS_FILTER_ITEM = 'UPDATE_SPEC_PRODUCTS_FILTER_ITEM';
-export const UPDATE_SPEC_PRODUCTS_FILTER_SEARCH = 'UPDATE_SPEC_PRODUCTS_FILTER_SEARCH';
+export const UPDATE_SPEC_PRODUCTS_FILTER_KEYWORD = 'UPDATE_SPEC_PRODUCTS_FILTER_KEYWORD';
 export const UPDATE_SPEC_PRODUCTS_FILTER_SECTION = 'UPDATE_SPEC_PRODUCTS_FILTER_SECTION';
 export const UPDATE_SPEC_PRODUCTS_FILTER_SORT = 'UPDATE_SPEC_PRODUCTS_FILTER_SORT';
 
@@ -84,10 +84,10 @@ export const onGetSpecProductsByItem = payload => dispatch =>
     dispatch(onGetSpecProducts());
   });
 
-export const GET_SPEC_PRODUCTS_BY_SEARCH = 'GET_SPEC_PRODUCTS_BY_SEARCH';
-export const onGetSpecProductsBySearch = payload => dispatch =>
+export const GET_SPEC_PRODUCTS_BY_KEYWORD = 'GET_SPEC_PRODUCTS_BY_KEYWORD';
+export const onGetSpecProductsByKeyword = payload => dispatch =>
   batch(() => {
-    dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SEARCH, payload));
+    dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_KEYWORD, payload));
     dispatch(onGetSpecProducts())
   });
 

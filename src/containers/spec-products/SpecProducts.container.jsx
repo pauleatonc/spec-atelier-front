@@ -5,7 +5,7 @@ import {
   onGetSpecProductsByFilters,
   onGetSpecProductsByFiltersAll,
   onGetSpecProductsByPage,
-  onGetSpecProductsBySearch,
+  onGetSpecProductsByKeyword,
   onGetSpecProductsBySort,
 } from './SpecProducts.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
@@ -27,12 +27,12 @@ const SpecProductsList = () => {
   const { brands } = useSelector(state => state.brandsList);
   const { nextPage, collection: products = [], loading, show, total } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
-  const [searchValue, setSearchValue] = useState('');
+  const [keywordValue, setKeywordValue] = useState('');
   const [sortValue, setSortValue] = useState({});
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const handleSearchChange = event => {
-    setSearchValue(event.target.value);
-    dispatch(onGetSpecProductsBySearch({ search: event.target.value }));
+  const handleKeywordChange = event => {
+    setKeywordValue(event.target.value);
+    dispatch(onGetSpecProductsByKeyword({ keyword: event.target.value }));
   };
   const handleSortChange = option => {
     setSortValue(option);
@@ -88,7 +88,7 @@ const SpecProductsList = () => {
     <Root>
       <Header>
         <HeaderSearch>
-          <SearchBar justifyContent="center" maxWidth="432px" placeholder="Buscar" value={searchValue} onChange={handleSearchChange} />
+          <SearchBar justifyContent="center" maxWidth="432px" placeholder="Buscar" value={keywordValue} onChange={handleKeywordChange} />
         </HeaderSearch>
         <HeaderFilters>
           <Tag selected={allFilterIsSelected} onClick={handleFilterAll}>Todos</Tag>

@@ -10,7 +10,7 @@ import {
   UPDATE_SPEC_PRODUCTS_FILTERS,
   UPDATE_SPEC_PRODUCTS_FILTERS_ALL,
   UPDATE_SPEC_PRODUCTS_FILTER_ITEM,
-  UPDATE_SPEC_PRODUCTS_FILTER_SEARCH,
+  UPDATE_SPEC_PRODUCTS_FILTER_KEYWORD,
   UPDATE_SPEC_PRODUCTS_FILTER_SECTION,
   UPDATE_SPEC_PRODUCTS_FILTER_SORT,
 } from './SpecProducts.actions';
@@ -20,7 +20,7 @@ const specProductsState = {
   filters: {
     item: '',
     limit: 20,
-    search: '',
+    keyword: '',
     section: '',
     sort: '',
   },
@@ -53,6 +53,7 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
         total: payload.total || 0,
       };
     }
+    // eslint-disable-next-line no-lone-blocks
     case HIDE_SPEC_PRODUCTS_SUCCESS: {
       return specProductsState;
     }; 
@@ -74,7 +75,7 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
         filters: {
           ...specProductsState.filters,
           item: state.filters.item,
-          search: state.filters.search,
+          keyword: state.filters.keyword,
           section: state.filters.section,
           sort: state.filters.sort,
         },
@@ -89,12 +90,12 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
         },
       };
     }
-    case UPDATE_SPEC_PRODUCTS_FILTER_SEARCH: {
+    case UPDATE_SPEC_PRODUCTS_FILTER_KEYWORD: {
       return {
         ...state,
         filters: {
           ...state.filters,
-          search: payload.search,
+          keyword: payload.keyword,
         },
       };
     }
