@@ -66,7 +66,7 @@ export const Total = styled.section`
 export const Cards = styled.section`
   display: grid;
   grid-column-gap: 38px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
 `;
 
 export const LoadMore = styled.section`
