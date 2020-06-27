@@ -11,7 +11,7 @@ import {
   Buttons,
   LinksContainer,
   LinkText,
-} from './brandInfo.styles';
+} from './BrandInfo.styles';
 
 import {
   Button,
