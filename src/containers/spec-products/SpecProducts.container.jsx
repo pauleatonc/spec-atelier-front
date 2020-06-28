@@ -94,16 +94,18 @@ const SpecProductsList = () => {
           <Tag selected={allFilterIsSelected} onClick={handleFilterAll}>Todos</Tag>
           <ToggleMenu anchor={<Tag selected={brandsValues.length > 0}>Marcas</Tag>} width="215px">
             <ComboBox
-              options={brands.map(brand => ({ label: brand.name, value: brand.id }))}
+              options={brands.map(brand => ({ label: brand.name || '', value: brand.id }))}
               placeholder="Selecciona"
+              type="underline"
               values={brandsValues}
               onChange={handleBrandsChange}
             />
           </ToggleMenu>
           <ToggleMenu anchor={<Tag selected={projectTypeValues.length > 0}>Tipo de proyecto</Tag>} width="215px">
             <ComboBox
-              options={projectTypes.map(projectType => ({ label: projectType.name, value: projectType.id }))}
+              options={projectTypes.map(projectType => ({ label: projectType.name || '', value: projectType.id }))}
               placeholder="Selecciona"
+              type="underline"
               values={projectTypeValues}
               onChange={handleProjectTypeChange}
             />
@@ -111,8 +113,9 @@ const SpecProductsList = () => {
           <Tag selected={false}>Mis especificaciones</Tag>
           <ToggleMenu anchor={<Tag selected={roomTypeValues.length > 0}>Recintos</Tag>} width="215px">
             <ComboBox
-              options={roomTypes.map(roomType => ({ label: roomType.name, value: roomType.id }))}
+              options={roomTypes.map(roomType => ({ label: roomType.name || '', value: roomType.id }))}
               placeholder="Selecciona"
+              type="underline"
               values={roomTypeValues}
               onChange={handleRoomTypeChange}
             />
@@ -148,10 +151,10 @@ const SpecProductsList = () => {
               <ProductCard
                 canAdd
                 category={`Sistema constructivo: ${product.system.name}`}
-                description={product.short_desc}
+                description={product.short_desc || ''}
                 key={`product-card-${product.id}`}
                 photo={product.images[0]?.urls?.thumb}
-                reference={product.reference}
+                reference={product.reference || ''}
                 selected={Boolean(selected)}
                 title={product.name}
                 onClickCard={handleCardClick(product.id)}

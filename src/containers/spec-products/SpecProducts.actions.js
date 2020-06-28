@@ -1,7 +1,6 @@
 import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
 import { getProducts } from '../../services/products.service';
-import { getAppData as onGetAppData } from '../../config/store/app-store/app.actions';
 import { getBrands as onGetBrands } from '../brands-list/BrandsList.actions';
 import { HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS, onShowSpecProductsSections } from '../spec-products-sections/SpecProductsSections.actions';
 import { HIDE_SPEC_PRODUCTS_ITEMS_SUCCESS, onShowSpecProductsItems } from '../spec-products-items/SpecProductsItems.actions';
@@ -119,7 +118,6 @@ export const onShowSpecProductsSuccess = () => dispatch =>
   batch(() => {
     dispatch(onShowSpecProductsSections());
     dispatch(onActionCreator(SHOW_SPEC_PRODUCTS_SUCCESS));
-    dispatch(onGetAppData());
     dispatch(onGetBrands());
     dispatch(onGetSpecProducts());
   });

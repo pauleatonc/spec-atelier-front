@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { COLOR_BLACK, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
@@ -52,14 +54,36 @@ export const Input = styled.input`
   }
 `;
 
+export const InputUnderline = styled(Input)`
+  border: 0; 
+  outline: 0;
+  min-width: 140px;
+  display:flex;
+  flex: 1;
+  justify-content: space-between;
+  border-bottom: 2px solid ${COLOR_LIGHTGREY};
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: ${COLOR_BLACK};
+  border-radius: 0;
+`;
+
 export const Options = styled.section`
   background-color: transparent;
-  border: 1px solid #979797;
+  border: ${({ type = 'default' }) => type === 'default' ? '1px solid #979797' : 'none'};
   border-radius: 9px;
   margin: 5px 0 0;
-  max-height: 212px;
+  max-height: 200px;
   overflow-y: auto;
 `;
+
+Options.defaultProps = {
+  type: 'default',
+};
+Options.propTypes = {
+  type: PropTypes.oneOf(['default', 'underline']),
+};
 
 export const Option = styled.section`
   align-items: center;

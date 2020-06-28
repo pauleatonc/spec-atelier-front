@@ -36,7 +36,7 @@ const specProductsState = {
 const specProductsReducer = (state = specProductsState, { payload, type }) => {
   switch (type) {
     case GET_SPEC_PRODUCTS: {
-      return { ...state, collection: [], loading: true };
+      return { ...state, collection: [], loading: true, nextPage: null, total: 0 };
     }
     case GET_SPEC_PRODUCTS_BY_PAGE: {
       return { ...state, loading: true };
