@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, COLOR_MERCURY } from '../../config/constants/styled-vars';
+import { COLOR_MINE_SHAFT, COLOR_MERCURY, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: #FFF;
@@ -67,6 +67,14 @@ export const Cards = styled.section`
   display: grid;
   grid-column-gap: 38px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
+
+  ${MEDIA_QUERY_SMALL} {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  ${MEDIA_QUERY_MEDIUM} {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 `;
 
 export const LoadMore = styled.section`
