@@ -8,12 +8,12 @@ import { HIDE_SPEC_PRODUCTS_ITEMS_SUCCESS, onShowSpecProductsItems } from '../sp
 export const GET_SPEC_PRODUCTS = 'GET_SPEC_PRODUCTS';
 export const GET_SPEC_PRODUCTS_ERROR = 'GET_SPEC_PRODUCTS_ERROR';
 export const GET_SPEC_PRODUCTS_SUCCESS = 'GET_SPEC_PRODUCTS_SUCCESS';
-export const onGetSpecProducts = () => async (dispatch, getState) => {
+export const onGetSpecProducts = () => async (dispatch, getState, { cancellableService }) => {
   dispatch(onActionCreator(GET_SPEC_PRODUCTS));
 
   try {
     const { specProducts } = getState();
-    const response = await getProducts(specProducts.filters);
+    const response = await cancellableService(GET_SPEC_PRODUCTS, () => getProducts(specProducts.filters));
 
     return dispatch(
       onActionCreator(
