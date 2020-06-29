@@ -1,27 +1,43 @@
 /**
- * The Cancellation class that manage a relationship of actions types and AbortController' instances
- * to cancel requests when repeating same action types.
+ * The Cancellation class that manage a relationship of actions types and AbortController' instances.
+ * Useful to cancel requests when dispatching same action type consecutively.
  */
 class Cancellation {
   constructor() {
-    this.latestActionType = null;
+    this.callbacks = [];
     this.controllers = {};
   }
 
-  getSignal() {
-    const actionType = this.latestActionType;
-    this.latestActionType = null;
+  emit(actionType) {
+    this.callbacks.forEach(callback => callback(actionType));
+  }
+
+  getSignal(actionType) {
+    if (actionType === null) {
+      return Promise.resolve(null);
+    }
 
     return Promise.resolve(this.controllers[actionType || '']?.signal);
   }
 
+  off(callback) {
+    this.callbacks = this.callbacks.filter(cb => cb !== callback);
+  }
+
+  on(callback) {
+    this.callbacks.push(callback);
+  }
+
   register(actionType) {
-    if (this.controllers[actionType] && this.controllers[actionType] instanceof window.AbortController) {
+    if (this.controllers[actionType || ''] instanceof window.AbortController) {
       this.controllers[actionType].abort();
     }
 
-    this.controllers = { ...this.controllers, [actionType]: new window.AbortController() };
-    this.latestActionType = actionType;
+    if (actionType !== null) {
+      this.controllers = { ...this.controllers, [actionType]: new window.AbortController() };
+    }
+
+    this.emit(actionType);
   }
 
   unregister(actionType) {
@@ -48,27 +64,6 @@ const factoryCancellationSingleton = () => {
 /**
  * To get the Cancellation singleton.
  */
-export const cancellationSingleton =  factoryCancellationSingleton();
+const cancellationSingleton =  factoryCancellationSingleton();
 
-/**
- * Factory to create a wrapper to call services.
- */
-const factoryCancellableService = () => {
-  const cancellation = cancellationSingleton();
-
-  return (actionType, callback) => {
-    cancellation.register(actionType);
-
-    return callback()
-      .then(response => {
-        cancellation.unregister(actionType);
-
-        return response;
-      });
-  };
-};
-
-/**
- * To call a service using the cancellable wrapper.
- */
-export const cancellableService = factoryCancellableService();
+export default cancellationSingleton;

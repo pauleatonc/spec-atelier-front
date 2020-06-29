@@ -1,4 +1,4 @@
-import { cancellationSingleton } from './cancellation';
+import cancellationSingleton from './cancellation';
 
 /**
  * To generate the request's headers.
@@ -20,78 +20,154 @@ const generateHeaders = (contentType, isPublic) => {
 };
 
 /**
- * Factory to create GET request helper with JSON as content type.
+ * Factory to create a DELETE request helper with JSON format as content type.
+ */
+const factoryDeleteJsonRequest = () => {
+  const cancellation = cancellationSingleton();
+  const getActionType = () => new Promise(resolve => cancellation.on(actionType => resolve(actionType)));
+
+  return (url, payload) => {
+    const headers = generateHeaders('application/json');
+    const body = JSON.stringify(payload);
+
+    return getActionType()
+      .then(actionType =>
+        Promise.all([Promise.resolve(actionType), Promise.resolve(cancellation.getSignal(actionType))]),
+      )
+      .then(([actionType, signal]) =>
+        Promise.all([Promise.resolve(actionType), fetch(url, { body, headers, signal, method: 'DELETE' })]),
+      )
+      .then(([actionType, response]) => {
+        cancellation.unregister(actionType);
+
+        return response;
+      })
+      .then(response => response.json());
+  }
+};
+
+/**
+ * Factory to create a GET request helper with JSON format as content type.
  */
 const factoryGetJsonRequest = () => {
   const cancellation = cancellationSingleton();
+  const getActionType = () => new Promise(resolve => cancellation.on(actionType => resolve(actionType)));
 
-  return async url => {
+  return url => {
     const headers = generateHeaders('application/json');
 
-    return cancellation.getSignal()
-      .then(signal => fetch(url, { headers, signal, method: 'GET' }))
+    return getActionType()
+      .then(actionType =>
+        Promise.all([Promise.resolve(actionType), Promise.resolve(cancellation.getSignal(actionType))]),
+      )
+      .then(([actionType, signal]) =>
+        Promise.all([Promise.resolve(actionType), fetch(url, { headers, signal, method: 'GET' })]),
+      )
+      .then(([actionType, response]) => {
+        cancellation.unregister(actionType);
+
+        return response;
+      })
       .then(response => response.json());
-  };
+  }
 };
 
 /**
- * Factory to create POST request helper with form-data as content type.
+ * Factory to create a POST request helper with form-data format as content type.
  */
 const factoryPostFormRequest = () => {
   const cancellation = cancellationSingleton();
+  const getActionType = () => new Promise(resolve => cancellation.on(actionType => resolve(actionType)));
 
   return (url, payload) => {
-    const formData = new FormData();
-    // FIXME: https://medium.com/@jugtuttle/formdata-and-strong-params-ruby-on-rails-react-c230d050e26e
     const headers = generateHeaders();
-  
+    const formData = new FormData();
+    
+    // FIXME: https://medium.com/@jugtuttle/formdata-and-strong-params-ruby-on-rails-react-c230d050e26e
     Object.keys(payload).forEach(key => {
       if (!Array.isArray(payload[key])) {
         formData.append(key, payload[key]);
-  
+
         return; 
       }
-  
+
       payload[key].forEach(item => formData.append(key, item));
     });
 
-    return cancellation.getSignal()
-      .then(signal => fetch(url, { headers, signal, body: formData, method: 'POST' }))
+    return getActionType()
+      .then(actionType =>
+        Promise.all([Promise.resolve(actionType), Promise.resolve(cancellation.getSignal(actionType))]),
+      )
+      .then(([actionType, signal]) =>
+        Promise.all([Promise.resolve(actionType), fetch(url, { headers, signal, body: formData, method: 'POST' })]),
+      )
+      .then(([actionType, response]) => {
+        cancellation.unregister(actionType);
+
+        return response;
+      })
       .then(response => response.json());
-  };
+  }
 };
 
 /**
- * Factory to create POST request helper with JSON as content type.
+ * Factory to create a POST request helper with JSON format as content type.
  */
 const factoryPostJsonRequest = () => {
   const cancellation = cancellationSingleton();
+  const getActionType = () => new Promise(resolve => cancellation.on(actionType => resolve(actionType)));
 
   return (url, payload) => {
-    const body = JSON.stringify(payload);
     const headers = generateHeaders('application/json');
-    
-    return cancellation.getSignal()
-      .then(signal => fetch(url, { body, headers, signal, method: 'POST' }))
+    const body = JSON.stringify(payload);
+
+    return getActionType()
+      .then(actionType =>
+        Promise.all([Promise.resolve(actionType), Promise.resolve(cancellation.getSignal(actionType))]),
+      )
+      .then(([actionType, signal]) =>
+        Promise.all([Promise.resolve(actionType), fetch(url, { body, headers, signal, method: 'POST' })]),
+      )
+      .then(([actionType, response]) => {
+        cancellation.unregister(actionType);
+
+        return response;
+      })
       .then(response => response.json());
-  };
+  }
 };
 
 /**
- * Factory to create PUT request helper with JSON as content type.
+ * Factory to create a PUT request helper with JSON format as content type.
  */
 const factoryPutJsonRequest = () => {
   const cancellation = cancellationSingleton();
+  const getActionType = () => new Promise(resolve => cancellation.on(actionType => resolve(actionType)));
 
   return (url, payload) => {
-    const body = JSON.stringify(payload);
     const headers = generateHeaders('application/json');
+    const body = JSON.stringify(payload);
 
-    return cancellation.getSignal()
-      .then(signal => fetch(url, { body, headers, signal, method: 'PUT' }))
+    return getActionType()
+      .then(actionType =>
+        Promise.all([Promise.resolve(actionType), Promise.resolve(cancellation.getSignal(actionType))]),
+      )
+      .then(([actionType, signal]) =>
+        Promise.all([Promise.resolve(actionType), fetch(url, { body, headers, signal, method: 'PUT' })]),
+      )
+      .then(([actionType, response]) => {
+        cancellation.unregister(actionType);
+
+        return response;
+      })
       .then(response => response.json());
-  };
+  }
 };
+
+/**
+ * To do a DELETE request with JSON as content type.
+ */
+export const deleteJsonRequest = factoryDeleteJsonRequest();
 
 /**
  * To do a GET request with JSON as content type.

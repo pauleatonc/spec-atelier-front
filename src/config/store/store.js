@@ -5,7 +5,6 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { APP_ENV } from '../constants/environment';
 import rootReducer from './reducers';
-import { cancellableService } from '../../modules/cancellation';
 
 const persistConfig = {
   key: 'root',
@@ -16,8 +15,8 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const middleware = APP_ENV === 'production'
-    ? applyMiddleware(thunk.withExtraArgument({ cancellableService }))
-    : composeWithDevTools(applyMiddleware(thunk.withExtraArgument({ cancellableService })));
+    ? applyMiddleware(thunk)
+    : composeWithDevTools(applyMiddleware(thunk));
    
 /**
  * Gets a new instance of a redux' store.
