@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { Children, cloneElement, useState } from 'react';
 import PropTypes from 'prop-types';
 import Context from './SpecPanelsLayout.context';
-import Root from './SpecPanelsLayout.styles';
+import { Root, Filters, Panels, Title } from './SpecPanelsLayout.styles';
 
 /**
  * The SpecPanelsLayout's component.
  */
 const SpecPanelsLayout = props => {
-  const { children } = props;
+  const { children, filtersPanels } = props;
   const [show, setShow] = useState(false);
   const handleShow = updatedValue => setShow(updatedValue);
   const contextPayload = { show, onShow: handleShow };
@@ -15,7 +15,13 @@ const SpecPanelsLayout = props => {
   return (
     <Context.Provider value={contextPayload}>
       <Root show={show}>
-        {children}
+        <Title>Productos</Title>
+        <Panels>
+          <Filters>
+            {Children.map(filtersPanels, (child, index) => cloneElement(child, { key: `filter-panel-${index}` }))}
+          </Filters>
+          {children}
+        </Panels>
       </Root>
     </Context.Provider>
   );

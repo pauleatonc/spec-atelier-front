@@ -6,7 +6,6 @@ export const Root = styled.div`
   align-items: center;
   display: flex;
   height: 100%;
-  padding: 0 11px;
 `;
 
 export const Item = styled.section`
@@ -18,7 +17,7 @@ export const Item = styled.section`
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
-  padding: 0 12px;
+  padding: 0 4px;
   position: relative;
 
   &:hover {

@@ -5,43 +5,27 @@ import { formatParams } from './services.helpers';
 /**
  * Gets the list of products' sections available.
  */
-export const getProductsSections = () => getJsonRequest(`${API_BASE_URL}/api/sections`);
+export const getProductsSections = () => getJsonRequest(`${API_BASE_URL}/sections`);
 
 /**
  * Gets the list of products' items by the given section.
  */
-export const getProductsItems = sectionID => getJsonRequest(`${API_BASE_URL}/api/sections/${sectionID}/items`);
+export const getProductsItems = sectionID => getJsonRequest(`${API_BASE_URL}/sections/${sectionID}/items`);
 
 /**
  * Gets the list of products' systems by the given item.
  */
-export const getProductsSystems = itemID => getJsonRequest(`${API_BASE_URL}/api/items/${itemID}/systems`);
+export const getProductsSystems = itemID => getJsonRequest(`${API_BASE_URL}/items/${itemID}/systems`);
 
 /**
- * Gets the list of products' brands.
+ * Gets a list of products. 
  */
-export const getProductsBrands = () => getJsonRequest(`${API_BASE_URL}/api/brands`);
-
-/**
- * Gets the list of products' brands by the given query.
- */
-export const searchProductsBrands = query => getJsonRequest(`${API_BASE_URL}/api/brands${formatParams(query)}`);
-
-/**
- * Gets a list of products by the given item. 
- */
-export const getProductsByItem = (itemID, page = null) => {
-  if (!page) {
-    return getJsonRequest(`${API_BASE_URL}/api/items/${itemID}/products?limit=20`);
-  }
-
-  return getJsonRequest(`${API_BASE_URL}/api/items/${itemID}/products?limit=20&page=${page}`);
-};
+export const getProducts = filters => getJsonRequest(`${API_BASE_URL}/products${formatParams(filters)}`);
 
 /**
  * Gets a product by the given item. 
  */
-export const getProductById = productID => getJsonRequest(`${API_BASE_URL}/api/products/${productID}`);
+export const getProductById = productID => getJsonRequest(`${API_BASE_URL}/products/${productID}`);
 
 /**
  * Create a new product. 
@@ -58,7 +42,7 @@ export const createProduct = data => {
     },
   };
 
-  return postJsonRequest(`${API_BASE_URL}/api/products`, body);
+  return postJsonRequest(`${API_BASE_URL}/products`, body);
 };
 
 /**
@@ -67,7 +51,7 @@ export const createProduct = data => {
 export const uploadProductImages = (productID, images) => {
   const body = { 'images[]': images };
 
-  return postFormRequest(`${API_BASE_URL}/api/products/${productID}/associate_images`, body);
+  return postFormRequest(`${API_BASE_URL}/products/${productID}/associate_images`, body);
 };
 
 /**
@@ -78,8 +62,3 @@ export const uploadProductDocuments = (productID, documents) => {
 
   return postFormRequest(`${API_BASE_URL}/api/products/${productID}/associate_documents`, body);
 };
-
-/**
- * Gets a list of products by brand. 
- */
-export const getProducts = params => getJsonRequest(`${API_BASE_URL}/api/products${formatParams(params)}`);

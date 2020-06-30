@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import DropdownMenu from '../menus/DropdownMenu';
+import useDropdown from '../basics/Dropdown.hooks';
+import Dropdown from '../basics/Dropdown';
 import { Root, Label, Section, Input, AddOption, AddAction, AddText, Option } from './Autocomplete.styles';
 
 /**
@@ -8,18 +9,14 @@ import { Root, Label, Section, Input, AddOption, AddAction, AddText, Option } fr
  */
 const Autocomplete = props => {
   const { disabled, label, options, placeholder, value: selectedOption, onChange } = props;
-  const [anchor, setAnchor] = useState(undefined);
-  const [width, setWidth] = useState('initial');
+  const {
+    anchor,
+    width,
+    onClick: handleClick,
+    onClose: handleClose,
+    onOpen: handleOpen,
+  } = useDropdown({ clickCallback: option => onChange(option) });
   const [innerValue, setInnerValue] = useState(selectedOption.label || '');
-  const handleOpen = event => {
-    setAnchor(event.currentTarget);
-    setWidth(`${event.currentTarget.clientWidth - 18}px`);
-  };
-  const handleClose = () => setAnchor(undefined);
-  const handleClick = option => () => {
-    onChange(option);
-    handleClose();
-  };
   const handleChange = event => {
     onChange({ label: event.target.value, value: event.target.value });
   
@@ -45,7 +42,7 @@ const Autocomplete = props => {
           onChange={handleChange}
         />
       </Section>
-      <DropdownMenu 
+      <Dropdown
         anchorRef={anchor}
         maxHeight="212px"
         offset={{ x: 9, y: 0 }}
@@ -64,7 +61,7 @@ const Autocomplete = props => {
           .map(option => (
           <Option key={option.value} onClick={handleClick(option)}>{option.label}</Option>
         ))}
-      </DropdownMenu>
+      </Dropdown>
     </Root>
   );
 };

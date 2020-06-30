@@ -4,18 +4,18 @@ import { postJsonRequest, putJsonRequest } from '../modules/requests';
 /**
  * Login from app
  */
-export const logIn = data => postJsonRequest(`${API_BASE_URL}/api/sessions`, data);
+export const logIn = data => postJsonRequest(`${API_BASE_URL}/sessions`, data);
 
 /**
  * Logout from app
  */
-export const logOut = () => putJsonRequest(`${API_BASE_URL}/api/logout`);
+export const logOut = () => putJsonRequest(`${API_BASE_URL}/logout`);
 
 /** 
  * Register User
  *  */
 
-export const register = data => postJsonRequest(`${API_BASE_URL}/api/registrations`, data);
+export const register = data => postJsonRequest(`${API_BASE_URL}/registrations`, data);
 
 
 /**

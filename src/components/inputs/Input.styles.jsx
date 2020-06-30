@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_LIGHTGREY, COLOR_WHITE, COLOR_BLACK } from '../../config/constants/styled-vars';
+import { COLOR_LIGHTGREY, COLOR_WHITE, COLOR_BLACK, COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: ${({ width = '100%' }) => width};
@@ -11,7 +11,7 @@ Root.propTypes = {
 };
 
 export const Label = styled.label`
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   display: block;
   font-family: Lato;
   font-size: 16px;
@@ -25,7 +25,7 @@ export const Input = styled.input`
   background-color: #EEE;
   border: 0;
   border-radius: 21.5px;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;

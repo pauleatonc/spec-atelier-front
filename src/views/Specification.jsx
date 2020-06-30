@@ -11,7 +11,7 @@ import SpecCreateProductOneContainer from '../containers/spec-create-product/Spe
 import SpecCreateProductTwoContainer from '../containers/spec-create-product/SpecCreateProductStepTwo.container';
 import SpecCreateProductThreeContainer from '../containers/spec-create-product/SpecCreateProductStepThree.container';
 import SpecPanelsLayout from '../components/layouts/SpecPanelsLayout';
-import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
+import { Root, Header, Main, Navigation } from './Specification.styles';
 
 /**
  * The Specification's view.
@@ -27,13 +27,9 @@ const Specification = () => {
           <SpecDocumentContainer />
           <Navigation>
             <SpecNavigatorContainer />
-            <Panels>
-              <SpecPanelsLayout>
-                <SpecProductsSectionsContainer />
-                <SpecProductsItemsContainer />
-              </SpecPanelsLayout>
-              <SpecProductsContainer />
-            </Panels>
+            <SpecPanelsLayout filtersPanels={[<SpecProductsSectionsContainer />, <SpecProductsItemsContainer />]}>
+              <SpecProductsContainer />                
+            </SpecPanelsLayout>
           </Navigation>
         </Main>
       </Root>

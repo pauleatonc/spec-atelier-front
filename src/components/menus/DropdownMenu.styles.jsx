@@ -1,40 +1,52 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 export const Root = styled.div`
-  background-color: transparent;
-  bottom: 0;
-  display: ${({ open = false }) => open ? 'initial' : 'none'};
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 10;
+  width: 100%;
 `;
 
-Root.propTypes = {
-  open: PropTypes.bool.isRequired,
-};
+export const Section = styled.div`
+  display: flex;
+  height: 100%;
+  min-height: 24px;
+  width: fit-content;
+`;
 
-export const Content = styled.div`
-  background-color: #FFF;
-  box-shadow: ${({ boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.14)' }) => boxShadow};
-  border: 1px solid #CCC;
+export const Text = styled.span`
+  align-items: center;
+  color: #212121;
+  cursor: pointer;
   display: inline-flex;
-  flex-direction: column;
-  max-height: ${({ maxHeight = 'initial' }) => maxHeight};
-  overflow-y: auto;
-  transform-origin: 0 0;
-  transform: ${({ translateX = 0, translateY = 0 }) => `translateX(${translateX}px) translateY(${translateY}px)`};
-  visibility: ${({ show = false }) => show ? 'visible' : 'hidden'};
-  width: ${({ width = 'initial' }) => width};
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin: 0 5px 0 0;
 `;
 
-Content.propTypes = {
-  boxShadow: PropTypes.string.isRequired,
-  maxHeight: PropTypes.string.isRequired,
-  show: PropTypes.bool.isRequired,
-  translateX: PropTypes.number.isRequired,
-  translateY: PropTypes.number.isRequired,
-  width: PropTypes.string.isRequired,
-};
+export const DropdownIcon = styled.img`
+  align-items: center;
+  cursor: pointer;
+  display: inline-flex;
+`;
+
+export const Option = styled.section`
+  box-sizing: border-box;
+  color: #212121;
+  cursor: pointer;
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 0.86px;
+  padding: 10px 23px;
+  width: 100%;
+
+  &:hover {
+    background-color: #EEE;
+  }
+
+  &:first-child {
+    margin: 6px 0 0;
+  }
+
+  &:last-child {
+    margin: 0 0 6px;
+  }
+`;

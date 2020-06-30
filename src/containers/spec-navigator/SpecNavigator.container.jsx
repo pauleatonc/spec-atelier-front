@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onHideSpecProductsSectionsSuccess, onShowSpecProductsSectionsSuccess } from '../spec-products-sections/SpecProductsSections.actions';
+import { onHideSpecProductsSuccess, onShowSpecProductsSuccess } from '../spec-products/SpecProducts.actions';
 import { Root, Section, NavIcon } from './SpecNavigator.styles';
 import docSource from '../../assets/images/icons/spec-doc.svg';
 import docActiveSource from '../../assets/images/icons/spec-doc_active.svg';
@@ -13,22 +13,20 @@ import cloneActiveSource from '../../assets/images/icons/spec-clone_active.svg';
  * The SpecNavigator's container.
  */
 const SpecNavigator = () => {
-  const { show: showSections } = useSelector(state => state.specProductsSections);
+  const { show: showProducts } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
-  const handleSectionsClick = () => {
-    if (showSections) {
-      dispatch(onHideSpecProductsSectionsSuccess());
-
-      return;
+  const handleProductsClick = () => {
+    if (showProducts) {
+      return dispatch(onHideSpecProductsSuccess());
     }
 
-    dispatch(onShowSpecProductsSectionsSuccess());
+    dispatch(onShowSpecProductsSuccess());
   };
 
   return (
     <Root>
       <Section>
-        <NavIcon src={showSections ? docActiveSource : docSource} srcActive={docActiveSource} onClick={handleSectionsClick} />
+        <NavIcon src={showProducts ? docActiveSource : docSource} srcActive={docActiveSource} onClick={handleProductsClick} />
       </Section>
       <Section>
         <NavIcon src={itemsSource} srcActive={itemsActiveSource} />
