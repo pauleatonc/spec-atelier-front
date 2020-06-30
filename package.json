@@ -4,6 +4,8 @@
 		"url": "https://github.com/Sophia-Sergio/specatelier-frontend/issues"
 	},
 	"dependencies": {
+		"@ckeditor/ckeditor5-build-inline": "^19.0.2",
+		"@ckeditor/ckeditor5-react": "^2.1.0",
 		"express": "^4.17.1",
 		"moment": "^2.27.0",
 		"moment-timezone": "^0.5.31",
@@ -91,15 +93,15 @@
 		"url": "git+ssh://git@github.com/Sophia-Sergio/specatelier-frontend.git"
 	},
 	"scripts": {
-		"build:prod": "eval $(grep -v '^#' .env.prod | xargs) webpack -p --mode production --env.NODE_ENV=production",
-		"dev": "eval $(grep -v '^#' .env.dev | xargs) webpack-dev-server --mode development --env.NODE_ENV=development",
+		"build:prod": "eval $(grep -v '^#' .env.prod | xargs) webpack -p --mode production --env.NODE_ENV=production --env.ENVIRONMENT=production",
+		"dev": "eval $(grep -v '^#' .env.dev | xargs) webpack-dev-server --mode development --env.NODE_ENV=development --env.ENVIRONMENT=development",
 		"heroku-postbuild": "npm run build:prod",
 		"prettier:check": "prettier --check ./src/**/*.js",
 		"prettier:format": "prettier --config .prettierrc --write ./src/**/*.js",
 		"start": "node ./server.js",
 		"start:dev": "concurrently \"npm run stubby\" \"npm run dev\"",
-		"start:int": "eval $(grep -v '^#' .env.stage | xargs) webpack-dev-server --mode development --env.NODE_ENV=integration",
-		"start:stage": "eval $(grep -v '^#' .env.stage | xargs) webpack-dev-server --mode development --env.NODE_ENV=integration",
+		"start:int": "eval $(grep -v '^#' .env.stage | xargs) webpack-dev-server --mode development --env.NODE_ENV=development --env.ENVIRONMENT=integration",
+		"start:stage": "eval $(grep -v '^#' .env.stage | xargs) webpack-dev-server --mode development --env.NODE_ENV=development --env.ENVIRONMENT=integration",
 		"stubby": "stubby -w -d mocks/stubby.json",
 		"test": "jest",
 		"test:coverage": "jest --coverage",

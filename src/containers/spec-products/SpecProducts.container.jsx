@@ -72,7 +72,6 @@ const SpecProductsList = () => {
   };
   const allFilterIsSelected = brandsValues.length === 0 && projectTypeValues.length === 0 && roomTypeValues.length === 0;
 
-
   useEffect(() => {
     if (show) {
       return;
