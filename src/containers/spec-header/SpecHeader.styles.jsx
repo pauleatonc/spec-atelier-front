@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 import specDownloadSource from '../../assets/images/icons/spec-download.svg';
 import specDownloadActiveSource from '../../assets/images/icons/spec-download_active.svg';
 import specMonetizationSource from '../../assets/images/icons/spec-monetization.svg';
@@ -25,7 +26,7 @@ export const Section = styled.section`
 `;
 
 export const ProjectName = styled(Section)`
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   font-family: Lato;
   font-size: 16px;
   font-weight: bold;

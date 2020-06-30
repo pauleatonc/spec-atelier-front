@@ -26,24 +26,9 @@ export const cleanParams = obj => Object
 
 
 /** 
- * Format the given entries to a string of query params.
+ * Format Object of params to string
  */
-export const formatToQueryString = entries => {
-  if (!entries || typeof entries !== 'object') {
-    return '';
-  }
-
-  return Object.entries(entries)
-    .reduce(
-      (query, [key, value]) => {
-        if (!value && value !== 0) {
-          return query;
-        }
-
-        return query.concat(`${key}=${value}`);
-      },
-      [],
-    )
-    .join('&')
-    .replace (/^/,'?');
+export const formatParams = obj => {
+  if (!obj || typeof obj !== 'object') return '';
+  return `?${Object.entries(cleanParams(obj)).map(([key, value]) => `${key}=${value}`).join('&')}`;
 }

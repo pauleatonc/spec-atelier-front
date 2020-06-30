@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '../config/constants/environment';
 import { getJsonRequest, postFormRequest, postJsonRequest } from '../modules/requests';
-import { formatToQueryString } from './services.helpers';
+import { formatParams } from './services.helpers';
 
 /**
  * Gets the list of products' sections available.
@@ -25,12 +25,12 @@ export const getProductsBrands = () => getJsonRequest(`${API_BASE_URL}/brands`);
 /**
  * Gets the list of products' brands by the given query.
  */
-export const searchProductsBrands = query => getJsonRequest(`${API_BASE_URL}/brands${formatToQueryString(query)}`);
+export const searchProductsBrands = query => getJsonRequest(`${API_BASE_URL}/brands${formatParams(query)}`);
 
 /**
  * Gets a list of products. 
  */
-export const getProducts = filters => getJsonRequest(`${API_BASE_URL}/products${formatToQueryString(filters)}`);
+export const getProducts = filters => getJsonRequest(`${API_BASE_URL}/products${formatParams(filters)}`);
 
 /**
  * Gets a list of products by the given item. 

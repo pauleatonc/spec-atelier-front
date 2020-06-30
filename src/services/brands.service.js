@@ -1,11 +1,11 @@
 import { API_BASE_URL } from '../config/constants/environment';
 import { getJsonRequest, postJsonRequest } from '../modules/requests';
-import { formatToQueryString, cleanObject } from './services.helpers';
+import { formatParams, cleanObject } from './services.helpers';
 
 /**
  * Gets the list of collaboratos by params (page, limit, sort, keywords).
  */
-export const getBrands = (params) => getJsonRequest(`${API_BASE_URL}/brands${formatToQueryString(params)}`);
+export const getBrands = (params) => getJsonRequest(`${API_BASE_URL}/brands${formatParams(params)}`);
 
 
 /**

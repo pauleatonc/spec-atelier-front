@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: #FFF;
@@ -24,7 +25,7 @@ export const AddIcon = styled.img`
 export const MenuItem = styled.section`
   background-color: transparent;
   border-bottom: 1px solid #B3B3B3;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   cursor: pointer;
   font-family: Lato;
   font-size: 14px;

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { COLOR_BLACK, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
+import { COLOR_BLACK, COLOR_LIGHTGREY, COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
 `;
 
 export const Label = styled.label`
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   display: block;
   font-family: Lato;
   font-size: 16px;
@@ -26,7 +26,7 @@ export const Input = styled.input`
   background-color: transparent;
   border: 1px solid #979797;
   border-radius: 9px;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   cursor: pointer;
   display: inline-flex;
   height: 38px;
@@ -64,7 +64,7 @@ export const DropIcon = styled.img`
 
 export const Option = styled.section`
   box-sizing: border-box;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   cursor: pointer;
   font-family: Lato;
   font-size: 12px;

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_PRIMARY } from '../../config/constants/styled-vars';
+import { COLOR_PRIMARY, COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: #FFF;
@@ -60,7 +60,7 @@ ItemIcon.propTypes = {
 };
 
 export const ItemText = styled.span`
-  color: ${({ active }) => active ? COLOR_PRIMARY : '#212121'};
+  color: ${({ active }) => active ? COLOR_PRIMARY : COLOR_MINE_SHAFT};
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 0.86px;
@@ -76,7 +76,7 @@ ItemText.propTypes = {
 
 export const Loading = styled.section`
   align-items: center;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   display: flex;
   font-family: Lato;
   font-size: 16px;

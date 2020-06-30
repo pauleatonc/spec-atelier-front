@@ -14,6 +14,8 @@ export const COLOR_LIGHTGREY = 'rgba(128, 128, 128, 0.4)';
 export const COLOR_GREY = 'rgba(128, 128, 128, 0.6)';
 export const COLOR_DARKGREY =  'rgba(128, 128, 128, 0.8)';
 export const COLOR_DARKESTGREY = 'rgba(128, 128, 128, 1)';
+export const COLOR_MINE_SHAFT = '#212121';
+export const COLOR_MERCURY = '#E5E5E5';
 
 // Media Queries 
 export const MAX_SCREEN_SMALL = 768;

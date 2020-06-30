@@ -1,11 +1,11 @@
 import { API_BASE_URL } from '../config/constants/environment';
 import { getJsonRequest, postJsonRequest } from '../modules/requests';
-import { formatToQueryString, cleanObject } from './services.helpers';
+import { formatParams, cleanObject } from './services.helpers';
 
 /**
  * Gets the list of products by params (page, limit, sort, keywords).
  */
-export const getProjects = (userId, params) => getJsonRequest(`${API_BASE_URL}/users/${userId}/projects/${formatToQueryString(params)}`);
+export const getProjects = (userId, params) => getJsonRequest(`${API_BASE_URL}/users/${userId}/projects/${formatParams(params)}`);
 
 
 /**

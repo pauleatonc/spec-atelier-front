@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_WHITE } from '../../config/constants/styled-vars';
+import { COLOR_WHITE, COLOR_MINE_SHAFT, COLOR_MERCURY } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: ${COLOR_WHITE};
@@ -17,8 +17,8 @@ Root.propTypes = {
 export const Title = styled.section`
   align-items: center;
   display: flex;
-  border-bottom: 1px solid #E5E5E5;
-  color: #212121;
+  border-bottom: 1px solid ${COLOR_MERCURY};
+  color: ${COLOR_MINE_SHAFT};
   font-family: Lato;
   font-size: 13px;
   font-weight: bold;
@@ -35,7 +35,7 @@ export const Panels = styled.section`
 `;
 
 export const Filters = styled.section`
-  border-right: 1px solid #E5E5E5;
+  border-right: 1px solid ${COLOR_MERCURY};
   display: flex;
   height: 100%;
   position: relative;

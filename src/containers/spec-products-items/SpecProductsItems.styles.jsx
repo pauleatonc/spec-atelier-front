@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_PRIMARY } from '../../config/constants/styled-vars';
+import { COLOR_PRIMARY, COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: #FFF;
@@ -28,7 +28,7 @@ export const Body = styled.section`
 
 export const Loading = styled.div`
   align-items: center;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   display: flex;
   font-family: Lato;
   font-size: 16px;
@@ -38,7 +38,7 @@ export const Loading = styled.div`
 `;
 
 export const Item = styled.p`
-  color: ${({ active }) => active ? COLOR_PRIMARY : '#212121'};
+  color: ${({ active }) => active ? COLOR_PRIMARY : COLOR_MINE_SHAFT};
   cursor: pointer;
   font-family: Lato;
   font-size: 12px;

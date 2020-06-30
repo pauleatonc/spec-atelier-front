@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
 `;
 
 export const Label = styled.label`
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   display: block;
   font-family: Lato;
   font-size: 16px;
@@ -31,7 +32,7 @@ export const Input = styled.input`
   background-color: transparent;
   border: 1px solid #979797;
   border-radius: 9px;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   cursor: pointer;
   display: inline-flex;
   height: 38px;
@@ -60,7 +61,7 @@ export const Input = styled.input`
 
 export const Option = styled.section`
   box-sizing: border-box;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   cursor: pointer;
   font-family: Lato;
   font-size: 12px;
@@ -109,7 +110,7 @@ export const AddAction = styled.span`
 `;
 
 export const AddText = styled.span`
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 0.86px;

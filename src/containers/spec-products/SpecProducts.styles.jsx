@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR_MINE_SHAFT, COLOR_MERCURY } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: #FFF;
@@ -23,7 +24,7 @@ export const HeaderSearch = styled.section`
 `;
 
 export const HeaderFilters = styled.section`
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid ${COLOR_MERCURY};
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -39,7 +40,7 @@ export const Body = styled.section`
 `;
 
 export const Total = styled.section`
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
@@ -60,7 +61,7 @@ export const LoadMore = styled.section`
 
 export const Loading = styled.span`
   align-items: center;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   display: inline-flex;
   font-family: Lato;
   font-size: 16px;
