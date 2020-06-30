@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { COLOR_BLACK, COLOR_LIGHTGREY, COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
+import { COLOR_BLACK, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
 `;
 
 export const Label = styled.label`
-  color: ${COLOR_MINE_SHAFT};
+  color: #212121;
   display: block;
   font-family: Lato;
   font-size: 16px;
@@ -26,7 +26,7 @@ export const Input = styled.input`
   background-color: transparent;
   border: 1px solid #979797;
   border-radius: 9px;
-  color: ${COLOR_MINE_SHAFT};
+  color: #212121;
   cursor: pointer;
   display: inline-flex;
   height: 38px;
@@ -78,13 +78,15 @@ export const DropIcon = styled.img`
 `;
 
 export const Option = styled.section`
+  align-items: center;
   box-sizing: border-box;
-  color: ${COLOR_MINE_SHAFT};
+  color: #212121;
   cursor: pointer;
+  display: flex;
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 0.86px;
-  padding: 10px 23px;
+  padding: 10px 16px;
   width: 100%;
 
   &:hover {
@@ -98,4 +100,16 @@ export const Option = styled.section`
   &:last-child {
     margin: 0 0 6px;
   }
+`;
+
+export const OptionCheckboxIcon = styled.img`
+  height: 18px;
+  margin: 0 8px 0 0;
+  width: 18px;
+`;
+
+export const OptionText = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;

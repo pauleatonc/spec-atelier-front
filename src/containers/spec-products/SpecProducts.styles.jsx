@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, COLOR_MERCURY } from '../../config/constants/styled-vars';
+import { COLOR_MINE_SHAFT, COLOR_MERCURY, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: #FFF;
@@ -35,22 +35,45 @@ export const HeaderFilters = styled.section`
 export const Body = styled.section`
   height: 100%;
   overflow-y: auto;
-  padding: 15px 46px;
+  padding: 20px 46px 15px;
   width: 100%;
 `;
 
-export const Total = styled.section`
+export const BodyHeader = styled.section`
+  align-items: center;
   color: ${COLOR_MINE_SHAFT};
+  display: grid;
   font-family: Lato;
   font-size: 12px;
+  grid-template-columns: 50% 50%;
+  height: 24px;
   letter-spacing: 1px;
   margin: 0 0 21px;
+`;
+
+export const Sort = styled.section`
+  display: flex;
+  justify-content: flex-start;
+`;
+
+export const Total = styled.section`
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const Cards = styled.section`
   display: grid;
   grid-column-gap: 38px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
+
+  ${MEDIA_QUERY_SMALL} {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  ${MEDIA_QUERY_MEDIUM} {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 `;
 
 export const LoadMore = styled.section`

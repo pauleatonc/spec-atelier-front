@@ -19,6 +19,7 @@ const appReducer = (state = initialProject, { payload, type }) => {
   switch (type) {
     case GET_DEFAULT_DATA:
       return {
+        ...state,
         cities: payload.cities.map(c => ({ id: c, name: c })),
         project_types: payload.project_types,
         room_types: payload.room_types,
@@ -26,9 +27,7 @@ const appReducer = (state = initialProject, { payload, type }) => {
         loaded: payload.loaded,
       };
     case GET_DEFAULT_DATA_ERROR:
-      return {
-        loaded: false,
-      };
+      return { ...state, loaded: false };
     default: {
       return state;
     }

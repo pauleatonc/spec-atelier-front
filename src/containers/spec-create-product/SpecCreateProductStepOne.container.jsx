@@ -21,10 +21,10 @@ const SpecCreateProductStepOne = () => {
   const { collection: items } = useSelector(state => state.specProductsItems);
   const { systemsCollection: systems } = useSelector(state => state.specCreateProduct);
   const dispatch = useDispatch();
-  const { handler: handleNameChange, set: setNameValue, value: nameValue } = useInput(name);
-  const { handler: onSectionChange, set: setSectionValue, value: sectionValue } = useSelect(section);
-  const { handler: onItemChange, set: setItemValue, value: itemValue } = useSelect(item);
-  const { handler: handleSystemChange, set: setSystemValue, value: systemValue } = useSelect(system);
+  const { onChange: handleNameChange, set: setNameValue, value: nameValue } = useInput(name);
+  const { onChange: onSectionChange, set: setSectionValue, value: sectionValue } = useSelect(section);
+  const { onChange: onItemChange, set: setItemValue, value: itemValue } = useSelect(item);
+  const { onChange: handleSystemChange, set: setSystemValue, value: systemValue } = useSelect(system);
   const handleSectionChange = option => {
     onSectionChange(option);
     setItemValue({});

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onGetSpecProductsByItem, onHideSpecProductsItemsSuccess } from './SpecProductsItems.actions';
+import { onGetSpecProductsByItem } from '../spec-products/SpecProducts.actions';
+import { onHideSpecProductsItemsSuccess } from './SpecProductsItems.actions';
 import Breadcrumbs from '../../components/basics/Breadcrumbs';
 import { Root, Header, Body, Loading, Item } from './SpecProductsItems.styles';
 

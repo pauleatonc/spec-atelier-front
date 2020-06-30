@@ -1,11 +1,37 @@
 import { useState } from 'react';
 
 /**
+ * The ComboBox custom's hook.
+ */
+export const useComboBox = (initialValue = [], callback = () => undefined) => {
+  const [values, setValues] = useState(initialValue);
+  const handleChange = options => {
+    setValues(options);
+    callback(options);
+  };
+
+  return { values, set: setValues, onChange: handleChange };
+}
+
+/*
+ * The Autocomplete custom's hook.
+ */
+export const useAutocomplete = (initialValue = {}, callback = () => undefined) => {
+  const [value, setValue] = useState(initialValue);
+  const handleChange = option => {
+    setValue(option);
+    callback(option);
+  };
+
+  return { value, set: setValue, onChange: handleChange };
+};
+
+/**
  * The Input custom's hook. 
  */
 export const useInput = (initialValue = '', type = 'text') => {
   const [value, setValue] = useState(initialValue);
-  const handler = event => {
+  const handleChange = event => {
     if (type === 'currency' && event.target.value !== '' && !/^[0-9]+$/.test(event.target.value)) {
       return;
     }
@@ -13,17 +39,20 @@ export const useInput = (initialValue = '', type = 'text') => {
     setValue(event.target.value);
   }; 
 
-  return { handler, type, value, set: setValue };
+  return { type, value, set: setValue, onChange: handleChange };
 };
 
 /**
- * The Textarea custom's hook. 
+ * The MultiSelect custom's hook.
  */
-export const useTextarea = (initialValue = '') => {
-  const [value, setValue] = useState(initialValue);
-  const handler = event => setValue(event.target.value); 
+export const useMultiSelect = (initialValue = [], callback = () => undefined) => {
+  const [values, setValues] = useState(initialValue);
+  const handleChange = options => {
+    setValues(options);
+    callback(options);
+  };
 
-  return { handler, value, set: setValue };
+  return { values, set: setValues, onChange: handleChange };
 };
 
 /**
@@ -31,23 +60,20 @@ export const useTextarea = (initialValue = '') => {
  */
 export const useSelect = (initialValue = {}, callback = () => undefined) => {
   const [value, setValue] = useState(initialValue);
-  const handler = option => {
+  const handleChange = option => {
     setValue(option);
     callback(option);
   };
 
-  return { handler, value, set: setValue };
+  return { value, set: setValue, onChange: handleChange };
 };
 
 /**
- * The Autocomplete custom's hook.
+ * The Textarea custom's hook. 
  */
-export const useAutocomplete = (initialValue = {}, callback = () => undefined) => {
+export const useTextarea = (initialValue = '') => {
   const [value, setValue] = useState(initialValue);
-  const handler = option => {
-    setValue(option);
-    callback(option);
-  };
+  const handleChange = event => setValue(event.target.value); 
 
-  return { handler, value, set: setValue };
+  return { value, set: setValue, onChange: handleChange };
 };

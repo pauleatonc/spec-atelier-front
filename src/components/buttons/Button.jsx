@@ -29,6 +29,9 @@ const Button = props => {
 
 Button.defaultProps = {
   disabled: false,
+  inverse: false,
+  margin: 'initial',
+  size: 'md',
   type: 'button',
   variant: 'default',
   width: 'initial',
@@ -36,6 +39,9 @@ Button.defaultProps = {
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   disabled: PropTypes.bool,
+  inverse: PropTypes.bool,
+  margin: PropTypes.string,
+  size: PropTypes.oneOf(['sm', 'md']),
   type: PropTypes.oneOf(['button']),
   variant: PropTypes.oneOf(['primary', 'secondary', 'default', 'gray', 'cancel']),
   width: PropTypes.string,

@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_BLACK, COLOR_LIGHTGREY, COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
+import { COLOR_BLACK, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
 `;
 
 export const Label = styled.label`
-  color: ${COLOR_MINE_SHAFT};
+  color: #212121;
   display: block;
   font-family: Lato;
   font-size: 16px;
@@ -26,7 +27,7 @@ export const Input = styled.input`
   background-color: transparent;
   border: 1px solid #979797;
   border-radius: 9px;
-  color: ${COLOR_MINE_SHAFT};
+  color: #212121;
   cursor: pointer;
   display: inline-flex;
   height: 38px;
@@ -34,7 +35,7 @@ export const Input = styled.input`
   font-size: 12px;
   letter-spacing: 1px;
   overflow: hidden;
-  padding: 0 31px 0 21px;
+  padding: 0 21px;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
@@ -68,23 +69,32 @@ export const InputUnderline = styled(Input)`
   border-radius: 0;
 `;
 
-export const DropIcon = styled.img`
-  bottom: 0;
-  cursor: pointer;
-  margin: auto 0;
-  right: 10px;
-  position: absolute;
-  top: 0;
+export const Options = styled.section`
+  background-color: transparent;
+  border: ${({ type = 'default' }) => type === 'default' ? '1px solid #979797' : 'none'};
+  border-radius: 9px;
+  margin: 5px 0 0;
+  max-height: 200px;
+  overflow-y: auto;
 `;
 
+Options.defaultProps = {
+  type: 'default',
+};
+Options.propTypes = {
+  type: PropTypes.oneOf(['default', 'underline']),
+};
+
 export const Option = styled.section`
+  align-items: center;
   box-sizing: border-box;
-  color: ${COLOR_MINE_SHAFT};
+  color: #212121;
   cursor: pointer;
+  display: flex;
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 0.86px;
-  padding: 10px 23px;
+  padding: 10px 16px;
   width: 100%;
 
   &:hover {
@@ -98,4 +108,16 @@ export const Option = styled.section`
   &:last-child {
     margin: 0 0 6px;
   }
+`;
+
+export const OptionCheckboxIcon = styled.img`
+  height: 18px;
+  margin: 0 8px 0 0;
+  width: 18px;
+`;
+
+export const OptionText = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onGetSpecProductsBySection } from './SpecProductsSections.actions';
+import { onGetSpecProductsBySection } from '../spec-products/SpecProducts.actions';
 import useSpecPanelsLayout from '../../components/layouts/SpecPanelsLayout.hook';
 import Breadcrumbs from '../../components/basics/Breadcrumbs';
 import { Root, Body, Header, Item, ItemIcon, ItemText, Loading } from './SpecProductsSections.styles';

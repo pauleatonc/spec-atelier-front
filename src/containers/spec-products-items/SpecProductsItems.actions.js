@@ -1,7 +1,6 @@
 import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
 import { getProductsItems } from '../../services/products.service';
-import { UPDATE_SPEC_PRODUCTS_FILTER_ITEM, onGetSpecProducts } from '../spec-products/SpecProducts.actions';
 
 export const GET_SPEC_PRODUCTS_ITEMS = 'GET_SPEC_PRODUCTS_ITEMS';
 export const GET_SPEC_PRODUCTS_ITEMS_ERROR = 'GET_SPEC_PRODUCTS_ITEMS_ERROR';
@@ -18,13 +17,6 @@ export const onGetSpecProductsItems = ({ sectionID } = {}) => async (dispatch, g
     return dispatch(onActionCreator(GET_SPEC_PRODUCTS_ITEMS_ERROR, { error }));
   }
 };
-
-export const GET_SPEC_PRODUCTS_BY_ITEM = 'GET_SPEC_PRODUCTS_BY_ITEM';
-export const onGetSpecProductsByItem = payload => dispatch =>
-  batch(() => {
-    dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_ITEM, payload));
-    dispatch(onGetSpecProducts());
-  });
 
 export const HIDE_SPEC_PRODUCTS_ITEMS_SUCCESS = 'HIDE_SPEC_PRODUCTS_ITEMS_SUCCESS';
 export const onHideSpecProductsItemsSuccess = () => ({ type: HIDE_SPEC_PRODUCTS_ITEMS_SUCCESS });
