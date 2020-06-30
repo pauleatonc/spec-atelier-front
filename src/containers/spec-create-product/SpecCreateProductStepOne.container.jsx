@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onHideSpecCreateProduct, onGetProductsSystems, onShowSpecCreateProductStepTwo } from './SpecCreateProduct.actions';
-import { onGetProductsSections } from '../spec-products-sections/SpecProductsSections.actions';
-import { onGetProductsItems } from '../spec-products-items/SpecProductsItems.actions';
+import { onHideSpecCreateProduct, onGetSpecProductsSystems, onShowSpecCreateProductStepTwoSuccess } from './SpecCreateProduct.actions';
+import { onGetSpecProductsSections } from '../spec-products-sections/SpecProductsSections.actions';
+import { onGetSpecProductsItems } from '../spec-products-items/SpecProductsItems.actions';
 import { useInput, useSelect } from '../../components/inputs/Inputs.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import StepsBubbles from '../../components/basics/StepsBubbles';
@@ -21,20 +21,20 @@ const SpecCreateProductStepOne = () => {
   const { collection: items } = useSelector(state => state.specProductsItems);
   const { systemsCollection: systems } = useSelector(state => state.specCreateProduct);
   const dispatch = useDispatch();
-  const { handler: handleNameChange, set: setNameValue, value: nameValue } = useInput(name);
-  const { handler: onSectionChange, set: setSectionValue, value: sectionValue } = useSelect(section);
-  const { handler: onItemChange, set: setItemValue, value: itemValue } = useSelect(item);
-  const { handler: handleSystemChange, set: setSystemValue, value: systemValue } = useSelect(system);
+  const { onChange: handleNameChange, set: setNameValue, value: nameValue } = useInput(name);
+  const { onChange: onSectionChange, set: setSectionValue, value: sectionValue } = useSelect(section);
+  const { onChange: onItemChange, set: setItemValue, value: itemValue } = useSelect(item);
+  const { onChange: handleSystemChange, set: setSystemValue, value: systemValue } = useSelect(system);
   const handleSectionChange = option => {
     onSectionChange(option);
     setItemValue({});
     setSystemValue({});
-    dispatch(onGetProductsItems({ sectionID: option.value }));
+    dispatch(onGetSpecProductsItems({ sectionID: option.value }));
   };
   const handleItemChange = option => {
     onItemChange(option);
     setSystemValue({});
-    dispatch(onGetProductsSystems({ itemID: option.value }));
+    dispatch(onGetSpecProductsSystems({ itemID: option.value }));
   };
   const handleClose = () => dispatch(onHideSpecCreateProduct());
   const handleExiting = () => {
@@ -43,7 +43,7 @@ const SpecCreateProductStepOne = () => {
     setItemValue({});
     setSystemValue({});
   };
-  const handleNext = () => dispatch(onShowSpecCreateProductStepTwo({
+  const handleNext = () => dispatch(onShowSpecCreateProductStepTwoSuccess({
     name: nameValue,
     section: sectionValue,
     item: itemValue,
@@ -56,7 +56,7 @@ const SpecCreateProductStepOne = () => {
       return;
     }
 
-    dispatch(onGetProductsSections());
+    dispatch(onGetSpecProductsSections());
   }, [show]);
 
   return (

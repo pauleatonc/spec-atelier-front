@@ -1,9 +1,12 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { COLOR_PRIMARY, COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: #FFF;
   height: 100%;
   left: 0;
+  padding: 0 23px;
   position: absolute;
   top: 0;
   width: 100%;
@@ -11,21 +14,21 @@ export const Root = styled.div`
 `;
 
 export const Header = styled.section`
-  border-bottom: 1px solid #E5E5E5;
   height: 46px;
+  padding: 10px 0 0;
   width: 100%;
 `;
 
 export const Body = styled.section`
   height: calc(100% - 46px);
-  padding: 37px 35px 0;
   overflow-y: auto;
+  padding: 32px 12px 15px;
   width: 100%;
 `;
 
 export const Loading = styled.div`
   align-items: center;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   display: flex;
   font-family: Lato;
   font-size: 16px;
@@ -35,7 +38,7 @@ export const Loading = styled.div`
 `;
 
 export const Item = styled.p`
-  color: #212121;
+  color: ${({ active }) => active ? COLOR_PRIMARY : COLOR_MINE_SHAFT};
   cursor: pointer;
   font-family: Lato;
   font-size: 12px;
@@ -46,3 +49,11 @@ export const Item = styled.p`
     color: #3FBFAD;
   }
 `;
+
+Item.defaultProps = {
+  active: false,
+};
+
+Item.propTypes = {
+  active: PropTypes.bool,
+};

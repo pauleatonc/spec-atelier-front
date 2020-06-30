@@ -1,15 +1,15 @@
 import {
-  CREATE_PRODUCT,
-  CREATE_PRODUCT_ERROR,
-  CREATE_PRODUCT_SUCCESS,
-  GET_PRODUCTS_BRANDS_SUCCESS,
-  GET_PRODUCTS_SYSTEMS_SUCCESS,
-  HIDE_SPEC_CREATE_PRODUCT,
-  HIDE_SPEC_CREATE_PRODUCT_STEP_TWO,
-  HIDE_SPEC_CREATE_PRODUCT_STEP_THREE,
-  SHOW_SPEC_CREATE_PRODUCT,
-  SHOW_SPEC_CREATE_PRODUCT_STEP_TWO,
-  SHOW_SPEC_CREATE_PRODUCT_STEP_THREE,
+  CREATE_SPEC_PRODUCT,
+  CREATE_SPEC_PRODUCT_ERROR,
+  CREATE_SPEC_PRODUCT_SUCCESS,
+  GET_SPEC_PRODUCTS_BRANDS_SUCCESS,
+  GET_SPEC_PRODUCTS_SYSTEMS_SUCCESS,
+  HIDE_SPEC_CREATE_PRODUCT_SUCCESS,
+  HIDE_SPEC_CREATE_PRODUCT_STEP_TWO_SUCCESS,
+  HIDE_SPEC_CREATE_PRODUCT_STEP_THREE_SUCCESS,
+  SHOW_SPEC_CREATE_PRODUCT_SUCCESS,
+  SHOW_SPEC_CREATE_PRODUCT_STEP_TWO_SUCCESS,
+  SHOW_SPEC_CREATE_PRODUCT_STEP_THREE_SUCCESS,
 } from './SpecCreateProduct.actions';
 
 const createProductState = {
@@ -25,48 +25,48 @@ const createProductState = {
  */
 const createProductReducer = (state = createProductState, { payload, type }) => {
   switch (type) {
-    case CREATE_PRODUCT: {
+    case CREATE_SPEC_PRODUCT: {
       return { ...state, loading: true };
     }
-    case CREATE_PRODUCT_ERROR: {
+    case CREATE_SPEC_PRODUCT_ERROR: {
       return { ...state, loading: false };
     }
-    case CREATE_PRODUCT_SUCCESS:
-    case HIDE_SPEC_CREATE_PRODUCT: {
+    case CREATE_SPEC_PRODUCT_SUCCESS:
+    case HIDE_SPEC_CREATE_PRODUCT_SUCCESS: {
       return createProductState;
     }
-    case GET_PRODUCTS_BRANDS_SUCCESS: {
+    case GET_SPEC_PRODUCTS_BRANDS_SUCCESS: {
       return { ...state, brandsCollection: payload.brands };
     }
-    case GET_PRODUCTS_SYSTEMS_SUCCESS: {
+    case GET_SPEC_PRODUCTS_SYSTEMS_SUCCESS: {
       return { ...state, systemsCollection: payload.systems };
     }
-    case HIDE_SPEC_CREATE_PRODUCT_STEP_TWO: {
+    case HIDE_SPEC_CREATE_PRODUCT_STEP_TWO_SUCCESS: {
       return {
         ...state,
         stepTwo: { ...state.stepTwo, ...payload, show: false },
       };
     }
-    case HIDE_SPEC_CREATE_PRODUCT_STEP_THREE: {
+    case HIDE_SPEC_CREATE_PRODUCT_STEP_THREE_SUCCESS: {
       return {
         ...state,
         stepThree: { ...state.stepThree, ...payload, show: false },
       };
     }
-    case SHOW_SPEC_CREATE_PRODUCT: {
+    case SHOW_SPEC_CREATE_PRODUCT_SUCCESS: {
       return {
         ...state,
         stepOne: { ...state.stepOne, show: true },
       };
     }
-    case SHOW_SPEC_CREATE_PRODUCT_STEP_TWO: {
+    case SHOW_SPEC_CREATE_PRODUCT_STEP_TWO_SUCCESS: {
       return {
         ...state,
         stepOne: { ...state.stepOne, ...payload },
         stepTwo: { ...state.stepTwo, show: true },
       };
     }
-    case SHOW_SPEC_CREATE_PRODUCT_STEP_THREE: {
+    case SHOW_SPEC_CREATE_PRODUCT_STEP_THREE_SUCCESS: {
       return {
         ...state,
         stepTwo: { ...state.stepTwo, ...payload },

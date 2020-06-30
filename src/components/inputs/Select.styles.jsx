@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { COLOR_BLACK, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
+import { COLOR_BLACK, COLOR_LIGHTGREY, COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
 `;
 
 export const Label = styled.label`
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   display: block;
   font-family: Lato;
   font-size: 16px;
@@ -26,7 +26,7 @@ export const Input = styled.input`
   background-color: transparent;
   border: 1px solid #979797;
   border-radius: 9px;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   cursor: pointer;
   display: inline-flex;
   height: 38px;
@@ -53,6 +53,21 @@ export const Input = styled.input`
   }
 `;
 
+export const InputUnderline = styled(Input)`
+  border: 0; 
+  outline: 0;
+  min-width: 140px;
+  display:flex;
+  flex: 1;
+  justify-content: space-between;
+  border-bottom: 2px solid ${COLOR_LIGHTGREY};
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: ${COLOR_BLACK};
+  border-radius: 0;
+`;
+
 export const DropIcon = styled.img`
   bottom: 0;
   cursor: pointer;
@@ -64,7 +79,7 @@ export const DropIcon = styled.img`
 
 export const Option = styled.section`
   box-sizing: border-box;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   cursor: pointer;
   font-family: Lato;
   font-size: 12px;
@@ -83,19 +98,4 @@ export const Option = styled.section`
   &:last-child {
     margin: 0 0 6px;
   }
-`;
-
-export const InputUnderline = styled(Input)`
-  border: 0; 
-  outline: 0;
-  min-width: 140px;
-  display:flex;
-  flex: 1;
-  justify-content: space-between;
-  border-bottom: 2px solid ${COLOR_LIGHTGREY};
-  font-family: Lato;
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: ${COLOR_BLACK};
-  border-radius: 0;
 `;

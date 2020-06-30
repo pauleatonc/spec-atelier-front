@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  onGetProductsBrands,
+  onGetSpecProductsBrands,
   onHideSpecCreateProduct,
-  onHideSpecCreateProductStepTwo,
-  onShowSpecCreateProductStepThree,
+  onHideSpecCreateProductStepTwoSuccess,
+  onShowSpecCreateProductStepThreeSuccess,
 } from './SpecCreateProduct.actions';
 import { useTextarea, useAutocomplete, useInput } from '../../components/inputs/Inputs.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
@@ -23,9 +23,9 @@ const SpecCreateProductStepTwo = () => {
   const { brand, description, price, show } = useSelector(state => state.specCreateProduct.stepTwo);
   const { brandsCollection: brands } = useSelector(state => state.specCreateProduct);
   const dispatch = useDispatch();
-  const { handler: handleDescriptionChange, set: setDescriptionValue, value: descriptionValue } = useTextarea(description);
-  const { handler: handleBrandChange, set: setBrandValue, value: brandValue } = useAutocomplete(brand);
-  const { handler: handlePriceChange, set: setPriceValue, value: priceValue } = useInput(price, 'currency');
+  const { onChange: handleDescriptionChange, set: setDescriptionValue, value: descriptionValue } = useTextarea(description);
+  const { onChange: handleBrandChange, set: setBrandValue, value: brandValue } = useAutocomplete(brand);
+  const { onChange: handlePriceChange, set: setPriceValue, value: priceValue } = useInput(price, 'currency');
   const handleClose = () => dispatch(onHideSpecCreateProduct());
   const handleEntering = () => {
     setDescriptionValue(description || '');
@@ -37,12 +37,12 @@ const SpecCreateProductStepTwo = () => {
     setBrandValue({});
     setPriceValue('');
   };
-  const handlePrev = () => dispatch(onHideSpecCreateProductStepTwo({
+  const handlePrev = () => dispatch(onHideSpecCreateProductStepTwoSuccess({
     description: descriptionValue,
     brand: brandValue,
     price: priceValue,
   }));
-  const handleNext = () => dispatch(onShowSpecCreateProductStepThree({
+  const handleNext = () => dispatch(onShowSpecCreateProductStepThreeSuccess({
     description: descriptionValue,
     brand: brandValue,
     price: priceValue,
@@ -54,7 +54,7 @@ const SpecCreateProductStepTwo = () => {
       return;
     }
 
-    dispatch(onGetProductsBrands());
+    dispatch(onGetSpecProductsBrands());
   }, [show]);
 
   return (

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR_MINE_SHAFT, COLOR_MERCURY, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: #FFF;
@@ -7,7 +8,7 @@ export const Root = styled.div`
   height: calc(100vh - 115px);
   max-height: calc(100vh - 115px);
   position: relative;
-  width: 100%;
+  width: calc(100% - 360px);
   z-index: 4;
 `;
 
@@ -15,14 +16,7 @@ export const Header = styled.section`
   width: 100%;
 `;
 
-export const HeaderSpace = styled.section`
-  border-bottom: 1px solid #E5E5E5;
-  height: 46px;
-  width: 100%;
-`;
-
 export const HeaderSearch = styled.section`
-  border-left: 1px solid #E5E5E5;
   display: flex;
   justify-content: center;
   padding: 23px 0 20px;
@@ -30,8 +24,7 @@ export const HeaderSearch = styled.section`
 `;
 
 export const HeaderFilters = styled.section`
-  border-bottom: 1px solid #E5E5E5;
-  border-left: 1px solid #E5E5E5;
+  border-bottom: 1px solid ${COLOR_MERCURY};
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -40,25 +33,47 @@ export const HeaderFilters = styled.section`
 `;
 
 export const Body = styled.section`
-  border-left: 1px solid #E5E5E5;
   height: 100%;
   overflow-y: auto;
-  padding: 15px 46px;
+  padding: 20px 46px 15px;
   width: 100%;
 `;
 
-export const Total = styled.section`
-  color: #212121;
+export const BodyHeader = styled.section`
+  align-items: center;
+  color: ${COLOR_MINE_SHAFT};
+  display: grid;
   font-family: Lato;
   font-size: 12px;
+  grid-template-columns: 50% 50%;
+  height: 24px;
   letter-spacing: 1px;
   margin: 0 0 21px;
+`;
+
+export const Sort = styled.section`
+  display: flex;
+  justify-content: flex-start;
+`;
+
+export const Total = styled.section`
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const Cards = styled.section`
   display: grid;
   grid-column-gap: 38px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
+
+  ${MEDIA_QUERY_SMALL} {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  ${MEDIA_QUERY_MEDIUM} {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 `;
 
 export const LoadMore = styled.section`
@@ -69,7 +84,7 @@ export const LoadMore = styled.section`
 
 export const Loading = styled.span`
   align-items: center;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   display: inline-flex;
   font-family: Lato;
   font-size: 16px;

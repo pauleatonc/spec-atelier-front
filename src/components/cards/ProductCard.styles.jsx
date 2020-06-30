@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 import dwgSource from '../../assets/images/icons/dwg.svg';
 import dwgActiveSource from '../../assets/images/icons/dwg_active.svg';
 import bimSource from '../../assets/images/icons/bim.svg';
@@ -76,7 +77,7 @@ const BaseDetails = styled.p`
 `;
 
 export const Title = styled(BaseDetails)`
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   font-size: 11px;
   letter-spacing: 0.92px;
 `;
@@ -88,7 +89,7 @@ export const Description = styled(BaseDetails)`
 `;
 
 export const Category = styled.p`
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   font-family: Lato;
   font-size: 10px;
   letter-spacing: 0.83px;
@@ -99,7 +100,7 @@ export const Category = styled.p`
 `;
 
 export const Reference = styled.p`
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
   font-family: Lato;
   font-size: 10px;
   letter-spacing: 0.83px;

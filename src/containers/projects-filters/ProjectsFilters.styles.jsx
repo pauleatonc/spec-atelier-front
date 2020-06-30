@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_DARKESTGREY, COLOR_BLACK } from '../../config/constants/styled-vars';
+import { COLOR_DARKESTGREY, COLOR_BLACK, COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   width: 100%;
@@ -57,7 +57,7 @@ export const FilterSelect = styled.select`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
 
   &:focus {
     outline: none;
@@ -75,7 +75,7 @@ export const FilterOption = styled.option`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
 `;
 
 export const Selector = styled.select`

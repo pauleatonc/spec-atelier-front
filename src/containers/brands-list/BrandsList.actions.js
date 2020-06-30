@@ -8,8 +8,19 @@ export const GET_BRANDS_ERROR = 'GET_BRANDS_ERROR';
 // async calls
 export const getBrands = params => async dispatch => {
   try {
-    const  { brands, status } = await getBrandsData(params);
-    dispatch(onActionCreator(GET_BRANDS, { brands, loading: false, params }));
+    const { brands } = await getBrandsData(params);
+
+    return dispatch(
+      onActionCreator(
+        GET_BRANDS,
+        {
+          brands: brands?.list ? brands?.list : brands,
+          loading: false,
+          params,
+          total: brands?.total || 0,
+        },
+      ),
+    );
   } catch (error) {
     dispatch(onActionCreator(GET_BRANDS_ERROR, { loading: false, error: true, params }));
   }

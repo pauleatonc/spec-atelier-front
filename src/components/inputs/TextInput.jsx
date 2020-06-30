@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 const StyledInput = styled.input`
   border-radius: 22px;
@@ -17,7 +18,7 @@ const StyledInput = styled.input`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: #212121;
+  color: ${COLOR_MINE_SHAFT};
 
   &:focus {
     outline: none;
