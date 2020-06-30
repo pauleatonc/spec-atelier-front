@@ -21,7 +21,7 @@ const SpecDocument = () => {
     anchor,
     onClose: handleMenuClose,
     onOpen: handleMenuOpen,
-  } = useDropdown({ clickCallback: option => onChange(option) });
+  } = useDropdown();
   const handleShowTextEditor = () => {
     handleMenuClose();
     setShowTextEditor(true);
