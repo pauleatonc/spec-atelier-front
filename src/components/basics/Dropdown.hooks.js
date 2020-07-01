@@ -11,7 +11,7 @@ const useDropdown = ({
 } = {}) => {
   const [anchor, setAnchor] = useState(undefined);
   const [width, setWidth] = useState('initial');
-  const handleOpen = event => {
+  const handleOpen = (event) => {
     setAnchor(event.currentTarget);
     setWidth(`${event.currentTarget.clientWidth - 18}px`);
     openCallback(event);

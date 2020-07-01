@@ -8,8 +8,13 @@ import checkboxOnSource from '../../assets/images/icons/checkbox-on.svg';
  * The ComboBox's component.
  */
 const ComboBox = props => {
-  const { disabled, label, options, placeholder, type, values: selectedOptions, onChange } = props;
-  const handleClick = (option, selected) => () => {
+  const { disabled, label, options, optionAll, placeholder, type, values: selectedOptions, onChange } = props;
+  const handleClickOptionAll = selected => () => {
+    const updatedOptions = selected ? [] : options;
+
+    onChange(updatedOptions);
+  };
+  const handleClickOption = (option, selected) => () => {
     const updatedOptions = selected
       ? selectedOptions.filter(selectOption => selectOption.value !== option.value)
       : selectedOptions.concat(option);
@@ -33,6 +38,7 @@ const ComboBox = props => {
 
     return `${optionsLabels.shift()}, ${optionsLabels.shift()}, (+${optionsLabels.length})`;
   };
+  const allSelected = options.length === selectedOptions.length;
 
   return (
     <Root>
@@ -42,11 +48,17 @@ const ComboBox = props => {
         {type === 'underline' && <InputUnderline readOnly disabled={disabled} placeholder={placeholder} value={formatInputValue()} /> }
       </Section>
       <Options type={type}>
+        {optionAll && (
+          <Option onClick={handleClickOptionAll(allSelected)}>
+            <OptionCheckboxIcon src={allSelected ? checkboxOnSource : checkboxOffSource} />
+            <OptionText>Todas</OptionText>
+          </Option>
+        )}
         {options.map(option => {
           const selected = selectedOptions.find(selectedOption => selectedOption.value === option.value);
           
           return (
-            <Option key={option.value} onClick={handleClick(option, selected)}>
+            <Option key={option.value} onClick={handleClickOption(option, selected)}>
               <OptionCheckboxIcon src={selected ? checkboxOnSource : checkboxOffSource} />
               <OptionText>{option.label}</OptionText>
             </Option>
@@ -60,6 +72,7 @@ const ComboBox = props => {
 ComboBox.defaultProps = {
   disabled: false,
   label: '',
+  optionAll: false,
   placeholder: '',
   type: 'default',
 };
@@ -72,6 +85,7 @@ ComboBox.propTypes = {
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     }),
   ).isRequired,
+  optionAll: PropTypes.bool,
   placeholder: PropTypes.string,
   type: PropTypes.oneOf(['default', 'underline']),
   values: PropTypes.arrayOf(

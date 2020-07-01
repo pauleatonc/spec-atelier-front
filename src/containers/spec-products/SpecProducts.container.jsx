@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onShowAlertSuccess } from '../alert/Alert.actions';
+import { onAttachSpecProduct, onDetachSpecProduct } from '../spec-document/SpecDocument.actions';
 import {
   onGetSpecProductsByFilters,
   onGetSpecProductsByFiltersAll,
@@ -25,11 +25,11 @@ import { Root, Header, HeaderSearch, HeaderFilters, Body, BodyHeader, Sort, Tota
 const SpecProductsList = () => {
   const { project_types: projectTypes, room_types: roomTypes } = useSelector(state => state.app);
   const { brands } = useSelector(state => state.brandsList);
+  const { blocks: selectedProducts } = useSelector(state => state.specDocument);
   const { nextPage, collection: products = [], loading, show, total } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
   const [keywordValue, setKeywordValue] = useState('');
   const [sortValue, setSortValue] = useState({});
-  const [selectedProducts, setSelectedProducts] = useState([]);
   const handleKeywordChange = event => {
     setKeywordValue(event.target.value);
     dispatch(onGetSpecProductsByKeyword({ keyword: event.target.value }));
@@ -38,18 +38,14 @@ const SpecProductsList = () => {
     setSortValue(option);
     dispatch(onGetSpecProductsBySort({ sort: option.value }));
   };
-  const handleCardClick = currentProductID => () => {
-    const hasProduct = selectedProducts.find(productID => productID === currentProductID);
-    let updatedProducts = [].concat(selectedProducts);
+  const handleCardClick = productID => () => {
+    const hasProduct = selectedProducts.find(selectedProduct => selectedProduct.id === productID);
 
     if (hasProduct) {
-      updatedProducts = updatedProducts.filter(productID => productID !== currentProductID);
-    } else {
-      updatedProducts = updatedProducts.concat(currentProductID);
-      dispatch(onShowAlertSuccess({ message: 'Añadiste productos a una sección' }));
+      return dispatch(onDetachSpecProduct(productID));
     }
-
-    setSelectedProducts(updatedProducts);
+    
+    return dispatch(onAttachSpecProduct(productID));
   };
   const handleLoadMoreClick = () => {
     dispatch(onGetSpecProductsByPage());
@@ -93,6 +89,7 @@ const SpecProductsList = () => {
           <Tag selected={allFilterIsSelected} onClick={handleFilterAll}>Todos</Tag>
           <ToggleMenu anchor={<Tag selected={brandsValues.length > 0}>Marcas</Tag>} width="215px">
             <ComboBox
+              optionAll
               options={brands.map(brand => ({ label: brand.name || '', value: brand.id }))}
               placeholder="Selecciona"
               type="underline"
@@ -102,6 +99,7 @@ const SpecProductsList = () => {
           </ToggleMenu>
           <ToggleMenu anchor={<Tag selected={projectTypeValues.length > 0}>Tipo de proyecto</Tag>} width="215px">
             <ComboBox
+              optionAll
               options={projectTypes.map(projectType => ({ label: projectType.name || '', value: projectType.id }))}
               placeholder="Selecciona"
               type="underline"
@@ -112,6 +110,7 @@ const SpecProductsList = () => {
           <Tag selected={false}>Mis especificaciones</Tag>
           <ToggleMenu anchor={<Tag selected={roomTypeValues.length > 0}>Recintos</Tag>} width="215px">
             <ComboBox
+              optionAll
               options={roomTypes.map(roomType => ({ label: roomType.name || '', value: roomType.id }))}
               placeholder="Selecciona"
               type="underline"
@@ -144,7 +143,7 @@ const SpecProductsList = () => {
         </BodyHeader>
         <Cards>
           {products.map(product => {
-            const selected = selectedProducts.find(selectedProduct => selectedProduct === product.id);
+            const selected = selectedProducts.find(selectedProduct => selectedProduct.id === product.id);
 
             return (
               <ProductCard
