@@ -66,6 +66,7 @@ export const Cards = styled.section`
   display: grid;
   grid-column-gap: 38px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
+  padding: 0 0 34px;
 
   ${MEDIA_QUERY_SMALL} {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -79,7 +80,7 @@ export const Cards = styled.section`
 export const LoadMore = styled.section`
   display: flex;
   justify-content: center;
-  margin: 50px 0 37px;
+  padding: 0 0 37px;
 `;
 
 export const Loading = styled.span`
