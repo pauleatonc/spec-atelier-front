@@ -95,6 +95,7 @@ export const BlockDotsIcon = styled.img`
 `;
 
 export const BlockImage = styled.section`
+  display: flex;
   width: 98px;
 `;
 
@@ -166,7 +167,7 @@ export const Product = styled.section`
 `;
 
 export const ProductImage = styled.img`
-  height: 147px;
+  height: 150px;
   object-fit: cover;
   object-position: center;
   width: 98px;
