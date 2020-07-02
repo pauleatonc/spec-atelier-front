@@ -94,6 +94,14 @@ export const BlockDotsIcon = styled.img`
   visibility: hidden;
 `;
 
+export const BlockImage = styled.section`
+  width: 98px;
+`;
+
+export const BlockContent = styled.section`
+  padding: 8px 0 8px 9px;
+`;
+
 export const Section = styled.section`
   align-items: center;
   background-color: rgba(242, 242, 242, 0.54);
@@ -136,9 +144,10 @@ export const Item = styled.section`
 
 export const Product = styled.section`
   background-color: rgba(242, 242, 242, 0.54);
+  display: flex;
   margin: 0 0 18px 0;
   min-height: 116px;
-  padding: 8px 30px 8px 9px;
+  padding: 0 30px 0 0;
   position: relative;
   width: 100%;
 
@@ -154,6 +163,13 @@ export const Product = styled.section`
   &:hover ${BlockDotsIcon} {
     visibility: visible;
   }
+`;
+
+export const ProductImage = styled.img`
+  height: 147px;
+  object-fit: cover;
+  object-position: center;
+  width: 98px;
 `;
 
 export const ProductTitle = styled.p`

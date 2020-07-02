@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
+import { onShowSpecImagesModalSuccess } from '../spec-images-modal/SpecImagesModal.actions';
 import { onShowSpecProducts } from '../spec-products/SpecProducts.actions';
 import { onCreateSpecBlockText, onRemoveSpecBlock } from './SpecDocument.actions';
 import useDropdown from '../../components/basics/Dropdown.hooks';
@@ -16,9 +17,12 @@ import {
   BlockEditor,
   BlockMenuItem,
   BlockDotsIcon,
+  BlockImage,
+  BlockContent,
   Section,
   Item,
   Product,
+  ProductImage,
   ProductTitle,
   ProductDescription,
   ProductSystem,
@@ -46,15 +50,6 @@ const SpecDocument = () => {
     onClose: handleBlockMenuClose,
     onOpen: handleBlockMenuOpen,
   } = useDropdown({ closeCallback: () => setSelectedBlockID('') });
-  const handleShowBlockMenu = blockID => event => {
-    handleBlockMenuOpen(event);
-    setSelectedBlockID(blockID);
-  };
-  const handleShowBlockEditor = blockID => () => {
-    handleBlockMenuClose();
-    setShowBlockEditor(blockID);
-  };
-  const handleHideBlockEditor = () => setShowBlockEditor('');
   const handleShowProducts = () => {
     handleAddMenuClose();
     dispatch(onShowSpecProducts());
@@ -62,6 +57,19 @@ const SpecDocument = () => {
   const handleCreateProduct = () => {
     handleAddMenuClose();
     dispatch(onShowSpecCreateProductSuccess());
+  };
+  const handleShowBlockMenu = blockID => event => {
+    handleBlockMenuOpen(event);
+    setSelectedBlockID(blockID);
+  };
+  const handleShowImagesModal = blockID => () => {
+    handleBlockMenuClose();
+    dispatch(onShowSpecImagesModalSuccess({ blockID }));
+  };
+  const handleHideBlockEditor = () => setShowBlockEditor('');
+  const handleShowBlockEditor = blockID => () => {
+    handleBlockMenuClose();
+    setShowBlockEditor(blockID);
   };
   const handleCreateBlockText = () => text => {
     handleHideBlockEditor();
@@ -94,7 +102,11 @@ const SpecDocument = () => {
           origin={{ x: 'right', y: 'top' }}
           onClose={handleBlockMenuClose}
         >
-          {selectedBlock?.type === 'product' && <BlockMenuItem>Añadir una imagen</BlockMenuItem>}
+          {selectedBlock?.type === 'product' && (
+            <BlockMenuItem onClick={handleShowImagesModal(selectedBlockID)}>
+              Añadir una imagen
+            </BlockMenuItem>
+          )}
           <BlockMenuItem onClick={handleShowBlockEditor(selectedBlockID)}>Añadir texto</BlockMenuItem>
           {selectedBlock?.type === 'product' && <BlockMenuItem>Editar</BlockMenuItem>}
           <BlockMenuItem onClick={handleRemoveBlock(selectedBlockID)}>Eliminar</BlockMenuItem>
@@ -141,10 +153,17 @@ const SpecDocument = () => {
                   </BlockEditor>
                 )}
                 <BlockDotsIcon src={threeDotsVerticalSource} onClick={handleShowBlockMenu(block.id)} />
-                <ProductTitle>{block.title}</ProductTitle>
-                {block.description && <ProductDescription>{block.description}</ProductDescription>}
-                {block.system && <ProductSystem>{`Sistema constructivo: ${block.system}`}</ProductSystem>}
-                {block.reference && <ProductReference>{`Referencia ${block.reference}`}</ProductReference>}
+                {(block?.image || block?.image === 0) && (
+                  <BlockImage>
+                    <ProductImage src={block?.images[block?.image]?.urls?.thumb || '#'} />
+                  </BlockImage>
+                )}
+                <BlockContent>
+                  <ProductTitle>{block.title}</ProductTitle>
+                  {block.description && <ProductDescription>{block.description}</ProductDescription>}
+                  {block.system && <ProductSystem>{`Sistema constructivo: ${block.system}`}</ProductSystem>}
+                  {block.reference && <ProductReference>{`Referencia ${block.reference}`}</ProductReference>}
+                </BlockContent>
               </Product>
             );
           })}

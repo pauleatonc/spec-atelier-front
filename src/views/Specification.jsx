@@ -10,6 +10,7 @@ import SpecModalProduct from '../containers/spec-modal-product/SpecModalProduct.
 import SpecCreateProductOneContainer from '../containers/spec-create-product/SpecCreateProductStepOne.container';
 import SpecCreateProductTwoContainer from '../containers/spec-create-product/SpecCreateProductStepTwo.container';
 import SpecCreateProductThreeContainer from '../containers/spec-create-product/SpecCreateProductStepThree.container';
+import SpecImagesModalContainer from '../containers/spec-images-modal/SpecImagesModal.container';
 import SpecPanelsLayout from '../components/layouts/SpecPanelsLayout';
 import { Root, Header, Main, Navigation } from './Specification.styles';
 
@@ -36,6 +37,7 @@ const Specification = () => {
       <SpecCreateProductOneContainer />
       <SpecCreateProductTwoContainer />
       <SpecCreateProductThreeContainer />
+      <SpecImagesModalContainer />
       <AlertContainer />
       <SpecModalProduct />
     </>

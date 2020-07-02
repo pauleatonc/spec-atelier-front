@@ -16,6 +16,7 @@ export const onAddSpecBlock = blockID => (dispatch, getState) => {
       .map(specProduct => ({
         description: specProduct.long_desc || '',
         id: specProduct.id,
+        images: specProduct.images || [],
         reference: specProduct.reference || '',
         system: specProduct?.system?.name || '',
         title: specProduct.name,
@@ -51,6 +52,28 @@ export const onRemoveSpecBlock = blockID => dispatch => {
 export const DETACH_SPEC_PRODUCT = 'DETACH_SPEC_PRODUCT';
 export const onDetachSpecProduct = payload => dispatch =>
   dispatch(onAddSpecBlock(payload));
+
+export const ADD_SPEC_BLOCK_IMAGE = 'ADD_SPEC_BLOCK_IMAGE';
+export const ADD_SPEC_BLOCK_IMAGE_ERROR = 'ADD_SPEC_BLOCK_IMAGE_ERROR';
+export const ADD_SPEC_BLOCK_IMAGE_SUCCESS = 'ADD_SPEC_BLOCK_IMAGE_SUCCESS';
+export const onAddSpecBlockImage = ({ blockID, imageID }) => async (dispatch, getState) => {
+  dispatch(onActionCreator(ADD_SPEC_BLOCK_IMAGE));
+
+  try {
+    const { specDocument } = getState();
+    const updatedBlocks = specDocument.blocks?.map(block => {
+      if (block.id === blockID) {
+        return { ...block, image: imageID };
+      }
+
+      return block;
+    })
+
+    return dispatch(onActionCreator(ADD_SPEC_BLOCK_IMAGE_SUCCESS, { blocks: updatedBlocks }));
+  } catch (error) {
+    return dispatch(onActionCreator(ADD_SPEC_BLOCK_IMAGE_ERROR, { error: true, nativeError: error }));
+  }
+};
 
 export const CREATE_SPEC_BLOCK_TEXT = 'CREATE_SPEC_BLOCK_TEXT';
 export const CREATE_SPEC_BLOCK_TEXT_ERROR = 'CREATE_SPEC_BLOCK_TEXT_ERROR';

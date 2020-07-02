@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { onCreateSpecProduct, onHideSpecCreateProduct, onHideSpecCreateProductStepThreeSuccess } from './SpecCreateProduct.actions';
+import useModal from '../../components/layouts/ModalLayout.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import StepsBubbles from '../../components/basics/StepsBubbles';
 import AttachedImages from '../../components/attachments/AttachedImages';
@@ -22,15 +23,17 @@ const SpecCreateProductStepThree = () => {
   const handleImagesChange = attachedImages => setImagesValues(attachedImages);
   const handleDocumentsChange = attachedDocuments => setDocumentsValues(attachedDocuments);
   const handleAttachReject = reason => dispatch(onShowAlertSuccess({ message: reason }));
-  const handleClose = () => dispatch(onHideSpecCreateProduct());
-  const handleEntering = () => {
-    setImagesValues(images || []);
-    setDocumentsValues(documents || []);
-  };
-  const handleExited = () => {
-    setImagesValues([]);
-    setDocumentsValues([]);
-  };
+  const { onClose: handleClose, onEntering: handleEntering, onExited: handleExited } = useModal({
+    closeCallback: () => dispatch(onHideSpecCreateProduct()),
+    enteringCallback: () => {
+      setImagesValues(images || []);
+      setDocumentsValues(documents || []);
+    },
+    exitedCallback: () => {
+      setImagesValues([]);
+      setDocumentsValues([]);
+    },
+  });
   const handlePrev = () => dispatch(onHideSpecCreateProductStepThreeSuccess({
     images: imagesValues,
     documents: documentsValues,

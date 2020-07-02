@@ -4,6 +4,7 @@ import { onHideSpecCreateProduct, onGetSpecProductsSystems, onShowSpecCreateProd
 import { onGetSpecProductsSections } from '../spec-products-sections/SpecProductsSections.actions';
 import { onGetSpecProductsItems } from '../spec-products-items/SpecProductsItems.actions';
 import { useInput, useSelect } from '../../components/inputs/Inputs.hooks';
+import useModal from '../../components/layouts/ModalLayout.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import StepsBubbles from '../../components/basics/StepsBubbles';
 import Input from '../../components/inputs/Input';
@@ -36,13 +37,15 @@ const SpecCreateProductStepOne = () => {
     setSystemValue({});
     dispatch(onGetSpecProductsSystems({ itemID: option.value }));
   };
-  const handleClose = () => dispatch(onHideSpecCreateProduct());
-  const handleExiting = () => {
-    setNameValue('');
-    setSectionValue({});
-    setItemValue({});
-    setSystemValue({});
-  };
+  const { onClose: handleClose, onExiting: handleExiting } = useModal({
+    closeCallback: () => dispatch(onHideSpecCreateProduct()),
+    exitingCallback: () => {
+      setNameValue('');
+      setSectionValue({});
+      setItemValue({});
+      setSystemValue({});
+    },
+  });
   const handleNext = () => dispatch(onShowSpecCreateProductStepTwoSuccess({
     name: nameValue,
     section: sectionValue,
