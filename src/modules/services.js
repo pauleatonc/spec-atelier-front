@@ -9,7 +9,10 @@ export const factoryService = callback => {
   return (serviceArgs, actionType = null) => {
     setTimeout(() => cancellation.register(actionType), 0);
 
-    return callback(serviceArgs);
+    return callback(serviceArgs)
+      .catch(error => {
+        throw error.toString();
+      });
   };
 };
 

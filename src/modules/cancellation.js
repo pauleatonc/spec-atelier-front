@@ -14,10 +14,10 @@ class Cancellation {
 
   getSignal(actionType) {
     if (actionType === null) {
-      return Promise.resolve(null);
+      return null;
     }
 
-    return Promise.resolve(this.controllers[actionType || '']?.signal);
+    return this.controllers[actionType || '']?.signal;
   }
 
   off(callback) {

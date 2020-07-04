@@ -20,171 +20,90 @@ const generateHeaders = (contentType, isPublic) => {
 };
 
 /**
- * Factory to create a DELETE request helper with JSON format as content type.
+ * Factory to create requests helpers.
  */
-const factoryDeleteJsonRequest = () => {
+const factoryRequest = callback => {
   const cancellation = cancellationSingleton();
-  const getActionType = () => new Promise(resolve => cancellation.on(actionType => resolve(actionType)));
+  const getActionType = () => new Promise(resolve => cancellation.on(actionType => resolve(actionType)))
+    .then(actionType => [actionType, cancellation.getSignal(actionType)]);
+  const unregisterActionType = actionType =>  cancellation.unregister(actionType);
 
-  return (url, payload) => {
-    const headers = generateHeaders('application/json');
-    const body = JSON.stringify(payload);
-
-    return getActionType()
-      .then(actionType =>
-        Promise.all([Promise.resolve(actionType), Promise.resolve(cancellation.getSignal(actionType))]),
-      )
-      .then(([actionType, signal]) =>
-        Promise.all([Promise.resolve(actionType), fetch(url, { body, headers, signal, method: 'DELETE' })]),
-      )
-      .then(([actionType, response]) => {
-        cancellation.unregister(actionType);
-
-        return response;
-      })
-      .then(response => response.json());
-  }
+  return (url, payload) => callback(url, payload, { getActionType, unregisterActionType });
 };
 
 /**
- * Factory to create a GET request helper with JSON format as content type.
+ * Helper to make a cancellable request using the fetch API.
  */
-const factoryGetJsonRequest = () => {
-  const cancellation = cancellationSingleton();
-  const getActionType = () => new Promise(resolve => cancellation.on(actionType => resolve(actionType)));
+const cancellableFetch = async (url, fetchOptions, cancelOptions) => {
+  const [actionType, signal] = await cancelOptions.getActionType();
+  const response = await fetch(url, { ...fetchOptions, signal });
 
-  return url => {
-    const headers = generateHeaders('application/json');
+  cancelOptions.unregisterActionType(actionType);
 
-    return getActionType()
-      .then(actionType =>
-        Promise.all([Promise.resolve(actionType), Promise.resolve(cancellation.getSignal(actionType))]),
-      )
-      .then(([actionType, signal]) =>
-        Promise.all([Promise.resolve(actionType), fetch(url, { headers, signal, method: 'GET' })]),
-      )
-      .then(([actionType, response]) => {
-        cancellation.unregister(actionType);
-
-        return response;
-      })
-      .then(response => response.json());
-  }
-};
-
-/**
- * Factory to create a POST request helper with form-data format as content type.
- */
-const factoryPostFormRequest = () => {
-  const cancellation = cancellationSingleton();
-  const getActionType = () => new Promise(resolve => cancellation.on(actionType => resolve(actionType)));
-
-  return (url, payload) => {
-    const headers = generateHeaders();
-    const formData = new FormData();
-    
-    // FIXME: https://medium.com/@jugtuttle/formdata-and-strong-params-ruby-on-rails-react-c230d050e26e
-    Object.keys(payload).forEach(key => {
-      if (!Array.isArray(payload[key])) {
-        formData.append(key, payload[key]);
-
-        return; 
-      }
-
-      payload[key].forEach(item => formData.append(key, item));
-    });
-
-    return getActionType()
-      .then(actionType =>
-        Promise.all([Promise.resolve(actionType), Promise.resolve(cancellation.getSignal(actionType))]),
-      )
-      .then(([actionType, signal]) =>
-        Promise.all([Promise.resolve(actionType), fetch(url, { headers, signal, body: formData, method: 'POST' })]),
-      )
-      .then(([actionType, response]) => {
-        cancellation.unregister(actionType);
-
-        return response;
-      })
-      .then(response => response.json());
-  }
-};
-
-/**
- * Factory to create a POST request helper with JSON format as content type.
- */
-const factoryPostJsonRequest = () => {
-  const cancellation = cancellationSingleton();
-  const getActionType = () => new Promise(resolve => cancellation.on(actionType => resolve(actionType)));
-
-  return (url, payload) => {
-    const headers = generateHeaders('application/json');
-    const body = JSON.stringify(payload);
-
-    return getActionType()
-      .then(actionType =>
-        Promise.all([Promise.resolve(actionType), Promise.resolve(cancellation.getSignal(actionType))]),
-      )
-      .then(([actionType, signal]) =>
-        Promise.all([Promise.resolve(actionType), fetch(url, { body, headers, signal, method: 'POST' })]),
-      )
-      .then(([actionType, response]) => {
-        cancellation.unregister(actionType);
-
-        return response;
-      })
-      .then(response => response.json());
-  }
-};
-
-/**
- * Factory to create a PUT request helper with JSON format as content type.
- */
-const factoryPutJsonRequest = () => {
-  const cancellation = cancellationSingleton();
-  const getActionType = () => new Promise(resolve => cancellation.on(actionType => resolve(actionType)));
-
-  return (url, payload) => {
-    const headers = generateHeaders('application/json');
-    const body = JSON.stringify(payload);
-
-    return getActionType()
-      .then(actionType =>
-        Promise.all([Promise.resolve(actionType), Promise.resolve(cancellation.getSignal(actionType))]),
-      )
-      .then(([actionType, signal]) =>
-        Promise.all([Promise.resolve(actionType), fetch(url, { body, headers, signal, method: 'PUT' })]),
-      )
-      .then(([actionType, response]) => {
-        cancellation.unregister(actionType);
-
-        return response;
-      })
-      .then(response => response.json());
-  }
+  return response;
 };
 
 /**
  * To do a DELETE request with JSON as content type.
  */
-export const deleteJsonRequest = factoryDeleteJsonRequest();
+export const deleteJsonRequest = factoryRequest((url, payload, options) => {
+  const headers = generateHeaders('application/json');
+  const body = JSON.stringify(payload);
+
+  return cancellableFetch(url, { body, headers, method: 'DELETE' }, options)
+    .then(response => response.json());
+});
 
 /**
  * To do a GET request with JSON as content type.
  */
-export const getJsonRequest = factoryGetJsonRequest();
+export const getJsonRequest = factoryRequest((url, _, options) => {
+  const headers = generateHeaders('application/json');
+
+  return cancellableFetch(url, { headers, method: 'GET' }, options)
+    .then(response => response.json());
+});
 
 /**
  * To do a POST request with form data as content type.
  */
-export const postFormRequest = factoryPostFormRequest();
+export const postFormRequest = factoryRequest((url, payload, options) => {
+  const headers = generateHeaders();
+  const formData = new FormData();
+  
+  // FIXME: https://medium.com/@jugtuttle/formdata-and-strong-params-ruby-on-rails-react-c230d050e26e
+  Object.keys(payload).forEach(key => {
+    if (!Array.isArray(payload[key])) {
+      formData.append(key, payload[key]);
+
+      return; 
+    }
+
+    payload[key].forEach(item => formData.append(key, item));
+  });
+
+  return cancellableFetch(url, { headers, body: formData, method: 'POST' }, options)
+    .then(response => response.json());
+});
 
 /**
  * To do a POST request with JSON as content type.
  */
-export const postJsonRequest = factoryPostJsonRequest();
+export const postJsonRequest = factoryRequest((url, payload, options) => {
+  const headers = generateHeaders('application/json');
+  const body = JSON.stringify(payload);
+
+  return cancellableFetch(url, { body, headers, method: 'POST' }, options)
+    .then(response => response.json());
+});
 
 /**
  * To do a PUT request with JSON as content type.
  */
-export const putJsonRequest = factoryPutJsonRequest();
+export const putJsonRequest = factoryRequest((url, payload, options) => {
+  const headers = generateHeaders('application/json');
+  const body = JSON.stringify(payload);
+
+  return cancellableFetch(url, { body, headers, method: 'PUT' }, options)
+    .then(response => response.json());
+});
