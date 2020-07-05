@@ -9,7 +9,7 @@ export const CLOSE_CONTACT_FORM_MODAL = 'CLOSE_CONTACT_FORM_MODAL';
 // async calls
 export const sendContactData = newContact => async dispatch => {
   try {
-    await postContact(newContact.brand_id, newContact);
+    await postContact({ brandId: newContact.brand_id, contact: newContact });
     dispatch(onActionCreator(POST_CONTACT_FORM, { sended: true, loading: false }));
   } catch (error) {
     dispatch(onActionCreator(POST_CONTACT_FORM_ERROR, { loading: false, error: true }));

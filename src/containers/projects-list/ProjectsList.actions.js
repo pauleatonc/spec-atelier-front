@@ -8,7 +8,7 @@ export const GET_PROJECTS_ERROR = 'GET_PROJECTS_ERROR';
 export const getMyProjects = params => async (dispatch, getState) => {
   try {
     const { user } = getState().auth;
-    const { projects } = await getProjects(user.id, params);
+    const { projects } = await getProjects({ userId: user.id, params });
     dispatch(onActionCreator(GET_PROJECTS, { projects, loading: false, params }));
   } catch (error) {
     dispatch(onActionCreator(GET_PROJECTS_ERROR, { loading: false, error: true, params }));
@@ -18,7 +18,7 @@ export const getMyProjects = params => async (dispatch, getState) => {
 export const getMoreProjects = params => async (dispatch, getState) => {
   try {
     const { user } = getState().auth;
-    const { projects } = await getProjects(user.id, params);
+    const { projects } = await getProjects({ userId: user.id, params });
     dispatch(onActionCreator(GET_MORE_PROJECTS, { projects, loading: false, params }));
   } catch (error) {
     dispatch(onActionCreator(GET_PROJECTS_ERROR, { loading: false, error: true, params }));

@@ -1,36 +1,36 @@
 import { API_BASE_URL } from '../config/constants/environment';
 import { getJsonRequest, postFormRequest, postJsonRequest } from '../modules/requests';
-import { formatParams } from './services.helpers';
+import { factoryService, formatParams } from '../modules/services';
 
 /**
  * Gets the list of products' sections available.
  */
-export const getProductsSections = () => getJsonRequest(`${API_BASE_URL}/sections`);
+export const getProductsSections = factoryService(() => getJsonRequest(`${API_BASE_URL}/sections`));
 
 /**
  * Gets the list of products' items by the given section.
  */
-export const getProductsItems = sectionID => getJsonRequest(`${API_BASE_URL}/sections/${sectionID}/items`);
+export const getProductsItems = factoryService(sectionID => getJsonRequest(`${API_BASE_URL}/sections/${sectionID}/items`));
 
 /**
  * Gets the list of products' systems by the given item.
  */
-export const getProductsSystems = itemID => getJsonRequest(`${API_BASE_URL}/items/${itemID}/systems`);
+export const getProductsSystems = factoryService(itemID => getJsonRequest(`${API_BASE_URL}/items/${itemID}/systems`));
 
 /**
  * Gets a list of products. 
  */
-export const getProducts = filters => getJsonRequest(`${API_BASE_URL}/products${formatParams(filters)}`);
+export const getProducts = factoryService(filters => getJsonRequest(`${API_BASE_URL}/products${formatParams(filters)}`));
 
 /**
  * Gets a product by the given item. 
  */
-export const getProductById = productID => getJsonRequest(`${API_BASE_URL}/products/${productID}`);
+export const getProductById = factoryService(productID => getJsonRequest(`${API_BASE_URL}/products/${productID}`));
 
 /**
  * Create a new product. 
  */
-export const createProduct = data => {
+export const createProduct = factoryService(data => {
   const body = {
     product: {
       brand: data.brand,
@@ -43,22 +43,22 @@ export const createProduct = data => {
   };
 
   return postJsonRequest(`${API_BASE_URL}/products`, body);
-};
+});
 
 /**
  * Upload images to the given product. 
  */
-export const uploadProductImages = (productID, images) => {
+export const uploadProductImages = factoryService(({ productID, images }) => {
   const body = { 'images[]': images };
 
   return postFormRequest(`${API_BASE_URL}/products/${productID}/associate_images`, body);
-};
+});
 
 /**
  * Upload documents to the given product.
  */
-export const uploadProductDocuments = (productID, documents) => {
+export const uploadProductDocuments = factoryService(({ productID, documents }) => {
   const body = { 'documents[]': documents };
 
   return postFormRequest(`${API_BASE_URL}/api/products/${productID}/associate_documents`, body);
-};
+});

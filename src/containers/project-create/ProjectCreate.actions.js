@@ -19,8 +19,8 @@ export const cleanStore = () => dispatch => dispatch(onActionCreator(CLEAN_STORE
 export const createProject = newProject => async (dispatch, getState) => {
   try {
     const { user } = getState().auth;
-    const response = await createNewProject(user.id, newProject);
-    if (response?.status >= 400) return dispatch(onActionCreator(CREATE_PROJECT_ERROR, { loading: false, error }));
+    const response = await createNewProject({ userId: user.id, project: newProject });
+    if (response?.status >= 400) return dispatch(onActionCreator(CREATE_PROJECT_ERROR, { loading: false }));
     return dispatch(onActionCreator(CREATE_PROJECT, { project: response.project, loading: false }));
   } catch (error) {
     return dispatch(onActionCreator(CREATE_PROJECT_ERROR, { loading: false, error }));

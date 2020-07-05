@@ -13,7 +13,7 @@ export const onGetSpecProducts = () => async (dispatch, getState) => {
 
   try {
     const { specProducts } = getState();
-    const response = await getProducts(specProducts.filters);
+    const response = await getProducts(specProducts.filters, GET_SPEC_PRODUCTS);
 
     return dispatch(
       onActionCreator(
