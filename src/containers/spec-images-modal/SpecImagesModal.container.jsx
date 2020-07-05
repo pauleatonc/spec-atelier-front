@@ -17,7 +17,7 @@ const SpecImagesModal = () => {
   const { selectedBlockID, show } = useSelector(state => state.specImagesModal);
   const dispatch = useDispatch();
   const selectedProductBlock = blocks.find(block => block.id === selectedBlockID) || {};
-  const [selectedImage, setSelectedImage] = useState(selectedProductBlock.image || '');
+  const [selectedImage, setSelectedImage] = useState(selectedProductBlock.element?.image || '');
   const { onClose: handleClose } = useModal({ closeCallback: () => dispatch(onHideSpecImagesModalSuccess()) });
   const handleSelectImage = selected => () => {
     if (selected === selectedImage) {
@@ -30,10 +30,14 @@ const SpecImagesModal = () => {
     handleClose(event);
     dispatch(onAddSpecBlockImage({ blockID, imageID }));
   }
-  const disableSubmit = !selectedProductBlock?.images?.length || selectedProductBlock?.images?.length === 0 || selectedImage === '';
+  const disableSubmit = (
+    !selectedProductBlock?.element?.images?.length ||
+    selectedProductBlock?.element?.images?.length === 0 ||
+    selectedImage === ''
+  );
 
   useEffect(() => {
-    setSelectedImage(selectedProductBlock.image);
+    setSelectedImage(selectedProductBlock.element?.image);
   }, [selectedProductBlock.image]);
 
   return (
@@ -45,9 +49,9 @@ const SpecImagesModal = () => {
         </Header>
         <Body>
           <Figures>
-            {selectedProductBlock?.images?.map((image, index) => (
+            {selectedProductBlock?.element?.images?.map((image, index) => (
               <Figure key={`block-image-${index}`} selected={index === selectedImage} onClick={handleSelectImage(index)}>
-                <Image selected={index === selectedImage} source={image?.urls?.thumb || '#'} />
+                <Image selected={index === selectedImage} source={image?.url || '#'} />
                 {index === selectedImage && <CheckIcon src={checkSource} />}
               </Figure>
             ))}

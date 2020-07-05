@@ -1,6 +1,5 @@
 import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
-import { createSpecBlockText } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 export const ADD_SPEC_BLOCK = 'ADD_SPEC_BLOCK';
@@ -14,12 +13,18 @@ export const onAddSpecBlock = blockID => (dispatch, getState) => {
     const [product] = specProducts.collection
       .filter(specProduct => specProduct.id === blockID)
       .map(specProduct => ({
-        description: specProduct.long_desc || '',
-        id: specProduct.id,
-        images: specProduct.images || [],
-        reference: specProduct.reference || '',
-        system: specProduct?.system?.name || '',
-        title: specProduct.name,
+        element: {
+          description: specProduct.long_desc || '',
+          id: specProduct.id,
+          images: (specProduct.images || []).map((image, index) => ({
+            id: `${specProduct.id}-images-${index}`,
+            url: image.urls?.thumb,
+          })),
+          reference: specProduct.reference || '',
+          system: specProduct?.system?.name || '',
+          title: specProduct.name,
+        },
+        id: `${specProduct.id}-block-product`,
         type: 'product',
       }));
 
@@ -63,7 +68,10 @@ export const onAddSpecBlockImage = ({ blockID, imageID }) => async (dispatch, ge
     const { specDocument } = getState();
     const updatedBlocks = specDocument.blocks?.map(block => {
       if (block.id === blockID) {
-        return { ...block, image: imageID };
+        return {
+          ...block,
+          element: { ...block.element, image: imageID },
+        };
       }
 
       return block;
@@ -75,19 +83,19 @@ export const onAddSpecBlockImage = ({ blockID, imageID }) => async (dispatch, ge
   }
 };
 
-export const CREATE_SPEC_BLOCK_TEXT = 'CREATE_SPEC_BLOCK_TEXT';
-export const CREATE_SPEC_BLOCK_TEXT_ERROR = 'CREATE_SPEC_BLOCK_TEXT_ERROR';
-export const CREATE_SPEC_BLOCK_TEXT_SUCCESS = 'CREATE_SPEC_BLOCK_TEXT_SUCCESS';
-export const onCreateSpecBlockText = ({ projectID, text }) => async (dispatch, getState) => {
-  dispatch(onActionCreator(CREATE_SPEC_BLOCK_TEXT));
+export const ADD_SPEC_BLOCK_TEXT = 'ADD_SPEC_BLOCK_TEXT';
+export const ADD_SPEC_BLOCK_TEXT_ERROR = 'ADD_SPEC_BLOCK_TEXT_ERROR';
+export const ADD_SPEC_BLOCK_TEXT_SUCCESS = 'ADD_SPEC_BLOCK_TEXT_SUCCESS';
+export const onAddSpecBlockText = ({ blockID, text }) => async dispatch => {
+  dispatch(onActionCreator(ADD_SPEC_BLOCK_TEXT));
 
   try {
-    const { auth } = getState();
+    // const { auth } = getState();
 
-    await createSpecBlockText({ projectID, text, userID: auth.user?.id });
+    // await createSpecBlockText({ projectID, text, userID: auth.user?.id });
 
-    return dispatch(onActionCreator(CREATE_SPEC_BLOCK_TEXT_SUCCESS));
+    return dispatch(onActionCreator(ADD_SPEC_BLOCK_TEXT_SUCCESS, { blockID, text }));
   } catch (error) {
-    return dispatch(onActionCreator(CREATE_SPEC_BLOCK_TEXT_ERROR, { error: true, nativeError: error }));
+    return dispatch(onActionCreator(ADD_SPEC_BLOCK_TEXT_ERROR, { error: true, nativeError: error }));
   }
 };

@@ -82,7 +82,7 @@ Options.defaultProps = {
   type: 'default',
 };
 Options.propTypes = {
-  type: PropTypes.oneOf(['default', 'underline']),
+  type: PropTypes.oneOf(['default', 'underline', 'list']),
 };
 
 export const Option = styled.section`
@@ -120,4 +120,13 @@ export const OptionText = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+`;
+
+export const Actions = styled.section`
+  display: grid;
+  grid-column-gap: 10px;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  padding: 10px 0;
+  width: 100%;
 `;

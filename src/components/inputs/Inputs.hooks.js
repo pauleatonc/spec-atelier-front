@@ -16,14 +16,22 @@ export const useAutocomplete = (initialValue = {}, callback = () => undefined) =
 /**
  * The ComboBox custom's hook.
  */
-export const useComboBox = (initialValue = [], callback = () => undefined) => {
+export const useComboBox = ({
+  initialValue = [],
+  changeCallback = () => undefined,
+  submitCallback = () => undefined,
+}) => {
   const [values, setValues] = useState(initialValue);
   const handleChange = options => {
     setValues(options);
-    callback(options);
+    changeCallback(options);
   };
+  const handleSubmit = options => {
+    setValues(options);
+    submitCallback(options);
+  }
 
-  return { values, set: setValues, onChange: handleChange };
+  return { values, set: setValues, onChange: handleChange, onSubmit: handleSubmit };
 }
 
 /**

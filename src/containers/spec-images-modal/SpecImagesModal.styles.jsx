@@ -74,7 +74,7 @@ export const Image = styled.span`
   background-image: url('${({ source }) => source}');
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   display: block;
   height: 100%;
   left: 0;

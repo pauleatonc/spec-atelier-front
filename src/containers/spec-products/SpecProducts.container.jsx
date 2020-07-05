@@ -54,12 +54,24 @@ const SpecProductsList = () => {
     event.stopPropagation();
     dispatch(getProduct(selectedProduct));
   }
-  const { values: brandsValues, set: setBrandsValues, onChange: handleBrandsChange } =
-    useComboBox([], values => dispatch(onGetSpecProductsByFilters({ key: 'brand', value: values })));
-  const { values: projectTypeValues, set: setProjectTypeValues, onChange: handleProjectTypeChange } =
-    useComboBox([], values => dispatch(onGetSpecProductsByFilters({ key: 'project_type', value: values })));
-  const { values: roomTypeValues, set: setRoomTypeValues, onChange: handleRoomTypeChange } =
-    useComboBox([], values => dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: values })));
+  const { values: brandsValues, set: setBrandsValues, onSubmit: onBrandsSubmit } =
+    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'brand', value: values })) });
+  const handleBrandsSubmit = close => event => {
+    close();
+    onBrandsSubmit(event);
+  };
+  const { values: projectTypeValues, set: setProjectTypeValues, onSubmit: onProjectTypeSubmit } =
+    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'project_type', value: values })) });
+  const handleProjectTypeSubmit = close => event => {
+    close();
+    onProjectTypeSubmit(event);
+  };
+  const { values: roomTypeValues, set: setRoomTypeValues, onSubmit: onRoomTypeSubmit } =
+    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: values })) });
+  const handleRoomTypeSubmit = close => event => {
+    close();
+    onRoomTypeSubmit(event);
+  };
   const handleFilterAll = () => {
     setBrandsValues([]);
     setProjectTypeValues([]);
@@ -87,36 +99,48 @@ const SpecProductsList = () => {
         </HeaderSearch>
         <HeaderFilters>
           <Tag selected={allFilterIsSelected} onClick={handleFilterAll}>Todos</Tag>
-          <ToggleMenu anchor={<Tag selected={brandsValues.length > 0}>Marcas</Tag>} width="215px">
-            <ComboBox
-              optionAll
-              options={brands.map(brand => ({ label: brand.name || '', value: brand.id }))}
-              placeholder="Selecciona"
-              type="underline"
-              values={brandsValues}
-              onChange={handleBrandsChange}
-            />
+          <ToggleMenu anchor={<Tag selected={brandsValues.length > 0}>Marcas</Tag>} width="291px">
+            {onClose => (
+              <ComboBox
+                optionAll
+                submit
+                options={brands.map(brand => ({ label: brand.name || '', value: brand.id }))}
+                placeholder="Selecciona"
+                type="list"
+                values={brandsValues}
+                variant="secondary"
+                onSubmit={handleBrandsSubmit(onClose)}
+              />
+            )}
           </ToggleMenu>
-          <ToggleMenu anchor={<Tag selected={projectTypeValues.length > 0}>Tipo de proyecto</Tag>} width="215px">
-            <ComboBox
-              optionAll
-              options={projectTypes.map(projectType => ({ label: projectType.name || '', value: projectType.id }))}
-              placeholder="Selecciona"
-              type="underline"
-              values={projectTypeValues}
-              onChange={handleProjectTypeChange}
-            />
+          <ToggleMenu anchor={<Tag selected={projectTypeValues.length > 0}>Tipo de proyecto</Tag>} width="291px">
+            {onClose => (
+              <ComboBox
+                optionAll
+                submit
+                options={projectTypes.map(projectType => ({ label: projectType.name || '', value: projectType.id }))}
+                placeholder="Selecciona"
+                type="list"
+                values={projectTypeValues}
+                variant="secondary"
+                onSubmit={handleProjectTypeSubmit(onClose)}
+              />
+            )}  
           </ToggleMenu>
-          <Tag selected={false}>Mis especificaciones</Tag>
-          <ToggleMenu anchor={<Tag selected={roomTypeValues.length > 0}>Recintos</Tag>} width="215px">
-            <ComboBox
-              optionAll
-              options={roomTypes.map(roomType => ({ label: roomType.name || '', value: roomType.id }))}
-              placeholder="Selecciona"
-              type="underline"
-              values={roomTypeValues}
-              onChange={handleRoomTypeChange}
-            />
+          <Tag disabled selected={false}>Mis especificaciones</Tag>
+          <ToggleMenu anchor={<Tag selected={roomTypeValues.length > 0}>Recintos</Tag>} width="291px">
+            {onClose => (
+              <ComboBox
+                optionAll
+                submit
+                options={roomTypes.map(roomType => ({ label: roomType.name || '', value: roomType.id }))}
+                placeholder="Selecciona"
+                type="list"
+                values={roomTypeValues}
+                variant="secondary"
+                onSubmit={handleRoomTypeSubmit(onClose)}
+              />
+            )}
           </ToggleMenu>
         </HeaderFilters>
       </Header>

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { COLOR_MINE_SHAFT, COLOR_PRIMARY, COLOR_WHITE } from '../../config/constants/styled-vars';
 
@@ -53,6 +54,18 @@ export const Group = styled.section`
   width: 100%;
 `;
 
+export const Block = styled.section`
+  margin: ${({ margin = 'initial' }) => margin};
+  width: 100%;
+`;
+
+Block.defaultProps = {
+  margin: 'initial',
+};
+Block.propTypes = {
+  margin: PropTypes.string,
+};
+
 export const BlockEditor = styled.section`
   background-color: #F2F2F2;
   bottom: 0;
@@ -103,6 +116,50 @@ export const BlockContent = styled.section`
   padding: 8px 0 8px 9px;
 `;
 
+export const BlockText = styled.section`
+  background-color: rgba(242, 242, 242, 0.54);
+  font-family: Lato;
+  font-size: 12px;
+  margin: 0 0 3px 0;
+  padding: 4px 30px 4px 9px;
+  width: 100%;
+
+  & p {
+    color: rgba(33, 33, 33, 0.51);
+    letter-spacing: 1px;
+    margin: 9px 0;
+  }
+
+  & h1 {
+    color: #212121;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 9px 0;
+  }
+
+  & h2 {
+    color: #212121;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 9px 0;
+  }
+
+  & h5 {
+    color: rgba(33, 33, 33, 0.51);
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin: 9px 0;
+  }
+
+  & strong {
+    font-weight: bold;
+  }
+
+  & i {
+    font-style: italic;
+  }
+`;
+
 export const Section = styled.section`
   align-items: center;
   background-color: rgba(242, 242, 242, 0.54);
@@ -113,9 +170,14 @@ export const Section = styled.section`
   font-weight: bold;
   height: 36px;
   letter-spacing: 1.14px;
-  margin: 0 0 4px 0;
+  margin: 0 0 3px 0;
   padding: 4px 30px 4px 9px;
+  position: relative;
   width: 100%;
+
+  &:hover ${BlockDotsIcon} {
+    visibility: visible;
+  }
 `;
 
 export const Item = styled.section`
@@ -128,7 +190,7 @@ export const Item = styled.section`
   font-weight: bold;
   height: 36px;
   letter-spacing: 1px;
-  margin: 0 0 10px 0;
+  margin: 0 0 3px 0;
   padding: 4px 30px 4px 9px;
   position: relative;
   width: 100%;
@@ -146,7 +208,7 @@ export const Item = styled.section`
 export const Product = styled.section`
   background-color: rgba(242, 242, 242, 0.54);
   display: flex;
-  margin: 0 0 18px 0;
+  margin: 0 0 3px 0;
   min-height: 116px;
   padding: 0 30px 0 0;
   position: relative;
@@ -168,8 +230,8 @@ export const Product = styled.section`
 
 export const ProductImage = styled.img`
   height: 150px;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  object-position: top;
   width: 98px;
 `;
 

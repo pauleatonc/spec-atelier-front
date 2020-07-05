@@ -6,7 +6,7 @@ const Button = styled.button`
   border: 1px solid ${({ selected = false }) => selected ? '#FF7E45' : '#CCC'};
   border-radius: 18px;
   color: ${({ selected = false }) => selected ? '#FF7E45' : '#9C9C9C'};
-  cursor: pointer;
+  cursor: ${({ disabled = false }) => disabled ? 'not-allowed' : 'pointer'};
   display: inline-flex;
   font-family: Lato;
   font-size: 12px;
@@ -28,9 +28,11 @@ const Button = styled.button`
 `;
 
 Button.defaultProps = {
+  disabled: false,
   selected: false,
 };
 Button.propTypes = {
+  disabled: PropTypes.bool,
   selected: PropTypes.bool,
 };
 

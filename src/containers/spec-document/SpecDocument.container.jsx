@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import { onShowSpecImagesModalSuccess } from '../spec-images-modal/SpecImagesModal.actions';
 import { onShowSpecProducts } from '../spec-products/SpecProducts.actions';
-import { onCreateSpecBlockText, onRemoveSpecBlock } from './SpecDocument.actions';
+import { onAddSpecBlockText, onRemoveSpecBlock } from './SpecDocument.actions';
 import useDropdown from '../../components/basics/Dropdown.hooks';
 import Dropdown from '../../components/basics/Dropdown';
 import Editor from '../../components/inputs/Editor';
@@ -14,11 +14,13 @@ import {
   AddMenuItem,
   Page,
   Group,
+  Block,
   BlockEditor,
   BlockMenuItem,
   BlockDotsIcon,
   BlockImage,
   BlockContent,
+  BlockText,
   Section,
   Item,
   Product,
@@ -71,9 +73,9 @@ const SpecDocument = () => {
     handleBlockMenuClose();
     setShowBlockEditor(blockID);
   };
-  const handleCreateBlockText = () => text => {
+  const handleCreateBlockText = blockID => text => {
     handleHideBlockEditor();
-    dispatch(onCreateSpecBlockText({ projectID, text }));
+    dispatch(onAddSpecBlockText({ blockID, projectID, text }));
   };
   const handleRemoveBlock = blockID => () => {
     handleHideBlockEditor();
@@ -102,12 +104,12 @@ const SpecDocument = () => {
           origin={{ x: 'right', y: 'top' }}
           onClose={handleBlockMenuClose}
         >
+          <BlockMenuItem onClick={handleShowBlockEditor(selectedBlockID)}>Añadir texto</BlockMenuItem>
           {selectedBlock?.type === 'product' && (
             <BlockMenuItem onClick={handleShowImagesModal(selectedBlockID)}>
               Añadir una imagen
             </BlockMenuItem>
           )}
-          <BlockMenuItem onClick={handleShowBlockEditor(selectedBlockID)}>Añadir texto</BlockMenuItem>
           {selectedBlock?.type === 'product' && <BlockMenuItem>Editar</BlockMenuItem>}
           <BlockMenuItem onClick={handleRemoveBlock(selectedBlockID)}>Eliminar</BlockMenuItem>
         </Dropdown>
@@ -116,12 +118,54 @@ const SpecDocument = () => {
         <Group>
           {blocks.map(block => {
             if (block.type === 'section') {
-              return <Section key={block.id}>{block.title}</Section>;
+              return (
+                <Block key={block.id} margin="0 0 4px 0">
+                  <Section>
+                    {showBlockEditor === block.id && (
+                      <BlockEditor>
+                        <Editor
+                          actions
+                          label="Texto"
+                          placeholder="Ingresa el texto"
+                          onCancel={handleHideBlockEditor}
+                          onSubmit={handleCreateBlockText(block.id)}
+                        />
+                      </BlockEditor>
+                    )}
+                    <BlockDotsIcon src={threeDotsVerticalSource} onClick={handleShowBlockMenu(block.id)} />
+                    {block?.element?.title}
+                  </Section>
+                  {block?.text && <BlockText dangerouslySetInnerHTML={{ __html: block?.text?.text }} />}
+                </Block>
+              );
             }
 
             if (block.type === 'item') {
               return (
-                <Item draggable key={block.id}>
+                <Block draggable key={block.id} margin="0 0 7px 0">
+                  <Item>
+                    {showBlockEditor === block.id && (
+                      <BlockEditor>
+                        <Editor
+                          actions
+                          label="Texto"
+                          placeholder="Ingresa el texto"
+                          onCancel={handleHideBlockEditor}
+                          onSubmit={handleCreateBlockText(block.id)}
+                        />
+                      </BlockEditor>
+                    )}
+                    <BlockDotsIcon src={threeDotsVerticalSource} onClick={handleShowBlockMenu(block.id)} />
+                    {block?.element?.title}
+                  </Item>
+                  {block?.text && <BlockText dangerouslySetInnerHTML={{ __html: block?.text?.text }} />}
+                </Block>
+              );
+            }
+
+            return (
+              <Block draggable key={block.id} margin="0 0 15px 0">
+                <Product>
                   {showBlockEditor === block.id && (
                     <BlockEditor>
                       <Editor
@@ -134,37 +178,20 @@ const SpecDocument = () => {
                     </BlockEditor>
                   )}
                   <BlockDotsIcon src={threeDotsVerticalSource} onClick={handleShowBlockMenu(block.id)} />
-                  {block.title}
-                </Item>
-              );
-            }
-
-            return (
-              <Product draggable key={block.id}>
-                {showBlockEditor === block.id && (
-                  <BlockEditor>
-                    <Editor
-                      actions
-                      label="Texto"
-                      placeholder="Ingresa el texto"
-                      onCancel={handleHideBlockEditor}
-                      onSubmit={handleCreateBlockText(block.id)}
-                    />
-                  </BlockEditor>
-                )}
-                <BlockDotsIcon src={threeDotsVerticalSource} onClick={handleShowBlockMenu(block.id)} />
-                {(block?.image || block?.image === 0) && (
-                  <BlockImage>
-                    <ProductImage src={block?.images[block?.image]?.urls?.thumb || '#'} />
-                  </BlockImage>
-                )}
-                <BlockContent>
-                  <ProductTitle>{block.title}</ProductTitle>
-                  {block.description && <ProductDescription>{block.description}</ProductDescription>}
-                  {block.system && <ProductSystem>{`Sistema constructivo: ${block.system}`}</ProductSystem>}
-                  {block.reference && <ProductReference>{`Referencia ${block.reference}`}</ProductReference>}
-                </BlockContent>
-              </Product>
+                  {(block?.element?.image || block?.element?.image === 0) && (
+                    <BlockImage>
+                      <ProductImage src={block?.element?.images[block?.element?.image]?.url || '#'} />
+                    </BlockImage>
+                  )}
+                  <BlockContent>
+                    <ProductTitle>{block?.element?.title}</ProductTitle>
+                    {block?.element?.description && <ProductDescription>{block?.element?.description}</ProductDescription>}
+                    {block?.element?.system && <ProductSystem>{`Sistema constructivo: ${block?.element?.system}`}</ProductSystem>}
+                    {block?.element?.reference && <ProductReference>{`Referencia ${block?.element?.reference}`}</ProductReference>}
+                  </BlockContent>
+                </Product>
+                {block?.text && <BlockText dangerouslySetInnerHTML={{ __html: block?.text?.text }} />}
+              </Block>
             );
           })}
         </Group>
