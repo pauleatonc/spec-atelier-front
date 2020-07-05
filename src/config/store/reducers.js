@@ -3,6 +3,7 @@ import loginReducer from '../../reducers/login.reducer';
 import recoverPasswordReducer from '../../reducers/recover_password.reducer';
 import newPasswordReducer from '../../reducers/new_password.reducer';
 import alertReducer from '../../containers/alert/Alert.reducer';
+import productsListReducer from '../../containers/products-list/ProductsList.reducer';
 import specProductsSectionsReducer from '../../containers/spec-products-sections/SpecProductsSections.reducer';
 import specProductsItemsReducer from '../../containers/spec-products-items/SpecProductsItems.reducer';
 import specProductsReducer from '../../containers/spec-products/SpecProducts.reducer';
@@ -12,7 +13,7 @@ import specCreateProductReducer from '../../containers/spec-create-product/SpecC
 import authReducer from '../../containers/auth/auth.reducer';
 import projectsListReducer from '../../containers/projects-list/ProjectsList.reducer';
 import newProjectReducer from '../../containers/project-create/ProjectCreate.reducer';
-import appReducer from '../../config/store/app-store/app.reducer';
+import appReducer from './app-store/app.reducer';
 import brandListReducer from '../../containers/brands-list/BrandsList.reducer';
 import brandReducer from '../../containers/brand/brand.reducer';
 import brandProductsListReducer from '../../containers/brand-products-list/BrandProductsList.reducer';
@@ -31,6 +32,7 @@ export default combineReducers({
   projectsList: projectsListReducer,
   alert: alertReducer,
   brandProductsList: brandProductsListReducer,
+  productsList: productsListReducer,
   specProductsSections: specProductsSectionsReducer,
   specProductsItems: specProductsItemsReducer,
   specProducts: specProductsReducer,

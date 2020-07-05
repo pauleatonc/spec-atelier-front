@@ -29,6 +29,7 @@ export const cleanObject = obj => Object
     return { ...acc, [key]: value }
   }, {});
 
+
 /**
  *  Delete null, undefined and empty strings values from object
  *  transform { attrd: { id } } to { attr: id }
@@ -41,6 +42,23 @@ export const cleanParams = obj => Object
     if (value && typeof value === 'object' && value.id) return { ...acc, [key]: value.id };
     return { ...acc, [key]: value }
   }, {});
+
+/**
+ *  Delete null, undefined and empty strings values from object
+ *  transform { attrd: { id } } to { attr: id }
+ *  transform { attrd: [{ id: 1 }, { id: 2 }] } to { attr: '1,2' }
+ *  return a new object
+ */
+
+export const cleanObjectsAndArrays = obj => Object
+  .entries(obj)
+  .reduce((acc, [key, value]) => {
+    if (!value) return acc;
+    if (value && typeof value === 'object' && value.id) return { ...acc, [key]: value.id };
+    if (Array.isArray(value)) return value.length ? { ...acc, [key]: value.map(({ id }) => id).join(',') } : acc;
+    return { ...acc, [key]: value };
+  }, {});
+
 
 /** 
  * Format Object of params to string

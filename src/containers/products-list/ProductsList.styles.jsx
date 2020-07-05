@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.section`
-  padding: 40px 16px;
+  padding: 42px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 46px;
 `;
-
-export const A  = 'a';
