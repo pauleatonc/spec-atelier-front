@@ -1,3 +1,5 @@
+import cancellationSingleton from './cancellation';
+
 /**
  * To generate the request's headers.
  */
@@ -18,22 +20,58 @@ const generateHeaders = (contentType, isPublic) => {
 };
 
 /**
- * To do a get request with JSON as content type.
+ * Factory to create requests helpers.
  */
-export const getJsonRequest = url => {
-  const headers = generateHeaders('application/json');
+const factoryRequest = callback => {
+  const cancellation = cancellationSingleton();
+  const getActionType = () => new Promise(resolve => cancellation.on(actionType => resolve(actionType)))
+    .then(actionType => [actionType, cancellation.getSignal(actionType)]);
+  const unregisterActionType = actionType =>  cancellation.unregister(actionType);
 
-  return fetch(url, { headers, method: 'GET' }).then(response => response.json());
+  return (url, payload) => callback(url, payload, { getActionType, unregisterActionType });
 };
 
 /**
- * To do a post request with form data as content type.
+ * Helper to make a cancellable request using the fetch API.
  */
-export const postFormRequest = (url, payload) => {
-  const formData = new FormData();
-  // FIXME: https://medium.com/@jugtuttle/formdata-and-strong-params-ruby-on-rails-react-c230d050e26e
-  const headers = generateHeaders();
+const cancellableFetch = async (url, fetchOptions, cancelOptions) => {
+  const [actionType, signal] = await cancelOptions.getActionType();
+  const response = await fetch(url, { ...fetchOptions, signal });
 
+  cancelOptions.unregisterActionType(actionType);
+
+  return response;
+};
+
+/**
+ * To do a DELETE request with JSON as content type.
+ */
+export const deleteJsonRequest = factoryRequest((url, payload, options) => {
+  const headers = generateHeaders('application/json');
+  const body = JSON.stringify(payload);
+
+  return cancellableFetch(url, { body, headers, method: 'DELETE' }, options)
+    .then(response => response.json());
+});
+
+/**
+ * To do a GET request with JSON as content type.
+ */
+export const getJsonRequest = factoryRequest((url, _, options) => {
+  const headers = generateHeaders('application/json');
+
+  return cancellableFetch(url, { headers, method: 'GET' }, options)
+    .then(response => response.json());
+});
+
+/**
+ * To do a POST request with form data as content type.
+ */
+export const postFormRequest = factoryRequest((url, payload, options) => {
+  const headers = generateHeaders();
+  const formData = new FormData();
+  
+  // FIXME: https://medium.com/@jugtuttle/formdata-and-strong-params-ruby-on-rails-react-c230d050e26e
   Object.keys(payload).forEach(key => {
     if (!Array.isArray(payload[key])) {
       formData.append(key, payload[key]);
@@ -44,26 +82,28 @@ export const postFormRequest = (url, payload) => {
     payload[key].forEach(item => formData.append(key, item));
   });
 
-  return fetch(url, { headers, body: formData, method: 'POST' }).then(response => response.json());
-};
+  return cancellableFetch(url, { headers, body: formData, method: 'POST' }, options)
+    .then(response => response.json());
+});
 
 /**
- * To do a post request with JSON as content type.
+ * To do a POST request with JSON as content type.
  */
-export const postJsonRequest = (url, payload) => {
-  const body = JSON.stringify(payload);
+export const postJsonRequest = factoryRequest((url, payload, options) => {
   const headers = generateHeaders('application/json');
+  const body = JSON.stringify(payload);
 
-  return fetch(url, { body, headers, method: 'POST' }).then(response => response.json());
-};
-
+  return cancellableFetch(url, { body, headers, method: 'POST' }, options)
+    .then(response => response.json());
+});
 
 /**
- * To do a put request with JSON as content type.
+ * To do a PUT request with JSON as content type.
  */
-export const putJsonRequest = (url, payload) => {
-  const body = JSON.stringify(payload);
+export const putJsonRequest = factoryRequest((url, payload, options) => {
   const headers = generateHeaders('application/json');
+  const body = JSON.stringify(payload);
 
-  return fetch(url, { body, headers, method: 'PUT' }).then(response => response.json());
-};
+  return cancellableFetch(url, { body, headers, method: 'PUT' }, options)
+    .then(response => response.json());
+});

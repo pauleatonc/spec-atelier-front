@@ -10,7 +10,7 @@ export const onCreateSpecItemText = ({ projectID, text }) => async (dispatch, ge
   try {
     const { auth } = getState();
 
-    await createSpecItemText(auth.user?.id, projectID, text);
+    await createSpecItemText({ projectID, text, userID: auth.user?.id });
 
     return dispatch(onActionCreator(CREATE_SPEC_ITEM_TEXT_SUCCESS));
   } catch (error) {

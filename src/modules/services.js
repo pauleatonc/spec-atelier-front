@@ -1,3 +1,21 @@
+import cancellationSingleton from './cancellation';
+
+/**
+ * Factory to create a wrapper to call services.
+ */
+export const factoryService = callback => {
+  const cancellation = cancellationSingleton();
+  
+  return (serviceArgs, actionType = null) => {
+    setTimeout(() => cancellation.register(actionType), 0);
+
+    return callback(serviceArgs)
+      .catch(error => {
+        throw error.toString();
+      });
+  };
+};
+
 /**
  *  Delete null and undefined values from object
  *  Transform { attrd: { id } } to { attr: id }
@@ -24,7 +42,6 @@ export const cleanParams = obj => Object
     return { ...acc, [key]: value }
   }, {});
 
-
 /** 
  * Format Object of params to string
  */
@@ -32,3 +49,4 @@ export const formatParams = obj => {
   if (!obj || typeof obj !== 'object') return '';
   return `?${Object.entries(cleanParams(obj)).map(([key, value]) => `${key}=${value}`).join('&')}`;
 }
+
