@@ -80,3 +80,9 @@ export const CancelButton = styled(BaseButton)`
   border: 1px solid transparent;
   color: #31CBB6;
 `;
+
+export const CancelSecondaryButton = styled(BaseButton)`
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: ${COLOR_SECONDARY};
+`;

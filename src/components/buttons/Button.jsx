@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PrimaryButton, SecondaryButton, DefaultButton, GrayButton, CancelButton } from './Button.styles';
+import {
+  PrimaryButton,
+  SecondaryButton,
+  DefaultButton,
+  GrayButton,
+  CancelButton,
+  CancelSecondaryButton,
+} from './Button.styles';
 
 /**
  * The Button's component.
@@ -24,6 +31,10 @@ const Button = props => {
     return <CancelButton {...buttonProps} />
   }
 
+  if (variant === 'cancel-secondary') {
+    return <CancelSecondaryButton {...buttonProps} />
+  }
+
   return <DefaultButton {...buttonProps} />;
 };
 
@@ -43,7 +54,7 @@ Button.propTypes = {
   margin: PropTypes.string,
   size: PropTypes.oneOf(['sm', 'md']),
   type: PropTypes.oneOf(['button']),
-  variant: PropTypes.oneOf(['primary', 'secondary', 'default', 'gray', 'cancel']),
+  variant: PropTypes.oneOf(['primary', 'secondary', 'default', 'gray', 'cancel', 'cancel-secondary']),
   width: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };

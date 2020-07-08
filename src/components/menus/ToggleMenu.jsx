@@ -27,7 +27,7 @@ const ToggleMenu = props => {
         width={width}
         onClose={handleClose}
       >
-        <Block>{children}</Block>
+        <Block>{children(handleClose)}</Block>
       </Dropdown>
     </>
   );
@@ -38,7 +38,7 @@ ToggleMenu.defaultProps = {
 };
 ToggleMenu.propTypes = {
   anchor: PropTypes.node.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.func.isRequired,
   width: PropTypes.string,
 };
 

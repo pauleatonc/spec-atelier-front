@@ -7,6 +7,7 @@ import {
   onShowSpecCreateProductStepThreeSuccess,
 } from './SpecCreateProduct.actions';
 import { useTextarea, useAutocomplete, useInput } from '../../components/inputs/Inputs.hooks';
+import useModal from '../../components/layouts/ModalLayout.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import StepsBubbles from '../../components/basics/StepsBubbles';
 import Textarea from '../../components/inputs/Textarea';
@@ -26,17 +27,19 @@ const SpecCreateProductStepTwo = () => {
   const { onChange: handleDescriptionChange, set: setDescriptionValue, value: descriptionValue } = useTextarea(description);
   const { onChange: handleBrandChange, set: setBrandValue, value: brandValue } = useAutocomplete(brand);
   const { onChange: handlePriceChange, set: setPriceValue, value: priceValue } = useInput(price, 'currency');
-  const handleClose = () => dispatch(onHideSpecCreateProduct());
-  const handleEntering = () => {
-    setDescriptionValue(description || '');
-    setBrandValue(brand || {});
-    setPriceValue(price || '');
-  };
-  const handleExited = () => {
-    setDescriptionValue('');
-    setBrandValue({});
-    setPriceValue('');
-  };
+  const { onClose: handleClose, onEntering: handleEntering, onExited: handleExited } = useModal({
+    closeCallback: () => dispatch(onHideSpecCreateProduct()),
+    enteringCallback: () => {
+      setDescriptionValue(description || '');
+      setBrandValue(brand || {});
+      setPriceValue(price || '');
+    },
+    exitedCallback: () => {
+      setDescriptionValue('');
+      setBrandValue({});
+      setPriceValue('');
+    },
+  });
   const handlePrev = () => dispatch(onHideSpecCreateProductStepTwoSuccess({
     description: descriptionValue,
     brand: brandValue,

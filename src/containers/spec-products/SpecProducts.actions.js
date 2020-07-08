@@ -12,8 +12,23 @@ export const onGetSpecProducts = () => async (dispatch, getState) => {
   dispatch(onActionCreator(GET_SPEC_PRODUCTS));
 
   try {
-    const { specProducts } = getState();
-    const response = await getProducts(specProducts.filters, GET_SPEC_PRODUCTS);
+    const { app, brandsList, specProducts } = getState();
+    const filters = Object.entries(specProducts.filters).reduce((entries, [key, value]) => {
+      if (key === 'brand' && (value?.length === brandsList.brands?.length || value?.length === 0)) {
+        return entries;
+      }
+
+      if (key === 'project_type' && (value?.length === app.project_types?.length || value?.length === 0)) {
+        return entries;
+      }
+
+      if (key === 'room_type' && (value?.length === app.room_types?.length || value?.length === 0)) {
+        return entries;
+      }
+
+      return { ...entries, [key]: value };
+    }, {});
+    const response = await getProducts(filters, GET_SPEC_PRODUCTS);
 
     return dispatch(
       onActionCreator(
@@ -105,16 +120,18 @@ export const onGetSpecProductsBySort = payload => dispatch =>
     dispatch(onGetSpecProducts());
   });
 
+export const HIDE_SPEC_PRODUCTS = 'HIDE_SPEC_PRODUCTS';
 export const HIDE_SPEC_PRODUCTS_SUCCESS = 'HIDE_SPEC_PRODUCTS_SUCCESS';
-export const onHideSpecProductsSuccess = () => dispatch =>
+export const onHideSpecProducts = () => dispatch =>
   batch(() => {
     dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS));
     dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_ITEMS_SUCCESS));
     dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_SUCCESS));
   });
 
+export const SHOW_SPEC_PRODUCTS = 'SHOW_SPEC_PRODUCTS';
 export const SHOW_SPEC_PRODUCTS_SUCCESS = 'SHOW_SPEC_PRODUCTS_SUCCESS';
-export const onShowSpecProductsSuccess = () => dispatch =>
+export const onShowSpecProducts = () => dispatch =>
   batch(() => {
     dispatch(onShowSpecProductsSections());
     dispatch(onActionCreator(SHOW_SPEC_PRODUCTS_SUCCESS));
