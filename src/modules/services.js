@@ -5,7 +5,7 @@ import cancellationSingleton from './cancellation';
  */
 export const factoryService = callback => {
   const cancellation = cancellationSingleton();
-  
+
   return (serviceArgs, actionType = null) => {
     setTimeout(() => cancellation.register(actionType), 0);
 
@@ -46,7 +46,9 @@ export const cleanParams = obj => Object
 /**
  *  Delete null, undefined and empty strings values from object
  *  transform { attrd: { id } } to { attr: id }
- *  transform { attrd: [{ id: 1 }, { id: 2 }] } to { attr: '1,2' }
+ *  transform 
+ *    from { attr: [1,2,3] } Array of objects with id,
+ *    to { attr: [{ id: 1 }, { id: 2 }] } to { attr: '[]=1&ttr=[]=2&ttr=[]=3' } as string
  *  return a new object
  */
 
@@ -55,7 +57,10 @@ export const cleanObjectsAndArrays = obj => Object
   .reduce((acc, [key, value]) => {
     if (!value) return acc;
     if (value && typeof value === 'object' && value.id) return { ...acc, [key]: value.id };
-    if (Array.isArray(value)) return value.length ? { ...acc, [key]: value.map(({ id }) => id).join(',') } : acc;
+    if (Array.isArray(value)) return value.length ? {
+      ...acc,
+      [`${key}[]`]: value.map(({ id }) => id).join(`&${key}[]=`),
+    } : acc;
     return { ...acc, [key]: value };
   }, {});
 
