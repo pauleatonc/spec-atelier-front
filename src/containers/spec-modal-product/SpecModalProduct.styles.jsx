@@ -6,6 +6,7 @@ import {
   COLOR_SECONDARY,
   MEDIA_QUERY_SMALL,
   COLOR_BLACK,
+  COLOR_LIGHTGREY,
 } from '../../config/constants/styled-vars';
 
 import IconDwg from '../../assets/images/icons/dwg.svg';
@@ -109,9 +110,11 @@ export const ImagesContent = styled.div`
 
 export const ProductImage = styled.img`
   cursor: pointer;
+  min-height: 60px;
   max-height: 80px;
   max-width: 100%;
-  ${active => active && `border: 2px solid; border-color: ${COLOR_PRIMARY};`}}
+  border: 2px solid; 
+  border-color: ${({ active }) => active ? COLOR_PRIMARY : COLOR_LIGHTGREY};
 `;
 
 export const ProductImageSelectedContainer = styled.div`
