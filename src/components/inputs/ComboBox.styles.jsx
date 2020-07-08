@@ -121,3 +121,8 @@ export const OptionText = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
+
+export const Footer = styled.section`
+  width: 100%;
+  padding: 8px 0;
+`;

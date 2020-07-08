@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Root, Label, Section, Input, InputUnderline, Options, Option, OptionCheckboxIcon, OptionText } from './ComboBox.styles';
+import { Root, Label, Section, Input, InputUnderline, Options, Option, OptionCheckboxIcon, OptionText, Footer } from './ComboBox.styles';
 import checkboxOffSource from '../../assets/images/icons/checkbox-off.svg';
 import checkboxOnSource from '../../assets/images/icons/checkbox-on.svg';
 
@@ -8,7 +8,7 @@ import checkboxOnSource from '../../assets/images/icons/checkbox-on.svg';
  * The ComboBox's component.
  */
 const ComboBox = props => {
-  const { disabled, label, options, placeholder, type, values: selectedOptions, onChange } = props;
+  const { disabled, label, options, placeholder, type, values: selectedOptions, onChange, footer } = props;
   const handleClick = (option, selected) => () => {
     const updatedOptions = selected
       ? selectedOptions.filter(selectOption => selectOption.value !== option.value)
@@ -53,6 +53,7 @@ const ComboBox = props => {
           );
         })}
       </Options>
+      {footer && <Footer>{footer}</Footer>}
     </Root>
   );
 };
@@ -62,6 +63,7 @@ ComboBox.defaultProps = {
   label: '',
   placeholder: '',
   type: 'default',
+  footer: null,
 };
 ComboBox.propTypes = {
   disabled: PropTypes.bool,
@@ -81,6 +83,7 @@ ComboBox.propTypes = {
     }),
   ).isRequired,
   onChange: PropTypes.func.isRequired,
+  footer: PropTypes.node,
 };
 
 export default ComboBox;
