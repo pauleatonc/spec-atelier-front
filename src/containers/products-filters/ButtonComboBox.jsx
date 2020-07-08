@@ -8,18 +8,15 @@ import { Button } from '../../components/SpecComponents';
 import {
   getProductsByFilter,
 } from '../products-list/ProductsList.actions';
-import { FooterContent } from './ButtonComboBox.styles';
 
 const mapToSelector = ({ name = '', id }) => ({ id, label: name || '', value: id || name });
 
-const ButtonComboBox = ({ options, name, children }) => {
+const ButtonComboBox = ({ options, name, children, absolute }) => {
   const { isSelectedAll, filters } = useSelector(state => state.productsList);
   const dispatch = useDispatch();
-  const {
-    values,
-    set,
-    onChange,
-  } = useComboBox(options, value => dispatch(getProductsByFilter({ ...filters, [name]: value })));
+  const submitCallback = val => dispatch(getProductsByFilter({ ...filters, [name]: val }));
+
+  const { values, set, onSubmit } = useComboBox({ initialValue: [], submitCallback });
 
   useEffect(() => {
     if (isSelectedAll) {
@@ -27,16 +24,9 @@ const ButtonComboBox = ({ options, name, children }) => {
     }
   }, [isSelectedAll]);
 
-  const clearOptions = () => dispatch(getProductsByFilter({ ...filters, [name]: [] }));
-
-  const Footer = () => (
-    <FooterContent>
-      <Button onClick={clearOptions}>Borrar</Button>
-    </FooterContent>
-  );
-
   return (
     <ToggleMenu
+      absolute={absolute}
       anchor={(
         <Button
           inverse
@@ -47,15 +37,17 @@ const ButtonComboBox = ({ options, name, children }) => {
           {children}
         </Button>
       )}
-    >
+    >{() => (
       <ComboBox
         options={options.map(mapToSelector)}
         placeholder="Selecciona"
         type="underline"
         values={values}
-        onChange={onChange}
-        footer={<Footer />}
+        onChange={onSubmit}
+        optionAll
+        absolute
       />
+    )}
     </ToggleMenu>
   );
 }
