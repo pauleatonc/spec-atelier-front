@@ -37,7 +37,7 @@ const BrandProductsList = () => {
           key={product.id}
           category={`Sistema constructivo: ${product.system.name}`}
           description={product.short_desc}
-          photo={product.images[0]?.urls?.thumb}
+          photo={product.images[0]?.urls?.small}
           reference={product.reference}
           title={product.name}
           onClickCard={onClickProduct(product)}
