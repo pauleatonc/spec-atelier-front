@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onHideSpecProductsSuccess, onShowSpecProductsSuccess } from '../spec-products/SpecProducts.actions';
+import { onHideSpecProducts, onShowSpecProducts } from '../spec-products/SpecProducts.actions';
 import { Root, Section, NavIcon } from './SpecNavigator.styles';
 import docSource from '../../assets/images/icons/spec-doc.svg';
 import docActiveSource from '../../assets/images/icons/spec-doc_active.svg';
@@ -17,10 +17,10 @@ const SpecNavigator = () => {
   const dispatch = useDispatch();
   const handleProductsClick = () => {
     if (showProducts) {
-      return dispatch(onHideSpecProductsSuccess());
+      return dispatch(onHideSpecProducts());
     }
 
-    dispatch(onShowSpecProductsSuccess());
+    return dispatch(onShowSpecProducts());
   };
 
   return (

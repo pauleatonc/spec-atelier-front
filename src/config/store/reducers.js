@@ -18,6 +18,8 @@ import brandListReducer from '../../containers/brands-list/BrandsList.reducer';
 import brandReducer from '../../containers/brand/brand.reducer';
 import brandProductsListReducer from '../../containers/brand-products-list/BrandProductsList.reducer';
 import modalContactFormReducer from '../../containers/modal-contact-form/ModalContactForm.reducers';
+import specDocumentReducer from '../../containers/spec-document/SpecDocument.reducer';
+import specImagesModalReducer from '../../containers/spec-images-modal/SpecImagesModal.reducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -39,4 +41,6 @@ export default combineReducers({
   specModalPorduct: specModalPorductReducer,
   specModal: specModalReducer,
   specCreateProduct: specCreateProductReducer,
+  specDocument: specDocumentReducer,
+  specImagesModal: specImagesModalReducer,
 });
