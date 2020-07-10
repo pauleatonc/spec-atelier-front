@@ -3,6 +3,7 @@ import loginReducer from '../../reducers/login.reducer';
 import recoverPasswordReducer from '../../reducers/recover_password.reducer';
 import newPasswordReducer from '../../reducers/new_password.reducer';
 import alertReducer from '../../containers/alert/Alert.reducer';
+import productsListReducer from '../../containers/products-list/ProductsList.reducer';
 import specProductsSectionsReducer from '../../containers/spec-products-sections/SpecProductsSections.reducer';
 import specProductsItemsReducer from '../../containers/spec-products-items/SpecProductsItems.reducer';
 import specProductsReducer from '../../containers/spec-products/SpecProducts.reducer';
@@ -33,6 +34,7 @@ export default combineReducers({
   projectsList: projectsListReducer,
   alert: alertReducer,
   brandProductsList: brandProductsListReducer,
+  productsList: productsListReducer,
   specProductsSections: specProductsSectionsReducer,
   specProductsItems: specProductsItemsReducer,
   specProducts: specProductsReducer,

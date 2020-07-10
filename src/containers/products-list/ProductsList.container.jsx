@@ -1,34 +1,30 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
-import { Loading, ErrorMessage } from '../../components/SpecComponents';
-import { Container } from './BrandproductsList.styles';
-import ProductCard from '../../components/cards/ProductCard';
-import { openContactFormModal, getProducts, cleanProductList } from './BrandProductsList.actions';
+import { Container } from './ProductsList.styles';
+import { onGetProducts, cleanStoreProductList } from './ProductsList.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
+import { Loading, ErrorMessage } from '../../components/SpecComponents';
+import ProductCard from '../../components/cards/ProductCard';
 
-
-const BrandProductsList = () => {
-  const { products, error, loading, params } = useSelector(state => state.brandProductsList);
+const ProductList = () => {
+  const { products, error, loading, filters } = useSelector(state => state.productsList);
   const dispatch = useDispatch();
-  const history = useHistory();
-  const onClickProduct = selectedProduct => () => {
+  const onClickProduct = selectedProduct => event => {
+    event.stopPropagation();
     dispatch(getProduct(selectedProduct));
   };
 
-  const onClickContact = selectedProduct => () => {
-    dispatch(openContactFormModal(selectedProduct));
-  };
-
-
   useEffect(() => {
-    if (!products.length) dispatch(getProducts(params));
-    return () => dispatch(cleanProductList())
+    if (!products.length) dispatch(onGetProducts({
+      ...filters,
+      page: 0,
+      limit: 10,
+    }));
   }, []);
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage />;
-  if (!products.length) return null;
+  if (!products.length) return <Container>No Hay Productos</Container>;
 
   return (
     <Container>
@@ -48,4 +44,4 @@ const BrandProductsList = () => {
   );
 };
 
-export default BrandProductsList;
+export default ProductList;

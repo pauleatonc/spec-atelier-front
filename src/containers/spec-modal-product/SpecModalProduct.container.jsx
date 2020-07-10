@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Loading, Modal, Button } from '../../components/SpecComponents';
 import {
@@ -18,21 +18,25 @@ import {
   ProductDescription,
   ProductBrand,
   Actions,
-  ButtonContact,
   Icons,
   Icon,
 } from './SpecModalProduct.styles';
 import noPhoto from '../../assets/images/icons/no-photo.svg';
 import { closeModal } from './SpecModalProduct.actions';
 
+const getFirstImg = data => (data?.images?.length && data.images[0]) || {};
 
 const SpecModalProduct = () => {
   const { product, showModalProduct } = useSelector(state => state.specModalPorduct);
-  const [selectedImg, selectImg] = useState((product?.images?.length && product.images[0]) || {});
+  const [selectedImg, selectImg] = useState(getFirstImg());
   const onSelectImg = img => () => selectImg(img);
   const dispatch = useDispatch();
   const noImgText = 'sin imágen';
 
+  useEffect(() => {
+    if (product) selectImg(getFirstImg(product));
+  }, [product]);
+  
   // TODO: This will go to contact view.
   const onContact = () => { };
   const onCloseModal = () => dispatch(closeModal());
@@ -49,7 +53,7 @@ const SpecModalProduct = () => {
       link.click();
       return setTimeout(() => document.body.removeChild(link), 2000);
     });
-  }
+  };
   
   if (!showModalProduct) return null;
   if (!product || !product.id) return <Loading />
@@ -74,9 +78,9 @@ const SpecModalProduct = () => {
                   onClick={onSelectImg(img)}
                 >
                   <ProductImage
-                    active={img.id === selectedImg.id}
-                    src={img.url}
-                    alt={`producto ${img.id || noImgText}`}
+                    active={img.id && img.id === selectedImg.id}
+                    src={img?.urls?.small || noPhoto}
+                    alt="Sin Imágen"
                   />
                 </ImagesContent>
               )}
@@ -84,8 +88,8 @@ const SpecModalProduct = () => {
             {/* Image primary */}
             <ProductImageSelectedContainer>
               <ProductImageSelected
-                src={selectedImg.url || noPhoto}
-                alt={`producto ${selectedImg.id || noImgText}`}
+                src={selectedImg?.urls?.medium || noPhoto}
+                alt={`producto ${selectedImg.order || noImgText}`}
               />
             </ProductImageSelectedContainer>
             {/* Info Product */}

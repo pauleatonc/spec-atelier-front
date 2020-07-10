@@ -36,8 +36,8 @@ const Main = () => {
             <PublicRoute exact restricted component={NewPassword} path="/new_password" />
             <PublicRoute exact component={Products} path="/products" />
             <PublicRoute exact component={Us} path="/us" />
-            <PublicRoute exact component={Collaborators} path="/Collaborators" />
-            <PublicRoute exact component={Collaborator} path="/Collaborators/:id" />
+            <PublicRoute exact component={Collaborators} path="/collaborators" />
+            <PublicRoute exact component={Collaborator} path="/collaborators/:id" />
             <PrivateRoute exact component={Projects} path="/projects" />
             <PrivateRoute exact component={Project} path="/projects/project" />
             <PrivateRoute exact component={Profile} path="/profile" />
