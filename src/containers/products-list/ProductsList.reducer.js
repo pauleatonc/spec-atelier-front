@@ -8,6 +8,7 @@ import {
   GET_MORE_PRODUCTS,
   GET_PRODUCTS_BY_FILTER,
   ON_SELECT_ALL,
+  CLEAN_PRODUCT_LIST_STORE,
 } from './ProductsList.actions';
 
 const productsListState = {
@@ -56,7 +57,7 @@ const productsListReducer = (state = productsListState, { payload, type }) => {
       };
     }
     case GET_MORE_PRODUCTS: {
-      return  {
+      return {
         ...state,
         filters: { ...payload.filters },
         products: [...state.products, ...(payload?.products || [])],
@@ -93,11 +94,15 @@ const productsListReducer = (state = productsListState, { payload, type }) => {
     case GET_SECTIONS_ERROR:
       break;
     case ON_SELECT_ALL:
-      return { 
-        ...state, 
+      return {
+        ...state,
         isSelectedAll: payload.isSelectedAll,
         loading: false,
         error: false,
+      };
+    case CLEAN_PRODUCT_LIST_STORE:
+      return {
+        ...productsListState,
       };
     default: {
       return state;

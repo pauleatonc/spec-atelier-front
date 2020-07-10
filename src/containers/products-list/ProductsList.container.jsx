@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from './ProductsList.styles';
-import { onGetProducts } from './ProductsList.actions';
+import { onGetProducts, cleanStoreProductList } from './ProductsList.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
 import ProductCard from '../../components/cards/ProductCard';
@@ -20,7 +20,6 @@ const ProductList = () => {
       page: 0,
       limit: 10,
     }));
-    // return () => dispatch(cleanProductList())
   }, []);
 
   if (loading) return <Loading />;

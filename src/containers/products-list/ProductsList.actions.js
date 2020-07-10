@@ -11,16 +11,14 @@ export const GET_PRODUCT_ERROR = 'GET_PRODUCT_ERROR';
 export const GET_PRODUCTS_BY_FILTER = 'GET_PRODUCTS_BY_FILTER';
 export const GET_PRODUCTS_FILTERS_ALL = 'UPDATE_PRODUCTS_FILTERS_ALL';
 export const GET_MORE_PRODUCTS = 'GET_MORE_PRODUCTS';
-export const CLEAN_STORE = 'CLEAN_STORE';
-
-
 export const GET_SECTIONS = 'GET_SECTIONS';
 export const GET_SECTIONS_ERROR = 'GET_SECTIONS_ERROR';
 export const GET_SECTIONS_SUCCESS = 'GET_SECTIONS_SUCCESS';
 
+export const CLEAN_PRODUCT_LIST_STORE = 'CLEAN_PRODUCT_LIST_STORE';
 export const ON_SELECT_ALL = 'ON_SELECT_ALL';
 
-export const cleanStore = () => dispatch => dispatch(onActionCreator(CLEAN_STORE));
+export const cleanStoreProductList = () => dispatch => dispatch(onActionCreator(CLEAN_PRODUCT_LIST_STORE));
 
 export const getProduct = brandId => async dispatch => {
   try {
@@ -116,7 +114,7 @@ export const getSections = () => async dispatch => {
 
 export const setSelectedAll = value => dispatch => dispatch(onActionCreator(GET_PRODUCTS_FILTERS_ALL, { isSelectedAll: value }))
 
-
+// TODO: THIS ACTION GOING TO BE USED.
 // export const getItems = filters => async dispatch => {
 //   try {
 //     const { items } = await getItemsService(filters);

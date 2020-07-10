@@ -1,57 +1,68 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { useComboBox } from '../../components/inputs/Inputs.hooks';
 import ComboBox from '../../components/inputs/ComboBox';
 import { Button } from '../../components/SpecComponents';
-
-import {
-  getProductsByFilter,
-} from '../products-list/ProductsList.actions';
 import { Container, Content } from './ButtonComboBox.styles';
+import { mapToSelector } from '../../helpers/helpers';
 
-const useOuterClick = callback => {
-  const innerRef = useRef();
-  const callbackRef = useRef();
+const propTypes = {
+  options: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  })),
+  currentOptions: PropTypes.arrayOf(PropTypes.object),
+  name: PropTypes.string.isRequired,
+  children: PropTypes.element,
+  onChange: PropTypes.func,
+};
 
-  useEffect(() => {
-    callbackRef.current = callback;
-  });
+const defaultProps = {
+  options: [],
+  currentOptions: [],
+  children: null,
+  onChange: () => {},
+};
 
-  useEffect(() => {
-
-    const handleClick = e => {
-      if (
-        innerRef.current &&
-        callbackRef.current &&
-        !innerRef.current.contains(e.target)
-      ) {
-        callbackRef.current(e);
-      }
-    }
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, []);
-  return innerRef;
-}
-
-const mapToSelector = ({ name = '', id }) => ({ id, label: name || '', value: id || name });
-
-const ButtonComboBox = ({ options = [], name, children }) => {
-  const { isSelectedAll, filters } = useSelector(state => state.productsList);
-  const dispatch = useDispatch();
-  const submitCallback = val => dispatch(getProductsByFilter({ ...filters, [name]: val }));
+const ButtonComboBox = ({ options, currentOptions, name, children, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-
-  const innerRef = useOuterClick(() => setIsOpen(false));
-
-  const { values, set, onSubmit } = useComboBox({ initialValue: [], submitCallback });
+  
+  const submitCallback = value => onChange({ name, value });
+  
+  const { values, set, onSubmit } = useComboBox({ initialValue: currentOptions, submitCallback });
+  
+  const onClickOusite = callback => {
+    const innerRef = useRef();
+    const callbackRef = useRef();
+  
+    useEffect(() => {
+      callbackRef.current = callback;
+    });
+  
+    useEffect(() => {
+      const handleClick = e => {
+        if (
+          innerRef.current &&
+          callbackRef.current &&
+          !innerRef.current.contains(e.target)
+        ) {
+          callbackRef.current(e);
+        }
+      }
+      document.addEventListener("click", handleClick);
+      return () => document.removeEventListener("click", handleClick);
+    }, []);
+    return innerRef;
+  };
 
   useEffect(() => {
-    if (isSelectedAll) {
+    if (!currentOptions.length && values.length) {
       set([]);
     }
-  }, [isSelectedAll]);
+  }, [currentOptions]);
+    
+  const innerRef = onClickOusite(() => setIsOpen(false));
 
   return (
     <Container isOpen={isOpen} ref={innerRef}>
@@ -75,6 +86,9 @@ const ButtonComboBox = ({ options = [], name, children }) => {
       </Content>
     </Container>
   );
-}
+};
+
+ButtonComboBox.propTypes = propTypes;
+ButtonComboBox.defaultProps = defaultProps;
 
 export default ButtonComboBox;
