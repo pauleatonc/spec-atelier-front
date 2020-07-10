@@ -99,3 +99,27 @@ export const onAddSpecBlockText = ({ blockID, text }) => async dispatch => {
     return dispatch(onActionCreator(ADD_SPEC_BLOCK_TEXT_ERROR, { error: true, nativeError: error }));
   }
 };
+
+export const UPDATE_SPEC_BLOCKS_SORT = 'UPDATE_SPEC_BLOCKS_SORT';
+export const UPDATE_SPEC_BLOCKS_SORT_ERROR = 'UPDATE_SPEC_BLOCKS_SORT_ERROR';
+export const UPDATE_SPEC_BLOCKS_SORT_SUCCESS = 'UPDATE_SPEC_BLOCKS_SORT_SUCCESS';
+export const onUpdateSpecBlocksSort = blocksIDs => async (dispatch, getState) => {
+  dispatch(onActionCreator(UPDATE_SPEC_BLOCKS_SORT));
+
+  try {
+    const { specDocument } = getState();
+    const updatedSpecBlocks = blocksIDs.reduce((blocks, blockID) => {
+      const found = specDocument.blocks.find(block => block.id === blockID);
+      
+      if (!found) {
+        return blocks;
+      }
+      
+      return blocks.concat(found);
+    }, []);
+
+    return dispatch(onActionCreator(UPDATE_SPEC_BLOCKS_SORT_SUCCESS, { blocks: updatedSpecBlocks }));
+  } catch (error) {
+    return dispatch(onActionCreator(UPDATE_SPEC_BLOCKS_SORT_ERROR, { error: true, nativeError: error }));
+  }
+};

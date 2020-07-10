@@ -3,6 +3,7 @@ import {
   ADD_SPEC_BLOCK_IMAGE_SUCCESS,
   ADD_SPEC_BLOCK_TEXT_SUCCESS,
   REMOVE_SPEC_BLOCK_SUCCESS,
+  UPDATE_SPEC_BLOCKS_SORT_SUCCESS,
 } from './SpecDocument.actions';
 
 const specDocumentState = {
@@ -143,6 +144,9 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
       const updatedBlocks = state.blocks.filter(block => block.id !== payload.blockID);
 
       return { ...state, blocks: updatedBlocks };
+    }
+    case UPDATE_SPEC_BLOCKS_SORT_SUCCESS: {
+      return { ...state, blocks: payload.blocks };
     }
     default: {
       return state;
