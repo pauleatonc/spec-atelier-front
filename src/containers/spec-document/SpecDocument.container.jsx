@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import { onShowSpecImagesModalSuccess } from '../spec-images-modal/SpecImagesModal.actions';
 import { onShowSpecProducts } from '../spec-products/SpecProducts.actions';
-import { onAddSpecBlockText, onRemoveSpecBlock, onUpdateSpecBlocksSort } from './SpecDocument.actions';
+import { onAddSpecBlockText, onRemoveSpecBlock, onUpdateSpecBlocksSort, onGetSpecBlocks } from './SpecDocument.actions';
 import useDropdown from '../../components/basics/Dropdown.hooks';
 import Dropdown from '../../components/basics/Dropdown';
 import DraggableList from '../../components/basics/DraggableList';
@@ -37,7 +37,7 @@ import threeDotsVerticalSource from '../../assets/images/icons/three-dots-vertic
  * The SpecDocument's container.
  */
 const SpecDocument = () => {
-  const { id: projectID } = useParams();
+  const { id: specID } = useParams();
   const { blocks } = useSelector(state => state.specDocument);
   const dispatch = useDispatch();
   const [selectedBlockID, setSelectedBlockID] = useState('');
@@ -76,35 +76,39 @@ const SpecDocument = () => {
   };
   const handleCreateBlockText = blockID => text => {
     handleHideBlockEditor();
-    dispatch(onAddSpecBlockText({ blockID, projectID, text }));
+    dispatch(onAddSpecBlockText({ blockID, specID, text }));
   };
   const handleRemoveBlock = blockID => () => {
     handleHideBlockEditor();
     dispatch(onRemoveSpecBlock(blockID));
   };
   const getBlockMarginByType = type => {
-    if (type === 'section') {
+    if (type === 'Section') {
       return '0 0 4px 0';
     }
 
-    if (type === 'item') {
+    if (type === 'Item') {
       return '0 0 7px 0';
     }
 
     return '0 0 15px 0';
   };
   const getBlockWrapperByType = (type, content) => {
-    if (type === 'section') {
+    if (type === 'Section') {
       return <Section>{content}</Section>;
     }
 
-    if (type === 'item') {
+    if (type === 'Item') {
       return <Item>{content}</Item>;
     }
 
     return <Product>{content}</Product>;
   };
   const selectedBlock = blocks.find(block => block.id === selectedBlockID);
+
+  useEffect(() => {
+    dispatch(onGetSpecBlocks(specID));
+  }, []);
 
   return (
     <Root>
@@ -128,12 +132,12 @@ const SpecDocument = () => {
           onClose={handleBlockMenuClose}
         >
           <BlockMenuItem onClick={handleShowBlockEditor(selectedBlockID)}>Añadir texto</BlockMenuItem>
-          {selectedBlock?.type === 'product' && (
+          {selectedBlock?.type === 'Product' && (
             <BlockMenuItem onClick={handleShowImagesModal(selectedBlockID)}>
               Añadir una imagen
             </BlockMenuItem>
           )}
-          {selectedBlock?.type === 'product' && <BlockMenuItem>Editar</BlockMenuItem>}
+          {selectedBlock?.type === 'Product' && <BlockMenuItem>Editar</BlockMenuItem>}
           <BlockMenuItem onClick={handleRemoveBlock(selectedBlockID)}>Eliminar</BlockMenuItem>
         </Dropdown>
       )}
@@ -141,7 +145,7 @@ const SpecDocument = () => {
         <DraggableList onChange={handleBlocksSortChange}>
           {blocks.map(block => {
             return ( 
-              <Block disabled={block.type === 'section'} id={block.id} key={block.id} margin={getBlockMarginByType(block.type)}>
+              <Block disabled={block.type === 'Section'} id={block.id} key={block.id} margin={getBlockMarginByType(block.type)}>
                 {getBlockWrapperByType(block.type, (
                   <>
                     {showBlockEditor === block.id && (
@@ -156,23 +160,23 @@ const SpecDocument = () => {
                       </BlockEditor>
                     )}
                     <BlockDotsIcon src={threeDotsVerticalSource} onClick={handleShowBlockMenu(block.id)} />
-                    {(block.type === 'product' && (block?.element?.image || block?.element?.image === 0)) && (
+                    {(block.type === 'Product' && (block?.element?.image || block?.element?.image === 0)) && (
                       <BlockImage>
                         <ProductImage src={block?.element?.images[block?.element?.image]?.url || '#'} />
                       </BlockImage>
                     )}
-                    {block.type !== 'product' && block?.element?.title}
-                    {block.type === 'product' && (
+                    {block.type !== 'Product' && block?.element?.name}
+                    {block.type === 'Product' && (
                       <BlockContent>
-                        <ProductTitle>{block?.element?.title}</ProductTitle>
-                        {block?.element?.description && <ProductDescription>{block?.element?.description}</ProductDescription>}
-                        {block?.element?.system && <ProductSystem>{`Sistema constructivo: ${block?.element?.system}`}</ProductSystem>}
+                        <ProductTitle>{block?.element?.name}</ProductTitle>
+                        {block?.element?.long_desc && <ProductDescription dangerouslySetInnerHTML={{ __html: block?.element?.long_desc?.replace(/\n/g, '<br />') }} />}
+                        {block?.element?.system && <ProductSystem>{`Sistema constructivo: ${block?.element?.system?.name}`}</ProductSystem>}
                         {block?.element?.reference && <ProductReference>{`Referencia ${block?.element?.reference}`}</ProductReference>}
                       </BlockContent>
                     )}
                   </>
                 ))}
-                {block?.text && <BlockText dangerouslySetInnerHTML={{ __html: block?.text?.text }} />}
+                {block?.element?.text && <BlockText dangerouslySetInnerHTML={{ __html: block?.element.text?.text }} />}
               </Block>
             );
           })}

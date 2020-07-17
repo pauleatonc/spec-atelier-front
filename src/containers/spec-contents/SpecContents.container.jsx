@@ -14,15 +14,15 @@ const SpecContents = () => {
   const { blocks } = useSelector(state => state.specDocument);
   const history = useHistory();
   const sections = useMemo(() => {
-    const sectionsBlocks = blocks.filter(block => block.type === 'section');
+    const sectionsBlocks = blocks.filter(block => block.type === 'Section');
     
     return sectionsBlocks.map(sectionBlock => ({
       ...sectionBlock,
       items: blocks
-        .filter(block => block.type === 'item' && block.sectionID === sectionBlock.id)
+        .filter(block => block.type === 'Item' && block.section === sectionBlock.id)
         .map(itemBlock => ({
           ...itemBlock,
-          products: blocks.filter(block => block.type === 'product' && block.itemID === itemBlock.id),
+          products: blocks.filter(block => block.type === 'Product' && block.item === itemBlock.id),
         })),
     }));
   }, [blocks]);

@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import ProjectCard from '../../components/project/ProjectCard';
 import { getMyProjects } from './ProjectsList.actions';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
-import { useHistory } from 'react-router';
 
 const ProjectsList = () => {
   const { projects, error, loading, params } = useSelector(state => state.projectsList);
   const dispatch = useDispatch();
   const history = useHistory();
-  const goToSpecification = ({ id }) => history.push(`/projects/${id}/specification`); 
+  const goToSpecification = specID => () => history.push(`/spec/${specID}`);
 
   useEffect(() => {
     if (!projects.length) dispatch(getMyProjects(params));
@@ -25,7 +25,7 @@ const ProjectsList = () => {
     <div className="projects__inner__body">
       {!!projects.length &&
         projects.map(project => (
-          <ProjectCard key={project.id} {...project} key={project.id} onClick={goToSpecification} />
+          <ProjectCard {...project} key={project.id} onClick={goToSpecification(project.project_spec_id)} />
         ))}
     </div>
   );

@@ -1,34 +1,46 @@
 import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
+import { addSpecBlock, addSpecBlockText, getSpecBlocks } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
+
+export const GET_SPEC_BLOCKS = 'GET_SPEC_BLOCKS';
+export const GET_SPEC_BLOCKS_ERROR = 'GET_SPEC_BLOCKS_ERROR';
+export const GET_SPEC_BLOCKS_SUCCESS = 'GET_SPEC_BLOCKS_SUCCESS';
+export const onGetSpecBlocks = specID => async (dispatch, getState) => {
+  dispatch(onActionCreator(GET_SPEC_BLOCKS));
+
+  try {
+    const { auth } = getState();
+    const { blocks = [] } = await getSpecBlocks({ specID, userID: auth.user?.id }) || {};
+
+    return dispatch(onActionCreator(GET_SPEC_BLOCKS_SUCCESS, { blocks }));
+  } catch (error) {
+    return dispatch(onActionCreator(GET_SPEC_BLOCKS, { error: true, nativeError: error }));
+  }
+};
 
 export const ADD_SPEC_BLOCK = 'ADD_SPEC_BLOCK';
 export const ADD_SPEC_BLOCK_ERROR = 'ADD_SPEC_BLOCK_ERROR';
 export const ADD_SPEC_BLOCK_SUCCESS = 'ADD_SPEC_BLOCK_SUCCESS';
-export const onAddSpecBlock = blockID => (dispatch, getState) => {
+export const onAddSpecBlock = ({ specID, blockID }) => async (dispatch, getState) => {
   dispatch(onActionCreator(ADD_SPEC_BLOCK));
 
   try {
-    const { specProducts } = getState();
-    const [product] = specProducts.collection
+    const { auth, specProducts } = getState();
+    const [block] = specProducts.collection
       .filter(specProduct => specProduct.id === blockID)
       .map(specProduct => ({
-        element: {
-          description: specProduct.long_desc || '',
-          id: specProduct.id,
-          images: (specProduct.images || []).map((image, index) => ({
-            id: `${specProduct.id}-images-${index}`,
-            url: image.urls?.thumb,
-          })),
-          reference: specProduct.reference || '',
-          system: specProduct?.system?.name || '',
-          title: specProduct.name,
-        },
-        id: `${specProduct.id}-block-product`,
-        type: 'product',
+        itemID: specProduct.item.id,
+        productID: specProduct.id,
+        sectionID: specProduct.section.id,
       }));
+    
+    await addSpecBlock({ ...block, specID, userID: auth.user?.id });
 
-    return dispatch(onActionCreator(ADD_SPEC_BLOCK_SUCCESS, product));
+    return batch(() => {
+      dispatch(onActionCreator(ADD_SPEC_BLOCK_SUCCESS));
+      dispatch(onGetSpecBlocks(specID));
+    });
   } catch (error) {
     return dispatch(onActionCreator(ADD_SPEC_BLOCK_ERROR, { error: true, nativeError: error }));
   }
@@ -37,7 +49,7 @@ export const onAddSpecBlock = blockID => (dispatch, getState) => {
 export const ATTACH_SPEC_PRODUCT = 'ATTACH_SPEC_PRODUCT';
 export const onAttachSpecProduct = payload => dispatch =>
   batch(() => {
-    dispatch(onAddSpecBlock(payload));
+    dispatch(onAddSpecBlock({ ...payload, blockID: payload.productID }));
     dispatch(onShowAlertSuccess({ message: 'Añadiste producto a una sección' }));
   });
 
@@ -86,15 +98,18 @@ export const onAddSpecBlockImage = ({ blockID, imageID }) => async (dispatch, ge
 export const ADD_SPEC_BLOCK_TEXT = 'ADD_SPEC_BLOCK_TEXT';
 export const ADD_SPEC_BLOCK_TEXT_ERROR = 'ADD_SPEC_BLOCK_TEXT_ERROR';
 export const ADD_SPEC_BLOCK_TEXT_SUCCESS = 'ADD_SPEC_BLOCK_TEXT_SUCCESS';
-export const onAddSpecBlockText = ({ blockID, text }) => async dispatch => {
+export const onAddSpecBlockText = ({ blockID, specID, text }) => async (dispatch, getState) => {
   dispatch(onActionCreator(ADD_SPEC_BLOCK_TEXT));
 
   try {
-    // const { auth } = getState();
+    const { auth } = getState();
 
-    // await createSpecBlockText({ projectID, text, userID: auth.user?.id });
+    await addSpecBlockText({ blockID, specID, text, userID: auth.user?.id });
 
-    return dispatch(onActionCreator(ADD_SPEC_BLOCK_TEXT_SUCCESS, { blockID, text }));
+    return batch(() => {
+      dispatch(onActionCreator(ADD_SPEC_BLOCK_TEXT_SUCCESS));
+      dispatch(onGetSpecBlocks(specID));
+    });
   } catch (error) {
     return dispatch(onActionCreator(ADD_SPEC_BLOCK_TEXT_ERROR, { error: true, nativeError: error }));
   }

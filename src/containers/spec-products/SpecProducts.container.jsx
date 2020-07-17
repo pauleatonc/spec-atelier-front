@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 import { onAttachSpecProduct, onDetachSpecProduct } from '../spec-document/SpecDocument.actions';
 import {
   onGetSpecProductsByFilters,
@@ -23,6 +24,7 @@ import { Root, Header, HeaderSearch, HeaderFilters, Body, BodyHeader, Sort, Tota
  * The SpecProductsList's container.
  */
 const SpecProductsList = () => {
+  const { id: specID } = useParams();
   const { project_types: projectTypes, room_types: roomTypes } = useSelector(state => state.app);
   const { brands } = useSelector(state => state.brandsList);
   const { blocks: selectedProducts } = useSelector(state => state.specDocument);
@@ -45,7 +47,7 @@ const SpecProductsList = () => {
       return dispatch(onDetachSpecProduct(productID));
     }
     
-    return dispatch(onAttachSpecProduct(productID));
+    return dispatch(onAttachSpecProduct({ productID, specID }));
   };
   const handleLoadMoreClick = () => {
     dispatch(onGetSpecProductsByPage());
