@@ -22,4 +22,4 @@ export const register = factoryService(data => postJsonRequest(`${API_BASE_URL}/
 /**
  *  Login with google
  */
-export const googleLogin = factoryService(data => postJsonRequest(`${API_BASE_URL}/auth/google_login_service`, data));
+export const googleLogin = factoryService(data => postJsonRequest(`${API_BASE_URL?.split('/api')[0]}/auth/google_login_service`, data));
