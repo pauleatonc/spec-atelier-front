@@ -1,12 +1,12 @@
 import React, { Children, cloneElement, useState } from 'react';
 import PropTypes from 'prop-types';
-import Context from './SpecPanelsLayout.context';
-import { Root, Filters, Panels, Title } from './SpecPanelsLayout.styles';
+import Context from './SpecProductsPanelLayout.context';
+import { Root, Filters, Panels, Title } from './SpecProductsPanelLayout.styles';
 
 /**
- * The SpecPanelsLayout's component.
+ * The SpecProductsPanelLayout's component.
  */
-const SpecPanelsLayout = props => {
+const SpecProductsPanelLayout = props => {
   const { children, filtersPanels } = props;
   const [show, setShow] = useState(false);
   const handleShow = updatedValue => setShow(updatedValue);
@@ -27,8 +27,8 @@ const SpecPanelsLayout = props => {
   );
 };
 
-SpecPanelsLayout.propTypes = {
+SpecProductsPanelLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default SpecPanelsLayout;
+export default SpecProductsPanelLayout;

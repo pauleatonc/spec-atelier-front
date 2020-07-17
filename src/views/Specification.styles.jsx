@@ -35,3 +35,7 @@ export const Navigation = styled.div`
   position: fixed;
   top: 115px;
 `;
+
+export const Panels = styled.section`
+  position: relative;
+`;
