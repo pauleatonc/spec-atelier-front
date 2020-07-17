@@ -9,7 +9,7 @@ const ProjectsList = () => {
   const { projects, error, loading, params } = useSelector(state => state.projectsList);
   const dispatch = useDispatch();
   const history = useHistory();
-  const goToSpecification = specID => () => history.push(`/spec/${specID}`);
+  const goToSpecification = specID => () => history.push(`/specs/${specID}`);
 
   useEffect(() => {
     if (!projects.length) dispatch(getMyProjects(params));

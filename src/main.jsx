@@ -41,7 +41,7 @@ const Main = () => {
             <PrivateRoute exact component={Projects} path="/projects" />
             <PrivateRoute exact component={Project} path="/projects/project" />
             <PrivateRoute exact component={Profile} path="/profile" />
-            <PrivateRoute exact component={Specification} path="/spec/:id" />
+            <PrivateRoute exact component={Specification} path="/specs/:id" />
           </Switch>
         </Router>
       </PersistGate>
