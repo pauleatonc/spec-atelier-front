@@ -22,7 +22,7 @@ const WhyBeSupplier = () => (
 					quis, elementum quis erat. Nam lobortis efficitur felis.
 				</Description>
 				<ButtonContainer>
-					<Button variant="primary" width="100%">únete</Button>
+					<Button variant="primary" width="100%" onClick={() => {}}>únete</Button>
 				</ButtonContainer>
 			</InfoContainer>
 		</Content>
