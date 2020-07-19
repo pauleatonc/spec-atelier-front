@@ -4,7 +4,7 @@ import NavBar from '../containers/navbar/Navbar.container';
 import Footer from '../components/footer';
 import HeaderHome from '../components/home/header';
 import WhoWeUs from '../components/home/who-we-us';
-import WhyBeSupplier from '../components/home/why-be-supplier';
+import WhyBeSupplier from '../components/home/why-be-supplier/WhyBeSupplier';
 import SliderImages from '../components/slide-images';
 
 /**
