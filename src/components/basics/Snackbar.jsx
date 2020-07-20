@@ -19,17 +19,16 @@ const transitionStyles = {
  */
 const Snackbar = props => {
   const { children, show, onClose = () => undefined, timeout } = props;
-  const [showSnackBar, setShowSnackBar] = useState(false);
+  const [showSnackBar, setShowSnackBar] = useState(show);
   const handleEntered = () => setTimeout(() => onClose(), 5000);
   const handleClick = () => onClose();
   useEffect(() => {
-    if (show) {
-      setShowSnackBar(true);
-      setTimeout(() => {
-        setShowSnackBar(false);
-        onClose();
-      }, timeout);
-    }
+    if (!show) return;
+    setShowSnackBar(true);
+    setTimeout(() => {
+      setShowSnackBar(false);
+      onClose();
+    }, timeout);
   }, [show]);
   const content = (
     <Transition mountOnEnter unmountOnExit in={showSnackBar} timeout={TRANSITION_DURATION} onEntered={handleEntered}>
