@@ -135,6 +135,10 @@ export const BlockText = styled.section`
 `;
 
 export const BlockTextContent = styled.section`
+  font-family: Lato;
+  font-size: 12px;
+  font-weight: initial;
+
   & p {
     color: rgba(33, 33, 33, 0.51);
     letter-spacing: 1px;
@@ -171,6 +175,10 @@ export const BlockTextContent = styled.section`
   }
 `;
 
+export const BlockTitle = styled.span`
+  text-transform: uppercase;
+`;
+
 export const Section = styled.section`
   align-items: center;
   background-color: rgba(242, 242, 242, 0.54);
@@ -185,7 +193,6 @@ export const Section = styled.section`
   margin: 0 0 3px 0;
   padding: 4px 30px 4px 9px;
   position: relative;
-  text-transform: uppercase;
   width: 100%;
 
   &:hover ${BlockDotsIcon} {
@@ -207,7 +214,6 @@ export const Item = styled.section`
   margin: 0 0 3px 0;
   padding: 4px 30px 4px 9px;
   position: relative;
-  text-transform: uppercase;
   width: 100%;
 
   &:hover ${BlockDotsIcon} {

@@ -30,6 +30,7 @@ import {
   BlockContent,
   BlockText,
   BlockTextContent,
+  BlockTitle,
   Section,
   Item,
   Product,
@@ -219,7 +220,7 @@ const SpecDocument = () => {
                         <ProductImage src={block?.element?.images.find(image => image.id === block.product_block_image)?.urls?.small || '#'} />
                       </BlockImage>
                     )}
-                    {block.type !== 'Product' && block?.element?.name}
+                    {block.type !== 'Product' && <BlockTitle>{block?.element?.name}</BlockTitle>}
                     {block.type === 'Product' && (
                       <BlockContent>
                         <ProductTitle>{block?.element?.name}</ProductTitle>

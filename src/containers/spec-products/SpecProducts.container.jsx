@@ -85,7 +85,7 @@ const SpecProductsList = () => {
   };
   const allFilterIsSelected = brandsValues.length === 0 && projectTypeValues.length === 0 && roomTypeValues.length === 0;
 
-  useEscapeKey(() => dispatch(onHideSpecProducts()));
+  useEscapeKey(show, () => dispatch(onHideSpecProducts()));
   useEffect(() => {
     if (show) {
       return;

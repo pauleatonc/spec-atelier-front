@@ -3,10 +3,8 @@ import { useEffect } from 'react';
 /**
  * The escape key custom hook.
  */
-export const useEscapeKey = callback => {
+export const useEscapeKey = (active = false, callback) => {
   const handleEscapeKey = event => {
-    event.preventDefault();
-
     if (event.key !== 'Escape' || event.code !== 'Escape') {
       return;
     }
@@ -15,7 +13,11 @@ export const useEscapeKey = callback => {
   }; 
 
   useEffect(() => {
-    document.addEventListener('keydown', handleEscapeKey);
+    if (active) {
+      document.addEventListener('keydown', handleEscapeKey);
+    } else {
+      document.removeEventListener('keydown', handleEscapeKey);
+    }
 
     return () => {
       document.removeEventListener('keydown', handleEscapeKey);
