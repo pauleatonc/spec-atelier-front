@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '../config/constants/environment';
+import { API_BASE, API_BASE_URL } from '../config/constants/environment';
 import { postJsonRequest, putJsonRequest } from '../modules/requests';
 import { factoryService } from '../modules/services';
 
@@ -22,4 +22,4 @@ export const register = factoryService(data => postJsonRequest(`${API_BASE_URL}/
 /**
  *  Login with google
  */
-export const googleLogin = factoryService(data => postJsonRequest(`${API_BASE_URL}/auth/google_login_service`, data));
+export const googleLogin = factoryService(data => postJsonRequest(`${API_BASE}/auth/google_login_service`, data));
