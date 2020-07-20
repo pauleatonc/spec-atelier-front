@@ -27,7 +27,7 @@ const SpecProductsList = () => {
   const { id: specID } = useParams();
   const { project_types: projectTypes, room_types: roomTypes } = useSelector(state => state.app);
   const { brands } = useSelector(state => state.brandsList);
-  const { blocks: selectedProducts } = useSelector(state => state.specDocument);
+  const selectedProducts = useSelector(state => state.specDocument.blocks?.filter(block => block.type === 'Product'));
   const { nextPage, collection: products = [], loading, show, total } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
   const [keywordValue, setKeywordValue] = useState('');
@@ -41,10 +41,10 @@ const SpecProductsList = () => {
     dispatch(onGetSpecProductsBySort({ sort: option.value }));
   };
   const handleCardClick = productID => () => {
-    const hasProduct = selectedProducts.find(selectedProduct => selectedProduct.id === productID);
+    const hasProduct = selectedProducts.find(selectedProduct => selectedProduct?.element.id === productID);
 
     if (hasProduct) {
-      return dispatch(onDetachSpecProduct(productID));
+      return dispatch(onDetachSpecProduct({ productID, specID }));
     }
     
     return dispatch(onAttachSpecProduct({ productID, specID }));
@@ -169,7 +169,7 @@ const SpecProductsList = () => {
         </BodyHeader>
         <Cards>
           {products.map(product => {
-            const selected = selectedProducts.find(selectedProduct => selectedProduct.id === product.id);
+            const selected = selectedProducts.find(selectedProduct => selectedProduct?.element.id === product.id);
 
             return (
               <ProductCard

@@ -126,8 +126,15 @@ export const BlockText = styled.section`
   font-size: 12px;
   margin: 0 0 3px 0;
   padding: 4px 30px 4px 9px;
+  position: relative;
   width: 100%;
 
+  &:hover ${BlockDotsIcon} {
+    visibility: visible;
+  }
+`;
+
+export const BlockTextContent = styled.section`
   & p {
     color: rgba(33, 33, 33, 0.51);
     letter-spacing: 1px;

@@ -4,7 +4,15 @@ import { useParams } from 'react-router-dom';
 import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import { onShowSpecImagesModalSuccess } from '../spec-images-modal/SpecImagesModal.actions';
 import { onShowSpecProducts } from '../spec-products/SpecProducts.actions';
-import { onAddSpecBlockText, onRemoveSpecBlock, onUpdateSpecBlocksSort, onGetSpecBlocks } from './SpecDocument.actions';
+import {
+  onAddSpecBlockText,
+  onGetSpecBlocks,
+  onRemoveSpecBlock,
+  onRemoveSpecBlockImage,
+  onRemoveSpecBlockText,
+  onSortSpecBlocks,
+  onUpdateSpecBlockText,
+} from './SpecDocument.actions';
 import useDropdown from '../../components/basics/Dropdown.hooks';
 import Dropdown from '../../components/basics/Dropdown';
 import DraggableList from '../../components/basics/DraggableList';
@@ -21,6 +29,7 @@ import {
   BlockImage,
   BlockContent,
   BlockText,
+  BlockTextContent,
   Section,
   Item,
   Product,
@@ -41,7 +50,9 @@ const SpecDocument = () => {
   const { blocks } = useSelector(state => state.specDocument);
   const dispatch = useDispatch();
   const [selectedBlockID, setSelectedBlockID] = useState('');
+  const [selectedBlockTextID, setSelectedBlockTextID] = useState('');
   const [showBlockEditor, setShowBlockEditor] = useState('');
+  const [showBlockTextEditor, setShowBlockTextEditor] = useState('');
   const {
     anchor: addAnchor,
     onClose: handleAddMenuClose,
@@ -52,6 +63,11 @@ const SpecDocument = () => {
     onClose: handleBlockMenuClose,
     onOpen: handleBlockMenuOpen,
   } = useDropdown({ closeCallback: () => setSelectedBlockID('') });
+  const {
+    anchor: blockTextAnchor,
+    onClose: handleBlockTextMenuClose,
+    onOpen: handleBlockTextMenuOpen,
+  } = useDropdown({ closeCallback: () => setSelectedBlockTextID('') });
   const handleShowProducts = () => {
     handleAddMenuClose();
     dispatch(onShowSpecProducts());
@@ -60,10 +76,14 @@ const SpecDocument = () => {
     handleAddMenuClose();
     dispatch(onShowSpecCreateProductSuccess());
   };
-  const handleBlocksSortChange = blocksIDs => dispatch(onUpdateSpecBlocksSort(blocksIDs));
+  const handleBlocksSortChange = blocksIDs => dispatch(onSortSpecBlocks({ blocksIDs, specID }));
   const handleShowBlockMenu = blockID => event => {
     handleBlockMenuOpen(event);
     setSelectedBlockID(blockID);
+  };
+  const handleShowBlockTextMenu = textID => event => {
+    handleBlockTextMenuOpen(event);
+    setSelectedBlockTextID(textID);
   };
   const handleShowImagesModal = blockID => () => {
     handleBlockMenuClose();
@@ -74,13 +94,30 @@ const SpecDocument = () => {
     handleBlockMenuClose();
     setShowBlockEditor(blockID);
   };
-  const handleCreateBlockText = blockID => text => {
+  const handleHideBlockTextEditor = () => setShowBlockTextEditor('');
+  const handleShowBlockTextEditor = textID => () => {
+    handleBlockTextMenuClose();
+    setShowBlockTextEditor(textID);
+  };
+  const handleAddBlockText = blockID => textValue => {
     handleHideBlockEditor();
-    dispatch(onAddSpecBlockText({ blockID, specID, text }));
+    dispatch(onAddSpecBlockText({ blockID, specID, textValue }));
+  };
+  const handleEditBlockText = textID => textValue => {
+    handleHideBlockTextEditor();
+    dispatch(onUpdateSpecBlockText({ textID, specID, textValue }));
   };
   const handleRemoveBlock = blockID => () => {
     handleHideBlockEditor();
-    dispatch(onRemoveSpecBlock(blockID));
+    dispatch(onRemoveSpecBlock({ blockID, specID }));
+  };
+  const handleBlockImageRemove = blockID => () => {
+    handleBlockMenuClose();
+    dispatch(onRemoveSpecBlockImage({ blockID, specID }));
+  };
+  const handleBlockTextRemove = textID => () => {
+    handleBlockTextMenuClose();
+    dispatch(onRemoveSpecBlockText({ textID, specID }));
   };
   const getBlockMarginByType = type => {
     if (type === 'Section') {
@@ -131,14 +168,31 @@ const SpecDocument = () => {
           origin={{ x: 'right', y: 'top' }}
           onClose={handleBlockMenuClose}
         >
-          <BlockMenuItem onClick={handleShowBlockEditor(selectedBlockID)}>Añadir texto</BlockMenuItem>
+          {!selectedBlock?.text && <BlockMenuItem onClick={handleShowBlockEditor(selectedBlockID)}>Añadir texto</BlockMenuItem>}
           {selectedBlock?.type === 'Product' && (
             <BlockMenuItem onClick={handleShowImagesModal(selectedBlockID)}>
-              Añadir una imagen
+              {selectedBlock?.product_block_image ? 'Editar imagen' : 'Añadir una imagen'}
+            </BlockMenuItem>
+          )}
+          {selectedBlock?.type === 'Product' && selectedBlock?.product_block_image && (
+            <BlockMenuItem onClick={handleBlockImageRemove(selectedBlockID)}>
+              Remover imagen
             </BlockMenuItem>
           )}
           {selectedBlock?.type === 'Product' && <BlockMenuItem>Editar</BlockMenuItem>}
           <BlockMenuItem onClick={handleRemoveBlock(selectedBlockID)}>Eliminar</BlockMenuItem>
+        </Dropdown>
+      )}
+      {Boolean(blockTextAnchor) && (
+        <Dropdown
+          anchorRef={blockTextAnchor}
+          offset={{ x: -5, y: -4 }}
+          open={Boolean(blockTextAnchor)}
+          origin={{ x: 'right', y: 'top' }}
+          onClose={handleBlockTextMenuClose}
+        >
+          <BlockMenuItem onClick={handleShowBlockTextEditor(selectedBlockTextID)}>Editar texto</BlockMenuItem>
+          <BlockMenuItem onClick={handleBlockTextRemove(selectedBlockTextID)}>Eliminar</BlockMenuItem>
         </Dropdown>
       )}
       <Page>
@@ -155,14 +209,14 @@ const SpecDocument = () => {
                           label="Texto"
                           placeholder="Ingresa el texto"
                           onCancel={handleHideBlockEditor}
-                          onSubmit={handleCreateBlockText(block.id)}
+                          onSubmit={handleAddBlockText(block.id)}
                         />
                       </BlockEditor>
                     )}
                     <BlockDotsIcon src={threeDotsVerticalSource} onClick={handleShowBlockMenu(block.id)} />
-                    {(block.type === 'Product' && (block?.element?.image || block?.element?.image === 0)) && (
+                    {(block.type === 'Product' && block?.product_block_image) && (
                       <BlockImage>
-                        <ProductImage src={block?.element?.images[block?.element?.image]?.url || '#'} />
+                        <ProductImage src={block?.element?.images.find(image => image.id === block.product_block_image)?.urls?.small || '#'} />
                       </BlockImage>
                     )}
                     {block.type !== 'Product' && block?.element?.name}
@@ -176,7 +230,24 @@ const SpecDocument = () => {
                     )}
                   </>
                 ))}
-                {block?.element?.text && <BlockText dangerouslySetInnerHTML={{ __html: block?.element.text?.text }} />}
+                {block?.text && (
+                  <BlockText>
+                    <BlockTextContent dangerouslySetInnerHTML={{ __html: block?.text?.text }} />
+                    {showBlockTextEditor === block?.text?.id && (
+                      <BlockEditor>
+                        <Editor
+                          actions
+                          initialValue={block?.text?.text}
+                          label="Texto"
+                          placeholder="Ingresa el texto"
+                          onCancel={handleHideBlockTextEditor}
+                          onSubmit={handleEditBlockText(block?.text?.id)}
+                        />
+                      </BlockEditor>
+                    )}
+                    <BlockDotsIcon src={threeDotsVerticalSource} onClick={handleShowBlockTextMenu(block?.text?.id)} />
+                  </BlockText>
+                )}
               </Block>
             );
           })}

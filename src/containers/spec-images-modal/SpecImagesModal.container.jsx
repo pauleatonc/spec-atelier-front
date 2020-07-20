@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { onAddSpecBlockImage } from '../spec-document/SpecDocument.actions';
 import { onHideSpecImagesModalSuccess } from './SpecImagesModal.actions';
 import useModal from '../../components/layouts/ModalLayout.hooks';
@@ -13,11 +14,12 @@ import checkSource from '../../assets/images/icons/check.svg';
  * The SpecImagesModal's container.
  */
 const SpecImagesModal = () => {
+  const { id: specID } = useParams();
   const { blocks } = useSelector(state => state.specDocument);
   const { selectedBlockID, show } = useSelector(state => state.specImagesModal);
   const dispatch = useDispatch();
   const selectedProductBlock = blocks.find(block => block.id === selectedBlockID) || {};
-  const [selectedImage, setSelectedImage] = useState(selectedProductBlock.element?.image || '');
+  const [selectedImage, setSelectedImage] = useState(selectedProductBlock.element?.product_block_image || '');
   const { onClose: handleClose } = useModal({ closeCallback: () => dispatch(onHideSpecImagesModalSuccess()) });
   const handleSelectImage = selected => () => {
     if (selected === selectedImage) {
@@ -28,7 +30,7 @@ const SpecImagesModal = () => {
   };
   const handleSubmit = (blockID, imageID) => event => {
     handleClose(event);
-    dispatch(onAddSpecBlockImage({ blockID, imageID }));
+    dispatch(onAddSpecBlockImage({ blockID, imageID, specID }));
   }
   const disableSubmit = (
     !selectedProductBlock?.element?.images?.length ||
@@ -37,7 +39,7 @@ const SpecImagesModal = () => {
   );
 
   useEffect(() => {
-    setSelectedImage(selectedProductBlock.element?.image);
+    setSelectedImage(selectedProductBlock.element?.product_block_image);
   }, [selectedProductBlock.image]);
 
   return (
@@ -49,10 +51,10 @@ const SpecImagesModal = () => {
         </Header>
         <Body>
           <Figures>
-            {selectedProductBlock?.element?.images?.map((image, index) => (
-              <Figure key={`block-image-${index}`} selected={index === selectedImage} onClick={handleSelectImage(index)}>
-                <Image selected={index === selectedImage} source={image?.url || '#'} />
-                {index === selectedImage && <CheckIcon src={checkSource} />}
+            {selectedProductBlock?.element?.images?.map(image => (
+              <Figure key={`block-image-${image.id}`} selected={image.id === selectedImage} onClick={handleSelectImage(image.id)}>
+                <Image selected={image.id === selectedImage} source={image?.urls?.small || '#'} />
+                {image.id === selectedImage && <CheckIcon src={checkSource} />}
               </Figure>
             ))}
           </Figures>
