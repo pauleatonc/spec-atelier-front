@@ -176,7 +176,7 @@ const SpecDocument = () => {
           )}
           {selectedBlock?.type === 'Product' && selectedBlock?.product_block_image && (
             <BlockMenuItem onClick={handleBlockImageRemove(selectedBlockID)}>
-              Remover imagen
+              Eliminar imagen
             </BlockMenuItem>
           )}
           {selectedBlock?.type === 'Product' && <BlockMenuItem>Editar</BlockMenuItem>}
@@ -192,7 +192,7 @@ const SpecDocument = () => {
           onClose={handleBlockTextMenuClose}
         >
           <BlockMenuItem onClick={handleShowBlockTextEditor(selectedBlockTextID)}>Editar texto</BlockMenuItem>
-          <BlockMenuItem onClick={handleBlockTextRemove(selectedBlockTextID)}>Eliminar</BlockMenuItem>
+          <BlockMenuItem onClick={handleBlockTextRemove(selectedBlockTextID)}>Eliminar texto</BlockMenuItem>
         </Dropdown>
       )}
       <Page>

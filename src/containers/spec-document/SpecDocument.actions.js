@@ -195,9 +195,9 @@ export const onSortSpecBlocks = ({ blocksIDs, specID }) => async (dispatch, getS
         type: found.type,
       });
     }, []);
-    const updatedSpecBlocks = await sortSpecBlocks({ specID, blocks: sortedSpecBlocks, userID: auth.user?.id });
+    const { blocks: updatedBlocks } = await sortSpecBlocks({ specID, blocks: sortedSpecBlocks, userID: auth.user?.id });
 
-    return dispatch(onActionCreator(SORT_SPEC_BLOCKS_SUCCESS, { blocks: updatedSpecBlocks }));
+    return dispatch(onActionCreator(SORT_SPEC_BLOCKS_SUCCESS, { blocks: updatedBlocks }));
   } catch (error) {
     return dispatch(onActionCreator(SORT_SPEC_BLOCKS_ERROR, { error: true, nativeError: error }));
   }
