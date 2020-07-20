@@ -55,11 +55,9 @@ const ContactForm = () => {
 
   return (
     <Container>
-      {showSnackBar && (
-        <SnackBar show={showSnackBar}>
-          {message}
-        </SnackBar>
-      )}
+      <SnackBar show={showSnackBar}>
+        {message}
+      </SnackBar>
       <Modal isOpen={showContactModal && selectedBrand.id} onClose={onCloseModal} size="xs">
         <>
           <Contact

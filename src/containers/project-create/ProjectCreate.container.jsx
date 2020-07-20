@@ -50,11 +50,9 @@ const ProjectsCreate = () => {
 
   return (
     <Container>
-      {showSnackBar && (
-        <SnackBar show={showSnackBar}>
-          {message}
-        </SnackBar>
-      )}
+      <SnackBar show={showSnackBar}>
+        {message || null}
+      </SnackBar>
       <StepperContainer>
         <StepBubbles
           prefix="step-create"
