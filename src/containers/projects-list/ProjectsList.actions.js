@@ -26,7 +26,5 @@ export const getMoreProjects = params => async (dispatch, getState) => {
   }
 };
 
-export const addProjectToList = project => dispatch => {
-  dispatch(onActionCreator(ADD_PROJECT_TO_LIST,  { project }));
-};
+export const addProjectToList = project => dispatch => dispatch(onActionCreator(ADD_PROJECT_TO_LIST,  { project }));
 
