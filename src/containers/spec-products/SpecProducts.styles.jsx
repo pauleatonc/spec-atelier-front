@@ -1,12 +1,20 @@
 import styled from 'styled-components';
 import { COLOR_MINE_SHAFT, COLOR_MERCURY, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../../config/constants/styled-vars';
 
+export const Overlay = styled.div`
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 0;
+`;
+
 export const Root = styled.div`
   background-color: #FFF;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 115px);
-  max-height: calc(100vh - 115px);
+  height: 100%;
   position: relative;
   width: calc(100% - 360px);
   z-index: 4;

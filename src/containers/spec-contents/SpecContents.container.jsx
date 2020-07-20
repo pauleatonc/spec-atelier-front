@@ -63,7 +63,7 @@ const SpecContents = () => {
     setSelectedSection();
     setSelectedItem();
   }, [show]);
-  console.log(sections);
+
   return (
     <Root show={show}>
       <PanelTitle>Tabla de contenidos</PanelTitle>
