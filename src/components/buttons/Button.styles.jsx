@@ -53,13 +53,13 @@ BaseButton.propTypes = {
 
 export const PrimaryButton = styled(BaseButton)`
   background-color: ${({ inverse }) => inverse ? COLOR_WHITE : COLOR_PRIMARY};
-  border: 1px solid ${({ inverse }) => inverse ? COLOR_WHITE : COLOR_PRIMARY};
+  border: 1px solid ${COLOR_PRIMARY};
   color: ${({ inverse }) => inverse ? COLOR_PRIMARY : COLOR_WHITE};
 `;
 
 export const SecondaryButton = styled(BaseButton)`
   background-color: ${({ inverse }) => inverse ? COLOR_WHITE : COLOR_SECONDARY};
-  border: 1px solid ${({ inverse }) => inverse ? COLOR_SECONDARY : COLOR_WHITE};
+  border: 1px solid ${COLOR_SECONDARY};
   color: ${({ inverse }) => inverse ? COLOR_SECONDARY : COLOR_WHITE};
 `;
 

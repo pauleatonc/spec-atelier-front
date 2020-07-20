@@ -5,6 +5,7 @@ import {
   Container,
 } from './brand.styles';
 
+import { Loading } from '../../components/SpecComponents';
 import { getBrand } from './brand.actions';
 import BrandInfo from '../../components/brand/BrandInfo';
 import BrandGallery from '../../components/brand/BrandGallery';

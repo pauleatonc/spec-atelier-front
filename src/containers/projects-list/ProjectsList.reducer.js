@@ -2,6 +2,7 @@ import {
   GET_PROJECTS,
   GET_PROJECTS_ERROR,
   GET_MORE_PROJECTS,
+  ADD_PROJECT_TO_LIST,
 } from './ProjectsList.actions';
 
 const sortFilters = [
@@ -59,6 +60,11 @@ const projectsReducer = (state = initialProjectState, { payload, type }) => {
         error: payload.error,
         loading: false,
       };
+    case ADD_PROJECT_TO_LIST: 
+      return {
+        ...state,
+        projects: state.projects.unshift(payload.project),
+      }
     default: {
       return state;
     }
