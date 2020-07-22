@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   Button,
   Modal,
-  SnackBar,
 } from '../../components/SpecComponents';
 import {
   Container,
@@ -14,9 +13,8 @@ import { Contact } from '../../components/forms/Forms';
 
 const ContactForm = () => {
   const { user = {} } = useSelector(state => state.auth);
-  const { contact, selectedBrand, showContactModal, message, sended, error } = useSelector(state => state.modalContactForm);
+  const { contact, selectedBrand, showContactModal } = useSelector(state => state.modalContactForm);
   const [contactForm, setContactForm] = useState(contact);
-  const [showSnackBar, setShowSnackBar] = useState(false);
   const dispatch = useDispatch();
   const onCloseModal = () => dispatch(closeContactModal());
 
@@ -38,26 +36,11 @@ const ContactForm = () => {
   };
 
   useEffect(() => {
-    return () => setShowSnackBar(false);
-  });
-
-  useEffect(() => {
-    if (sended) {
-      setShowSnackBar(true);
-      setTimeout(() => setShowSnackBar(false), 3000);
-    }
-    if (error) {
-      setShowSnackBar(true);
-      setTimeout(() => setShowSnackBar(false), 3000);
-    }
-  }, [sended, error]);
-
+    if (showContactModal) setContactForm({});
+  }, [showContactModal]);
 
   return (
     <Container>
-      <SnackBar show={showSnackBar}>
-        {message}
-      </SnackBar>
       <Modal isOpen={showContactModal && selectedBrand.id} onClose={onCloseModal} size="xs">
         <>
           <Contact

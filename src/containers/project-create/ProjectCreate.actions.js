@@ -1,6 +1,7 @@
 import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
 import { createNewProject } from '../../services/projects.service';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { addProjectToList } from '../projects-list/ProjectsList.actions';
 
 export const SET_PROJECT = 'SET_PROJECT';
@@ -23,11 +24,15 @@ export const createProject = newProject => async (dispatch, getState) => {
     const { user } = getState().auth;
     const response = await createNewProject({ userId: user.id, project: newProject });
     if (response?.status >= 400) return dispatch(onActionCreator(CREATE_PROJECT_ERROR, { loading: false }));
-    return batch(() => {
+    const message = `Creaste el proyecto ${response?.project?.name}`;
+    return batch(()=> {
+      dispatch(onShowAlertSuccess({ message }));
       dispatch(addProjectToList(response.project));
       dispatch(onActionCreator(CREATE_PROJECT, { project: response.project, loading: false }));
-    });
+    }); 
   } catch (error) {
+    const message = 'Error al crear el proyecto';
+    dispatch(onShowAlertSuccess({ message }));
     return dispatch(onActionCreator(CREATE_PROJECT_ERROR, { loading: false, error }));
   }
 };

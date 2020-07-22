@@ -16,6 +16,7 @@ const initialModalContactFormState = {
     message: '',
   },
   message: '',
+  error: undefined,
 };
 
 /**
@@ -25,13 +26,10 @@ const modalContactFormReducer = (state = initialModalContactFormState, { payload
   switch (type) {
     case POST_CONTACT_FORM:
       return {
-        ...state,
+        ...initialModalContactFormState,
         sended: true,
         loading: false,
-        error: undefined,
-        showContactModal: false,
-        selectedBrand: {},
-        message: 'Hemos enviado la información al colaborador.',
+       
       };
     case POST_CONTACT_FORM_ERROR:
       return {
@@ -39,7 +37,6 @@ const modalContactFormReducer = (state = initialModalContactFormState, { payload
         sended: false,
         error: payload.error,
         loading: false,
-        message: 'Error al enviar formulario.'
       };
     case OPEN_CONTACT_FORM_MODAL:
       return {
