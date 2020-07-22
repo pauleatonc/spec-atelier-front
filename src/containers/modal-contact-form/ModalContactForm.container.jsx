@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   Button,
   Modal,
-  SnackBar,
 } from '../../components/SpecComponents';
 import {
   Container,
@@ -11,12 +10,12 @@ import {
 } from './ModalContactForm.styles';
 import { sendContactData, closeContactModal } from './ModalContactForm.actions';
 import { Contact } from '../../components/forms/Forms';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 const ContactForm = () => {
   const { user = {} } = useSelector(state => state.auth);
   const { contact, selectedBrand, showContactModal, message, sended, error } = useSelector(state => state.modalContactForm);
   const [contactForm, setContactForm] = useState(contact);
-  const [showSnackBar, setShowSnackBar] = useState(false);
   const dispatch = useDispatch();
   const onCloseModal = () => dispatch(closeContactModal());
 
@@ -38,28 +37,24 @@ const ContactForm = () => {
   };
 
   useEffect(() => {
-    return () => setShowSnackBar(false);
-  });
-
-  useEffect(() => {
     if (sended) {
-      setShowSnackBar(true);
-      setTimeout(() => setShowSnackBar(false), 3000);
+      dispatch(onShowAlertSuccess({ message }));
     }
     if (error) {
-      setShowSnackBar(true);
-      setTimeout(() => setShowSnackBar(false), 3000);
+      dispatch(onShowAlertSuccess({ message }));
+    }
+    return () => {
+      onCloseModal();
     }
   }, [sended, error]);
+
+  useEffect(() => {
+    if (showContactModal) setContactForm({});
+  }, [showContactModal]);
 
 
   return (
     <Container>
-      {showSnackBar && (
-        <SnackBar show={showSnackBar}>
-          {message}
-        </SnackBar>
-      )}
       <Modal isOpen={showContactModal && selectedBrand.id} onClose={onCloseModal} size="xs">
         <>
           <Contact

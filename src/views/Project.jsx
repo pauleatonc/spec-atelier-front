@@ -5,6 +5,7 @@ import Footer from '../components/footer';
 
 import ProjectsHeader from '../containers/projects-header/ProjectsHeader';
 import ProjectCreateContainer from '../containers/project-create/ProjectCreate.container';
+import AlertContainer from '../containers/alert/Alert.container';
 import { Container, Content } from './Project.styles';
 
 import HEADER_IMG from '../assets/images/project/project_background_header.png';
@@ -22,6 +23,7 @@ const Project = () => {
           <ProjectCreateContainer />
         </Content>
       </Container>
+      <AlertContainer />
     </AppLayout>
   );
 };

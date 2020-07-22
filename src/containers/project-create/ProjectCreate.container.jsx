@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Transition } from 'react-transition-group';
 import {
   ROUTE_PROJECTS,
 } from '../../config/constants/routes';
-import { useSelector, useDispatch } from 'react-redux';
 import {
   StepBubbles,
-  SnackBar,
 } from '../../components/SpecComponents';
 import ProjectDataContainer from './ProjectData.container';
 import ProjectDetailsContainer from './ProjectDetails.container';
@@ -19,9 +17,10 @@ import {
 } from './ProjectCreate.styles';
 import { cleanStore } from './ProjectCreate.actions';
 
+import { onShowAlertSuccess } from '../alert/Alert.actions';
+
 const ProjectsCreate = () => {
   const { view, created, error, message } = useSelector(state => state.newProject);
-  const [showSnackBar, setShowSnackBar] = useState(false);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -38,23 +37,16 @@ const ProjectsCreate = () => {
 
   useEffect(() => {
     if (created) {
-      setShowSnackBar(true);
-      setTimeout(() => setShowSnackBar(false), 1500);
+      dispatch(onShowAlertSuccess({ message }));
       setTimeout(() => history.push(ROUTE_PROJECTS), 2000);
     }
     if (error) {
-      setShowSnackBar(true);
-      setTimeout(() => setShowSnackBar(false), 2000);
+      dispatch(onShowAlertSuccess({ message }));
     }
   }, [created, error]);
 
   return (
     <Container>
-      {showSnackBar && (
-        <SnackBar show={showSnackBar}>
-          {message}
-        </SnackBar>
-      )}
       <StepperContainer>
         <StepBubbles
           prefix="step-create"

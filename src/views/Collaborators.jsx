@@ -8,6 +8,7 @@ import { ImgHeader } from './Collaborators.styles';
 import BrandsSeeMoreButtonContainer from '../containers/brands-buttons/BrandsSeeMore.container';
 import BrandsFiltersContainer from '../containers/brands-search/BrandsSearch.container';
 import ContactFormModalContainer from '../containers/modal-contact-form/ModalContactForm.container';
+import AlertContainer from '../containers/alert/Alert.container';
 
 /**
  * The Colaboration's view.
@@ -20,6 +21,7 @@ const Collaborators = () => {
       <BrandsListContainer />
       <BrandsSeeMoreButtonContainer />
       <ContactFormModalContainer />
+      <AlertContainer />
     </AppLayout>
   );
 };
