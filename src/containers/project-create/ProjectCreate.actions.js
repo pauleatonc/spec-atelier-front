@@ -1,7 +1,8 @@
+import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
 import { createNewProject } from '../../services/projects.service';
-import { batch } from 'react-redux';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
+import { addProjectToList } from '../projects-list/ProjectsList.actions';
 
 export const SET_PROJECT = 'SET_PROJECT';
 export const CHANGE_VIEW = 'CHANGE_VIEW';
@@ -26,6 +27,7 @@ export const createProject = newProject => async (dispatch, getState) => {
     const message = `Creaste el proyecto ${response?.project?.name}`;
     return batch(()=> {
       dispatch(onShowAlertSuccess({ message }));
+      dispatch(addProjectToList(response.project));
       dispatch(onActionCreator(CREATE_PROJECT, { project: response.project, loading: false }));
     }); 
   } catch (error) {
