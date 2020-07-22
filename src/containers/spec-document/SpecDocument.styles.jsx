@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, COLOR_PRIMARY, COLOR_WHITE } from '../../config/constants/styled-vars';
+import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   box-sizing: border-box;
@@ -57,6 +57,10 @@ export const Group = styled.section`
 export const Block = styled.section`
   margin: ${({ margin = 'initial' }) => margin};
   width: 100%;
+
+  &:last-child {
+    margin: 0;
+  }
 `;
 
 Block.defaultProps = {
@@ -195,11 +199,6 @@ export const Item = styled.section`
   position: relative;
   width: 100%;
 
-  &:active {
-    background-color: ${COLOR_WHITE};
-    outline: 2px dashed ${COLOR_PRIMARY};
-  }
-
   &:hover ${BlockDotsIcon} {
     visibility: visible;
   }
@@ -213,15 +212,6 @@ export const Product = styled.section`
   padding: 0 30px 0 0;
   position: relative;
   width: 100%;
-
-  &:last-child {
-    margin: 0 0 10px 0;
-  }
-
-  &:active {
-    background-color: ${COLOR_WHITE};
-    outline: 2px dashed ${COLOR_PRIMARY};
-  }
 
   &:hover ${BlockDotsIcon} {
     visibility: visible;
