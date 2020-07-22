@@ -17,21 +17,6 @@ import {
   IconCheck,
 } from './ProjectCreate.styles';
 
-import { Transition } from 'react-transition-group';
-
-const duration = 2000;
-
-const defaultStyle = {
-  transition: `height ${duration}ms ease-in`,
-  maxHeight: '0',
-  overflow: 'auto',
-}
-
-const transitionStyles = {
-  entered: { maxHeight: '1000px' },
-  exited: { maxHeight: 0, overflow: 'hidden' },
-};
-
 const ProjectData = () => {
   const { view, newProject } = useSelector(state => state.newProject);
   const { work_types, project_types } = useSelector(state => state.app);

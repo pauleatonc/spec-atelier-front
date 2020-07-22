@@ -16,25 +16,6 @@ import {
 import { SubHeaderProjectPermission } from '../../components/sub-headers/ProjectSubHeaders';
 import { createProject, changeView } from './ProjectCreate.actions';
 
-
-import { Transition } from 'react-transition-group';
-
-const duration = 2000;
-
-const defaultStyle = {
-  transition: `max-height ${duration}ms ease-in-out`,
-  opacity: 0,
-  maxHeight: 0,
-}
-
-const transitionStyles = {
-  entering: { maxHeight: '100%' },
-  entered: { maxHeight: '100%' },
-  exiting: { maxHeight: 0 },
-  exited: { maxHeight: 0 },
-};
-
-
 const ProjectPermission = () => {
   const { view, newProject } = useSelector(state => state.newProject);
   const [tempNewProject, setNewProject] = useState({ ...newProject });

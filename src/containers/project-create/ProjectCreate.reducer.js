@@ -67,14 +67,12 @@ const newProjectReducer = (state = initialProject, { payload, type }) => {
         ...state,
         created: true,
         loading: false,
-        message: `Creaste el proyecto ${payload?.project?.name}`,
       };
     case CREATE_PROJECT_ERROR:
       return {
         ...state,
         loading: false,
         error: payload.error,
-        message: 'Error al crear el proyecto',
       };
     case CLEAN_STORE:
       return { ...initialProject };
