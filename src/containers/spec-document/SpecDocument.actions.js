@@ -44,7 +44,7 @@ export const onAddSpecBlock = ({ specID, blockID }) => async (dispatch, getState
         productID: specProduct.id,
         sectionID: specProduct.section.id,
       }));
-    const { blocks: updatedBlocks } = await addSpecBlock({ ...block, specID, userID: auth.user?.id });
+    const { blocks: updatedBlocks } = await addSpecBlock({ ...block, specID, userID: auth.user?.id }, ADD_SPEC_BLOCK);
 
     return dispatch(onActionCreator(ADD_SPEC_BLOCK_SUCCESS, { blocks: updatedBlocks }));
   } catch (error) {
