@@ -1,5 +1,7 @@
+import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
 import { postContact } from '../../services/contact.service';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 export const POST_CONTACT_FORM = 'POST_CONTACT_FORM';
 export const POST_CONTACT_FORM_ERROR = 'POST_CONTACT_FORM_ERROR';
@@ -9,10 +11,18 @@ export const CLOSE_CONTACT_FORM_MODAL = 'CLOSE_CONTACT_FORM_MODAL';
 // async calls
 export const sendContactData = newContact => async dispatch => {
   try {
+    const message = 'Hemos enviado la información al colaborador.';
     await postContact({ brandId: newContact.brand_id, contact: newContact });
-    dispatch(onActionCreator(POST_CONTACT_FORM, { sended: true, loading: false }));
+    batch(() => {
+      dispatch(onShowAlertSuccess({ message }));
+      dispatch(onActionCreator(POST_CONTACT_FORM, { sended: true, loading: false }));
+    });
   } catch (error) {
-    dispatch(onActionCreator(POST_CONTACT_FORM_ERROR, { loading: false, error: true }));
+    const message = 'Error al enviar formulario.';
+    batch(() => {
+      dispatch(onShowAlertSuccess({ message }));
+      dispatch(onActionCreator(POST_CONTACT_FORM_ERROR, { loading: false, error: true }));
+    });
   }
 };
 

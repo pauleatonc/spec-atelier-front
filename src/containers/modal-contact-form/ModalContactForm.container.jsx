@@ -10,11 +10,10 @@ import {
 } from './ModalContactForm.styles';
 import { sendContactData, closeContactModal } from './ModalContactForm.actions';
 import { Contact } from '../../components/forms/Forms';
-import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 const ContactForm = () => {
   const { user = {} } = useSelector(state => state.auth);
-  const { contact, selectedBrand, showContactModal, message, sended, error } = useSelector(state => state.modalContactForm);
+  const { contact, selectedBrand, showContactModal } = useSelector(state => state.modalContactForm);
   const [contactForm, setContactForm] = useState(contact);
   const dispatch = useDispatch();
   const onCloseModal = () => dispatch(closeContactModal());
@@ -37,21 +36,8 @@ const ContactForm = () => {
   };
 
   useEffect(() => {
-    if (sended) {
-      dispatch(onShowAlertSuccess({ message }));
-    }
-    if (error) {
-      dispatch(onShowAlertSuccess({ message }));
-    }
-    return () => {
-      onCloseModal();
-    }
-  }, [sended, error]);
-
-  useEffect(() => {
     if (showContactModal) setContactForm({});
   }, [showContactModal]);
-
 
   return (
     <Container>
