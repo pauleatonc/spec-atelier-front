@@ -5,4 +5,8 @@ export const formatDate = date => {
   return tempDate.isValid() ? tempDate.format('DD-MM-YYYY') : '';
 };
 
-export const mapToSelector = ({ name = '', id }) => ({ id, label: name || '', value: id || name });
+export const mapToSelector = value => ({
+  label: value.name || '',
+  value: value.id || value.name,
+  ...value,
+});

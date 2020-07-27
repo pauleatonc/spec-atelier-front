@@ -10,6 +10,7 @@ import specProductsReducer from '../../containers/spec-products/SpecProducts.red
 import specModalPorductReducer from '../../containers/spec-modal-product/SpecModalProduct.reducer';
 import specModalReducer from '../../components/modal/modal.reducer';
 import specCreateProductReducer from '../../containers/spec-create-product/SpecCreateProduct.reducer';
+import specEditProductReducer from '../../containers/spec-edit-product/SpecEditProduct.reducer';
 import authReducer from '../../containers/auth/auth.reducer';
 import projectsListReducer from '../../containers/projects-list/ProjectsList.reducer';
 import newProjectReducer from '../../containers/project-create/ProjectCreate.reducer';
@@ -41,6 +42,7 @@ export default combineReducers({
   specModalPorduct: specModalPorductReducer,
   specModal: specModalReducer,
   specCreateProduct: specCreateProductReducer,
+  specEditProduct: specEditProductReducer,
   specDocument: specDocumentReducer,
   specImagesModal: specImagesModalReducer,
 });

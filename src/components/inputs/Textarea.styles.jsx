@@ -24,7 +24,7 @@ export const Textarea = styled.textarea`
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
-  min-height: 152px;
+  min-height: ${({ minHeight }) => minHeight || '152px'};
   padding: 11px 19px;
   resize: none;
   width: 100%;

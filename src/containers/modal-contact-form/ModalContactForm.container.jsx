@@ -11,7 +11,7 @@ import {
 import { sendContactData, closeContactModal } from './ModalContactForm.actions';
 import { Contact } from '../../components/forms/Forms';
 
-const ContactForm = () => {
+const ContactForm = ({ type }) => {
   const { user = {} } = useSelector(state => state.auth);
   const { contact, selectedBrand, showContactModal } = useSelector(state => state.modalContactForm);
   const [contactForm, setContactForm] = useState(contact);
@@ -32,7 +32,7 @@ const ContactForm = () => {
       user_phone: `+56${contactForm.user_phone}`,
       user_id: user?.id || 0,
       brand_id: selectedBrand?.id,
-    }));
+    }, type));
   };
 
   useEffect(() => {

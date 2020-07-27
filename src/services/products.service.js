@@ -45,6 +45,21 @@ export const createProduct = factoryService(data => {
   return postJsonRequest(`${API_BASE_URL}/products`, body);
 });
 
+export const editProduct = factoryService(data => {
+  const body = {
+    product: {
+      brand: data.brand,
+      item_id: data.item,
+      long_desc: data.description,
+      name: data.name,
+      price: data.price,
+      system_id: data.system,
+    },
+  };
+
+  return postJsonRequest(`${API_BASE_URL}/products`, body);
+});
+
 /**
  * Upload images to the given product. 
  */

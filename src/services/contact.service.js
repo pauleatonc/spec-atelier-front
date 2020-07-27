@@ -9,3 +9,7 @@ export const postContact = factoryService(
   ({ brandId, contact }) => postJsonRequest(`${API_BASE_URL}/brands/${brandId}/contact_form`, { brand_contact_form: cleanObject(contact) }),
 );
 
+export const postContactFromProduct = factoryService(
+  ({ productId, contact }) => postJsonRequest(`${API_BASE_URL}/products/${productId}/contact_form`, { brand_contact_form: cleanObject(contact) }),
+);
+

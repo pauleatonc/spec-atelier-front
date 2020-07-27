@@ -6,12 +6,12 @@ import { Root, Label, Textarea as TextareaBase } from './Textarea.styles';
  * The Textarea' component.
  */
 const Textarea = props => {
-  const { label, placeholder, value, onChange, name } = props;
+  const { label, placeholder, value, onChange, name, minHeight } = props;
 
   return (
     <Root>
       {label && <Label>{label}</Label>}
-      <TextareaBase name={name} placeholder={placeholder} value={value} onChange={onChange} />
+      <TextareaBase name={name} placeholder={placeholder} value={value} onChange={onChange} minHeight={minHeight} />
     </Root>
   );
 };
