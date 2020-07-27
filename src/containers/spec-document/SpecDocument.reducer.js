@@ -12,14 +12,15 @@ const specDocumentState = {
       element: {
         title: 'Terminaciones',
       },
-      id: '0000',
+      id: 'section-0001',
       type: 'section',
     },
     {
       element: {
         title: 'Puertas',
       },
-      id: '0001',
+      id: 'item-0001',
+      sectionID: 'section-0001',
       type: 'item',
     },
     {
@@ -85,28 +86,32 @@ const specDocumentState = {
         ],
         title: 'Producto 1',
       },
-      id: '0002',
+      id: 'product-0001',
+      itemID: 'item-0001',
       type: 'product',
     },
     {
       element: {
         title: 'Producto 2',
       },
-      id: '0003',
+      id: 'product-0002',
+      itemID: 'item-0001',
       type: 'product',
     },
     {
       element: {
         title: 'Producto 3',
       },
-      id: '0004',
+      id: 'product-0003',
+      itemID: 'item-0001',
       type: 'product',
     },
     {
       element: {
         title: 'Producto 4',
       },
-      id: '0005',
+      id: 'product-0004',
+      itemID: 'item-0001',
       type: 'product',
     },
   ],

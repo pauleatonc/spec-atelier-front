@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { onGetSpecProductsBySection } from '../spec-products/SpecProducts.actions';
-import useSpecPanelsLayout from '../../components/layouts/SpecPanelsLayout.hook';
+import useSpecProductsPanelLayout from '../../components/layouts/SpecProductsPanelLayout.hook';
 import Breadcrumbs from '../../components/basics/Breadcrumbs';
 import { Root, Body, Header, Item, ItemIcon, ItemText, Loading } from './SpecProductsSections.styles';
 
@@ -14,7 +14,7 @@ const SpecProductsSections = () => {
   const dispatch = useDispatch();
   const handleSectionClick = sectionID => () => dispatch(onGetSpecProductsBySection({ sectionID }));
 
-  useSpecPanelsLayout(show);
+  useSpecProductsPanelLayout(show);
 
   return (
     <Root>
