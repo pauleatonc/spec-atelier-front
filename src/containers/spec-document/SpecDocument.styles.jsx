@@ -126,7 +126,18 @@ export const BlockText = styled.section`
   font-size: 12px;
   margin: 0 0 3px 0;
   padding: 4px 30px 4px 9px;
+  position: relative;
   width: 100%;
+
+  &:hover ${BlockDotsIcon} {
+    visibility: visible;
+  }
+`;
+
+export const BlockTextContent = styled.section`
+  font-family: Lato;
+  font-size: 12px;
+  font-weight: initial;
 
   & p {
     color: rgba(33, 33, 33, 0.51);
@@ -164,6 +175,10 @@ export const BlockText = styled.section`
   }
 `;
 
+export const BlockTitle = styled.span`
+  text-transform: uppercase;
+`;
+
 export const Section = styled.section`
   align-items: center;
   background-color: rgba(242, 242, 242, 0.54);
@@ -173,7 +188,8 @@ export const Section = styled.section`
   font-size: 16px;
   font-weight: bold;
   height: 36px;
-  letter-spacing: 1.14px;
+  letter-spacing: 1px;
+  line-height: 1.6;
   margin: 0 0 3px 0;
   padding: 4px 30px 4px 9px;
   position: relative;
@@ -194,6 +210,7 @@ export const Item = styled.section`
   font-weight: bold;
   height: 36px;
   letter-spacing: 1px;
+  line-height: 1.6;
   margin: 0 0 3px 0;
   padding: 4px 30px 4px 9px;
   position: relative;
@@ -231,7 +248,9 @@ export const ProductTitle = styled.p`
   font-size: 12px;
   font-weight: bold;
   letter-spacing: 1px;
+  line-height: 1.6;
   margin: 0 0 9px;
+  text-transform: uppercase;
 `;
 
 export const ProductDescription = styled.p`
@@ -239,6 +258,7 @@ export const ProductDescription = styled.p`
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
+  line-height: 1.6;
   margin: 0 0 9px;
 `;
 
@@ -247,7 +267,8 @@ export const ProductSystem = styled.p`
   font-family: Lato;
   font-size: 11px;
   font-weight: bold;
-  letter-spacing: 0.92px;
+  letter-spacing: 1px;
+  line-height: 1.6;
   margin: 0 0 12px;
 `;
 
@@ -255,5 +276,6 @@ export const ProductReference = styled.p`
   color: ${COLOR_MINE_SHAFT};
   font-family: Lato;
   font-size: 11px;
-  letter-spacing: 0.92px;
+  letter-spacing: 1px;
+  line-height: 1.6;
 `;

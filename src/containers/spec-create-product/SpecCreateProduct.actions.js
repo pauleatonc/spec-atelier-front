@@ -62,8 +62,8 @@ export const onCreateSpecProduct = ({ documents, images }) => async (dispatch, g
     const response = await createProduct(payload);
 
     await Promise.all([
-      uploadProductImages(response.product.id, images),
-      uploadProductDocuments(response.product.id, documents),
+      uploadProductImages({ productID: response.product.id, images }),
+      uploadProductDocuments({ productID: response.product.id, documents }),
     ]);
 
     return batch(() => {

@@ -14,15 +14,15 @@ const SpecContents = () => {
   const { blocks } = useSelector(state => state.specDocument);
   const history = useHistory();
   const sections = useMemo(() => {
-    const sectionsBlocks = blocks.filter(block => block.type === 'section');
+    const sectionsBlocks = blocks.filter(block => block.type === 'Section');
     
     return sectionsBlocks.map(sectionBlock => ({
       ...sectionBlock,
       items: blocks
-        .filter(block => block.type === 'item' && block.sectionID === sectionBlock.id)
+        .filter(block => block.type === 'Item' && block.section === sectionBlock.element.id)
         .map(itemBlock => ({
           ...itemBlock,
-          products: blocks.filter(block => block.type === 'product' && block.itemID === itemBlock.id),
+          products: blocks.filter(block => block.type === 'Product' && block.item === itemBlock.element.id),
         })),
     }));
   }, [blocks]);
@@ -70,18 +70,18 @@ const SpecContents = () => {
       <ListTitle>Indice de Partidas</ListTitle>
       {sections.map((section, sectionIndex) => (
         <Fragment key={section.id}>
-          <ListItem title={section.element.title} onClick={handleSectionClick(section.id)}>
+          <ListItem title={section.element.name} onClick={handleSectionClick(section.id)}>
             <span>
-              {`${sectionIndex + 1}. ${section.element.title}`}
+              {`${sectionIndex + 1}. ${section.element.name}`}
             </span>
             <ArrowIcon src={selectedSection === section.id ? arrowUpSource : arrowDownSource} />
           </ListItem>
           <Collapsible show={selectedSection === section.id}>
             {section.items.map((item, itemIndex) => (
               <Fragment key={item.id}>
-                <ListItem padding="0 23px 0 62px" title={item.element.title} onClick={handleItemClick(item.id)}>
+                <ListItem padding="0 23px 0 62px" title={item.element.name} onClick={handleItemClick(item.id)}>
                   <span>
-                    {`${sectionIndex + 1}.${itemIndex + 1}. ${item.element.title}`}
+                    {`${sectionIndex + 1}.${itemIndex + 1}. ${item.element.name}`}
                   </span>
                   <ArrowIcon src={selectedItem === item.id ? arrowUpSource : arrowDownSource} />
                 </ListItem>
@@ -94,7 +94,7 @@ const SpecContents = () => {
                       onClick={handleProductClick(product.id)}
                     >
                       <span>
-                        {`${sectionIndex + 1}.${itemIndex + 1}.${productIndex + 1}. ${product.element.title}`}
+                        {`${sectionIndex + 1}.${itemIndex + 1}.${productIndex + 1}. ${product.element.name}`}
                       </span>
                       <span>&nbsp;</span>
                     </ListItem>
