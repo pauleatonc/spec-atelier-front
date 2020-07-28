@@ -38,6 +38,7 @@ export const EditorStyles = createGlobalStyle`
     box-shadow: none !important;
     font-family: Lato;
     font-size: 12px;
+    font-weight: initial;
     height: 95px;
     outline: 0;
     overflow-y: auto !important;

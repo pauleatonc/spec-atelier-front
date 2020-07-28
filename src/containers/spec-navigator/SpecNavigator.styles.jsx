@@ -10,6 +10,7 @@ export const Root = styled.div`
   height: 201px;
   justify-content: center;
   width: 56px;
+  z-index: 2;
 `;
 
 export const Section = styled.section`

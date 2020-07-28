@@ -21,6 +21,7 @@ import brandProductsListReducer from '../../containers/brand-products-list/Brand
 import modalContactFormReducer from '../../containers/modal-contact-form/ModalContactForm.reducers';
 import specDocumentReducer from '../../containers/spec-document/SpecDocument.reducer';
 import specImagesModalReducer from '../../containers/spec-images-modal/SpecImagesModal.reducer';
+import specContentsReducer from '../../containers/spec-contents/SpecContents.reducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -45,4 +46,5 @@ export default combineReducers({
   specEditProduct: specEditProductReducer,
   specDocument: specDocumentReducer,
   specImagesModal: specImagesModalReducer,
+  specContents: specContentsReducer,
 });

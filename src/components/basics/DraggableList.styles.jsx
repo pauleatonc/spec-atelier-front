@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components';
 import { COLOR_PRIMARY } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`

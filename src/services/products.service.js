@@ -75,5 +75,5 @@ export const uploadProductImages = factoryService(({ productID, images }) => {
 export const uploadProductDocuments = factoryService(({ productID, documents }) => {
   const body = { 'documents[]': documents };
 
-  return postFormRequest(`${API_BASE_URL}/api/products/${productID}/associate_documents`, body);
+  return postFormRequest(`${API_BASE_URL}/products/${productID}/associate_documents`, body);
 });

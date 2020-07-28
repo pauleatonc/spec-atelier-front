@@ -65,6 +65,17 @@ export const getJsonRequest = factoryRequest((url, _, options) => {
 });
 
 /**
+ * To do a PATCH request with JSON as content type.
+ */
+export const patchJsonRequest = factoryRequest((url, payload, options) => {
+  const headers = generateHeaders('application/json');
+  const body = JSON.stringify(payload);
+
+  return cancellableFetch(url, { body, headers, method: 'PATCH' }, options)
+    .then(response => response.json());
+});
+
+/**
  * To do a POST request with form data as content type.
  */
 export const postFormRequest = factoryRequest((url, payload, options) => {
