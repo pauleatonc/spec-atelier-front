@@ -20,7 +20,7 @@ const Collaborators = () => {
       <BrandsFiltersContainer />
       <BrandsListContainer />
       <BrandsSeeMoreButtonContainer />
-      <ContactFormModalContainer />
+      <ContactFormModalContainer type="brand"/>
       <AlertContainer />
     </AppLayout>
   );

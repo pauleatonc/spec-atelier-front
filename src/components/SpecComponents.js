@@ -1,6 +1,6 @@
 import Image from './image/Image';
 import Loading from './basics/loading';
-import Modal from './modal/modal';
+// import Modal from './modal/modal';
 import NavbarLogin from './navbar/navbar-login/NavbarLogin';
 import NavbarApp from './navbar/navbar-app/NavbarApp';
 import TextArea from './inputs/Textarea';
@@ -14,6 +14,7 @@ import StepBubbles from './basics/StepsBubbles';
 import Select from './inputs/Select';
 import SnackBar from './basics/Snackbar';
 import SearchBar from './filters/SearchBar';
+import Modal from './layouts/ModalLayout';
 
 export {
   Button,

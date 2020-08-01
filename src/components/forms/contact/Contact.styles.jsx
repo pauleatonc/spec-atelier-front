@@ -39,11 +39,11 @@ export const Label = styled.p`
 `;
 
 export const CodeNumber = styled.span`
-  font-size: 14;
+  font-size: 14px;
   font-family: Lato;
   display: flex;
   align-items: center;
-  margin: 0 8px 0;
+  margin-right: 8px;
   color: ${COLOR_DARKGREY};
 `;
 

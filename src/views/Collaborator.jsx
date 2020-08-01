@@ -16,7 +16,7 @@ const Collaborator = () => {
         <BrandInfoContainer />
         <BrandProductsContainer />
         <BrandProductsSeeMoreContainer />
-        <ContactFormModalContainer />
+        <ContactFormModalContainer type="brand"/>
         <ProductModalContainer />
       </Container>
     </AppLayout>
