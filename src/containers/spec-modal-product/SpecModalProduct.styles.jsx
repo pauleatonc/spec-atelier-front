@@ -28,7 +28,16 @@ const icons = {
 const HEIGHT_CONTENT = '350px';
 const PADDING_CONTENT = '8px 2px 8px 8px';
 
+export const ButtonClose = styled.span`
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+  outline: none;
+`;
+
 export const Container = styled.div`
+  width: 80%;
+  padding: 40px;
   background-color: ${COLOR_WHITE};
   border-radius: 4px;
   min-height: ${HEIGHT_CONTENT};
@@ -97,24 +106,25 @@ export const ImagesContainer = styled.section`
 `
 
 export const ImagesContent = styled.div`
+  outline: none;
   -webkit-justify-content: center;
-  padding: 4px;
+  margin: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1;
+  border: 2px solid; 
+  border-color: ${({ active }) => active ? COLOR_PRIMARY : 'transparent'};
   ${MEDIA_QUERY_SMALL} {
     display: none;
   }
 `;
 
-export const ProductImage = styled.img`
+export const Img = styled.img`
   cursor: pointer;
-  min-height: 60px;
-  max-height: 80px;
+  max-height: 100%;
   max-width: 100%;
-  border: 2px solid; 
-  border-color: ${({ active }) => active ? COLOR_PRIMARY : COLOR_LIGHTGREY};
+  object-fit: scale-down;
 `;
 
 export const ProductImageSelectedContainer = styled.div`
@@ -126,10 +136,12 @@ export const ProductImageSelectedContainer = styled.div`
   min-height: 200px;
 `;
 
-export const ProductImageSelected = styled.img`
-  object-fit: scale-down;
-  max-width: auto;
+export const ProductImageSelected = styled.div`
   max-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 `;
 
 export const InfoContainer = styled.section`

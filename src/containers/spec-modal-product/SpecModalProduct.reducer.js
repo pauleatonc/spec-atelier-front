@@ -1,7 +1,8 @@
 import {
   GET_PRODUCT,
   GET_PRODUCT_ERROR,
-  CLOSE_MODAL,
+  SHOW_MODAL_PRODUCT,
+  CLOSE_MODAL_PRODUCT,
 } from './SpecModalProduct.actions';
 
 export const initialState = {
@@ -27,7 +28,13 @@ const productsReducer = (state = initialState, action) => {
         error: payload.error,
         loader: payload.loader,
       };
-    case CLOSE_MODAL:
+    case SHOW_MODAL_PRODUCT: {
+      return {
+        ...state,
+        showModalProduct: true,
+      }
+    }
+    case CLOSE_MODAL_PRODUCT:
       return {
         ...initialState,
       }

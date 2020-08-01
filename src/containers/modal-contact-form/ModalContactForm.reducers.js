@@ -8,7 +8,10 @@ import {
 const initialModalContactFormState = {
   loading: true,
   show: false,
-  selectedBrand: {},
+  selectedBrand: {
+    name: '',
+  },
+  selectedProduct: {},
   showContactModal: false,
   sended: false,
   contact: {
@@ -41,7 +44,8 @@ const modalContactFormReducer = (state = initialModalContactFormState, { payload
     case OPEN_CONTACT_FORM_MODAL:
       return {
         ...state,
-        selectedBrand: payload?.selectedBrand,
+        selectedBrand: payload?.selectedBrand || {},
+        selectedProduct: payload?.selectedProduct || {},
         showContactModal: true,
       };
     case CLOSE_CONTACT_FORM_MODAL:

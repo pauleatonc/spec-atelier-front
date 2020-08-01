@@ -17,7 +17,7 @@ const BrandsList = () => {
     history.push(`/collaborators/${selectedBrand.id}`);
   };
   
-  const onClickContact = selectedBrand => dispatch(openContactModal(selectedBrand));
+  const onClickContact = selectedBrand => dispatch(openContactModal({ selectedBrand }));
 
   useEffect(() => {
     if (!brands.length) dispatch(getBrands(params));
