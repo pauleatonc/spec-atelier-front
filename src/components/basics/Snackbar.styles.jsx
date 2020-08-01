@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Z_INDEX_ALERT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   position: relative;
@@ -22,5 +23,5 @@ export const Content = styled.div`
   right: 0;
   top: 67px;
   width: fit-content;
-  z-index: 100;
+  z-index: ${Z_INDEX_ALERT};
 `;
