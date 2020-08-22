@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, COLOR_WHITE } from '../../config/constants/styled-vars';
-
+import { COLOR_MINE_SHAFT, COLOR_WHITE, COLOR_PRIMARY, COLOR_GREY } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: #FAFAFA;
@@ -9,6 +8,7 @@ export const Root = styled.div`
   box-shadow: ${({ shadow = true }) => shadow ? '0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.14)' : 'none'};
   width: 80%;
   padding: 42px 32px 20px;
+  overflow-y: auto;
 `;
 
 export const ProductContainer = styled.section`
@@ -87,6 +87,9 @@ export const Section = styled.section`
   padding: ${({ padding }) => padding};
   justify-items: ${({ justifyItems }) => justifyItems};
   width: ${({ width }) => width};
+  height: ${({ height }) => height};
+  justify-content: ${({ justifyContent }) => justifyContent};
+   ${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection}` : ''}; 
 `;
 
 Section.defaultProps = {
@@ -98,6 +101,9 @@ Section.defaultProps = {
   gridTemplateRows: 'initial',
   padding: 'initial',
   width: '100%',
+  height: 'auto',
+  justifyContent: 'initial',
+  flexDirection: undefined,
 };
 Section.propTypes = {
   alignItems: PropTypes.string,
@@ -108,6 +114,9 @@ Section.propTypes = {
   gridTemplateRows: PropTypes.string,
   padding: PropTypes.string,
   width: PropTypes.string,
+  height: PropTypes.string,
+  justifyContent: PropTypes.string,
+  flexDirection: PropTypes.string,
 };
 
 export const Footer = styled.section`
@@ -121,4 +130,58 @@ export const Gap = styled.div`
   display: inline-block;
   height: 10px;
   width: 10px;
+`;
+
+export const Container = styled.section`
+  display: grid;
+  gap: 8px 8px;
+  grid-template-areas:
+    "one one two two three three"
+    "four four four five five five";
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 194px 194px;
+`;
+
+export const Content = styled.div`
+  grid-area: ${({ gridArea }) => gridArea || 'one'};
+`;
+
+export const Text = styled.div`
+  white-space: nowrap;
+  font-family: Lato;
+  font-size: 12px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 0.63px;
+  text-align: center;
+  color: ${COLOR_PRIMARY};
+`;
+
+export const SectionImage = styled.section`
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+  cursor: pointer;
+`;
+
+export const DocContainer = styled.div`
+  width: 100%;
+  border-radius: 9px;
+  border: solid 1px ${COLOR_GREY};
+  min-height: 38px;
+`;
+
+export const DocIcon = styled.div`
+`
+
+export const DocContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const DocText = styled.div`
 `;

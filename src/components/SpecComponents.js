@@ -1,6 +1,8 @@
+import AttachedDocuments from './attachments/AttachedDocuments';
+import AttachedImages from './attachments/AttachedImages';
 import Image from './image/Image';
+import ImageDragAndDrop from './image/ImageDragAndDrop';
 import Loading from './basics/loading';
-// import Modal from './modal/modal';
 import NavbarLogin from './navbar/navbar-login/NavbarLogin';
 import NavbarApp from './navbar/navbar-app/NavbarApp';
 import TextArea from './inputs/Textarea';
@@ -17,11 +19,14 @@ import SearchBar from './filters/SearchBar';
 import Modal from './layouts/ModalLayout';
 
 export {
+  AttachedDocuments,
+  AttachedImages,
   Button,
   ButtonLink,
   ButtonSocialMedia,
   ErrorMessage,
   Image,
+  ImageDragAndDrop,
   Loading,
   Modal,
   NavbarLogin,

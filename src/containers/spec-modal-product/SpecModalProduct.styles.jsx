@@ -101,13 +101,11 @@ export const ImagesContainer = styled.section`
   display: flex;
   flex: 1;
   flex-direction: column;
-  display: flex;
   overflow-y: auto;
 `
 
 export const ImagesContent = styled.div`
   outline: none;
-  -webkit-justify-content: center;
   margin: 4px;
   display: flex;
   justify-content: center;
@@ -118,13 +116,6 @@ export const ImagesContent = styled.div`
   ${MEDIA_QUERY_SMALL} {
     display: none;
   }
-`;
-
-export const Img = styled.img`
-  cursor: pointer;
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: scale-down;
 `;
 
 export const ProductImageSelectedContainer = styled.div`

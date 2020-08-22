@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Loading, Modal, Button } from '../../components/SpecComponents';
+import { Loading, Modal, Button, Image } from '../../components/SpecComponents';
 import {
   ButtonClose,
   Container,
@@ -10,7 +10,6 @@ import {
   Section,
   ImagesContainer,
   ImagesContent,
-  Img,
   ProductImageSelectedContainer,
   ProductImageSelected,
   InfoContainer,
@@ -22,38 +21,18 @@ import {
   Icons,
   Icon,
 } from './SpecModalProduct.styles';
-import noPhoto from '../../assets/images/icons/no-photo.svg';
+
 import { closeModal } from './SpecModalProduct.actions';
 import { openContactModal } from '../modal-contact-form/ModalContactForm.actions';
 
-const getFirstImg = data => (data?.images?.length && data.images[0]) || {};
-
-const Image = ({ src }) => {
-  const [displayedImg, setDisplayedImg] = useState(src || noPhoto);
-  const imgRef = useRef(null);
-  const onError = () => {
-    imgRef.current.src = noPhoto;
-  };
-  useEffect(() => {
-    setDisplayedImg(src);
-  }, [src]);
-  return (
-    <Img
-      ref={imgRef}
-      onError={onError}
-      src={displayedImg}
-      alt="Sin Imágen"
-    />
-  );
-};
-
 
 const SpecModalProduct = () => {
+  const getFirstImg = data => (data?.images?.length && data.images[0]) || {};
   const { product, showModalProduct } = useSelector(state => state.specModalPorduct);
   const [selectedImg, selectImg] = useState(getFirstImg());
   const onSelectImg = img => () => selectImg(img);
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     if (product) selectImg(getFirstImg(product));
   }, [product]);
@@ -110,14 +89,14 @@ const SpecModalProduct = () => {
                   onClick={onSelectImg(img)}
                   active={img.id && img.id === selectedImg.id}
                 >
-                  <Image src={img?.urls?.medium} />
+                  <Image src={img?.urls?.medium} type="responsive" />
                 </ImagesContent>
               )}
             </ImagesContainer>
             {/* Image primary */}
             <ProductImageSelectedContainer>
               <ProductImageSelected>
-                <Image src={selectedImg?.urls?.medium} />
+                <Image src={selectedImg?.urls?.medium} type="responsive" />
               </ProductImageSelected>
             </ProductImageSelectedContainer>
             {/* Info Product */}

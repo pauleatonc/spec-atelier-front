@@ -34,8 +34,8 @@ import closeSource from '../../assets/images/icons/close.svg';
  * The AttachedFiles' component.
  */
 const AttachedFiles = props => {
-  const { documents, label, onChange, onReject } = props;
-  const [show, setShow] = useState(false);
+  const { documents, label, onChange, onReject, showModal, hideItems } = props;
+  const [show, setShow] = useState(showModal);
   const handleOpen = () => setShow(true);
   const handleClose = () => setShow(false);
   const handleDrop = useCallback((acceptedDocuments = []) => {
@@ -43,7 +43,7 @@ const AttachedFiles = props => {
     const attachedDocuments = acceptedDocuments.reduce((docs, document) => {
       const pdfDocuments = docs.filter(doc => doc.name.includes('.pdf'));
       const dwgDocument = docs.find(doc => doc.name.includes('.dwg'));
-      const rvtDocument = docs.find(doc => doc.name.includes('.rvt')); 
+      const rvtDocument = docs.find(doc => doc.name.includes('.rvt'));
 
       if (document.name.includes('.pdf') && pdfDocuments.length >= 2) {
         return docs;
@@ -81,41 +81,45 @@ const AttachedFiles = props => {
     const updatedAttachedDocuments = documents.filter((document, index) =>
       !(document.name === attachedDocument.name && index === attachedIndex),
     );
-      
+
     onChange(updatedAttachedDocuments);
   };
 
   return (
     <Root>
-      {label && <Label>{label}</Label>}
-      <Box>
-        {documents.length === 0 && (
-          <Empty>
-            <EmptyHeader>
-              <DropIcon alt="" margin="0 0 15px" src={documentsUploadSource} />
-            </EmptyHeader>
-            <EmptyBody>
-              <EmptyAction onClick={handleOpen}>Sube documentos</EmptyAction>
-              <EmptyText>Puedes subir 2 PDF, 1 DWG Y 1 RVT</EmptyText>
-            </EmptyBody>
-          </Empty>
-        )}
-        {documents.length > 0 && (
-          <List>
-            {documents.map((document, index) => (
-              <Item key={index}>
-                <img alt="" src={documentUploadSource} />
-                <ItemDetails>
-                  <ItemText>{document.name}</ItemText>
-                  <ItemText>{`${Math.round(document.size / 1024)} Kb`}</ItemText>
-                </ItemDetails>
-                <RemoveIcon alt="" src={removeSource} onClick={handleRemove(document, index)} />
-              </Item>
-            ))}
-          </List>
-        )}
-      </Box>
-      {documents.length > 0 && <Action onClick={handleOpen}>Sube documentos</Action>}
+      {!hideItems && (
+        <>
+          {label && <Label>{label}</Label>}
+          <Box>
+            {documents.length === 0 && (
+              <Empty>
+                <EmptyHeader>
+                  <DropIcon alt="" margin="0 0 15px" src={documentsUploadSource} />
+                </EmptyHeader>
+                <EmptyBody>
+                  <EmptyAction onClick={handleOpen}>Sube documentos</EmptyAction>
+                  <EmptyText>Puedes subir 2 PDF, 1 DWG Y 1 RVT</EmptyText>
+                </EmptyBody>
+              </Empty>
+            )}
+            {documents.length > 0 && (
+              <List>
+                {documents.map((document, index) => (
+                  <Item key={index}>
+                    <img alt="" src={documentUploadSource} />
+                    <ItemDetails>
+                      <ItemText>{document.name}</ItemText>
+                      <ItemText>{`${Math.round(document.size / 1024)} Kb`}</ItemText>
+                    </ItemDetails>
+                    <RemoveIcon alt="" src={removeSource} onClick={handleRemove(document, index)} />
+                  </Item>
+                ))}
+              </List>
+            )}
+          </Box>
+          {documents.length > 0 && <Action onClick={handleOpen}>Sube documentos</Action>}
+        </>
+      )}
       <ModalLayout show={show} onClose={handleClose}>
         <DropContent>
           <DropCloseIcon alt="" src={closeSource} onClick={handleClose} />
@@ -149,6 +153,8 @@ const AttachedFiles = props => {
 AttachedFiles.defaultProps = {
   label: '',
   onReject: () => undefined,
+  hideItems: false,
+  onClose: () => undefined,
 };
 AttachedFiles.propTypes = {
   documents: PropTypes.arrayOf(
@@ -156,7 +162,9 @@ AttachedFiles.propTypes = {
   ).isRequired,
   label: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   onReject: PropTypes.func,
+  hideItems: PropTypes.bool,
 };
 
 export default AttachedFiles;

@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { COLOR_BLACK, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
 
+// import dwgIcon from '../../assets/images/icons/dwg.svg';
+// import bimSource from '../../assets/images/icons/bim.svg';
+// import pdfIcon from '../../assets/images/icons/pdf.svg';
+
 export const Container = styled.div`
   min-width: 185px;
   height: 38px;
@@ -41,10 +45,10 @@ export const Buttons = styled.div`
   right: 0;
 `;
 
-export const Delete = styled.button`
-  D
+export const Button = styled.button`
+  
 `
 
-export const Edit = styled.button`
-  E
-`
+export const Text = styled.div`
+  
+`;

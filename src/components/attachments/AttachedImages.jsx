@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
 import ModalLayout from '../layouts/ModalLayout';
@@ -31,14 +31,17 @@ import closeSource from '../../assets/images/icons/close.svg';
  * The AttachedImages' component.
  */
 const AttachedImages = props => {
-  const { images, label, onChange, onReject } = props;
-  const [show, setShow] = useState(false);
+  const { images, label, onChange, onReject, showModal, maxSize, onClose, hideItems } = props;
+  const [show, setShow] = useState(showModal);
   const handleOpen = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    onClose();
+    setShow(false);
+  }
   const handleDrop = useCallback((acceptedImages = []) => {
     const allImages = [...images, ...acceptedImages];
     const attachedImages = acceptedImages.reduce((imgs, image) => {
-      if (imgs.length >= 5) {
+      if (imgs.length >= maxSize) {
         return imgs;
       }
 
@@ -47,8 +50,8 @@ const AttachedImages = props => {
 
     handleClose();
 
-    if (allImages.length > 5) {
-      onReject('Puedes subir solo hasta 5 imágenes');
+    if (allImages.length > maxSize) {
+      onReject(`Puedes subir solo hasta ${maxSize} imágene${maxSize === 1 ? '' : 's'}`);
     }
 
     onChange(attachedImages);
@@ -65,35 +68,41 @@ const AttachedImages = props => {
 
     onChange(updatedAttachedImages);
   };
-
+  useEffect(() => {
+    setShow(showModal);
+  }, [showModal]);
   return (
     <Root>
-      {label && <Label>{label}</Label>}
-      <Box>
-        {images.length === 0 && (
-          <Empty>
-            <EmptyHeader>
-              <DropIcon alt="" src={imagesUploadSource} />
-            </EmptyHeader>
-            <EmptyBody>
-              <EmptyAction onClick={handleOpen}>Sube imágenes</EmptyAction>
-              <EmptyText>Puedes subir hasta 5 imágenes</EmptyText>
-            </EmptyBody>
-          </Empty>
-        )}
-        {images.length > 0 && (
-          <List>
-            {images.map((image, index) => (
-              <Item key={index} source={URL.createObjectURL(image)}>
-                <Square onClick={handleRemove(image, index)}>
-                  <img alt="" src={removeSource} />
-                </Square>
-              </Item>
-            ))}
-          </List>
-        )}
-      </Box>
-      {images.length > 0 && <Action onClick={handleOpen}>Sube imágenes</Action>}
+      {!hideItems && (
+        <>
+          {label && <Label>{label}</Label>}
+          <Box>
+            {images.length === 0 && (
+              <Empty>
+                <EmptyHeader>
+                  <DropIcon alt="" src={imagesUploadSource} />
+                </EmptyHeader>
+                <EmptyBody>
+                  <EmptyAction onClick={handleOpen}>Sube imágene{maxSize === 1 ? '' : 's'}</EmptyAction>
+                  <EmptyText>Puedes subir hasta {maxSize} imágene{maxSize === 1 ? '' : 's'}</EmptyText>
+                </EmptyBody>
+              </Empty>
+            )}
+            {images.length > 0 && (
+              <List>
+                {images.map((image, index) => (
+                  <Item key={index} source={URL.createObjectURL(image)}>
+                    <Square onClick={handleRemove(image, index)}>
+                      <img alt="" src={removeSource} />
+                    </Square>
+                  </Item>
+                ))}
+              </List>
+            )}
+          </Box>
+          {images.length > 0 && <Action onClick={handleOpen}>Sube imágene{maxSize === 1 ? '' : 's'}</Action>}
+        </>
+      )}
       <ModalLayout show={show} onClose={handleClose}>
         <DropContent>
           <DropCloseIcon alt="" src={closeSource} onClick={handleClose} />
@@ -127,6 +136,10 @@ const AttachedImages = props => {
 AttachedImages.defaultProps = {
   label: '',
   onReject: () => undefined,
+  onClose: () => undefined,
+  showModal: false,
+  maxSize: 5,
+  hideItems: false,
 };
 AttachedImages.propTypes = {
   images: PropTypes.arrayOf(
@@ -134,7 +147,11 @@ AttachedImages.propTypes = {
   ).isRequired,
   label: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   onReject: PropTypes.func,
+  showModal: PropTypes.bool,
+  maxSize: PropTypes.number,
+  hideItems: PropTypes.bool,
 };
 
 export default AttachedImages;

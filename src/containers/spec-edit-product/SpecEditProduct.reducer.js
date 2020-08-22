@@ -18,6 +18,17 @@ const editProductState = {
   product: {},
   loading: false,
   editing: false,
+  images: [
+    { code: 1, name: 'one', src: '' },
+    { code: 2, name: 'two', src: '' },
+    { code: 3, name: 'three', src: '' },
+    { code: 4, name: 'four', src: '' },
+    { code: 5, name: 'five', src: '' },
+  ],
+  pdfs: [
+    { code: 1, name: '', url: '' },
+    { code: 2, name: '', url: '' },
+  ],
 };
 
 /**
@@ -26,7 +37,8 @@ const editProductState = {
 const editProductReducer = (state = editProductState, { payload, type }) => {
   switch (type) {
     case GET_SPEC_PRODUCT: {
-      return { ...state, loading: true, product: {}, show: true };
+      console.log('here')
+      return { ...state, loading: false, product: {}, show: true };
     }
     case GET_SPEC_PRODUCT_SUCCESS: {
       console.log('payload', payload)

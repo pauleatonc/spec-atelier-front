@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '../config/constants/environment';
-import { getJsonRequest, postFormRequest, postJsonRequest } from '../modules/requests';
+import { getJsonRequest, postFormRequest, postJsonRequest, patchJsonRequest } from '../modules/requests';
 import { factoryService, formatParams } from '../modules/services';
 
 /**
@@ -45,19 +45,21 @@ export const createProduct = factoryService(data => {
   return postJsonRequest(`${API_BASE_URL}/products`, body);
 });
 
-export const editProduct = factoryService(data => {
-  const body = {
-    product: {
-      brand: data.brand,
-      item_id: data.item,
-      long_desc: data.description,
-      name: data.name,
-      price: data.price,
-      system_id: data.system,
-    },
-  };
+export const editProduct = factoryService(product => {
+  console.log('service', product);
+  // const body = {
+  //   product: {
+  //     ...data,
+  //     brand: data.brand,
+  //     item_id: data.item,
+  //     long_desc: data.description,
+  //     name: data.name,
+  //     price: data.price,
+  //     system_id: data.system,
+  //   },
+  // };
 
-  return postJsonRequest(`${API_BASE_URL}/products`, body);
+  return patchJsonRequest(`${API_BASE_URL}/products/${product.id}`, { product });
 });
 
 /**

@@ -11,6 +11,7 @@ import {
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS } from '../spec-products-sections/SpecProductsSections.actions';
 import { onHideSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
+import { cleanObject } from '../../modules/services';
 
 export const GET_SPEC_PRODUCT = 'GET_SPEC_PRODUCT';
 export const GET_SPEC_PRODUCT_SUCCESS = 'GET_SPEC_PRODUCT_SUCCESS';
@@ -62,28 +63,20 @@ export const onGetSpecProductsBrands = () => async dispatch => {
 export const EDIT_SPEC_PRODUCT = 'EDIT_SPEC_PRODUCT';
 export const EDIT_SPEC_PRODUCT_ERROR = 'EDIT_SPEC_PRODUCT_ERROR';
 export const EDIT_SPEC_PRODUCT_SUCCESS = 'EDIT_SPEC_PRODUCT_SUCCESS';
-export const onEditSpecProduct = ({ documents, images }) => async (dispatch, getState) => {
+export const onEditSpecProduct = ({ product, documents, images, documentsToDelete, ImagesToDelete }) => async dispatch => {
   dispatch(onActionCreator(EDIT_SPEC_PRODUCT));
-
+  console.log('product', product);
+  const patch = [
+    editProduct(cleanObject(product)),
+  ];
+  if (documents.length) patch.concat(uploadProductImages(product.id, images));
+  if (images.length) patch.concat(uploadProductDocuments(product.id, documents));
+  // if (documentsToDelete.length) patch.concat();
+  // if (ImagesToDelete.length) patch.concat();
   try {
-    const state = getState();
-    const { stepOne, stepTwo } = state.specEditProduct;
-    const payload = {
-      name: stepOne.name,
-      section: stepOne.section?.value,
-      item: stepOne.item?.value,
-      system: stepOne.system?.value,
-      description: stepTwo.description,
-      brand: stepTwo.brand.value,
-      price: stepTwo.price,
-    };
-    const response = await editProduct(payload);
-
-    await Promise.all([
-      uploadProductImages(response.product.id, images),
-      uploadProductDocuments(response.product.id, documents),
-    ]);
-
+    const results = await Promise.all(patch);
+    if (results.some(r => r.error)) throw Error;
+    console.log('resulst', results);
     return batch(() => {
       dispatch(onActionCreator(EDIT_SPEC_PRODUCT_SUCCESS));
       dispatch(onShowAlertSuccess({ message: 'Producto editado exitosamente' }));
@@ -101,8 +94,8 @@ export const onEditSpecProduct = ({ documents, images }) => async (dispatch, get
 export const HIDE_SPEC_EDIT_PRODUCT = 'HIDE_SPEC_EDIT_PRODUCT';
 export const HIDE_SPEC_EDIT_PRODUCT_SUCCESS = 'HIDE_SPEC_EDIT_PRODUCT_SUCCESS';
 export const onHideSpecEditProduct = () => dispatch =>
-batch(() => {
-  dispatch(onActionCreator(HIDE_SPEC_EDIT_PRODUCT_SUCCESS));
-  dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS));
-  dispatch(onHideSpecProductsItemsSuccess());
-});
+  batch(() => {
+    dispatch(onActionCreator(HIDE_SPEC_EDIT_PRODUCT_SUCCESS));
+    dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS));
+    dispatch(onHideSpecProductsItemsSuccess());
+  });
