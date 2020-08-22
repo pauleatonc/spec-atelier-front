@@ -1,48 +1,32 @@
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable import/no-unresolved */
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { recoverPasswordAction } from '@Actions/';
+import React from 'react';
 
-export const handleRecoverPassword = (email, recoverPasswordMethod) => {
-	recoverPasswordMethod(email);
+import { Link } from 'react-router-dom';
+import RecoverPasswordContainer from '../../containers/auth/recover-password/RecoverPassword.container';
+import {
+  Container,
+  SectionLeft,
+  SectionRight,
+  Image,
+  Logo,
+} from './Auth.styles';
+/**
+ * The Recovery Password view.
+ */
+const RecoverPassword = () => {
+  return (
+    <Container >
+      <SectionLeft>
+        <Image>
+          <Link to="/" data-view="home" >
+            <Logo />
+          </Link>
+        </Image>
+      </SectionLeft>
+      <SectionRight>
+        <RecoverPasswordContainer />
+      </SectionRight>
+    </Container>
+  );
 };
 
-const RecoverPassword = props => {
-	const [email, setEmail] = useState('');
-	const { recoverPasswordMethod } = props;
-
-	return (
-		<>
-			<h1>Olvidaste tu contraseña?</h1>
-			<form>
-				<input
-					type="email"
-					name="email"
-					value={email}
-					onChange={e => setEmail(e.target.value)}
-					placeholder="correo"
-					required
-				/>
-				<button
-					type="button"
-					onClick={() => handleRecoverPassword(email, recoverPasswordMethod)}
-				>
-					Recuperar contraseña
-				</button>
-			</form>
-		</>
-	);
-};
-
-RecoverPassword.propTypes = {
-	recoverPasswordMethod: PropTypes.func.isRequired,
-};
-
-export default connect(
-	state => state,
-	dispatch => ({
-		recoverPasswordMethod: recoverPasswordAction(dispatch),
-	}),
-)(RecoverPassword);
+export default RecoverPassword;

@@ -25,7 +25,7 @@ export const Content = styled.div`
   }
 `;
 
-export const LogInTittle = styled.p`
+export const LoginTitle = styled.p`
   font-family: 'Akzidenz Grotesk - condenced', sans-serif;
   font-size: 30px;
   font-weight: bold;
@@ -64,6 +64,10 @@ export const RegisterLink = styled(Link)`
 
 export const ButtonGoogleContainer = styled.section`
   margin: 40px 0;
+`;
+
+export const TextContent = styled.div`
+  padding: 32px 0 8px;
 `;
 
 export const TextInfo = styled.p`
@@ -119,3 +123,20 @@ export const KeepSessionContainer = styled.section`
   margin-top: 12px;
   margin-bottom: 22px;
 `; 
+
+export const ButtonText = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+`;
+
+export const ButtonContainer = styled.div`
+  padding: 16px 0;
+`;
