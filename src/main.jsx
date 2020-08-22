@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './config/store/store';
 import Home from './views/Home';
@@ -33,7 +33,7 @@ const Main = () => {
             <PublicRoute exact restricted component={Login} path="/login" />
             <PublicRoute exact restricted component={Registration} path="/registration" />
             <PublicRoute exact restricted component={RecoverPassword} path="/recover_password" />
-            <PublicRoute exact restricted component={NewPassword} path="/new_password" />
+            <PublicRoute exact restricted component={NewPassword} path="/new_password/:token" />
             <PublicRoute exact component={Products} path="/products" />
             <PublicRoute exact component={Us} path="/us" />
             <PublicRoute exact component={Collaborators} path="/collaborators" />
@@ -42,6 +42,7 @@ const Main = () => {
             <PrivateRoute exact component={Project} path="/projects/project" />
             <PrivateRoute exact component={Profile} path="/profile" />
             <PrivateRoute exact component={Specification} path="/specs/:id" />
+            <Redirect to="/projects" />
           </Switch>
         </Router>
       </PersistGate>

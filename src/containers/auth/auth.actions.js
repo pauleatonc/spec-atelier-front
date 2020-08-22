@@ -1,5 +1,5 @@
 import onActionCreator from '../../config/store/helpers';
-import { logIn, logOut, register, googleLogin } from '../../services/auth.service';
+import { logIn, logOut, register, googleLogin, recoveryPassword, newPassword } from '../../services/auth.service';
 import {
   setLocalStorage,
   deleteLocalStorage,
@@ -15,6 +15,10 @@ export const GOOGLE_LOG_IN = 'GOOGLE_LOG_IN';
 export const GOOGLE_LOG_IN_ERROR = 'GOOGLE_LOG_IN_ERROR'
 export const REGISTRATION = 'REGISTRATION';
 export const REGISTRATION_ERROR = 'REGISTRATION_ERROR';
+export const RECOVER_PASSWORD = 'RECOVER_PASSWORD';
+export const RECOVER_PASSWORD_ERROR = 'RECOVER_PASSWORD_ERROR';
+export const NEW_PASSWORD = 'NEW_PASSWORD';
+export const NEW_PASSWORD_ERROR = 'NEW_PASSWORD_ERROR';
 
 /**
  * Login action
@@ -115,6 +119,36 @@ export const googleLoginAction = data => async dispatch => {
       payload: {
         isLogin: false,
         error,
+      },
+    });
+  };
+};
+
+// Send email to recover password
+
+export const recoverPassword = email => async dispatch => {
+  try {
+    await recoveryPassword(email);
+    return dispatch(onActionCreator(RECOVER_PASSWORD, { sended: true }));
+  } catch (error) {
+    return dispatch(onActionCreator(RECOVER_PASSWORD_ERROR, { sended: false }));
+  }
+};
+
+export const setNewPassword = ({ token, password }) => async dispatch => {
+  try {
+    await newPassword({ token, password });
+    return dispatch({
+      type: NEW_PASSWORD,
+      payload: {
+        status: true,
+      },
+    })
+  } catch (error) {
+    return dispatch({
+      type: NEW_PASSWORD_ERROR,
+      payload: {
+        status: false,
       },
     });
   };

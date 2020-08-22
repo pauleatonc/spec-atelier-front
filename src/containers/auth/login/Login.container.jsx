@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams, useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
 import ButtonGoogleLogin from '../../../components/buttons/ButtonGoogle';
 
@@ -8,26 +9,21 @@ import {
   HeaderText,
   RegisterLink,
   RegisterText,
-  LogInTittle,
+  LoginTitle,
   ButtonGoogleContainer,
   TextInfo,
-  ButtonLogin,
-  KeepSessionContainer,
 } from '../Auth.styles';
 import { TextInput, Button } from '../../../components/SpecComponents';
 import { loginAction } from '../auth.actions';
 
-const defaultUser = {
-  email: '',
-  password: '',
-};
 
 const Login = () => {
-  const [user, setUser] = useState(defaultUser);
+  const { state } = useLocation();
+  const [user, setUser] = useState({ password: '', email: state?.email || '' });
   const dispatch = useDispatch();
   const handleSubmit = () => dispatch(loginAction({ user }));
-  const onChangeUser = ({ target: { name, value }}) => setUser({ ...user, [name]: value });
-
+  const onChangeUser = ({ target: { name, value } }) => setUser({ ...user, [name]: value });
+  
   return (
     <Container>
       <Content>
@@ -35,14 +31,20 @@ const Login = () => {
           <RegisterText>
             ¿Aún no eres usuario?
           </RegisterText>
-          <RegisterLink to="/registration" data-view="registration" >
+          <RegisterLink
+            to={{
+              pathname: '/registration',
+              state: { email: user.email },
+            }}
+            data-view="registration"
+          >
             Regístrate ahora
           </RegisterLink>
         </HeaderText>
 
-        <LogInTittle>
+        <LoginTitle>
           Inicia sesión
-				</LogInTittle>
+				</LoginTitle>
 
         <ButtonGoogleContainer>
           <ButtonGoogleLogin label="Iniciar con Google" />
@@ -72,7 +74,13 @@ const Login = () => {
             <RegisterText>
               ¿Se te olvidó la contraseña?
             </RegisterText>
-            <RegisterLink to="/registration" data-view="recover_password" >
+            <RegisterLink
+              to={{
+                pathname: '/recover_password',
+                state: { email: user.email },
+              }}
+              data-view="recover_password"
+            >
               Recuperar Contraseña
             </RegisterLink>
           </TextInfo>

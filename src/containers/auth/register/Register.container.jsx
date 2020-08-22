@@ -1,35 +1,29 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
-
 import {
   Container,
   Content,
   HeaderText,
   RegisterLink,
   RegisterText,
-  LogInTittle,
+  LoginTitle,
   ButtonGoogleContainer,
   TextInfo,
-  ButtonLogin,
 } from '../Auth.styles';
 import { TextInput, Button } from '../../../components/SpecComponents';
 import { registrationAction } from '../auth.actions';
 import ButtonGoogleLogin from '../../../components/buttons/ButtonGoogle';
 
-const defaultUser = {
-  email: '',
-  password: '',
-};
-
 const Register = () => {
-  const [user, setUser] = useState(defaultUser);
+  const { state } = useLocation();
+  const [user, setUser] = useState({ password: '', email: state?.email || '' });
   const dispatch = useDispatch();
   const handleSubmit = () => dispatch(registrationAction({ user }));
   const onChangeUser = ({ target: { name, value }}) => setUser({ ...user, [name]: value });
   return (
     <Container>
       <Content>
-
         <HeaderText>
           <RegisterText>
             ¿Ya eres usuario?
@@ -39,9 +33,9 @@ const Register = () => {
           </RegisterLink>
         </HeaderText>
 
-        <LogInTittle>
+        <LoginTitle>
           Regístrate
-				</LogInTittle>
+				</LoginTitle>
 
         <ButtonGoogleContainer>
           <ButtonGoogleLogin label="Regístrate con Google" />
@@ -72,7 +66,7 @@ const Register = () => {
 					</Button>
         </form>
       </Content>
-    </Container >
+    </Container>
   );
 };
 
