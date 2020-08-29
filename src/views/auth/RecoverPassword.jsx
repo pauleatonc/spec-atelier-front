@@ -9,6 +9,7 @@ import {
   Image,
   Logo,
 } from './Auth.styles';
+import Alert from '../../containers/alert/Alert.container';
 /**
  * The Recovery Password view.
  */
@@ -25,6 +26,7 @@ const RecoverPassword = () => {
       <SectionRight>
         <RecoverPasswordContainer />
       </SectionRight>
+      <Alert />
     </Container>
   );
 };
