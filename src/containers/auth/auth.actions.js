@@ -4,6 +4,7 @@ import {
   setLocalStorage,
   deleteLocalStorage,
 } from '../../helpers/localstorage.helper';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 /**
  * Contants
@@ -77,15 +78,17 @@ export const registrationAction = data => async dispatch => {
         },
       });
     }
+    const message = 'Se ha registrado correctamente';
+    dispatch(onShowAlertSuccess({ message }));
     setLocalStorage({ key: 'token', value: user.jwt });
     setLocalStorage({ key: 'userID', value: user.id });
-    return dispatch({
+    return setTimeout(() => dispatch({
       type: REGISTRATION,
       payload: {
         isLogin: true,
         user,
       },
-    });
+    }), 4000);
   } catch (error) {
     return dispatch(onActionCreator({
       type: REGISTRATION_ERROR,
@@ -128,7 +131,10 @@ export const googleLoginAction = data => async dispatch => {
 
 export const recoverPassword = email => async dispatch => {
   try {
-    await recoveryPassword(email);
+    const response = await recoveryPassword(email);
+    const message = 'Se han enviado las instrucciónes al correo';
+    if (response.error) dispatch(onShowAlertSuccess({ message: response.error }));
+    else dispatch(onShowAlertSuccess({ message }));
     return dispatch(onActionCreator(RECOVER_PASSWORD, { sended: true }));
   } catch (error) {
     return dispatch(onActionCreator(RECOVER_PASSWORD_ERROR, { sended: false }));
@@ -138,6 +144,8 @@ export const recoverPassword = email => async dispatch => {
 export const setNewPassword = ({ token, password }) => async dispatch => {
   try {
     await newPassword({ token, password });
+    const message = 'Se ha guardado la nueva contraseña, ahora puedes iniciar sesión';
+    dispatch(onShowAlertSuccess({ message }));
     return dispatch({
       type: NEW_PASSWORD,
       payload: {

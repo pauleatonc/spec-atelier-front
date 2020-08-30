@@ -8,12 +8,14 @@ import {
   Image,
   Logo,
 } from './Auth.styles';
+
+import Alert from '../../containers/alert/Alert.container';
 /**
- * The New Password's view.
+ * The Login's view.
  */
 const Login = () => {
   return (
-    <Container >
+    <Container>
       <SectionLeft>
         <Image>
           <Link to="/" data-view="home" >
@@ -24,6 +26,7 @@ const Login = () => {
       <SectionRight>
         <NewPasswordContainer />
       </SectionRight>
+			<Alert />
     </Container>
   );
 };

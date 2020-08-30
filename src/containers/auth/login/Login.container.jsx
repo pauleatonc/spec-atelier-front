@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 import { useDispatch } from 'react-redux';
 import ButtonGoogleLogin from '../../../components/buttons/ButtonGoogle';
 
