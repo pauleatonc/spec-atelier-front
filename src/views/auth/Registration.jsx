@@ -9,6 +9,7 @@ import {
   Image,
   Logo,
 } from './Auth.styles';
+import Alert from '../../containers/alert/Alert.container';
 
 const Registration = () => {
   return (
@@ -23,6 +24,7 @@ const Registration = () => {
       <SectionRight>
         <RegisterContainer />
       </SectionRight>
+      <Alert />
     </Container>
   );
 };

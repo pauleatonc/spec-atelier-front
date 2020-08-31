@@ -8,6 +8,7 @@ import {
   Image,
   Logo,
 } from './Auth.styles';
+import Alert from '../../containers/alert/Alert.container';
 /**
  * The Home's view.
  */
@@ -24,6 +25,7 @@ const Login = () => {
       <SectionRight>
         <LoginContainer />
       </SectionRight>
+      <Alert />
     </Container>
   );
 };
