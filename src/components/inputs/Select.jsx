@@ -9,14 +9,14 @@ import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
  * The Select' component.
  */
 const Select = props => {
-  const { disabled, label, options, placeholder, value: selectedOption, onChange, type } = props;
+  const { disabled, label, options, placeholder, value: selectedOption, onChange, type, name } = props;
   const {
     anchor,
     width,
     onClick: handleClick,
     onClose: handleClose,
     onOpen: handleOpen,
-  } = useDropdown({ clickCallback: option => onChange(option) });
+  } = useDropdown({ clickCallback: option => onChange(option, name) });
 
   return (
     <Root>
@@ -47,8 +47,10 @@ Select.defaultProps = {
   label: '',
   placeholder: '',
   type: 'default',
+  name: '',
 };
 Select.propTypes = {
+  name: PropTypes.string,
   disabled: PropTypes.bool,
   label: PropTypes.string,
   options: PropTypes.arrayOf(

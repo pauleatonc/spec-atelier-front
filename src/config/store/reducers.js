@@ -8,8 +8,8 @@ import specProductsSectionsReducer from '../../containers/spec-products-sections
 import specProductsItemsReducer from '../../containers/spec-products-items/SpecProductsItems.reducer';
 import specProductsReducer from '../../containers/spec-products/SpecProducts.reducer';
 import specModalPorductReducer from '../../containers/spec-modal-product/SpecModalProduct.reducer';
-import specModalReducer from '../../components/modal/modal.reducer';
 import specCreateProductReducer from '../../containers/spec-create-product/SpecCreateProduct.reducer';
+import specEditProductReducer from '../../containers/spec-edit-product/SpecEditProduct.reducer';
 import authReducer from '../../containers/auth/auth.reducer';
 import projectsListReducer from '../../containers/projects-list/ProjectsList.reducer';
 import newProjectReducer from '../../containers/project-create/ProjectCreate.reducer';
@@ -40,8 +40,8 @@ export default combineReducers({
   specProductsItems: specProductsItemsReducer,
   specProducts: specProductsReducer,
   specModalPorduct: specModalPorductReducer,
-  specModal: specModalReducer,
   specCreateProduct: specCreateProductReducer,
+  specEditProduct: specEditProductReducer,
   specDocument: specDocumentReducer,
   specImagesModal: specImagesModalReducer,
   specContents: specContentsReducer,

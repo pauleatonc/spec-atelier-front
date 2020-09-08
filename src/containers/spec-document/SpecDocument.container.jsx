@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
+import { onShowSpecEditProduct } from '../spec-edit-product/SpecEditProduct.actions';
 import { onShowSpecImagesModalSuccess } from '../spec-images-modal/SpecImagesModal.actions';
 import { onShowSpecProducts } from '../spec-products/SpecProducts.actions';
 import {
@@ -77,6 +78,11 @@ const SpecDocument = () => {
     handleAddMenuClose();
     dispatch(onShowSpecCreateProductSuccess());
   };
+  const handleEditProduct = block => event => {
+    handleBlockMenuClose(event);
+    dispatch(onShowSpecEditProduct({ id: block.element.id || 1 }));
+  };
+
   const handleBlocksSortChange = blocksIDs => dispatch(onSortSpecBlocks({ blocksIDs, specID }));
   const handleShowBlockMenu = blockID => event => {
     handleBlockMenuOpen(event);
@@ -180,7 +186,9 @@ const SpecDocument = () => {
               Eliminar imagen
             </BlockMenuItem>
           )}
-          {selectedBlock?.type === 'Product' && <BlockMenuItem>Editar</BlockMenuItem>}
+          {selectedBlock?.type === 'Product' && (
+            <BlockMenuItem onClick={handleEditProduct(selectedBlock)}>Editar</BlockMenuItem>
+          )}
           <BlockMenuItem onClick={handleRemoveBlock(selectedBlockID)}>Eliminar</BlockMenuItem>
         </Dropdown>
       )}

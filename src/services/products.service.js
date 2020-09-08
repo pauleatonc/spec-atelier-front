@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '../config/constants/environment';
-import { getJsonRequest, postFormRequest, postJsonRequest } from '../modules/requests';
+import { getJsonRequest, postFormRequest, postJsonRequest, patchJsonRequest, deleteJsonRequest } from '../modules/requests';
 import { factoryService, formatParams } from '../modules/services';
 
 /**
@@ -45,6 +45,11 @@ export const createProduct = factoryService(data => {
   return postJsonRequest(`${API_BASE_URL}/products`, body);
 });
 
+export const editProduct = factoryService(product => {
+
+  return patchJsonRequest(`${API_BASE_URL}/products/${product.id}`, { product });
+});
+
 /**
  * Upload images to the given product. 
  */
@@ -55,6 +60,14 @@ export const uploadProductImages = factoryService(({ productID, images }) => {
 });
 
 /**
+ * Delete images to the given product. 
+ */
+export const removeProductImages = factoryService(({ productID, images }) => {
+  const body = { 'images': images };
+  return deleteJsonRequest(`${API_BASE_URL}/products/${productID}/remove_images`, body);
+});
+
+/**
  * Upload documents to the given product.
  */
 export const uploadProductDocuments = factoryService(({ productID, documents }) => {
@@ -62,3 +75,12 @@ export const uploadProductDocuments = factoryService(({ productID, documents }) 
 
   return postFormRequest(`${API_BASE_URL}/products/${productID}/associate_documents`, body);
 });
+
+/**
+ * Delete documents to the given product. 
+ */
+export const removeProductDocuments = factoryService(({ productID, documents }) => {
+  const body = { 'documents': documents };
+  return deleteJsonRequest(`${API_BASE_URL}/products/${productID}/remove_documents`, body);
+});
+

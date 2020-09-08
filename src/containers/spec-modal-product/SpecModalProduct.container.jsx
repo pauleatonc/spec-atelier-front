@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Loading, Modal, Button } from '../../components/SpecComponents';
+import { Loading, Modal, Button, Image } from '../../components/SpecComponents';
 import {
+  ButtonClose,
   Container,
   Content,
   Header,
@@ -9,7 +10,6 @@ import {
   Section,
   ImagesContainer,
   ImagesContent,
-  ProductImage,
   ProductImageSelectedContainer,
   ProductImageSelected,
   InfoContainer,
@@ -21,24 +21,27 @@ import {
   Icons,
   Icon,
 } from './SpecModalProduct.styles';
-import noPhoto from '../../assets/images/icons/no-photo.svg';
-import { closeModal } from './SpecModalProduct.actions';
 
-const getFirstImg = data => (data?.images?.length && data.images[0]) || {};
+import { closeModal } from './SpecModalProduct.actions';
+import { openContactModal } from '../modal-contact-form/ModalContactForm.actions';
+
 
 const SpecModalProduct = () => {
+  const getFirstImg = data => (data?.images?.length && data.images[0]) || {};
   const { product, showModalProduct } = useSelector(state => state.specModalPorduct);
   const [selectedImg, selectImg] = useState(getFirstImg());
   const onSelectImg = img => () => selectImg(img);
   const dispatch = useDispatch();
-  const noImgText = 'sin imágen';
-
+  
   useEffect(() => {
     if (product) selectImg(getFirstImg(product));
   }, [product]);
+
+  const onContact = () => dispatch(openContactModal({ 
+    selectedBrand: product.brand,
+    selectedProduct: product,
+  }));
   
-  // TODO: This will go to contact view.
-  const onContact = () => { };
   const onCloseModal = () => dispatch(closeModal());
 
   // Download documents 
@@ -54,14 +57,22 @@ const SpecModalProduct = () => {
       return setTimeout(() => document.body.removeChild(link), 2000);
     });
   };
-  
+
   if (!showModalProduct) return null;
   if (!product || !product.id) return <Loading />
 
   return (
-    <Modal isOpen={showModalProduct} onClose={onCloseModal}>
+    <Modal show={showModalProduct} onClose={onCloseModal}>
       <Container>
         <Content>
+          <ButtonClose
+            role="button"
+            tabIndex="0"
+            onKeyDown={onCloseModal}
+            onClick={onCloseModal}
+          >
+            <i className="fas fa-times" />
+          </ButtonClose>
           <Header>
             <Title>
               {`${product.name} / ${product.short_desc}`}
@@ -69,28 +80,24 @@ const SpecModalProduct = () => {
           </Header>
           <Section>
             <ImagesContainer>
-              {!!product?.images?.length && product.images.map(img =>
+              {!!product?.images?.length && product.images.map((img, i) =>
                 <ImagesContent
                   key={img.id}
                   role="button"
-                  tabIndex={img.id}
+                  tabIndex={i}
                   onKeyDown={onSelectImg(img)}
                   onClick={onSelectImg(img)}
+                  active={img.id && img.id === selectedImg.id}
                 >
-                  <ProductImage
-                    active={img.id && img.id === selectedImg.id}
-                    src={img?.urls?.small || noPhoto}
-                    alt="Sin Imágen"
-                  />
+                  <Image src={img?.urls?.medium} type="responsive" />
                 </ImagesContent>
               )}
             </ImagesContainer>
             {/* Image primary */}
             <ProductImageSelectedContainer>
-              <ProductImageSelected
-                src={selectedImg?.urls?.medium || noPhoto}
-                alt={`producto ${selectedImg.order || noImgText}`}
-              />
+              <ProductImageSelected>
+                <Image src={selectedImg?.urls?.medium} type="responsive" />
+              </ProductImageSelected>
             </ProductImageSelectedContainer>
             {/* Info Product */}
             <InfoContainer>

@@ -9,6 +9,8 @@ import ModalProductContainer from '../containers/spec-modal-product/SpecModalPro
 import { Container, Separator } from './Products.styles';
 import ProductHeader from '../components/product/ProductsHeader';
 import ProductsListSeeMore from '../containers/products-list/ProductsListSeeMore';
+import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
+import AlertContainer from '../containers/alert/Alert.container';
 /**
  * The Products' view.
  */
@@ -23,7 +25,9 @@ const Products = () => {
         <ProductsListContainer />
         <ProductsListSeeMore />
       </Container>
+      <AlertContainer />
       <ModalProductContainer />
+      <ContactFormContainer type="product" />
     </AppLayout>
   );
 };

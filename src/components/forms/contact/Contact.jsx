@@ -21,23 +21,31 @@ const Contact = ({ brand, contactType, contact, onChange }) => (
       Contactar
     </Title>
     <InputContainer>
-      <Label>Colaborador</Label>
       <Input name="brand" type="underline" onChange={onChange} value={brand} disabled />
     </InputContainer>
     <InputContainer>
-      <Label>Cargo del Contacto</Label>
       <Input name="user" type="underline" onChange={onChange} value={contactType} disabled />
+    </InputContainer>
+    <InputContainer>
+      <Label strong>Cargo del contacto</Label>
+      <Input name="user" type="underline" onChange={onChange} value="Distribuidor" disabled />
     </InputContainer>
     <InputContainer>
       <Label>Teléfono</Label>
       <CellPhone>
         <CodeNumber>+56</CodeNumber>
-        <Input name="user_phone" type="underline" onChange={onChange} value={contact.user_phone} />
+        <Input 
+          name="user_phone" 
+          type="underline" 
+          onChange={onChange} 
+          value={contact.user_phone} 
+          placeholder="Escribe aquí el teléfono" 
+        />
       </CellPhone>
     </InputContainer>
     <InputContainer>
       <Label style={{ marginBottom: 12 }} strong>Deja un mensaje para el colaborador</Label>
-      <TextArea name="message" onChange={onChange} value={contact.message} />
+      <TextArea name="message" onChange={onChange} value={contact.message} minHeightTextArea="88px" />
     </InputContainer>
   </Container>
 );

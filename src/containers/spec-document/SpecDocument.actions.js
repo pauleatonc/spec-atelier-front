@@ -21,9 +21,9 @@ export const onGetSpecBlocks = specID => async (dispatch, getState) => {
 
   try {
     const { auth } = getState();
-    const { blocks = [] } = await getSpecBlocks({ specID, userID: auth.user?.id }) || {};
+    const { blocks = [], project = {} } = await getSpecBlocks({ specID, userID: auth.user?.id }) || {};
 
-    return dispatch(onActionCreator(GET_SPEC_BLOCKS_SUCCESS, { blocks }));
+    return dispatch(onActionCreator(GET_SPEC_BLOCKS_SUCCESS, { blocks, project }));
   } catch (error) {
     return dispatch(onActionCreator(GET_SPEC_BLOCKS, { error: true, nativeError: error }));
   }
