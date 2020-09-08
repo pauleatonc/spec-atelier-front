@@ -1,49 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { onHideSpecEditProduct, onGetSpecProductsSystems, onGetSpecProductsBrands, onEditSpecProduct } from './SpecEditProduct.actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { onHideSpecEditProduct, onGetSpecProductsSystems, onGetSpecProductsBrands, onEditSpecProduct, cleanStore } from './SpecEditProduct.actions';
 import { onGetSpecProductsSections } from '../spec-products-sections/SpecProductsSections.actions';
 import { onGetSpecProductsItems } from '../spec-products-items/SpecProductsItems.actions';
-import { useInput, useSelect, useTextarea } from '../../components/inputs/Inputs.hooks';
+import { useInput, useSelect, useTextarea, useMultiSelect } from '../../components/inputs/Inputs.hooks';
 import useModal from '../../components/layouts/ModalLayout.hooks';
-import { Root, Section, Footer, Label, ProductContainer, Content, Container, Text, SectionImage, DocContainer } from './SpecEditProduct.styles';
-import { TextArea, Input, Select, Button, Loading, Modal, ImageDragAndDrop, Image, AttachedImages, AttachedDocuments } from '../../components/SpecComponents';
+import { Root, Section, Footer, Label, ProductContainer, Text, DocContainer, ImagesContainer, ProductContent } from './SpecEditProduct.styles';
+import { TextArea, Input, Select, Button, Loading, Modal, ImageDelete, AttachedImages, AttachedDocuments } from '../../components/SpecComponents';
 import { mapToSelector } from '../../helpers/helpers';
-import noPhoto from '../../assets/images/icons/no-photo.svg';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
-import FileItem from '../../components/files/FileItem';
+import DocumentItem from '../../components/attachments/DocumentItem';
+import MultiSelect from '../../components/inputs/MultiSelect';
+import { COLOR_GREY } from '../../config/constants/styled-vars';
 
+
+function* KeyGen() {
+  let i = 1;
+  while (true) yield (i +=1 ) + Date.now();
+};
+
+const keygen = KeyGen();
 /**
  * The SpecEditProduct's container.
  */
 const SpecEditProduct = () => {
   const { id } = useParams();
-  console.log('id', id);
-  const { show, product, loading, pdfs } = useSelector(state => state.specEditProduct);
+  const { show, product, loading, systemsCollection: systems, brandsCollection: brands } = useSelector(state => state.specEditProduct);
   const { collection: sections } = useSelector(state => state.specProductsSections);
   const { collection: items } = useSelector(state => state.specProductsItems);
-  const { systemsCollection: systems, brandsCollection: brands, images } = useSelector(state => state.specEditProduct);
   const {
-    project_types: projectTypes = [],
-    room_types: roomTypes = [],
-    work_types: workTypes = [],
+    project_types = [],
+    room_types = [],
+    work_types = [],
   } = useSelector(state => state.app);
-  const [imagesModal, setImagesModal] = useState(false);
-  const [newImages, setNewImages] = useState([]);
   const dispatch = useDispatch();
-  const { onChange: handleNameChange, set: setNameValue, value: nameValue } = useInput('');
-  const { onChange: handlePriceChange, set: setPriceValue, value: priceValue } = useInput(0, 'currency');
-  const { onChange: handleDescriptionChange, set: setDescriptionValue, value: descriptionValue } = useTextarea(product.description);
+
+  const [imagesModal, setImagesModal] = useState(false);
+  const [documentsModal, setDocumentsModal] = useState(false);
+  const [imagesToDelete, setImagesToDelete] = useState([]);
+  const [documentsToDelete, setDocumentsToDelete] = useState([]);
+  const [roomTypesOptions, setRoomTypesOptions] = useState(room_types || []);
+  const [showMoreData, setShowMoreData] = useState(false);
+  const [imagesValues, setImagesValues] = useState([]);
+  const [documentsValues, setDocumentsValues] = useState([]);
+
+  const { onChange: handleNameChange, set: setNameValue, value: nameValue } = useInput(product.name);
+  const { onChange: handlePriceChange, set: setPriceValue, value: priceValue } = useInput('', 'currency');
+  const { onChange: handleDescriptionChange, set: setDescriptionValue, value: descriptionValue } = useTextarea(product.long_desc);
   const { onChange: onSectionChange, set: setSectionValue, value: sectionValue } = useSelect(product.section);
   const { onChange: onItemChange, set: setItemValue, value: itemValue } = useSelect(product.item);
   const { onChange: handleSystemChange, set: setSystemValue, value: systemValue } = useSelect(product.system);
-
   const { onChange: handleBrandChange, set: setBrandValue, value: brandValue } = useSelect(product.brand);
-  const { onChange: handleProjectTypeChange, set: setProjectTypeValue, value: projectTypeValue } = useSelect(product.system);
-  const { onChange: handleRoomTypeChange, set: setRoomTypeValue, value: roomTypeValue } = useSelect(product.system);
-  const { onChange: handleWorkTypeChange, set: setWorkTypeValue, value: workTypeValue } = useSelect(product.system);
-
-  const [imagesValues, setImagesValues] = useState(images);
+  const { onChange: handleProjectTypeChange, set: setProjectTypeValue, values: projectTypeValues } = useMultiSelect();
+  const { onChange: handleRoomTypeChange, set: setRoomTypeValue, values: roomTypeValues } = useMultiSelect();
+  const { onChange: handleWorkTypeChange, set: setWorkTypeValue, values: workTypeValues } = useMultiSelect();
 
   const handleSectionChange = option => {
     onSectionChange(option);
@@ -51,105 +62,150 @@ const SpecEditProduct = () => {
     setSystemValue({});
     dispatch(onGetSpecProductsItems({ sectionID: option.value }));
   };
+
   const handleItemChange = option => {
     onItemChange(option);
     setSystemValue({});
     dispatch(onGetSpecProductsSystems({ itemID: option.value }));
   };
+
   const { onClose: handleClose, onExiting: handleExiting } = useModal({
-    closeCallback: () => dispatch(onHideSpecEditProduct()),
-    exitingCallback: () => {
-      setDescriptionValue('');
-      setNameValue('');
-      setSectionValue({});
+    closeCallback: () => {
+      dispatch(onHideSpecEditProduct());
+      dispatch(cleanStore());
+      setShowMoreData(false);
       setItemValue({});
       setSystemValue({});
+      setImagesValues([]);
+      setImagesToDelete([]);
+      setDocumentsToDelete([]);
+      setNameValue('');
+      setDescriptionValue('');
       setPriceValue('');
+      setSectionValue({});
+      setDocumentsValues([]);
+      setRoomTypesOptions([]);
+    },
+    exitingCallback: () => {
+      setImagesModal(false);
+      setDocumentsModal(false);
     },
   });
 
-  const handleMoreDate = () => ({
-    // section: sectionValue,
-    // item: itemValue,
-    // system: systemValue,
-  });
+  const filterRoomTypesOptions = selectedProjectTypes => {
+    const filteredRoomTypes = room_types
+      .filter(rt => rt.project_types.some(rpt => selectedProjectTypes.some(spt => spt.id === rpt.id)))
+      .map(mapToSelector);
 
-  const handleNext = () => dispatch(onHideSpecEditProduct());
+    setRoomTypesOptions(filteredRoomTypes)
+    setRoomTypeValue(filteredRoomTypes.filter(frt => roomTypeValues.some(rt => rt.id === frt.id)));
+    handleProjectTypeChange(selectedProjectTypes)
+  };
 
-  const handleEditImg = img => {
-    console.log('delete-img', img);
+  const handleMoreDate = () => {
+    setShowMoreData(true);
+    setProjectTypeValue(product.project_type.map(mapToSelector));
+    filterRoomTypesOptions(product.project_type);
+    setWorkTypeValue(product.work_type.map(mapToSelector));
   };
 
   const handleDeleteImg = img => {
-    setImagesValues(
-      imagesValues.map((image, i) => image.code === img.code ? {
-        ...images[i],
-        src: '',
-      } : image)
-    );
+    setImagesValues(imagesValues.filter(image => image.id !== img.id));
+    if (!img.isNew) setImagesToDelete([...imagesToDelete, img.id]);
   };
 
-  const openModalImg = position => () => setImagesModal(position);
+  const handleDeletePDF = doc => () => {
+    setDocumentsValues(documentsValues.filter(file => file.id !== doc.id));
+    if (!doc.isNew) setDocumentsToDelete([...documentsToDelete, doc.id]);
+  };
 
-  const closeModalImg = () => setImagesModal(0);
+  const openModalImg = () => setImagesModal(true);
+  const closeModalImg = () => setImagesModal(false);
+  const toggleDocumentsModal = () => setDocumentsModal(!documentsModal);
 
-  const mapToImages = imgs => images.map((img, i) => ({ ...img, src: imgs[i]?.urls?.medium }));
-  
+  const mapToImages = img => ({ ...img, src: img?.urls?.medium });
+  const mapToFiles = file => ({ ...file, src: file.url });
+
   const handleAttachReject = reason => dispatch(onShowAlertSuccess({ message: reason }));
 
   const onAddImages = imgs => {
-    setNewImages([...newImages, ...imgs]);
+    // eslint-disable-next-line no-undef
+    const newImages = imgs.filter(img => img instanceof File);
     setImagesValues(
-      imagesValues.map(img => img.code === imagesModal ? {
-        ...img,
-        src: URL.createObjectURL(imgs[0]),
+      [...imagesValues, ...newImages.map(img => ({
+        id: keygen.next().value,
+        name: img.name,
+        size: img.size,
+        src: URL.createObjectURL(img),
+        file: img,
         isNew: true,
-      } : img)
+      }))]
+    );
+  };
+
+  const onAddDocuments = attachedDocuments => {
+    setDocumentsValues(
+      [...documentsValues, ...attachedDocuments.map(doc => ({
+        id: keygen.next().value,
+        name: doc.name,
+        size: doc.size,
+        src: URL.createObjectURL(doc),
+        file: doc,
+        isNew: true,
+      }))]
     );
   };
 
   const onSave = () => dispatch(onEditSpecProduct({
     product: {
       id: product.id,
-      name: nameValue,
-      brand: brandValue,
-      item_id: itemValue,
-      long_desc: descriptionValue,
-      price: priceValue,
-      system_id: systemValue,
+      name: product.name !== nameValue ? nameValue : undefined,
+      brand: product.brand?.id !== brandValue?.id ? brandValue : undefined,
+      item_id: product.item?.id !== itemValue?.id ? itemValue : undefined,
+      long_desc: product.long_desc !== descriptionValue ? descriptionValue : undefined,
+      price: product.price !== priceValue ? priceValue : undefined,
+      section: product.section?.id !== sectionValue?.id ? sectionValue : undefined,
+      system_id: product.system?.id !== systemValue?.id ? systemValue : undefined,
+      room_type: roomTypeValues.length ? roomTypeValues.map(rt => rt.id) : undefined,
+      work_type: workTypeValues.length ? workTypeValues.map(wt => wt.id) : undefined,
+      project_type: projectTypeValues.length ? projectTypeValues.map(pt => pt.id) : undefined,
     },
-    documents: [],
-    images: newImages.filter(({ isNew, id: imgiD }) => !imgiD && isNew),
-  }))
-
-
-  const canEdit = !nameValue || !sectionValue.label || !itemValue.label;
+    documents: documentsValues.reduce((acc, doc) => doc.isNew ? [...acc, doc.file] : acc, []),
+    images: imagesValues.reduce((acc, img) => img.isNew ? [...acc, img.file] : acc, []),
+    imagesToDelete,
+    documentsToDelete,
+    specID: id,
+  }));
 
   useEffect(() => {
-    if (!show) {
-      return;
-    }
-    // dispatch(getProduct());
+    if (!show) return;
     dispatch(onGetSpecProductsBrands());
     dispatch(onGetSpecProductsSections());
   }, [show]);
 
   useEffect(() => {
-    console.log('product', product);
     if (product.id) {
       setDescriptionValue(product.long_desc);
       setNameValue(product.name);
       setSectionValue(mapToSelector(product.section));
       setItemValue(mapToSelector(product.item));
       setSystemValue(mapToSelector(product.system));
-      setPriceValue(product.price);
+      setPriceValue(product.price || '');
       setBrandValue(mapToSelector(product.brand));
-      // setRoomTypeValue(product.room_types)
-      setImagesValues(mapToImages(product.images))
+      setImagesValues(product.images.map(mapToImages));
+      setDocumentsValues(product.pdfs.map(mapToFiles));
+      setDocumentsToDelete([]);
+      setImagesToDelete([]);
+      dispatch(onGetSpecProductsItems({ sectionID: product.section.id }));
+      dispatch(onGetSpecProductsSystems({ itemID: product.item.id }));
     };
   }, [product]);
 
-  if (loading || !brands || !product.id) return <Loading />
+  if (loading || !brands || !product.id) return null;
+  const canEdit = !nameValue || !sectionValue.label || !itemValue.label;
+  const imageWidth = imagesValues.length < 3 ? `${Number.parseInt(100 / imagesValues.length || 1, 10)}%` : '33%';
+  const imagesHeight = imagesValues.length < 3 ? '100%' : `${Number.parseInt(100 / Math.ceil(imagesValues.length / 3), 10)}%`;
+
   return (
     <Modal show={show} onClose={handleClose} onExiting={handleExiting}>
       <Root>
@@ -160,43 +216,44 @@ const SpecEditProduct = () => {
             value={nameValue}
             width="490px"
             onChange={handleNameChange}
-            name="nombre"
-          />
+            name="name"
+            />
         </Section>
         <ProductContainer>
           {/* Left */}
-          <div>
-            <Container>
+          <ProductContent>
+            <Text onClick={openModalImg}><i className="fas fa-plus" /> Añadir imagen</Text>
+            <ImagesContainer>
               {imagesValues.map(img => (
-                <Content gridArea={img.name}>
-                  {img.src
-                    ? (
-                      <ImageDragAndDrop key={img.code} img={img} onDelete={handleDeleteImg} onEdit={handleEditImg} />
-                    ) : (
-                      <SectionImage key={img.code} onClick={openModalImg(img.code)}>
-                        <Image height="60px" width="60px" src={noPhoto} />
-                        <Text>Añadir Imagen</Text>
-                      </SectionImage>
-                    )
-                  }
-                </Content>
+                <ImageDelete
+                  key={img.id}
+                  width={imageWidth}
+                  height={imagesHeight}
+                  img={img}
+                  onDelete={handleDeleteImg}
+                  hideDelete={!!img.hide_delete}
+                />
               ))}
-            </Container>
-            {/* <Section display="grid" gridTemplateColumns="1fr 1fr" padding="20px 0">
-              {pdfs.map(pdf => pdf && <FileItem file={pdf} /> )}
-              {product.dwg?.name && <FileItem file={product.dwg?.name} />}
-              {product.bim?.name && <FileItem file={product.bim?.name} />}
-            </Section> */}
-          </div>
+            </ImagesContainer>
+            <Text onClick={toggleDocumentsModal}><i className="fas fa-plus" /> Añadir archivo</Text>
+            <DocContainer>
+              <ProductContainer>
+                {documentsValues.map(pdf => pdf && <DocumentItem key={pdf.id} document={pdf} bordered onClickRemove={handleDeletePDF(pdf)} />)}
+                {product.dwg?.name && <DocumentItem key={product.dwg.id} document={product.dwg} bordered />}
+                {product.bim?.name && <DocumentItem  key={product.bim.id} document={product.bim} bordered />}
+              </ProductContainer>
+            </DocContainer>
+          </ProductContent>
           {/* Right */}
-          <div>
-            <Section padding="0 0 10px">
+           <div>
+           <Section padding="0 0 10px">
               <Label>Descripción</Label>
               <TextArea
-                minHeight="118px"
+                minHeightTextArea="118px"
                 placeholder="Detalla el producto"
                 value={descriptionValue}
                 onChange={handleDescriptionChange}
+                name="log_desc"
               />
             </Section>
             <Section alignItems="flex-end" display="grid" gridTemplateColumns="1fr 1fr" padding="20px 0">
@@ -243,49 +300,49 @@ const SpecEditProduct = () => {
               <div>
                 <Label>Precio</Label>
                 <Input
-                  placeholder="Nombre"
+                  placeholder="Precio"
                   value={priceValue}
                   width="100%"
                   onChange={handlePriceChange}
-                  name="nombre"
+                  name="price"
                 />
               </div>
             </Section>
-            <Section alignItems="flex-end" display="grid" gridTemplateColumns="1fr 1fr" gridGap="12px">
-              <div>
-                <Label>Tipo de proyecto</Label>
-                {projectTypes.length && (
-                  <Select
-                    options={projectTypes.map(mapToSelector)}
+            {showMoreData && (
+              <Section alignItems="flex-end" display="grid" gridTemplateColumns="1fr 1fr" gridGap="12px">
+                <div>
+                  <Label>Tipo de proyecto</Label>
+                  <MultiSelect
+                    showButtons
+                    options={project_types.map(mapToSelector)}
                     placeholder="Elige un tipo de proyecto"
-                    value={projectTypeValue}
-                    onChange={handleProjectTypeChange}
+                    values={projectTypeValues.map(mapToSelector)}
+                    onChange={filterRoomTypesOptions}
                   />
-                )}
-              </div>
-              <div>
-                <Label>Tipo de Obra</Label>
-                {workTypes.length && (
-                  <Select
-                    options={workTypes.map(mapToSelector)}
-                    placeholder="Elige un tipo"
-                    value={workTypeValue}
+                </div>
+                <div>
+                  <Label>Tipo de Obra</Label>
+                  <MultiSelect
+                    showButtons
+                    options={work_types.map(mapToSelector)}
+                    placeholder="Elige un tipo de obra"
+                    values={workTypeValues.map(mapToSelector)}
                     onChange={handleWorkTypeChange}
                   />
-                )}
-              </div>
-              <div>
-                <Label>Tipo de habitación</Label>
-                {roomTypes.length && (
-                  <Select
-                    options={roomTypes.map(mapToSelector)}
-                    placeholder="Elige un sistema"
-                    value={roomTypeValue}
+                </div>
+                <div>
+                  <Label>Tipo de habitación</Label>
+                  <MultiSelect
+                    showButtons
+                    options={roomTypesOptions}
+                    placeholder={roomTypesOptions.length ? 'Elige una habitación' : 'Elige un proyecto primero'}
+                    values={roomTypeValues.map(mapToSelector)}
                     onChange={handleRoomTypeChange}
+                    disabled={!roomTypesOptions.length}
                   />
-                )}
-              </div>
-            </Section>
+                </div>
+              </Section>
+            )}
           </div>
         </ProductContainer>
         <Footer>
@@ -297,37 +354,43 @@ const SpecEditProduct = () => {
             >
               Guardar
             </Button>
-            <Button
+            <Button    
               inverse
               disabled={canEdit}
-              variant="gray"
+              variant="cancel"
               onClick={handleClose}
+              style={{ marginLeft: 12, color: COLOR_GREY }}
             >
               Descartar
           </Button>
           </div>
-          <Button
-            inverse
-            disabled={canEdit}
-            variant="primary"
-            onClick={handleMoreDate}
-          >
-            Añadir datos adicionales
-          </Button>
+          {!showMoreData && (
+            <Button
+              inverse
+              disabled={canEdit}
+              variant="cancel"
+              onClick={handleMoreDate}
+            >
+              Añadir datos adicionales
+            </Button>
+          )}
         </Footer>
         <AttachedImages
           images={[]}
+          maxSize={10}
           onChange={onAddImages}
           onReject={handleAttachReject}
           onClose={closeModalImg}
-          showModal={!!imagesModal}
+          showModal={imagesModal}
           hideItems
         />
         <AttachedDocuments
+          maxSize={5}
           documents={[]}
-          onChange={() => { }}
+          onChange={onAddDocuments}
           onReject={handleAttachReject}
-          showModal={false}
+          showModal={documentsModal}
+          onClose={toggleDocumentsModal}
           hideItems
         />
       </Root>

@@ -88,7 +88,7 @@ const SpecCreateProductStepTwo = () => {
             <Section display="grid" gridGap="46px" gridTemplateRows="1fr 1fr">
               <Autocomplete
                 label="¿Qué marca es?"
-                options={brands.map(availableBrand => ({ label: availableBrand.name, value: availableBrand.name }))}
+                options={brands.map(availableBrand => ({ label: availableBrand.name, value: availableBrand.id }))}
                 placeholder="Elige una marca"
                 value={brandValue}
                 onChange={handleBrandChange}

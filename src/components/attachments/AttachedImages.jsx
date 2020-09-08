@@ -143,7 +143,10 @@ AttachedImages.defaultProps = {
 };
 AttachedImages.propTypes = {
   images: PropTypes.arrayOf(
-    PropTypes.instanceOf(window.File),
+    PropTypes.oneOfType([
+      PropTypes.instanceOf(window.File),
+      PropTypes.object,
+    ])
   ).isRequired,
   label: PropTypes.string,
   onChange: PropTypes.func.isRequired,

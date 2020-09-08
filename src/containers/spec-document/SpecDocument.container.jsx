@@ -78,8 +78,8 @@ const SpecDocument = () => {
     handleAddMenuClose();
     dispatch(onShowSpecCreateProductSuccess());
   };
-  const handleEditProduct = block => () => {
-    handleAddMenuClose();
+  const handleEditProduct = block => event => {
+    handleBlockMenuClose(event);
     dispatch(onShowSpecEditProduct({ id: block.element.id || 1 }));
   };
 

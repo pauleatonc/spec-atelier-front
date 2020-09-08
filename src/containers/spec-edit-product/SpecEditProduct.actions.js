@@ -7,15 +7,19 @@ import {
   getProductsSystems,
   uploadProductImages,
   uploadProductDocuments,
+  removeProductImages,
+  removeProductDocuments,
 } from '../../services/products.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS } from '../spec-products-sections/SpecProductsSections.actions';
 import { onHideSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
 import { cleanObject } from '../../modules/services';
+import { onGetSpecBlocks } from '../spec-document/SpecDocument.actions';
 
 export const GET_SPEC_PRODUCT = 'GET_SPEC_PRODUCT';
 export const GET_SPEC_PRODUCT_SUCCESS = 'GET_SPEC_PRODUCT_SUCCESS';
 export const GET_SPEC_PRODUCT_ERROR = 'GET_SPEC_PRODUCT_ERROR';
+export const SPEC_EDIT_PRODUCT_CLEAN_STORE = 'SPEC_EDIT_PRODUCT_CLEAN_STORE';
 
 export const onShowSpecEditProduct = ({ id }) => async dispatch => {
   dispatch(onActionCreator(GET_SPEC_PRODUCT));
@@ -63,25 +67,24 @@ export const onGetSpecProductsBrands = () => async dispatch => {
 export const EDIT_SPEC_PRODUCT = 'EDIT_SPEC_PRODUCT';
 export const EDIT_SPEC_PRODUCT_ERROR = 'EDIT_SPEC_PRODUCT_ERROR';
 export const EDIT_SPEC_PRODUCT_SUCCESS = 'EDIT_SPEC_PRODUCT_SUCCESS';
-export const onEditSpecProduct = ({ product, documents, images, documentsToDelete, ImagesToDelete }) => async dispatch => {
-  dispatch(onActionCreator(EDIT_SPEC_PRODUCT));
-  console.log('product', product);
-  const patch = [
-    editProduct(cleanObject(product)),
-  ];
-  if (documents.length) patch.concat(uploadProductImages(product.id, images));
-  if (images.length) patch.concat(uploadProductDocuments(product.id, documents));
-  // if (documentsToDelete.length) patch.concat();
-  // if (ImagesToDelete.length) patch.concat();
+export const onEditSpecProduct = ({ product, documents, images, documentsToDelete, imagesToDelete, specID }) => async dispatch => {
   try {
+    dispatch(onActionCreator(EDIT_SPEC_PRODUCT));
+    const patch = [
+      editProduct(cleanObject(product)),
+    ];
+
+    if (images?.length) patch.concat(uploadProductImages({ productID: product.id, images }));
+    if (documents?.length) patch.concat(uploadProductDocuments({ productID: product.id, documents }));
+    if (imagesToDelete?.length) patch.concat(removeProductImages({ productID: product.id, images: imagesToDelete }));
+    if (documentsToDelete?.length) patch.concat(removeProductDocuments({ productID: product.id, documents: documentsToDelete }));
+
     const results = await Promise.all(patch);
     if (results.some(r => r.error)) throw Error;
-    console.log('resulst', results);
     return batch(() => {
+      dispatch(onGetSpecBlocks(specID))
       dispatch(onActionCreator(EDIT_SPEC_PRODUCT_SUCCESS));
       dispatch(onShowAlertSuccess({ message: 'Producto editado exitosamente' }));
-      dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS));
-      dispatch(onHideSpecProductsItemsSuccess());
     });
   } catch (error) {
     return batch(() => {
@@ -99,3 +102,5 @@ export const onHideSpecEditProduct = () => dispatch =>
     dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS));
     dispatch(onHideSpecProductsItemsSuccess());
   });
+
+export const cleanStore = () => dispatch => dispatch(onActionCreator(SPEC_EDIT_PRODUCT_CLEAN_STORE));

@@ -113,3 +113,12 @@ export const OptionText = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
+
+export const Actions = styled.section`
+  display: grid;
+  grid-column-gap: 10px;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  padding: 10px 0;
+  width: 100%;
+`;

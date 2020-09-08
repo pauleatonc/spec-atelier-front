@@ -14,8 +14,16 @@ export const Root = styled.div`
 export const ProductContainer = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 30px;
+  column-gap: 12px;
   width: 100%;
+  min-height: 0;
+  min-width: 0;
+  padding: 8px 12px 8px 8px;
+`;
+
+export const ProductContent = styled.section`
+  overflow: hidden;
+  min-width: 0;  
 `;
 
 Root.defaultProps = {
@@ -132,47 +140,38 @@ export const Gap = styled.div`
   width: 10px;
 `;
 
-export const Container = styled.section`
-  display: grid;
-  gap: 8px 8px;
-  grid-template-areas:
-    "one one two two three three"
-    "four four four five five five";
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 194px 194px;
-`;
-
-export const Content = styled.div`
-  grid-area: ${({ gridArea }) => gridArea || 'one'};
-`;
-
 export const Text = styled.div`
   white-space: nowrap;
   font-family: Lato;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: 0.63px;
-  text-align: center;
+  text-align: right;
   color: ${COLOR_PRIMARY};
-`;
-
-export const SectionImage = styled.section`
-  display: flex;
-  align-items: center; 
-  justify-content: center;
-  height: 100%;
-  flex-direction: column;
+  margin: 12px 0;
   cursor: pointer;
 `;
 
-export const DocContainer = styled.div`
-  width: 100%;
-  border-radius: 9px;
+
+export const ImagesContainer = styled.section`
+  height: 260px;
   border: solid 1px ${COLOR_GREY};
-  min-height: 38px;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  marign: 8px;
+`;
+
+export const DocContainer = styled.div`
+  margin: 8px 0;
+  width: 100%;
+  border: dotted 1px ${COLOR_GREY};
+  height: 160px;
+  overflow-y: auto;
 `;
 
 export const DocIcon = styled.div`

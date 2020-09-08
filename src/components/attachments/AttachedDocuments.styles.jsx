@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
+import { COLOR_MINE_SHAFT, COLOR_GREY } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   position: relative;
@@ -78,6 +78,7 @@ export const EmptyText = styled.span`
   letter-spacing: 0.75px;
   pointer-event: none;
   user-select: none;
+  text-align: center;
 `;
 
 export const List = styled.div`
@@ -88,15 +89,23 @@ export const List = styled.div`
   width: 100%;
 `;
 
+const border = `
+  border: 1px solid ${COLOR_GREY};
+  border-radius: 8px;
+  margin: 2px;
+`;
+
 export const Item = styled.section`
   align-items: center;
   background-color: transparent;
   display: flex;
   grid-template-columns: 40px auto 30px;
   height: 50px;
-  padding: 0 10px 0 31px;
+  padding: 8px 10px;
   position: relative;
   width: 100%;
+  min-width: 0;
+  ${({ bordered }) => bordered ? border : '' }
 
   &:hover {
     background-color: #EEE;
@@ -107,7 +116,7 @@ export const ItemDetails = styled.div`
   box-sizing: border-box;
   display: block;
   overflow: hidden;
-  padding: 0 10px 0 20px;
+  padding: 0 10px;
   width: 100%;
 `;
 

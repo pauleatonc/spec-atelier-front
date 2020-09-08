@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
 import ModalLayout from '../layouts/ModalLayout';
@@ -14,10 +14,6 @@ import {
   EmptyAction,
   EmptyText,
   List,
-  Item,
-  ItemDetails,
-  ItemText,
-  RemoveIcon,
   Action,
   DropContent,
   DropCloseIcon,
@@ -26,15 +22,14 @@ import {
   DropZoneText,
 } from './AttachedDocuments.styles';
 import documentsUploadSource from '../../assets/images/icons/documents-upload.svg';
-import documentUploadSource from '../../assets/images/icons/document-upload.svg';
-import removeSource from '../../assets/images/icons/remove.svg';
 import closeSource from '../../assets/images/icons/close.svg';
+import DocumentItem from './DocumentItem';
 
 /**
  * The AttachedFiles' component.
  */
 const AttachedFiles = props => {
-  const { documents, label, onChange, onReject, showModal, hideItems } = props;
+  const { documents, label, onChange, onReject, showModal, hideItems, maxSize } = props;
   const [show, setShow] = useState(showModal);
   const handleOpen = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -57,7 +52,7 @@ const AttachedFiles = props => {
         return docs;
       }
 
-      if (docs.length >= 4) {
+      if (docs.length >= maxSize) {
         return docs;
       }
 
@@ -66,12 +61,17 @@ const AttachedFiles = props => {
 
     handleClose();
 
-    if (allDocuments.length > 4) {
-      onReject('Puedes subir hasta 4 documentos: 2 PDF, 1 DWG y 1 RVT');
+    if (allDocuments.length > maxSize) {
+      onReject(`Puedes subir hasta ${maxSize} documentos: ${maxSize - 2} PDF, 1 DWG y 1 RVT'`);
     }
 
     onChange(attachedDocuments);
   }, [documents]);
+
+  useEffect(() => {
+    setShow(showModal);
+  }, [showModal]);
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: '.pdf, .dwg, .rvt',
     onDrop: handleDrop,
@@ -98,21 +98,19 @@ const AttachedFiles = props => {
                 </EmptyHeader>
                 <EmptyBody>
                   <EmptyAction onClick={handleOpen}>Sube documentos</EmptyAction>
-                  <EmptyText>Puedes subir 2 PDF, 1 DWG Y 1 RVT</EmptyText>
+                  <EmptyText>{`Puedes subir hasta ${maxSize} documentos: ${maxSize - 2} PDF, 1 DWG y 1 RVT`}</EmptyText>
                 </EmptyBody>
               </Empty>
             )}
             {documents.length > 0 && (
               <List>
                 {documents.map((document, index) => (
-                  <Item key={index}>
-                    <img alt="" src={documentUploadSource} />
-                    <ItemDetails>
-                      <ItemText>{document.name}</ItemText>
-                      <ItemText>{`${Math.round(document.size / 1024)} Kb`}</ItemText>
-                    </ItemDetails>
-                    <RemoveIcon alt="" src={removeSource} onClick={handleRemove(document, index)} />
-                  </Item>
+                  <DocumentItem
+                    key={document.id}
+                    document={document}
+                    index={index}
+                    onClickRemove={handleRemove(document, index)}
+                  />
                 ))}
               </List>
             )}
@@ -155,16 +153,21 @@ AttachedFiles.defaultProps = {
   onReject: () => undefined,
   hideItems: false,
   onClose: () => undefined,
+  maxSize: 5,
 };
 AttachedFiles.propTypes = {
   documents: PropTypes.arrayOf(
-    PropTypes.instanceOf(window.File),
+    PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.instanceOf(window.File),
+    ])
   ).isRequired,
   label: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onClose: PropTypes.func,
   onReject: PropTypes.func,
   hideItems: PropTypes.bool,
+  maxSize: PropTypes.number,
 };
 
 export default AttachedFiles;

@@ -5,30 +5,35 @@ import {
   GET_SPEC_PRODUCTS_BRANDS_SUCCESS,
   GET_SPEC_PRODUCTS_SYSTEMS_SUCCESS,
   HIDE_SPEC_EDIT_PRODUCT_SUCCESS,
-  // SHOW_SPEC_EDIT_PRODUCT_SUCCESS,
   GET_SPEC_PRODUCT,
   GET_SPEC_PRODUCT_SUCCESS,
   GET_SPEC_PRODUCT_ERROR,
+  SPEC_EDIT_PRODUCT_CLEAN_STORE,
 } from './SpecEditProduct.actions';
 
 const editProductState = {
   brandsCollection: [],
   show: false,
   systemsCollection: [],
-  product: {},
+  product: {
+    name: '',
+    short_desc: '',
+    long_desc: '',
+    section: {},
+    item: {},
+    system: {},
+    price: '',
+    brand: {},
+    images: [],
+    pdfs: [],
+    project_type: [],
+    room_type: [],
+    work_type: [],
+  },
   loading: false,
   editing: false,
-  images: [
-    { code: 1, name: 'one', src: '' },
-    { code: 2, name: 'two', src: '' },
-    { code: 3, name: 'three', src: '' },
-    { code: 4, name: 'four', src: '' },
-    { code: 5, name: 'five', src: '' },
-  ],
-  pdfs: [
-    { code: 1, name: '', url: '' },
-    { code: 2, name: '', url: '' },
-  ],
+  images: [],
+  documents: [],
 };
 
 /**
@@ -37,11 +42,9 @@ const editProductState = {
 const editProductReducer = (state = editProductState, { payload, type }) => {
   switch (type) {
     case GET_SPEC_PRODUCT: {
-      console.log('here')
       return { ...state, loading: false, product: {}, show: true };
     }
     case GET_SPEC_PRODUCT_SUCCESS: {
-      console.log('payload', payload)
       return { ...state, loading: false, product: payload.product };
     }
     case GET_SPEC_PRODUCT_ERROR: {
@@ -62,6 +65,9 @@ const editProductReducer = (state = editProductState, { payload, type }) => {
     }
     case GET_SPEC_PRODUCTS_SYSTEMS_SUCCESS: {
       return { ...state, systemsCollection: payload.systems };
+    }
+    case SPEC_EDIT_PRODUCT_CLEAN_STORE: {
+      return { ...editProductState };
     }
     default: {
       return state;

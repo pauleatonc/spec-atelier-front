@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Root, Separator, Section, ProjectName, Download, Monetization } from './SpecHeader.styles';
 import logoSource from '../../assets/images/logo-spec.png';
@@ -9,6 +10,7 @@ import logo3xSource from '../../assets/images/logo-spec@3x.png';
  * The SpecHeader's container.
  */
 const SpecHeader = () => {
+  const { project } = useSelector(state => state.specDocument);
   return (
     <Root>
       <Section>
@@ -17,7 +19,7 @@ const SpecHeader = () => {
         </Link>
       </Section>
       <Separator />
-      <ProjectName>Hospital San Carlos de ANCUD</ProjectName>
+      <ProjectName>{project?.name}</ProjectName>
       <Separator />
       <Section>
         <Download />
