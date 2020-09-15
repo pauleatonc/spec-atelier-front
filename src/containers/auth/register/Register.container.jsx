@@ -61,7 +61,7 @@ const Register = () => {
             placeholder="Contraseña"
             required
           />
-          <Button variant="secondary" onClick={handleSubmit} width="164px">
+          <Button variant="secondary" onClick={handleSubmit} width="164px" disabled={!user.password || !user.email}>
             Crear Cuenta
 					</Button>
         </form>

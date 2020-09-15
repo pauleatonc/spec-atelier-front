@@ -84,7 +84,7 @@ const Login = () => {
               Recuperar Contraseña
             </RegisterLink>
           </TextInfo>
-          <Button variant="secondary" onClick={handleSubmit} width="164px">
+          <Button variant="secondary" onClick={handleSubmit} width="164px" disabled={!user.password || !user.email}>
             Iniciar sesión
 					</Button>
         </form>
