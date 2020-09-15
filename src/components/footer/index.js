@@ -1,16 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LOGO from '../../assets/images/logo_footer.png';
+import { LOGO_SPEC_SMALL, LOGO_CCHC, LOGO_CENTRO_INNOVACION, LOGO_CORFO } from '../../assets/Images';
+import { Image } from '../SpecComponents';
+import { Container, Content, ImageConainer, LeftContent, RightContent, Menu } from './Footer.styles';
 
 const Footer = () => (
-	<footer className="footer">
-		<div className="footer__inner">
-			<div className="footer__inner__menu">
-				<div className="footer__inner__menu__container">
+	<Container>
+		<Content>
+			<LeftContent>
+				<Menu>
 					<div className="footer__inner__menu__container__logo">
 						<img
+							alt=""
 							className="footer__inner__menu__container__logo__content"
-							src={LOGO}
+							src={LOGO_SPEC_SMALL}
 						/>
 					</div>
 					<Link className="footer__inner__menu__container__link" to="/us">
@@ -22,10 +25,14 @@ const Footer = () => (
 					<Link className="footer__inner__menu__container__link" to="/brands">
 						Marcas
 					</Link>
-				</div>
-			</div>
-
-			<div className="footer__inner__info">
+				</Menu>
+				<ImageConainer>
+					<Image src={LOGO_CCHC} width="120px" height="64px" />
+					<Image src={LOGO_CENTRO_INNOVACION} width="164px" height="56px" />
+					<Image src={LOGO_CORFO} width="168px" height="64px" />
+				</ImageConainer>
+			</LeftContent>
+			<RightContent>
 				<div className="footer__inner__info__container">
 					<div className="footer__inner__info__container__contacts">
 						<h3 className="footer__inner__info__container__contacts__title">
@@ -74,9 +81,9 @@ const Footer = () => (
 						</span>
 					</p>
 				</div>
-			</div>
-		</div>
-	</footer>
+			</RightContent>
+		</Content>
+	</Container>
 );
 
 export default Footer;
