@@ -5,6 +5,8 @@ import {
   GET_PRODUCTS_FILTERS_ALL,
   GET_SECTIONS_ERROR,
   GET_SECTIONS_SUCCESS,
+  GET_ITEMS_SUCCESS,
+  GET_ITEMS_ERROR,
   GET_MORE_PRODUCTS,
   GET_PRODUCTS_BY_FILTER,
   ON_SELECT_ALL,
@@ -38,7 +40,7 @@ const productsListState = {
 /**
  * The products' reducer.
  */
-const productsListReducer = (state = productsListState, { payload, type }) => {
+const productsListReducer = (state = { ...productsListState }, { payload, type }) => {
   switch (type) {
     case GET_PRODUCTS: {
       return {
@@ -92,6 +94,16 @@ const productsListReducer = (state = productsListState, { payload, type }) => {
       };
     }
     case GET_SECTIONS_ERROR:
+      break;
+    case GET_ITEMS_SUCCESS: {
+      return {
+        ...state,
+        items: payload.items,
+        loading: false,
+        error: false,
+      };
+    }
+    case GET_ITEMS_ERROR:
       break;
     case ON_SELECT_ALL:
       return {

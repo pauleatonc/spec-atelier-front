@@ -21,6 +21,7 @@ import DropdownMenu from '../../components/menus/DropdownMenu';
 import Button from '../../components/buttons/Button';
 import ProductCard from '../../components/cards/ProductCard';
 import { Overlay, Root, Header, HeaderSearch, HeaderFilters, Body, BodyHeader, Sort, Total, Cards, LoadMore, Loading } from './SpecProducts.styles';
+import { mapToSelector } from '../../helpers/helpers';
 
 /**
  * The SpecProductsList's container.
@@ -32,17 +33,22 @@ const SpecProductsList = () => {
   const selectedProducts = useSelector(state => state.specDocument.blocks?.filter(block => block.type === 'Product'));
   const { nextPage, collection: products = [], loading, show, total } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
+
   const [keywordValue, setKeywordValue] = useState('');
   const [sortValue, setSortValue] = useState({});
+  const [roomTypesOptions, setRoomTypesOptions] = useState([]);
+
   const handleHideSpecProducts = () => dispatch(onHideSpecProducts());
   const handleKeywordChange = event => {
     setKeywordValue(event.target.value);
     dispatch(onGetSpecProductsByKeyword({ keyword: event.target.value }));
   };
+
   const handleSortChange = option => {
     setSortValue(option);
     dispatch(onGetSpecProductsBySort({ sort: option.value }));
   };
+
   const handleCardClick = productID => () => {
     const hasProduct = selectedProducts.find(selectedProduct => selectedProduct?.element.id === productID);
 
@@ -52,6 +58,7 @@ const SpecProductsList = () => {
     
     return dispatch(onAttachSpecProduct({ productID, specID }));
   };
+
   const handleLoadMoreClick = () => {
     dispatch(onGetSpecProductsByPage());
   };
@@ -59,24 +66,37 @@ const SpecProductsList = () => {
     event.stopPropagation();
     dispatch(getProduct(selectedProduct));
   }
+
   const { values: brandsValues, set: setBrandsValues, onSubmit: onBrandsSubmit } =
     useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'brand', value: values })) });
+  
+    const { values: projectTypeValues, set: setProjectTypeValues, onSubmit: onProjectTypeSubmit } =
+    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'project_type', value: values })) });
+  
+  const { values: roomTypeValues, set: setRoomTypeValues, onSubmit: onRoomTypeSubmit } =
+      useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: values })) });
+  
   const handleBrandsSubmit = close => event => {
     close();
     onBrandsSubmit(event);
   };
-  const { values: projectTypeValues, set: setProjectTypeValues, onSubmit: onProjectTypeSubmit } =
-    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'project_type', value: values })) });
+  
   const handleProjectTypeSubmit = close => event => {
+    const filteredRoomTypes = roomTypes
+      .filter(rt => rt.project_types.some(rpt => event.some(spt => spt.value === rpt.id)))
+      .map(mapToSelector);
+    
+    dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: filteredRoomTypes }))
+    setRoomTypesOptions(filteredRoomTypes);  
     close();
     onProjectTypeSubmit(event);
   };
-  const { values: roomTypeValues, set: setRoomTypeValues, onSubmit: onRoomTypeSubmit } =
-    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: values })) });
+
   const handleRoomTypeSubmit = close => event => {
     close();
     onRoomTypeSubmit(event);
   };
+
   const handleFilterAll = () => {
     setBrandsValues([]);
     setProjectTypeValues([]);
@@ -112,7 +132,7 @@ const SpecProductsList = () => {
                 <ComboBox
                   optionAll
                   submit
-                  options={brands.map(brand => ({ label: brand.name || '', value: brand.id }))}
+                  options={brands.filter(({ products_count }) => products_count).map(brand => ({ label: brand.name || '', value: brand.id }))}
                   placeholder="Selecciona"
                   type="list"
                   values={brandsValues}
@@ -141,7 +161,7 @@ const SpecProductsList = () => {
                 <ComboBox
                   optionAll
                   submit
-                  options={roomTypes.map(roomType => ({ label: roomType.name || '', value: roomType.id }))}
+                  options={roomTypesOptions}
                   placeholder="Selecciona"
                   type="list"
                   values={roomTypeValues}

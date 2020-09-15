@@ -21,25 +21,34 @@ const defaultProps = {
   options: [],
   currentOptions: [],
   children: null,
-  onChange: () => {},
+  onChange: () => { },
 };
 
-const ButtonComboBox = ({ options, currentOptions, name, children, onChange }) => {
+const ButtonComboBox = ({ options, currentOptions, name, children, onChange, submit, variant }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  
-  const submitCallback = value => onChange({ name, value });
-  
+  const [tempValues, setTempValues] = useState([]);
+
+  const submitCallback = value => {
+    setIsOpen(false);
+    onChange({ name, value });
+  }
+
   const { values, set, onSubmit } = useComboBox({ initialValue: currentOptions, submitCallback });
-  
+
+  const onChangeOption = value => {
+    setTempValues(value);
+    set({ name, value });
+  }
+
   const onClickOusite = callback => {
     const innerRef = useRef();
     const callbackRef = useRef();
-  
+
     useEffect(() => {
       callbackRef.current = callback;
     });
-  
+
     useEffect(() => {
       const handleClick = e => {
         if (
@@ -59,10 +68,17 @@ const ButtonComboBox = ({ options, currentOptions, name, children, onChange }) =
   useEffect(() => {
     if (!currentOptions.length && values.length) {
       set([]);
+    } else {
+      set(currentOptions);
     }
   }, [currentOptions]);
-    
-  const innerRef = onClickOusite(() => setIsOpen(false));
+
+  const innerRef = onClickOusite(() => {
+    if (!isOpen) return
+    set(tempValues);
+    setIsOpen(false);
+  });
+
 
   return (
     <Container isOpen={isOpen} ref={innerRef}>
@@ -76,11 +92,14 @@ const ButtonComboBox = ({ options, currentOptions, name, children, onChange }) =
       </Button>
       <Content isOpen={isOpen}>
         <ComboBox
+          variant={variant}
           options={options.map(mapToSelector)}
           placeholder="Selecciona"
           type="underline"
           values={values}
-          onChange={onSubmit}
+          onChange={onChangeOption}
+          submit={submit}
+          onSubmit={onSubmit}
           optionAll
         />
       </Content>

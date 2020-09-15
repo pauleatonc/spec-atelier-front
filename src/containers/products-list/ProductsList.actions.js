@@ -14,6 +14,8 @@ export const GET_MORE_PRODUCTS = 'GET_MORE_PRODUCTS';
 export const GET_SECTIONS = 'GET_SECTIONS';
 export const GET_SECTIONS_ERROR = 'GET_SECTIONS_ERROR';
 export const GET_SECTIONS_SUCCESS = 'GET_SECTIONS_SUCCESS';
+export const GET_ITEMS_SUCCESS = 'GET_ITEMS_SUCCESS';
+export const GET_ITEMS_ERROR = 'GET_ITEMS_ERROR';
 
 export const CLEAN_PRODUCT_LIST_STORE = 'CLEAN_PRODUCT_LIST_STORE';
 export const ON_SELECT_ALL = 'ON_SELECT_ALL';
@@ -114,15 +116,14 @@ export const getSections = () => async dispatch => {
 
 export const setSelectedAll = value => dispatch => dispatch(onActionCreator(GET_PRODUCTS_FILTERS_ALL, { isSelectedAll: value }))
 
-// TODO: THIS ACTION GOING TO BE USED.
-// export const getItems = filters => async dispatch => {
-//   try {
-//     const { items } = await getItemsService(filters);
-//     return dispatch(onActionCreator(GET_ITEMS, { items }));
-//   } catch (error) {
-//     return dispatch(onActionCreator(GET_ITEMS, { error: true, nativeError: error }));
-//   }
-// };
+export const getItems = filters => async dispatch => {
+  try {
+    const { items } = await getItemsService(filters);
+    return dispatch(onActionCreator(GET_ITEMS_SUCCESS, { items }));
+  } catch (error) {
+    return dispatch(onActionCreator(GET_ITEMS_ERROR, { error: true, nativeError: error }));
+  }
+};
 
 
 
