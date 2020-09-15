@@ -39,7 +39,6 @@ const SpecCreateProductStepThree = () => {
     documents: documentsValues,
   }));
   const handleCreate = () => dispatch(onCreateSpecProduct({ images: imagesValues, documents: documentsValues }));
-  const disabledNext = imagesValues.length === 0 || documentsValues.length === 0;
 
   return (
     <ModalLayout
@@ -85,7 +84,6 @@ const SpecCreateProductStepThree = () => {
               <Button variant="cancel" width="163px" onClick={handlePrev}>Atrás</Button>
               <Gap />
               <Button
-                disabled={disabledNext}
                 variant="primary"
                 width="163px"
                 onClick={handleCreate}
