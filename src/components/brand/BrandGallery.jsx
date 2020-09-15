@@ -11,7 +11,7 @@ const BrandGallery = ({ images }) => {
     <Container>
       {imgs.map(img => (
         <Content key={img.id} name={img.name} >
-          <Image src={img.url} />
+          <Image src={img.url} height="100%" />
         </Content>
       ))}
     </Container>
@@ -19,7 +19,10 @@ const BrandGallery = ({ images }) => {
 };
 
 BrandGallery.propTypes = {
-  images: PropTypes.array,
+  images: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }),
 };
 
 BrandGallery.defaultProps = {
