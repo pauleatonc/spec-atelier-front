@@ -23,9 +23,11 @@ const Contact = ({ brand, contactType, contact, onChange }) => (
     <InputContainer>
       <Input name="brand" type="underline" onChange={onChange} value={brand} disabled />
     </InputContainer>
-    <InputContainer>
-      <Input name="user" type="underline" onChange={onChange} value={contactType} disabled />
-    </InputContainer>
+    {contactType && (
+      <InputContainer>
+        <Input name="user" type="underline" onChange={onChange} value={contactType} disabled />
+      </InputContainer>
+    )}
     <InputContainer>
       <Label strong>Cargo del contacto</Label>
       <Input name="user" type="underline" onChange={onChange} value="Distribuidor" disabled />
@@ -34,12 +36,12 @@ const Contact = ({ brand, contactType, contact, onChange }) => (
       <Label>Teléfono</Label>
       <CellPhone>
         <CodeNumber>+56</CodeNumber>
-        <Input 
-          name="user_phone" 
-          type="underline" 
-          onChange={onChange} 
-          value={contact.user_phone} 
-          placeholder="Escribe aquí el teléfono" 
+        <Input
+          name="user_phone"
+          type="underline"
+          onChange={onChange}
+          value={contact.user_phone}
+          placeholder="Escribe aquí el teléfono"
         />
       </CellPhone>
     </InputContainer>
