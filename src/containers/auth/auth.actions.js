@@ -28,15 +28,17 @@ export const LOG_OUT = 'LOG_OUT';
 
 export const loginAction = data => async dispatch => {
   try {
-    const response = await logIn(data);
-    setLocalStorage({ key: 'token', value: response.user.jwt });
-    setLocalStorage({ key: 'userID', value: response.user.id });
+    const { user, error } = await logIn(data);
+    if (error) throw error;
+    setLocalStorage({ key: 'token', value: user.jwt });
+    setLocalStorage({ key: 'userID', value: user.id });
     return dispatch(onActionCreator(LOG_IN, {
       isLogin: true,
-      user: response.user,
+      user,
       loader: true,
     }));
   } catch (error) {
+    if (error.alert) dispatch(onShowAlertSuccess({ message: error.alert }));
     return dispatch(onActionCreator(LOG_IN_ERROR, {
       isLogin: false,
       loader: true,
@@ -69,15 +71,7 @@ export const logoutAction = data => async dispatch => {
 export const registrationAction = data => async dispatch => {
   try {
     const { user, error } = await register(data);
-    if (error) {
-      return dispatch({
-        type: REGISTRATION_ERROR,
-        payload: {
-          isLogin: false,
-          error,
-        },
-      });
-    }
+    if (error) throw error;
     const message = 'Se ha registrado correctamente';
     dispatch(onShowAlertSuccess({ message }));
     setLocalStorage({ key: 'token', value: user.jwt });
@@ -90,6 +84,8 @@ export const registrationAction = data => async dispatch => {
       },
     }), 4000);
   } catch (error) {
+    if (error.alert?.email) dispatch(onShowAlertSuccess({ message: error.alert.email[0] }));
+    else if (error.alert) dispatch(onShowAlertSuccess({ message: error.alert }));
     return dispatch(onActionCreator({
       type: REGISTRATION_ERROR,
       payload: {

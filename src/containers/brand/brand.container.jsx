@@ -20,7 +20,7 @@ const Brand = () => {
     dispatch(getBrand(params.id));
   }, []);
 
-  const onClickContact = () => dispatch(openContactModal(brand));
+  const onClickContact = () => dispatch(openContactModal({ selectedBrand: brand }));
 
   if (loading) return <Loading />;
   if (!brand) return <Container />;

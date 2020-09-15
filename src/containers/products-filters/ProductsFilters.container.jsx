@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   onGetProductsByFiltersAll,
@@ -6,12 +6,14 @@ import {
   getItems,
   setSelectedAll,
   getProductsByFilter,
+  cleanStoreProductList,
 } from '../products-list/ProductsList.actions';
 import { Button } from '../../components/SpecComponents';
 import { Container, Content, Text } from './ProductsFilters.styles';
 import { getBrands } from '../brands-list/BrandsList.actions';
 import { getAppData } from '../../config/store/app-store/app.actions';
 import ButtonComboBox from './ButtonComboBox';
+import { mapToSelector } from '../../helpers/helpers';
 
 /**
  * The ProductsFilters's container.
@@ -24,18 +26,48 @@ const ProductsFilters = () => {
   const { loaded } = useSelector(state => state.app);
   const { isSelectedAll, filters, sections, items } = useSelector(state => state.productsList);
   const { brands } = useSelector(state => state.brandsList);
+  const [roomTypesOptions, setRoomTypesOptions] = useState([]);
+  const [itemsTypesOptions, setItemsTypesOptions] = useState(items);
   const dispatch = useDispatch();
 
   const handleFilterAll = () => dispatch(onGetProductsByFiltersAll());
-  const submitCallback = ({ name, value }) => dispatch(getProductsByFilter({ ...filters, [name]: value }));
+  const submitCallback = ({ name, value }) => {
+    if (name === 'project_type') {
+      const filteredRoomTypes = (
+        value.length
+          ? roomTypes.filter(rt => rt.project_types.some(rpt => value.some(val => val.value === rpt.id)))
+          : roomTypes
+      ).map(mapToSelector);
+
+      const selectedRoomTypes = filters.room_type.filter(rt => rt.project_types.some(rpt => value.some(val => val.value === rpt.id)));
+      
+      setRoomTypesOptions(filteredRoomTypes);
+      dispatch(getProductsByFilter({
+        ...filters, 
+        room_type: selectedRoomTypes,
+        [name]: value,
+      }));
+    } else {
+      dispatch(getProductsByFilter({ ...filters, [name]: value }));
+    }
+  }
 
   useEffect(() => {
     if (!loaded) dispatch(getAppData());
     dispatch(getBrands());
     dispatch(getSections());
-    // TODO: NEED API
-    // dispatch(getItems());
+    dispatch(getItems());
+    setRoomTypesOptions(roomTypes.map(mapToSelector));
+    return () => dispatch(cleanStoreProductList());
   }, []);
+
+  useEffect(() => {
+    if (roomTypes.length) setRoomTypesOptions(roomTypes.map(mapToSelector));
+  }, [roomTypes]);
+
+  useEffect(() => {
+    if (items.length) setItemsTypesOptions(items.map(mapToSelector));
+  }, [items]);
 
   useEffect(() => {
     const { section = [], room_type = [], project_type = [], item = [], brand = [], sort = '', keyword = '' } = filters;
@@ -56,51 +88,63 @@ const ProductsFilters = () => {
           <Text>Todos</Text>
         </Button>
         <ButtonComboBox
+          variant="secondary"
           options={sections}
           name="section"
           onChange={submitCallback}
           currentOptions={filters.section}
+          submit
         >
-         <Text>Sección</Text>
+          <Text>Sección</Text>
         </ButtonComboBox>
         <ButtonComboBox
-          options={items} // items
+          variant="secondary"
+          options={itemsTypesOptions}
           name="item"
           onChange={submitCallback}
           currentOptions={filters.item}
+          submit
         >
           <Text>Partidas</Text>
         </ButtonComboBox>
         <ButtonComboBox
+          variant="secondary"
           options={projectTypes}
           name="project_type"
           onChange={submitCallback}
           isGrey={!isSelectedAll}
           currentOptions={filters.project_type}
+          submit
         >
           <Text>Tipo de proyecto</Text>
         </ButtonComboBox>
         <ButtonComboBox
+          variant="secondary"
           options={[]}
           name="most_used"
           onChange={submitCallback}
           currentOptions={filters.most_used}
+          submit
         >
           <Text>Mas usados</Text>
         </ButtonComboBox>
         <ButtonComboBox
-          options={roomTypes}
+          variant="secondary"
+          options={roomTypesOptions}
           name="room_type"
           onChange={submitCallback}
           currentOptions={filters.room_type}
+          submit
         >
           <Text>Recintos</Text>
         </ButtonComboBox>
         <ButtonComboBox
+          variant="secondary"
           options={brands}
           name="brand"
           onChange={submitCallback}
           currentOptions={filters.brand}
+          submit
         >
           <Text>Marcas</Text>
         </ButtonComboBox>

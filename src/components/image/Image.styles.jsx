@@ -11,7 +11,6 @@ export const Content = styled.section`
 `;
 
 export const Img = styled.img`
-  background-image: url('${({ src = '' }) => src}');
   background-repeat: no-repeat;
   background-size: cover;
   ${({ type }) => {

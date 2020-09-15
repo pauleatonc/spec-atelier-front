@@ -8,7 +8,8 @@ export const Container = styled.section`
 `;
 
 export const Content = styled.div`
-  padding: 16px 8%;
+  padding: 16px;
+  margin: 0 auto;
   display: grid;
   grid-gap: 24px;
   grid-template-columns: repeat(7, max-content);

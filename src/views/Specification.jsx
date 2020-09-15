@@ -14,6 +14,8 @@ import SpecEditProductContainer from '../containers/spec-edit-product/SpecEditPr
 import SpecImagesModalContainer from '../containers/spec-images-modal/SpecImagesModal.container';
 import SpecContentsContainer from '../containers/spec-contents/SpecContents.container';
 import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayout';
+import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
+
 import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
 
 /**
@@ -46,6 +48,7 @@ const Specification = () => {
       <SpecImagesModalContainer />
       <AlertContainer />
       <SpecModalProduct />
+      <ContactFormContainer type="product" />
     </>
   );
 };
