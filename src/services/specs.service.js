@@ -92,3 +92,13 @@ export const updateSpecBlockText = factoryService(({ specID, textID, textValue, 
     { text: textID, updated_text: textValue },
   ),
 );
+
+/**
+ * Download current specification.
+ */
+
+export const downloadSpec = factoryService(({ specID, userID }) => 
+  getJsonRequest(
+    `/api/users/${userID}/project_specs/${specID}/download_word`
+  ),
+);
