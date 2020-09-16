@@ -19,6 +19,7 @@ import brandReducer from '../../containers/brand/brand.reducer';
 import brandProductsListReducer from '../../containers/brand-products-list/BrandProductsList.reducer';
 import modalContactFormReducer from '../../containers/modal-contact-form/ModalContactForm.reducers';
 import specDocumentReducer from '../../containers/spec-document/SpecDocument.reducer';
+import specHeaderReducer from '../../containers/spec-header/SpecHeader.reducer';
 import specImagesModalReducer from '../../containers/spec-images-modal/SpecImagesModal.reducer';
 import specContentsReducer from '../../containers/spec-contents/SpecContents.reducer';
 
@@ -36,6 +37,7 @@ export default combineReducers({
   alert: alertReducer,
   brandProductsList: brandProductsListReducer,
   productsList: productsListReducer,
+  specHeader: specHeaderReducer,
   specProductsSections: specProductsSectionsReducer,
   specProductsItems: specProductsItemsReducer,
   specProducts: specProductsReducer,
