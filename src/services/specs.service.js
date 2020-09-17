@@ -99,6 +99,6 @@ export const updateSpecBlockText = factoryService(({ specID, textID, textValue, 
 
 export const downloadSpec = factoryService(({ specID, userID }) =>
   getJsonRequest(
-    `${API_BASE_URL}/api/users/${userID}/project_specs/${specID}/download_word`
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/download_word`
   ),
 );
