@@ -66,8 +66,11 @@ const Footer = () => (
             <h3 className="footer__inner__info__container__social_network__title">
               Síguenos en
 						</h3>
-            <a className="footer__inner__info__container__social_network__link">
+            <a href="https://www.instagram.com/specatelier/" className="footer__inner__info__container__social_network__link">
               <i className="fab fa-instagram footer__inner__info__container__social_network__link__icon" />
+            </a>
+            <a href="https://www.linkedin.com/company/specatelier" className="footer__inner__info__container__social_network__link">
+              <i className="fab fa-linkedin footer__inner__info__container__social_network__link__icon" />
             </a>
           </div>
         </div>
