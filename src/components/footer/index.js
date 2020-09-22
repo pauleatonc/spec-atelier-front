@@ -16,9 +16,9 @@ const Footer = () => (
               src={LOGO_SPEC_SMALL}
             />
           </div>
-          <Link className="footer__inner__menu__container__link" to="/us">
+          {/* <Link className="footer__inner__menu__container__link" to="/us">
             Nosotros
-					</Link>
+					</Link> */}
           <Link className="footer__inner__menu__container__link" to="/products">
             Productos
 					</Link>
@@ -46,6 +46,21 @@ const Footer = () => (
 								</a>
               </span>
             </p>
+          {/*   <p className="footer__inner__info__container__contacts__contact">
+              <i className="fab fa-whatsapp footer__inner__info__container__contacts__contact__icon" />
+              <span className="footer__inner__info__container__contacts__contact__text">
+                <a
+                  href="tel:+56987654321"
+                  onClick={() =>
+                    navigator.userAgent.match(
+                      /Android|iPhone|iPad|iPod|Mobile/i,
+                    ) != null
+                  }
+                >
+                  +569 8765 4321
+								</a>
+              </span>
+            </p> */}
           </div>
           <div className="footer__inner__info__container__social_network">
             <h3 className="footer__inner__info__container__social_network__title">
