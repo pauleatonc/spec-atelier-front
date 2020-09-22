@@ -41,7 +41,7 @@ const SpecNavigator = () => {
         <NavIcon src={showContents ? itemsActiveSource : itemsSource} srcActive={itemsActiveSource} onClick={handleContentsClick} />
       </Section>
       <Section>
-        <NavIcon src={cloneSource} srcActive={cloneActiveSource} />
+      {/* <NavIcon src={cloneSource} srcActive={cloneActiveSource} /> */}
       </Section>
     </Root>
   );
