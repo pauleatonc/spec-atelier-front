@@ -49,7 +49,8 @@ const SpecProductsList = () => {
     dispatch(onGetSpecProductsBySort({ sort: option.value }));
   };
 
-  const handleCardClick = productID => () => {
+  const handleCardClick = productID => event => {
+    event.stopPropagation();
     const hasProduct = selectedProducts.find(selectedProduct => selectedProduct?.element.id === productID);
 
     if (hasProduct) {
