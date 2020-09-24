@@ -15,6 +15,7 @@ import {
   Button,
   ContentData,
   IconCheck,
+  TextButton,
 } from './ProjectCreate.styles';
 
 const ProjectData = () => {
@@ -39,10 +40,10 @@ const ProjectData = () => {
   useEffect(() => {
     setNewProject(newProject);
   }, [newProject]);
-  
+
   if (view !== 'data') {
     return <SubHeaderProjectData {...newProject} />;
-  } 
+  }
 
   return (
     <ContentData>
@@ -69,14 +70,16 @@ const ProjectData = () => {
               inverse
             >
               <ButtonIcon type={pt?.value.toUpperCase()} active={pt.id === tempNewProject.project_type.id} />
-              {pt.name}
+              <TextButton>
+                {pt.name}
+              </TextButton>
             </Button>
           </ButtonContainer>
         ))}
       </Row>
       <Title>
         ¿Qué tipo de trabajo es?
-            </Title>
+      </Title>
       <Row>
         {work_types.map(wt => (
           <ButtonContainer key={wt.id}>
@@ -86,7 +89,9 @@ const ProjectData = () => {
               variant={wt.id === tempNewProject.work_type.id ? 'primary' : 'default'}
               inverse
             >
-              {wt.name}
+              <TextButton>
+                {wt.name}
+              </TextButton>
             </Button>
           </ButtonContainer>
         ))}
@@ -98,7 +103,9 @@ const ProjectData = () => {
             onClick={onSave}
             disabled={!canSave}
           >
-            Guardar
+             <TextButton>
+              Guardar
+             </TextButton>
             </Button>
         </ButtonContainer>
       </Row>
