@@ -5,7 +5,7 @@ import { factoryService } from '../modules/services'
 /**
  * Add a block to the spec.
  */
-export const addSpecBlock = factoryService(({ itemID, productID, sectionID, specID, userID }) => 
+export const addSpecBlock = factoryService(({ itemID, productID, sectionID, specID, userID }) =>
   postJsonRequest(
     `${API_BASE_URL}/users/${userID}/project_specs/${specID}/create_product`,
     {
@@ -97,8 +97,8 @@ export const updateSpecBlockText = factoryService(({ specID, textID, textValue, 
  * Download current specification.
  */
 
-export const downloadSpec = factoryService(({ specID, userID }) => 
+export const downloadSpec = factoryService(({ specID, userID }) =>
   getJsonRequest(
-    `/api/users/${userID}/project_specs/${specID}/download_word`
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/download_word`
   ),
 );
