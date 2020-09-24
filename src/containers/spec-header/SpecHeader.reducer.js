@@ -2,6 +2,7 @@ import {
   LOADING_SPEC_DOWNLOAD,
   DOWNLOAD_URL_SUCCESS,
   DOWNLOAD_URL_ERROR,
+  CLEAN_DOWNLOAD,
 } from './SpecHeader.actions';
 
 const specHeaderState = {
@@ -21,6 +22,8 @@ const specDocumentReducer = (state = specHeaderState, { payload, type }) => {
       return { ...state, loading: false, url: payload.url };
     case DOWNLOAD_URL_ERROR:
       return { ...state, loading: false, url: '' };
+    case CLEAN_DOWNLOAD:
+      return { ... state, url: '' };
     default: {
       return state;
     }

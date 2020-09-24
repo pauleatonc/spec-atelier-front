@@ -55,7 +55,7 @@ const ProductCard = props => {
   const showSeeMore = !selected && Boolean(onClickSeeMore);
 
   return (
-    <Root hover={hover} selected={selected} onClick={onClickCard} onMouseEnter={handleCardMouseEnter} onMouseLeave={handleCardMouseLeave}>
+    <Root hover={hover} selected={selected} onClick={onClickSeeMore} onMouseEnter={handleCardMouseEnter} onMouseLeave={handleCardMouseLeave}>
       <Content>
         <Photo style={photoStyles} />
         <Details>
@@ -76,7 +76,7 @@ const ProductCard = props => {
           Ver más
         </SeeMore>
       </Footer>
-      {hover && !selected && canAdd && <Add />}
+      {hover && !selected && canAdd && <Add onClick={onClickCard} />}
       {selected && <Check />}
     </Root>
   );
