@@ -35,7 +35,7 @@ export const onGetSpecProductsBrands = () => async dispatch => {
   try {
     const response = await getBrands();
 
-    return dispatch(onActionCreator(GET_SPEC_PRODUCTS_BRANDS_SUCCESS, { brands: response.brands.filter(brand => brand.name !== null) }));
+    return dispatch(onActionCreator(GET_SPEC_PRODUCTS_BRANDS_SUCCESS, { brands: response.brands.list.filter(brand => brand.name !== null) }));
   } catch (error) {
     return dispatch(onActionCreator(GET_SPEC_PRODUCTS_BRANDS_ERROR, { error }));
   }
@@ -60,11 +60,12 @@ export const onCreateSpecProduct = ({ documents, images }) => async (dispatch, g
       price: stepTwo.price,
     };
     const response = await createProduct(payload);
-
-    await Promise.all([
-      uploadProductImages({ productID: response.product.id, images }),
-      uploadProductDocuments({ productID: response.product.id, documents }),
-    ]);
+    
+    const postData = [];
+    if (images?.length) postData.concat(uploadProductImages({ productID: response.product.id, images }));
+    if (documents?.length) postData.concat(uploadProductDocuments({ productID: response.product.id, documents }));  
+    
+    if (postData.length) await Promise.All(postData);
 
     return batch(() => {
       dispatch(onActionCreator(CREATE_SPEC_PRODUCT_SUCCESS));
