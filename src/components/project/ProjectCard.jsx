@@ -5,36 +5,52 @@ import {
 	handleChangeToPrettyFormat,
 } from '../../helpers/pretty-format.helper';
 
-import COMMERCIAL from '../../assets/images/project/project_type/commercial.png';
-import EDUCATIONAL from '../../assets/images/project/project_type/educational.png';
-import INSTITUTIONAL from '../../assets/images/project/project_type/institutional.png';
-import REAL_STATE from '../../assets/images/project/project_type/real_state.png';
-import HOSPITALARIO from '../../assets/images/project/project_type/hospitalario.png';
-import RESIDENTIAL from '../../assets/images/project/project_type/residential.png';
 
-import COMMERCIAL_ICON from '../../assets/images/project/icon_type/commercial.png';
-import EDUCATIONAL_ICON from '../../assets/images/project/icon_type/educational.png';
-import INSTITUTIONAL_ICON from '../../assets/images/project/icon_type/institutional.png';
-import REAL_STATE_ICON from '../../assets/images/project/icon_type/real_state.png';
-import HOSPITALARIO_ICON from '../../assets/images/project/icon_type/hospitalario.png';
-import RESIDENTIAL_ICON from '../../assets/images/project/icon_type/residential.png';
+import {
+	IMAGE_COMMERCIAL_COLOR,
+	IMAGE_EDUCATIONAL_COLOR,
+	IMAGE_HOSPITAL_COLOR,
+	IMAGE_HOTEL_COLOR,
+	IMAGE_INDUSTRIAL_COLOR,
+	IMAGE_REAL_STATE_COLOR,
+	IMAGE_INSTITUTIONAL_COLOR,
+	IMAGE_OFFICE_COLOR,
+	IMAGE_RESIDENTIAL_COLOR,
+
+	ICON_COMMERCIAL_GREY,
+	ICON_EDUCATIONAL_GREY,
+	ICON_HOSPITAL_GREY,
+	ICON_HOTEL_GREY,
+	ICON_INDUSTRIAL_GREY,
+	ICON_REAL_STATE_GREY,
+	ICON_INSTITUTIONAL_GREY,
+	ICON_OFFICE_GREY,
+	ICON_RESIDENTIAL_GREY,
+} from '../../assets/Images';
+
 
 const mapImages = {
-	commercial: COMMERCIAL,
-	educational: EDUCATIONAL,
-	institutional: INSTITUTIONAL,
-	real_state: REAL_STATE,
-	hospital: HOSPITALARIO,
-	residential: RESIDENTIAL,
+	commercial: IMAGE_COMMERCIAL_COLOR,
+	educational: IMAGE_EDUCATIONAL_COLOR,
+	institutional: IMAGE_INSTITUTIONAL_COLOR,
+	real_state: IMAGE_REAL_STATE_COLOR,
+	hospital: IMAGE_HOSPITAL_COLOR,
+	residential: IMAGE_RESIDENTIAL_COLOR,
+	office: IMAGE_OFFICE_COLOR,
+	hotel: IMAGE_HOTEL_COLOR,
+	industrial: IMAGE_INDUSTRIAL_COLOR,
 };
 
 const mapIconsProjectType = {
-	commercial: COMMERCIAL_ICON,
-	educational: EDUCATIONAL_ICON,
-	institutional: INSTITUTIONAL_ICON,
-	real_state: REAL_STATE_ICON,
-	hospital: HOSPITALARIO_ICON,
-	residential: RESIDENTIAL_ICON,
+	commercial: ICON_COMMERCIAL_GREY,
+	educational: ICON_EDUCATIONAL_GREY,
+	institutional: ICON_INSTITUTIONAL_GREY,
+	real_state: ICON_REAL_STATE_GREY,
+	hospital: ICON_HOSPITAL_GREY,
+	residential: ICON_RESIDENTIAL_GREY,
+	office: ICON_OFFICE_GREY,
+	hotel: ICON_HOTEL_GREY,
+	industrial: ICON_INDUSTRIAL_GREY,
 };
 
 const mapProjectType = {
@@ -44,6 +60,9 @@ const mapProjectType = {
 	real_state: 'Inmobiliario',
 	hospital: 'Hospitalario',
 	residential: 'Residencial',
+	office: 'Oficina',
+	hotel: 'Hotelero',
+	industrial: 'Industrial',
 };
 
 const mapWorkType = {
@@ -95,7 +114,7 @@ const Project = props => {
 		id,
 	} = props;
 
-	const onSelect = project  => () => onClick(project);
+	const onSelect = project => () => onClick(project);
 
 	return (
 		<article className="project">
@@ -127,7 +146,7 @@ const Project = props => {
 						Creada el {handleChangeToPrettyFormat(created_at)}
 					</p>
 					<p className="project__content__body__text">
-						{prettyLocationFormat(city  || '', country || '')}
+						{prettyLocationFormat(city || '', country || '')}
 					</p>
 					<p className="project__content__body__text">
 						{handlePrintEditDate(created_at, updated_at)}
