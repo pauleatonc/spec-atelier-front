@@ -40,7 +40,7 @@ const AttachedFiles = props => {
       const dwgDocument = docs.find(doc => doc.name.includes('.dwg'));
       const rvtDocument = docs.find(doc => doc.name.includes('.rvt'));
 
-      if (document.name.includes('.pdf') && pdfDocuments.length >= 2) {
+      if (document.name.includes('.pdf') && pdfDocuments.length >= maxSize - 2) {
         return docs;
       }
 
@@ -60,8 +60,7 @@ const AttachedFiles = props => {
     }, [].concat(documents));
 
     handleClose();
-
-    if (allDocuments.length > maxSize) {
+    if (allDocuments.length >= maxSize) {
       onReject(`Puedes subir hasta ${maxSize} documentos: ${maxSize - 2} PDF, 1 DWG y 1 RVT'`);
     }
 
@@ -106,7 +105,7 @@ const AttachedFiles = props => {
               <List>
                 {documents.map((document, index) => (
                   <DocumentItem
-                    key={document.id}
+                    key={document.id || document.name}
                     document={document}
                     index={index}
                     onClickRemove={handleRemove(document, index)}
