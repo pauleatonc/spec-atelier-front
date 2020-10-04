@@ -60,10 +60,9 @@ const AttachedFiles = props => {
     }, [].concat(documents));
 
     handleClose();
-    if (allDocuments.length >= maxSize) {
+    if (allDocuments.length >= maxSize || !attachedDocuments.length) {
       onReject(`Puedes subir hasta ${maxSize} documentos: ${maxSize - 2} PDF, 1 DWG y 1 RVT'`);
     }
-
     onChange(attachedDocuments);
   }, [documents]);
 
@@ -80,6 +79,9 @@ const AttachedFiles = props => {
     const updatedAttachedDocuments = documents.filter((document, index) =>
       !(document.name === attachedDocument.name && index === attachedIndex),
     );
+    if (!updatedAttachedDocuments.length) {
+      onReject(`Puedes subir hasta ${maxSize} documentos: ${maxSize - 2} PDF, 1 DWG y 1 RVT'`);
+    }
 
     onChange(updatedAttachedDocuments);
   };
