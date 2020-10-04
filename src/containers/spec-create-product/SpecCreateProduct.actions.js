@@ -46,7 +46,6 @@ export const CREATE_SPEC_PRODUCT_ERROR = 'CREATE_SPEC_PRODUCT_ERROR';
 export const CREATE_SPEC_PRODUCT_SUCCESS = 'CREATE_SPEC_PRODUCT_SUCCESS';
 export const onCreateSpecProduct = ({ documents, images }) => async (dispatch, getState) => {
   dispatch(onActionCreator(CREATE_SPEC_PRODUCT));
-
   try {
     const state = getState();
     const { stepOne, stepTwo } = state.specCreateProduct;
@@ -56,7 +55,7 @@ export const onCreateSpecProduct = ({ documents, images }) => async (dispatch, g
       item: stepOne.item?.value,
       system: stepOne.system?.value,
       description: stepTwo.description,
-      brand: stepTwo.brand.value,
+      brand: stepTwo.brand.label,
       price: stepTwo.price,
     };
     const response = await createProduct(payload);

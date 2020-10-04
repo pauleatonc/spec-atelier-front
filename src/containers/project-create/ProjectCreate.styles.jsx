@@ -142,9 +142,10 @@ export const ButtonIcon = styled.div`
   font-size: 12px;
   background-image: url('${({ type, active }) => active ? activeTypes[type] : types[type] }');
   background-repeat: no-repeat;
+  background-size: cover;
   width: 20px;
   height: 20px;
-  margin: auto 8px auto 0;
+  margin: auto 8px auto 4px;
   object-fit: contain;
 `;
 
@@ -185,7 +186,6 @@ export const Text = styled.div`
 export const TextButton = styled.div`
   height: 16px;
   font-family: Lato;
-  font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -195,6 +195,8 @@ export const TextButton = styled.div`
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
 `;
 
 export const Label = styled.div`
@@ -221,6 +223,7 @@ export const PermissionOptions = styled.section`
 export const PermissionOption = styled.section`
   cursor: pointer;
   min-height: 120px;
+  min-width: 300px;
   border-radius: 4px;
   border: solid 1px ${({ active }) => active ? COLOR_PRIMARY : BORDER_GREY};
   background-color: ${({ active }) => active ? COLOR_LIGHTERGREY : COLOR_WHITE};
