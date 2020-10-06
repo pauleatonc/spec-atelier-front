@@ -35,11 +35,15 @@ import ICON_INSTITUTIONAL_GREY from './images/project/project_type_image/institu
 import ICON_OFFICE_GREY from './images/project/project_type_image/office/ic-office-grey.svg';
 import ICON_RESIDENTIAL_GREY from './images/project/project_type_image/residencial/ic-residencial-grey.svg';
 
+import ICON_CREATE_PRODUCT from './images/products/ic-create-product.png';
+
 export {
   LOGO_CCHC,
   LOGO_CENTRO_INNOVACION,
   LOGO_CORFO,
   LOGO_SPEC_SMALL,
+
+  ICON_CREATE_PRODUCT,
 
   ICON_COMMERCIAL_GREY,
   ICON_EDUCATIONAL_GREY,

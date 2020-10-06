@@ -62,6 +62,23 @@ const SpecCreateProductStepOne = () => {
     dispatch(onGetSpecProductsSections());
   }, [show]);
 
+  const mapToSelector= sectionOption => ({ ...sectionOption, label: sectionOption.name, value: sectionOption.id });
+
+  useEffect(() => {
+    if (sections && section?.id) {
+      setSectionValue(mapToSelector(sections.find(i => i.id === section.id)));
+      dispatch(onGetSpecProductsItems({ sectionID: section.id }));
+    }
+  }, [section]);
+
+
+  useEffect(() => {
+    if (items && item?.id) {
+      setItemValue(mapToSelector(items.find(i => i.id === item.id)));
+      dispatch(onGetSpecProductsSystems({ itemID: item.id }));
+    }
+  }, [item]);
+  
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
       <Root>
@@ -85,21 +102,21 @@ const SpecCreateProductStepOne = () => {
           <Section alignItems="flex-end" display="grid" gridTemplateColumns="1fr 1fr 1fr" padding="36px 0 0">
             <Select
               label="Categoriza el producto"
-              options={sections.map(sectionOption => ({ label: sectionOption.name, value: sectionOption.id }))}
+              options={sections.map(mapToSelector)}
               placeholder="Elige una sección"
               value={sectionValue}
               onChange={handleSectionChange}
             />
             <Select
               disabled={!sectionValue.value}
-              options={items.map(itemOption => ({ label: itemOption.name, value: itemOption.id }))}
+              options={items.map(mapToSelector)}
               placeholder="Elige una partida"
               value={itemValue}
               onChange={handleItemChange}
             />
             <Select
               disabled={!itemValue.value}
-              options={systems.map(systemOption => ({ label: systemOption.name, value: systemOption.id }))}
+              options={systems.map(mapToSelector)}
               placeholder="Elige un sistema"
               value={systemValue}
               onChange={handleSystemChange}

@@ -13,7 +13,7 @@ const SpecProductsItems = () => {
   const { collection: items, show } = useSelector(state => state.specProductsItems);
   const dispatch = useDispatch();
   const handleShowSections = () => {
-    dispatch(onGetSpecProductsBySection({ sectionID: '' }));
+    dispatch(onGetSpecProductsBySection({ sectionID: '', itemID: '' }));
     dispatch(onHideSpecProductsItemsSuccess());
   }
   const handleItemClick = itemID => () => dispatch(onGetSpecProductsByItem({ itemID }));
