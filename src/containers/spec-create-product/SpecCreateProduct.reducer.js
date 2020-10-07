@@ -10,6 +10,7 @@ import {
   SHOW_SPEC_CREATE_PRODUCT_SUCCESS,
   SHOW_SPEC_CREATE_PRODUCT_STEP_TWO_SUCCESS,
   SHOW_SPEC_CREATE_PRODUCT_STEP_THREE_SUCCESS,
+  SHOW_SPEC_CREATE_PRODUCT_FROM_ITEM_SUCCESS,
 } from './SpecCreateProduct.actions';
 
 const createProductState = {
@@ -59,6 +60,18 @@ const createProductReducer = (state = createProductState, { payload, type }) => 
         stepOne: { ...state.stepOne, show: true },
       };
     }
+
+    case SHOW_SPEC_CREATE_PRODUCT_FROM_ITEM_SUCCESS: {
+      return {
+        ...state,
+        stepOne: {
+          ...state.stepOne,
+          ...payload,
+          show: true,
+        },
+      };
+    }
+
     case SHOW_SPEC_CREATE_PRODUCT_STEP_TWO_SUCCESS: {
       return {
         ...state,

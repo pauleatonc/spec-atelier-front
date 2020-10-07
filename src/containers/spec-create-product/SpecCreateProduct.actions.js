@@ -9,7 +9,8 @@ import {
 } from '../../services/products.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS } from '../spec-products-sections/SpecProductsSections.actions';
-import { onHideSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
+import { onGetSpecProductsItems, onHideSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
+import { onGetSpecProducts } from '../spec-products/SpecProducts.actions';
 
 export const GET_SPEC_PRODUCTS_SYSTEMS = 'GET_SPEC_PRODUCTS_SYSTEMS';
 export const GET_SPEC_PRODUCTS_SYSTEMS_ERROR = 'GET_SPEC_PRODUCTS_SYSTEMS_ERROR';
@@ -69,8 +70,7 @@ export const onCreateSpecProduct = ({ documents, images }) => async (dispatch, g
     return batch(() => {
       dispatch(onActionCreator(CREATE_SPEC_PRODUCT_SUCCESS));
       dispatch(onShowAlertSuccess({ message: 'Producto creado exitosamente' }));
-      dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS));
-      dispatch(onHideSpecProductsItemsSuccess());
+      dispatch(onGetSpecProducts());
     });
   } catch (error) {
     return batch(() => {
@@ -85,8 +85,6 @@ export const HIDE_SPEC_CREATE_PRODUCT_SUCCESS = 'HIDE_SPEC_CREATE_PRODUCT_SUCCES
 export const onHideSpecCreateProduct = () => dispatch =>
 batch(() => {
   dispatch(onActionCreator(HIDE_SPEC_CREATE_PRODUCT_SUCCESS));
-  dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS));
-  dispatch(onHideSpecProductsItemsSuccess());
 });
 
 export const SHOW_SPEC_CREATE_PRODUCT_SUCCESS = 'SHOW_SPEC_CREATE_PRODUCT_SUCCESS';
@@ -96,6 +94,19 @@ export const HIDE_SPEC_CREATE_PRODUCT_STEP_TWO_SUCCESS = 'HIDE_SPEC_CREATE_PRODU
 export const SHOW_SPEC_CREATE_PRODUCT_STEP_TWO_SUCCESS = 'SHOW_SPEC_CREATE_PRODUCT_STEP_TWO_SUCCESS';
 export const onHideSpecCreateProductStepTwoSuccess = payload => ({ payload, type: HIDE_SPEC_CREATE_PRODUCT_STEP_TWO_SUCCESS });
 export const onShowSpecCreateProductStepTwoSuccess = payload => ({ payload, type: SHOW_SPEC_CREATE_PRODUCT_STEP_TWO_SUCCESS });
+
+export const SHOW_SPEC_CREATE_PRODUCT_FROM_ITEM_SUCCESS = 'SHOW_SPEC_CREATE_PRODUCT_FROM_ITEM_SUCCESS';
+export const onShowSpecCreateProductFromItemSuccess = ({ itemID , sectionID }) => (dispatch, getState) => {
+  const { collection: sections } = getState().specProductsSections;
+  const { collection: items } = getState().specProductsItems;
+  dispatch(onActionCreator(
+    SHOW_SPEC_CREATE_PRODUCT_FROM_ITEM_SUCCESS, 
+    {
+      item: items.find(i => i.id === itemID),
+      section: sections.find(i => i.id === sectionID),
+    }
+  ));
+};
 
 export const HIDE_SPEC_CREATE_PRODUCT_STEP_THREE_SUCCESS = 'HIDE_SPEC_CREATE_PRODUCT_STEP_THREE_SUCCESS';
 export const SHOW_SPEC_CREATE_PRODUCT_STEP_THREE_SUCCESS = 'SHOW_SPEC_CREATE_PRODUCT_STEP_THREE_SUCCESS';

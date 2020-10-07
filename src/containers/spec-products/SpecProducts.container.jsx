@@ -22,6 +22,8 @@ import Button from '../../components/buttons/Button';
 import ProductCard from '../../components/cards/ProductCard';
 import { Overlay, Root, Header, HeaderSearch, HeaderFilters, Body, BodyHeader, Sort, Total, Cards, LoadMore, Loading } from './SpecProducts.styles';
 import { mapToSelector } from '../../helpers/helpers';
+import CreateProduct from '../../components/product/CreateProduct';
+import { onHideSpecCreateProduct, onShowSpecCreateProductFromItemSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 
 /**
  * The SpecProductsList's container.
@@ -31,7 +33,7 @@ const SpecProductsList = () => {
   const { project_types: projectTypes, room_types: roomTypes } = useSelector(state => state.app);
   const { brands } = useSelector(state => state.brandsList);
   const selectedProducts = useSelector(state => state.specDocument.blocks?.filter(block => block.type === 'Product'));
-  const { nextPage, collection: products = [], loading, show, total } = useSelector(state => state.specProducts);
+  const { nextPage, collection: products = [], loading, show, total, filters } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
 
   const [keywordValue, setKeywordValue] = useState('');
@@ -56,7 +58,7 @@ const SpecProductsList = () => {
     if (hasProduct) {
       return dispatch(onDetachSpecProduct({ productID, specID }));
     }
-    
+
     return dispatch(onAttachSpecProduct({ productID, specID }));
   };
 
@@ -71,24 +73,24 @@ const SpecProductsList = () => {
   const { values: brandsValues, set: setBrandsValues, onSubmit: onBrandsSubmit } =
     useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'brand', value: values })) });
   
-    const { values: projectTypeValues, set: setProjectTypeValues, onSubmit: onProjectTypeSubmit } =
+  const { values: projectTypeValues, set: setProjectTypeValues, onSubmit: onProjectTypeSubmit } =
     useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'project_type', value: values })) });
-  
+
   const { values: roomTypeValues, set: setRoomTypeValues, onSubmit: onRoomTypeSubmit } =
-      useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: values })) });
-  
+    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: values })) });
+
   const handleBrandsSubmit = close => event => {
     close();
     onBrandsSubmit(event);
   };
-  
+
   const handleProjectTypeSubmit = close => event => {
     const filteredRoomTypes = roomTypes
       .filter(rt => rt.project_types.some(rpt => event.some(spt => spt.value === rpt.id)))
       .map(mapToSelector);
-    
+
     dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: filteredRoomTypes }))
-    setRoomTypesOptions(filteredRoomTypes);  
+    setRoomTypesOptions(filteredRoomTypes);
     close();
     onProjectTypeSubmit(event);
   };
@@ -104,6 +106,11 @@ const SpecProductsList = () => {
     setRoomTypeValues([]);
     dispatch(onGetSpecProductsByFiltersAll());
   };
+
+  const handleCreateProduct = () => {
+    dispatch(onShowSpecCreateProductFromItemSuccess({ itemID: filters.item, sectionID: filters.section }));
+  };
+
   const allFilterIsSelected = brandsValues.length === 0 && projectTypeValues.length === 0 && roomTypeValues.length === 0;
 
   useEscapeKey(show, () => dispatch(onHideSpecProducts()));
@@ -154,7 +161,7 @@ const SpecProductsList = () => {
                   variant="secondary"
                   onSubmit={handleProjectTypeSubmit(onClose)}
                 />
-              )}  
+              )}
             </ToggleMenu>
             <Tag disabled selected={false}>Mis especificaciones</Tag>
             <ToggleMenu anchor={<Tag selected={roomTypeValues.length > 0}>Recintos</Tag>} width="291px">
@@ -176,7 +183,7 @@ const SpecProductsList = () => {
         <Body>
           <BodyHeader>
             {loading && 'Cargando...'}
-            {!loading && (
+            {!!products.length && !loading && (
               <>
                 <Sort>
                   <DropdownMenu
@@ -194,27 +201,30 @@ const SpecProductsList = () => {
               </>
             )}
           </BodyHeader>
-          <Cards>
-            {products.map(product => {
-              const selected = selectedProducts.find(selectedProduct => selectedProduct?.element.id === product.id);
+          {!!products.length &&
+            <Cards>
+              {products.map(product => {
+                const selected = selectedProducts.find(selectedProduct => selectedProduct?.element.id === product.id);
 
-              return (
-                <ProductCard
-                  canAdd
-                  category={`Sistema constructivo: ${product.system.name}`}
-                  description={product.short_desc || ''}
-                  key={`product-card-${product.id}`}
-                  photo={product.images[0]?.urls?.thumb}
-                  reference={product.reference || ''}
-                  selected={Boolean(selected)}
-                  title={product.name}
-                  onClickCard={handleCardClick(product.id)}
-                  onClickSeeMore={handleSeeMoreClick(product)}
-                />
-              );
-            })}
-          </Cards>
-          {nextPage !== null && (
+                return (
+                  <ProductCard
+                    canAdd
+                    category={`Sistema constructivo: ${product.system.name}`}
+                    description={product.short_desc || ''}
+                    key={`product-card-${product.id}`}
+                    photo={product.images[0]?.urls?.thumb}
+                    reference={product.reference || ''}
+                    selected={Boolean(selected)}
+                    title={product.name}
+                    onClickCard={handleCardClick(product.id)}
+                    onClickSeeMore={handleSeeMoreClick(product)}
+                  />
+                );
+              })}
+            </Cards>
+          }
+          {!products.length && !loading && <CreateProduct onClickCreate={handleCreateProduct} />}
+          {!!products.length && nextPage !== null && (
             <LoadMore>
               {loading && <Loading>Cargando...</Loading>}
               {!loading && <Button variant="gray" onClick={handleLoadMoreClick}>Ver más</Button>}
