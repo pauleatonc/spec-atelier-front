@@ -85,8 +85,6 @@ export const HIDE_SPEC_CREATE_PRODUCT_SUCCESS = 'HIDE_SPEC_CREATE_PRODUCT_SUCCES
 export const onHideSpecCreateProduct = () => dispatch =>
 batch(() => {
   dispatch(onActionCreator(HIDE_SPEC_CREATE_PRODUCT_SUCCESS));
-  dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS));
-  dispatch(onHideSpecProductsItemsSuccess());
 });
 
 export const SHOW_SPEC_CREATE_PRODUCT_SUCCESS = 'SHOW_SPEC_CREATE_PRODUCT_SUCCESS';
