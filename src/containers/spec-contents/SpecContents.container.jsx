@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Collapsible from '../../components/basics/Collapsible';
 import { Root, PanelTitle, ListTitle, ListItem, ArrowIcon } from './SpecContents.styles';
 import arrowDownSource from '../../assets/images/icons/arrow-down.svg';
@@ -12,10 +12,9 @@ import arrowUpSource from '../../assets/images/icons/arrow-up.svg';
 const SpecContents = () => {
   const { show } = useSelector(state => state.specContents);
   const { blocks } = useSelector(state => state.specDocument);
-  const history = useHistory();
+  const { pathname } = useLocation();
   const sections = useMemo(() => {
     const sectionsBlocks = blocks.filter(block => block.type === 'Section');
-    
     return sectionsBlocks.map(sectionBlock => ({
       ...sectionBlock,
       items: blocks
@@ -34,9 +33,6 @@ const SpecContents = () => {
       if (currentSelectedSection === sectionID) {
         return undefined;
       }
-
-      history.push(`#${sectionID}`);
-
       return sectionID;
     });
   };
@@ -45,14 +41,8 @@ const SpecContents = () => {
       if (currentSelectedItem === itemID) {
         return undefined;
       }
-
-      history.push(`#${itemID}`);
-
       return itemID;
     });
-  };
-  const handleProductClick = productID => () => {
-    history.push(`#${productID}`);
   };
 
   useEffect(() => {
@@ -68,33 +58,42 @@ const SpecContents = () => {
     <Root show={show}>
       <PanelTitle>Tabla de contenidos</PanelTitle>
       <ListTitle>Indice de Partidas</ListTitle>
-      {sections.map((section, sectionIndex) => (
+      {sections.map(section => (
         <Fragment key={section.id}>
-          <ListItem title={section.element.name} onClick={handleSectionClick(section.id)}>
+          <ListItem 
+            title={section.element.name} 
+            onClick={handleSectionClick(section.id)} 
+            href={selectedSection === section.id ? `${pathname}#${section.id}` : 'javascript:;' }
+          >
             <span>
-              {`${sectionIndex + 1}. ${section.element.name}`}
+              {section.element.name}
             </span>
             <ArrowIcon src={selectedSection === section.id ? arrowUpSource : arrowDownSource} />
           </ListItem>
           <Collapsible show={selectedSection === section.id}>
-            {section.items.map((item, itemIndex) => (
+            {section.items.map(item => (
               <Fragment key={item.id}>
-                <ListItem padding="0 23px 0 62px" title={item.element.name} onClick={handleItemClick(item.id)}>
+                <ListItem 
+                  padding="0 23px 0 62px"
+                  title={item.element.name}
+                  onClick={handleItemClick(item.id)} 
+                  href={selectedItem === item.id ? `${pathname}#${item.id}` : 'javascript:;' }
+                >
                   <span>
-                    {`${sectionIndex + 1}.${itemIndex + 1}. ${item.element.name}`}
+                    {item.element.name}
                   </span>
                   <ArrowIcon src={selectedItem === item.id ? arrowUpSource : arrowDownSource} />
                 </ListItem>
                 <Collapsible show={selectedItem === item.id}>
-                  {item.products.map((product, productIndex) => (
+                  {item.products.map(product => (
                     <ListItem
                       key={product.id}
                       padding="0 23px 0 77px"
                       title={product.element.title}
-                      onClick={handleProductClick(product.id)}
+                      href={`${pathname}#${product.id}`}
                     >
                       <span>
-                        {`${sectionIndex + 1}.${itemIndex + 1}.${productIndex + 1}. ${product.element.name}`}
+                        {product.element.name}
                       </span>
                       <span>&nbsp;</span>
                     </ListItem>

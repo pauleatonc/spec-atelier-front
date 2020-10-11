@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import { onShowSpecEditProduct } from '../spec-edit-product/SpecEditProduct.actions';
 import { onShowSpecImagesModalSuccess } from '../spec-images-modal/SpecImagesModal.actions';
@@ -50,6 +50,7 @@ import threeDotsVerticalSource from '../../assets/images/icons/three-dots-vertic
 const SpecDocument = () => {
   const { id: specID } = useParams();
   const { blocks } = useSelector(state => state.specDocument);
+  const {url, path} = useLocation();
   const dispatch = useDispatch();
   const [selectedBlockID, setSelectedBlockID] = useState('');
   const [selectedBlockTextID, setSelectedBlockTextID] = useState('');
