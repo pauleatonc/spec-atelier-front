@@ -160,7 +160,6 @@ export const TermsLink = styled.a`
   color: #17bea8;
   margin-left: 4px;
   clear: both;
-  display: inline-block;
   overflow: hidden;
   white-space: nowrap;
 `;
