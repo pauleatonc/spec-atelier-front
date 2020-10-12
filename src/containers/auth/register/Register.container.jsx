@@ -10,10 +10,14 @@ import {
   LoginTitle,
   ButtonGoogleContainer,
   TextInfo,
+  TermsText,
+  TermsLink,
 } from '../Auth.styles';
 import { TextInput, Button } from '../../../components/SpecComponents';
 import { registrationAction } from '../auth.actions';
 import ButtonGoogleLogin from '../../../components/buttons/ButtonGoogle';
+
+const  TermAndConditions = 'https://firebasestorage.googleapis.com/v0/b/spec-atelier.appspot.com/o/documents%2FT%26Cs%20de%20Uso%20Spec%20Atelier.pdf?alt=media';
 
 const Register = () => {
   const { state } = useLocation();
@@ -61,6 +65,14 @@ const Register = () => {
             placeholder="Contraseña"
             required
           />
+          <TextInfo size={12} >
+            <RegisterText>
+              Creando una cuenta aceptas nuestros
+              <TermsLink href={TermAndConditions} dowload target="_blank" rel="noreferrer">
+                términos y condiciones.
+              </TermsLink>
+            </RegisterText>  
+          </TextInfo>    
           <Button variant="secondary" onClick={handleSubmit} width="164px" disabled={!user.password || !user.email}>
             Crear Cuenta
 					</Button>
