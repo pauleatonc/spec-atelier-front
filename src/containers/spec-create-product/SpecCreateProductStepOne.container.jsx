@@ -52,7 +52,8 @@ const SpecCreateProductStepOne = () => {
     item: itemValue,
     system: systemValue,
   }));
-  const disabledNext = !nameValue || !sectionValue.label || !itemValue.label;
+  const disableSection = !systemValue.label && systems.length;
+  const disabledNext = !nameValue || !itemValue.label || disableSection;
 
   useEffect(() => {
     if (!show) {
@@ -115,7 +116,7 @@ const SpecCreateProductStepOne = () => {
               onChange={handleItemChange}
             />
             <Select
-              disabled={!itemValue.value}
+              disabled={!itemValue.value || !systems.length}
               options={systems.map(mapToSelector)}
               placeholder="Elige un sistema"
               value={systemValue}
