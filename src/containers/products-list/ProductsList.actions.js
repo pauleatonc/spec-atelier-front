@@ -107,9 +107,9 @@ export const onGetProductsByFiltersAll = () => async dispatch => {
   }
 }
 
-export const getSections = filters => async dispatch => {
+export const getSections = ({ brand, section, item } = {}) => async dispatch => {
   try {
-    const { sections } = await getServiceSections(cleanObjectsAndArrays(filters));
+    const { sections } = await getServiceSections(cleanObjectsAndArrays({ brand, section, item  }));
     return dispatch(onActionCreator(GET_SECTIONS_SUCCESS, { sections }));
   } catch (error) {
     return dispatch(onActionCreator(GET_SECTIONS_ERROR, { error: true, nativeError: error }));
@@ -118,9 +118,9 @@ export const getSections = filters => async dispatch => {
 
 export const setSelectedAll = value => dispatch => dispatch(onActionCreator(GET_PRODUCTS_FILTERS_ALL, { isSelectedAll: value }))
 
-export const getItems = filters => async dispatch => {
+export const getItems = ({ brand, section, item } = {})  => async dispatch => {
   try {
-    const { items } = await getItemsService(cleanObjectsAndArrays(filters));
+    const { items } = await getItemsService(cleanObjectsAndArrays(({ brand, section, item }) ));
     return dispatch(onActionCreator(GET_ITEMS_SUCCESS, { items }));
   } catch (error) {
     return dispatch(onActionCreator(GET_ITEMS_ERROR, { error: true, nativeError: error }));

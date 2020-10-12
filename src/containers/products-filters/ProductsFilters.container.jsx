@@ -50,8 +50,8 @@ const ProductsFilters = () => {
       dispatch(getItems({ section: value }));
       dispatch(getProductsByFilter({ ...filters, [name]: value }));
     } else if (name === 'brand') {
-      dispatch(getSections({ brand: value }));
-      dispatch(getItems({ brand: value }));
+      dispatch(getSections({ ...filters, brand: value }));
+      dispatch(getItems({ ...filters, brand: value }));
       dispatch(getProductsByFilter({ ...filters, [name]: value }));
     } else {
       dispatch(getProductsByFilter({ ...filters, [name]: value }));
