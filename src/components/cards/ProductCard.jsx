@@ -52,7 +52,7 @@ const ProductCard = props => {
     backgroundImage: `url('${photo || noPhoto}')`,
     backgroundSize: photo ? 'cover' : 'initial',
   };
-  const showSeeMore = !selected && Boolean(onClickSeeMore);
+  const showSeeMore = Boolean(onClickSeeMore);
 
   return (
     <Root hover={hover} selected={selected} onClick={onClickSeeMore} onMouseEnter={handleCardMouseEnter} onMouseLeave={handleCardMouseLeave}>
