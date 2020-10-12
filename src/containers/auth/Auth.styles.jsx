@@ -43,7 +43,7 @@ export const HeaderText = styled.section`
   line-height: normal;
   letter-spacing: 1px;
   font-style: normal;
-  margin-bottom: 120px;
+  margin-bottom: 100px;
 `;
 
 export const RegisterText = styled.span`
@@ -139,4 +139,27 @@ export const ButtonText = styled.div`
 
 export const ButtonContainer = styled.div`
   padding: 16px 0;
+`;
+
+export const TermsText = styled.div`
+  margin: 16px 0;
+  font-family: Lato;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  color: ${COLOR_BLACK};
+  display: flex;
+`;
+
+export const TermsLink = styled.a`
+  text-decoration: none;
+  font-weight: bold;
+  color: #17bea8;
+  margin-left: 4px;
+  clear: both;
+  overflow: hidden;
+  white-space: nowrap;
 `;

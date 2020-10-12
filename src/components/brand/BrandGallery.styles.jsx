@@ -8,6 +8,7 @@ export const Container = styled.section`
                        "three three"
                        "four five";
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 120px 260px 120x;
   max-height: 500px;
 `;
 

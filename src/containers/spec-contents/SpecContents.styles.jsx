@@ -45,7 +45,8 @@ export const ListTitle = styled.section`
   padding: 0 23px;
 `;
 
-export const ListItem = styled.section`
+export const ListItem = styled.a`
+  text-decoration: none;
   align-items: center;
   color: ${COLOR_MINE_SHAFT};
   cursor: pointer;

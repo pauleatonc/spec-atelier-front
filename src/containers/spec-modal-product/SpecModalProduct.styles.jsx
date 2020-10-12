@@ -111,6 +111,7 @@ export const ImagesContent = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
+  max-width: 100px;
   border: 2px solid; 
   border-color: ${({ active }) => active ? COLOR_PRIMARY : 'transparent'};
   ${MEDIA_QUERY_SMALL} {
