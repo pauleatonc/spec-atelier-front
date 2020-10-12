@@ -75,7 +75,7 @@ const ButtonComboBox = ({ options, currentOptions, name, children, onChange, sub
 
   const innerRef = onClickOusite(() => {
     if (!isOpen) return
-    set(tempValues);
+    set(values);
     setIsOpen(false);
   });
 
