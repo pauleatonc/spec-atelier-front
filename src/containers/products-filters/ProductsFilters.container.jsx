@@ -27,7 +27,6 @@ const ProductsFilters = () => {
   const { isSelectedAll, filters, sections, items } = useSelector(state => state.productsList);
   const { brands } = useSelector(state => state.brandsList);
   const [roomTypesOptions, setRoomTypesOptions] = useState([]);
-  const [itemsTypesOptions, setItemsTypesOptions] = useState(items);
   const dispatch = useDispatch();
 
   const handleFilterAll = () => dispatch(onGetProductsByFiltersAll());
@@ -40,13 +39,20 @@ const ProductsFilters = () => {
       ).map(mapToSelector);
 
       const selectedRoomTypes = filters.room_type.filter(rt => rt.project_types.some(rpt => value.some(val => val.value === rpt.id)));
-      
+
       setRoomTypesOptions(filteredRoomTypes);
       dispatch(getProductsByFilter({
-        ...filters, 
+        ...filters,
         room_type: selectedRoomTypes,
         [name]: value,
       }));
+    } else if (name === 'section') {
+      dispatch(getItems({ section: value }));
+      dispatch(getProductsByFilter({ ...filters, [name]: value }));
+    } else if (name === 'brand') {
+      dispatch(getSections({ brand: value }));
+      dispatch(getItems({ brand: value }));
+      dispatch(getProductsByFilter({ ...filters, [name]: value }));
     } else {
       dispatch(getProductsByFilter({ ...filters, [name]: value }));
     }
@@ -62,12 +68,8 @@ const ProductsFilters = () => {
   }, []);
 
   useEffect(() => {
-    if (roomTypes.length) setRoomTypesOptions(roomTypes.map(mapToSelector));
+    if (roomTypes) setRoomTypesOptions(roomTypes.map(mapToSelector));
   }, [roomTypes]);
-
-  useEffect(() => {
-    if (items.length) setItemsTypesOptions(items.map(mapToSelector));
-  }, [items]);
 
   useEffect(() => {
     const { section = [], room_type = [], project_type = [], item = [], brand = [], sort = '', keyword = '' } = filters;
@@ -99,7 +101,7 @@ const ProductsFilters = () => {
         </ButtonComboBox>
         <ButtonComboBox
           variant="secondary"
-          options={itemsTypesOptions}
+          options={items}
           name="item"
           onChange={submitCallback}
           currentOptions={filters.item}

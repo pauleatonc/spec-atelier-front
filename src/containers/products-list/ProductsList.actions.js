@@ -1,7 +1,9 @@
 import onActionCreator from '../../config/store/helpers';
-import { getProductById, getProducts, getProductsSections } from '../../services/products.service';
+import { getProductById, getProducts } from '../../services/products.service';
 import { getItems as getItemsService } from '../../services/items.service';
 import { cleanObjectsAndArrays } from '../../modules/services';
+import { getSections as getServiceSections } from '../../services/sections.service';
+import { getBrands as getServiceBrands } from '../../services/brands.service';
 
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_PRODUCTS_ERROR = 'GET_PRODUCTS_ERROR';
@@ -105,9 +107,9 @@ export const onGetProductsByFiltersAll = () => async dispatch => {
   }
 }
 
-export const getSections = () => async dispatch => {
+export const getSections = filters => async dispatch => {
   try {
-    const { sections } = await getProductsSections();
+    const { sections } = await getServiceSections(cleanObjectsAndArrays(filters));
     return dispatch(onActionCreator(GET_SECTIONS_SUCCESS, { sections }));
   } catch (error) {
     return dispatch(onActionCreator(GET_SECTIONS_ERROR, { error: true, nativeError: error }));
@@ -118,7 +120,16 @@ export const setSelectedAll = value => dispatch => dispatch(onActionCreator(GET_
 
 export const getItems = filters => async dispatch => {
   try {
-    const { items } = await getItemsService(filters);
+    const { items } = await getItemsService(cleanObjectsAndArrays(filters));
+    return dispatch(onActionCreator(GET_ITEMS_SUCCESS, { items }));
+  } catch (error) {
+    return dispatch(onActionCreator(GET_ITEMS_ERROR, { error: true, nativeError: error }));
+  }
+};
+
+export const getBrands = filters => async dispatch => {
+  try {
+    const { items } = await getServiceBrands(cleanObjectsAndArrays(filters));
     return dispatch(onActionCreator(GET_ITEMS_SUCCESS, { items }));
   } catch (error) {
     return dispatch(onActionCreator(GET_ITEMS_ERROR, { error: true, nativeError: error }));

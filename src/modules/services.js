@@ -52,7 +52,7 @@ export const cleanParams = obj => Object
  *  return a new object
  */
 
-export const cleanObjectsAndArrays = obj => Object
+export const cleanObjectsAndArrays = (obj = {}) => Object
   .entries(obj)
   .reduce((acc, [key, value]) => {
     if (!value) return acc;
