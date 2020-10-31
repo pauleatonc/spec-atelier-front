@@ -44,6 +44,7 @@ const ProjectsFilters = () => {
         <SelectorRelative
           name="sort"
           type="underline"
+          maxHeight="180px"
           options={sortFilters}
           placeholder=""
           value={params.sort.id}

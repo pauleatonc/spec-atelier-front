@@ -112,6 +112,7 @@ export const FilterSortText = styled.div`
   color: ${COLOR_BLACK};
   border-radius: 0;
   width: 240px;
+  align-items: center;
 `
 export const DropIcon = styled.img`
   cursor: pointer;
