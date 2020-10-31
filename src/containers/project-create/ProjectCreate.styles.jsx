@@ -9,6 +9,7 @@ import {
   COLOR_PRIMARY,
   COLOR_DARKESTGREY,
   COLOR_GREY,
+  COLOR_LIGHTGREY,
 } from '../../config/constants/styled-vars';
 
 import {
@@ -263,7 +264,6 @@ export const Suffix = styled.span`
   position: absolute;
   right: 16px;
   top: 12px;
-  z-index: 1;
   font-family: Lato;
   font-size: 12px;
   font-weight: normal;
@@ -321,3 +321,30 @@ export const SelectorDateContainer = styled.div`
   padding: 4px 0;
 
 `;
+
+export const InputText = styled.div`
+  white-space: nowrap;
+  padding: 4px 16px 8px 16px;
+  border: 0; 
+  outline: 0;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid ${COLOR_LIGHTGREY};
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: ${COLOR_BLACK};
+  border-radius: 0;
+  width: 240px;
+`
+export const DropIcon = styled.img`
+  cursor: pointer;
+`;
+
+export const TextValue = styled.div`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`
