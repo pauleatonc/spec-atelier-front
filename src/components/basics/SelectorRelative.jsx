@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Content, Option, Section } from './SelectorRelative.styles';
-import { mapToSelector } from '../../helpers/helpers';
+import { Container, Content, Option, Section, NoOptions } from './SelectorRelative.styles';
 
 const propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
@@ -11,17 +10,15 @@ const propTypes = {
     ]),
     name: PropTypes.string,
   })),
-  name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
 };
 
 const defaultProps = {
   options: [],
-  children: null,
   onChange: () => { },
 };
 
-const SelectorRelative = ({ options, name, onChange, renderInput, width }) => {
+const SelectorRelative = ({ options, onChange, renderInput, width, maxHeight }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -65,10 +62,11 @@ const SelectorRelative = ({ options, name, onChange, renderInput, width }) => {
       <Section onClick={toggle}>
         {renderInput}
       </Section>
-      <Content isOpen={isOpen} width={width}>
+      <Content isOpen={isOpen} width={width} maxHeight={maxHeight}>
         {options.map(option => (
           <Option key={option.id} onClick={onChangeOption(option)} value={option.id}>{option.label}</Option>
         ))}
+        {!options.length && <NoOptions>No hay Opciones Disponibles</NoOptions>}
       </Content>
     </Container>
   );

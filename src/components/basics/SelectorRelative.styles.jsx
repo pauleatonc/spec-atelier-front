@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_WHITE, SHADOW_GREY, COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
+import { COLOR_WHITE, SHADOW_GREY, COLOR_MINE_SHAFT, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
 
 
 export const Container = styled.div`
@@ -7,14 +7,17 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
+  max-height: ${({ maxHeight }) => maxHeight || '100%'};
   margin-top: 8px;
   position: absolute;
   border: 1px solid #CCC;
   background-color: ${COLOR_WHITE};
   min-width: 160px;
+  min-height 30px;
   width: ${({ width }) => width || '100%'};
   padding: 4px 4px;
   z-index: 1;
+  overflow-y: auto;
   display: ${({ isOpen }) => isOpen ? 'block' : 'none'}
   ${({ isOpen }) => isOpen ? `box-shadow: ${SHADOW_GREY}` : ''}
 `;
@@ -49,3 +52,11 @@ export const Option = styled.section`
     margin: 0 0 6px;
   }
 `;
+
+export const NoOptions = styled.div`
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 0.86px;
+  padding: 10px 23px;
+  color: ${COLOR_LIGHTGREY};
+`
