@@ -4,7 +4,6 @@ import DatePicker from 'react-datepicker';
 import {
   TextArea,
   Input,
-  Select,
 } from '../../components/SpecComponents';
 import {
   ContentData,
@@ -19,10 +18,15 @@ import {
   Suffix,
   SelectorDate,
   SelectorDateContainer,
+  InputText,
+  TextValue,
+  DropIcon,
 } from './ProjectCreate.styles';
 import { SubHeaderProjectDescription } from '../../components/sub-headers/ProjectSubHeaders';
 import { changeView } from './ProjectCreate.actions';
 import { formatDate } from '../../helpers/helpers';
+import SelectorRelative from '../../components/basics/SelectorRelative';
+import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
 
 const ProjectDetails = () => {
   const { view, newProject } = useSelector(state => state.newProject);
@@ -74,12 +78,23 @@ const ProjectDetails = () => {
         Elige la ciudad donde se realizará tu proyecto
             </Text>
       <Section width="40%">
-        <Select
+        <SelectorRelative
+          name="sort"
           type="underline"
           options={citiesOptions}
           placeholder="Elige una ciudad"
           value={tempNewProject.city}
           onChange={onSelectCity}
+          maxHeight="180px"
+          width="200px"
+          renderInput={(
+            <InputText>
+              <TextValue>
+                {tempNewProject.city.label || 'Elige una ciudad'}
+              </TextValue>
+              <DropIcon alt="" src={dropArrowSource} />
+            </InputText>
+          )}
         />
       </Section>
       <Text>

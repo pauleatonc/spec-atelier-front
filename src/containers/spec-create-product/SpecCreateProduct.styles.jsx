@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
+import { COLOR_BLACK, COLOR_LIGHTGREY, COLOR_MINE_SHAFT, COLOR_WHITE } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: #FAFAFA;
@@ -101,4 +101,52 @@ export const Gap = styled.div`
   display: inline-block;
   height: 10px;
   width: 10px;
+`;
+
+export const ButtonSelectorContent = styled.div`
+  white-space: nowrap;
+  outline: 0;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #979797;
+  border-radius: 9px;
+  padding: 0 12px 0 18px;
+  background-color: ${({ disabled }) => disabled ? '#DDD' : COLOR_WHITE}
+`;
+
+export const InputButton = styled.input`
+  align-items: center;
+  background-color: transparent;
+  color: ${COLOR_MINE_SHAFT};
+  cursor: pointer;
+  display: inline-flex;
+  height: 38px;
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 1px;
+  overflow: hidden;
+  padding-left: 24px
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  border: 0;
+
+  &:active, &:focus {
+    outline: 0;
+  }
+
+  &::placeholder {
+    color: rgba(33, 33, 33, 0.46);
+  }
+
+  &:disabled {
+    background-color: #DDD;
+    cursor: not-allowed;
+  }
+`;
+
+export const DropIcon = styled.img`
+  cursor: pointer;
 `;
