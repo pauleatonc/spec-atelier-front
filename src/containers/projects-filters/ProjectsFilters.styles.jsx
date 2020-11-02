@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_DARKESTGREY, COLOR_BLACK, COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
+import { COLOR_DARKESTGREY, COLOR_BLACK, COLOR_MINE_SHAFT, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   width: 100%;
@@ -97,7 +97,23 @@ export const Selector = styled.select`
   color: ${COLOR_BLACK};
 `;
 
-export const FilterSortText = styled.span`
+export const FilterSortText = styled.div`
   white-space: nowrap;
-  padding: 4px 16px;
+  padding: 4px 16px 8px 16px;
+  border: 0; 
+  outline: 0;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  border-bottom: 2px solid ${COLOR_LIGHTGREY};
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: ${COLOR_BLACK};
+  border-radius: 0;
+  width: 240px;
+  align-items: center;
 `
+export const DropIcon = styled.img`
+  cursor: pointer;
+`;
