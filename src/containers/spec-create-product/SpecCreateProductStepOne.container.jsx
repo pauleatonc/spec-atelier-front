@@ -10,8 +10,10 @@ import StepsBubbles from '../../components/basics/StepsBubbles';
 import Input from '../../components/inputs/Input';
 import Select from '../../components/inputs/Select';
 import Button from '../../components/buttons/Button';
-import { Root, Header, Title, CloseIcon, Body, Section, Footer } from './SpecCreateProduct.styles';
+import { Root, Header, Title, CloseIcon, Body, Section, Footer, InputButton, DropIcon, ButtonSelectorContent } from './SpecCreateProduct.styles';
 import closeSource from '../../assets/images/icons/close.svg';
+import SelectorRelative from '../../components/basics/SelectorRelative';
+import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
 
 /**
  * The SpecCreateProductStepOne's container.
@@ -63,7 +65,7 @@ const SpecCreateProductStepOne = () => {
     dispatch(onGetSpecProductsSections());
   }, [show]);
 
-  const mapToSelector= sectionOption => ({ ...sectionOption, label: sectionOption.name, value: sectionOption.id });
+  const mapToSelector = sectionOption => ({ ...sectionOption, label: sectionOption.name, value: sectionOption.id });
 
   useEffect(() => {
     if (sections && section?.id) {
@@ -79,7 +81,7 @@ const SpecCreateProductStepOne = () => {
       dispatch(onGetSpecProductsSystems({ itemID: item.id }));
     }
   }, [item]);
-  
+
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
       <Root>
@@ -92,7 +94,7 @@ const SpecCreateProductStepOne = () => {
             <StepsBubbles prefix="step-1" steps={[{ active: true }, { active: false }, { active: false }]} />
           </Section>
           <Section padding="41px 0 0">
-            <Input 
+            <Input
               label="Nombre del producto"
               placeholder="Nombre"
               value={nameValue}
@@ -101,26 +103,43 @@ const SpecCreateProductStepOne = () => {
             />
           </Section>
           <Section alignItems="flex-end" display="grid" gridTemplateColumns="1fr 1fr 1fr" padding="36px 0 0">
-            <Select
-              label="Categoriza el producto"
+            <SelectorRelative
+              name="sort"
+              type="underline"
               options={sections.map(mapToSelector)}
-              placeholder="Elige una sección"
               value={sectionValue}
               onChange={handleSectionChange}
+              maxHeight="160px"
+              renderInput={(
+                <ButtonSelectorContent>
+                  <InputButton readOnly placeholder="Categoriza el producto" value={sectionValue.label || ''} />
+                  <DropIcon alt="" src={dropArrowSource} />
+                </ButtonSelectorContent>
+              )}
             />
-            <Select
-              disabled={!sectionValue.value}
+            <SelectorRelative
               options={items.map(mapToSelector)}
-              placeholder="Elige una partida"
               value={itemValue}
               onChange={handleItemChange}
+              maxHeight="160px"
+              renderInput={(
+                <ButtonSelectorContent disabled={!sectionValue.value}>
+                  <InputButton readOnly placeholder="Elige una partida" value={itemValue.label || ''} disabled={!sectionValue.value}/>
+                  <DropIcon alt="" src={dropArrowSource} />
+                </ButtonSelectorContent>
+              )}
             />
-            <Select
-              disabled={!itemValue.value || !systems.length}
+             <SelectorRelative
               options={systems.map(mapToSelector)}
-              placeholder="Elige un sistema"
               value={systemValue}
               onChange={handleSystemChange}
+              maxHeight="1600px"
+              renderInput={(
+                <ButtonSelectorContent disabled={!itemValue.value || !systems.length}>
+                  <InputButton readOnly placeholder="Elige una partida" value={systemValue.label || ''} disabled={!itemValue.value || !systems.length} />
+                  <DropIcon alt="" src={dropArrowSource} />
+                </ButtonSelectorContent>
+              )}
             />
           </Section>
         </Body>

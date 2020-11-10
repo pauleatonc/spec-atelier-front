@@ -40,7 +40,7 @@ export const onAddSpecBlock = ({ specID, blockID }) => async (dispatch, getState
     const [block] = specProducts.collection
       .filter(specProduct => specProduct.id === blockID)
       .map(specProduct => ({
-        itemID: specProduct.item.id,
+        itemID: specProduct.items[0]?.id || '',
         productID: specProduct.id,
         sectionID: specProduct.section.id,
       }));

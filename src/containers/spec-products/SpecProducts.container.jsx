@@ -23,7 +23,7 @@ import ProductCard from '../../components/cards/ProductCard';
 import { Overlay, Root, Header, HeaderSearch, HeaderFilters, Body, BodyHeader, Sort, Total, Cards, LoadMore, Loading } from './SpecProducts.styles';
 import { mapToSelector } from '../../helpers/helpers';
 import CreateProduct from '../../components/product/CreateProduct';
-import { onHideSpecCreateProduct, onShowSpecCreateProductFromItemSuccess } from '../spec-create-product/SpecCreateProduct.actions';
+import { onShowSpecCreateProductFromItemSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 
 /**
  * The SpecProductsList's container.
@@ -215,7 +215,7 @@ const SpecProductsList = () => {
                     photo={product.images[0]?.urls?.thumb}
                     reference={product.reference || ''}
                     selected={Boolean(selected)}
-                    title={product.name}
+                    title={product?.name}
                     onClickCard={handleCardClick(product.id)}
                     onClickSeeMore={handleSeeMoreClick(product)}
                   />
