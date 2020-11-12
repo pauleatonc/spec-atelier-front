@@ -16,6 +16,7 @@ import newProjectReducer from '../../containers/project-create/ProjectCreate.red
 import appReducer from './app-store/app.reducer';
 import brandListReducer from '../../containers/brands-list/BrandsList.reducer';
 import brandReducer from '../../containers/brand/brand.reducer';
+import brandsSliderReducer from '../../containers/brand-slider/BrandSlider.reducer';
 import brandProductsListReducer from '../../containers/brand-products-list/BrandProductsList.reducer';
 import modalContactFormReducer from '../../containers/modal-contact-form/ModalContactForm.reducers';
 import specDocumentReducer from '../../containers/spec-document/SpecDocument.reducer';
@@ -27,6 +28,7 @@ export default combineReducers({
   auth: authReducer,
   app: appReducer,
   brand: brandReducer,
+  brandsSlider: brandsSliderReducer,
   brandsList: brandListReducer,
 	login: loginReducer,
 	recoverPassword: recoverPasswordReducer,
