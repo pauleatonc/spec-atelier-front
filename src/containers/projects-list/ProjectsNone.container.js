@@ -13,10 +13,10 @@ import {
 import ICON_NEW_PROJECT from '../../assets/images/project/design_project.png'
 
 const ProjectsNone = () => {
-  const { projects, loading, params } = useSelector(state => state.projectsList);
+  const { user } = useSelector(state => state.auth);
   const history = useHistory();
   const goToNewProject = () => history.push('./projects/project');
-  if (projects.length || loading || params.keyword) return null;
+  if (user.projects_count) return null;
   return (
     <Container>
       <IconContent>
