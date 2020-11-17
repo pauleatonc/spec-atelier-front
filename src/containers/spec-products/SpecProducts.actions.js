@@ -96,6 +96,7 @@ export const onGetSpecProductsByItem = payload => dispatch =>
   batch(() => {
     dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_ITEM, payload));
     dispatch(onGetSpecProducts());
+    dispatch(onGetBrands({ item: payload.itemID }));
   });
 
 export const GET_SPEC_PRODUCTS_BY_KEYWORD = 'GET_SPEC_PRODUCTS_BY_KEYWORD';
@@ -110,6 +111,7 @@ export const onGetSpecProductsBySection = payload => dispatch =>
   batch(() => {
     dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SECTION, payload));
     dispatch(onShowSpecProductsItems());
+    dispatch(onGetBrands({ section: payload.sectionID }));
     dispatch(onGetSpecProducts());
   });
 

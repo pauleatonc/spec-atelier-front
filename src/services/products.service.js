@@ -39,6 +39,7 @@ export const createProduct = factoryService(data => {
       name: data.name,
       price: data.price,
       system_id: data.system,
+      short_desc: data.shortDescription || '',
     },
   };
 

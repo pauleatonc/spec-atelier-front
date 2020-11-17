@@ -10,8 +10,10 @@ import StepsBubbles from '../../components/basics/StepsBubbles';
 import Input from '../../components/inputs/Input';
 import Select from '../../components/inputs/Select';
 import Button from '../../components/buttons/Button';
-import { Root, Header, Title, CloseIcon, Body, Section, Footer } from './SpecCreateProduct.styles';
+import { Root, Header, Title, CloseIcon, Body, Section, Footer, InputButton, DropIcon, ButtonSelectorContent } from './SpecCreateProduct.styles';
 import closeSource from '../../assets/images/icons/close.svg';
+import SelectorRelative from '../../components/basics/SelectorRelative';
+import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
 
 /**
  * The SpecCreateProductStepOne's container.
@@ -52,7 +54,8 @@ const SpecCreateProductStepOne = () => {
     item: itemValue,
     system: systemValue,
   }));
-  const disabledNext = !nameValue || !sectionValue.label || !itemValue.label;
+  const disableSection = !systemValue.label && systems.length;
+  const disabledNext = !nameValue || !itemValue.label || disableSection;
 
   useEffect(() => {
     if (!show) {
@@ -61,6 +64,23 @@ const SpecCreateProductStepOne = () => {
 
     dispatch(onGetSpecProductsSections());
   }, [show]);
+
+  const mapToSelector = sectionOption => ({ ...sectionOption, label: sectionOption.name, value: sectionOption.id });
+
+  useEffect(() => {
+    if (sections && section?.id) {
+      setSectionValue(mapToSelector(sections.find(i => i.id === section.id)));
+      dispatch(onGetSpecProductsItems({ sectionID: section.id }));
+    }
+  }, [section]);
+
+
+  useEffect(() => {
+    if (items && item?.id) {
+      setItemValue(mapToSelector(items.find(i => i.id === item.id)));
+      dispatch(onGetSpecProductsSystems({ itemID: item.id }));
+    }
+  }, [item]);
 
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
@@ -74,7 +94,7 @@ const SpecCreateProductStepOne = () => {
             <StepsBubbles prefix="step-1" steps={[{ active: true }, { active: false }, { active: false }]} />
           </Section>
           <Section padding="41px 0 0">
-            <Input 
+            <Input
               label="Nombre del producto"
               placeholder="Nombre"
               value={nameValue}
@@ -83,26 +103,43 @@ const SpecCreateProductStepOne = () => {
             />
           </Section>
           <Section alignItems="flex-end" display="grid" gridTemplateColumns="1fr 1fr 1fr" padding="36px 0 0">
-            <Select
-              label="Categoriza el producto"
-              options={sections.map(sectionOption => ({ label: sectionOption.name, value: sectionOption.id }))}
-              placeholder="Elige una sección"
+            <SelectorRelative
+              name="sort"
+              type="underline"
+              options={sections.map(mapToSelector)}
               value={sectionValue}
               onChange={handleSectionChange}
+              maxHeight="160px"
+              renderInput={(
+                <ButtonSelectorContent>
+                  <InputButton readOnly placeholder="Categoriza el producto" value={sectionValue.label || ''} />
+                  <DropIcon alt="" src={dropArrowSource} />
+                </ButtonSelectorContent>
+              )}
             />
-            <Select
-              disabled={!sectionValue.value}
-              options={items.map(itemOption => ({ label: itemOption.name, value: itemOption.id }))}
-              placeholder="Elige una partida"
+            <SelectorRelative
+              options={items.map(mapToSelector)}
               value={itemValue}
               onChange={handleItemChange}
+              maxHeight="160px"
+              renderInput={(
+                <ButtonSelectorContent disabled={!sectionValue.value}>
+                  <InputButton readOnly placeholder="Elige una partida" value={itemValue.label || ''} disabled={!sectionValue.value}/>
+                  <DropIcon alt="" src={dropArrowSource} />
+                </ButtonSelectorContent>
+              )}
             />
-            <Select
-              disabled={!itemValue.value}
-              options={systems.map(systemOption => ({ label: systemOption.name, value: systemOption.id }))}
-              placeholder="Elige un sistema"
+             <SelectorRelative
+              options={systems.map(mapToSelector)}
               value={systemValue}
               onChange={handleSystemChange}
+              maxHeight="1600px"
+              renderInput={(
+                <ButtonSelectorContent disabled={!itemValue.value || !systems.length}>
+                  <InputButton readOnly placeholder="Elige una partida" value={systemValue.label || ''} disabled={!itemValue.value || !systems.length} />
+                  <DropIcon alt="" src={dropArrowSource} />
+                </ButtonSelectorContent>
+              )}
             />
           </Section>
         </Body>

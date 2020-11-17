@@ -52,10 +52,10 @@ const ProductCard = props => {
     backgroundImage: `url('${photo || noPhoto}')`,
     backgroundSize: photo ? 'cover' : 'initial',
   };
-  const showSeeMore = !selected && Boolean(onClickSeeMore);
+  const showSeeMore = Boolean(onClickSeeMore);
 
   return (
-    <Root hover={hover} selected={selected} onClick={onClickCard} onMouseEnter={handleCardMouseEnter} onMouseLeave={handleCardMouseLeave}>
+    <Root hover={hover} selected={selected} onClick={onClickSeeMore} onMouseEnter={handleCardMouseEnter} onMouseLeave={handleCardMouseLeave}>
       <Content>
         <Photo style={photoStyles} />
         <Details>
@@ -76,7 +76,7 @@ const ProductCard = props => {
           Ver más
         </SeeMore>
       </Footer>
-      {hover && !selected && canAdd && <Add />}
+      {hover && !selected && canAdd && <Add onClick={onClickCard} />}
       {selected && <Check />}
     </Root>
   );
@@ -89,6 +89,7 @@ ProductCard.defaultProps = {
   photo: '',
   selected: false,
   technical: '#',
+  reference: '',
   onClickCard: () => undefined,
   onClickSeeMore: undefined,
 };
@@ -99,7 +100,7 @@ ProductCard.propTypes = {
   description: PropTypes.string.isRequired,
   dwg: PropTypes.string,
   photo: PropTypes.string,
-  reference: PropTypes.string.isRequired,
+  reference: PropTypes.string,
   selected: PropTypes.bool,
   technical: PropTypes.string,
   title: PropTypes.string.isRequired,

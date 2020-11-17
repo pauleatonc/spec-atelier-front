@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onGetSpecProductsByItem } from '../spec-products/SpecProducts.actions';
+import { onGetSpecProductsByItem, onGetSpecProductsBySection } from '../spec-products/SpecProducts.actions';
 import { onHideSpecProductsItemsSuccess } from './SpecProductsItems.actions';
 import Breadcrumbs from '../../components/basics/Breadcrumbs';
 import { Root, Header, Body, Loading, Item } from './SpecProductsItems.styles';
@@ -12,7 +12,10 @@ const SpecProductsItems = () => {
   const { item: selectedItemID } = useSelector(state => state.specProducts.filters);
   const { collection: items, show } = useSelector(state => state.specProductsItems);
   const dispatch = useDispatch();
-  const handleShowSections = () => dispatch(onHideSpecProductsItemsSuccess());
+  const handleShowSections = () => {
+    dispatch(onGetSpecProductsBySection({ sectionID: '', itemID: '' }));
+    dispatch(onHideSpecProductsItemsSuccess());
+  }
   const handleItemClick = itemID => () => dispatch(onGetSpecProductsByItem({ itemID }));
 
   if (!show) {

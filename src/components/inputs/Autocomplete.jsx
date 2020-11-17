@@ -57,7 +57,7 @@ const Autocomplete = props => {
           </AddOption>
         )}
         {options
-          .filter(option => option.label.includes(innerValue))
+          .filter(option => option.label?.toLowerCase().includes(innerValue?.toLowerCase()))
           .map(option => (
           <Option key={option.value} onClick={handleClick(option)}>{option.label}</Option>
         ))}

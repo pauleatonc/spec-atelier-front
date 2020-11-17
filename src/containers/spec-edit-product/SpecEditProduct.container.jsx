@@ -124,7 +124,7 @@ const SpecEditProduct = () => {
   const toggleDocumentsModal = () => setDocumentsModal(!documentsModal);
 
   const mapToImages = img => ({ ...img, src: img?.urls?.medium });
-  const mapToFiles = file => ({ ...file, src: file.url });
+  const mapToFiles = file => ({ id: file.id, file, src: file.url, name: file.name });
 
   const handleAttachReject = reason => dispatch(onShowAlertSuccess({ message: reason }));
 
@@ -144,8 +144,10 @@ const SpecEditProduct = () => {
   };
 
   const onAddDocuments = attachedDocuments => {
+     // eslint-disable-next-line no-undef
+    const newDocs = attachedDocuments.filter(doc => doc instanceof File);
     setDocumentsValues(
-      [...documentsValues, ...attachedDocuments.map(doc => ({
+      [...documentsValues, ...newDocs.map(doc => ({
         id: keygen.next().value,
         name: doc.name,
         size: doc.size,
@@ -238,7 +240,7 @@ const SpecEditProduct = () => {
             <Text onClick={toggleDocumentsModal}><i className="fas fa-plus" /> Añadir archivo</Text>
             <DocContainer>
               <ProductContainer>
-                {documentsValues.map(pdf => pdf && <DocumentItem key={pdf.id} document={pdf} bordered onClickRemove={handleDeletePDF(pdf)} />)}
+                {documentsValues.map(pdf => pdf && <DocumentItem key={pdf.id} document={pdf.file} bordered onClickRemove={handleDeletePDF(pdf)} />)}
                 {product.dwg?.name && <DocumentItem key={product.dwg.id} document={product.dwg} bordered />}
                 {product.bim?.name && <DocumentItem  key={product.bim.id} document={product.bim} bordered />}
               </ProductContainer>
@@ -376,7 +378,7 @@ const SpecEditProduct = () => {
           )}
         </Footer>
         <AttachedImages
-          images={[]}
+          images={imagesValues}
           maxSize={10}
           onChange={onAddImages}
           onReject={handleAttachReject}
@@ -386,7 +388,7 @@ const SpecEditProduct = () => {
         />
         <AttachedDocuments
           maxSize={5}
-          documents={[]}
+          documents={documentsValues}
           onChange={onAddDocuments}
           onReject={handleAttachReject}
           showModal={documentsModal}

@@ -94,7 +94,7 @@ const productsListReducer = (state = { ...productsListState }, { payload, type }
       };
     }
     case GET_SECTIONS_ERROR:
-      break;
+      return { ...state };
     case GET_ITEMS_SUCCESS: {
       return {
         ...state,

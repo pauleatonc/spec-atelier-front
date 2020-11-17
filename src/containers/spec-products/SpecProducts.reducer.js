@@ -107,6 +107,7 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
         filters: {
           ...state.filters,
           section: payload.sectionID,
+          item: payload.itemID,
         },
       };
     }

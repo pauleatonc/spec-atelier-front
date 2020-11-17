@@ -9,6 +9,7 @@ import {
   COLOR_PRIMARY,
   COLOR_DARKESTGREY,
   COLOR_GREY,
+  COLOR_LIGHTGREY,
 } from '../../config/constants/styled-vars';
 
 import {
@@ -21,6 +22,9 @@ import REAL_STATE from '../../assets/images/project/project_type/ic-real_state_g
 import RESIDENTIAL from '../../assets/images/project/project_type/ic-residential_grey.svg';
 import HOTEL from '../../assets/images/project/project_type/ic-hotel_grey.svg';
 import EDUCATIONAL from '../../assets/images/project/project_type/ic-educational_grey.svg';
+import COMMERCIAL from '../../assets/images/project/project_type/ic-commercial_grey.svg';
+import OFFICE from '../../assets/images/project/project_type/ic-office_grey.svg';
+import INDUSTRIAL from '../../assets/images/project/project_type/ic-industrial_grey.svg';
 
 import INSTITUTIONAL_ACTIVE from '../../assets/images/project/project_type/ic-institutional_green.svg';
 import HOSPITAL_ACTIVE from '../../assets/images/project/project_type/ic-hospitaler_green.svg';
@@ -28,6 +32,10 @@ import REAL_STATE_ACTIVE from '../../assets/images/project/project_type/ic-real_
 import RESIDENTIAL_ACTIVE from '../../assets/images/project/project_type/ic-residential_green.svg';
 import HOTEL_ACTIVE from '../../assets/images/project/project_type/ic-hotel_green.svg';
 import EDUCATIONAL_ACTIVE from '../../assets/images/project/project_type/ic-educational_green.svg';
+import COMMERCIAL_ACTIVE from '../../assets/images/project/project_type/ic-commercial_green.svg';
+import OFFICE_ACTIVE from '../../assets/images/project/project_type/ic-office_green.svg';
+import INDUSTRIAL_ACTIVE from '../../assets/images/project/project_type/ic-industrial_green.svg';
+
 
 import ICON_CHECK from '../../assets/images/icons/check.svg';
 
@@ -38,7 +46,11 @@ const types = {
   RESIDENTIAL,
   HOTEL,
   EDUCATIONAL,
+  COMMERCIAL,
+  OFFICE,
+  INDUSTRIAL,
 };
+
 
 const activeTypes = {
   INSTITUTIONAL: INSTITUTIONAL_ACTIVE,
@@ -47,6 +59,9 @@ const activeTypes = {
   RESIDENTIAL: RESIDENTIAL_ACTIVE,
   HOTEL: HOTEL_ACTIVE,
   EDUCATIONAL: EDUCATIONAL_ACTIVE,
+  COMMERCIAL: COMMERCIAL_ACTIVE,
+  OFFICE: OFFICE_ACTIVE,
+  INDUSTRIAL: INDUSTRIAL_ACTIVE,
 };
 
 
@@ -131,7 +146,8 @@ export const ButtonIcon = styled.div`
   background-size: cover;
   width: 20px;
   height: 20px;
-  margin: auto 8px auto 0;
+  margin: auto 8px auto 4px;
+  object-fit: contain;
 `;
 
 export const SubHeader = styled.section`
@@ -168,6 +184,22 @@ export const Text = styled.div`
   margin: 16px 0;
 `;
 
+export const TextButton = styled.div`
+  height: 16px;
+  font-family: Lato;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  clear: both;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+`;
+
 export const Label = styled.div`
   height: 16px;
   font-family: Lato;
@@ -192,6 +224,7 @@ export const PermissionOptions = styled.section`
 export const PermissionOption = styled.section`
   cursor: pointer;
   min-height: 120px;
+  min-width: 300px;
   border-radius: 4px;
   border: solid 1px ${({ active }) => active ? COLOR_PRIMARY : BORDER_GREY};
   background-color: ${({ active }) => active ? COLOR_LIGHTERGREY : COLOR_WHITE};
@@ -231,7 +264,6 @@ export const Suffix = styled.span`
   position: absolute;
   right: 16px;
   top: 12px;
-  z-index: 1;
   font-family: Lato;
   font-size: 12px;
   font-weight: normal;
@@ -289,3 +321,30 @@ export const SelectorDateContainer = styled.div`
   padding: 4px 0;
 
 `;
+
+export const InputText = styled.div`
+  white-space: nowrap;
+  padding: 4px 16px 8px 16px;
+  border: 0; 
+  outline: 0;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid ${COLOR_LIGHTGREY};
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: ${COLOR_BLACK};
+  border-radius: 0;
+  width: 240px;
+`
+export const DropIcon = styled.img`
+  cursor: pointer;
+`;
+
+export const TextValue = styled.div`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`

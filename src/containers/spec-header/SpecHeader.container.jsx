@@ -5,7 +5,7 @@ import { Root, Separator, Section, ProjectName, Download, Monetization } from '.
 import logoSource from '../../assets/images/logo-spec.png';
 import logo2xSource from '../../assets/images/logo-spec@2x.png';
 import logo3xSource from '../../assets/images/logo-spec@3x.png';
-import { downloadSpecDocument } from './SpecHeader.actions';
+import { cleanDownload, downloadSpecDocument } from './SpecHeader.actions';
 
 /**
  * The SpecHeader's container.
@@ -17,6 +17,10 @@ const SpecHeader = () => {
   const { url } = useSelector(state => state.specHeader);
 
   const handleDownloadClick = () => dispatch(downloadSpecDocument({ specID: id }));
+
+  useEffect(() => {
+    return () => dispatch(cleanDownload());
+  }, []);
 
   useEffect(() => {
     const downloadDoc = () => {
