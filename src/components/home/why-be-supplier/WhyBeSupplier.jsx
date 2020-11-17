@@ -14,12 +14,12 @@ const WhyBeSupplier = () => (
 		<Content>
 			<InfoContainer>
 				<Title>
-					¿Por qué ser proveedor?
+					¿Quieres ser proveedor?
 				</Title>
 				<Description>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non erat
-					tortor. In eu pulvinar ligula. Aenean leo purus, gravida id commodo
-					quis, elementum quis erat. Nam lobortis efficitur felis.
+					Publica tus productos y soluciones costructivas en SpecAtelier
+					para que nuestros usuario puedan especificarlas en sus proyectos.
+					Aumenta la demanda con un solo click
 				</Description>
 				<ButtonContainer>
 					<Button variant="primary" width="100%" onClick={() => {}}>únete</Button>
