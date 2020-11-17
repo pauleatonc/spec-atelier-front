@@ -5,19 +5,22 @@ import Footer from '../components/footer';
 import HeaderHome from '../components/home/header';
 import WhoWeUs from '../components/home/who-we-us';
 import WhyBeSupplier from '../components/home/why-be-supplier/WhyBeSupplier';
-import BrandSliderContainer from '../containers/brand-slider/BrandSlider';
+import SliderImages from '../components/slide-images';
+import HttpsRedirect from 'react-https-redirect';
 
 /**
  * The Home's view.
  */
 const Home = () => {
 	return (
-		<AppLayout footer={<Footer />} header={<NavBar fixed />}>
-			<HeaderHome />
-			<WhoWeUs />
-			<BrandSliderContainer />
-			<WhyBeSupplier />
-		</AppLayout>
+		<HttpsRedirect>
+			<AppLayout footer={<Footer />} header={<NavBar fixed />}>
+				<HeaderHome />
+				<WhoWeUs />
+				<SliderImages />
+				<WhyBeSupplier />
+			</AppLayout>
+		</HttpsRedirect>
 	);
 };
 
