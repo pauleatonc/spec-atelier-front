@@ -58,7 +58,7 @@ const handlePrintImages = obj =>
 		<div key={data.id} className="container__images_content">
 			<img
 				className="container__images_content__image"
-				src={data.pathImage}
+				src={data.logo}
 				alt={data.name}
 			/>
 		</div>

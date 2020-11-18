@@ -30,6 +30,7 @@ const ProjectData = () => {
       [name]: value,
     });
   };
+  console.log('project', newProject);
 
   const onChangeName = ({ target: { name, value } }) => setNewProject({ ...tempNewProject, [name]: value });
 

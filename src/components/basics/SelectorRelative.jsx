@@ -11,14 +11,16 @@ const propTypes = {
     name: PropTypes.string,
   })),
   onChange: PropTypes.func,
+  right: PropTypes.bool,
 };
 
 const defaultProps = {
+  right: false,
   options: [],
   onChange: () => { },
 };
 
-const SelectorRelative = ({ options, onChange, renderInput, width, maxHeight }) => {
+const SelectorRelative = ({ options, onChange, renderInput, width, maxHeight, right }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -62,7 +64,7 @@ const SelectorRelative = ({ options, onChange, renderInput, width, maxHeight }) 
       <Section onClick={toggle}>
         {renderInput}
       </Section>
-      <Content isOpen={isOpen} width={width} maxHeight={maxHeight}>
+      <Content isOpen={isOpen} width={width} maxHeight={maxHeight} right={right}>
         {options.map(option => (
           <Option key={option.id} onClick={onChangeOption(option)} value={option.id}>{option.label}</Option>
         ))}

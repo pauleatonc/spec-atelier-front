@@ -18,8 +18,9 @@ export const Content = styled.div`
   padding: 4px 4px;
   z-index: 1;
   overflow-y: auto;
-  display: ${({ isOpen }) => isOpen ? 'block' : 'none'}
-  ${({ isOpen }) => isOpen ? `box-shadow: ${SHADOW_GREY}` : ''}
+  display: ${({ isOpen }) => isOpen ? 'block' : 'none'};
+  ${({ isOpen }) => isOpen ? `box-shadow: ${SHADOW_GREY}` : ''};
+  ${({ right }) => right ? 'right: 0' : ''};
 `;
 
 export const Section = styled.div`

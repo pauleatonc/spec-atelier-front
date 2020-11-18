@@ -5,8 +5,8 @@ import Footer from '../components/footer';
 import HeaderHome from '../components/home/header';
 import WhoWeUs from '../components/home/who-we-us';
 import WhyBeSupplier from '../components/home/why-be-supplier/WhyBeSupplier';
-import SliderImages from '../components/slide-images';
 import HttpsRedirect from 'react-https-redirect';
+import BrandSlider from '../containers/brand-slider/BrandSlider';
 
 /**
  * The Home's view.
@@ -17,7 +17,7 @@ const Home = () => {
 			<AppLayout footer={<Footer />} header={<NavBar fixed />}>
 				<HeaderHome />
 				<WhoWeUs />
-				<SliderImages />
+				<BrandSlider />
 				<WhyBeSupplier />
 			</AppLayout>
 		</HttpsRedirect>

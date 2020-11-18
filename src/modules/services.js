@@ -40,6 +40,10 @@ export const cleanParams = obj => Object
   .reduce((acc, [key, value]) => {
     if (value === null || value === undefined || value === '') return acc;
     if (value && typeof value === 'object' && value.id) return { ...acc, [key]: value.id };
+    if (Array.isArray(value)) return value.length ? {
+      ...acc,
+      [`${key}[]`]: value.map(({ id }) => id).join(`&${key}[]=`),
+    } : acc;
     return { ...acc, [key]: value }
   }, {});
 

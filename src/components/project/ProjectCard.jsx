@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import {
 	firstLetterToUppercase,
@@ -27,6 +28,8 @@ import {
 	ICON_OFFICE_GREY,
 	ICON_RESIDENTIAL_GREY,
 } from '../../assets/Images';
+import SelectorRelative from '../basics/SelectorRelative';
+
 
 
 const mapImages = {
@@ -96,10 +99,14 @@ const prettyLocationFormat = (city, country) =>
 const handlePrintEditDate = (createDate, editDate) => {
 	if (createDate === editDate) {
 		return 'Aún no se ha editado';
-	} else {
-		return `Creado el ${handleChangeToPrettyFormat(editDate)}`;
 	}
+	return `Creado el ${handleChangeToPrettyFormat(editDate)}`;
+
 };
+const options = [
+	{ label: 'Editar', value: 'MODIFY', id: 'MODIFY' },
+	{ label: 'Eliminar', value: 'DELETE', id: 'DELETE' },
+];
 
 const Project = props => {
 	const {
@@ -112,14 +119,29 @@ const Project = props => {
 		country,
 		onClick,
 		id,
+		onClickDelete,
 	} = props;
 
+	const history = useHistory();
 	const onSelect = project => () => onClick(project);
+	const [showMenu, setShowMenu] = useState(false);
+	const toggleMenu = () => setShowMenu(!showMenu);
+
+	const onSelectMenuOption = opt => {
+		// e.stopPropagation();
+		if (opt.id === 'DELETE') {
+			onClickDelete({ id });
+		} else if (opt.id === 'MODIFY') {
+			history.push(`/projects/project/${id}`);
+			// toggleMenu();
+		}
+	}
 
 	return (
 		<article className="project">
 			<div className="project__header">
 				<img
+					role="presentation"
 					onClick={onSelect({ id })}
 					src={hanlePrintImage(project_type)}
 					className="project__header__image"
@@ -130,7 +152,16 @@ const Project = props => {
 				<div className="project__content__header">
 					<div className="project__content__header__top">
 						<p className="project__content__header__top__title">{name}</p>
-						<i className="fas fa-ellipsis-v" />
+						<SelectorRelative
+							right
+							name="menu"
+							maxHeight="180px"
+							options={options}
+							onChange={onSelectMenuOption}
+							renderInput={(
+								<i className="fas fa-ellipsis-v" onClick={toggleMenu} />
+							)}
+						/>
 					</div>
 					<div className="project__content__header__bottom">
 						<p className="project__content__header__bottom__project">

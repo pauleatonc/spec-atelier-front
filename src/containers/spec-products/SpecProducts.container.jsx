@@ -10,6 +10,7 @@ import {
   onGetSpecProductsByKeyword,
   onGetSpecProductsBySort,
   onHideSpecProducts,
+  getMySpecifications,
 } from './SpecProducts.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import { useComboBox } from '../../components/inputs/Inputs.hooks';
@@ -33,7 +34,7 @@ const SpecProductsList = () => {
   const { project_types: projectTypes, room_types: roomTypes } = useSelector(state => state.app);
   const { brands } = useSelector(state => state.brandsList);
   const selectedProducts = useSelector(state => state.specDocument.blocks?.filter(block => block.type === 'Product'));
-  const { nextPage, collection: products = [], loading, show, total, filters } = useSelector(state => state.specProducts);
+  const { nextPage, collection: products = [], loading, show, total, filters, mySpecifications = [] } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
 
   const [keywordValue, setKeywordValue] = useState('');
@@ -79,9 +80,17 @@ const SpecProductsList = () => {
   const { values: roomTypeValues, set: setRoomTypeValues, onSubmit: onRoomTypeSubmit } =
     useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: values })) });
 
+  const { values: mySpecValues, set: setSpecValues, onSubmit: onSpecSubmit } =
+    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'project_spec', value: values })) });
+
   const handleBrandsSubmit = close => event => {
     close();
     onBrandsSubmit(event);
+  };
+
+  const handleSpecSubmit = close => event => {
+    close();
+    onSpecSubmit(event);
   };
 
   const handleProjectTypeSubmit = close => event => {
@@ -114,16 +123,25 @@ const SpecProductsList = () => {
   const allFilterIsSelected = brandsValues.length === 0 && projectTypeValues.length === 0 && roomTypeValues.length === 0;
 
   useEscapeKey(show, () => dispatch(onHideSpecProducts()));
+
+  // useEffect(() => {
+  //   dispatch(getMySpecifications());
+  // }, []);
+
   useEffect(() => {
     if (show) {
       return;
     }
-
+    setSpecValues([]);
     setBrandsValues([]);
     setProjectTypeValues([]);
     setRoomTypeValues([]);
     setSortValue({});
   }, [show]);
+
+  // useEffect(() => {
+  //   if (mySpecifications) setSpecValues(mySpecifications);
+  // }, [mySpecifications]);
 
   return (
     <>
@@ -163,7 +181,21 @@ const SpecProductsList = () => {
                 />
               )}
             </ToggleMenu>
-            <Tag disabled selected={false}>Mis especificaciones</Tag>
+            {/* <Tag disabled selected={false}>Mis especificaciones</Tag> */}
+            <ToggleMenu anchor={<Tag selected={mySpecifications.length > 0}>Mis especificaciones</Tag>} width="291px">
+              {onClose => (
+                <ComboBox
+                  optionAll
+                  submit
+                  options={mySpecifications}
+                  placeholder="Selecciona"
+                  type="list"
+                  values={mySpecValues}
+                  variant="secondary"
+                  onSubmit={handleSpecSubmit(onClose)}
+                />
+              )}
+            </ToggleMenu>
             <ToggleMenu anchor={<Tag selected={roomTypeValues.length > 0}>Recintos</Tag>} width="291px">
               {onClose => (
                 <ComboBox
@@ -204,7 +236,7 @@ const SpecProductsList = () => {
           {!!products.length &&
             <Cards>
               {products.map(product => {
-                const selected = selectedProducts.find(selectedProduct => selectedProduct?.element.id === product.id);
+                const selected = selectedProducts.find(selectedProduct => selectedProduct?.element.original_product_id === product.id);
 
                 return (
                   <ProductCard

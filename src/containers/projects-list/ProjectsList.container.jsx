@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import ProjectCard from '../../components/project/ProjectCard';
-import { getMyProjects } from './ProjectsList.actions';
+import { getMyProjects, deleteProject } from './ProjectsList.actions';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
 
 const ProjectsList = () => {
@@ -10,6 +10,7 @@ const ProjectsList = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const goToSpecification = specID => () => history.push(`/specs/${specID}`);
+  const onDeleteProject = ({ id }) => dispatch(deleteProject({ id }));
 
   useEffect(() => {
     if (!projects.length) dispatch(getMyProjects(params));
@@ -25,7 +26,12 @@ const ProjectsList = () => {
     <div className="projects__inner__body">
       {!!projects.length &&
         projects.map(project => (
-          <ProjectCard {...project} key={project.id} onClick={goToSpecification(project.project_spec_id)} />
+          <ProjectCard 
+            key={project.id} 
+            {...project} 
+            onClick={goToSpecification(project.project_spec_id)} 
+            onClickDelete={onDeleteProject} 
+          />
         ))}
     </div>
   );

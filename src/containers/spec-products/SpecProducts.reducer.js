@@ -5,6 +5,8 @@ import {
   GET_SPEC_PRODUCTS_BY_PAGE,
   GET_SPEC_PRODUCTS_BY_PAGE_ERROR,
   GET_SPEC_PRODUCTS_BY_PAGE_SUCCESS,
+  GET_SPEC_MY_SPECEFICATIONS,
+  GET_SPEC_MY_SPECEFICATIONS_ERROR,
   HIDE_SPEC_PRODUCTS_SUCCESS,
   SHOW_SPEC_PRODUCTS_SUCCESS,
   UPDATE_SPEC_PRODUCTS_FILTERS,
@@ -28,6 +30,7 @@ const specProductsState = {
   nextPage: null,
   show: false,
   total: 0,
+  mySpecifications: [],
 };
 
 /**
@@ -119,6 +122,9 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
           sort: payload.sort,
         },
       };
+    }
+    case GET_SPEC_MY_SPECEFICATIONS: {
+      return { ...state, mySpecifications: payload.specifications };
     }
     default: {
       return state;

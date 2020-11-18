@@ -1,4 +1,3 @@
-import { formatDate } from  '../../helpers/helpers';
 import moment from 'moment';
 import {
   SET_PROJECT,
@@ -7,11 +6,15 @@ import {
   CREATE_PROJECT,
   CREATE_PROJECT_ERROR,
   CLEAN_STORE,
+  GET_PROJECT_LOADING,
+  GET_PROJECT_SUCESS,
+  GET_PROJECT_ERROR,
 } from './ProjectCreate.actions';
 
 
 const delivery_date = new Date();
 delivery_date.setFullYear(delivery_date.getFullYear() + 1);
+const setDate = date => moment(date).format('MM/DD/YYYY')
 
 const initialProject = {
   newProject: {
@@ -76,6 +79,19 @@ const newProjectReducer = (state = initialProject, { payload, type }) => {
       };
     case CLEAN_STORE:
       return { ...initialProject };
+    case GET_PROJECT_LOADING:
+      return { ...state, loading: true };
+    case GET_PROJECT_SUCESS:
+      return {
+        ...state,
+        loading: false,
+        newProject: {
+          ...payload.project,
+          delivery_date: setDate(payload.project?.delivery_date),
+        }
+      };
+    case GET_PROJECT_ERROR:
+      return { ...state, loading: false, newProject: {}, error: payload.error }
     default: {
       return state;
     }

@@ -102,3 +102,10 @@ export const downloadSpec = factoryService(({ specID, userID }) =>
     `${API_BASE_URL}/users/${userID}/project_specs/${specID}/download_word`
   ),
 );
+
+/**
+ * Get the specifications from user.
+ */
+export const getMySpecifications = factoryService(({ userID }, params) =>
+  getJsonRequest(`${API_BASE_URL}/users/${userID}/project_specs`, params),
+);

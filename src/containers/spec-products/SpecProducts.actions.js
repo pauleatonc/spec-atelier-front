@@ -2,6 +2,7 @@ import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
 import { getProducts } from '../../services/products.service';
 import { getBrands as onGetBrands } from '../brands-list/BrandsList.actions';
+import { getMySpecifications as getMySpecificationsService } from '../../services/specs.service';
 import { HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS, onShowSpecProductsSections } from '../spec-products-sections/SpecProductsSections.actions';
 import { HIDE_SPEC_PRODUCTS_ITEMS_SUCCESS, onShowSpecProductsItems } from '../spec-products-items/SpecProductsItems.actions';
 
@@ -28,7 +29,7 @@ export const onGetSpecProducts = () => async (dispatch, getState) => {
 
       return { ...entries, [key]: value };
     }, {});
-    const response = await getProducts(filters, GET_SPEC_PRODUCTS);
+    const response = await getProducts({ ...filters, with_products: true } , GET_SPEC_PRODUCTS);
 
     return dispatch(
       onActionCreator(
@@ -140,3 +141,15 @@ export const onShowSpecProducts = () => dispatch =>
     dispatch(onGetBrands());
     dispatch(onGetSpecProducts());
   });
+
+  export const GET_SPEC_MY_SPECEFICATIONS = 'GET_SPEC_MY_SPECEFICATIONS';
+  export const getMySpecifications = params => async (dispatch, getState) => {
+    const { user } = getState().auth;
+    console.log('user', user);
+    try {
+      const { specifications } = await getMySpecificationsService({ userID: user.id }, params);
+      dispatch(onActionCreator(GET_SPEC_MY_SPECEFICATIONS, { specifications }));
+    } catch (error) {
+      dispatch(onActionCreator(GET_SPEC_MY_SPECEFICATIONS, { error, }));
+    }
+  };

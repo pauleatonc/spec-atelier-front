@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '../config/constants/environment';
-import { getJsonRequest, postJsonRequest } from '../modules/requests';
+import { getJsonRequest, postJsonRequest, deleteJsonRequest } from '../modules/requests';
 import { cleanObject, factoryService, formatParams } from '../modules/services';
 
 /**
@@ -7,6 +7,13 @@ import { cleanObject, factoryService, formatParams } from '../modules/services';
  */
 export const getProjects = factoryService(
   ({ userId, params }) => getJsonRequest(`${API_BASE_URL}/users/${userId}/projects/${formatParams(params)}`),
+);
+
+/**
+ * Get porject by id
+ */
+export const getProject = factoryService(
+  ({ id, userId }) => getJsonRequest(`${API_BASE_URL}/users/${userId}/projects/${id}`),
 );
 
 
@@ -18,3 +25,6 @@ export const createNewProject = factoryService(
 );
 
 
+export const deleteProject = factoryService(
+  ({ userId, id }) => deleteJsonRequest(`${API_BASE_URL}/users/${userId}/projects/${id}`, { id }),
+);
