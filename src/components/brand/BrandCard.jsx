@@ -5,11 +5,13 @@ import {
   Quantity,
   Description,
   ButtonContainer,
+  ImageBrand,
+  CardImg,
+  Country,
 } from './BrandCard.styles';
 
 import {
   Card,
-  CardImg,
   TitleContainer,
   Line,
   DescriptionContainer,
@@ -26,8 +28,10 @@ const BrandCard = ({
 }) => {
   const {
     name,
-    image,
+    logo,
     products_count,
+    description,
+    country,
   } = brand;
 
   const onSelectBrand = () => onClickBrand(brand);
@@ -35,7 +39,10 @@ const BrandCard = ({
 
   return (
     <Card>
-      <CardImg img={image} onClick={onSelectBrand} />
+      <CardImg onClick={onSelectBrand} >
+        <ImageBrand src={logo} />
+        <Country>{country}</Country>
+      </CardImg>
       <TitleContainer>
         <Name>{name}</Name>
         <Quantity>Products ({products_count})</Quantity>
@@ -43,7 +50,7 @@ const BrandCard = ({
       <Line />
       <DescriptionContainer>
         <Description>
-          1a10 Design is a study and author design brand of the architect Felipe Arriagada, which starts at the end of 2013 in Santiago, Chile, where he develops furniture products and architectural and interior design projects.
+         {description}
         </Description>
       </DescriptionContainer>
       <ButtonContainer>
