@@ -11,7 +11,7 @@ const BrandGallery = ({ images }) => {
     <Container>
       {imgs.map(img => (
         <Content key={img.id} name={img.name} >
-          <Image src={img.url} height={img.name === 'three' ? '260px' : '120px' } width="100%" type="cover" />
+          <Image src={img.url} height={img.name === 'three' ? '240px' : '140px' } width="100%" type="cover" />
         </Content>
       ))}
     </Container>

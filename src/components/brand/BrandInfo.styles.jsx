@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { COLOR_BLACK, COLOR_LIGHTGREY, MEDIA_QUERY_MEDIUM, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
 import ICON_CHILE from '../../assets/images/icons/countries/chile.svg'
 
+const icons = {
+  Chile: ICON_CHILE,
+  España: '',
+};
+
 export const BrandContainer = styled.div`
   border-radius: 5px;
   border: 1px solid ${COLOR_LIGHTGREY};
@@ -13,6 +18,7 @@ export const BrandContainer = styled.div`
   ${MEDIA_QUERY_SMALL} {
     padding: 12px 12px 12px 12px;
   }
+  min-height: 600px;
 `;
 
 export const Header = styled.section`
@@ -34,7 +40,7 @@ export const Country = styled.section`
 `;
 
 export const CountryIcon = styled.div`
-  background: url(${ICON_CHILE});
+  background: url(${({ country }) => icons[country]});
   background-repeat: no-repeat;
   background-size: cover;
   height: 24px;
@@ -87,6 +93,11 @@ export const LinkText = styled.a`
   ${MEDIA_QUERY_SMALL} {
     min-width: 60px;
   }
+`;
+
+export const ImageBrand = styled.img`
+  max-height: 85px;
+  max-width: 200px;
 `;
 
 

@@ -11,6 +11,7 @@ import {
   Buttons,
   LinksContainer,
   LinkText,
+  ImageBrand,
 } from './BrandInfo.styles';
 
 import {
@@ -26,9 +27,9 @@ const BrandInfo = ({ onClickContact, brand }) => {
   return (
     <BrandContainer>
       <Header>
-        <Icon />
+        <ImageBrand src={brand.logo} />
         <Country >
-          <CountryIcon />
+          <CountryIcon country={brand.country}/>
           <CountryName>
             {brand.country}
           </CountryName>
