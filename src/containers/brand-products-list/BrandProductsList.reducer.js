@@ -15,7 +15,7 @@ const initialProductState = {
     keyword: '',
     page: 0,
     limit: 6,
-    brand: 2,
+    brand: '',
   },
   selectedProduct: undefined,
   showProductModal: false,
