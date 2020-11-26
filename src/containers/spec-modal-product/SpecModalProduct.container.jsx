@@ -32,19 +32,19 @@ const SpecModalProduct = () => {
   const [selectedImg, selectImg] = useState(getFirstImg());
   const onSelectImg = img => () => selectImg(img);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     if (product) selectImg(getFirstImg(product));
   }, [product]);
 
-  const onContact = () => dispatch(openContactModal({ 
+  const onContact = () => dispatch(openContactModal({
     selectedBrand: product.brand,
     selectedProduct: product,
   }));
-  
+
   const onCloseModal = () => dispatch(closeModal());
 
-  // Download documents 
+  // Download documents
   const handleIconClick = documents => () => {
     documents.forEach(async doc => {
       const link = document.createElement("a");
@@ -109,7 +109,7 @@ const SpecModalProduct = () => {
                   {product.long_desc}
                 </ProductDescription>
                 <ProductBrand>
-                  {`${product?.system?.name || ''}: ${product?.brand?.name || ''}`}
+                  {`${product?.systems?.first?.name || ''}: ${product?.brand?.name || ''}`}
                 </ProductBrand>
                 <Actions>
                   <Button
@@ -121,13 +121,13 @@ const SpecModalProduct = () => {
                   <Icons>
                     <Icon
                       type="dwg"
-                      active={!!product.dwg_url}
-                      onClick={handleIconClick([product.dwg_url])}
+                      active={!!product.dwg.url}
+                      onClick={handleIconClick([product.dwg.url])}
                     />
                     <Icon
                       type="bim"
-                      active={!!product.dwg_url}
-                      onClick={handleIconClick([product.bim_url])}
+                      active={!!product.bim.url}
+                      onClick={handleIconClick([product.bim.url])}
                     />
                     <Icon
                       type="tech"
