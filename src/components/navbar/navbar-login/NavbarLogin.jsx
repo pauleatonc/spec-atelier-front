@@ -17,9 +17,8 @@ import {
 } from './NavbarLogin.styles';
 
 const items = [
-  { id: 'us', label: 'Nosotros', to: '/us' },
   { id: 'products', label: 'Productos', to: '/products' },
-  { id: 'brands', label: 'Colaboradores', to: '/collaborators' },
+  { id: 'collaborators', label: 'Colaboradores', to: '/collaborators' },
 ];
 
 const NavBarLogin = ({ fixed }) => {
