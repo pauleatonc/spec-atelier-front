@@ -23,7 +23,7 @@ export const TitleContainer = styled.section`
   align-items: center;
   justify-content: space-between;
   flex: 1;
-  margin 8px 0;
+  margin: 8px 0;
 `;
 
 export const Title = styled.div`
@@ -40,4 +40,6 @@ export const Line = styled.div`
 
 export const DescriptionContainer = styled.section`
   margin: 16px 0;
+  max-height: 135px;
+  overflow: hidden;
 `;
