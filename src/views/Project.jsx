@@ -26,7 +26,7 @@ const Project = () => {
           <ProjectStepsContainer />
           <ProjectDataContainer />
           <ProjectDetailsContainer />
-          <ProjectPermissionContainer />
+          {/* <ProjectPermissionContainer /> */}
         </Content>
       </Container>
       <AlertContainer />

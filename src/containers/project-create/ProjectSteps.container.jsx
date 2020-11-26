@@ -22,7 +22,7 @@ const ProjectSteps = () => {
   const steps = [
     { active: true, },
     { active: view === 'details' || view === 'permission' },
-    { active: view === 'permission' },
+    // { active: view === 'permission' },
   ];
 
   useEffect(() => {
