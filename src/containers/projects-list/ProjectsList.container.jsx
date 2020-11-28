@@ -10,7 +10,10 @@ const ProjectsList = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const goToSpecification = specID => () => history.push(`/specs/${specID}`);
-  const onDeleteProject = ({ id }) => () => dispatch(deleteProject({ id }));
+  const onChangeMenuOption =  ({ id }) => opt => {
+    if (opt.id === 'DELETE')  dispatch(deleteProject({ id }));
+    else if (opt.id === 'MODIFY')  history.push(`/projects/project/${id}`);
+  }
 
   useEffect(() => {
     if (!projects.length) dispatch(getMyProjects(params));
@@ -30,7 +33,7 @@ const ProjectsList = () => {
             {...project} 
             key={project.id} 
             onClick={goToSpecification(project.project_spec_id)}
-            onDelete={onDeleteProject(project)}
+            onChangeMenuOption={onChangeMenuOption(project)}
           />
         ))}
     </div>

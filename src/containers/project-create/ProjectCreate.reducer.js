@@ -7,6 +7,8 @@ import {
   CREATE_PROJECT,
   CREATE_PROJECT_ERROR,
   CLEAN_STORE,
+  GET_PROJECT,
+  GET_PROJECT_ERROR,
 } from './ProjectCreate.actions';
 
 
@@ -67,6 +69,18 @@ const newProjectReducer = (state = initialProject, { payload, type }) => {
         ...state,
         created: true,
         loading: false,
+      };
+    case CREATE_PROJECT_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: payload.error,
+      };
+    case GET_PROJECT:
+      return {
+        ...state,
+        loading: false,
+        newProject: payload.project,
       };
     case CREATE_PROJECT_ERROR:
       return {

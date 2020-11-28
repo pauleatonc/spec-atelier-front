@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeView } from './ProjectCreate.actions';
+import { changeView, getProject } from './ProjectCreate.actions';
 import {
   Input,
 } from '../../components/SpecComponents';
@@ -17,12 +17,14 @@ import {
   IconCheck,
   TextButton,
 } from './ProjectCreate.styles';
+import { useParams } from 'react-router';
 
 const ProjectData = () => {
   const { view, newProject } = useSelector(state => state.newProject);
   const { work_types, project_types } = useSelector(state => state.app);
   const [tempNewProject, setNewProject] = useState(newProject);
   const dispatch = useDispatch();
+  const { id } = useParams();
 
   const onChangeProjectData = ({ name, value }) => () => {
     setNewProject({
@@ -40,6 +42,14 @@ const ProjectData = () => {
   useEffect(() => {
     setNewProject(newProject);
   }, [newProject]);
+
+  useEffect(() => {
+    if (id && work_types.length) dispatch(getProject({ id }));
+  }, []);
+  
+  useEffect(() => {
+    if (work_types.length) dispatch(getProject({ id }));
+  }, [work_types]);
 
   if (view !== 'data') {
     return <SubHeaderProjectData {...newProject} />;

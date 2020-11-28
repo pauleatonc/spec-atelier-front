@@ -23,16 +23,18 @@ import {
   DropIcon,
 } from './ProjectCreate.styles';
 import { SubHeaderProjectDescription } from '../../components/sub-headers/ProjectSubHeaders';
-import { changeView, createProject } from './ProjectCreate.actions';
+import { changeView, createProject, modifyProject } from './ProjectCreate.actions';
 import { formatDate } from '../../helpers/helpers';
 import SelectorRelative from '../../components/basics/SelectorRelative';
 import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
+import { useParams } from 'react-router';
 
 const ProjectDetails = () => {
   const { view, newProject } = useSelector(state => state.newProject);
   const { cities } = useSelector(state => state.app);
   const [tempNewProject, setNewProject] = useState(newProject);
   const dispatch = useDispatch();
+  const { id } = useParams();
   const onChangeProjectData = ({ target: { name, value } }) => {
     if (name === 'size' && Number.isNaN(+value)) return;
     setNewProject({
@@ -56,7 +58,10 @@ const ProjectDetails = () => {
   };
   // const onSave = () => dispatch(changeView('permission', tempNewProject));
 
-  const onSave = () => dispatch(createProject(tempNewProject));
+  const onSave = () => {
+    if (id) dispatch(modifyProject(tempNewProject));
+    else dispatch(createProject(tempNewProject));
+  }
   const onBack = () => dispatch(changeView('data', tempNewProject));
 
   const canSave = tempNewProject.city && !Number.isNaN(tempNewProject.size);
@@ -111,7 +116,7 @@ const ProjectDetails = () => {
             width="100%"
             name="size"
             placeholder="EJ: 600"
-            value={tempNewProject.size}
+            value={tempNewProject.size + ''}
             onChange={onChangeProjectData}
           />
         </InputContent>

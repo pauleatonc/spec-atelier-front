@@ -102,6 +102,8 @@ const handlePrintEditDate = (createDate, editDate) => {
 	}
 };
 
+const options = [{ id: 'DELETE', label: 'Eliminar'}, { id: 'MODIFY', label: 'Modificar' }];
+
 const Project = props => {
 	const {
 		name,
@@ -112,14 +114,13 @@ const Project = props => {
 		city,
 		country,
     onClick,
-    onDelete,
-    onModify,
+    onChangeMenuOption,
 		id,
   } = props;
   const [showOptions, setShowOptions] = useState(false);
   const toggleOptions = () => setShowOptions(!showOptions);
 
-	const onSelect = project => () => onClick(project);
+  const onSelect = project => () => onClick(project);
 
 	return (
 		<article className="project">
@@ -138,14 +139,14 @@ const Project = props => {
             <div>
               
               <SelectorRelative
-                onChange={onDelete} 
+                onChange={onChangeMenuOption} 
                 open={showOptions} 
                 onClose={toggleOptions} 
                 renderInput={<i className="fas fa-ellipsis-v" onClick={toggleOptions} />}
                 right
                 width="20px"
                 maxHeight="300px"
-                options={[{id: 'DELETE', label: 'Eliminar'}, {id: 'MODIFY', label: 'Modificar'}]}
+                options={options}
               />
             </div>
 					</div>

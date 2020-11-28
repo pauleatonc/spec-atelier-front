@@ -20,7 +20,7 @@ const appReducer = (state = initialProject, { payload, type }) => {
     case GET_DEFAULT_DATA:
       return {
         ...state,
-        cities: payload.cities.map(c => ({ id: c, name: c })),
+        cities: payload.cities.map(c => ({ id: c, name: c, label: c })),
         project_types: payload.project_types,
         room_types: payload.room_types,
         work_types: payload.work_types,
