@@ -13,13 +13,14 @@ export const Content = styled.div`
   border: 1px solid #CCC;
   background-color: ${COLOR_WHITE};
   min-width: 160px;
-  min-height 30px;
+  min-height: 30px;
   width: ${({ width }) => width || '100%'};
   padding: 4px 4px;
   z-index: 1;
   overflow-y: auto;
-  display: ${({ isOpen }) => isOpen ? 'block' : 'none'}
-  ${({ isOpen }) => isOpen ? `box-shadow: ${SHADOW_GREY}` : ''}
+  display: ${({ isOpen }) => isOpen ? 'block' : 'none'};
+  ${({ isOpen }) => isOpen ? `box-shadow: ${SHADOW_GREY}` : ''};
+  ${({ right }) => right ? 'right: 0' : 'left: 0'};
 `;
 
 export const Section = styled.div`
