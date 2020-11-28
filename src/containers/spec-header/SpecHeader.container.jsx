@@ -46,7 +46,7 @@ const SpecHeader = () => {
       <ProjectName>{project?.name}</ProjectName>
       <Separator />
       <Section>
-        <Download onClick={handleDownloadClick} />
+        <Download onClick={handleDownloadClick} title="Descargar proyecto"/>
       </Section>
       <Separator />
       <Section>
