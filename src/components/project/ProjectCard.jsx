@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
 	firstLetterToUppercase,
@@ -27,6 +27,7 @@ import {
 	ICON_OFFICE_GREY,
 	ICON_RESIDENTIAL_GREY,
 } from '../../assets/Images';
+import SelectorRelative from '../basics/SelectorRelative';
 
 
 const mapImages = {
@@ -110,9 +111,13 @@ const Project = props => {
 		updated_at,
 		city,
 		country,
-		onClick,
+    onClick,
+    onDelete,
+    onModify,
 		id,
-	} = props;
+  } = props;
+  const [showOptions, setShowOptions] = useState(false);
+  const toggleOptions = () => setShowOptions(!showOptions);
 
 	const onSelect = project => () => onClick(project);
 
@@ -130,7 +135,19 @@ const Project = props => {
 				<div className="project__content__header">
 					<div className="project__content__header__top">
 						<p className="project__content__header__top__title">{name}</p>
-						<i className="fas fa-ellipsis-v" />
+            <div>
+              
+              <SelectorRelative
+                onChange={onDelete} 
+                open={showOptions} 
+                onClose={toggleOptions} 
+                renderInput={<i className="fas fa-ellipsis-v" onClick={toggleOptions} />}
+                right
+                width="20px"
+                maxHeight="300px"
+                options={[{id: 'DELETE', label: 'Eliminar'}, {id: 'MODIFY', label: 'Modificar'}]}
+              />
+            </div>
 					</div>
 					<div className="project__content__header__bottom">
 						<p className="project__content__header__bottom__project">

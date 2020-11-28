@@ -3,6 +3,8 @@ import {
   GET_PROJECTS_ERROR,
   GET_MORE_PROJECTS,
   ADD_PROJECT_TO_LIST,
+  DELETE_PROJECT,
+  DELETE_PROJECT_ERROR,
 } from './ProjectsList.actions';
 
 const sortFilters = [
@@ -60,7 +62,19 @@ const projectsReducer = (state = initialProjectState, { payload, type }) => {
         error: payload.error,
         loading: false,
       };
-    case ADD_PROJECT_TO_LIST: 
+    case DELETE_PROJECT:
+      return {
+        ...state,
+        projects: state.projects.filter(({ id }) => id !== payload.projectId),
+        total: payload?.projects?.total - 1,
+        loading: false,
+        error: undefined,
+      };
+    case DELETE_PROJECT_ERROR:
+      return {
+        ...state,
+      }
+    case ADD_PROJECT_TO_LIST:
       return {
         ...state,
         projects: state.projects.unshift(payload.project),
