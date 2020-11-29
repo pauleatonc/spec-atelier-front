@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '../config/constants/environment';
 import { deleteJsonRequest, getJsonRequest, postJsonRequest, patchJsonRequest } from '../modules/requests';
-import { factoryService } from '../modules/services'
+import { cleanObjectsAndArrays, factoryService, formatParams } from '../modules/services'
 
 /**
  * Add a block to the spec.
@@ -102,3 +102,18 @@ export const downloadSpec = factoryService(({ specID, userID }) =>
     `${API_BASE_URL}/users/${userID}/project_specs/${specID}/download_word`
   ),
 );
+
+/**
+ * getMySpecifications 
+ */
+
+export const getMySpecs = factoryService(({ params }) => getJsonRequest(
+  `${API_BASE_URL}/project_specs/my_specifications${formatParams(params)}`,
+));
+
+/**
+ * get room types by params
+ */
+export const getRoomTypes = factoryService(({ params }) => getJsonRequest(
+  `${API_BASE_URL}/configs/room_types${formatParams(cleanObjectsAndArrays(params))}`,
+));

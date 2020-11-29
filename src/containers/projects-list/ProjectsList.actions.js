@@ -31,14 +31,12 @@ export const getMoreProjects = params => async (dispatch, getState) => {
 
 export const deleteProject = ({ id }) => async (dispatch, getState) => {
   try {
-    console.log('aka', id)
     const { user } = getState().auth;
     const response = await deleteProjectService({ userId: user.id, projectId: id });
     dispatch(onActionCreator(DELETE_PROJECT, { projectId: id }));
   } catch (error) {
-    console.log('rerer', error);
     dispatch(onShowAlertSuccess({ message: "Error al eliminar el proyecto"}))
-    dispatch(onActionCreator(DELETE_PROJECT_ERROR, { loading: false, error: true, params }));
+    dispatch(onActionCreator(DELETE_PROJECT_ERROR, { loading: false, error: true }));
   }
 };
 

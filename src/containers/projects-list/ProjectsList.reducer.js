@@ -66,7 +66,7 @@ const projectsReducer = (state = initialProjectState, { payload, type }) => {
       return {
         ...state,
         projects: state.projects.filter(({ id }) => id !== payload.projectId),
-        total: payload?.projects?.total - 1,
+        total: state.total - 1,
         loading: false,
         error: undefined,
       };

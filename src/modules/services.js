@@ -59,7 +59,7 @@ export const cleanObjectsAndArrays = (obj = {}) => Object
     if (value && typeof value === 'object' && value.id) return { ...acc, [key]: value.id };
     if (Array.isArray(value)) return value.length ? {
       ...acc,
-      [`${key}[]`]: value.map(({ id }) => id).join(`&${key}[]=`),
+      [`${key}[]`]: value.map(data => data?.id ? data.id : data).join(`&${key}[]=`),
     } : acc;
     return { ...acc, [key]: value };
   }, {});
