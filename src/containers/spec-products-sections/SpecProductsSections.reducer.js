@@ -25,7 +25,7 @@ const specProductsSectionsReducer = (state = specProductsSectionsState, { payloa
       return { ...state, collection: payload.sections || [], loading: false };
     }
     case HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS: {
-      return specProductsSectionsState;
+      return { ...specProductsSectionsState };
     }
     case SHOW_SPEC_PRODUCTS_SECTIONS_SUCCESS: {
       return { ...state, show: true };

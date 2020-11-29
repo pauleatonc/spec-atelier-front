@@ -13,6 +13,11 @@ import {
   UPDATE_SPEC_PRODUCTS_FILTER_KEYWORD,
   UPDATE_SPEC_PRODUCTS_FILTER_SECTION,
   UPDATE_SPEC_PRODUCTS_FILTER_SORT,
+  UPDATE_SPEC_PROJECT_TYPE_FILTERS,
+  GET_SPEC_MYSPEC,
+  GET_SPEC_MYSPEC_ERROR,
+  GET_SPEC_ROOMTYPES,
+  GET_SPEC_ROOMTYPES_ERROR,
 } from './SpecProducts.actions';
 
 const specProductsState = {
@@ -23,11 +28,13 @@ const specProductsState = {
     keyword: '',
     section: '',
     sort: '',
+    specification: [],
   },
   loading: false,
   nextPage: null,
   show: false,
   total: 0,
+  specification: [],
 };
 
 /**
@@ -55,9 +62,19 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
         total: payload.total || 0,
       };
     }
+    case UPDATE_SPEC_PROJECT_TYPE_FILTERS: {
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          project_types: payload.project_types || state.filters.project_types || [],
+          room_types: payload.room_types || state.filters.room_types || [],
+        }
+      };
+    }
     // eslint-disable-next-line no-lone-blocks
     case HIDE_SPEC_PRODUCTS_SUCCESS: {
-      return specProductsState;
+      return { ...specProductsState, show: false };
     }; 
     case SHOW_SPEC_PRODUCTS_SUCCESS: {
       return { ...state, show: true };
@@ -118,6 +135,30 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
           ...state.filters,
           sort: payload.sort,
         },
+      };
+    }
+    case GET_SPEC_MYSPEC: {
+      return {
+        ...state,
+        specifications: payload.specifications || [],
+      };
+    }
+    case GET_SPEC_MYSPEC_ERROR: {
+      return {
+        ...state,
+        specifications: [],
+      };
+    }
+    case GET_SPEC_ROOMTYPES: {
+      return {
+        ...state,
+        room_types: payload.room_types || [],
+      };
+    }
+    case GET_SPEC_ROOMTYPES_ERROR: {
+      return {
+        ...state,
+        room_types: [],
       };
     }
     default: {

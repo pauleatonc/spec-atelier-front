@@ -191,7 +191,7 @@ const SpecEditProduct = () => {
       setNameValue(product.name);
       setSectionValue(mapToSelector(product.section));
       setItemValue(mapToSelector(product.item));
-      setSystemValue(mapToSelector(product.system));
+      setSystemValue(mapToSelector(product?.system || {}));
       setPriceValue(product.price || '');
       setBrandValue(mapToSelector(product.brand));
       setImagesValues(product.images.map(mapToImages));

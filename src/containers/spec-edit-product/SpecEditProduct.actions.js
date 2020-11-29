@@ -58,7 +58,7 @@ export const onGetSpecProductsBrands = () => async dispatch => {
   try {
     const response = await getBrands();
 
-    return dispatch(onActionCreator(GET_SPEC_PRODUCTS_BRANDS_SUCCESS, { brands: response.brands.filter(brand => brand.name !== null) }));
+    return dispatch(onActionCreator(GET_SPEC_PRODUCTS_BRANDS_SUCCESS, { brands: response?.brands?.list.filter(brand => brand.name !== null) }));
   } catch (error) {
     return dispatch(onActionCreator(GET_SPEC_PRODUCTS_BRANDS_ERROR, { error }));
   }

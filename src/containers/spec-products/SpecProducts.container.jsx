@@ -10,6 +10,9 @@ import {
   onGetSpecProductsByKeyword,
   onGetSpecProductsBySort,
   onHideSpecProducts,
+  getMySpecifications,
+  getRoomTypes,
+  onGetSpecProductsProjectType,
 } from './SpecProducts.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import { useComboBox } from '../../components/inputs/Inputs.hooks';
@@ -30,10 +33,19 @@ import { onShowSpecCreateProductFromItemSuccess } from '../spec-create-product/S
  */
 const SpecProductsList = () => {
   const { id: specID } = useParams();
-  const { project_types: projectTypes, room_types: roomTypes } = useSelector(state => state.app);
+  const { project_types: projectTypes } = useSelector(state => state.app);
   const { brands } = useSelector(state => state.brandsList);
   const selectedProducts = useSelector(state => state.specDocument.blocks?.filter(block => block.type === 'Product'));
-  const { nextPage, collection: products = [], loading, show, total, filters } = useSelector(state => state.specProducts);
+  const { 
+    nextPage, 
+    collection: products = [], 
+    loading,
+    show, 
+    total, 
+    filters, 
+    specifications = [], 
+    room_types: roomTypes = [],
+  } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
 
   const [keywordValue, setKeywordValue] = useState('');
@@ -79,20 +91,27 @@ const SpecProductsList = () => {
   const { values: roomTypeValues, set: setRoomTypeValues, onSubmit: onRoomTypeSubmit } =
     useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: values })) });
 
+  const { values: specValues, set: setSpecValues, onSubmit: onSpecSubmit } =
+    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'specification', value: values })) });
+
   const handleBrandsSubmit = close => event => {
     close();
     onBrandsSubmit(event);
+  };
+
+  const handleSpecSubmit = close => event => {
+    close();
+    onSpecSubmit(event);
   };
 
   const handleProjectTypeSubmit = close => event => {
     const filteredRoomTypes = roomTypes
       .filter(rt => rt.project_types.some(rpt => event.some(spt => spt.value === rpt.id)))
       .map(mapToSelector);
-
-    dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: filteredRoomTypes }))
-    setRoomTypesOptions(filteredRoomTypes);
-    close();
+    console.log('even', event);
+    dispatch(getRoomTypes({ project_types: event.map(({ value }) => value) }));
     onProjectTypeSubmit(event);
+    close();
   };
 
   const handleRoomTypeSubmit = close => event => {
@@ -116,6 +135,8 @@ const SpecProductsList = () => {
   useEscapeKey(show, () => dispatch(onHideSpecProducts()));
   useEffect(() => {
     if (show) {
+      dispatch(getMySpecifications());
+      dispatch(getRoomTypes({}));
       return;
     }
 
@@ -123,7 +144,9 @@ const SpecProductsList = () => {
     setProjectTypeValues([]);
     setRoomTypeValues([]);
     setSortValue({});
+    setSpecValues([]);
   }, [show]);
+
 
   return (
     <>
@@ -163,7 +186,20 @@ const SpecProductsList = () => {
                 />
               )}
             </ToggleMenu>
-            <Tag disabled selected={false}>Mis especificaciones</Tag>
+            <ToggleMenu anchor={<Tag selected={!!specValues.length}>Mis especificaciones</Tag>} width="291px">
+              {onClose => (
+                <ComboBox
+                  optionAll
+                  submit
+                  options={specifications.map(s => ({ label: s.name || '', value: s.id }))}
+                  placeholder="Selecciona"
+                  type="list"
+                  values={specValues}
+                  variant="secondary"
+                  onSubmit={handleSpecSubmit(onClose)}
+                />
+              )}
+            </ToggleMenu>
             <ToggleMenu anchor={<Tag selected={roomTypeValues.length > 0}>Recintos</Tag>} width="291px">
               {onClose => (
                 <ComboBox
@@ -209,7 +245,7 @@ const SpecProductsList = () => {
                 return (
                   <ProductCard
                     canAdd
-                    category={`Sistema constructivo: ${product.system?.name}`}
+                    category={product.system?.name || ''}
                     description={product.short_desc || ''}
                     key={`product-card-${product.id}`}
                     photo={product.images[0]?.urls?.thumb}
