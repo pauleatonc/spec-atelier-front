@@ -19,6 +19,8 @@ export const Buttons = styled.div`
   bottom: 0;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
 `;
 
 export const Button = styled.button`

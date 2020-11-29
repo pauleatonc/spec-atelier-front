@@ -11,6 +11,8 @@ export const Container = styled.div`
 
 export const Content = styled.section`
   position: absolute;
+  width: 100%;
+  height: 100%;
 `;
 
 export const Img = styled.img`
@@ -25,4 +27,5 @@ export const Img = styled.img`
   ${({ maxHeight }) => maxHeight && `max-height: ${maxHeight};`}
   ${({ width }) => width && `width: ${width};`}
   ${({ height }) => height && `height: ${height};`}
+  object-fit: ${({ objectFit }) => objectFit};
 `;

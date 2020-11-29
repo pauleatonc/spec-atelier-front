@@ -4,7 +4,18 @@ import { Container, Img, Content } from './Image.styles';
 import noPhoto from '../../assets/images/icons/no-photo.svg';
 
 const Image = props => {
-  const { src, children, type, width, height, maxWidth, maxHeight } = props;
+  const { 
+    src, 
+    children, 
+    type, 
+    width, 
+    height, 
+    maxWidth, 
+    maxHeight, 
+    objectFit,
+    containerHeight,
+    containerWidth,
+  } = props;
   const [displayedImg, setDisplayedImg] = useState(src || noPhoto);
   const imgRef = useRef(null);
   const onError = () => {
@@ -14,7 +25,7 @@ const Image = props => {
     setDisplayedImg(src);
   }, [src]);
   return (
-    <Container width={width} height={height}>
+    <Container width={containerWidth || width} height={containerHeight || height}>
       <Img 
         src={displayedImg} 
         onError={onError} 
@@ -24,6 +35,7 @@ const Image = props => {
         height={height} 
         maxHeight={maxHeight} 
         maxWidth={maxWidth}
+        objectFit={objectFit}
       />
       {children && <Content>{children}</Content>}
     </Container>
@@ -38,6 +50,9 @@ Image.propTypes = {
   height: PropTypes.string,
   maxWidth: PropTypes.string,
   maxHeight: PropTypes.string,
+  objectFit: PropTypes.string,
+  containerWidth: PropTypes.string,
+  containerHeight: PropTypes.string,
 };
 
 Image.defaultProps = {
@@ -48,6 +63,9 @@ Image.defaultProps = {
   height: '',
   maxWidth: '',
   maxHeight: '',
+  objectFit: 'none',
+  containerWidth: '',
+  containerHeight: '',
 }
 
 export default Image;

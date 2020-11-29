@@ -163,7 +163,6 @@ export const ImagesContainer = styled.section`
   flex: 1;
   flex-wrap: wrap;
   justify-content: space-between;
-  marign: 8px;
 `;
 
 export const DocContainer = styled.div`
