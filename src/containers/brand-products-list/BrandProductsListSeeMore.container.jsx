@@ -3,10 +3,12 @@ import { Button } from '../../components/SpecComponents';
 import { ButtonSection } from './BrandProductsListSeeMore.styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { getMoreProducts } from './BrandProductsList.actions';
+import { useParams } from 'react-router';
 
 const BrandProductsListSeeMore = () => {
   const { products, loading, params, total } = useSelector(state => state.brandProductsList);
   const [showButton, setShowButton] = useState(true);
+  const { id } = useParams();
 
   const dispatch = useDispatch();
 
@@ -14,6 +16,7 @@ const BrandProductsListSeeMore = () => {
     dispatch(getMoreProducts({ 
       ...params,
       page: params.page + 1,
+      brand: id,
     }))
   };
 

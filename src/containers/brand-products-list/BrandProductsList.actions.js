@@ -21,7 +21,7 @@ export const getProducts = params => async dispatch => {
 export const getMoreProducts = params => async dispatch => {
   try {
     const { products } = await getProductsService(params);
-    dispatch(onActionCreator(GET_MORE_PRODUCTS, { products, loading: false, params }));
+    dispatch(onActionCreator(GET_MORE_PRODUCTS, { products: products?.list || [], loading: false, params }));
   } catch (error) {
     dispatch(onActionCreator(GET_PRODUCTS_ERROR, { loading: false, error: true, params }));
   }

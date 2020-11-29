@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
 import { Container } from './BrandproductsList.styles';
 import ProductCard from '../../components/cards/ProductCard';
@@ -11,6 +11,7 @@ import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 const BrandProductsList = () => {
   const { products, error, loading, params } = useSelector(state => state.brandProductsList);
   const dispatch = useDispatch();
+  const { id } = useParams();
   const history = useHistory();
   const onClickProduct = selectedProduct => () => {
     dispatch(getProduct(selectedProduct));
@@ -22,7 +23,7 @@ const BrandProductsList = () => {
 
 
   useEffect(() => {
-    if (!products.length) dispatch(getProducts(params));
+    if (!products.length) dispatch(getProducts({ ...params, brand: id }));
     return () => dispatch(cleanProductList())
   }, []);
 
