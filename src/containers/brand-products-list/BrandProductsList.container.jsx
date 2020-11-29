@@ -35,7 +35,7 @@ const BrandProductsList = () => {
       {products.map(product => (
         <ProductCard
           key={product.id}
-          category={`Sistema constructivo: ${product.system?.name}`}
+          category={product.system?.name || ''}
           description={product.short_desc}
           photo={product.images[0]?.urls?.small}
           reference={product.reference}

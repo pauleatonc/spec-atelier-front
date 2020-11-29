@@ -61,7 +61,7 @@ const ProductCard = props => {
         <Details>
           <Title title={title}>{title}</Title>
           <Description title={description}>{description}</Description>
-          <Category title={category}>{category}</Category>
+          <Category title={category}>{category? `Sistema constructivo: ${category}`: ''}</Category>
           <Reference>{`Referencia ${reference}`}</Reference>
         </Details>
       </Content>
@@ -92,6 +92,7 @@ ProductCard.defaultProps = {
   reference: '',
   onClickCard: () => undefined,
   onClickSeeMore: undefined,
+  category: '',
 };
 ProductCard.propTypes = {
   bim: PropTypes.string,

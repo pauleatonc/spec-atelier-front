@@ -56,7 +56,7 @@ const mapIconsProjectType = {
 
 const mapProjectType = {
 	commercial: 'Comercial',
-	educational: 'Eduacional',
+	educational: 'Educacional',
 	institutional: 'Institucional',
 	real_state: 'Inmobiliario',
 	hospital: 'Hospitalario',
