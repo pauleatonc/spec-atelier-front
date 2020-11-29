@@ -37,10 +37,10 @@ export const BubbleInactive = styled.div`
   background-color: #FFF;
   border: 1px solid rgba(151,151,151,0.32);
   border-radius: 50%;
-  height: 14px;
+  height: 30px;
   margin: 0 57px 0 0;
-  min-width: 14px;
-  width: 14px;
+  min-width: 30px;
+  width: 30px;
 `;
 
 export const BubbleActive = styled.div`

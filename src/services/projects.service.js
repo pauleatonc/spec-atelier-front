@@ -20,7 +20,7 @@ export const getProject = factoryService(
  * Modify product
  */
 export const modifyProject = factoryService(
-  ({ userId, projectId, data }) => putJsonRequest(`${API_BASE_URL}/users/${userId}/projects/${projectId}`, data),
+  ({ userId, projectId, data }) => putJsonRequest(`${API_BASE_URL}/users/${userId}/projects/${projectId}`, cleanObject(data)),
 );
 
 /**

@@ -114,7 +114,7 @@ const ProjectData = () => {
             disabled={!canSave}
           >
              <TextButton>
-              Guardar
+              Siguiente
              </TextButton>
             </Button>
         </ButtonContainer>
