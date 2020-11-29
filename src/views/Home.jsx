@@ -18,7 +18,7 @@ const Home = () => {
 			<AppLayout footer={<Footer />} header={<NavBar fixed />}>
 				<HeaderHome />
 				<WhoWeUs />
-				<BrandsImageSlider />
+				<SliderImages />
 				<WhyBeSupplier />
 			</AppLayout>
 		</HttpsRedirect>
