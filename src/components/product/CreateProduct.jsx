@@ -15,7 +15,7 @@ const CreateProduct = ({ onClickCreate }) => (
           ¡Vaya, aún no tienes productos en esta partida!
         </Title>
         <Text>
-          Comienza a creando uno para usar en tus específicaciones.
+          Comienza creando uno para usar en tus específicaciones.
         </Text>
       </InfoContainer>
       <ButtonContainer>

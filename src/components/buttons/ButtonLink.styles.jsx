@@ -12,6 +12,7 @@ import ICON_FACEBOOK from '../../assets/images/icons/socialmedia/facebook.svg';
 import ICON_TWITTER from '../../assets/images/icons/socialmedia/twitter.svg';
 import ICON_LOCATION from '../../assets/images/icons/location.svg';
 import ICON_CELLPHONE from '../../assets/images/icons/cellphone.svg';
+import ICON_WEB from '../../assets/images/icons/word.svg';
 
 const mapVariantsToColors = {
   default: COLOR_BLACK,
@@ -22,7 +23,7 @@ const mapVariantsToColors = {
 };
 
 const mapTypeToIcon = {
-  web: 'ICON_WEB',
+  web: ICON_WEB,
   address: ICON_LOCATION,
   phone: ICON_CELLPHONE,
   facebook: ICON_FACEBOOK,
@@ -76,5 +77,6 @@ export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 99px;
 `;
 

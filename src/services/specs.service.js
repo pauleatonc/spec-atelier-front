@@ -31,7 +31,7 @@ export const addSpecBlockText = factoryService(({ blockID, specID, textValue, us
  */
 export const deleteSpecBlock = factoryService(({ blockID, specID, userID }) =>
   deleteJsonRequest(
-    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/remove_product`,
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/remove_block`,
     { block: blockID },
   ),
 );

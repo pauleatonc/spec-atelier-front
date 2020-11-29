@@ -18,7 +18,7 @@ export const BrandContainer = styled.div`
   ${MEDIA_QUERY_SMALL} {
     padding: 12px 12px 12px 12px;
   }
-  min-height: 600px;
+  height: 538px;
 `;
 
 export const Header = styled.section`
@@ -45,7 +45,7 @@ export const CountryIcon = styled.div`
   background-size: cover;
   height: 24px;
   width: 24px;
-  margin: 2px 4px; 
+  margin: 2px 4px;
 `;
 
 export const CountryName = styled.div`
@@ -68,6 +68,8 @@ export const Description = styled.div`
   letter-spacing: 1px;
   color: ${COLOR_BLACK};
   padding: 40px 0 16px;
+  max-height: 300px;
+  overflow-y: scroll;
 `;
 
 export const Buttons = styled.section`
@@ -81,7 +83,7 @@ export const LinksContainer = styled.section`
   justify-content: flex-end;
   margin: 16px 0;
 `;
-  
+
 export const LinkText = styled.a`
   max-width: 140px;
   min-width: 110px;
