@@ -60,7 +60,7 @@ const SpecModalProduct = () => {
 
   if (!showModalProduct) return null;
   if (!product || !product.id) return <Loading />
-  const titleSpecPdf = product?.spec_pdf_url?.reduce(s => s.split('/').pop(), '') || '';
+  const titleSpecPdf = product?.pdfs?.map(s => s.name).join(' - ') || '';
 
   return (
     <Modal show={showModalProduct} onClose={onCloseModal}>
@@ -135,7 +135,7 @@ const SpecModalProduct = () => {
                     <Icon
                       type="tech"
                       title={titleSpecPdf}
-                      active={!!(Array.isArray(product.spec_pdf_url) && product.spec_pdf_url.length)}
+                      active={product?.pdfs?.length}
                       onClick={handleIconClick(product.spec_pdf_url)}
                     />
                   </Icons>
