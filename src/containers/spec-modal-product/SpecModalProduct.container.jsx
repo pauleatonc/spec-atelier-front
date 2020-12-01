@@ -60,6 +60,7 @@ const SpecModalProduct = () => {
 
   if (!showModalProduct) return null;
   if (!product || !product.id) return <Loading />
+  const titleSpecPdf = product?.spec_pdf_url?.reduce(s => s.split('/').pop(), '') || '';
 
   return (
     <Modal show={showModalProduct} onClose={onCloseModal}>
@@ -121,16 +122,19 @@ const SpecModalProduct = () => {
                   <Icons>
                     <Icon
                       type="dwg"
+                      title={product?.dwg?.url?.split('/').pop() || ''}
                       active={!!product.dwg.url}
                       onClick={handleIconClick([product.dwg.url])}
                     />
                     <Icon
                       type="bim"
+                      title={product?.bim?.url?.split('/').pop() || ''}
                       active={!!product.bim.url}
                       onClick={handleIconClick([product.bim.url])}
                     />
                     <Icon
                       type="tech"
+                      title={titleSpecPdf}
                       active={!!(Array.isArray(product.spec_pdf_url) && product.spec_pdf_url.length)}
                       onClick={handleIconClick(product.spec_pdf_url)}
                     />
