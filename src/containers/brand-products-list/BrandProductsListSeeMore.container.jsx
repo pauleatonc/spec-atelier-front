@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from 'react';
+import React from 'react';
 import { Button } from '../../components/SpecComponents';
 import { ButtonSection } from './BrandProductsListSeeMore.styles';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,12 +6,10 @@ import { getMoreProducts } from './BrandProductsList.actions';
 import { useParams } from 'react-router';
 
 const BrandProductsListSeeMore = () => {
-  const { products, loading, params, total } = useSelector(state => state.brandProductsList);
-  const [showButton, setShowButton] = useState(true);
+  const { products, loading, params, next_page } = useSelector(state => state.brandProductsList);
   const { id } = useParams();
 
   const dispatch = useDispatch();
-
   const onClickSeeMore = () => {
     dispatch(getMoreProducts({ 
       ...params,
@@ -20,20 +18,16 @@ const BrandProductsListSeeMore = () => {
     }))
   };
 
-  useEffect(() => {
-    setShowButton(!!total && products.length < total); 
-  }, [products]);
-
   if (!products.length) return null;
 
   return (
     <ButtonSection justify="center">
       <Button 
-        variant={showButton ? 'primary' : 'gray'}
+        variant={next_page ? 'primary' : 'gray'}
         onClick={onClickSeeMore} 
-        disabled={loading || !showButton}
+        disabled={loading || !next_page}
       >
-        {showButton ? 'Ver más' : 'No hay más productos'}
+        {next_page ? 'Ver más' : 'No hay más productos'}
       </Button>
     </ButtonSection>
   );

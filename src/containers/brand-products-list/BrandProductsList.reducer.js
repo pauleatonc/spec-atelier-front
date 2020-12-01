@@ -1,7 +1,7 @@
 import {
-  GET_PRODUCTS,
+  GET_BRAND_PRODUCTS,
   GET_PRODUCTS_ERROR,
-  GET_MORE_PRODUCTS,
+  GET_MORE_PRODUCTS_BRAND,
   OPEN_PRODUCT_MODAL,
   CLOSE_PRODUCT_MODAL,
   CLEAN_PRODUCTS_LIST,
@@ -17,6 +17,7 @@ const initialProductState = {
     limit: 6,
     brand: '',
   },
+  next_page: 1,
   selectedProduct: undefined,
   showProductModal: false,
 };
@@ -24,9 +25,9 @@ const initialProductState = {
 /**
  * The products reducer.
  */
-const productsReducer = (state = initialProductState, { payload, type }) => {
+const brandProductsReducer = (state = initialProductState, { payload, type }) => {
   switch (type) {
-    case GET_PRODUCTS:
+    case GET_BRAND_PRODUCTS:
       return {
         ...state,
         products: payload?.products?.list || [],
@@ -35,12 +36,13 @@ const productsReducer = (state = initialProductState, { payload, type }) => {
         error: undefined,
         params: initialProductState.params,
       };
-    case GET_MORE_PRODUCTS:
+    case GET_MORE_PRODUCTS_BRAND:
       const newProducts = payload?.products?.list || [];
       return {
         ...state,
         products: [...state.products, ...newProducts],
         total: payload?.products?.total || 0,
+        next_page: payload?.products?.next_page,
         loading: false,
         error: undefined,
         params: payload.params,
@@ -73,4 +75,4 @@ const productsReducer = (state = initialProductState, { payload, type }) => {
   }
 };
 
-export default productsReducer;
+export default brandProductsReducer;

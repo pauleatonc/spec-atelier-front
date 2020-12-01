@@ -62,7 +62,7 @@ const ProductCard = props => {
           <Title title={title}>{title}</Title>
           <Description title={description}>{description}</Description>
           <Category title={category}>{category? `Sistema constructivo: ${category}`: ''}</Category>
-          <Reference>{`Referencia ${reference}`}</Reference>
+          <Reference>{`Referencia ${reference || 'sin especificar'}`}</Reference>
         </Details>
       </Content>
       <Footer>
