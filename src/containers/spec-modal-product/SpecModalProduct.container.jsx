@@ -110,7 +110,7 @@ const SpecModalProduct = () => {
                   {product.long_desc}
                 </ProductDescription>
                 <ProductBrand>
-                  {`${product?.systems?.first?.name || ''}: ${product?.brand?.name || ''}`}
+                  {`Referencia: ${product?.systems?.first?.name || ''}: ${product?.brand?.name || ''}`}
                 </ProductBrand>
                 <Actions>
                   <Button
