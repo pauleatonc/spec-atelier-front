@@ -136,7 +136,7 @@ const SpecModalProduct = () => {
                       type="tech"
                       title={titleSpecPdf}
                       active={product?.pdfs?.length}
-                      onClick={handleIconClick(product.pdfs.map(({ name }) => name))}
+                      onClick={handleIconClick(product.pdfs.map(({ url }) => url))}
                     />
                   </Icons>
                 </Actions>
