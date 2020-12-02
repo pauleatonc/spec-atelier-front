@@ -50,7 +50,7 @@ const SpecProductsList = () => {
 
   const [keywordValue, setKeywordValue] = useState('');
   const [sortValue, setSortValue] = useState({});
-  const [roomTypesOptions, setRoomTypesOptions] = useState([]);
+  const [roomTypesOptions, setRoomTypesOptions] = useState(roomTypes);
 
   const handleHideSpecProducts = () => dispatch(onHideSpecProducts());
   const handleKeywordChange = event => {
@@ -111,6 +111,7 @@ const SpecProductsList = () => {
     console.log('even', event);
     dispatch(getRoomTypes({ project_types: event.map(({ value }) => value) }));
     onProjectTypeSubmit(event);
+    setRoomTypesOptions(filteredRoomTypes);
     close();
   };
 
@@ -146,6 +147,10 @@ const SpecProductsList = () => {
     setSortValue({});
     setSpecValues([]);
   }, [show]);
+
+  useEffect(() => {
+    setRoomTypesOptions(roomTypes);
+  }, [roomTypes]);
 
 
   return (
@@ -205,7 +210,7 @@ const SpecProductsList = () => {
                 <ComboBox
                   optionAll
                   submit
-                  options={roomTypesOptions}
+                  options={roomTypesOptions.map(rt => ({ label: rt.name || '', value: rt.id }))}
                   placeholder="Selecciona"
                   type="list"
                   values={roomTypeValues}

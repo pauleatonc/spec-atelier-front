@@ -10,8 +10,7 @@ export const onGetSpecProductsItems = ({ sectionID } = {}) => async (dispatch, g
 
   try {
     const { specProducts } = getState();
-    const response = await getProductsItems(sectionID || specProducts.filters.section);
-
+    const response = await getProductsItems({ sectionID: sectionID || specProducts.filters.section, params: { with_products: true }});
     return dispatch(onActionCreator(GET_SPEC_PRODUCTS_ITEMS_SUCCESS, { items: response.items }));
   } catch (error) {
     return dispatch(onActionCreator(GET_SPEC_PRODUCTS_ITEMS_ERROR, { error }));

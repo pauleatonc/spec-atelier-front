@@ -35,6 +35,7 @@ const specProductsState = {
   show: false,
   total: 0,
   specification: [],
+  room_types: [],
 };
 
 /**
@@ -150,6 +151,7 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
       };
     }
     case GET_SPEC_ROOMTYPES: {
+      console.log('room_types', payload)
       return {
         ...state,
         room_types: payload.room_types || [],

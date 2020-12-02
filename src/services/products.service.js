@@ -10,7 +10,7 @@ export const getProductsSections = factoryService(() => getJsonRequest(`${API_BA
 /**
  * Gets the list of products' items by the given section.
  */
-export const getProductsItems = factoryService(sectionID => getJsonRequest(`${API_BASE_URL}/sections/${sectionID}/items`));
+export const getProductsItems = factoryService(({ sectionID, params }) => getJsonRequest(`${API_BASE_URL}/sections/${sectionID}/items${formatParams(params)}`));
 
 /**
  * Gets the list of products' systems by the given item.

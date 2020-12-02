@@ -16,7 +16,7 @@ const SpecProductsItems = () => {
     dispatch(onGetSpecProductsBySection({ sectionID: '', itemID: '' }));
     dispatch(onHideSpecProductsItemsSuccess());
   }
-  const handleItemClick = itemID => () => dispatch(onGetSpecProductsByItem({ itemID }));
+  const handleItemClick = itemID => () => itemID ? dispatch(onGetSpecProductsByItem({ itemID })) : () => {};
 
   if (!show) {
     return null;
