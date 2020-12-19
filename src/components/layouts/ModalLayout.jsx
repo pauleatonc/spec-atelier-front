@@ -56,9 +56,14 @@ const ModalLayout = props => {
   const modalElement = document.getElementById('__modals');
 
   useEffect(() => {
+    return () => document.body.style.overflow = 'auto';
+  },[]);
+
+  useEffect(() => {
     if (!show) {
       return;
     }
+    if (show) document.body.style.overflow = 'hidden';
 
     rootRef.current.focus();
   }, [show]);

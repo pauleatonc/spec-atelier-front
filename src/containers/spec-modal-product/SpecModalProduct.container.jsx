@@ -54,7 +54,7 @@ const SpecModalProduct = () => {
       link.id = 'doc';
       document.body.appendChild(link);
       link.click();
-      return setTimeout(() => document.body.removeChild(link), 2000);
+      return setTimeout(() => document.body.removeChild(link), 1200);
     });
   };
 
@@ -88,7 +88,7 @@ const SpecModalProduct = () => {
                   tabIndex={i}
                   onKeyDown={onSelectImg(img)}
                   onClick={onSelectImg(img)}
-                  active={img.id && img.id === selectedImg.id && product?.images?.length > 1}
+                  active={!!(img.id && img.id === selectedImg.id && product?.images?.length > 1)}
                 >
                   <Image src={img?.urls?.medium} type="responsive" height="80px" maxWidth="100%" objectFit="contains"/>
                 </ImagesContent>
@@ -135,8 +135,8 @@ const SpecModalProduct = () => {
                     <Icon
                       type="tech"
                       title={titleSpecPdf}
-                      active={product?.pdfs?.length}
-                      onClick={handleIconClick(product.pdfs.map(({ url }) => url))}
+                      active={!!product?.pdfs?.length}
+                      onClick={handleIconClick([...product.pdfs.map(({ url }) => url), ...product.pdfs.map(({ url }) => url)])}
                     />
                   </Icons>
                 </Actions>
