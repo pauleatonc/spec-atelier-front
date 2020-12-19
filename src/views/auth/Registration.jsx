@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import RegisterContainer from '../../containers/auth/register/Register.container';
 
 import {
+  Content,
   Container,
   SectionLeft,
   SectionRight,
@@ -22,7 +23,9 @@ const Registration = () => {
         </Image>
       </SectionLeft>
       <SectionRight>
-        <RegisterContainer />
+        <Content>
+          <RegisterContainer />
+        </Content>
       </SectionRight>
       <Alert />
     </Container>

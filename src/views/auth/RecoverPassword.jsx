@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import RecoverPasswordContainer from '../../containers/auth/recover-password/RecoverPassword.container';
 import {
   Container,
+  Content,
   SectionLeft,
   SectionRight,
   Image,
@@ -24,7 +25,9 @@ const RecoverPassword = () => {
         </Image>
       </SectionLeft>
       <SectionRight>
-        <RecoverPasswordContainer />
+        <Content>
+          <RecoverPasswordContainer />
+        </Content>
       </SectionRight>
       <Alert />
     </Container>

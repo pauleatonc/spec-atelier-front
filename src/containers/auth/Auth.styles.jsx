@@ -9,10 +9,9 @@ import {
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
-  height: 100vh;
+  height: 100%;
   width: 100%;
   font-family: 'Lato', sans-serif;
-  display: flex;
 `;
 
 export const Content = styled.div`

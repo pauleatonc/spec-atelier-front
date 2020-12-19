@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import NewPasswordContainer from '../../containers/auth/new-password/NewPassword.container';
 import {
   Container,
-  SectionLeft,
-  SectionRight,
-  Image,
-  Logo,
+  Content,
+	SectionLeft,
+	SectionRight,
+	Image,
+	Logo,
 } from './Auth.styles';
 
 import Alert from '../../containers/alert/Alert.container';
@@ -14,21 +15,23 @@ import Alert from '../../containers/alert/Alert.container';
  * The Login's view.
  */
 const Login = () => {
-  return (
-    <Container>
-      <SectionLeft>
-        <Image>
-          <Link to="/" data-view="home" >
-            <Logo />
-          </Link>
-        </Image>
-      </SectionLeft>
-      <SectionRight>
-        <NewPasswordContainer />
-      </SectionRight>
+	return (
+		<Container>
+			<SectionLeft>
+				<Image>
+					<Link to="/" data-view="home">
+						<Logo />
+					</Link>
+				</Image>
+			</SectionLeft>
+			<SectionRight>
+				<Content>
+					<NewPasswordContainer />
+				</Content>
+			</SectionRight>
 			<Alert />
-    </Container>
-  );
+		</Container>
+	);
 };
 
 export default Login;

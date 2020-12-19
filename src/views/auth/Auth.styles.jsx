@@ -55,3 +55,13 @@ export const Logo = styled.div`
   background-repeat: no-repeat;
   object-fit: contain;
 `;
+
+export const Content = styled.div`
+  padding: 60px 120px;
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  ${MEDIA_QUERY_SMALL} {
+    padding: 60px 60px;
+  }
+`;
