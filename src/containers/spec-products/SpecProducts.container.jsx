@@ -36,14 +36,14 @@ const SpecProductsList = () => {
   const { project_types: projectTypes } = useSelector(state => state.app);
   const { brands } = useSelector(state => state.brandsList);
   const selectedProducts = useSelector(state => state.specDocument.blocks?.filter(block => block.type === 'Product'));
-  const { 
-    nextPage, 
-    collection: products = [], 
+  const {
+    nextPage,
+    collection: products = [],
     loading,
-    show, 
-    total, 
-    filters, 
-    specifications = [], 
+    show,
+    total,
+    filters,
+    specifications = [],
     room_types: roomTypes = [],
   } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
@@ -84,7 +84,7 @@ const SpecProductsList = () => {
 
   const { values: brandsValues, set: setBrandsValues, onSubmit: onBrandsSubmit } =
     useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'brand', value: values })) });
-  
+
   const { values: projectTypeValues, set: setProjectTypeValues, onSubmit: onProjectTypeSubmit } =
     useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'project_type', value: values })) });
 
@@ -253,7 +253,7 @@ const SpecProductsList = () => {
                     category={product.system?.name || ''}
                     description={product.short_desc || ''}
                     key={`product-card-${product.id}`}
-                    photo={product.images[0]?.urls?.thumb}
+                    photo={product.images[0]?.urls?.small}
                     reference={product.reference || ''}
                     selected={Boolean(selected)}
                     title={product?.name}

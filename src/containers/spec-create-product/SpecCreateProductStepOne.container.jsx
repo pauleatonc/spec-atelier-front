@@ -133,7 +133,7 @@ const SpecCreateProductStepOne = () => {
               options={systems.map(mapToSelector)}
               value={systemValue}
               onChange={handleSystemChange}
-              maxHeight="1600px"
+              maxHeight="160px"
               renderInput={(
                 <ButtonSelectorContent disabled={!itemValue.value || !systems.length}>
                   <InputButton readOnly placeholder="Elige una partida" value={systemValue.label || ''} disabled={!itemValue.value || !systems.length} />
