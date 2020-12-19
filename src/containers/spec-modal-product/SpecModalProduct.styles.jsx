@@ -113,6 +113,7 @@ export const ImagesContent = styled.div`
   flex: 1;
   max-width: 100px;
   border: 2px solid; 
+  max-height: 120px;
   border-color: ${({ active }) => active ? COLOR_PRIMARY : 'transparent'};
   ${MEDIA_QUERY_SMALL} {
     display: none;

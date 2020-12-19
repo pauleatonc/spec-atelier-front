@@ -88,7 +88,7 @@ const SpecModalProduct = () => {
                   tabIndex={i}
                   onKeyDown={onSelectImg(img)}
                   onClick={onSelectImg(img)}
-                  active={img.id && img.id === selectedImg.id}
+                  active={img.id && img.id === selectedImg.id && product?.images?.length > 1}
                 >
                   <Image src={img?.urls?.medium} type="responsive" height="80px" maxWidth="100%" objectFit="contains"/>
                 </ImagesContent>
