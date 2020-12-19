@@ -120,7 +120,7 @@ export const setSelectedAll = value => dispatch => dispatch(onActionCreator(GET_
 
 export const getItems = ({ brand, section, item } = {})  => async dispatch => {
   try {
-    const { items } = await getItemsService(cleanObjectsAndArrays(({ brand, section, item }) ));
+    const { items } = await getItemsService(cleanObjectsAndArrays(({ brand, section, item, with_products: true }) ));
     return dispatch(onActionCreator(GET_ITEMS_SUCCESS, { items }));
   } catch (error) {
     return dispatch(onActionCreator(GET_ITEMS_ERROR, { error: true, nativeError: error }));
