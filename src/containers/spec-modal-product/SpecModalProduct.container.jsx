@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Loading, Modal, Button, Image } from '../../components/SpecComponents';
+import { Loading, Modal, Button, Image, ToolTip } from '../../components/SpecComponents';
 import {
   ButtonClose,
   Container,
@@ -120,24 +120,27 @@ const SpecModalProduct = () => {
                     Contactar
                   </Button>
                   <Icons>
-                    <Icon
-                      type="dwg"
-                      title={product?.dwg?.url?.split('/').pop() || ''}
-                      active={!!product.dwg.url}
-                      onClick={handleIconClick([product.dwg.url])}
-                    />
-                    <Icon
-                      type="bim"
-                      title={product?.bim?.url?.split('/').pop() || ''}
-                      active={!!product.bim.url}
-                      onClick={handleIconClick([product.bim.url])}
-                    />
-                    <Icon
-                      type="tech"
-                      title={titleSpecPdf}
-                      active={!!product?.pdfs?.length}
-                      onClick={handleIconClick([...product.pdfs.map(({ url }) => url), ...product.pdfs.map(({ url }) => url)])}
-                    />
+                    <ToolTip content={product?.dwg?.url?.split('/').pop() || ''} position="bottom">
+                      <Icon
+                        type="dwg"
+                        active={!!product.dwg.url}
+                        onClick={handleIconClick([product.dwg.url])}
+                      />
+                    </ToolTip>
+                    <ToolTip content={product?.bim?.url?.split('/').pop() || ''} position="bottom">
+                      <Icon
+                        type="bim"
+                        active={!!product.bim.url}
+                        onClick={handleIconClick([product.bim.url])}
+                      />
+                    </ToolTip>
+                    <ToolTip content={titleSpecPdf} position="bottom">
+                      <Icon
+                        type="tech"
+                        active={!!product?.pdfs?.length}
+                        onClick={handleIconClick([...product.pdfs.map(({ url }) => url), ...product.pdfs.map(({ url }) => url)])}
+                      />
+                    </ToolTip>
                   </Icons>
                 </Actions>
               </InfoContent>
