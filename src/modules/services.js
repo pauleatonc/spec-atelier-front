@@ -55,7 +55,7 @@ export const cleanParams = obj => Object
 export const cleanObjectsAndArrays = (obj = {}) => Object
   .entries(obj)
   .reduce((acc, [key, value]) => {
-    if (!value) return acc;
+    if (!value && typeof value !== 'boolean') return acc;
     if (value && typeof value === 'object' && value.id) return { ...acc, [key]: value.id };
     if (Array.isArray(value)) return value.length ? {
       ...acc,

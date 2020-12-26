@@ -24,6 +24,7 @@ const productsListState = {
     item: [],
     brand: [],
     sort: '',
+    with_products: false,
   },
   products: [],
   items: [],

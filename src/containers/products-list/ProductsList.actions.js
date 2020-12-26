@@ -109,7 +109,7 @@ export const onGetProductsByFiltersAll = () => async dispatch => {
 
 export const getSections = ({ brand, section, item } = {}) => async dispatch => {
   try {
-    const { sections } = await getServiceSections(cleanObjectsAndArrays({ brand, section, item  }));
+    const { sections } = await getServiceSections(cleanObjectsAndArrays({ brand, section, item, with_products: true  }));
     return dispatch(onActionCreator(GET_SECTIONS_SUCCESS, { sections }));
   } catch (error) {
     return dispatch(onActionCreator(GET_SECTIONS_ERROR, { error: true, nativeError: error }));
@@ -130,7 +130,7 @@ export const getItems = ({ brand, section, item } = {})  => async dispatch => {
 export const getBrands = filters => async dispatch => {
   try {
     const { items } = await getServiceBrands(cleanObjectsAndArrays(filters));
-    return dispatch(onActionCreator(GET_ITEMS_SUCCESS, { items }));
+    return dispatch(onActionCreator(GET_ITEMS_SUCCESS, { items, with_products: true }));
   } catch (error) {
     return dispatch(onActionCreator(GET_ITEMS_ERROR, { error: true, nativeError: error }));
   }

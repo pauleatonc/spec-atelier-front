@@ -120,16 +120,14 @@ const ProductsFilters = () => {
         >
           <Text>Tipo de proyecto</Text>
         </ButtonComboBox>
-        <ButtonComboBox
-          variant="secondary"
-          options={[]}
-          name="most_used"
-          onChange={submitCallback}
-          currentOptions={filters.most_used}
-          submit
+        <Button
+          inverse
+          variant={filters.with_products ? 'secondary' : 'default'}
+          name="with_products"
+          onClick={() => submitCallback({ name: 'with_products', value: !filters.with_products })}
         >
           <Text>Mas usados</Text>
-        </ButtonComboBox>
+        </Button>
         <ButtonComboBox
           variant="secondary"
           options={roomTypesOptions}
