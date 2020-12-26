@@ -17,6 +17,7 @@ import Select from './inputs/Select';
 import SnackBar from './basics/Snackbar';
 import SearchBar from './filters/SearchBar';
 import Modal from './layouts/ModalLayout';
+import ToolTip from './tooltip/Tooltip';
 
 export {
   AttachedDocuments,
@@ -38,4 +39,5 @@ export {
   Select,
   SnackBar,
   SearchBar,
+  ToolTip,
 }
