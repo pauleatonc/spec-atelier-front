@@ -15,13 +15,13 @@ import { onGetSpecProducts } from '../spec-products/SpecProducts.actions';
 export const GET_SPEC_PRODUCTS_SYSTEMS = 'GET_SPEC_PRODUCTS_SYSTEMS';
 export const GET_SPEC_PRODUCTS_SYSTEMS_ERROR = 'GET_SPEC_PRODUCTS_SYSTEMS_ERROR';
 export const GET_SPEC_PRODUCTS_SYSTEMS_SUCCESS = 'GET_SPEC_PRODUCTS_SYSTEMS_SUCCESS';
-export const onGetSpecProductsSystems = ({ itemID }) => async dispatch => {
+export const onGetSpecProductsSystems = ({ items }) => async dispatch => {
   dispatch(onActionCreator(GET_SPEC_PRODUCTS_SYSTEMS));
 
   try {
-    const response = await getProductsSystems(itemID);
+    const response = await getProductsSystems({ item_id: items });
 
-    return dispatch(onActionCreator(GET_SPEC_PRODUCTS_SYSTEMS_SUCCESS, { systems: response.systems }));
+    return dispatch(onActionCreator(GET_SPEC_PRODUCTS_SYSTEMS_SUCCESS, { systems: response.subitems }));
   } catch (error) {
     return dispatch(onActionCreator(GET_SPEC_PRODUCTS_SYSTEMS_ERROR, { error }));
   }
@@ -47,14 +47,15 @@ export const CREATE_SPEC_PRODUCT_ERROR = 'CREATE_SPEC_PRODUCT_ERROR';
 export const CREATE_SPEC_PRODUCT_SUCCESS = 'CREATE_SPEC_PRODUCT_SUCCESS';
 export const onCreateSpecProduct = ({ documents, images }) => async (dispatch, getState) => {
   dispatch(onActionCreator(CREATE_SPEC_PRODUCT));
+  const mapId = ({ id }) => id;
   try {
     const state = getState();
     const { stepOne, stepTwo } = state.specCreateProduct;
     const payload = {
       name: stepOne.name,
-      section: stepOne.section?.value,
-      item: stepOne.item?.value,
-      system: stepOne.system?.value,
+      section: stepOne.section.map(mapId),
+      item: stepOne.item.map(mapId),
+      system: stepOne.system.map(mapId),
       description: stepTwo.description,
       brand: stepTwo.brand.label,
       price: stepTwo.price,

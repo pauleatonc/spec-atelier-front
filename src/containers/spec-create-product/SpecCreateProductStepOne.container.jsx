@@ -1,161 +1,213 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onHideSpecCreateProduct, onGetSpecProductsSystems, onShowSpecCreateProductStepTwoSuccess } from './SpecCreateProduct.actions';
+import {
+	onHideSpecCreateProduct,
+	onGetSpecProductsSystems,
+	onShowSpecCreateProductStepTwoSuccess,
+} from './SpecCreateProduct.actions';
 import { onGetSpecProductsSections } from '../spec-products-sections/SpecProductsSections.actions';
 import { onGetSpecProductsItems } from '../spec-products-items/SpecProductsItems.actions';
-import { useInput, useSelect } from '../../components/inputs/Inputs.hooks';
+import {
+	useInput,
+	useMultiSelect,
+	useSelect,
+} from '../../components/inputs/Inputs.hooks';
 import useModal from '../../components/layouts/ModalLayout.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import StepsBubbles from '../../components/basics/StepsBubbles';
 import Input from '../../components/inputs/Input';
 import Select from '../../components/inputs/Select';
 import Button from '../../components/buttons/Button';
-import { Root, Header, Title, CloseIcon, Body, Section, Footer, InputButton, DropIcon, ButtonSelectorContent } from './SpecCreateProduct.styles';
+import {
+	Root,
+	Header,
+	Title,
+	CloseIcon,
+	Body,
+	Section,
+	Footer,
+} from './SpecCreateProduct.styles';
 import closeSource from '../../assets/images/icons/close.svg';
-import SelectorRelative from '../../components/basics/SelectorRelative';
-import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
+import MultiSelect from '../../components/inputs/MultiSelect';
 
 /**
  * The SpecCreateProductStepOne's container.
  */
 const SpecCreateProductStepOne = () => {
-  const { name, item, section, show, system } = useSelector(state => state.specCreateProduct.stepOne);
-  const { collection: sections } = useSelector(state => state.specProductsSections);
-  const { collection: items } = useSelector(state => state.specProductsItems);
-  const { systemsCollection: systems } = useSelector(state => state.specCreateProduct);
-  const dispatch = useDispatch();
-  const { onChange: handleNameChange, set: setNameValue, value: nameValue } = useInput(name);
-  const { onChange: onSectionChange, set: setSectionValue, value: sectionValue } = useSelect(section);
-  const { onChange: onItemChange, set: setItemValue, value: itemValue } = useSelect(item);
-  const { onChange: handleSystemChange, set: setSystemValue, value: systemValue } = useSelect(system);
-  const handleSectionChange = option => {
-    onSectionChange(option);
-    setItemValue({});
-    setSystemValue({});
-    dispatch(onGetSpecProductsItems({ sectionID: option.value }));
-  };
-  const handleItemChange = option => {
-    onItemChange(option);
-    setSystemValue({});
-    dispatch(onGetSpecProductsSystems({ itemID: option.value }));
-  };
-  const { onClose: handleClose, onExiting: handleExiting } = useModal({
-    closeCallback: () => dispatch(onHideSpecCreateProduct()),
-    exitingCallback: () => {
-      setNameValue('');
-      setSectionValue({});
-      setItemValue({});
-      setSystemValue({});
-    },
-  });
-  const handleNext = () => dispatch(onShowSpecCreateProductStepTwoSuccess({
-    name: nameValue,
-    section: sectionValue,
-    item: itemValue,
-    system: systemValue,
-  }));
-  const disableSection = !systemValue.label && systems.length;
-  const disabledNext = !nameValue || !itemValue.label || disableSection;
+	const { name, item, section, show, system } = useSelector(
+		(state) => state.specCreateProduct.stepOne,
+	);
+	const { collection: sections } = useSelector(
+		(state) => state.specProductsSections,
+	);
+	const { collection: items = [] } = useSelector(
+		(state) => state.specProductsItems,
+	);
+	const { systemsCollection: systems = [] } = useSelector(
+		(state) => state.specCreateProduct,
+	);
+	const dispatch = useDispatch();
+	const {
+		onChange: handleNameChange,
+		set: setNameValue,
+		value: nameValue,
+	} = useInput(name);
 
-  useEffect(() => {
-    if (!show) {
-      return;
-    }
+	const {
+		onChange: onSectionChange,
+		set: setSectionValue,
+		values: sectionValues,
+	} = useMultiSelect();
 
-    dispatch(onGetSpecProductsSections());
-  }, [show]);
+	const {
+		onChange: onItemChange,
+		set: setItemValue,
+		values: itemValues = [],
+	} = useMultiSelect([]);
 
-  const mapToSelector = sectionOption => ({ ...sectionOption, label: sectionOption.name, value: sectionOption.id });
+	const {
+		onChange: onSystemChange,
+		set: setSystemValues,
+		values: systemValues = [],
+	} = useMultiSelect([]);
 
-  useEffect(() => {
-    if (sections && section?.id) {
-      setSectionValue(mapToSelector(sections.find(i => i.id === section.id)));
-      dispatch(onGetSpecProductsItems({ sectionID: section.id }));
-    }
-  }, [section]);
+	const handleSectionChange = (option) => {
+		onSectionChange(option);
+		setItemValue([]);
+		setSystemValues([]);
+	};
 
+	const onSubmitSection = () => {
+		dispatch(onGetSpecProductsItems({ sections: sectionValues }));
+		setItemValue([]);
+		setSystemValues([]);
+	};
 
-  useEffect(() => {
-    if (items && item?.id) {
-      setItemValue(mapToSelector(items.find(i => i.id === item.id)));
-      dispatch(onGetSpecProductsSystems({ itemID: item.id }));
-    }
-  }, [item]);
+	const handleItemChange = (option) => {
+		onItemChange(option);
+		setSystemValues([]);
+	};
 
-  return (
-    <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
-      <Root>
-        <Header>
-          <Title>Crear producto</Title>
-          <CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
-        </Header>
-        <Body>
-          <Section>
-            <StepsBubbles prefix="step-1" steps={[{ active: true }, { active: false }, { active: false }]} />
-          </Section>
-          <Section padding="41px 0 0">
-            <Input
-              label="Nombre del producto"
-              placeholder="Nombre"
-              value={nameValue}
-              width="490px"
-              onChange={handleNameChange}
-            />
-          </Section>
-          <Section alignItems="flex-end" display="grid" gridTemplateColumns="1fr 1fr 1fr" padding="36px 0 0">
-            <SelectorRelative
-              name="sort"
-              type="underline"
-              options={sections.map(mapToSelector)}
-              value={sectionValue}
-              onChange={handleSectionChange}
-              maxHeight="160px"
-              renderInput={(
-                <ButtonSelectorContent>
-                  <InputButton readOnly placeholder="Categoriza el producto" value={sectionValue.label || ''} />
-                  <DropIcon alt="" src={dropArrowSource} />
-                </ButtonSelectorContent>
-              )}
-            />
-            <SelectorRelative
-              options={items.map(mapToSelector)}
-              value={itemValue}
-              onChange={handleItemChange}
-              maxHeight="160px"
-              renderInput={(
-                <ButtonSelectorContent disabled={!sectionValue.value}>
-                  <InputButton readOnly placeholder="Elige una partida" value={itemValue.label || ''} disabled={!sectionValue.value}/>
-                  <DropIcon alt="" src={dropArrowSource} />
-                </ButtonSelectorContent>
-              )}
-            />
-             <SelectorRelative
-              options={systems.map(mapToSelector)}
-              value={systemValue}
-              onChange={handleSystemChange}
-              maxHeight="160px"
-              renderInput={(
-                <ButtonSelectorContent disabled={!itemValue.value || !systems.length}>
-                  <InputButton readOnly placeholder="Elige una partida" value={systemValue.label || ''} disabled={!itemValue.value || !systems.length} />
-                  <DropIcon alt="" src={dropArrowSource} />
-                </ButtonSelectorContent>
-              )}
-            />
-          </Section>
-        </Body>
-        <Footer>
-          <Button
-            disabled={disabledNext}
-            variant="primary"
-            width="163px"
-            onClick={handleNext}
-          >
-            Siguiente
-          </Button>
-        </Footer>
-      </Root>
-    </ModalLayout>
-  );
+	const onSubmitItem = () => {
+		dispatch(onGetSpecProductsSystems({ items: itemValues }));
+	};
+
+	const handleSystemChange = (option) => {
+		onSystemChange(option);
+	};
+
+	const { onClose: handleClose, onExiting: handleExiting } = useModal({
+		closeCallback: () => dispatch(onHideSpecCreateProduct()),
+		exitingCallback: () => {
+			setNameValue('');
+			setSectionValue([]);
+			setItemValue([]);
+			setSystemValues([]);
+		},
+	});
+	const handleNext = () =>
+		dispatch(
+			onShowSpecCreateProductStepTwoSuccess({
+				name: nameValue,
+				sections: sectionValues,
+				items: itemValues,
+				systems: systemValues,
+			}),
+		);
+
+	const disableSection = !systemValues.length;
+	const disabledNext = !nameValue || !itemValues.length || disableSection;
+
+	useEffect(() => {
+		if (!show) {
+			return;
+		}
+
+		dispatch(onGetSpecProductsSections());
+	}, [show]);
+
+	const mapToSelector = (sectionOption) => ({
+		...sectionOption,
+		label: sectionOption.name,
+		value: sectionOption.id,
+	});
+
+	return (
+		<ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
+			<Root>
+				<Header>
+					<Title>Crear producto</Title>
+					<CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
+				</Header>
+				<Body>
+					<Section>
+						<StepsBubbles
+							prefix="step-1"
+							steps={[{ active: true }, { active: false }, { active: false }]}
+						/>
+					</Section>
+					<Section padding="41px 0 0">
+						<Input
+							label="Nombre del producto"
+							placeholder="Nombre"
+							value={nameValue}
+							width="490px"
+							onChange={handleNameChange}
+						/>
+					</Section>
+					<Section
+						alignItems="flex-end"
+						display="grid"
+						gridTemplateColumns="1fr 1fr 1fr"
+						padding="36px 0 0"
+					>
+						<MultiSelect
+							changeOnCLose={false}
+							showButtons
+							options={sections.map(mapToSelector)}
+							placeholder="Categoriza el producto"
+							values={sectionValues}
+							onChange={handleSectionChange}
+							onSubmit={onSubmitSection}
+							optionAll={false}
+						/>
+						<MultiSelect
+							changeOnCLose={false}
+							showButtons
+							options={items.map(mapToSelector)}
+							placeholder="Elige una partida"
+							values={itemValues || []}
+							onChange={handleItemChange}
+							onSubmit={onSubmitItem}
+							optionAll={false}
+							disabled={!items.length}
+						/>
+						<MultiSelect
+							changeOnCLose={false}
+							showButtons
+							options={systems.map(mapToSelector)}
+							placeholder="Elige un systema"
+							values={systemValues || []}
+							onChange={handleSystemChange}
+							onSubmit={handleSystemChange}
+							optionAll={false}
+							disabled={!systems.length}
+						/>
+					</Section>
+				</Body>
+				<Footer>
+					<Button
+						disabled={disabledNext}
+						variant="primary"
+						width="163px"
+						onClick={handleNext}
+					>
+						Siguiente
+					</Button>
+				</Footer>
+			</Root>
+		</ModalLayout>
+	);
 };
 
 export default SpecCreateProductStepOne;
