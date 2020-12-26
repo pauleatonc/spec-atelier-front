@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '../config/constants/environment';
 import { getJsonRequest, postFormRequest, postJsonRequest, patchJsonRequest, deleteJsonRequest } from '../modules/requests';
-import { factoryService, formatParams } from '../modules/services';
+import { cleanObjectsAndArrays, factoryService, formatParams } from '../modules/services';
 
 /**
  * Gets the list of products' sections available.
@@ -10,12 +10,12 @@ export const getProductsSections = factoryService(() => getJsonRequest(`${API_BA
 /**
  * Gets the list of products' items by the given section.
  */
-export const getProductsItems = factoryService(({ sectionID, params }) => getJsonRequest(`${API_BASE_URL}/sections/${sectionID}/items${formatParams(params)}`));
+export const getProductsItems = factoryService(sections => getJsonRequest(`${API_BASE_URL}/items${formatParams(cleanObjectsAndArrays(sections))}`));
 
 /**
  * Gets the list of products' systems by the given item.
  */
-export const getProductsSystems = factoryService(itemID => getJsonRequest(`${API_BASE_URL}/items/${itemID}/systems`));
+export const getProductsSystems = factoryService(items => getJsonRequest(`${API_BASE_URL}/subitems${formatParams(cleanObjectsAndArrays(items))}`));
 
 /**
  * Gets a list of products. 
