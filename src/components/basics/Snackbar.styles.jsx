@@ -19,7 +19,7 @@ export const Content = styled.div`
   line-height: 1.43;
   margin: 0 auto;
   padding: 14px 16px;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 67px;
   width: fit-content;
