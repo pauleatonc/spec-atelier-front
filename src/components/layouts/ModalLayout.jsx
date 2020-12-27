@@ -61,6 +61,7 @@ const ModalLayout = props => {
 
   useEffect(() => {
     if (!show) {
+      document.body.style.overflow = 'auto';
       return;
     }
     if (show) document.body.style.overflow = 'hidden';
