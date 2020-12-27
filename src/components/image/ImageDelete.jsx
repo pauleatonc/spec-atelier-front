@@ -26,10 +26,10 @@ const defaultProps = {
   hideDelete: false,
 };
 
-const ImageDelete = ({ img, onDelete, height, width, hideDelete, containerWidth, containerHeight }) => {
+const ImageDelete = ({ img, onDelete, height, width, hideDelete }) => {
   const onClickDelete = () => onDelete(img);
   return (
-    <Image src={img.src} type="cover" width={width} height={height} objectFit="scale-down" containerWidth={containerWidth} containerHeight={containerHeight}>
+    <Image src={img.src} containerWidth={width} containerHeight={height} objectFit="contain">
       {!hideDelete && (
         <Buttons>
           <Button type="button" onClick={onClickDelete}>
