@@ -109,9 +109,9 @@ const SpecCreateProductStepOne = () => {
 		dispatch(
 			onShowSpecCreateProductStepTwoSuccess({
 				name: nameValue,
-				sections: sectionValues,
-				items: itemValues,
-				systems: systemValues,
+				section: sectionValues,
+				item: itemValues,
+				system: systemValues,
 			}),
 		);
 

@@ -19,7 +19,7 @@ export const onGetSpecProductsSystems = ({ items }) => async dispatch => {
   dispatch(onActionCreator(GET_SPEC_PRODUCTS_SYSTEMS));
 
   try {
-    const response = await getProductsSystems({ item_id: items });
+    const response = await getProductsSystems({ item: items });
 
     return dispatch(onActionCreator(GET_SPEC_PRODUCTS_SYSTEMS_SUCCESS, { systems: response.subitems }));
   } catch (error) {
