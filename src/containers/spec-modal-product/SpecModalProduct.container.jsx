@@ -27,22 +27,27 @@ import { openContactModal } from '../modal-contact-form/ModalContactForm.actions
 
 
 const SpecModalProduct = () => {
+  let isMounted = true;
   const getFirstImg = data => (data?.images?.length && data.images[0]) || {};
   const { product, showModalProduct } = useSelector(state => state.specModalPorduct);
   const [selectedImg, selectImg] = useState(getFirstImg());
   const onSelectImg = img => () => selectImg(img);
   const dispatch = useDispatch();
+  const onCloseModal = () => dispatch(closeModal());
 
   useEffect(() => {
-    if (product) selectImg(getFirstImg(product));
-  }, [product]);
+    if (product && showModalProduct) selectImg(getFirstImg(product));
+  }, [product, showModalProduct]);
+
+  useEffect(() => {
+    return () => { isMounted = false };
+  }, []);
 
   const onContact = () => dispatch(openContactModal({
     selectedBrand: product.brand,
     selectedProduct: product,
   }));
 
-  const onCloseModal = () => dispatch(closeModal());
 
   // Download documents
   const handleIconClick = documents => () => {
@@ -54,7 +59,7 @@ const SpecModalProduct = () => {
       link.id = 'doc';
       document.body.appendChild(link);
       link.click();
-      return setTimeout(() => document.body.removeChild(link), 1200);
+      return setTimeout(() => document.body.removeChild(link), 2000);
     });
   };
 
@@ -138,7 +143,7 @@ const SpecModalProduct = () => {
                       <Icon
                         type="tech"
                         active={!!product?.pdfs?.length}
-                        onClick={handleIconClick([...product.pdfs.map(({ url }) => url), ...product.pdfs.map(({ url }) => url)])}
+                        onClick={handleIconClick(product.pdfs.map(({ url }) => url))}
                       />
                     </ToolTip>
                   </Icons>

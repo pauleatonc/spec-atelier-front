@@ -14,7 +14,7 @@ export const onGetSpecProductsItems = (
 	try {
 		const { specProducts } = getState();
 		const response = await getProductsItems({
-			section_id: sections || specProducts.filters.sections,
+			section: sections || specProducts.filters.sections,
 		});
 		return dispatch(
 			onActionCreator(GET_SPEC_PRODUCTS_ITEMS_SUCCESS, {

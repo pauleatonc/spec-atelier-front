@@ -267,13 +267,13 @@ const SpecEditProduct = () => {
 					name: product.name !== nameValue ? nameValue : undefined,
 					brand: product.brand?.id !== brandValue?.id ? brandValue : undefined,
 					long_desc:
-            product.long_desc !== descriptionValue
-            ? descriptionValue
-            : undefined,
+						product.long_desc !== descriptionValue
+						? descriptionValue
+						: undefined,
 					price: product.price !== priceValue ? priceValue : undefined,
-					item_id: isSameArray(product.items, itemValue) ? itemValue.map(mapToId) : undefined,
+					item: isSameArray(product.items, itemValue) ? itemValue.map(mapToId) : undefined,
 					section: isSameArray(product.sections, sectionValue) ? sectionValue.map(mapToId) : undefined,
-					system_id: isSameArray(product.systems, systemValue) ? systemValue.map(mapToId) : undefined,
+					system: isSameArray(product.systems, systemValue) ? systemValue.map(mapToId) : undefined,
 					room_type: roomTypeValues.length
 						? roomTypeValues.map((rt) => rt.id)
 						: undefined,

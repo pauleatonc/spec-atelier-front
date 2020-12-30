@@ -34,11 +34,11 @@ export const createProduct = factoryService(data => {
   const body = {
     product: {
       brand: data.brand,
-      item_id: data.item,
+      item: data.item,
       long_desc: data.description,
       name: data.name,
       price: data.price,
-      system_id: data.system,
+      system: data.system,
       short_desc: data.shortDescription || '',
     },
   };

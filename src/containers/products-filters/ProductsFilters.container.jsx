@@ -122,9 +122,9 @@ const ProductsFilters = () => {
         </ButtonComboBox>
         <Button
           inverse
-          variant={filters.with_products ? 'secondary' : 'default'}
-          name="with_products"
-          onClick={() => submitCallback({ name: 'with_products', value: !filters.with_products })}
+          variant={filters.most_used ? 'secondary' : 'default'}
+          name="most_used"
+          onClick={() => submitCallback({ name: 'most_used', value: !filters.most_used })}
         >
           <Text>Mas usados</Text>
         </Button>
