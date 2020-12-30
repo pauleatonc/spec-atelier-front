@@ -35,7 +35,7 @@ const SpecProductsList = () => {
   const { id: specID } = useParams();
   const { project_types: projectTypes } = useSelector(state => state.app);
   const { brands } = useSelector(state => state.brandsList);
-  const selectedProducts = useSelector(state => state.specDocument.blocks?.filter(block => block.type === 'Product'));
+  const selectedProducts = useSelector(state => state.specDocument.blocks?.filter(block => block.type === 'Product')) || [];
   const {
     nextPage,
     collection: products = [],
@@ -66,12 +66,11 @@ const SpecProductsList = () => {
   const handleCardClick = productID => event => {
     event.stopPropagation();
     const hasProduct = selectedProducts.find(selectedProduct => selectedProduct?.element.id === productID);
-
+    const currentProduct = products.find(p => p.id === productID);
     if (hasProduct) {
       return dispatch(onDetachSpecProduct({ productID, specID }));
     }
-
-    return dispatch(onAttachSpecProduct({ productID, specID }));
+    return dispatch(onAttachSpecProduct({ productID, specID, systemID: currentProduct?.systems[0]?.id }));
   };
 
   const handleLoadMoreClick = () => {

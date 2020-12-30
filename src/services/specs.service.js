@@ -5,13 +5,14 @@ import { cleanObjectsAndArrays, factoryService, formatParams } from '../modules/
 /**
  * Add a block to the spec.
  */
-export const addSpecBlock = factoryService(({ itemID, productID, sectionID, specID, userID }) =>
+export const addSpecBlock = factoryService(({ itemID, productID, sectionID, systemID, specID, userID }) =>
   postJsonRequest(
     `${API_BASE_URL}/users/${userID}/project_specs/${specID}/create_product`,
     {
       item: itemID,
       product: productID,
       section: sectionID,
+      system: systemID,
     },
   ),
 );
