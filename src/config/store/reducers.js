@@ -22,12 +22,14 @@ import specDocumentReducer from '../../containers/spec-document/SpecDocument.red
 import specHeaderReducer from '../../containers/spec-header/SpecHeader.reducer';
 import specImagesModalReducer from '../../containers/spec-images-modal/SpecImagesModal.reducer';
 import specContentsReducer from '../../containers/spec-contents/SpecContents.reducer';
+import brandsImageSliderReducer from '../../containers/brands-images-slider/BrandsImageSlider.reducer';
 
 export default combineReducers({
   auth: authReducer,
   app: appReducer,
   brand: brandReducer,
   brandsList: brandListReducer,
+  brandsImageSlider: brandsImageSliderReducer,
 	login: loginReducer,
 	recoverPassword: recoverPasswordReducer,
   modalContactForm: modalContactFormReducer,

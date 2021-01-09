@@ -26,8 +26,9 @@
       width: $width-80;
       margin-left: auto;
       margin-right: auto;
+
       display: flex;
-      align-items: center;
+      align-items: center;      
 
       .slick-slide {
         max-width: $total-parent !important;
@@ -74,7 +75,10 @@
         &__image {
           margin-left: auto;
           margin-right: auto;
-          width: 200px;
+          max-width: 100%;
+          min-width: 200px;
+          height: 80px;
+          object-fit: contain;
         }
 
         &:focus {

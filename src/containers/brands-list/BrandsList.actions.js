@@ -8,7 +8,7 @@ export const GET_BRANDS_ERROR = 'GET_BRANDS_ERROR';
 // async calls
 export const getBrands = params => async dispatch => {
   try {
-    const { brands } = await getBrandsData(params);
+    const { brands } = await getBrandsData({ ...params, with_products: true });
 
     return dispatch(
       onActionCreator(
