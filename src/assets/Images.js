@@ -1,4 +1,3 @@
-
 import LOGO_CCHC from './images/cchc_logo.svg';
 import LOGO_CENTRO_INNOVACION from './images/centro_innovavcion_logo.svg';
 import LOGO_CORFO from './images/corfo_logo.svg';
@@ -37,14 +36,38 @@ import ICON_RESIDENTIAL_GREY from './images/project/project_type_image/residenci
 
 import ICON_CREATE_PRODUCT from './images/products/ic-create-product.png';
 
+import ICON_CAMERA from './images/profile/photo.png';
+import ICON_CAMERA_2X from './images/profile/photo@2x.png';
+import ICON_CAMERA_3X from './images/profile/photo@3x.png';
+
+import PROFILE_HEADER from './images/profile/profile-header.jpg'
+import PROFILE_HEADER_2X from './images/profile/profile-header@2x.jpg'
+import PROFILE_HEADER_3x from './images/profile/profile-header@3x.jpg'
+
+import PROFILE_PHOTO_DEFAULT from './images/profile/profile-photo-default.png'
+import PROFILE_PHOTO_DEFAULT_2X from './images/profile/profile-photo-default@2x.png'
+import PROFILE_PHOTO_DEFAULT_3X from './images/profile/profile-photo-default@3x.png'
+
+
+import PRODUCT_HEADER from './images/products/product-header-src.jpg';
+import PRODUCT_HEADE_2X from './images/products/product-header-src@2x.jpg';
+import PRODUCT_HEADER_3X from './images/products/product-header-src@3x.jpg';
+
+import ICON_ARROW_DOWN from './images/icons/drop-arrow.svg';
+
 export {
   LOGO_CCHC,
   LOGO_CENTRO_INNOVACION,
   LOGO_CORFO,
   LOGO_SPEC_SMALL,
 
-  ICON_CREATE_PRODUCT,
+  ICON_ARROW_DOWN,
 
+  ICON_CREATE_PRODUCT,
+  ICON_CAMERA,
+  ICON_CAMERA_2X,
+  ICON_CAMERA_3X,
+  
   ICON_COMMERCIAL_GREY,
   ICON_EDUCATIONAL_GREY,
   ICON_HOSPITAL_GREY,
@@ -75,4 +98,14 @@ export {
   IMAGE_OFFICE_GREY,
   IMAGE_RESIDENTIAL_GREY,
 
+  PROFILE_HEADER,
+  PROFILE_HEADER_2X,
+  PROFILE_HEADER_3x,
+  PROFILE_PHOTO_DEFAULT,
+  PROFILE_PHOTO_DEFAULT_2X,
+  PROFILE_PHOTO_DEFAULT_3X,
+
+  PRODUCT_HEADER,
+  PRODUCT_HEADE_2X,
+  PRODUCT_HEADER_3X,
 };
