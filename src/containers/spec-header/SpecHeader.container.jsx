@@ -50,7 +50,7 @@ const SpecHeader = () => {
       </Section>
       <Separator />
       <Section>
-      {/* <Monetization /> */}
+      <Monetization />
       </Section>
     </Root>
   );
