@@ -77,15 +77,13 @@ export const onGetSpecProductsByPage = () => async (dispatch, getState) => {
 };
 
 export const GET_SPEC_ROOMTYPES = 'GET_SPEC_ROOMTYPES';
-export const GET_SPEC_ROOMTYPES_ERROR = 'GET_SPEC_ROOMTYPES_ERROR'; 
+export const GET_SPEC_ROOMTYPES_ERROR = 'GET_SPEC_ROOMTYPES_ERROR';
 
 export const getRoomTypes = ({ project_types = [] }) => async dispatch => {
   try {
-    console.log('room_types, project_types', project_types);
     const { room_types } = await getRoomTypesService({ params: { with_products: true, project_types }});
     dispatch(onActionCreator(GET_SPEC_ROOMTYPES, { room_types }))
   } catch (error) {
-    console.log('error', error);
     dispatch(onActionCreator(GET_SPEC_ROOMTYPES_ERROR))
   }
 }
@@ -130,7 +128,7 @@ export const GET_SPEC_PRODUCTS_BY_SECTION = 'GET_SPEC_PRODUCTS_BY_SECTION';
 export const onGetSpecProductsBySection = payload => dispatch =>
   batch(() => {
     dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SECTION, payload));
-    dispatch(onShowSpecProductsItems());
+    dispatch(onShowSpecProductsItems({ section: payload.sectionID }));
     dispatch(onGetBrands({ section: payload.sectionID }));
     dispatch(onGetSpecProducts());
   });
@@ -145,7 +143,7 @@ export const onGetSpecProductsProjectType = ({ project_types }) => async dispatc
       dispatch(onShowSpecProductsItems());
       dispatch(onGetSpecProducts());
     });
-    
+
   // } catch (error) {
   //   batch(() => {
   //     dispatch(onActionCreator(UPDATE_SPEC_PROJECT_TYPE_FILTERS));
