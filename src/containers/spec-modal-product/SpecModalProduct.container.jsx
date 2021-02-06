@@ -34,6 +34,7 @@ const SpecModalProduct = () => {
   const onSelectImg = img => () => selectImg(img);
   const dispatch = useDispatch();
   const onCloseModal = () => dispatch(closeModal());
+  const isRegisteredClient = !!product?.client.id && !!product?.client.name;
 
   useEffect(() => {
     if (product && showModalProduct) selectImg(getFirstImg(product));
@@ -118,12 +119,17 @@ const SpecModalProduct = () => {
                   {`Referencia: ${product?.systems?.first?.name || ''}: ${product?.brand?.name || ''}`}
                 </ProductBrand>
                 <Actions>
-                  <Button
-                    variant="secondary"
-                    onClick={onContact}
-                  >
-                    Contactar
-                  </Button>
+                  {
+                    isRegisteredClient && 
+                    (
+                      <Button
+                        variant="secondary"
+                        onClick={onContact}
+                      >
+                        Contactar
+                      </Button>
+                    )
+                  }
                   <Icons>
                     <ToolTip content={product?.dwg?.url?.split('/').pop() || ''} position="bottom">
                       <Icon
