@@ -86,6 +86,7 @@ export const Description = styled(BaseDetails)`
   color: rgba(33, 33, 33, 0.51);
   font-size: 10px;
   letter-spacing: 0.83px;
+  -webkit-line-clamp: 3;
 `;
 
 export const Category = styled.p`

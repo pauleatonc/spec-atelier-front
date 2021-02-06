@@ -151,7 +151,6 @@ const SpecProductsList = () => {
     setRoomTypesOptions(roomTypes);
   }, [roomTypes]);
 
-
   return (
     <>
       <Overlay onClick={handleHideSpecProducts} />
@@ -250,7 +249,7 @@ const SpecProductsList = () => {
                   <ProductCard
                     canAdd
                     category={product.system?.name || ''}
-                    description={product.short_desc || ''}
+                    description={(!!product.short_desc && product.short_desc.length > 0) ? product.short_desc : product.long_desc}
                     key={`product-card-${product.id}`}
                     photo={product.images[0]?.urls?.small}
                     reference={product.reference || ''}
