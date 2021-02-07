@@ -1,91 +1,89 @@
 .slide {
-  height: 382px;
-  position: relative;
-  width: $total-parent;
+	height: 382px;
+	position: relative;
+	width: $total-parent;
 
-  &__inner {
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 56px;
-    padding-top: 105px;
-    height: $total-parent;
-    width: $width-90;
-    overflow: hidden;
-    position: relative;
+	&__inner {
+		margin-left: auto;
+		margin-right: auto;
+		padding-bottom: 56px;
+		padding-top: 105px;
+		height: $total-parent;
+		width: $width-90;
+		position: relative;
 
-    &__title {
-      font-family: 'Akzidenz Grotesk - bold condenced';
-      color: $black-color;
-      font-size: $font-size-xl;
-      letter-spacing: 1.5px;
-      text-align: center;
-      padding-bottom: 60px;
-    }
+		&__title {
+			font-family: 'Akzidenz Grotesk - bold condenced';
+			color: $black-color;
+			font-size: $font-size-xl;
+			letter-spacing: 1.5px;
+			text-align: center;
+			padding-bottom: 60px;
+		}
 
-    .container {
-      width: $width-80;
-      margin-left: auto;
-      margin-right: auto;
+		.container {
+			width: $width-80;
+			margin-left: auto;
+			margin-right: auto;
+			display: flex;
+			align-items: center;
 
-      display: flex;
-      align-items: center;      
+			.slick-slide {
+				max-width: $total-parent !important;
+			}
 
-      .slick-slide {
-        max-width: $total-parent !important;
-      }
+			&__row {
+				line-height: 0;
+				width: 32px;
+				height: 32px;
+				cursor: pointer;
+				color: $support-orange-color;
+				border: 1px solid $support-orange-color;
+				border-radius: 50%;
+				outline: 0;
+				position: absolute;
+				text-align: center;
+				padding-top: 7px;
 
-      &__row {
-        line-height: 0;
-        width: 32px;
-        height: 32px;
-        cursor: pointer;
-        color: $support-orange-color;
-        border: 1px solid $support-orange-color;
-        border-radius: 50%;
-        outline: 0;
-        position: absolute;
-        text-align: center;
-        padding-top: 7px;
+				&.prev {
+					display: block;
+					left: -36px;
+					padding-right: 1px;
 
-        &.prev {
-          display: block;
-          left: -36px;
-          padding-right: 1px;
+					@media only screen and (max-width: 768px) {
+						bottom: -30px;
+						left: initial;
+						right: 50px;
+					}
+				}
 
-          @media only screen and (max-width: 768px) {
-            bottom: -30px;
-            left: initial;
-            right: 50px;
-          }
-        }
+				&.next {
+					display: block;
+					padding-left: 1px;
+					right: -36px;
 
-        &.next {
-          display: block;
-          padding-left: 1px;
-          right: -36px;
+					@media only screen and (max-width: 768px) {
+						bottom: -30px;
+						right: 0;
+					}
+				}
+			}
 
-          @media only screen and (max-width: 768px) {
-            bottom: -30px;
-            right: 0;
-          }
-        }
-      }
+			&__images_content {
+				&__image {
+					margin-left: auto;
+					margin-right: auto;
+					max-width: 100%;
+					min-width: 200px;
+					height: 80px;
+					object-fit: contain;
+				}
 
-      &__images_content {
-        &__image {
-          margin-left: auto;
-          margin-right: auto;
-          max-width: 100%;
-          min-width: 200px;
-          height: 80px;
-          object-fit: contain;
-        }
-
-        &:focus {
-          border: none;
-          outline: none;
-        }
-      }
-    }
-  }
+				&:focus {
+					border: none;
+					outline: none;
+				}
+			}
+		}
+	}
 }

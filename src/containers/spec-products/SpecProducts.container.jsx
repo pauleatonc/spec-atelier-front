@@ -244,7 +244,6 @@ const SpecProductsList = () => {
             <Cards>
               {products.map(product => {
                 const selected = selectedProducts.find(selectedProduct => selectedProduct?.element.original_product_id === product.id);
-
                 return (
                   <ProductCard
                     canAdd
