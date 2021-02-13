@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react'
+import firebase from 'firebase/app';
+import 'firebase/analytics';
+
 import { store, persistor } from './config/store/store';
 import Home from './views/Home';
 import Login from './views/auth/Login';
@@ -17,12 +20,15 @@ import Us from './views/Us';
 import Specification from './views/Specification';
 import Collaborators from './views/Collaborators';
 import Collaborator from './views/Collaborator';
+import { firebaseConfig } from './config/config';
 import './assets/styles/main.scss';
 
 import PublicRoute from './containers/routes/PublicRoute';
 import PrivateRoute from './containers/routes/PrivateRoute';
 
 const Main = () => {
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
   return (
     <Provider store={store}>
       {/* TODO: Add App Loading component */}
