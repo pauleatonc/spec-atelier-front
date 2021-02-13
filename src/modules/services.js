@@ -35,7 +35,13 @@ export const cleanObject = (obj) =>
  */
 export const cleanParams = (obj) =>
 	Object.entries(obj).reduce((acc, [key, value]) => {
-		if (value === null || value === undefined || value === '') return acc;
+		if (
+			value === null ||
+			value === undefined ||
+			value === '' ||
+			value.length === 0
+		)
+			return acc;
 		if (value && typeof value === 'object' && value.id)
 			return { ...acc, [key]: value.id };
 		return { ...acc, [key]: value };

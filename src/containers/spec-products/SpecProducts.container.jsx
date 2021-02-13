@@ -73,9 +73,8 @@ const SpecProductsList = () => {
     return dispatch(onAttachSpecProduct({ productID, specID, systemID: currentProduct?.systems[0]?.id }));
   };
 
-  const handleLoadMoreClick = () => {
-    dispatch(onGetSpecProductsByPage());
-  };
+  const handleLoadMoreClick = () => dispatch(onGetSpecProductsByPage());
+
   const handleSeeMoreClick = selectedProduct => event => {
     event.stopPropagation();
     dispatch(getProduct(selectedProduct));
@@ -110,7 +109,6 @@ const SpecProductsList = () => {
     const filteredRoomTypes = roomTypes
       .filter(rt => rt.project_types.some(rpt => event.some(spt => spt.value === rpt.id)))
       .map(mapToSelector);
-    console.log('even', event);
     dispatch(getRoomTypes({ project_types: event.map(({ value }) => value) }));
     onProjectTypeSubmit(event);
     setRoomTypesOptions(filteredRoomTypes);
@@ -155,7 +153,6 @@ const SpecProductsList = () => {
   useEffect(() => {
     setRoomTypesOptions(roomTypes);
   }, [roomTypes]);
-
   return (
     <>
       <Overlay onClick={handleHideSpecProducts} />
