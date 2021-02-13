@@ -259,6 +259,9 @@ const SpecProductsList = () => {
                     title={product?.name}
                     onClickCard={handleCardClick(product.id)}
                     onClickSeeMore={handleSeeMoreClick(product)}
+                    pdfs={product?.pdfs}
+                    dwg={product?.dwg}
+                    bim={product?.bim}
                   />
                 );
               })}

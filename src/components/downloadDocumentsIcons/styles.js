@@ -20,7 +20,7 @@ const icons = {
 export const Icons = styled.section`
 	display: flex;
 	align-items: center;
-	margin: 8px auto;
+	margin-left: ${({ isDetail }) => (isDetail ? '26px' : '0px')};
 `;
 
 export const Icon = styled.span`

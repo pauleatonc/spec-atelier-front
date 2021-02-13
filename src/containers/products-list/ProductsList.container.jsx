@@ -38,6 +38,9 @@ const ProductList = () => {
           title={product.name}
           onClickCard={onClickProduct(product)}
           onClickSeeMore={onClickProduct(product)}
+          pdfs={product?.pdfs}
+          dwg={product?.dwg}
+          bim={product?.bim}
         />
       ))}
     </Container>

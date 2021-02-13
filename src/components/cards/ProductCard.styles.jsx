@@ -29,7 +29,7 @@ export const Root = styled.div`
   height: 190px;
   margin: 0 0 16px;
   min-width: 300px;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
   width: 100%;
 
