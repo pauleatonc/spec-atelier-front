@@ -132,7 +132,7 @@ const SpecProductsList = () => {
     dispatch(onShowSpecCreateProductFromItemSuccess({ itemID: filters.item, sectionID: filters.section }));
   };
 
-  const allFilterIsSelected = brandsValues.length === 0 && projectTypeValues.length === 0 && roomTypeValues.length === 0 && !myProductsSelected;
+  const allFilterIsSelected = brandsValues.length === 0 && projectTypeValues.length === 0 && roomTypeValues.length === 0 && !myProductsSelected && specValues.length === 0;
 
   useEscapeKey(show, () => dispatch(onHideSpecProducts()));
   useEffect(() => {
