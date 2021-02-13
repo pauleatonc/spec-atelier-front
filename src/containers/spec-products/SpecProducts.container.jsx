@@ -93,6 +93,9 @@ const SpecProductsList = () => {
   const { values: specValues, set: setSpecValues, onSubmit: onSpecSubmit } =
     useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'specification', value: values })) });
 
+  const { values: myProductsSelected, set: setMyProducsSelected, onSubmit: onMyProductsSubmit } =
+    useComboBox({ initialValue: false, submitCallback: () => dispatch(onGetSpecProductsByFilters({ key: 'my_products', value: true })) });
+
   const handleBrandsSubmit = close => event => {
     close();
     onBrandsSubmit(event);
@@ -123,6 +126,7 @@ const SpecProductsList = () => {
     setBrandsValues([]);
     setProjectTypeValues([]);
     setRoomTypeValues([]);
+    setMyProducsSelected(false);
     dispatch(onGetSpecProductsByFiltersAll());
   };
 
@@ -130,7 +134,7 @@ const SpecProductsList = () => {
     dispatch(onShowSpecCreateProductFromItemSuccess({ itemID: filters.item, sectionID: filters.section }));
   };
 
-  const allFilterIsSelected = brandsValues.length === 0 && projectTypeValues.length === 0 && roomTypeValues.length === 0;
+  const allFilterIsSelected = brandsValues.length === 0 && projectTypeValues.length === 0 && roomTypeValues.length === 0 && !myProductsSelected;
 
   useEscapeKey(show, () => dispatch(onHideSpecProducts()));
   useEffect(() => {
@@ -145,6 +149,7 @@ const SpecProductsList = () => {
     setRoomTypeValues([]);
     setSortValue({});
     setSpecValues([]);
+    setMyProducsSelected(false);
   }, [show]);
 
   useEffect(() => {
@@ -161,6 +166,7 @@ const SpecProductsList = () => {
           </HeaderSearch>
           <HeaderFilters>
             <Tag selected={allFilterIsSelected} onClick={handleFilterAll}>Todos</Tag>
+            <Tag selected={!!myProductsSelected} onClick={onMyProductsSubmit}>Mis productos</Tag>
             <ToggleMenu anchor={<Tag selected={brandsValues.length > 0}>Marcas</Tag>} width="291px">
               {onClose => (
                 <ComboBox

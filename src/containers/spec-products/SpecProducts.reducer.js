@@ -92,7 +92,10 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
 				...state,
 				filters: {
 					...state.filters,
-					[payload.key]: payload.value.map((val) => val.value),
+					[payload.key]:
+						typeof payload.value === 'object'
+							? payload.value.map((val) => val.value)
+							: payload.value,
 				},
 			};
 		}
