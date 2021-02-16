@@ -35,7 +35,6 @@ const SpecHeader = () => {
     }
     if (url) downloadDoc();
   }, [url]);
-
   return (
     <Root>
       <Section>
@@ -51,7 +50,7 @@ const SpecHeader = () => {
       </Section>
       <Separator />
       <Section>
-      <Monetization onClick={handleDownloadBudgetClick} />
+      <Monetization onClick={handleDownloadBudgetClick} title="Descargar presupuesto" />
       </Section>
     </Root>
   );

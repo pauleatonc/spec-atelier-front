@@ -4,6 +4,7 @@ import {
 	getJsonRequest,
 	postJsonRequest,
 	patchJsonRequest,
+	getBlobRequest,
 } from '../modules/requests';
 import {
 	cleanObjectsAndArrays,
@@ -141,7 +142,7 @@ export const getRoomTypes = factoryService(({ params }) =>
 );
 
 export const downloadBudged = factoryService(({ specID, userID }) =>
-	getJsonRequest(
+	getBlobRequest(
 		`${API_BASE_URL}/users/${userID}/project_specs/${specID}/download_budget`,
 	),
 );
