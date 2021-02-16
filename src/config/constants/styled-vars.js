@@ -31,5 +31,5 @@ export const Z_INDEX_NAVBAR = '600';
 export const Z_INDEX_ALERT = '900';
 
 // VIEWS
-export const VIEW_HEADER_HEIGHT = '140px';
+export const VIEW_HEADER_HEIGHT = 215;
 

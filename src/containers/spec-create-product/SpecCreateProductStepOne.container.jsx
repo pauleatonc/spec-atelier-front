@@ -186,7 +186,7 @@ const SpecCreateProductStepOne = () => {
 							changeOnCLose={false}
 							showButtons
 							options={systems.map(mapToSelector)}
-							placeholder="Elige un systema"
+							placeholder="Elige un sistema"
 							values={systemValues || []}
 							onChange={handleSystemChange}
 							onSubmit={handleSystemChange}

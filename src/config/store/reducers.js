@@ -23,6 +23,9 @@ import specHeaderReducer from '../../containers/spec-header/SpecHeader.reducer';
 import specImagesModalReducer from '../../containers/spec-images-modal/SpecImagesModal.reducer';
 import specContentsReducer from '../../containers/spec-contents/SpecContents.reducer';
 import brandsImageSliderReducer from '../../containers/brands-images-slider/BrandsImageSlider.reducer';
+import ProfileProductsListReducer from '../../containers/profile-products/ProductsList.reducer';
+import ProfileReducer from '../../containers/profile-header/ProfileHeader.reducer';
+
 
 export default combineReducers({
   auth: authReducer,
@@ -49,4 +52,6 @@ export default combineReducers({
   specDocument: specDocumentReducer,
   specImagesModal: specImagesModalReducer,
   specContents: specContentsReducer,
+  profile: ProfileReducer,
+  profileProductsList: ProfileProductsListReducer,
 });

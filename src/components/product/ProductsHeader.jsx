@@ -1,16 +1,18 @@
 import React from 'react';
 import { Header } from './ProductsHeader.styles';
 
-import SRC from '../../assets/images/products/product-header-src.jpg';
-import SRC2X from '../../assets/images/products/product-header-src@2x.jpg';
-import SRC3X from '../../assets/images/products/product-header-src@3x.jpg';
+import {
+  PRODUCT_HEADER,
+  PRODUCT_HEADER_2X,
+  PRODUCT_HEADER_3X,
+} from '../../assets/Images';
 
-const ProductsHeader = () => (
+const ProfileHeader = () => (
   <Header
     alt="Specatelier"
-    src={SRC}
-    srcSet={`${SRC2X} 2x, ${SRC3X} 3x`}
+    src={PRODUCT_HEADER}
+    srcSet={`${PRODUCT_HEADER_2X} 2x, ${PRODUCT_HEADER_3X} 3x`}
   />
 );
 
-export default ProductsHeader;
+export default ProfileHeader;
