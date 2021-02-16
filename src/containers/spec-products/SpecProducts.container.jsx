@@ -73,9 +73,8 @@ const SpecProductsList = () => {
     return dispatch(onAttachSpecProduct({ productID, specID, systemID: currentProduct?.systems[0]?.id }));
   };
 
-  const handleLoadMoreClick = () => {
-    dispatch(onGetSpecProductsByPage());
-  };
+  const handleLoadMoreClick = () => dispatch(onGetSpecProductsByPage());
+
   const handleSeeMoreClick = selectedProduct => event => {
     event.stopPropagation();
     dispatch(getProduct(selectedProduct));
@@ -93,6 +92,9 @@ const SpecProductsList = () => {
   const { values: specValues, set: setSpecValues, onSubmit: onSpecSubmit } =
     useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'specification', value: values })) });
 
+  const { values: myProductsSelected, set: setMyProducsSelected, onSubmit: onMyProductsSubmit } =
+    useComboBox({ initialValue: false, submitCallback: () => dispatch(onGetSpecProductsByFilters({ key: 'my_products', value: true })) });
+
   const handleBrandsSubmit = close => event => {
     close();
     onBrandsSubmit(event);
@@ -107,7 +109,6 @@ const SpecProductsList = () => {
     const filteredRoomTypes = roomTypes
       .filter(rt => rt.project_types.some(rpt => event.some(spt => spt.value === rpt.id)))
       .map(mapToSelector);
-    console.log('even', event);
     dispatch(getRoomTypes({ project_types: event.map(({ value }) => value) }));
     onProjectTypeSubmit(event);
     setRoomTypesOptions(filteredRoomTypes);
@@ -123,6 +124,7 @@ const SpecProductsList = () => {
     setBrandsValues([]);
     setProjectTypeValues([]);
     setRoomTypeValues([]);
+    setMyProducsSelected(false);
     dispatch(onGetSpecProductsByFiltersAll());
   };
 
@@ -130,7 +132,7 @@ const SpecProductsList = () => {
     dispatch(onShowSpecCreateProductFromItemSuccess({ itemID: filters.item, sectionID: filters.section }));
   };
 
-  const allFilterIsSelected = brandsValues.length === 0 && projectTypeValues.length === 0 && roomTypeValues.length === 0;
+  const allFilterIsSelected = brandsValues.length === 0 && projectTypeValues.length === 0 && roomTypeValues.length === 0 && !myProductsSelected && specValues.length === 0;
 
   useEscapeKey(show, () => dispatch(onHideSpecProducts()));
   useEffect(() => {
@@ -145,13 +147,12 @@ const SpecProductsList = () => {
     setRoomTypeValues([]);
     setSortValue({});
     setSpecValues([]);
+    setMyProducsSelected(false);
   }, [show]);
 
   useEffect(() => {
     setRoomTypesOptions(roomTypes);
   }, [roomTypes]);
-
-
   return (
     <>
       <Overlay onClick={handleHideSpecProducts} />
@@ -162,6 +163,7 @@ const SpecProductsList = () => {
           </HeaderSearch>
           <HeaderFilters>
             <Tag selected={allFilterIsSelected} onClick={handleFilterAll}>Todos</Tag>
+            <Tag selected={!!myProductsSelected} onClick={onMyProductsSubmit}>Mis productos</Tag>
             <ToggleMenu anchor={<Tag selected={brandsValues.length > 0}>Marcas</Tag>} width="291px">
               {onClose => (
                 <ComboBox
@@ -245,12 +247,11 @@ const SpecProductsList = () => {
             <Cards>
               {products.map(product => {
                 const selected = selectedProducts.find(selectedProduct => selectedProduct?.element.original_product_id === product.id);
-
                 return (
                   <ProductCard
                     canAdd
                     category={product.system?.name || ''}
-                    description={product.short_desc || ''}
+                    description={product.short_desc || product.long_desc}
                     key={`product-card-${product.id}`}
                     photo={product.images[0]?.urls?.small}
                     reference={product.reference || ''}
@@ -258,6 +259,9 @@ const SpecProductsList = () => {
                     title={product?.name}
                     onClickCard={handleCardClick(product.id)}
                     onClickSeeMore={handleSeeMoreClick(product)}
+                    pdfs={product?.pdfs}
+                    dwg={product?.dwg}
+                    bim={product?.bim}
                   />
                 );
               })}
