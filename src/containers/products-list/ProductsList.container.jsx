@@ -32,7 +32,7 @@ const ProductList = () => {
         <ProductCard
           key={product.id}
           category={product.system?.name || ''}
-          description={(!!product.short_desc && product.short_desc.length > 0) ? product.short_desc : product.long_desc}
+          description={product.short_desc || product.long_desc}
           photo={product.images[0]?.urls?.small}
           reference={product.reference}
           title={product.name}
