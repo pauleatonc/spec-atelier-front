@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Loading, Modal, Button, Image, ToolTip } from '../../components/SpecComponents';
+import { Loading, Modal, Button, Image, DownloadDocumentsIcons } from '../../components/SpecComponents';
 import {
   ButtonClose,
   Container,
@@ -18,13 +18,10 @@ import {
   ProductDescription,
   ProductBrand,
   Actions,
-  Icons,
-  Icon,
 } from './SpecModalProduct.styles';
 
 import { closeModal } from './SpecModalProduct.actions';
 import { openContactModal } from '../modal-contact-form/ModalContactForm.actions';
-
 
 const SpecModalProduct = () => {
   let isMounted = true;
@@ -34,6 +31,7 @@ const SpecModalProduct = () => {
   const onSelectImg = img => () => selectImg(img);
   const dispatch = useDispatch();
   const onCloseModal = () => dispatch(closeModal());
+  const isRegisteredClient = !!product?.client.id && !!product?.client.name;
 
   useEffect(() => {
     if (product && showModalProduct) selectImg(getFirstImg(product));
@@ -48,24 +46,8 @@ const SpecModalProduct = () => {
     selectedProduct: product,
   }));
 
-
-  // Download documents
-  const handleIconClick = documents => () => {
-    documents.forEach(async doc => {
-      const link = document.createElement("a");
-      link.download = doc;
-      link.href = doc;
-      link.target = '_blank';
-      link.id = 'doc';
-      document.body.appendChild(link);
-      link.click();
-      return setTimeout(() => document.body.removeChild(link), 2000);
-    });
-  };
-
   if (!showModalProduct) return null;
   if (!product || !product.id) return <Loading />
-  const titleSpecPdf = product?.pdfs?.map(s => s.name).join(' - ') || '';
 
   return (
     <Modal show={showModalProduct} onClose={onCloseModal}>
@@ -118,35 +100,18 @@ const SpecModalProduct = () => {
                   {`Referencia: ${product?.systems?.first?.name || ''}: ${product?.brand?.name || ''}`}
                 </ProductBrand>
                 <Actions>
-                  <Button
-                    variant="secondary"
-                    onClick={onContact}
-                  >
-                    Contactar
-                  </Button>
-                  <Icons>
-                    <ToolTip content={product?.dwg?.url?.split('/').pop() || ''} position="bottom">
-                      <Icon
-                        type="dwg"
-                        active={!!product.dwg.url}
-                        onClick={handleIconClick([product.dwg.url])}
-                      />
-                    </ToolTip>
-                    <ToolTip content={product?.bim?.url?.split('/').pop() || ''} position="bottom">
-                      <Icon
-                        type="bim"
-                        active={!!product.bim.url}
-                        onClick={handleIconClick([product.bim.url])}
-                      />
-                    </ToolTip>
-                    <ToolTip content={titleSpecPdf} position="bottom">
-                      <Icon
-                        type="tech"
-                        active={!!product?.pdfs?.length}
-                        onClick={handleIconClick(product.pdfs.map(({ url }) => url))}
-                      />
-                    </ToolTip>
-                  </Icons>
+                  {
+                    isRegisteredClient && 
+                    (
+                      <Button
+                        variant="secondary"
+                        onClick={onContact}
+                      >
+                        Contactar
+                      </Button>
+                    )
+                  }
+                  <DownloadDocumentsIcons pdfs={product?.pdfs} dwg={product?.dwg} bim={product?.bim} isDetail />
                 </Actions>
               </InfoContent>
             </InfoContainer>

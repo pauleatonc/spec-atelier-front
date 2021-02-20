@@ -11,30 +11,26 @@ import {
   Reference,
   Footer,
   Actions,
-  DwgIcon,
-  BimIcon,
-  TechIcon,
-  CertIcon,
   SeeMore,
   Add,
   Check,
 } from './ProductCard.styles';
 import noPhoto from '../../assets/images/icons/no-photo.svg';
+import { DownloadDocumentsIcons } from '../../components/SpecComponents';
 
 /**
  * The ProductCard's component.
  */
 const ProductCard = props => {
   const {
+    pdfs,
+    dwg,
     bim,
     category,
-    certificates,
     description,
-    dwg,
     photo,
     reference,
     selected,
-    technical,
     title,
     onClickCard,
     onClickSeeMore,
@@ -43,11 +39,6 @@ const ProductCard = props => {
   const [hover, setHover] = useState(false);
   const handleCardMouseEnter = () => setHover(true);
   const handleCardMouseLeave = () => setHover(false);
-  const handleIconClick = location => event => {
-    event.stopPropagation();
-
-    window.open(location, '_blank');
-  };
   const photoStyles = {
     backgroundImage: `url('${photo || noPhoto}')`,
     backgroundSize: photo ? 'cover' : 'initial',
@@ -67,10 +58,7 @@ const ProductCard = props => {
       </Content>
       <Footer>
         <Actions>
-          {dwg !== '#' && <DwgIcon hover={hover} onClick={handleIconClick(dwg)} />}
-          {bim !== '#' && <BimIcon hover={hover} onClick={handleIconClick(bim)} />}
-          {technical !== '#' && <TechIcon hover={hover} onClick={handleIconClick(technical)} />}
-          {certificates !== '#' && <CertIcon hover={hover} onClick={handleIconClick(certificates)} />}
+          <DownloadDocumentsIcons pdfs={pdfs} dwg={dwg} bim={bim} positionToolTip='top' />
         </Actions>
         <SeeMore hover={hover} show={showSeeMore} onClick={onClickSeeMore}>
           Ver más
@@ -83,27 +71,19 @@ const ProductCard = props => {
 };
 
 ProductCard.defaultProps = {
-  bim: '#',
-  certificates: '#',
-  dwg: '#',
   photo: '',
   selected: false,
-  technical: '#',
   reference: '',
   onClickCard: () => undefined,
   onClickSeeMore: undefined,
   category: '',
 };
 ProductCard.propTypes = {
-  bim: PropTypes.string,
   category: PropTypes.string.isRequired,
-  certificates: PropTypes.string,
   description: PropTypes.string.isRequired,
-  dwg: PropTypes.string,
   photo: PropTypes.string,
   reference: PropTypes.string,
   selected: PropTypes.bool,
-  technical: PropTypes.string,
   title: PropTypes.string.isRequired,
   onClickCard: PropTypes.func,
   onClickSeeMore: PropTypes.func,
