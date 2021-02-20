@@ -5,10 +5,12 @@ export const LOADING_SPEC_DOWNLOAD = 'LOADING_SPEC_DOWNLOAD';
 export const DOWNLOAD_URL_SUCCESS = 'DOWNLOAD_URL_SUCCESS';
 export const DOWNLOAD_URL_ERROR = 'DOWNLOAD_URL_ERROR';
 export const CLEAN_DOWNLOAD = 'CLEAN_DOWNLOAD';
+export const LOADING_BUDGET_DOWNLOAD = 'LOADING_BUDGET_DOWNLOAD';
+export const DOWNLOAD_BUDGET_SUCCESS = 'DOWNLOAD_BUDGET_SUCCESS';
+export const DOWNLOAD_BUDGET_ERROR = 'DOWNLOAD_BUDGET_ERROR';
 
 const startDownload = (file, fileName) => {
-	console.log(new Blob([file]));
-	const url = window.URL.createObjectURL(new Blob([file]));
+	const url = window.URL.createObjectURL(file);
 	const link = document.createElement('a');
 	link.href = url;
 	link.setAttribute('download', fileName);
@@ -38,15 +40,16 @@ export const cleanDownload = () => (dispatch) =>
 
 export const downloadBudgetDocument = ({ specID }) => (dispatch, getState) => {
 	const { auth } = getState();
-	dispatch(onActionCreator(LOADING_SPEC_DOWNLOAD));
+	dispatch(onActionCreator(LOADING_BUDGET_DOWNLOAD));
 	downloadBudged({ specID, userID: auth.user?.id }).then(
 		(response) => {
-			startDownload(response, 'resobyte.xlsx');
+			startDownload(response, 'presupuesto.xlsx');
+			return dispatch(onActionCreator(DOWNLOAD_BUDGET_SUCCESS));
 		},
 		(error) => {
 			console.log(error);
 			return dispatch(
-				onActionCreator(DOWNLOAD_URL_ERROR, {
+				onActionCreator(DOWNLOAD_BUDGET_ERROR, {
 					error: true,
 					nativeError: error,
 				}),

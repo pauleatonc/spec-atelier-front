@@ -146,7 +146,9 @@ export const putJsonRequest = factoryRequest((url, payload, options) => {
  */
 export const getBlobRequest = factoryRequest((url, _, options) => {
 	const headers = generateHeaders('application/json');
-	return cancellableFetch(url, { headers, method: 'GET' }, options).then(
-		(response) => response,
-	);
+	return cancellableFetch(
+		url,
+		{ headers, method: 'GET' },
+		options,
+	).then((response) => response.blob());
 });
