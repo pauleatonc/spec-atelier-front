@@ -7,6 +7,8 @@ import ProductList from '../containers/profile-products/ProductsList.container';
 import ProductsListSeeMore from '../containers/profile-products/ProductsListSeeMore';
 import ProfileProductsFilters from '../containers/profile-products-filters/ProductsFilters.container';
 import ProfileProductsSearch from '../containers/profile-products-search/ProductsSearch.container';
+import { Separator } from './Products.styles';
+import ProfileChangePicture from '../containers/profile-change-picture/ProfileChangePicture';
 
 /**
  * The Profile's view.
@@ -17,8 +19,10 @@ const Profile = () => {
       <ProfileHeader />
       <ProfileProductsSearch />
       <ProfileProductsFilters />
+      <Separator />
       <ProductList />
       <ProductsListSeeMore />
+      <ProfileChangePicture />
     </AppLayout>
   );
 };

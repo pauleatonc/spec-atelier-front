@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_BLACK, COLOR_LIGHTGREY, COLOR_MINE_SHAFT, COLOR_WHITE } from '../../config/constants/styled-vars';
+import { COLOR_MINE_SHAFT, COLOR_WHITE } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: #FAFAFA;

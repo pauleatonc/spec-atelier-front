@@ -14,7 +14,7 @@ import {
 	getMySpecs,
 	getRoomTypes as getRoomTypesService,
 } from '../../services/specs.service';
-import { cleanObjectsAndArrays, cleanParams } from '../../modules/services';
+import { cleanObjectsAndArrays } from '../../modules/services';
 
 export const GET_SPEC_PRODUCTS = 'GET_SPEC_PRODUCTS';
 export const GET_SPEC_PRODUCTS_ERROR = 'GET_SPEC_PRODUCTS_ERROR';

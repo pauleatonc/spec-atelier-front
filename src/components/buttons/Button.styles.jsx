@@ -20,7 +20,7 @@ const BaseButton = styled.button`
   line-height: 1;
   margin: ${({ margin = 'initial' }) => margin};
   min-width: 107px;
-  padding: 0 19px;
+  padding: ${({ padding = '0 19px'}) => padding };
   width: ${({ width = 'initial' }) => width};
 
   &:active {
@@ -49,6 +49,7 @@ BaseButton.propTypes = {
   margin: PropTypes.string,
   size: PropTypes.oneOf(['sm', 'md']),
   width: PropTypes.string.isRequired,
+  padding: PropTypes.string
 };
 
 export const PrimaryButton = styled(BaseButton)`

@@ -85,10 +85,9 @@ export const Row = styled.div`
 `;
 
 export const ProfileName = styled.div`
-  width: 167px;
   height: 24px;
-  margin: 12px;
-  font-family: Roboto;
+  margin-bottom: 12px;
+  font-family: Lato;
   font-size: 20px;
   font-weight: bold;
   font-stretch: normal;
@@ -100,7 +99,7 @@ export const ProfileName = styled.div`
 
 export const ProfileCompany = styled.div`
   height: 22px;
-  margin: 8px 0;
+  margin-bottom: 8px;
   font-family: Lato;
   -webkit-text-stroke: 1px ${COLOR_GREY};
   font-size: 18px;
@@ -115,7 +114,6 @@ export const ProfileCompany = styled.div`
 
 export const ProfileCity = styled.div`
   height: 22px;
-  margin: 2px 0;
   font-family: Lato;
   -webkit-text-stroke: 1px ${COLOR_GREY};
   font-size: 18px;
@@ -153,12 +151,13 @@ export const ItemText = styled.span`
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
+  margin-bottom: 10px;
 `;
 
 export const UnderLine = styled.span`
   width: 100px;
   height: 3px;
-  margin: 8px 2px 4px 2px;
+  margin-bottom: 27px;
   border-radius: 1.5px;
   background-color: ${COLOR_PRIMARY};
 `;
@@ -188,4 +187,9 @@ export const TextValue = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-`
+`;
+
+export const ButtonCreateContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;

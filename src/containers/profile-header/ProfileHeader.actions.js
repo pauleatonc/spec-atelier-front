@@ -9,6 +9,8 @@ export const SET_PROFILE = 'SET_PROFILE';
 export const GET_PROFILE = 'GET_PROFILE';
 export const PROFILE_LOADING = 'PROFILE_LOADING';
 export const CLEAN_PROFILE_STORE = 'CLEAN_PROFILE_STORE';
+export const SHOW_EDIT_PROFILE_PICTURE = 'SHOW_EDIT_PROFILE_PICTURE'
+export const HIDE_EDIT_PROFILE_PICTURE = 'HIDE_EDIT_PROFILE_PICTURE'
 
 export const cleanStoreProductList = () => (dispatch) =>
   dispatch(onActionCreator(CLEAN_PRODUCT_LIST_STORE));
@@ -23,7 +25,6 @@ export const getUserProfile = () => async (dispatch, getSate) => {
       return dispatch(
         onActionCreator(GET_PROFILE, { loading: false, error: true, user: {} }),
       );
-    console.log('erw', response);
     return dispatch(
       onActionCreator(GET_PROFILE, {
         loading: false,
@@ -54,3 +55,6 @@ export const setUserProfile = ({ user: profile }) => async (dispatch, getSate) =
     return dispatch(onActionCreator(GET_PROFILE, { loading: false, error }));
   }
 };
+
+export const onShowEditProfilePicture = () => ({ type: SHOW_EDIT_PROFILE_PICTURE });
+export const onHideEditProfilePicture = () => ({ type: HIDE_EDIT_PROFILE_PICTURE });

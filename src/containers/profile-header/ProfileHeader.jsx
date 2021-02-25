@@ -18,6 +18,7 @@ import {
   InputText,
   TextValue,
   DropIcon,
+  ButtonCreateContainer
 } from './ProfileHeader.styles';
 import {
   PROFILE_HEADER,
@@ -30,18 +31,20 @@ import {
   ICON_ARROW_DOWN,
 } from '../../assets/Images';
 import { Button, Input, Loading } from '../../components/SpecComponents';
-import { getUserProfile, setUserProfile } from './ProfileHeader.actions';
+import { getUserProfile, setUserProfile, onShowEditProfilePicture } from './ProfileHeader.actions';
+import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import { Separator } from '../../components/navbar/navbar-profile/NavProfile.styles';
 import SelectorRelative from '../../components/basics/SelectorRelative';
-import { mapToSelector } from '../../helpers/helpers';
 
 const ProductsHeader = () => {
   const [isEditting, setIsEditing] = useState(false);
-  const { user, error, loading } = useSelector((state) => state.profile);
+  const { user, loading } = useSelector((state) => state.profile);
   const { cities } = useSelector((state) => state.app);
   const [currentUser, setCurrentUser] = useState(user);
   const dispatch = useDispatch();
 
+  const handleCreateProduct = () => dispatch(onShowSpecCreateProductSuccess());
+  const handleEditProfilePicture = () => dispatch(onShowEditProfilePicture());
   
   const onSaveUserInfo = () => {
     dispatch(setUserProfile({ user: currentUser }));
@@ -60,7 +63,6 @@ const ProductsHeader = () => {
     const { first_name, last_name, id, city, company } = user;
     setCurrentUser({ first_name, last_name, id, city, company });
   }, [user]);
-  console.log('user', user);
 
   const mapToCities = (c) => ({ label: c.name, value: c.id, ...c });
   const onSelectCity = (city) =>
@@ -69,10 +71,7 @@ const ProductsHeader = () => {
   const onChangeCompany = ({ target: { value } }) =>
     setCurrentUser({ ...currentUser, company: value });
 
-
-  if (loading) return <Loading />;
-
-  return (
+  return loading ? <Loading/> : (
     <>
       <Container>
         <Header
@@ -86,7 +85,7 @@ const ProductsHeader = () => {
               sr={PROFILE_PHOTO_DEFAULT}
               srcSet={`${PROFILE_PHOTO_DEFAULT_2X} 2x, ${PROFILE_PHOTO_DEFAULT_3X} 3x`}
             />
-            <IconPhoto>
+            <IconPhoto onClick={handleEditProfilePicture}>
               <img src={ICON_CAMERA} />
             </IconPhoto>
           </ProfileContainer>
@@ -98,7 +97,9 @@ const ProductsHeader = () => {
             style={{ backgroundColor: '#eeeeee' }}
             onClick={onClickEdit}
           >
-            Editar perfil
+            {
+              isEditting ? 'Guardar' : (<><i className="fa fa-pen" style={{ marginRight: '11px' }} />Editar perfil</>)
+            }
           </Button>
         </ButtonContainer>
       </Container>
@@ -141,10 +142,15 @@ const ProductsHeader = () => {
       </ContentEdit>
       <Item>
         <ItemText>Mis Productos</ItemText>
+        <Separator />
         <UnderLine />
       </Item>
 
-      <Separator style={{ marginBottom: '85px', marginTop: 0 }} />
+      <ButtonCreateContainer>
+        <Button onClick={handleCreateProduct} variant="primary">
+          <i className="fa fa-plus" style={{ marginRight: '11px' }} /> Crear
+        </Button>
+      </ButtonCreateContainer>
     </>
   );
 };

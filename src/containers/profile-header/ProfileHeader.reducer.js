@@ -2,6 +2,8 @@ import {
   GET_PROFILE,
   SET_PROFILE,
   PROFILE_LOADING,
+  SHOW_EDIT_PROFILE_PICTURE,
+  HIDE_EDIT_PROFILE_PICTURE
 } from './ProfileHeader.actions';
 
 const Profile = {
@@ -10,6 +12,7 @@ const Profile = {
   },
   loading: false,
   error: false,
+  showEditProfilePicture: false
 };
 
 /**
@@ -37,6 +40,18 @@ const ProfileReducer = (state = { ...Profile }, { payload, type }) => {
       return {
         ...state,
         loading: true,
+      }
+    }
+    case SHOW_EDIT_PROFILE_PICTURE: {
+      return {
+        ...state,
+        showEditProfilePicture: true
+      }
+    }
+    case HIDE_EDIT_PROFILE_PICTURE: {
+      return {
+        ...state,
+        showEditProfilePicture: false
       }
     }
     default: {

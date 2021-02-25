@@ -4,6 +4,7 @@ import {
   COLOR_PRIMARY,
   NAVBAR_HEIGHT,
   COLOR_WHITE,
+  COLOR_LIGHTERGREY
 } from '../../../config/constants/styled-vars';
 
 export const ProfileButton = styled.div`
@@ -53,7 +54,7 @@ export const OptionsContent = styled.section`
 `;
 
 export const Separator = styled.div`
-  background-color: #b3b3b3;
+  background-color: ${COLOR_LIGHTERGREY};
   height: 1px;
   width: 100%;
 `;

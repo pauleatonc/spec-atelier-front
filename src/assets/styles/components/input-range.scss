@@ -1,0 +1,70 @@
+input[type='range'] {
+    display: block;
+    width: 175px;
+    -webkit-appearance: none;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+
+        &::-webkit-slider-runnable-track {
+            outline: none;
+        }
+    }
+
+    &::-webkit-slider-runnable-track,
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+    }
+
+    &::-webkit-slider-thumb {
+        background-color: #ffffff;
+        width: 17px;
+        height: 17px;
+        border: solid 2px #46c0ae;
+        border-radius: 50%;
+        margin-top: -6px;
+    }
+
+    &::-moz-range-thumb {
+        background-color: #ffffff;
+        width: 17px;
+        height: 17px;
+        border: solid 2px #46c0ae;
+        border-radius: 50%;
+    }
+
+    &::-ms-thumb {
+        background-color: #ffffff;
+        width: 17px;
+        height: 17px;
+        border: solid 2px #46c0ae;
+        border-radius: 50%;
+    }
+    
+    &::-webkit-slider-runnable-track {
+        background-color: #d6f0ec;
+        height: 5px;
+        border-radius: 2.5px;
+    }
+
+    &::-moz-range-track {
+        background-color: #d6f0ec;
+        height: 5px;
+        border-radius: 2.5px;
+    }
+
+    &::-ms-track {
+        background-color: #d6f0ec;
+        height: 5px;
+        border-radius: 2.5px;
+    }
+
+    &::-ms-fill-lower {
+        background-color: #d6f0ec
+    }
+
+    &::-ms-fill-upper {
+        background-color: #46c0ae;
+    }
+  }
