@@ -43,7 +43,7 @@ export const downloadBudgetDocument = ({ specID }) => (dispatch, getState) => {
 	dispatch(onActionCreator(LOADING_BUDGET_DOWNLOAD));
 	downloadBudged({ specID, userID: auth.user?.id }).then(
 		(response) => {
-			startDownload(response, 'presupuesto.xlsx');
+			startDownload(response, 'presupuesto.xls');
 			return dispatch(onActionCreator(DOWNLOAD_BUDGET_SUCCESS));
 		},
 		(error) => {
