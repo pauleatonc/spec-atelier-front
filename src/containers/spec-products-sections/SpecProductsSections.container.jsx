@@ -27,7 +27,7 @@ const SpecProductsSections = () => {
           {sections.map(section => (
             <Item key={section.id} onClick={handleSectionClick(section.id)}>
               <ItemIcon active={section.id === selectedSectionID} icon={section.eng_name} iconHover={`${section.eng_name}_active`} />
-              <ItemText active={section.id === selectedSectionID}>{section.name}</ItemText>
+              <ItemText active={section.id === selectedSectionID}>{section.code}. {section.name}</ItemText>
             </Item>
           ))}
         </Body>
