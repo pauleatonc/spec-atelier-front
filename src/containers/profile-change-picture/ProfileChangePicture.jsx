@@ -13,7 +13,7 @@ import ModalLayout from '../../components/layouts/ModalLayout';
 import closeSource from '../../assets/images/icons/close.svg';
 import Button from '../../components/buttons/Button';
 
-import { onHideEditProfilePicture } from '../profile-header/ProfileHeader.actions';
+import { onHideEditProfilePicture, onChangeProfilePicture } from '../profile-header/ProfileHeader.actions';
 
 import { Root, Header, Title, CloseIcon, Footer, Body, ButtonUploadPicture, EditorPicture, ButtonZoomPicture } from './ProfileChangePicture.styles';
 
@@ -44,6 +44,8 @@ const ProfileChangePicture = () => {
         setAvatar(fileUploaded);
     }
 
+    const handleSaveProfilePicture = () => dispatch(onChangeProfilePicture(avatar));
+
     return (
         <ModalLayout show={showEditProfilePicture} onClose={handleClose} onExiting={handleExiting}>
             <Root>
@@ -54,7 +56,7 @@ const ProfileChangePicture = () => {
                 <Body>
                     <ButtonUploadPicture>
                         <Button variant="cancel" padding="0" onClick={handleUploadPicture}><i className="fa fa-plus-circle" style={{ marginRight: '10px' }} />Subir una  foto</Button>
-                        <input type="file" ref={hiddenFileInput} onChange={handleChangePicture} style={{display:'none'}} />
+                        <input type="file" accept=".jpg, .jpeg, .png" ref={hiddenFileInput} onChange={handleChangePicture} style={{display:'none'}} />
                     </ButtonUploadPicture>
                     <EditorPicture>
                         <AvatarEditor
@@ -85,7 +87,7 @@ const ProfileChangePicture = () => {
                     </EditorPicture>
                 </Body>
                 <Footer>
-                    <Button variant="primary" width="113px" onClick={()=> {}}>
+                    <Button variant="primary" width="113px" onClick={handleSaveProfilePicture}>
 						Guardar
 					</Button>
                 </Footer>

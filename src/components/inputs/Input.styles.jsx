@@ -49,9 +49,9 @@ export const InputUnderline = styled.input`
   display: flex;
   padding: 10px 10px 10px 0;
   flex: 1;
-  border-bottom: 1px solid ${COLOR_LIGHTGREY};
+  border-bottom: 1px solid ${({ colorUnderline }) => colorUnderline ? colorUnderline : COLOR_LIGHTGREY};
   font-family: Lato;
-  font-size: 14px;
+  font-size: ${({ fontSize }) => fontSize ? `${fontSize}px` : '14px'};
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;

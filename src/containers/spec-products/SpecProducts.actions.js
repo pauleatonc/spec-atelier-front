@@ -90,9 +90,6 @@ export const onGetSpecProductsByPage = () => async (dispatch, getState) => {
 
 	try {
 		const { specProducts } = getState();
-		console.log({
-			...specProducts.filters,
-		});
 		const response = await getProducts({
 			...specProducts.filters,
 			page: specProducts.nextPage,
@@ -245,7 +242,7 @@ export const getMySpecifications = () => async (dispatch) => {
 		});
 		dispatch(onActionCreator(GET_SPEC_MYSPEC, { specifications }));
 	} catch (error) {
-		console.log('err', error);
+		console.error('err', error);
 		dispatch(onActionCreator(GET_SPEC_MYSPEC_ERROR, { specifications: [] }));
 	}
 };

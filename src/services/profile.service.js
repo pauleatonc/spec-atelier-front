@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '../config/constants/environment';
-import { getJsonRequest, postFormRequest, putJsonRequest } from '../modules/requests';
+import { getJsonRequest, patchFormRequest, putJsonRequest } from '../modules/requests';
 import { factoryService } from '../modules/services';
 
 /**
@@ -18,7 +18,10 @@ export const setProfile = factoryService(({ id, user }) => putJsonRequest(`${API
  * Set user Profile image
  */
 
-export const setProfileImage = factoryService(({ id, data }) => postFormRequest(`${API_BASE_URL}/users/${id}/add_profile_image`, data));
+export const setProfileImage = factoryService(({ id, image }) => {
+    const body = { 'image[]': image }
+   return patchFormRequest(`${API_BASE_URL}/users/${id}/profile_image_upload`, body);
+})
 
 // how: GET api/users/{:id}
 // update: PUT api/users/{:id} ==> espero user: {first_name: string, last_name: string, city: string, company: string }

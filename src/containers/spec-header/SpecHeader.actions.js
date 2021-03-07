@@ -47,7 +47,7 @@ export const downloadBudgetDocument = ({ specID }) => (dispatch, getState) => {
 			return dispatch(onActionCreator(DOWNLOAD_BUDGET_SUCCESS));
 		},
 		(error) => {
-			console.log(error);
+			console.error(error);
 			return dispatch(
 				onActionCreator(DOWNLOAD_BUDGET_ERROR, {
 					error: true,

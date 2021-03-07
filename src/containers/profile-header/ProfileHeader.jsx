@@ -18,7 +18,8 @@ import {
   InputText,
   TextValue,
   DropIcon,
-  ButtonCreateContainer
+  ButtonCreateContainer,
+  ProfileNameInputContainer
 } from './ProfileHeader.styles';
 import {
   PROFILE_HEADER,
@@ -35,6 +36,7 @@ import { getUserProfile, setUserProfile, onShowEditProfilePicture } from './Prof
 import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import { Separator } from '../../components/navbar/navbar-profile/NavProfile.styles';
 import SelectorRelative from '../../components/basics/SelectorRelative';
+import { COLOR_GREEN_UNDERLINE } from '../../config/constants/styled-vars';
 
 const ProductsHeader = () => {
   const [isEditting, setIsEditing] = useState(false);
@@ -44,6 +46,7 @@ const ProductsHeader = () => {
   const dispatch = useDispatch();
 
   const handleCreateProduct = () => dispatch(onShowSpecCreateProductSuccess());
+
   const handleEditProfilePicture = () => dispatch(onShowEditProfilePicture());
   
   const onSaveUserInfo = () => {
@@ -65,11 +68,18 @@ const ProductsHeader = () => {
   }, [user]);
 
   const mapToCities = (c) => ({ label: c.name, value: c.id, ...c });
+
   const onSelectCity = (city) =>
     setCurrentUser({ ...currentUser, city: city.value });
 
   const onChangeCompany = ({ target: { value } }) =>
     setCurrentUser({ ...currentUser, company: value });
+
+  const onChangeFirstName = ({ target: { value } }) =>
+    setCurrentUser({ ...currentUser, first_name: value });
+
+  const onChangeLastName = ({ target: { value } }) =>
+    setCurrentUser({ ...currentUser, last_name: value });
 
   return loading ? <Loading/> : (
     <>
@@ -104,28 +114,35 @@ const ProductsHeader = () => {
         </ButtonContainer>
       </Container>
       <ContentEdit>
-        <ProfileName>
-          {currentUser.first_name} {currentUser.last_name}
+        <ProfileName isEditting={isEditting}>
+          {isEditting ? 
+          (
+            <>
+              <ProfileNameInputContainer>
+                <Input type="underline" fontSize={20} onChange={onChangeFirstName} value={currentUser.first_name || ''} colorUnderline={COLOR_GREEN_UNDERLINE} />
+              </ProfileNameInputContainer>
+              <ProfileNameInputContainer>
+                <Input type="underline" fontSize={20} onChange={onChangeLastName} value={currentUser.last_name || ''} colorUnderline={COLOR_GREEN_UNDERLINE} />
+              </ProfileNameInputContainer>
+            </>
+          ) : <>{currentUser.first_name} {currentUser.last_name}</>}
         </ProfileName>
-        <ProfileCompany>
+        <ProfileCompany isEditting={isEditting}>
           {isEditting ? (
-            <Input onChange={onChangeCompany} value={currentUser.company || ''} />
+            <Input type="underline" fontSize={18} onChange={onChangeCompany} value={currentUser.company || ''} colorUnderline={COLOR_GREEN_UNDERLINE} />
           ) : (
             <>{currentUser.company || 'Compañia sin especificar'}</>
           )}
         </ProfileCompany>
-        <ProfileCity>
+        <ProfileCity isEditting={isEditting}>
           {isEditting ? (
             <SelectorRelative
               name="sort"
-              type="underline"
               options={cities.map(mapToCities)}
               placeholder="Elige tu ciudad"
               value={currentUser.city}
               onChange={onSelectCity}
               maxHeight="180px"
-              width="200px"
-              style={{ margin: 24 }}
               renderInput={
                 <InputText>
                   <TextValue>

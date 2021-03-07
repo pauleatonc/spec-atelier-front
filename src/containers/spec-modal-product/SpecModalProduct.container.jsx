@@ -84,7 +84,7 @@ const SpecModalProduct = () => {
             {/* Image primary */}
             <ProductImageSelectedContainer>
               <ProductImageSelected>
-                <Image src={selectedImg?.urls?.medium} type="cover"  height="240px" objectFit="contains" />
+                <Image src={selectedImg?.urls?.medium} type="responsive" height="240px" objectFit="contains" />
               </ProductImageSelected>
             </ProductImageSelectedContainer>
             {/* Info Product */}

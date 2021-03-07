@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import {
   COLOR_BLACK,
   COLOR_GREY,
-  COLOR_LIGHTERGREY,
   COLOR_LIGHTGREY,
   COLOR_PRIMARY,
   COLOR_WHITE,
   VIEW_HEADER_HEIGHT,
+  COLOR_GREEN_UNDERLINE
 } from '../../config/constants/styled-vars';
 
 const position_bottom = 30;
@@ -77,7 +77,8 @@ export const ContentEdit = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 60px;
+  max-width: 340px;
+  margin: 0 auto 60px auto;
 `;
 
 export const Row = styled.div`
@@ -85,8 +86,10 @@ export const Row = styled.div`
 `;
 
 export const ProfileName = styled.div`
-  height: 24px;
-  margin-bottom: 12px;
+  display: flex;
+  width: 100%;
+  justify-content: ${({ isEditting }) => isEditting ? 'space-between' : 'center'};;
+  margin-bottom: ${({ isEditting }) => isEditting ? '4px' : '12px'};
   font-family: Lato;
   font-size: 20px;
   font-weight: bold;
@@ -95,34 +98,39 @@ export const ProfileName = styled.div`
   line-height: normal;
   letter-spacing: 1.25px;
   color: ${COLOR_BLACK};
+  -webkit-text-stroke: 1px ${COLOR_BLACK};
 `
 
 export const ProfileCompany = styled.div`
-  height: 22px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
   margin-bottom: 8px;
   font-family: Lato;
-  -webkit-text-stroke: 1px ${COLOR_GREY};
+  -webkit-text-stroke: 1px ${({ isEditting }) => isEditting ? COLOR_BLACK : COLOR_GREY};
   font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: 1.13px;
-  color: ${COLOR_LIGHTGREY};
+  color: ${({ isEditting }) => isEditting ? COLOR_BLACK : COLOR_LIGHTGREY};
   white-space: nowrap;
 `;
 
 export const ProfileCity = styled.div`
-  height: 22px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
   font-family: Lato;
-  -webkit-text-stroke: 1px ${COLOR_GREY};
+  -webkit-text-stroke: 1px ${({ isEditting }) => isEditting ? COLOR_BLACK : COLOR_GREY};
   font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: 1.13px;
-  color: ${COLOR_LIGHTGREY};
+  color: ${({ isEditting }) => isEditting ? COLOR_BLACK : COLOR_LIGHTGREY};
   white-space: nowrap;
 `;
 
@@ -164,20 +172,20 @@ export const UnderLine = styled.span`
 
 export const InputText = styled.div`
   white-space: nowrap;
-  padding: 4px 16px 8px 16px;
+  padding: 10px 10px 10px 0;
   border: 0; 
   outline: 0;
   display: flex;
   flex: 1;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid ${COLOR_LIGHTGREY};
+  border-bottom: 1px solid ${COLOR_GREEN_UNDERLINE};
   font-family: Lato;
-  font-size: 12px;
+  font-size: 18px;
   letter-spacing: 1px;
   color: ${COLOR_BLACK};
   border-radius: 0;
-  width: 240px;
+  width: 100%;
 `
 export const DropIcon = styled.img`
   cursor: pointer;
@@ -192,4 +200,8 @@ export const TextValue = styled.div`
 export const ButtonCreateContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+`;
+
+export const ProfileNameInputContainer = styled.div`
+  max-width: 160px;
 `;
