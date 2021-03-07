@@ -4,6 +4,7 @@ import {
   getProfile,
   setProfileImage,
 } from '../../services/profile.service';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 export const SET_PROFILE = 'SET_PROFILE';
 export const GET_PROFILE = 'GET_PROFILE';
@@ -50,6 +51,7 @@ export const setUserProfile = ({ user: profile }) => async (dispatch, getState) 
       return dispatch(
         onActionCreator(GET_PROFILE, { loading: false, error: true }),
       );
+      dispatch(onShowAlertSuccess({ message: 'Se editó el perfil correctamente' }));
     return dispatch(
       onActionCreator(GET_PROFILE, { loading: false, user: response.user }),
     );

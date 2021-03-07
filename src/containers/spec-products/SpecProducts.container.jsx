@@ -33,7 +33,7 @@ import { onShowSpecCreateProductFromItemSuccess } from '../spec-create-product/S
  */
 const SpecProductsList = () => {
   const { id: specID } = useParams();
-  const { project_types: projectTypes } = useSelector(state => state.app);
+  const { project_types: projectTypes, room_types: roomTypes } = useSelector(state => state.app);
   const { brands } = useSelector(state => state.brandsList);
   const selectedProducts = useSelector(state => state.specDocument.blocks?.filter(block => block.type === 'Product')) || [];
   const {
@@ -44,7 +44,6 @@ const SpecProductsList = () => {
     total,
     filters,
     specifications = [],
-    room_types: roomTypes = [],
   } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
 
