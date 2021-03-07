@@ -131,8 +131,6 @@ export const postFormRequest = factoryRequest((url, payload, options) => {
 		payload[key].forEach((item) => formData.append(key, item));
 	});
 
-	console.log(payload, formData);
-
 	return cancellableFetch(
 		url,
 		{ headers, body: formData, method: 'POST' },

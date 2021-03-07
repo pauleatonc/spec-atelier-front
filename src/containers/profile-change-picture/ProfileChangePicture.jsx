@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AvatarEditor from 'react-avatar-editor'
 
 import {
-    PROFILE_PHOTO_DEFAULT,
-    PROFILE_PHOTO_DEFAULT_2X,
-    PROFILE_PHOTO_DEFAULT_3X
+    PROFILE_PHOTO_DEFAULT
   } from '../../assets/Images';
 
 import useModal from '../../components/layouts/ModalLayout.hooks';
@@ -16,16 +14,16 @@ import Button from '../../components/buttons/Button';
 import { onHideEditProfilePicture, onChangeProfilePicture } from '../profile-header/ProfileHeader.actions';
 
 import { Root, Header, Title, CloseIcon, Footer, Body, ButtonUploadPicture, EditorPicture, ButtonZoomPicture } from './ProfileChangePicture.styles';
+import { useEffect } from 'react';
 
 const ProfileChangePicture = () => {
+    const { showEditProfilePicture, user } = useSelector(state => state.profile);
     const [ zomAvatar, setZoomAvatar ] = useState(1);
     const [ avatar, setAvatar ] = useState();
-    const { showEditProfilePicture } = useSelector(state => state.profile);
     const hiddenFileInput = useRef(null);
     const dispatch = useDispatch();
     const { onClose: handleClose, onExiting: handleExiting } = useModal({
-		closeCallback: () => dispatch(onHideEditProfilePicture()),
-		exitingCallback: () => { },
+		closeCallback: () => dispatch(onHideEditProfilePicture())
 	});
 
     const handleZoomAvatar = ({ target: { value } }) => {
@@ -45,6 +43,11 @@ const ProfileChangePicture = () => {
     }
 
     const handleSaveProfilePicture = () => dispatch(onChangeProfilePicture(avatar));
+
+    useEffect(() => {
+        if (user.profile_image)
+         setAvatar(user.profile_image.urls.medium);
+      }, [user.profile_image]);
 
     return (
         <ModalLayout show={showEditProfilePicture} onClose={handleClose} onExiting={handleExiting}>
@@ -87,7 +90,7 @@ const ProfileChangePicture = () => {
                     </EditorPicture>
                 </Body>
                 <Footer>
-                    <Button variant="primary" width="113px" onClick={handleSaveProfilePicture}>
+                    <Button variant="primary" width="113px" onClick={handleSaveProfilePicture} disabled={!avatar?.name}>
 						Guardar
 					</Button>
                 </Footer>

@@ -19,7 +19,7 @@ export const setProfile = factoryService(({ id, user }) => putJsonRequest(`${API
  */
 
 export const setProfileImage = factoryService(({ id, image }) => {
-    const body = { 'image[]': image }
+    const body = { image }
    return patchFormRequest(`${API_BASE_URL}/users/${id}/profile_image_upload`, body);
 })
 

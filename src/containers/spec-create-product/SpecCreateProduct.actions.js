@@ -9,6 +9,7 @@ import {
 } from '../../services/products.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { onGetSpecProducts } from '../spec-products/SpecProducts.actions';
+import { onGetProducts as onGetMyProfileProducts } from '../profile-products/ProductsList.actions';
 
 export const GET_SPEC_PRODUCTS_SYSTEMS = 'GET_SPEC_PRODUCTS_SYSTEMS';
 export const GET_SPEC_PRODUCTS_SYSTEMS_ERROR = 'GET_SPEC_PRODUCTS_SYSTEMS_ERROR';
@@ -49,6 +50,7 @@ export const onCreateSpecProduct = ({ documents, images }) => async (dispatch, g
   try {
     const state = getState();
     const { stepOne, stepTwo } = state.specCreateProduct;
+    const { filters: myProfileFilters } = state.profileProductsList
     const payload = {
       name: stepOne.name,
       section: stepOne.section.map(mapId),
@@ -70,6 +72,11 @@ export const onCreateSpecProduct = ({ documents, images }) => async (dispatch, g
       dispatch(onActionCreator(CREATE_SPEC_PRODUCT_SUCCESS));
       dispatch(onShowAlertSuccess({ message: 'Producto creado exitosamente' }));
       dispatch(onGetSpecProducts());
+      dispatch(onGetMyProfileProducts({
+        ...myProfileFilters,
+        page: 0,
+        limit: 10,
+      }))
     });
   } catch (error) {
     return batch(() => {

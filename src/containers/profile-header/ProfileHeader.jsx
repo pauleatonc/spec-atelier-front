@@ -8,7 +8,6 @@ import {
   ProfileName,
   ProfileCity,
   ProfileCompany,
-  ProfileContainer,
   ProfilePhoto,
   Photo,
   IconPhoto,
@@ -81,7 +80,7 @@ const ProductsHeader = () => {
   const onChangeLastName = ({ target: { value } }) =>
     setCurrentUser({ ...currentUser, last_name: value });
 
-  return loading ? <Loading/> : (
+  return loading && !user.profile_image ? <Loading/> : (
     <>
       <Container>
         <Header
@@ -90,15 +89,13 @@ const ProductsHeader = () => {
           srcSet={`${PROFILE_HEADER_2X} 2x, ${PROFILE_HEADER_3X} 3x`}
         />
         <ProfilePhoto>
-          <ProfileContainer>
             <Photo
-              sr={PROFILE_PHOTO_DEFAULT}
-              srcSet={`${PROFILE_PHOTO_DEFAULT_2X} 2x, ${PROFILE_PHOTO_DEFAULT_3X} 3x`}
+              sr={user.profile_image?.urls.medium || PROFILE_PHOTO_DEFAULT}
+              srcSet={`${user.profile_image?.urls.medium || PROFILE_PHOTO_DEFAULT_2X}, ${user.profile_image?.urls.small || PROFILE_PHOTO_DEFAULT_3X}`}
             />
             <IconPhoto onClick={handleEditProfilePicture}>
               <img src={ICON_CAMERA} />
             </IconPhoto>
-          </ProfileContainer>
         </ProfilePhoto>
         <ButtonContainer>
           <Button
@@ -119,17 +116,41 @@ const ProductsHeader = () => {
           (
             <>
               <ProfileNameInputContainer>
-                <Input type="underline" fontSize={20} onChange={onChangeFirstName} value={currentUser.first_name || ''} colorUnderline={COLOR_GREEN_UNDERLINE} />
+                <Input
+                  type="underline"
+                  fontSize={20}
+                  onChange={onChangeFirstName}
+                  value={currentUser.first_name || ''}
+                  colorUnderline={COLOR_GREEN_UNDERLINE}
+                  placeholder="Nombre"
+                  textAlign="right"
+                />
               </ProfileNameInputContainer>
               <ProfileNameInputContainer>
-                <Input type="underline" fontSize={20} onChange={onChangeLastName} value={currentUser.last_name || ''} colorUnderline={COLOR_GREEN_UNDERLINE} />
+                <Input
+                  type="underline"
+                  fontSize={20}
+                  onChange={onChangeLastName}
+                  value={currentUser.last_name || ''}
+                  colorUnderline={COLOR_GREEN_UNDERLINE}
+                  placeholder="Apellido"
+                  textAlign="left"
+                />
               </ProfileNameInputContainer>
             </>
           ) : <>{currentUser.first_name} {currentUser.last_name}</>}
         </ProfileName>
         <ProfileCompany isEditting={isEditting}>
           {isEditting ? (
-            <Input type="underline" fontSize={18} onChange={onChangeCompany} value={currentUser.company || ''} colorUnderline={COLOR_GREEN_UNDERLINE} />
+            <Input
+              type="underline"
+              fontSize={18}
+              onChange={onChangeCompany}
+              value={currentUser.company || ''}
+              colorUnderline={COLOR_GREEN_UNDERLINE}
+              placeholder="Empresa"
+              textAlign="center"
+              />
           ) : (
             <>{currentUser.company || 'Compañia sin especificar'}</>
           )}

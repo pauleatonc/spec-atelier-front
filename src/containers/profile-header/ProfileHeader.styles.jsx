@@ -35,29 +35,21 @@ export const ProfilePhoto = styled.div`
   width: 191px;
   height: 190px;
   padding: 1px 1px 2px 2px;
-  border: solid 1px #ffffff;
+  border: solid 5px #ffffff;
   position: absolute;
   bottom: -${position_bottom}px;
-  background-color: ${COLOR_WHITE};
   left: 50%;
   margin-left: -95px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-export const ProfileContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
 `;
 
 export const Photo = styled.img`
-  height: 100%;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
+  max-width: 360px;
+  border-radius: 50%;
 `;
 
 export const IconPhoto = styled.div`
@@ -107,14 +99,14 @@ export const ProfileCompany = styled.div`
   justify-content: center;
   margin-bottom: 8px;
   font-family: Lato;
-  -webkit-text-stroke: 1px ${({ isEditting }) => isEditting ? COLOR_BLACK : COLOR_GREY};
+  -webkit-text-stroke: 1px ${COLOR_GREY};
   font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: 1.13px;
-  color: ${({ isEditting }) => isEditting ? COLOR_BLACK : COLOR_LIGHTGREY};
+  color: ${COLOR_LIGHTGREY};
   white-space: nowrap;
 `;
 
@@ -123,14 +115,14 @@ export const ProfileCity = styled.div`
   width: 100%;
   justify-content: center;
   font-family: Lato;
-  -webkit-text-stroke: 1px ${({ isEditting }) => isEditting ? COLOR_BLACK : COLOR_GREY};
+  -webkit-text-stroke: 1px ${COLOR_GREY};
   font-size: 18px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: 1.13px;
-  color: ${({ isEditting }) => isEditting ? COLOR_BLACK : COLOR_LIGHTGREY};
+  color: ${COLOR_LIGHTGREY};
   white-space: nowrap;
 `;
 
@@ -186,6 +178,7 @@ export const InputText = styled.div`
   color: ${COLOR_BLACK};
   border-radius: 0;
   width: 100%;
+  justify-content: center;
 `
 export const DropIcon = styled.img`
   cursor: pointer;

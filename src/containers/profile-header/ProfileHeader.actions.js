@@ -66,8 +66,8 @@ export const onChangeProfilePicture = image => (dispatch, getState) => {
   dispatch(onActionCreator(CHANGE_PROFILE_PICTURE_LOADING));
   setProfileImage({ id: user.id, image }).then(
 		(response) => {
-			console.log(response);
-      return dispatch(onActionCreator(CHANGE_PROFILE_PICTURE_SUCCESS));
+      dispatch(onHideEditProfilePicture());
+      dispatch(onActionCreator(CHANGE_PROFILE_PICTURE_SUCCESS, { user: response.user }));
 		},
 		(error) => {
 			console.error(error);

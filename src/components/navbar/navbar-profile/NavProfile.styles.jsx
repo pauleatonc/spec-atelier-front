@@ -58,3 +58,14 @@ export const Separator = styled.div`
   height: 1px;
   width: 100%;
 `;
+
+export const ProfilePictureContainer = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+`;

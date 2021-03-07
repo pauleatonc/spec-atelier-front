@@ -68,6 +68,7 @@ const ProfileReducer = (state = { ...Profile }, { payload, type }) => {
         ...state,
         loading: false,
         error: false,
+        user: { ...payload.user }
       }
     }
     case CHANGE_PROFILE_PICTURE_ERROR: {
