@@ -31,7 +31,12 @@ const SpecProductsItems = () => {
       {items.length > 0 && (
         <Body>
           {items.map(item =>
-            <Item active={item.id === selectedItemID} key={item.id} onClick={handleItemClick(item.id)}>{item.name}</Item>
+            <Item
+              active={item.id === selectedItemID}
+              key={item.id}
+              onClick={handleItemClick(item.id)}>
+              {item.code}. {item.name}
+            </Item>
           )}
         </Body>
       )}
