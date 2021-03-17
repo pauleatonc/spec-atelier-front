@@ -11,6 +11,8 @@ import {
   GET_PRODUCTS_BY_FILTER,
   ON_SELECT_ALL,
   CLEAN_PRODUCT_LIST_STORE,
+  GET_BRANDS_SUCCESS,
+  GET_BRANDS_ERROR
 } from './ProductsList.actions';
 
 const productsListState = {
@@ -118,6 +120,15 @@ const productsListReducer = (state = { ...productsListState }, { payload, type }
       return {
         ...productsListState,
       };
+    case GET_BRANDS_SUCCESS:
+      return {
+        ...state,
+        brands: payload.brands.list,
+        loading: false,
+        error: false,
+      };
+    case GET_BRANDS_ERROR:
+      break;
     default: {
       return state;
     }

@@ -11,8 +11,7 @@ import {
   onGetSpecProductsBySort,
   onHideSpecProducts,
   getMySpecifications,
-  getRoomTypes,
-  onGetSpecProductsProjectType,
+  getRoomTypes
 } from './SpecProducts.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import { useComboBox } from '../../components/inputs/Inputs.hooks';
