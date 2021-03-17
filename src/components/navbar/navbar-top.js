@@ -17,9 +17,9 @@ const NavbarTop = () => {
 			</li>
 			<li className="navbar__inner__section__item">
 				<Link
-					to="/brands"
+					to="/clients"
 					className="navbar__inner__section__item__link"
-					data-view="brands"
+					data-view="clients"
 				>
 					Marcas
 				</Link>

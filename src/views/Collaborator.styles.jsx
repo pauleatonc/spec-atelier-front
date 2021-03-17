@@ -11,6 +11,6 @@ export const Container = styled.section`
   }
 `;
 
-export const BrandContainer = styled.section`
+export const ClientContainer = styled.section`
   border: 1px solid ${COLOR_GREY};
 `;

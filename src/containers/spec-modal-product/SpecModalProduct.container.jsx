@@ -42,7 +42,7 @@ const SpecModalProduct = () => {
   }, []);
 
   const onContact = () => dispatch(openContactModal({
-    selectedBrand: product.brand,
+    selectedClient: product.client,
     selectedProduct: product,
   }));
 

@@ -30,7 +30,6 @@ export const useComboBox = ({
 		changeCallback(options);
 	};
 	const handleSubmit = (options) => {
-		console.log(options);
 		setValues(options);
 		submitCallback(options);
 	};

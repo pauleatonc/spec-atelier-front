@@ -24,6 +24,7 @@ const editProductState = {
     system: {},
     price: '',
     brand: {},
+    client: {},
     images: [],
     pdfs: [],
     project_type: [],
@@ -37,7 +38,7 @@ const editProductState = {
 };
 
 /**
- * The edit product's reducer. 
+ * The edit product's reducer.
  */
 const editProductReducer = (state = editProductState, { payload, type }) => {
   switch (type) {

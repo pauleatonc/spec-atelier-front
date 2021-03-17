@@ -1,8 +1,8 @@
 import onActionCreator from '../../config/store/helpers';
 import { getProducts as getProductsService  } from '../../services/products.service';
 
-export const GET_BRAND_PRODUCTS = 'GET_BRAND_PRODUCTS';
-export const GET_MORE_PRODUCTS_BRAND = 'GET_MORE_PRODUCTS_BRAND';
+export const GET_CLIENT_PRODUCTS = 'GET_CLIENT_PRODUCTS';
+export const GET_MORE_PRODUCTS_CLIENT = 'GET_MORE_PRODUCTS_CLIENT';
 export const GET_PRODUCTS_ERROR = 'GET_PRODUCTS_ERROR';
 export const OPEN_PRODUCT_MODAL = 'OPEN_PRODUCT_MODAL';
 export const CLOSE_PRODUCT_MODAL = 'CLOSE_PRODUCT_MODAL';
@@ -12,7 +12,7 @@ export const CLEAN_PRODUCTS_LIST = 'CLEAN_PRODUCTS_LIST';
 export const getProducts = params => async dispatch => {
   try {
     const  { products, status } = await getProductsService(params);
-    dispatch(onActionCreator(GET_BRAND_PRODUCTS, { products, loading: false, params }));
+    dispatch(onActionCreator(GET_CLIENT_PRODUCTS, { products, loading: false, params }));
   } catch (error) {
     dispatch(onActionCreator(GET_PRODUCTS_ERROR, { loading: false, error: true, params }));
   }
@@ -21,7 +21,7 @@ export const getProducts = params => async dispatch => {
 export const getMoreProducts = params => async dispatch => {
   try {
     const { products } = await getProductsService(params);
-    dispatch(onActionCreator(GET_MORE_PRODUCTS_BRAND, { products, loading: false, params }));
+    dispatch(onActionCreator(GET_MORE_PRODUCTS_CLIENT, { products, loading: false, params }));
   } catch (error) {
     dispatch(onActionCreator(GET_PRODUCTS_ERROR, { loading: false, error: true, params }));
   }

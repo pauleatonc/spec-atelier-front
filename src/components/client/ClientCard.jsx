@@ -5,10 +5,10 @@ import {
   Quantity,
   Description,
   ButtonContainer,
-  ImageBrand,
+  ImageClient,
   CardImg,
   Country,
-} from './BrandCard.styles';
+} from './ClientCard.styles';
 
 import {
   Card,
@@ -21,9 +21,9 @@ import {
   Button,
 } from '../SpecComponents';
 
-const BrandCard = ({
-  brand,
-  onClickBrand,
+const ClientCard = ({
+  client,
+  onClickClient,
   onClickContact,
 }) => {
   const {
@@ -32,15 +32,15 @@ const BrandCard = ({
     products_count,
     description,
     country,
-  } = brand;
+  } = client;
 
-  const onSelectBrand = () => onClickBrand(brand);
-  const onSelectContact = () => onClickContact(brand);
+  const onSelectClient = () => onClickClient(client);
+  const onSelectContact = () => onClickContact(client);
 
   return (
     <Card>
-      <CardImg onClick={onSelectBrand} >
-        <ImageBrand src={logo} />
+      <CardImg onClick={onSelectClient} >
+        <ImageClient src={logo} />
         <Country>{country}</Country>
       </CardImg>
       <TitleContainer>
@@ -62,16 +62,16 @@ const BrandCard = ({
   );
 };
 
-BrandCard.propTypes = {
-  brand: PropTypes.shape({
+ClientCard.propTypes = {
+  client: PropTypes.shape({
     name: PropTypes.string,
   }),
 };
 
-BrandCard.defaultProps = {
-  brand: {
+ClientCard.defaultProps = {
+  client: {
     name: '',
   },
 };
 
-export default BrandCard;
+export default ClientCard;

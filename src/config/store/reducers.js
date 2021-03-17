@@ -15,14 +15,15 @@ import projectsListReducer from '../../containers/projects-list/ProjectsList.red
 import newProjectReducer from '../../containers/project-create/ProjectCreate.reducer';
 import appReducer from './app-store/app.reducer';
 import brandListReducer from '../../containers/brands-list/BrandsList.reducer';
-import brandReducer from '../../containers/brand/brand.reducer';
-import brandProductsListReducer from '../../containers/brand-products-list/BrandProductsList.reducer';
+import clientListReducer from '../../containers/clients-list/ClientsList.reducer';
+import clientReducer from '../../containers/client/client.reducer';
+import clientProductsListReducer from '../../containers/client-products-list/ClientProductsList.reducer';
 import modalContactFormReducer from '../../containers/modal-contact-form/ModalContactForm.reducers';
 import specDocumentReducer from '../../containers/spec-document/SpecDocument.reducer';
 import specHeaderReducer from '../../containers/spec-header/SpecHeader.reducer';
 import specImagesModalReducer from '../../containers/spec-images-modal/SpecImagesModal.reducer';
 import specContentsReducer from '../../containers/spec-contents/SpecContents.reducer';
-import brandsImageSliderReducer from '../../containers/brands-images-slider/BrandsImageSlider.reducer';
+import clientsImageSliderReducer from '../../containers/clients-images-slider/ClientsImageSlider.reducer';
 import ProfileProductsListReducer from '../../containers/profile-products/ProductsList.reducer';
 import ProfileReducer from '../../containers/profile-header/ProfileHeader.reducer';
 
@@ -30,9 +31,10 @@ import ProfileReducer from '../../containers/profile-header/ProfileHeader.reduce
 export default combineReducers({
   auth: authReducer,
   app: appReducer,
-  brand: brandReducer,
+  client: clientReducer,
+  clientsList: clientListReducer,
+  clientsImageSlider: clientsImageSliderReducer,
   brandsList: brandListReducer,
-  brandsImageSlider: brandsImageSliderReducer,
 	login: loginReducer,
 	recoverPassword: recoverPasswordReducer,
   modalContactForm: modalContactFormReducer,
@@ -40,7 +42,7 @@ export default combineReducers({
   newProject: newProjectReducer,
   projectsList: projectsListReducer,
   alert: alertReducer,
-  brandProductsList: brandProductsListReducer,
+  clientProductsList: clientProductsListReducer,
   productsList: productsListReducer,
   specHeader: specHeaderReducer,
   specProductsSections: specProductsSectionsReducer,

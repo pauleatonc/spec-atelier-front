@@ -22,7 +22,7 @@ const Footer = () => (
           <Link className="footer__inner__menu__container__link" to="/products">
             Productos
 					</Link>
-          <Link className="footer__inner__menu__container__link" to="/brands">
+          <Link className="footer__inner__menu__container__link" to="/clients">
             Marcas
 					</Link>
         </Menu>

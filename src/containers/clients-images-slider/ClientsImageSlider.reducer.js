@@ -1,28 +1,28 @@
 import {
-    GET_BRANDS_HOME,
-    GET_BRANDS_ERROR_HOME,
-  } from './BrandsImageSlider.actions';
-  
+    GET_CLIENTS_HOME,
+    GET_CLIENTS_ERROR_HOME,
+  } from './ClientsImageSlider.actions';
+
   const initialState = {
-    brands: [],
+    clients: [],
     loading: true,
     error: undefined,
     total: 0,
   };
-  
+
   /**
-   * The home brands reducer.
+   * The home clients reducer.
    */
-  const brandsImageSliderReducer = (state = initialState, { payload, type }) => {
+  const clientsImageSliderReducer = (state = initialState, { payload, type }) => {
     switch (type) {
-      case GET_BRANDS_HOME:
+      case GET_CLIENTS_HOME:
         return {
           ...state,
-          brands: payload?.brands || [],
+          clients: payload?.clients || [],
           loading: false,
           error: undefined,
         };
-      case GET_BRANDS_ERROR_HOME:
+      case GET_CLIENTS_ERROR_HOME:
         return {
           ...state,
           error: payload.error,
@@ -33,6 +33,5 @@ import {
       }
     }
   };
-  
-  export default brandsImageSliderReducer;
-  
+
+  export default clientsImageSliderReducer;

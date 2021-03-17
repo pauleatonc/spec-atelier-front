@@ -1,38 +1,10 @@
 import onActionCreator from '../../config/store/helpers';
-import {
-	getBrands as getBrandsData,
-	getClients as getClientsData,
-} from '../../services/brands.service';
+import { getBrands as getBrandsData }from '../../services/brands.service';
 
-export const GET_BRANDS = 'GET_ALL_BRANDS';
+export const GET_BRANDS= 'GET_BRANDS';
 export const GET_MORE_BRANDS = 'GET_MORE_BRANDS';
 export const GET_BRANDS_ERROR = 'GET_BRANDS_ERROR';
-export const GET_CLIENTS = 'GET_CLIENTS';
-export const GET_CLIENTS_ERROR = 'GET_CLIENTS_ERROR';
 
-// async calls
-export const getBrands = (params) => async (dispatch) => {
-	try {
-		const { brands } = await getBrandsData({ ...params, with_products: true });
-
-		return dispatch(
-			onActionCreator(GET_BRANDS, {
-				brands: brands?.list ? brands?.list : brands,
-				loading: false,
-				params,
-				total: brands?.total || 0,
-			}),
-		);
-	} catch (error) {
-		dispatch(
-			onActionCreator(GET_BRANDS_ERROR, {
-				loading: false,
-				error: true,
-				params,
-			}),
-		);
-	}
-};
 
 export const getMoreBrands = (params) => async (dispatch) => {
 	try {
@@ -51,20 +23,20 @@ export const getMoreBrands = (params) => async (dispatch) => {
 	}
 };
 
-export const getClients = (params) => async (dispatch) => {
+export const getBrands = (params) => async (dispatch) => {
 	try {
-		const { clients } = await getClientsData(params);
+		const { brands } = await getBrandsData(params);
 		return dispatch(
-			onActionCreator(GET_CLIENTS, {
-				clients: clients?.list ? clients?.list : clients,
+			onActionCreator(GET_BRANDS, {
+				brands: brands?.list ? brands?.list : brands,
 				loading: false,
 				params,
-				total: clients?.total || 0,
+				total: brands?.total || 0,
 			}),
 		);
 	} catch (error) {
 		dispatch(
-			onActionCreator(GET_CLIENTS_ERROR, {
+			onActionCreator(GET_BRANDS_ERROR, {
 				loading: false,
 				error: true,
 				params,

@@ -6,7 +6,7 @@ const removeClassToAllItems = (items, classToRemove) => {
 
 const mapPathnameToUrl = {
 	'/products': 'products',
-	'/brands': 'brands',
+	'/clients': 'clients',
 	'/projects': 'projects',
 };
 

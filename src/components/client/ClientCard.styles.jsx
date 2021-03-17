@@ -18,7 +18,7 @@ export const CardImg = styled.div`
   justify-content: space-between;
 `;
 
-export const ImageBrand = styled.img`
+export const ImageClient = styled.img`
   max-height: 85px;
   max-width: 200px;
 `;

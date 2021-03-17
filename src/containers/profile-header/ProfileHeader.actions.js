@@ -50,7 +50,6 @@ export const setUserProfile = ({ user: profile }) => async (dispatch, getSate) =
       onActionCreator(GET_PROFILE, { loading: false, user: response.user }),
     );
   } catch (error) {
-    console.log('asddad', error);
     return dispatch(onActionCreator(GET_PROFILE, { loading: false, error }));
   }
 };

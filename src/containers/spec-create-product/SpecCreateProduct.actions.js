@@ -61,11 +61,10 @@ export const onCreateSpecProduct = ({ documents, images }) => async (dispatch, g
       price: stepTwo.price,
     };
     const response = await createProduct(payload);
-    
+
     const postData = [];
     if (images?.length) postData.concat(uploadProductImages({ productID: response.product.id, images }));
-    if (documents?.length) postData.concat(uploadProductDocuments({ productID: response.product.id, documents }));  
-    
+    if (documents?.length) postData.concat(uploadProductDocuments({ productID: response.product.id, documents }));
     if (postData.length) await Promise.All(postData);
 
     return batch(() => {
@@ -101,7 +100,7 @@ export const onShowSpecCreateProductFromItemSuccess = ({ itemID , sectionID }) =
   const { collection: sections } = getState().specProductsSections;
   const { collection: items } = getState().specProductsItems;
   dispatch(onActionCreator(
-    SHOW_SPEC_CREATE_PRODUCT_FROM_ITEM_SUCCESS, 
+    SHOW_SPEC_CREATE_PRODUCT_FROM_ITEM_SUCCESS,
     {
       item: items.find(i => i.id === itemID),
       section: sections.find(i => i.id === sectionID),

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { COLOR_BLACK } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
