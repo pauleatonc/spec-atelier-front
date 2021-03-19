@@ -139,7 +139,8 @@ export const Item = styled.div`
   text-decoration: none;
   &:focus, &:hover, &:visited, &:link, &:active {
     text-decoration: none;
-  }
+  };
+  padding: 0 81px;
 `;
 
 export const ItemText = styled.span`
@@ -193,6 +194,7 @@ export const TextValue = styled.div`
 export const ButtonCreateContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  padding: 0 81px;
 `;
 
 export const ProfileNameInputContainer = styled.div`
