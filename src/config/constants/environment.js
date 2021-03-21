@@ -7,3 +7,4 @@ export const API_BASE = process.env.API_BASE || window.location.host;
 export const APP_ENV = process.env.APP_ENV || 'development';
 
 export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
+export const FIREBASE_API_KEY = process.env.FIREBASE_API_KEY || '';

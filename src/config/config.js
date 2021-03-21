@@ -1,3 +1,4 @@
+import { FIREBASE_API_KEY } from './constants/environment';
 /* eslint-disable no-undef */
 const mapApiUrls = {
 	development: 'http://localhost:8882',
@@ -12,7 +13,7 @@ export const mapFrontUrls = {
 };
 
 export const firebaseConfig = {
-	apiKey: 'AIzaSyAWyET2wg56d8sprVIH-CD2P9ghaqIKHVw',
+	apiKey: FIREBASE_API_KEY,
 	authDomain: 'spec-atelier.firebaseapp.com',
 	databaseURL: 'https://spec-atelier.firebaseio.com',
 	projectId: 'spec-atelier',
