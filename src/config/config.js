@@ -1,4 +1,13 @@
-import { FIREBASE_API_KEY } from './constants/environment';
+import {
+  FIREBASE_API_KEY,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_STORAGE_BUCKET,
+  FIREBASE_MSG_SENDER_ID,
+  FIREBASE_APP_ID,
+  FIREBASE_MEASUREMENT_ID,
+  FIREBASE_DATABASE_URL,
+  FIREBASE_AUTH_DOMAIN
+} from './constants/environment';
 /* eslint-disable no-undef */
 const mapApiUrls = {
 	development: 'http://localhost:8882',
@@ -14,13 +23,13 @@ export const mapFrontUrls = {
 
 export const firebaseConfig = {
 	apiKey: FIREBASE_API_KEY,
-	authDomain: 'spec-atelier.firebaseapp.com',
-	databaseURL: 'https://spec-atelier.firebaseio.com',
-	projectId: 'spec-atelier',
-	storageBucket: 'spec-atelier.appspot.com',
-	messagingSenderId: '291675161560',
-	appId: '1:291675161560:web:84a47340c200841044e8ad',
-	measurementId: 'G-7XM3CQ6R0H',
+	authDomain: FIREBASE_AUTH_DOMAIN,
+	databaseURL: FIREBASE_DATABASE_URL,
+	projectId: FIREBASE_PROJECT_ID,
+	storageBucket: FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: FIREBASE_MSG_SENDER_ID,
+	appId: FIREBASE_APP_ID,
+	measurementId: FIREBASE_MEASUREMENT_ID,
 };
 
 export const handleGetEnvironment = () => ENVIRONMENT;

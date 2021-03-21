@@ -28,7 +28,6 @@ import PrivateRoute from './containers/routes/PrivateRoute';
 
 const Main = () => {
   firebase.initializeApp(firebaseConfig);
-  console.log(firebaseConfig);
   firebase.analytics();
   return (
     <Provider store={store}>
