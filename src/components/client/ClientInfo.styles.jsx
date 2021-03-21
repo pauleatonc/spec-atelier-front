@@ -7,7 +7,7 @@ const icons = {
   España: '',
 };
 
-export const BrandContainer = styled.div`
+export const ClientContainer = styled.div`
   border-radius: 5px;
   border: 1px solid ${COLOR_LIGHTGREY};
   padding: 28px 28px 12px 28px;
@@ -97,7 +97,7 @@ export const LinkText = styled.a`
   }
 `;
 
-export const ImageBrand = styled.img`
+export const ImageClient = styled.img`
   max-height: 85px;
   max-width: 200px;
 `;

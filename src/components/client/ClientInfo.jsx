@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  BrandContainer,
+  ClientContainer,
   Header,
   Icon,
   Country,
@@ -11,8 +11,8 @@ import {
   Buttons,
   LinksContainer,
   LinkText,
-  ImageBrand,
-} from './BrandInfo.styles';
+  ImageClient,
+} from './ClientInfo.styles';
 
 import {
   Button,
@@ -20,45 +20,45 @@ import {
   ButtonSocialMedia,
 } from '../SpecComponents';
 
-const BrandInfo = ({ onClickContact, brand }) => {
+const ClientInfo = ({ onClickContact, client }) => {
 
-  if (!brand) return <BrandContainer />;
-  const addressToQuery = brand?.address.replace(/\s+/g, '-') || ''; 
+  if (!client) return <ClientContainer />;
+  const addressToQuery = client?.address.replace(/\s+/g, '-') || '';
   return (
-    <BrandContainer>
+    <ClientContainer>
       <Header>
-        <ImageBrand src={brand.logo} />
+        <ImageClient src={client.logo} />
         <Country >
-          <CountryIcon country={brand.country}/>
+          <CountryIcon country={client.country}/>
           <CountryName>
-            {brand.country}
+            {client.country}
           </CountryName>
         </Country>
       </Header>
-      <Description dangerouslySetInnerHTML={{ __html: brand.description }} />
+      <Description dangerouslySetInnerHTML={{ __html: client.description }} />
       <Buttons>
         <Button onClick={onClickContact} variant="secondary">
           Contactar
         </Button>
         <LinksContainer>
           <ButtonLink type="web">
-            <LinkText target="_blank" href={brand.web}>{brand.web}</LinkText>
+            <LinkText target="_blank" href={client.web}>{client.web}</LinkText>
           </ButtonLink>
           <ButtonLink type="address">
-            <LinkText target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${addressToQuery}`}>{brand.address}</LinkText>
+            <LinkText target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${addressToQuery}`}>{client.address}</LinkText>
           </ButtonLink>
           <ButtonLink type="phone">
-            <LinkText target="_blank" href={`tel:${brand.phone}`}>{brand.phone}</LinkText>
+            <LinkText target="_blank" href={`tel:${client.phone}`}>{client.phone}</LinkText>
           </ButtonLink>
         </LinksContainer>
       </Buttons>
       <LinksContainer>
-        {brand.social_media.map(sm => (
+        {client.social_media.map(sm => (
           <ButtonSocialMedia key={sm.name} type={sm.name} target="_blank" to={sm.url} />
         ))}
       </LinksContainer>
-    </BrandContainer>
+    </ClientContainer>
   )
 };
 
-export default BrandInfo;
+export default ClientInfo;

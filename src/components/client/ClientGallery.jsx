@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Content } from './BrandGallery.styles';
+import { Container, Content } from './ClientGallery.styles';
 import { Image } from '../SpecComponents';
 
 const names = ['one', 'two', 'three', 'four', 'five'];
 
-const BrandGallery = ({ images }) => {
+const ClientGallery = ({ images }) => {
   const imgs = images.map((img, i) => ({ ...img, name: names[i] }));
   return (
     <Container>
@@ -18,15 +18,15 @@ const BrandGallery = ({ images }) => {
   );
 };
 
-BrandGallery.propTypes = {
+ClientGallery.propTypes = {
   images: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
   }),
 };
 
-BrandGallery.defaultProps = {
+ClientGallery.defaultProps = {
   images: [],
 };
 
-export default BrandGallery;
+export default ClientGallery;

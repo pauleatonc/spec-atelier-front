@@ -1,7 +1,7 @@
 import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
 import { getProducts } from '../../services/products.service';
-import { getBrands as onGetBrands } from '../brands-list/BrandsList.actions';
+import { getClients as onGetClients } from '../clients-list/ClientsList.actions';
 import {
 	HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS,
 	onShowSpecProductsSections,
@@ -26,14 +26,14 @@ export const onGetSpecProducts = ({ key = '', value } = {}) => async (
 	dispatch(onActionCreator(GET_SPEC_PRODUCTS));
 
 	try {
-		const { app, brandsList, specProducts } = getState();
+		const { app, clientsList, specProducts } = getState();
 		const filters = Object.entries({
 			...specProducts.filters,
 			[key]: value,
 		}).reduce((entries, [key, value]) => {
 			if (
-				key === 'brand' &&
-				(value?.length === brandsList.brands?.length || value?.length === 0)
+				key === 'client' &&
+				(value?.length === clientsList.clients?.length || value?.length === 0)
 			) {
 				return entries;
 			}
@@ -164,7 +164,7 @@ export const onGetSpecProductsByItem = (payload) => (dispatch) =>
 	batch(() => {
 		dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_ITEM, payload));
 		dispatch(onGetSpecProducts());
-		dispatch(onGetBrands({ item: payload.itemID }));
+		dispatch(onGetClients({ item: payload.itemID }));
 	});
 
 export const GET_SPEC_PRODUCTS_BY_KEYWORD = 'GET_SPEC_PRODUCTS_BY_KEYWORD';
@@ -179,7 +179,7 @@ export const onGetSpecProductsBySection = (payload) => (dispatch) =>
 	batch(() => {
 		dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SECTION, payload));
 		dispatch(onShowSpecProductsItems({ section: payload.sectionID }));
-		dispatch(onGetBrands({ section: payload.sectionID }));
+		dispatch(onGetClients({ section: payload.sectionID }));
 		dispatch(onGetSpecProducts());
 	});
 
@@ -233,7 +233,7 @@ export const onShowSpecProducts = () => (dispatch) =>
 	batch(() => {
 		dispatch(onShowSpecProductsSections());
 		dispatch(onActionCreator(SHOW_SPEC_PRODUCTS_SUCCESS));
-		dispatch(onGetBrands());
+		dispatch(onGetClients());
 		dispatch(onGetSpecProducts());
 	});
 

@@ -1,11 +1,11 @@
 import {
-  GET_BRAND_PRODUCTS,
+  GET_CLIENT_PRODUCTS,
   GET_PRODUCTS_ERROR,
-  GET_MORE_PRODUCTS_BRAND,
+  GET_MORE_PRODUCTS_CLIENT,
   OPEN_PRODUCT_MODAL,
   CLOSE_PRODUCT_MODAL,
   CLEAN_PRODUCTS_LIST,
-} from './BrandProductsList.actions';
+} from './ClientProductsList.actions';
 
 const initialProductState = {
   products: [],
@@ -15,7 +15,7 @@ const initialProductState = {
     keyword: '',
     page: 0,
     limit: 6,
-    brand: '',
+    client: '',
   },
   next_page: 1,
   selectedProduct: undefined,
@@ -25,9 +25,9 @@ const initialProductState = {
 /**
  * The products reducer.
  */
-const brandProductsReducer = (state = initialProductState, { payload, type }) => {
+const clientProductsReducer = (state = initialProductState, { payload, type }) => {
   switch (type) {
-    case GET_BRAND_PRODUCTS:
+    case GET_CLIENT_PRODUCTS:
       return {
         ...state,
         products: payload?.products?.list || [],
@@ -36,7 +36,7 @@ const brandProductsReducer = (state = initialProductState, { payload, type }) =>
         error: undefined,
         params: initialProductState.params,
       };
-    case GET_MORE_PRODUCTS_BRAND:
+    case GET_MORE_PRODUCTS_CLIENT:
       const newProducts = payload?.products?.list || [];
       return {
         ...state,
@@ -75,4 +75,4 @@ const brandProductsReducer = (state = initialProductState, { payload, type }) =>
   }
 };
 
-export default brandProductsReducer;
+export default clientProductsReducer;

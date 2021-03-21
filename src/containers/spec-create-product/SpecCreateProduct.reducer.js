@@ -22,7 +22,7 @@ const createProductState = {
 };
 
 /**
- * The create product's reducer. 
+ * The create product's reducer.
  */
 const createProductReducer = (state = createProductState, { payload, type }) => {
   switch (type) {

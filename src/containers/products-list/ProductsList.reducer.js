@@ -24,7 +24,7 @@ const productsListState = {
     room_type: [],
     project_type: [],
     item: [],
-    brand: [],
+    client: [],
     sort: '',
     with_products: true,
     most_used: false,

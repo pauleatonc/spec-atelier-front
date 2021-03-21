@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../../components/SpecComponents';
-import { ButtonSection } from './brandsSeeMore.styles';
+import { ButtonSection } from './ClientsSeeMore.styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { getMoreBrands } from '../brands-list/BrandsList.actions';
+import { getMoreClients } from '../clients-list/ClientsList.actions';
 
-const BrandsSeeMoreButton = () => {
-  const { brands, loading, params, total } = useSelector(state => state.brandsList);
+const ClientsSeeMoreButton = () => {
+  const { clients, loading, params, total } = useSelector(state => state.clientsList);
   const [showButton, setShowButton] = useState(true);
 
   const dispatch = useDispatch();
 
   const onClickSeeMore = () => {
-    dispatch(getMoreBrands({
+    dispatch(getMoreClients({
       ...params,
       page: params.page + 1,
     }))
   };
 
   useEffect(() => {
-    setShowButton(!!total && brands.length < total);
-  }, [brands]);
+    setShowButton(!!total && clients.length < total);
+  }, [clients]);
 
-  if (!brands.length) return null;
+  if (!clients.length) return null;
 
   return (
     <ButtonSection justify="center">
@@ -36,4 +36,4 @@ const BrandsSeeMoreButton = () => {
   );
 };
 
-export default BrandsSeeMoreButton;
+export default ClientsSeeMoreButton;

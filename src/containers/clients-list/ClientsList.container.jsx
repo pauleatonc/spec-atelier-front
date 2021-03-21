@@ -2,22 +2,22 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
-import { Container } from './BrandsList.style';
-import BrandCard from '../../components/brand/BrandCard';
+import { Container } from './ClientsList.style';
+import ClientCard from '../../components/client/ClientCard';
 
-import { getClients } from './BrandsList.actions';
+import { getClients } from './ClientsList.actions';
 import { openContactModal } from '../modal-contact-form/ModalContactForm.actions';
 
-const BrandsList = () => {
-  const { clients, error, loading, params } = useSelector(state => state.brandsList);
+const ClientsList = () => {
+  const { clients, error, loading, params } = useSelector(state => state.clientsList);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onClickBrand = selectedBrand => {
-    history.push(`/collaborators/${selectedBrand.id}`);
+  const onClickClient = selectedClient => {
+    history.push(`/collaborators/${selectedClient.id}`);
   };
-  
-  const onClickContact = selectedBrand => dispatch(openContactModal({ selectedBrand }));
+
+  const onClickContact = selectedClient => dispatch(openContactModal({ selectedClient }));
 
   useEffect(() => {
     if (!clients.length) dispatch(getClients(params));
@@ -30,10 +30,10 @@ const BrandsList = () => {
   return (
     <Container>
       {clients.map(client => (
-        <BrandCard
+        <ClientCard
           key={client.id}
-          brand={client}
-          onClickBrand={onClickBrand}
+          client={client}
+          onClickClient={onClickClient}
           onClickContact={onClickContact}
         />
       ))}
@@ -41,4 +41,4 @@ const BrandsList = () => {
   );
 };
 
-export default BrandsList;
+export default ClientsList;

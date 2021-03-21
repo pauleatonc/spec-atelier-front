@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getBrands } from '../brands-list/BrandsList.actions';
+import { getClients } from '../clients-list/ClientsList.actions';
 import { SearchBar } from '../../components/SpecComponents';
 import {
   Container,
-} from './BrandsSearch.style';
+} from './ClientsSearch.style';
 
-const BrandsFilters = () => {
+const ClientsFilters = () => {
   const dispatch = useDispatch();
-  const { params, brands } = useSelector(state => state.brandsList);
-  const [keyword, setKeywords] = useState(params.keyword || ''); 
+  const { params, clients } = useSelector(state => state.clientsList);
+  const [keyword, setKeywords] = useState(params.keyword || '');
 
   const onChangeParams = ({ target: { name, value } }) => {
     setKeywords(value);
-    dispatch(getBrands({
+    dispatch(getClients({
       ...params,
       [name]: value,
     }));
   }
-  
-  if (!brands.length && !params.keyword) return null;
+
+  if (!clients.length && !params.keyword) return null;
 
   return (
     <Container>
@@ -35,4 +35,4 @@ const BrandsFilters = () => {
   );
 };
 
-export default BrandsFilters;
+export default ClientsFilters;

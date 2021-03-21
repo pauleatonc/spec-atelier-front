@@ -26,11 +26,11 @@ export const ON_SELECT_ALL = 'ON_SELECT_ALL';
 
 export const cleanStoreProductList = () => dispatch => dispatch(onActionCreator(CLEAN_PRODUCT_LIST_STORE));
 
-export const getProduct = brandId => async dispatch => {
+export const getProduct = clientId => async dispatch => {
   try {
-    const response = await getProductById(brandId);
+    const response = await getProductById(clientId);
     if (response?.status >= 400) return dispatch(onActionCreator(GET_PROFILE_PRODUCT_ERROR, { loading: false, error: true }));
-    return dispatch(onActionCreator(GET_PROFILE_PRODUCT, { brand: response.brand, loading: false }));
+    return dispatch(onActionCreator(GET_PROFILE_PRODUCT, { client: response.client, loading: false }));
   } catch (error) {
     return dispatch(onActionCreator(GET_PROFILE_PRODUCT_ERROR, { loading: false, error }));
   }
@@ -116,6 +116,7 @@ export const setSelectedAll = value => dispatch => {
 }
 
 export const onGetFiltersByFilters = filters => dispatch => {
+  console.log('sss');
   dispatch(getBrands({ ...filters }));
   dispatch(getSections({ ...filters }));
   dispatch(getItems({ ...filters }));

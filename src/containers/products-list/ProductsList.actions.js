@@ -4,7 +4,6 @@ import { getItems as getItemsService } from '../../services/items.service';
 import { cleanObjectsAndArrays } from '../../modules/services';
 import { getSections as getServiceSections } from '../../services/sections.service';
 import { getBrands as getServiceBrands } from '../../services/brands.service';
-//import { getAppData } from '../../config/store/app-store/app.actions';
 
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_PRODUCTS_ERROR = 'GET_PRODUCTS_ERROR';
@@ -27,11 +26,11 @@ export const ON_SELECT_ALL = 'ON_SELECT_ALL';
 
 export const cleanStoreProductList = () => dispatch => dispatch(onActionCreator(CLEAN_PRODUCT_LIST_STORE));
 
-export const getProduct = brandId => async dispatch => {
+export const getProduct = clientId => async dispatch => {
   try {
-    const response = await getProductById(brandId);
+    const response = await getProductById(clientId);
     if (response?.status >= 400) return dispatch(onActionCreator(GET_PRODUCT_ERROR, { loading: false, error: true }));
-    return dispatch(onActionCreator(GET_PRODUCT, { brand: response.brand, loading: false }));
+    return dispatch(onActionCreator(GET_PRODUCT, { client: response.client, loading: false }));
   } catch (error) {
     return dispatch(onActionCreator(GET_PRODUCT_ERROR, { loading: false, error }));
   }
@@ -149,7 +148,3 @@ export const getBrands = filters => async dispatch => {
     return dispatch(onActionCreator(GET_BRANDS_ERROR, { error: true, nativeError: error }));
   }
 };
-
-
-
-

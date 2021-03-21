@@ -17,14 +17,14 @@ const propTypes = {
 };
 
 const defaultProps = {
-	type: 'brand',
+	type: 'client',
 };
 
 const ContactForm = ({ type }) => {
 	const { user = {}, isLogin } = useSelector((state) => state.auth);
 	const {
 		contact,
-		selectedBrand,
+		selectedClient,
 		showContactModal,
 		selectedProduct,
 	} = useSelector((state) => state.modalContactForm);
@@ -48,7 +48,7 @@ const ContactForm = ({ type }) => {
 					...contactForm,
 					user_phone: `+56${contactForm.user_phone}`,
 					user_id: user?.id || 0,
-					brand_id: selectedBrand?.id,
+					client_id: selectedClient?.id,
 					product_id: selectedProduct?.id,
 				},
 				type,
@@ -82,8 +82,8 @@ const ContactForm = ({ type }) => {
 						<Contact
 							contact={contactForm}
 							onChange={onChangeData}
-							brand={selectedBrand.name}
-							contactType={selectedBrand.contact_type}
+							client={selectedClient.name}
+							contactType={selectedClient.contact_type}
 						/>
 						<BottonContainer>
 							<Button variant="primary" onClick={sendForm}>

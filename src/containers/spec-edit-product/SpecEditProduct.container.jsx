@@ -137,7 +137,7 @@ const SpecEditProduct = () => {
 		setItemValue([]);
 		setSystemValue([]);
   };
-  
+
   const onSubmitSection = () => {
     dispatch(onGetSpecProductsItems({ sections: sectionValue }));
   };
@@ -146,7 +146,7 @@ const SpecEditProduct = () => {
 		onItemChange(option);
 		setSystemValue([]);
   };
-  
+
   const onSubmitItem = () => {
 		dispatch(onGetSpecProductsSystems({ items: itemValue }));
   };
@@ -221,7 +221,7 @@ const SpecEditProduct = () => {
 		name: file.name,
 	});
 
-	const mapToId = ({ id }) => id; 
+	const mapToId = ({ id }) => id;
 
 	const handleAttachReject = (reason) =>
 		dispatch(onShowAlertSuccess({ message: reason }));
@@ -264,7 +264,7 @@ const SpecEditProduct = () => {
 			onEditSpecProduct({
 				product: {
 					id: product.id,
-					name: product.name !== nameValue ? nameValue : undefined,
+          name: product.name !== nameValue ? nameValue : undefined,
 					brand: product.brand?.id !== brandValue?.id ? brandValue : undefined,
 					long_desc:
 						product.long_desc !== descriptionValue
@@ -466,7 +466,7 @@ const SpecEditProduct = () => {
 								<Label>Marcas</Label>
 								<Select
 									options={brands.map(mapToSelector)}
-									placeholder="Elige un sistema"
+									placeholder="Elige una marca"
 									value={brandValue}
 									onChange={handleBrandChange}
 								/>

@@ -49,9 +49,9 @@ const NavBarTopMobile = props => {
 						</li>
 						<li className="lateral_menu__inner__content__item">
 							<Link
-								to="/brands"
+								to="/clients"
 								className="lateral_menu__inner__content__item__link"
-								data-view="brands"
+								data-view="clients"
 							>
 								Marcas
 							</Link>

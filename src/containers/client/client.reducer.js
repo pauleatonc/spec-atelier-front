@@ -1,11 +1,11 @@
 import {
-  GET_BRAND,
-  GET_BRAND_ERROR,
+  GET_CLIENT,
+  GET_CLIENT_ERROR,
   CLEAN_STORE,
-} from './brand.actions';
+} from './client.actions';
 
-const initialBrand = {
-  brand: undefined,
+const initialClient = {
+  client: undefined,
   loading: false,
   view: 'data',
   error: undefined,
@@ -14,29 +14,29 @@ const initialBrand = {
 };
 
 /**
- * brand reducer.
+ * client reducer.
  */
-const brandReducer = (state = initialBrand, { payload, type }) => {
+const clientReducer = (state = initialClient, { payload, type }) => {
   switch (type) {
-    case GET_BRAND:
+    case GET_CLIENT:
       return {
         ...state,
-        brand: payload?.brand,
+        client: payload?.client,
         loading: false,
         error: undefined,
       };
-    case GET_BRAND_ERROR:
+    case GET_CLIENT_ERROR:
       return {
         ...state,
         loading: false,
         error: payload?.error,
       };
     case CLEAN_STORE:
-      return { ...initialBrand };
+      return { ...initialClient };
     default: {
       return state;
     }
   }
 };
 
-export default brandReducer;
+export default clientReducer;

@@ -1,6 +1,6 @@
 import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
-import { postContactProduct, postContactBrand } from '../../services/contact.service';
+import { postContactProduct, postContactClient } from '../../services/contact.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 export const POST_CONTACT_FORM = 'POST_CONTACT_FORM';
@@ -10,11 +10,12 @@ export const CLOSE_CONTACT_FORM_MODAL = 'CLOSE_CONTACT_FORM_MODAL';
 
 // async calls
 export const sendContactData = (newContact, type) => async dispatch => {
+  console.log(newContact)
   try {
     if (type === 'product') {
       await postContactProduct({ productId: newContact.product_id, contact: newContact });
     } else {
-      await postContactBrand({ brandId: newContact.brand_id, contact: newContact });
+      await postContactClient({ clientId: newContact.client_id, contact: newContact });
     }
     const message = 'Hemos enviado la información al colaborador.';
     batch(() => {
@@ -31,7 +32,7 @@ export const sendContactData = (newContact, type) => async dispatch => {
 };
 
 // sync calls
-export const openContactModal = ({ selectedBrand, selectedProduct }) => dispatch => 
-  dispatch(onActionCreator(OPEN_CONTACT_FORM_MODAL, { selectedBrand, selectedProduct }));
+export const openContactModal = ({ selectedClient, selectedProduct }) => dispatch =>
+  dispatch(onActionCreator(OPEN_CONTACT_FORM_MODAL, { selectedClient, selectedProduct }));
 
 export const closeContactModal = () => dispatch => dispatch(onActionCreator(CLOSE_CONTACT_FORM_MODAL, {}));

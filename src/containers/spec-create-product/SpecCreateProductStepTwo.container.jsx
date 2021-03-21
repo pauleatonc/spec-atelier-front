@@ -79,8 +79,8 @@ const SpecCreateProductStepTwo = () => {
             <StepsBubbles prefix="step-2" steps={[{ active: true }, { active: true }, { active: false }]} />
           </Section>
           <Section display="grid" gridTemplateColumns="1.5fr 1fr" padding="41px 0 0">
-            <Textarea 
-              label="Agregar el texto que específica el producto"
+            <Textarea
+              label="Agregar el texto que especifica el producto"
               placeholder="Detalla el producto"
               value={descriptionValue || ''}
               onChange={handleDescriptionChange}

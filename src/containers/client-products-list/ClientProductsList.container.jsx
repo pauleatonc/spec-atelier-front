@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
-import { Container } from './BrandproductsList.styles';
+import { Container } from './ClientProductsList.styles';
 import ProductCard from '../../components/cards/ProductCard';
-import { openContactFormModal, getProducts, cleanProductList } from './BrandProductsList.actions';
+import { openContactFormModal, getProducts, cleanProductList } from './ClientProductsList.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 
 
-const BrandProductsList = () => {
-  const { products, error, loading, params } = useSelector(state => state.brandProductsList);
+const ClientProductsList = () => {
+  const { products, error, loading, params } = useSelector(state => state.clientProductsList);
   const dispatch = useDispatch();
   const { id } = useParams();
   const history = useHistory();
@@ -21,9 +21,8 @@ const BrandProductsList = () => {
     dispatch(openContactFormModal(selectedProduct));
   };
 
-
   useEffect(() => {
-    if (!products.length) dispatch(getProducts({ ...params, brand: id }));
+    if (!products.length) dispatch(getProducts({ ...params, client: id }));
     return () => dispatch(cleanProductList())
   }, []);
 
@@ -52,4 +51,4 @@ const BrandProductsList = () => {
   );
 };
 
-export default BrandProductsList;
+export default ClientProductsList;

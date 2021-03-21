@@ -1,9 +1,7 @@
 import {
 	GET_BRANDS,
 	GET_BRANDS_ERROR,
-	GET_MORE_BRANDS,
-	GET_CLIENTS,
-	GET_CLIENTS_ERROR,
+	GET_MORE_BRANDS
 } from './BrandsList.actions';
 
 const initialBrandState = {
@@ -17,7 +15,6 @@ const initialBrandState = {
 	},
 	error: undefined,
 	total: 0,
-	clients: [],
 };
 
 /**
@@ -45,21 +42,6 @@ const brandsReducer = (state = initialBrandState, { payload, type }) => {
 				params: payload.params,
 			};
 		case GET_BRANDS_ERROR:
-			return {
-				...state,
-				error: payload.error,
-				loading: false,
-			};
-		case GET_CLIENTS:
-			return {
-				...state,
-				clients: payload?.clients || [],
-				total: payload?.total || 0,
-				loading: false,
-				error: undefined,
-				params: initialBrandState.params,
-			};
-		case GET_CLIENTS_ERROR:
 			return {
 				...state,
 				error: payload.error,
