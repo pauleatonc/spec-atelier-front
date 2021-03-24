@@ -9,26 +9,23 @@ import {
   CancelSecondaryButton
 } from './Button.styles';
 
+import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+
 /**
  * The Button's component.
  */
 const Button = props => {
   const { variant, ...buttonProps } = props;
 
-  switch (variant) {
-    case 'primary':
-      return <PrimaryButton {...buttonProps} />;
-    case 'secondary':
-      return <SecondaryButton {...buttonProps} />;
-    case 'gray':
-      return <GrayButton {...buttonProps} />;
-    case 'cancel':
-      return <CancelButton {...buttonProps} />;
-    case 'cancel-secondary':
-      return <CancelSecondaryButton {...buttonProps} />;
-    default:
-      return <DefaultButton {...buttonProps} />;
+  const BUTTONS = {
+    [VARIANTS_BUTTON.PRIMARY]: <PrimaryButton {...buttonProps} />,
+    [VARIANTS_BUTTON.SECONDARY]: <SecondaryButton {...buttonProps} />,
+    [VARIANTS_BUTTON.GRAY]: <GrayButton {...buttonProps} />,
+    [VARIANTS_BUTTON.CANCEL]: <CancelButton {...buttonProps} />,
+    [VARIANTS_BUTTON.CANCEL_SECONDARY]: <CancelSecondaryButton {...buttonProps} />,
   }
+
+  return BUTTONS[variant] || <DefaultButton {...buttonProps} />;
 };
 
 Button.defaultProps = {

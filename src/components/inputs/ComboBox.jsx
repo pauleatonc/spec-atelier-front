@@ -5,6 +5,7 @@ import { Root, Label, Section, Input, InputUnderline, Options, Option, OptionChe
 import checkboxOffSource from '../../assets/images/icons/checkbox-off.svg';
 import checkboxOnSource from '../../assets/images/icons/checkbox-on.svg';
 import checkboxOnSecondarySource from '../../assets/images/icons/checkbox-on-secondary.svg';
+import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 /**
  * The ComboBox's component.
@@ -70,7 +71,7 @@ const ComboBox = props => {
     return `${optionsLabels.shift()}, ${optionsLabels.shift()}, (+${optionsLabels.length})`;
   };
   const allSelected = options.length === selectedOptions.length;
-  const checkboxIconOn = variant === 'primary' ? checkboxOnSource : checkboxOnSecondarySource;
+  const checkboxIconOn = variant === VARIANTS_BUTTON.PRIMARY ? checkboxOnSource : checkboxOnSecondarySource;
 
   useEffect(() => {
     setSelectedOptions(values);
@@ -105,7 +106,7 @@ const ComboBox = props => {
       </Options>
       {submit && (
         <Actions>
-          <Button variant="cancel-secondary" onClick={handleClickClean}>Borrar</Button>
+          <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY} onClick={handleClickClean}>Borrar</Button>
           <Button variant={variant} onClick={handleClickSubmit}>Guardar</Button>
         </Actions>
       )}

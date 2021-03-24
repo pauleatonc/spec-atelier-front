@@ -19,7 +19,7 @@ import checkboxOnSource from '../../assets/images/icons/checkbox-on.svg';
 import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
 import checkboxOnSecondarySource from '../../assets/images/icons/checkbox-on-secondary.svg';
 import Button from '../buttons/Button';
-import { useEffect } from 'react';
+import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 /**
  * The MultiSelect' component.
@@ -165,7 +165,7 @@ const MultiSelect = (props) => {
 				})}
 				{showButtons && (
 					<Actions>
-						<Button variant="cancel-secondary" onClick={handleClickClean}>
+						<Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY} onClick={handleClickClean}>
 							Borrar
 						</Button>
 						<Button variant={variant} onClick={handleClickSubmit}>

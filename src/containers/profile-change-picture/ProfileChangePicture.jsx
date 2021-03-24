@@ -2,14 +2,12 @@ import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AvatarEditor from 'react-avatar-editor'
 
-import {
-    PROFILE_PHOTO_DEFAULT
-  } from '../../assets/Images';
-
+import { PROFILE_PHOTO_DEFAULT } from '../../assets/Images';
 import useModal from '../../components/layouts/ModalLayout.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import closeSource from '../../assets/images/icons/close.svg';
 import Button from '../../components/buttons/Button';
+import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 import { onHideEditProfilePicture, onChangeProfilePicture } from '../profile-header/ProfileHeader.actions';
 
@@ -58,7 +56,7 @@ const ProfileChangePicture = () => {
                 </Header>
                 <Body>
                     <ButtonUploadPicture>
-                        <Button variant="cancel" padding="0" onClick={handleUploadPicture}><i className="fa fa-plus-circle" style={{ marginRight: '10px' }} />Subir una  foto</Button>
+                        <Button variant={VARIANTS_BUTTON.CANCEL} padding="0" onClick={handleUploadPicture}><i className="fa fa-plus-circle" style={{ marginRight: '10px' }} />Subir una  foto</Button>
                         <input type="file" accept=".jpg, .jpeg, .png" ref={hiddenFileInput} onChange={handleChangePicture} style={{display:'none'}} />
                     </ButtonUploadPicture>
                     <EditorPicture>
@@ -90,7 +88,7 @@ const ProfileChangePicture = () => {
                     </EditorPicture>
                 </Body>
                 <Footer>
-                    <Button variant="primary" width="113px" onClick={handleSaveProfilePicture} disabled={!avatar?.name}>
+                    <Button variant={VARIANTS_BUTTON.PRIMARY} width="113px" onClick={handleSaveProfilePicture} disabled={!avatar?.name}>
 						Guardar
 					</Button>
                 </Footer>

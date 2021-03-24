@@ -18,53 +18,53 @@ input[type='range'] {
     }
 
     &::-webkit-slider-thumb {
-        background-color: #ffffff;
+        background-color: $white-color;
         width: 17px;
         height: 17px;
-        border: solid 2px #46c0ae;
+        border: solid 2px $principal-color;
         border-radius: 50%;
         margin-top: -6px;
     }
 
     &::-moz-range-thumb {
-        background-color: #ffffff;
+        background-color: $white-color;
         width: 17px;
         height: 17px;
-        border: solid 2px #46c0ae;
+        border: solid 2px $principal-color;
         border-radius: 50%;
     }
 
     &::-ms-thumb {
-        background-color: #ffffff;
+        background-color: $white-color;
         width: 17px;
         height: 17px;
-        border: solid 2px #46c0ae;
+        border: solid 2px $principal-color;
         border-radius: 50%;
     }
     
     &::-webkit-slider-runnable-track {
-        background-color: #d6f0ec;
+        background-color: $light-green-color;
         height: 5px;
         border-radius: 2.5px;
     }
 
     &::-moz-range-track {
-        background-color: #d6f0ec;
+        background-color: $light-green-color;
         height: 5px;
         border-radius: 2.5px;
     }
 
     &::-ms-track {
-        background-color: #d6f0ec;
+        background-color: $light-green-color;
         height: 5px;
         border-radius: 2.5px;
     }
 
     &::-ms-fill-lower {
-        background-color: #d6f0ec
+        background-color: $light-green-color
     }
 
     &::-ms-fill-upper {
-        background-color: #46c0ae;
+        background-color: $principal-color;
     }
   }

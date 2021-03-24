@@ -24,6 +24,7 @@ import {
 } from './SpecCreateProduct.styles';
 import closeSource from '../../assets/images/icons/close.svg';
 import MultiSelect from '../../components/inputs/MultiSelect';
+import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 /**
  * The SpecCreateProductStepOne's container.
@@ -193,7 +194,7 @@ const SpecCreateProductStepOne = () => {
 				<Footer>
 					<Button
 						disabled={disabledNext}
-						variant="primary"
+						variant={VARIANTS_BUTTON.PRIMARY}
 						width="163px"
 						onClick={handleNext}
 					>
