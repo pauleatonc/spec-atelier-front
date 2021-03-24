@@ -6,7 +6,7 @@ import { Root, Label, Input as InputBase, InputUnderline } from './Input.styles'
  * The Input's component.
  */
 const Input = props => {
-  const { label, placeholder, value, width, onChange, name, variant, type, disabled } = props;
+  const { label, placeholder, value, width, onChange, name, variant, type, disabled, ...restProps } = props;
 
   return (
     <Root width={width}>
@@ -15,7 +15,7 @@ const Input = props => {
         && <InputBase name={name} placeholder={placeholder} type="text" value={value} onChange={onChange} />
       }
       {type === 'underline' &&
-        <InputUnderline name={name} disabled={disabled} placeholder={placeholder} variant={variant} type="text" value={value}  onChange={onChange} />
+        <InputUnderline name={name} disabled={disabled} placeholder={placeholder} variant={variant} type="text" value={value}  onChange={onChange} {...restProps} />
       }
     </Root>
   );

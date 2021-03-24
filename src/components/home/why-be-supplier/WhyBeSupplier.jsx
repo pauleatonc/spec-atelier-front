@@ -9,6 +9,7 @@ import {
 } from './WhyBeSupplier.styles';
 import Button from '../../buttons/Button';
 import { useHistory } from 'react-router';
+import { VARIANTS_BUTTON } from '../../../config/constants/button-variants';
 
 const WhyBeSupplier = () => {
   const history = useHistory();
@@ -25,7 +26,7 @@ const WhyBeSupplier = () => {
             Aumenta la demanda con un solo click
           </Description>
           <ButtonContainer>
-            <Button variant="primary" width="100%" onClick={() => history.push('/login')}>únete</Button>
+            <Button variant={VARIANTS_BUTTON.PRIMARY} width="100%" onClick={() => history.push('/login')}>únete</Button>
           </ButtonContainer>
         </InfoContainer>
       </Content>

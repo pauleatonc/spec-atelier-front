@@ -14,4 +14,3 @@ export const Content = styled.section`
     padding: 16px 16px;
   }
 `;
-

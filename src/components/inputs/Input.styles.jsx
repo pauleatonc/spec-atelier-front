@@ -47,11 +47,11 @@ export const InputUnderline = styled.input`
   min-width: 100px;
   width: 100%;
   display: flex;
-  padding: 10px 10px 10px 0;
+  padding: 10px ${({ textAlign }) => textAlign === 'right' ? '0' : '10px' } 10px ${({ textAlign }) => textAlign === 'right' ? '10px' : '0px' };
   flex: 1;
-  border-bottom: 1px solid ${COLOR_LIGHTGREY};
+  border-bottom: 1px solid ${({ colorUnderline }) => colorUnderline ? colorUnderline : COLOR_LIGHTGREY};
   font-family: Lato;
-  font-size: 14px;
+  font-size: ${({ fontSize }) => fontSize ? `${fontSize}px` : '14px'};
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -60,4 +60,5 @@ export const InputUnderline = styled.input`
   color: ${COLOR_BLACK};
   background-color: ${COLOR_WHITE};
   border-radius: 0;
+  text-align: ${({ textAlign }) => textAlign ? textAlign : 'left'};
 `;

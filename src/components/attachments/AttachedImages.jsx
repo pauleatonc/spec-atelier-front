@@ -26,6 +26,7 @@ import {
 import imagesUploadSource from '../../assets/images/icons/images-upload.svg';
 import removeSource from '../../assets/images/icons/remove.svg';
 import closeSource from '../../assets/images/icons/close.svg';
+import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 /**
  * The AttachedImages' component.
@@ -122,7 +123,7 @@ const AttachedImages = props => {
               </DropZoneText>
             </DropZoneSection>
             <DropZoneSection padding="13px 0 0">
-              <Button variant="primary" onClick={handleAttach}>
+              <Button variant={VARIANTS_BUTTON.PRIMARY} onClick={handleAttach}>
                 Cargar imágenes desde la computadora
               </Button>
             </DropZoneSection>

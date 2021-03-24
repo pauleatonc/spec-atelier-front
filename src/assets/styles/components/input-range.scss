@@ -1,0 +1,70 @@
+input[type='range'] {
+    display: block;
+    width: 175px;
+    -webkit-appearance: none;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+
+        &::-webkit-slider-runnable-track {
+            outline: none;
+        }
+    }
+
+    &::-webkit-slider-runnable-track,
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+    }
+
+    &::-webkit-slider-thumb {
+        background-color: $white-color;
+        width: 17px;
+        height: 17px;
+        border: solid 2px $principal-color;
+        border-radius: 50%;
+        margin-top: -6px;
+    }
+
+    &::-moz-range-thumb {
+        background-color: $white-color;
+        width: 17px;
+        height: 17px;
+        border: solid 2px $principal-color;
+        border-radius: 50%;
+    }
+
+    &::-ms-thumb {
+        background-color: $white-color;
+        width: 17px;
+        height: 17px;
+        border: solid 2px $principal-color;
+        border-radius: 50%;
+    }
+    
+    &::-webkit-slider-runnable-track {
+        background-color: $light-green-color;
+        height: 5px;
+        border-radius: 2.5px;
+    }
+
+    &::-moz-range-track {
+        background-color: $light-green-color;
+        height: 5px;
+        border-radius: 2.5px;
+    }
+
+    &::-ms-track {
+        background-color: $light-green-color;
+        height: 5px;
+        border-radius: 2.5px;
+    }
+
+    &::-ms-fill-lower {
+        background-color: $light-green-color
+    }
+
+    &::-ms-fill-upper {
+        background-color: $principal-color;
+    }
+  }

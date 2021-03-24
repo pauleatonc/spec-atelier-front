@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from './ProductsList.styles';
-import { onGetProducts, cleanStoreProductList } from './ProductsList.actions';
+import { onGetProducts } from './ProductsList.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
 import ProductCard from '../../components/cards/ProductCard';
@@ -23,7 +23,8 @@ const ProductList = () => {
   }, []);
 
   if (loading) return <Loading />;
-  if (!products.length && error) return <Container>No Hay Productos</Container>;
+  if (error) return <ErrorMessage />;
+  if (!products.length) return <Container>No Hay Productos</Container>;
 
   return (
     <Container>
@@ -31,12 +32,15 @@ const ProductList = () => {
         <ProductCard
           key={product.id}
           category={product.system?.name || ''}
-          description={product.short_desc}
+          description={product.short_desc || product.long_desc}
           photo={product.images[0]?.urls?.small}
           reference={product.reference}
           title={product.name}
           onClickCard={onClickProduct(product)}
           onClickSeeMore={onClickProduct(product)}
+          pdfs={product?.pdfs}
+          dwg={product?.dwg}
+          bim={product?.bim}
         />
       ))}
     </Container>

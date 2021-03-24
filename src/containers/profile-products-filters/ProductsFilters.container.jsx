@@ -7,10 +7,10 @@ import {
   setSelectedAll,
   getProductsByFilter,
   cleanStoreProductList,
+  getBrands
 } from '../profile-products/ProductsList.actions';
 import { Button } from '../../components/SpecComponents';
 import { Container, Content, Text } from './ProductsFilters.styles';
-import { getBrands } from '../brands-list/BrandsList.actions';
 import { getAppData } from '../../config/store/app-store/app.actions';
 import ButtonComboBox from './ButtonComboBox';
 import { mapToSelector } from '../../helpers/helpers';
@@ -23,10 +23,9 @@ const ProfileProductsFilters = () => {
     (state) => state.app,
   );
   const { loaded } = useSelector((state) => state.app);
-  const { isSelectedAll, filters, sections, items } = useSelector(
+  const { isSelectedAll, filters, sections, items, brands } = useSelector(
     (state) => state.profileProductsList,
   );
-  const { brands } = useSelector((state) => state.brandsList);
   const [roomTypesOptions, setRoomTypesOptions] = useState([]);
   const dispatch = useDispatch();
 
@@ -56,13 +55,6 @@ const ProfileProductsFilters = () => {
           [name]: value,
         }),
       );
-    } else if (name === 'section') {
-      dispatch(getItems({ section: value }));
-      dispatch(getProductsByFilter({ ...filters, [name]: value }));
-    } else if (name === 'brand') {
-      dispatch(getSections({ ...filters, brand: value }));
-      dispatch(getItems({ ...filters, brand: value }));
-      dispatch(getProductsByFilter({ ...filters, [name]: value }));
     } else {
       dispatch(getProductsByFilter({ ...filters, [name]: value }));
     }

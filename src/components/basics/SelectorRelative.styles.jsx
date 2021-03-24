@@ -4,6 +4,7 @@ import { COLOR_WHITE, SHADOW_GREY, COLOR_MINE_SHAFT, COLOR_LIGHTGREY } from '../
 
 export const Container = styled.div`
   position: relative;
+  width: ${({ width }) => width || '100%'};
 `;
 
 export const Content = styled.div`

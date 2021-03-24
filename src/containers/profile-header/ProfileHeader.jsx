@@ -8,7 +8,6 @@ import {
   ProfileName,
   ProfileCity,
   ProfileCompany,
-  ProfileContainer,
   ProfilePhoto,
   Photo,
   IconPhoto,
@@ -18,6 +17,8 @@ import {
   InputText,
   TextValue,
   DropIcon,
+  ButtonCreateContainer,
+  ProfileNameInputContainer
 } from './ProfileHeader.styles';
 import {
   PROFILE_HEADER,
@@ -30,18 +31,22 @@ import {
   ICON_ARROW_DOWN,
 } from '../../assets/Images';
 import { Button, Input, Loading } from '../../components/SpecComponents';
-import { getUserProfile, setUserProfile } from './ProfileHeader.actions';
+import { getUserProfile, setUserProfile, onShowEditProfilePicture } from './ProfileHeader.actions';
+import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import { Separator } from '../../components/navbar/navbar-profile/NavProfile.styles';
 import SelectorRelative from '../../components/basics/SelectorRelative';
-import { mapToSelector } from '../../helpers/helpers';
+import { COLOR_GREEN_UNDERLINE } from '../../config/constants/styled-vars';
 
 const ProductsHeader = () => {
   const [isEditting, setIsEditing] = useState(false);
-  const { user, error, loading } = useSelector((state) => state.profile);
+  const { user, loading } = useSelector((state) => state.profile);
   const { cities } = useSelector((state) => state.app);
   const [currentUser, setCurrentUser] = useState(user);
   const dispatch = useDispatch();
 
+  const handleCreateProduct = () => dispatch(onShowSpecCreateProductSuccess());
+
+  const handleEditProfilePicture = () => dispatch(onShowEditProfilePicture());
   
   const onSaveUserInfo = () => {
     dispatch(setUserProfile({ user: currentUser }));
@@ -60,19 +65,22 @@ const ProductsHeader = () => {
     const { first_name, last_name, id, city, company } = user;
     setCurrentUser({ first_name, last_name, id, city, company });
   }, [user]);
-  console.log('user', user);
 
   const mapToCities = (c) => ({ label: c.name, value: c.id, ...c });
+
   const onSelectCity = (city) =>
     setCurrentUser({ ...currentUser, city: city.value });
 
   const onChangeCompany = ({ target: { value } }) =>
     setCurrentUser({ ...currentUser, company: value });
 
+  const onChangeFirstName = ({ target: { value } }) =>
+    setCurrentUser({ ...currentUser, first_name: value });
 
-  if (loading) return <Loading />;
+  const onChangeLastName = ({ target: { value } }) =>
+    setCurrentUser({ ...currentUser, last_name: value });
 
-  return (
+  return loading && !user.profile_image ? <Loading/> : (
     <>
       <Container>
         <Header
@@ -81,15 +89,13 @@ const ProductsHeader = () => {
           srcSet={`${PROFILE_HEADER_2X} 2x, ${PROFILE_HEADER_3X} 3x`}
         />
         <ProfilePhoto>
-          <ProfileContainer>
             <Photo
-              sr={PROFILE_PHOTO_DEFAULT}
-              srcSet={`${PROFILE_PHOTO_DEFAULT_2X} 2x, ${PROFILE_PHOTO_DEFAULT_3X} 3x`}
+              sr={user.profile_image?.urls.medium || PROFILE_PHOTO_DEFAULT}
+              srcSet={`${user.profile_image?.urls.medium || PROFILE_PHOTO_DEFAULT_2X}, ${user.profile_image?.urls.small || PROFILE_PHOTO_DEFAULT_3X}`}
             />
-            <IconPhoto>
+            <IconPhoto onClick={handleEditProfilePicture}>
               <img src={ICON_CAMERA} />
             </IconPhoto>
-          </ProfileContainer>
         </ProfilePhoto>
         <ButtonContainer>
           <Button
@@ -98,33 +104,66 @@ const ProductsHeader = () => {
             style={{ backgroundColor: '#eeeeee' }}
             onClick={onClickEdit}
           >
-            Editar perfil
+            {
+              isEditting ? 'Guardar' : (<><i className="fa fa-pen" style={{ marginRight: '11px' }} />Editar perfil</>)
+            }
           </Button>
         </ButtonContainer>
       </Container>
       <ContentEdit>
-        <ProfileName>
-          {currentUser.first_name} {currentUser.last_name}
+        <ProfileName isEditting={isEditting}>
+          {isEditting ? 
+          (
+            <>
+              <ProfileNameInputContainer>
+                <Input
+                  type="underline"
+                  fontSize={20}
+                  onChange={onChangeFirstName}
+                  value={currentUser.first_name || ''}
+                  colorUnderline={COLOR_GREEN_UNDERLINE}
+                  placeholder="Nombre"
+                  textAlign="right"
+                />
+              </ProfileNameInputContainer>
+              <ProfileNameInputContainer>
+                <Input
+                  type="underline"
+                  fontSize={20}
+                  onChange={onChangeLastName}
+                  value={currentUser.last_name || ''}
+                  colorUnderline={COLOR_GREEN_UNDERLINE}
+                  placeholder="Apellido"
+                  textAlign="left"
+                />
+              </ProfileNameInputContainer>
+            </>
+          ) : <>{currentUser.first_name} {currentUser.last_name}</>}
         </ProfileName>
-        <ProfileCompany>
+        <ProfileCompany isEditting={isEditting}>
           {isEditting ? (
-            <Input onChange={onChangeCompany} value={currentUser.company || ''} />
+            <Input
+              type="underline"
+              fontSize={18}
+              onChange={onChangeCompany}
+              value={currentUser.company || ''}
+              colorUnderline={COLOR_GREEN_UNDERLINE}
+              placeholder="Empresa"
+              textAlign="center"
+              />
           ) : (
             <>{currentUser.company || 'Compañia sin especificar'}</>
           )}
         </ProfileCompany>
-        <ProfileCity>
+        <ProfileCity isEditting={isEditting}>
           {isEditting ? (
             <SelectorRelative
               name="sort"
-              type="underline"
               options={cities.map(mapToCities)}
               placeholder="Elige tu ciudad"
               value={currentUser.city}
               onChange={onSelectCity}
               maxHeight="180px"
-              width="200px"
-              style={{ margin: 24 }}
               renderInput={
                 <InputText>
                   <TextValue>
@@ -141,10 +180,15 @@ const ProductsHeader = () => {
       </ContentEdit>
       <Item>
         <ItemText>Mis Productos</ItemText>
+        <Separator />
         <UnderLine />
       </Item>
 
-      <Separator style={{ marginBottom: '85px', marginTop: 0 }} />
+      <ButtonCreateContainer>
+        <Button onClick={handleCreateProduct} variant="primary">
+          <i className="fa fa-plus" style={{ marginRight: '11px' }} /> Crear
+        </Button>
+      </ButtonCreateContainer>
     </>
   );
 };

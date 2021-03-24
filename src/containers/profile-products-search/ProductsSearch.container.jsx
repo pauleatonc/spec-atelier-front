@@ -2,7 +2,7 @@ import React, { useState }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, SearchContaienr } from './ProductsSearch.styles';
 import { SearchBar } from '../../components/SpecComponents';
-import { onGetProducts } from '../products-list/ProductsList.actions';
+import { onGetProducts } from '../profile-products/ProductsList.actions';
 
 const ProfileProductsSearch = () => {
   const dispatch = useDispatch();

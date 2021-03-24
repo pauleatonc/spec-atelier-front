@@ -88,6 +88,31 @@ export const patchJsonRequest = factoryRequest((url, payload, options) => {
 	).then((response) => response.json());
 });
 
+
+/**
+ * To do a PATCH request.
+ */
+ export const patchFormRequest = factoryRequest((url, payload, options) => {
+	const headers = generateHeaders();
+	const formData = new FormData();
+
+	Object.keys(payload).forEach((key) => {
+		if (!Array.isArray(payload[key])) {
+			formData.append(key, payload[key]);
+
+			return;
+		}
+
+		payload[key].forEach((item) => formData.append(key, item));
+	});
+
+	return cancellableFetch(
+		url,
+		{ body: formData, headers, method: 'PATCH' },
+		options,
+	).then((response) => response.json());
+});
+
 /**
  * To do a POST request with form data as content type.
  */

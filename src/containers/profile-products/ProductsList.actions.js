@@ -3,7 +3,7 @@ import { getProductById, getProducts } from '../../services/products.service';
 import { getItems as getItemsService } from '../../services/items.service';
 import { cleanObjectsAndArrays } from '../../modules/services';
 import { getSections as getServiceSections } from '../../services/sections.service';
-import { getClient as getServiceClients } from '../../services/clients.service';
+import { getBrands as getServiceBrands } from '../../services/brands.service';
 
 export const GET_PROFILE_PRODUCTS = 'GET_PROFILE_PRODUCTS';
 export const GET_PROFILE_PRODUCTS_ERROR = 'GET_PROFILE_PRODUCTS_ERROR';
@@ -18,6 +18,8 @@ export const GET_PROFILE_SECTIONS_ERROR = 'GET_PROFILE_SECTIONS_ERROR';
 export const GET_PROFILE_SECTIONS_SUCCESS = 'GET_PROFILE_SECTIONS_SUCCESS';
 export const GET_PROFILE_ITEMS_SUCCESS = 'GET_PROFILE_ITEMS_SUCCESS';
 export const GET_PROFILE_ITEMS_ERROR = 'GET_PROFILE_ITEMS_ERROR';
+export const GET_PROFILE_BRANDS_SUCCESS = 'GET_PROFILE_BRANDS_SUCCESS';
+export const GET_PROFILE_BRANDS_ERROR = 'GET_PROFILE_BRANDS_ERROR';
 
 export const CLEAN_PRODUCT_LIST_STORE = 'CLEAN_PRODUCT_LIST_STORE';
 export const ON_SELECT_ALL = 'ON_SELECT_ALL';
@@ -57,6 +59,7 @@ export const onGetProducts = filters => async dispatch => {
 export const getProductsByFilter = filters => async dispatch => {
   try {
     const { products } = await getProducts(cleanObjectsAndArrays(filters), GET_PROFILE_PRODUCTS_BY_FILTER);
+    dispatch(onGetFiltersByFilters(filters));
     return dispatch(
       onActionCreator(
         GET_PROFILE_PRODUCTS_BY_FILTER,
@@ -107,35 +110,41 @@ export const onGetProductsByFiltersAll = () => async dispatch => {
   }
 }
 
-export const getSections = ({ client, section, item } = {}) => async dispatch => {
+export const setSelectedAll = value => dispatch => {
+  dispatch(onGetFiltersByFilters());
+  dispatch(onActionCreator(GET_PROFILE_PRODUCTS_FILTERS_ALL, { isSelectedAll: value }));
+}
+
+export const onGetFiltersByFilters = filters => dispatch => {
+  console.log('sss');
+  dispatch(getBrands({ ...filters }));
+  dispatch(getSections({ ...filters }));
+  dispatch(getItems({ ...filters }));
+}
+
+export const getSections = filters => async dispatch => {
   try {
-    const { sections } = await getServiceSections(cleanObjectsAndArrays({ client, section, item, with_products: true  }));
+    const { sections } = await getServiceSections(cleanObjectsAndArrays({ ...filters, with_products: true }));
     return dispatch(onActionCreator(GET_PROFILE_SECTIONS_SUCCESS, { sections }));
   } catch (error) {
     return dispatch(onActionCreator(GET_PROFILE_SECTIONS_ERROR, { error: true, nativeError: error }));
   }
 };
 
-export const setSelectedAll = value => dispatch => dispatch(onActionCreator(GET_PROFILE_PRODUCTS_FILTERS_ALL, { isSelectedAll: value }))
-
-export const getItems = ({ client, section, item } = {})  => async dispatch => {
+export const getItems = filters  => async dispatch => {
   try {
-    const { items } = await getItemsService(cleanObjectsAndArrays(({ client, section, item, with_products: true }) ));
+    const { items } = await getItemsService(cleanObjectsAndArrays({ ...filters, with_products: true }));
     return dispatch(onActionCreator(GET_PROFILE_ITEMS_SUCCESS, { items }));
   } catch (error) {
     return dispatch(onActionCreator(GET_PROFILE_ITEMS_ERROR, { error: true, nativeError: error }));
   }
 };
 
-export const getClients = filters => async dispatch => {
+export const getBrands = filters => async dispatch => {
   try {
-    const { items } = await getServiceClients(cleanObjectsAndArrays(filters));
-    return dispatch(onActionCreator(GET_PROFILE_ITEMS_SUCCESS, { items, with_products: true }));
+    const { brands } = await getServiceBrands(cleanObjectsAndArrays({ ...filters, with_products: true }));
+    return dispatch(onActionCreator(GET_PROFILE_BRANDS_SUCCESS, { brands }));
   } catch (error) {
-    return dispatch(onActionCreator(GET_PROFILE_ITEMS_ERROR, { error: true, nativeError: error }));
+    return dispatch(onActionCreator(GET_PROFILE_BRANDS_ERROR, { error: true, nativeError: error }));
   }
 };
-
-
-
-

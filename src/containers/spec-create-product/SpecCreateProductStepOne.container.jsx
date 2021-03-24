@@ -7,16 +7,11 @@ import {
 } from './SpecCreateProduct.actions';
 import { onGetSpecProductsSections } from '../spec-products-sections/SpecProductsSections.actions';
 import { onGetSpecProductsItems } from '../spec-products-items/SpecProductsItems.actions';
-import {
-	useInput,
-	useMultiSelect,
-	useSelect,
-} from '../../components/inputs/Inputs.hooks';
+import { useInput, useMultiSelect } from '../../components/inputs/Inputs.hooks';
 import useModal from '../../components/layouts/ModalLayout.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import StepsBubbles from '../../components/basics/StepsBubbles';
 import Input from '../../components/inputs/Input';
-import Select from '../../components/inputs/Select';
 import Button from '../../components/buttons/Button';
 import {
 	Root,
@@ -29,12 +24,13 @@ import {
 } from './SpecCreateProduct.styles';
 import closeSource from '../../assets/images/icons/close.svg';
 import MultiSelect from '../../components/inputs/MultiSelect';
+import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 /**
  * The SpecCreateProductStepOne's container.
  */
 const SpecCreateProductStepOne = () => {
-	const { name, item, section, show, system } = useSelector(
+	const { name, show } = useSelector(
 		(state) => state.specCreateProduct.stepOne,
 	);
 	const { collection: sections } = useSelector(
@@ -198,7 +194,7 @@ const SpecCreateProductStepOne = () => {
 				<Footer>
 					<Button
 						disabled={disabledNext}
-						variant="primary"
+						variant={VARIANTS_BUTTON.PRIMARY}
 						width="163px"
 						onClick={handleNext}
 					>

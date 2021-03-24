@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import {
   COLOR_BLACK,
   COLOR_GREY,
-  COLOR_LIGHTERGREY,
   COLOR_LIGHTGREY,
   COLOR_PRIMARY,
   COLOR_WHITE,
   VIEW_HEADER_HEIGHT,
+  COLOR_GREEN_UNDERLINE
 } from '../../config/constants/styled-vars';
 
 const position_bottom = 30;
@@ -35,29 +35,21 @@ export const ProfilePhoto = styled.div`
   width: 191px;
   height: 190px;
   padding: 1px 1px 2px 2px;
-  border: solid 1px #ffffff;
+  border: solid 5px #ffffff;
   position: absolute;
   bottom: -${position_bottom}px;
-  background-color: ${COLOR_WHITE};
   left: 50%;
   margin-left: -95px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-export const ProfileContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
 `;
 
 export const Photo = styled.img`
-  height: 100%;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
+  max-width: 360px;
+  border-radius: 50%;
 `;
 
 export const IconPhoto = styled.div`
@@ -77,7 +69,8 @@ export const ContentEdit = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 60px;
+  max-width: 340px;
+  margin: 0 auto 60px auto;
 `;
 
 export const Row = styled.div`
@@ -85,10 +78,11 @@ export const Row = styled.div`
 `;
 
 export const ProfileName = styled.div`
-  width: 167px;
-  height: 24px;
-  margin: 12px;
-  font-family: Roboto;
+  display: flex;
+  width: 100%;
+  justify-content: ${({ isEditting }) => isEditting ? 'space-between' : 'center'};;
+  margin-bottom: ${({ isEditting }) => isEditting ? '4px' : '12px'};
+  font-family: Lato;
   font-size: 20px;
   font-weight: bold;
   font-stretch: normal;
@@ -96,11 +90,14 @@ export const ProfileName = styled.div`
   line-height: normal;
   letter-spacing: 1.25px;
   color: ${COLOR_BLACK};
+  -webkit-text-stroke: 1px ${COLOR_BLACK};
 `
 
 export const ProfileCompany = styled.div`
-  height: 22px;
-  margin: 8px 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 8px;
   font-family: Lato;
   -webkit-text-stroke: 1px ${COLOR_GREY};
   font-size: 18px;
@@ -114,8 +111,9 @@ export const ProfileCompany = styled.div`
 `;
 
 export const ProfileCity = styled.div`
-  height: 22px;
-  margin: 2px 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
   font-family: Lato;
   -webkit-text-stroke: 1px ${COLOR_GREY};
   font-size: 18px;
@@ -141,7 +139,8 @@ export const Item = styled.div`
   text-decoration: none;
   &:focus, &:hover, &:visited, &:link, &:active {
     text-decoration: none;
-  }
+  };
+  padding: 0 81px;
 `;
 
 export const ItemText = styled.span`
@@ -153,32 +152,34 @@ export const ItemText = styled.span`
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
+  margin-bottom: 10px;
 `;
 
 export const UnderLine = styled.span`
   width: 100px;
   height: 3px;
-  margin: 8px 2px 4px 2px;
+  margin-bottom: 27px;
   border-radius: 1.5px;
   background-color: ${COLOR_PRIMARY};
 `;
 
 export const InputText = styled.div`
   white-space: nowrap;
-  padding: 4px 16px 8px 16px;
+  padding: 10px 10px 10px 0;
   border: 0; 
   outline: 0;
   display: flex;
   flex: 1;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid ${COLOR_LIGHTGREY};
+  border-bottom: 1px solid ${COLOR_GREEN_UNDERLINE};
   font-family: Lato;
-  font-size: 12px;
+  font-size: 18px;
   letter-spacing: 1px;
   color: ${COLOR_BLACK};
   border-radius: 0;
-  width: 240px;
+  width: 100%;
+  justify-content: center;
 `
 export const DropIcon = styled.img`
   cursor: pointer;
@@ -188,4 +189,14 @@ export const TextValue = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-`
+`;
+
+export const ButtonCreateContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 81px;
+`;
+
+export const ProfileNameInputContainer = styled.div`
+  max-width: 160px;
+`;

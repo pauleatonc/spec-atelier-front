@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutAction } from '../../../containers/auth/auth.actions';
 import {
   ProfileButton,
@@ -8,10 +8,12 @@ import {
   OptionsContent,
   Option,
   Separator,
+  ProfilePictureContainer
 } from './NavProfile.styles';
 
 const NavProfile = () => {
   const [showOptions, setShowOtions] = useState(false);
+  const { user } = useSelector(state => state.profile);
   const togglOptions = () => setShowOtions(!showOptions);
   const dispatch = useDispatch();
   const onLogout = () => dispatch(logoutAction());
@@ -23,7 +25,9 @@ const NavProfile = () => {
         onKeyPress={togglOptions}
         isOpen={showOptions}
       >
-        <i className="fas fa-user-circle" />
+        <ProfilePictureContainer>
+        {!!user?.profile_image?.urls ? <img src={user?.profile_image?.urls.thumb} /> : <i className="fas fa-user-circle" />}
+        </ProfilePictureContainer>
       </ProfileButton>
       <ProfileOptions show={showOptions}>
         <OptionsContent>

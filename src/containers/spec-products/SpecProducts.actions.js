@@ -14,7 +14,7 @@ import {
 	getMySpecs,
 	getRoomTypes as getRoomTypesService,
 } from '../../services/specs.service';
-import { cleanObjectsAndArrays, cleanParams } from '../../modules/services';
+import { cleanObjectsAndArrays } from '../../modules/services';
 
 export const GET_SPEC_PRODUCTS = 'GET_SPEC_PRODUCTS';
 export const GET_SPEC_PRODUCTS_ERROR = 'GET_SPEC_PRODUCTS_ERROR';
@@ -62,7 +62,6 @@ export const onGetSpecProducts = ({ key = '', value } = {}) => async (
 			cleanObjectsAndArrays(filters),
 			GET_SPEC_PRODUCTS,
 		);
-
 		return dispatch(
 			onActionCreator(GET_SPEC_PRODUCTS_SUCCESS, {
 				nextPage: response?.products?.next_page,
@@ -141,17 +140,22 @@ export const UPDATE_SPEC_PRODUCTS_FILTER_SORT =
 	'UPDATE_SPEC_PRODUCTS_FILTER_SORT';
 
 export const GET_SPEC_PRODUCTS_BY_FILTERS = 'GET_SPEC_PRODUCTS_BY_FILTERS';
-export const onGetSpecProductsByFilters = (payload) => (dispatch) =>
+export const onGetSpecProductsByFilters = (payload) => (dispatch, getState) => {
 	batch(() => {
 		dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTERS, payload));
+		dispatch(onGetBrands({ ...getState().specProducts.filters }));
+		dispatch(getMySpecifications({ ...getState().specProducts.filters }));
 		dispatch(onGetSpecProducts());
 	});
+}
 
 export const GET_SPEC_PRODUCTS_BY_FILTERS_ALL =
 	'GET_SPEC_PRODUCTS_BY_FILTERS_ALL';
 export const onGetSpecProductsByFiltersAll = () => (dispatch) =>
 	batch(() => {
 		dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTERS_ALL));
+		dispatch(onGetBrands());
+		dispatch(getMySpecifications());
 		dispatch(onGetSpecProducts());
 	});
 
@@ -235,14 +239,12 @@ export const onShowSpecProducts = () => (dispatch) =>
 
 export const GET_SPEC_MYSPEC = 'HIDE_SPEC_PRODUCTS';
 export const GET_SPEC_MYSPEC_ERROR = 'HIDE_SPEC_PRODUCTS_SUCCESS';
-export const getMySpecifications = () => async (dispatch) => {
+export const getMySpecifications = filters => async (dispatch) => {
 	try {
-		const { specifications } = await getMySpecs({
-			params: { with_products: true },
-		});
+		const { specifications } = await getMySpecs(cleanObjectsAndArrays({ ...filters, with_products: true }));
 		dispatch(onActionCreator(GET_SPEC_MYSPEC, { specifications }));
 	} catch (error) {
-		console.log('err', error);
+		console.error('err', error);
 		dispatch(onActionCreator(GET_SPEC_MYSPEC_ERROR, { specifications: [] }));
 	}
 };

@@ -91,7 +91,7 @@ export const getProject = ({ id }) => async (dispatch, getState) => {
 		};
 		dispatch(onActionCreator(GET_PROJECT, { project, loading: false }));
 	} catch (error) {
-		console.log('error', error);
+		console.error('error', error);
 		return dispatch(
 			onActionCreator(GET_PROJECT_ERROR, { loading: false, error }),
 		);

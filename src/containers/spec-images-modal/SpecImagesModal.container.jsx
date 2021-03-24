@@ -9,6 +9,7 @@ import Button from '../../components/buttons/Button';
 import { Root, Header, Title, CloseIcon, Body, Figures, Figure, Image, CheckIcon, Footer } from './SpecImagesModal.styles';
 import closeSource from '../../assets/images/icons/close.svg';
 import checkSource from '../../assets/images/icons/check.svg';
+import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 /**
  * The SpecImagesModal's container.
@@ -62,7 +63,7 @@ const SpecImagesModal = () => {
         <Footer>
           <Button
             disabled={disableSubmit}
-            variant="primary"
+            variant={VARIANTS_BUTTON.PRIMARY}
             onClick={handleSubmit(selectedProductBlock.id, selectedImage)}
           >
             Añadir

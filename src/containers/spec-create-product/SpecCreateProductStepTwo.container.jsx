@@ -16,6 +16,7 @@ import Input from '../../components/inputs/Input';
 import Button from '../../components/buttons/Button';
 import { Root, Header, Title, CloseIcon, Body, Section, Footer, Gap } from './SpecCreateProduct.styles';
 import closeSource from '../../assets/images/icons/close.svg';
+import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 /**
  * The SpecCreateProductStepTwo's container.
@@ -103,11 +104,11 @@ const SpecCreateProductStepTwo = () => {
           </Section>
         </Body>
         <Footer>
-          <Button variant="cancel" width="163px" onClick={handlePrev}>Atrás</Button>
+          <Button variant={VARIANTS_BUTTON.CANCEL} width="163px" onClick={handlePrev}>Atrás</Button>
           <Gap />
           <Button
             disabled={disabledNext}
-            variant="primary"
+            variant={VARIANTS_BUTTON.PRIMARY}
             width="163px"
             onClick={handleNext}
           >

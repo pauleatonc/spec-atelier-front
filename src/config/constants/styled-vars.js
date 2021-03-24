@@ -16,6 +16,7 @@ export const COLOR_DARKGREY =  '#757575';
 export const COLOR_DARKESTGREY = 'rgba(128, 128, 128, 1)';
 export const COLOR_MINE_SHAFT = '#212121';
 export const COLOR_MERCURY = '#E5E5E5';
+export const COLOR_GREEN_UNDERLINE = '#19bea8'
 
 export const SHADOW_GREY = '0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.14);'
 

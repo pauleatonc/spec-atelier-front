@@ -10,6 +10,7 @@ import AttachedDocuments from '../../components/attachments/AttachedDocuments';
 import Button from '../../components/buttons/Button';
 import { Root, Loading, Header, Title, CloseIcon, Body, Section, Footer, Gap } from './SpecCreateProduct.styles';
 import closeSource from '../../assets/images/icons/close.svg';
+import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 /**
  * The SpecCreateProductStepThree's container.
@@ -81,10 +82,10 @@ const SpecCreateProductStepThree = () => {
         <Footer>
           {!loading && (
             <>
-              <Button variant="cancel" width="163px" onClick={handlePrev}>Atrás</Button>
+              <Button variant={VARIANTS_BUTTON.CANCEL} width="163px" onClick={handlePrev}>Atrás</Button>
               <Gap />
               <Button
-                variant="primary"
+                variant={VARIANTS_BUTTON.PRIMARY}
                 width="163px"
                 onClick={handleCreate}
               >

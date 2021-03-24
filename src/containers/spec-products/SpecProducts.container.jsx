@@ -11,8 +11,7 @@ import {
   onGetSpecProductsBySort,
   onHideSpecProducts,
   getMySpecifications,
-  getRoomTypes,
-  onGetSpecProductsProjectType,
+  getRoomTypes
 } from './SpecProducts.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import { useComboBox } from '../../components/inputs/Inputs.hooks';
@@ -27,13 +26,14 @@ import { Overlay, Root, Header, HeaderSearch, HeaderFilters, Body, BodyHeader, S
 import { mapToSelector } from '../../helpers/helpers';
 import CreateProduct from '../../components/product/CreateProduct';
 import { onShowSpecCreateProductFromItemSuccess } from '../spec-create-product/SpecCreateProduct.actions';
+import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 /**
  * The SpecProductsList's container.
  */
 const SpecProductsList = () => {
   const { id: specID } = useParams();
-  const { project_types: projectTypes } = useSelector(state => state.app);
+  const { project_types: projectTypes, room_types: roomTypes } = useSelector(state => state.app);
   const { brands } = useSelector(state => state.brandsList);
   const selectedProducts = useSelector(state => state.specDocument.blocks?.filter(block => block.type === 'Product')) || [];
   const {
@@ -44,7 +44,6 @@ const SpecProductsList = () => {
     total,
     filters,
     specifications = [],
-    room_types: roomTypes = [],
   } = useSelector(state => state.specProducts);
   const dispatch = useDispatch();
 
@@ -271,7 +270,7 @@ const SpecProductsList = () => {
           {!!products.length && nextPage !== null && (
             <LoadMore>
               {loading && <Loading>Cargando...</Loading>}
-              {!loading && <Button variant="gray" onClick={handleLoadMoreClick}>Ver más</Button>}
+              {!loading && <Button variant={VARIANTS_BUTTON.GRAY} onClick={handleLoadMoreClick}>Ver más</Button>}
             </LoadMore>
           )}
         </Body>
