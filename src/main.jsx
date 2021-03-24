@@ -25,10 +25,14 @@ import './assets/styles/main.scss';
 
 import PublicRoute from './containers/routes/PublicRoute';
 import PrivateRoute from './containers/routes/PrivateRoute';
+import { APP_ENV } from './config/constants/environment';
 
 const Main = () => {
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+  if (APP_ENV === 'production') {
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  }
+
   return (
     <Provider store={store}>
       {/* TODO: Add App Loading component */}

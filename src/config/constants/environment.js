@@ -14,4 +14,4 @@ export const FIREBASE_MSG_SENDER_ID = process.env.FIREBASE_MSG_SENDER_ID || '';
 export const FIREBASE_APP_ID = process.env.FIREBASE_APP_ID || '';
 export const FIREBASE_MEASUREMENT_ID = process.env.FIREBASE_MEASUREMENT_ID || '';
 export const FIREBASE_DATABASE_URL = process.env.FIREBASE_DATABASE_URL || '';
-export const FIREBASE_AUTH_DOMAIN = process.env.FIREBASE_DATABASE_URL || '';
+export const FIREBASE_AUTH_DOMAIN = process.env.FIREBASE_AUTH_DOMAIN || '';
