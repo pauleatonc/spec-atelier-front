@@ -18,7 +18,7 @@ import {
 
 const items = [
   { id: 'products', label: 'Productos', to: '/products' },
-  { id: 'collaborators', label: 'Colaboradores', to: '/collaborators' },
+  { id: 'collaborators', label: 'Empresas', to: '/collaborators' },
 ];
 
 const NavBarLogin = ({ fixed }) => {

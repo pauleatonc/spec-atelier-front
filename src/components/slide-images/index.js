@@ -67,7 +67,7 @@ const SliderImages = ({ images }) => {
 	return (
 		<div className="slide">
 			<div className="slide__inner">
-				<h1 className="slide__inner__title">Principales colaboradores</h1>
+				<h1 className="slide__inner__title">Principales empresas</h1>
 				<Slider {...settings}>{handlePrintImages(images)}</Slider>
 			</div>
 		</div>
