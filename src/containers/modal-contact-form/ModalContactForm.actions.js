@@ -10,7 +10,6 @@ export const CLOSE_CONTACT_FORM_MODAL = 'CLOSE_CONTACT_FORM_MODAL';
 
 // async calls
 export const sendContactData = (newContact, type) => async dispatch => {
-  console.log(newContact)
   try {
     if (type === 'product') {
       await postContactProduct({ productId: newContact.product_id, contact: newContact });

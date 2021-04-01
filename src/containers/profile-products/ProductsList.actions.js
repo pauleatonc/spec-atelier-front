@@ -116,7 +116,6 @@ export const setSelectedAll = value => dispatch => {
 }
 
 export const onGetFiltersByFilters = filters => dispatch => {
-  console.log('sss');
   dispatch(getBrands({ ...filters }));
   dispatch(getSections({ ...filters }));
   dispatch(getItems({ ...filters }));

@@ -206,10 +206,10 @@ const SpecDocument = () => {
         </Dropdown>
       )}
       <Page>
-        <DraggableList onChange={handleBlocksSortChange}>
+        <DraggableList onChange={handleBlocksSortChange} blocks={blocks}>
           {blocks.map(block => {
             return ( 
-              <Block disabled={block.type === 'Section'} id={block.id} key={block.id} margin={getBlockMarginByType(block.type)}>
+              <Block disabled={block.type === 'Section' || block.type === 'Item'} id={block.id} key={block.id} margin={getBlockMarginByType(block.type)}>
                 {getBlockWrapperByType(block.type, (
                   <>
                     {showBlockEditor === block.id && (
