@@ -111,7 +111,7 @@ const SpecModalProduct = () => {
                       </Button>
                     )
                   }
-                  <DownloadDocumentsIcons pdfs={product?.pdfs} dwg={product?.dwg} bim={product?.bim} isDetail />
+                  <DownloadDocumentsIcons pdfs={product?.pdfs} dwg={product?.dwg} bim={product?.bim} isDetail productId={product.id}/>
                 </Actions>
               </InfoContent>
             </InfoContainer>

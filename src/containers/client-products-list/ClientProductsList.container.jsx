@@ -45,6 +45,7 @@ const ClientProductsList = () => {
           pdfs={product?.pdfs}
           dwg={product?.dwg}
           bim={product?.bim}
+          productId={product.id}
         />
       ))}
     </Container>
