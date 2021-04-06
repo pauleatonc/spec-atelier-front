@@ -40,7 +40,6 @@ const ProductCard = props => {
     canAdd,
     productId
   } = props;
-  const analytics = firebase.analytics();
   const [hover, setHover] = useState(false);
   const handleCardMouseEnter = () => setHover(true);
   const handleCardMouseLeave = () => setHover(false);
@@ -52,7 +51,7 @@ const ProductCard = props => {
 
   const handleClickSeeMore = event => {
     if (APP_ENV === 'production') {
-      analytics.logEvent(ANALYTICS_EVENTS.PRODUCT_VIEW, { productId });
+      firebase.analytics().logEvent(ANALYTICS_EVENTS.PRODUCT_VIEW, { productId });
     }
     onClickSeeMore(event)
   }

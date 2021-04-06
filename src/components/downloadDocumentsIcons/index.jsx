@@ -7,11 +7,10 @@ import { APP_ENV } from '../../config/constants/environment';
 import { Icons, Icon } from './styles';
 
 const DownloadDocumentsIcons = ({ pdfs, dwg, bim, positionToolTip = "bottom", isDetail = false, productId }) => {
-    const analytics = firebase.analytics();
     const titleSpecPdf = pdfs?.map(s => s.name).join(' - ') || '';
     const handleIconClick = (documents, eventName) => event => {
         if (APP_ENV === 'production') {
-            analytics.logEvent(eventName, { productId });
+            firebase.analytics().logEvent(eventName, { productId });
         }
         event.stopPropagation();
         documents.forEach(async doc => {
