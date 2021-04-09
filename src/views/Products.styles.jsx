@@ -15,3 +15,7 @@ export const ButtonCreateContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
+export const PaddingContainer = styled.div`
+  padding: 0 81px;
+`;

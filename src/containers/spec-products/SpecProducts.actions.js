@@ -2,6 +2,7 @@ import { batch } from 'react-redux';
 import onActionCreator from '../../config/store/helpers';
 import { getProducts } from '../../services/products.service';
 import { getClients as onGetClients } from '../clients-list/ClientsList.actions';
+import { getBrands as onGetBrands } from '../brands-list/BrandsList.actions';
 import {
 	HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS,
 	onShowSpecProductsSections,
@@ -147,7 +148,7 @@ export const onGetSpecProductsByFilters = (payload) => (dispatch, getState) => {
 		dispatch(getMySpecifications({ ...getState().specProducts.filters }));
 		dispatch(onGetSpecProducts());
 	});
-}
+};
 
 export const GET_SPEC_PRODUCTS_BY_FILTERS_ALL =
 	'GET_SPEC_PRODUCTS_BY_FILTERS_ALL';
@@ -239,9 +240,11 @@ export const onShowSpecProducts = () => (dispatch) =>
 
 export const GET_SPEC_MYSPEC = 'HIDE_SPEC_PRODUCTS';
 export const GET_SPEC_MYSPEC_ERROR = 'HIDE_SPEC_PRODUCTS_SUCCESS';
-export const getMySpecifications = filters => async (dispatch) => {
+export const getMySpecifications = (filters) => async (dispatch) => {
 	try {
-		const { specifications } = await getMySpecs(cleanObjectsAndArrays({ ...filters, with_products: true }));
+		const { specifications } = await getMySpecs(
+			cleanObjectsAndArrays({ ...filters, with_products: true }),
+		);
 		dispatch(onActionCreator(GET_SPEC_MYSPEC, { specifications }));
 	} catch (error) {
 		console.error('err', error);

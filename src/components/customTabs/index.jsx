@@ -1,26 +1,34 @@
 import React, { useState } from 'react';
 
 import TabButtons from './components/TabButtons';
-import {Container} from  './styles';
-  
-const CustomTabs  = ({ children }) =>{
-    const [isActiveTab, setIsActiveTab] = useState(children[0].props.title)
-    const handleChangeTab = tab => setIsActiveTab(tab);
+import { Container, BorderContainer } from './styles';
 
-    let content;
-    let tabs = [];
+const CustomTabs = ({ children, isProfileStatsTabs }) => {
+	const [isActiveTab, setIsActiveTab] = useState(children[0].props.title);
+	const handleChangeTab = (tab) => setIsActiveTab(tab);
 
-    return (
-        <Container>
-            {React.Children.map(children, child => {
-                tabs.push(child.props.title)
-                if (child.props.title === isActiveTab) content = child.props.children
-            })}
-            <TabButtons isActive={isActiveTab} tabs={tabs} onChange={handleChangeTab}/>
-            <>{content}</>
-        </Container>
-    );
-    
-}
-   
+	let content;
+	let tabs = [];
+
+	return (
+		<Container>
+			{React.Children.map(children, (child) => {
+				if (child?.props?.title) {
+					tabs.push(child.props.title);
+					if (child.props.title === isActiveTab) content = child.props.children;
+				}
+			})}
+			<BorderContainer isProfileStatsTabs={isProfileStatsTabs}>
+				<TabButtons
+					isActive={isActiveTab}
+					tabs={tabs}
+					onChange={handleChangeTab}
+					isProfileStatsTabs={isProfileStatsTabs}
+				/>
+				<>{content}</>
+			</BorderContainer>
+		</Container>
+	);
+};
+
 export default CustomTabs;
