@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import debounce from 'lodash.debounce';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, ListContainer, Separator } from './ProductsList.styles';
 import { onGetProducts } from './ProductsList.actions';
@@ -10,35 +11,60 @@ import ProductsSearchContainer from '../products-search/ProductsSearch.container
 import ProductsFiltersContainer from '../products-filters/ProductsFilters.container';
 
 const ProductList = () => {
+	const dispatch = useDispatch();
 	const { products, error, loading, filters } = useSelector(
 		(state) => state.productsList,
 	);
-	const dispatch = useDispatch();
+
+	const [keyword, setKeywords] = useState(filters.keyword || '');
+
 	const onClickProduct = (selectedProduct) => (event) => {
 		event.stopPropagation();
 		dispatch(getProduct(selectedProduct));
 	};
 
-	useEffect(() => {
-		if (!products.length)
-			dispatch(
-				onGetProducts({
-					...filters,
-					page: 0,
-					limit: 10,
-				}),
-			);
-	}, []);
+	const debouncedSave = useCallback(
+		debounce(
+			(name, newValue) =>
+				dispatch(
+					onGetProducts({
+						...filters,
+						[name]: newValue,
+					}),
+				),
+			700,
+		),
+		[],
+	);
 
-	if (loading) return <Loading />;
-	if (error) return <ErrorMessage />;
-	if (!products.length) return <Container>No Hay Productos</Container>;
+	const onChangeParams = ({ target: { name, value } }) => {
+		setKeywords(value);
+		debouncedSave(name, value);
+	};
+
+	useEffect(() => {
+		dispatch(
+			onGetProducts({
+				...filters,
+			}),
+		);
+	}, []);
 
 	return (
 		<Container>
-			<ProductsSearchContainer />
+			<ProductsSearchContainer
+				keyword={keyword}
+				onChangeParams={onChangeParams}
+			/>
 			<ProductsFiltersContainer />
 			<Separator />
+			{error && <ErrorMessage />}
+			{loading && (
+				<Container>
+					<Loading />
+				</Container>
+			)}
+			{!products.length && !loading && <Container>No Hay Productos</Container>}
 			<ListContainer>
 				{products.map((product) => (
 					<ProductCard
