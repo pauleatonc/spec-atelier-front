@@ -7,7 +7,6 @@ import {
 	GET_ITEMS_SUCCESS,
 	GET_ITEMS_ERROR,
 	GET_MORE_PRODUCTS,
-	ON_SELECT_ALL,
 	CLEAN_PRODUCT_LIST_STORE,
 	GET_BRANDS_SUCCESS,
 	GET_BRANDS_ERROR,
@@ -59,7 +58,6 @@ const productsListReducer = (
 				...state,
 				filters: { ...payload.filters },
 				products: [...state.products, ...(payload?.products || [])],
-				loading: false,
 				error: false,
 			};
 		}
@@ -96,13 +94,6 @@ const productsListReducer = (
 		case GET_ITEMS_ERROR:
 		case GET_BRANDS_ERROR:
 			return { ...state };
-		case ON_SELECT_ALL:
-			return {
-				...state,
-				isSelectedAll: payload.isSelectedAll,
-				loading: false,
-				error: false,
-			};
 		case CLEAN_PRODUCT_LIST_STORE:
 			return {
 				...productsListInitialState,

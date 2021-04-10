@@ -20,7 +20,6 @@ export const GET_BRANDS_SUCCESS = 'GET_BRANDS_SUCCESS';
 export const GET_BRANDS_ERROR = 'GET_BRANDS_ERROR';
 
 export const CLEAN_PRODUCT_LIST_STORE = 'CLEAN_PRODUCT_LIST_STORE';
-export const ON_SELECT_ALL = 'ON_SELECT_ALL';
 
 export const cleanStoreProductList = () => (dispatch) =>
 	dispatch(onActionCreator(CLEAN_PRODUCT_LIST_STORE));

@@ -6,7 +6,6 @@ import {
 	setSelectedAll,
 	onGetProductsByFilter,
 	onGetProducts,
-	cleanStoreProductList,
 	getBrands,
 } from '../products-list/ProductsList.actions';
 import { productsListInitialState } from '../products-list/ProductsList.reducer';
@@ -15,6 +14,7 @@ import { Container, Content, Text } from './ProductsFilters.styles';
 import { getAppData } from '../../config/store/app-store/app.actions';
 import ButtonComboBox from './ButtonComboBox';
 import { mapToSelector } from '../../helpers/helpers';
+import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
 
 /**
  * The ProductsFilters's container.
@@ -72,14 +72,13 @@ const ProductsFilters = () => {
 		dispatch(getSections());
 		dispatch(getItems());
 		setRoomTypesOptions(roomTypes.map(mapToSelector));
-		return () => dispatch(cleanStoreProductList());
 	}, []);
 
-	useEffect(() => {
+	useDidUpdateEffect(() => {
 		if (roomTypes) setRoomTypesOptions(roomTypes.map(mapToSelector));
 	}, [roomTypes]);
 
-	useEffect(() => {
+	useDidUpdateEffect(() => {
 		const {
 			section = [],
 			room_type = [],
@@ -100,7 +99,15 @@ const ProductsFilters = () => {
 		) {
 			dispatch(setSelectedAll(productsListInitialState.filters));
 		}
-	}, [filters]);
+	}, [
+		filters.section,
+		filters.room_type,
+		filters.project_type,
+		filters.item,
+		filters.brand,
+		filters.sort,
+		filters.keyword,
+	]);
 
 	return (
 		<Container>
