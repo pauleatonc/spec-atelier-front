@@ -10,8 +10,6 @@ export const GET_PRODUCTS_ERROR = 'GET_PRODUCTS_ERROR';
 export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCTS_SUCCESS';
 export const GET_PRODUCT = 'GET_PRODUCT';
 export const GET_PRODUCT_ERROR = 'GET_PRODUCT_ERROR';
-export const GET_PRODUCTS_BY_FILTER = 'GET_PRODUCTS_BY_FILTER';
-export const GET_PRODUCTS_FILTERS_ALL = 'UPDATE_PRODUCTS_FILTERS_ALL';
 export const GET_MORE_PRODUCTS = 'GET_MORE_PRODUCTS';
 export const GET_SECTIONS = 'GET_SECTIONS';
 export const GET_SECTIONS_ERROR = 'GET_SECTIONS_ERROR';
@@ -44,19 +42,19 @@ export const getProduct = (clientId) => async (dispatch) => {
 	}
 };
 
-export const onGetProducts = (filters) => async (dispatch) => {
+export const onGetProducts = (filters, extraPayload = {}) => async (
+	dispatch,
+) => {
 	dispatch(onActionCreator(GET_PRODUCTS));
 	try {
-		const { products } = await getProducts(
-			cleanObjectsAndArrays(filters),
-			GET_PRODUCTS,
-		);
+		const { products } = await getProducts(cleanObjectsAndArrays(filters));
 		return dispatch(
 			onActionCreator(GET_PRODUCTS_SUCCESS, {
 				nextPage: products?.next_page,
 				products: products?.list || products || [],
 				total: products?.total || 0,
 				filters,
+				...extraPayload,
 			}),
 		);
 	} catch (error) {
@@ -64,79 +62,6 @@ export const onGetProducts = (filters) => async (dispatch) => {
 			onActionCreator(GET_PRODUCTS_ERROR, { error: true, nativeError: error }),
 		);
 	}
-};
-
-export const getProductsByFilter = (filters) => async (dispatch) => {
-	try {
-		const { products } = await getProducts(
-			cleanObjectsAndArrays(filters),
-			GET_PRODUCTS_BY_FILTER,
-		);
-		dispatch(onGetFiltersByFilters(filters));
-		return dispatch(
-			onActionCreator(GET_PRODUCTS_BY_FILTER, {
-				nextPage: products?.next_page,
-				products: products?.list || products || [],
-				total: products?.total || 0,
-				filters,
-			}),
-		);
-	} catch (error) {
-		return dispatch(
-			onActionCreator(GET_PRODUCTS_ERROR, { error: true, nativeError: error }),
-		);
-	}
-};
-
-export const getMoreProducts = (filters) => async (dispatch) => {
-	try {
-		const { products } = await getProducts(
-			cleanObjectsAndArrays(filters),
-			GET_PRODUCTS,
-		);
-		return dispatch(
-			onActionCreator(GET_MORE_PRODUCTS, {
-				nextPage: products?.next_page,
-				products: products?.list || products || [],
-				total: products?.total || 0,
-				filters,
-			}),
-		);
-	} catch (error) {
-		return dispatch(
-			onActionCreator(GET_PRODUCTS_ERROR, { error: true, nativeError: error }),
-		);
-	}
-};
-
-export const onGetProductsByFiltersAll = () => async (dispatch) => {
-	try {
-		const filters = { limit: 10, page: 0 };
-		const { products } = await getProducts(filters, GET_PRODUCTS);
-		return dispatch(
-			onActionCreator(GET_PRODUCTS_FILTERS_ALL, {
-				nextPage: products?.next_page,
-				products: products?.list || products || [],
-				total: products?.total || 0,
-				filters,
-			}),
-		);
-	} catch (error) {
-		return dispatch(
-			onActionCreator(GET_PRODUCTS_ERROR, { error: true, nativeError: error }),
-		);
-	}
-};
-
-export const setSelectedAll = (value) => (dispatch) => {
-	dispatch(onGetFiltersByFilters());
-	dispatch(onActionCreator(GET_PRODUCTS_FILTERS_ALL, { isSelectedAll: value }));
-};
-
-export const onGetFiltersByFilters = (filters) => (dispatch) => {
-	dispatch(getBrands({ ...filters }));
-	dispatch(getSections({ ...filters }));
-	dispatch(getItems({ ...filters }));
 };
 
 export const getSections = (filters) => async (dispatch) => {
@@ -176,4 +101,38 @@ export const getBrands = (filters) => async (dispatch) => {
 			onActionCreator(GET_BRANDS_ERROR, { error: true, nativeError: error }),
 		);
 	}
+};
+
+export const onGetFiltersByFilters = (filters) => (dispatch) => {
+	dispatch(getBrands({ ...filters }));
+	dispatch(getSections({ ...filters }));
+	dispatch(getItems({ ...filters }));
+};
+
+export const onGetProductsByFilter = (filters) => async (dispatch) => {
+	dispatch(onGetFiltersByFilters(filters));
+	dispatch(onGetProducts(filters, { isSelectedAll: false }));
+};
+
+export const getMoreProducts = (filters) => async (dispatch) => {
+	try {
+		const { products } = await getProducts(cleanObjectsAndArrays(filters));
+		return dispatch(
+			onActionCreator(GET_MORE_PRODUCTS, {
+				nextPage: products?.next_page,
+				products: products?.list || products || [],
+				total: products?.total || 0,
+				filters,
+			}),
+		);
+	} catch (error) {
+		return dispatch(
+			onActionCreator(GET_PRODUCTS_ERROR, { error: true, nativeError: error }),
+		);
+	}
+};
+
+export const setSelectedAll = (filters) => (dispatch) => {
+	dispatch(onGetFiltersByFilters(filters));
+	dispatch(onGetProducts(filters, { isSelectedAll: true }));
 };

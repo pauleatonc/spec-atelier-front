@@ -2,20 +2,18 @@ import {
 	GET_PRODUCTS,
 	GET_PRODUCTS_ERROR,
 	GET_PRODUCTS_SUCCESS,
-	GET_PRODUCTS_FILTERS_ALL,
 	GET_SECTIONS_ERROR,
 	GET_SECTIONS_SUCCESS,
 	GET_ITEMS_SUCCESS,
 	GET_ITEMS_ERROR,
 	GET_MORE_PRODUCTS,
-	GET_PRODUCTS_BY_FILTER,
 	ON_SELECT_ALL,
 	CLEAN_PRODUCT_LIST_STORE,
 	GET_BRANDS_SUCCESS,
 	GET_BRANDS_ERROR,
 } from './ProductsList.actions';
 
-const productsListState = {
+export const productsListInitialState = {
 	filters: {
 		page: 0,
 		limit: 10,
@@ -45,7 +43,7 @@ const productsListState = {
  * The products' reducer.
  */
 const productsListReducer = (
-	state = { ...productsListState },
+	state = { ...productsListInitialState },
 	{ payload, type },
 ) => {
 	switch (type) {
@@ -53,15 +51,6 @@ const productsListReducer = (
 			return {
 				...state,
 				loading: true,
-				error: false,
-			};
-		}
-		case GET_PRODUCTS_BY_FILTER: {
-			return {
-				...state,
-				...payload,
-				isSelectedAll: false,
-				loading: false,
 				error: false,
 			};
 		}
@@ -83,35 +72,30 @@ const productsListReducer = (
 				error: false,
 			};
 		}
-		case GET_PRODUCTS_FILTERS_ALL: {
-			return {
-				...state,
-				...payload,
-				isSelectedAll: true,
-				loading: false,
-				error: false,
-			};
-		}
 		case GET_SECTIONS_SUCCESS: {
 			return {
 				...state,
 				sections: payload.sections,
-				loading: false,
 				error: false,
 			};
 		}
-		case GET_SECTIONS_ERROR:
-			return { ...state };
 		case GET_ITEMS_SUCCESS: {
 			return {
 				...state,
 				items: payload.items,
-				loading: false,
 				error: false,
 			};
 		}
+		case GET_BRANDS_SUCCESS:
+			return {
+				...state,
+				brands: payload.brands.list,
+				error: false,
+			};
+		case GET_SECTIONS_ERROR:
 		case GET_ITEMS_ERROR:
-			break;
+		case GET_BRANDS_ERROR:
+			return { ...state };
 		case ON_SELECT_ALL:
 			return {
 				...state,
@@ -121,17 +105,8 @@ const productsListReducer = (
 			};
 		case CLEAN_PRODUCT_LIST_STORE:
 			return {
-				...productsListState,
+				...productsListInitialState,
 			};
-		case GET_BRANDS_SUCCESS:
-			return {
-				...state,
-				brands: payload.brands.list,
-				loading: false,
-				error: false,
-			};
-		case GET_BRANDS_ERROR:
-			break;
 		default: {
 			return state;
 		}
