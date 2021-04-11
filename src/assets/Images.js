@@ -41,7 +41,7 @@ import ICON_CAMERA_3X from './images/profile/photo@3x.png';
 
 import PROFILE_HEADER from './images/profile/profile-header.jpg';
 import PROFILE_HEADER_2X from './images/profile/profile-header@2x.jpg';
-import PROFILE_HEADER_3x from './images/profile/profile-header@3x.jpg';
+import PROFILE_HEADER_3X from './images/profile/profile-header@3x.jpg';
 
 import PROFILE_PHOTO_DEFAULT from './images/profile/profile-photo-default.png';
 import PROFILE_PHOTO_DEFAULT_2X from './images/profile/profile-photo-default@2x.png';
@@ -92,7 +92,7 @@ export {
 	IMAGE_RESIDENTIAL_GREY,
 	PROFILE_HEADER,
 	PROFILE_HEADER_2X,
-	PROFILE_HEADER_3x,
+	PROFILE_HEADER_3X,
 	PROFILE_PHOTO_DEFAULT,
 	PROFILE_PHOTO_DEFAULT_2X,
 	PROFILE_PHOTO_DEFAULT_3X,

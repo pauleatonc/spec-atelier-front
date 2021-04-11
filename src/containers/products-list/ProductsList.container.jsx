@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, ListContainer, Separator } from './ProductsList.styles';
 import { setFilters, onGetProducts } from './ProductsList.actions';
+import { productsListInitialState } from './ProductsList.reducer';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
 import ProductCard from '../../components/cards/ProductCard';
@@ -10,13 +11,17 @@ import ProductsListSeeMore from './ProductsListSeeMore';
 import ProductsSearchContainer from '../products-search/ProductsSearch.container';
 import ProductsFiltersContainer from '../products-filters/ProductsFilters.container';
 
-const ProductList = () => {
+const ProductList = ({ extraFilters }) => {
 	const dispatch = useDispatch();
 	const { products, error, loading, filters } = useSelector(
 		(state) => state.productsList,
 	);
 
 	const [keyword, setKeywords] = useState(filters.keyword || '');
+	const initialFilters = {
+		...productsListInitialState.filters,
+		...extraFilters,
+	};
 
 	const onClickProduct = (selectedProduct) => (event) => {
 		event.stopPropagation();
@@ -43,11 +48,7 @@ const ProductList = () => {
 	};
 
 	useEffect(() => {
-		dispatch(
-			onGetProducts({
-				...filters,
-			}),
-		);
+		dispatch(onGetProducts(initialFilters));
 	}, []);
 
 	return (
@@ -56,7 +57,7 @@ const ProductList = () => {
 				keyword={keyword}
 				onChangeParams={onChangeParams}
 			/>
-			<ProductsFiltersContainer />
+			<ProductsFiltersContainer initialFilters={initialFilters} />
 			<Separator />
 			{error && <ErrorMessage />}
 			{loading && (

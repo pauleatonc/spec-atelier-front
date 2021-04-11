@@ -3,11 +3,8 @@ import AppLayout from '../components/layouts/AppLayout';
 import Navbar from '../containers/navbar/Navbar.container';
 import Footer from '../components/footer';
 import ProfileHeader from '../containers/profile-header/ProfileHeader';
-import ProductList from '../containers/profile-products/ProductsList.container';
-import ProductsListSeeMore from '../containers/profile-products/ProductsListSeeMore';
-import ProfileProductsFilters from '../containers/profile-products-filters/ProductsFilters.container';
-import ProfileProductsSearch from '../containers/profile-products-search/ProductsSearch.container';
-import { PaddingContainer, Separator } from './Products.styles';
+import ProductListContainer from '../containers/products-list/ProductsList.container';
+import { PaddingContainer } from './Products.styles';
 import ProfileChangePicture from '../containers/profile-change-picture/ProfileChangePicture';
 
 import AlertContainer from '../containers/alert/Alert.container';
@@ -23,27 +20,23 @@ import SpecModalProduct from '../containers/spec-modal-product/SpecModalProduct.
  * The Profile's view.
  */
 const Profile = () => {
-  return (
-    <AppLayout footer={<Footer />} header={<Navbar />}>
-      <ProfileHeader />
-      <ProfileProductsSearch />
-      <ProfileProductsFilters />
-      <PaddingContainer>
-        <Separator />
-        <ProductList />
-      </PaddingContainer>
-      <ProductsListSeeMore />
-      <ProfileChangePicture />
-      <SpecCreateProductOneContainer />
-      <SpecCreateProductTwoContainer />
-      <SpecCreateProductThreeContainer />
-      <SpecEditProductContainer />
-      <SpecImagesModalContainer />
-      <AlertContainer />
-      <SpecModalProduct />
-      <ContactFormContainer type="product" />
-    </AppLayout>
-  );
+	return (
+		<AppLayout footer={<Footer />} header={<Navbar />}>
+			<ProfileHeader />
+			<PaddingContainer>
+				<ProductListContainer extraFilters={{ my_products: true }} />
+			</PaddingContainer>
+			<ProfileChangePicture />
+			<SpecCreateProductOneContainer />
+			<SpecCreateProductTwoContainer />
+			<SpecCreateProductThreeContainer />
+			<SpecEditProductContainer />
+			<SpecImagesModalContainer />
+			<AlertContainer />
+			<SpecModalProduct />
+			<ContactFormContainer type="product" />
+		</AppLayout>
+	);
 };
 
 export default Profile;

@@ -54,7 +54,6 @@ export const onGetProducts = (filters, extraPayload = {}) => async (
 				nextPage: products?.next_page,
 				products: products?.list || products || [],
 				total: products?.total || 0,
-				filters,
 				...extraPayload,
 			}),
 		);

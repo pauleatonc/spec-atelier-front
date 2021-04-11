@@ -7,10 +7,8 @@ import {
 	setSelectedAll,
 	onGetProductsByFilter,
 	getBrands,
-	cleanStoreProductList,
 	setFilters,
 } from '../products-list/ProductsList.actions';
-import { productsListInitialState } from '../products-list/ProductsList.reducer';
 import { Button } from '../../components/SpecComponents';
 import { Container, Content, Text } from './ProductsFilters.styles';
 import { getAppData } from '../../config/store/app-store/app.actions';
@@ -21,7 +19,7 @@ import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
 /**
  * The ProductsFilters's container.
  */
-const ProductsFilters = () => {
+const ProductsFilters = ({ initialFilters }) => {
 	const { project_types: projectTypes, room_types: roomTypes } = useSelector(
 		(state) => state.app,
 	);
@@ -37,7 +35,7 @@ const ProductsFilters = () => {
 	const [roomTypesOptions, setRoomTypesOptions] = useState([]);
 	const dispatch = useDispatch();
 
-	const handleFilterAll = () => dispatch(cleanStoreProductList());
+	const handleFilterAll = () => dispatch(setFilters(initialFilters));
 
 	const submitCallback = ({ name, value }) => {
 		if (name === 'project_type') {
@@ -105,7 +103,7 @@ const ProductsFilters = () => {
 			!most_used &&
 			page === 0
 		) {
-			dispatch(setSelectedAll(productsListInitialState.filters));
+			dispatch(setSelectedAll(initialFilters));
 		} else if (page === 0) dispatch(onGetProductsByFilter(filters));
 	}, [filtersRef.current]);
 
