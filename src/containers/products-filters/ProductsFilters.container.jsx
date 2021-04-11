@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import isDeepEqual from 'fast-deep-equal/react';
 import {
 	getSections,
 	getItems,
 	setSelectedAll,
 	onGetProductsByFilter,
-	onGetProducts,
 	getBrands,
+	cleanStoreProductList,
+	setFilters,
 } from '../products-list/ProductsList.actions';
 import { productsListInitialState } from '../products-list/ProductsList.reducer';
 import { Button } from '../../components/SpecComponents';
@@ -27,15 +29,16 @@ const ProductsFilters = () => {
 	const { isSelectedAll, filters, sections, items, brands } = useSelector(
 		(state) => state.productsList,
 	);
+
+	const filtersRef = useRef(filters);
+	if (!isDeepEqual(filtersRef.current, filters)) {
+		filtersRef.current = filters;
+	}
 	const [roomTypesOptions, setRoomTypesOptions] = useState([]);
 	const dispatch = useDispatch();
 
-	const handleFilterAll = () =>
-		dispatch(
-			onGetProducts(productsListInitialState.filters, {
-				isSelectedAll: true,
-			}),
-		);
+	const handleFilterAll = () => dispatch(cleanStoreProductList());
+
 	const submitCallback = ({ name, value }) => {
 		if (name === 'project_type') {
 			const filteredRoomTypes = (value.length
@@ -55,14 +58,15 @@ const ProductsFilters = () => {
 
 			setRoomTypesOptions(filteredRoomTypes);
 			dispatch(
-				onGetProductsByFilter({
+				setFilters({
 					...filters,
 					room_type: selectedRoomTypes,
+					page: 0,
 					[name]: value,
 				}),
 			);
 		} else {
-			dispatch(onGetProductsByFilter({ ...filters, [name]: value }));
+			dispatch(setFilters({ ...filters, [name]: value, page: 0 }));
 		}
 	};
 
@@ -87,6 +91,8 @@ const ProductsFilters = () => {
 			brand = [],
 			sort = '',
 			keyword = '',
+			most_used,
+			page,
 		} = filters;
 		if (
 			!keyword &&
@@ -95,19 +101,13 @@ const ProductsFilters = () => {
 			!project_type.length &&
 			!item.length &&
 			!brand.length &&
-			!sort
+			!sort &&
+			!most_used &&
+			page === 0
 		) {
 			dispatch(setSelectedAll(productsListInitialState.filters));
-		}
-	}, [
-		filters.section,
-		filters.room_type,
-		filters.project_type,
-		filters.item,
-		filters.brand,
-		filters.sort,
-		filters.keyword,
-	]);
+		} else if (page === 0) dispatch(onGetProductsByFilter(filters));
+	}, [filtersRef.current]);
 
 	return (
 		<Container>

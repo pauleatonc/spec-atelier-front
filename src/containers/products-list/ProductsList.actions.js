@@ -19,6 +19,8 @@ export const GET_ITEMS_ERROR = 'GET_ITEMS_ERROR';
 export const GET_BRANDS_SUCCESS = 'GET_BRANDS_SUCCESS';
 export const GET_BRANDS_ERROR = 'GET_BRANDS_ERROR';
 
+export const SET_FILTERS = 'SET_FILTERS';
+
 export const CLEAN_PRODUCT_LIST_STORE = 'CLEAN_PRODUCT_LIST_STORE';
 
 export const cleanStoreProductList = () => (dispatch) =>
@@ -108,9 +110,11 @@ export const onGetFiltersByFilters = (filters) => (dispatch) => {
 	dispatch(getItems({ ...filters }));
 };
 
-export const onGetProductsByFilter = (filters) => async (dispatch) => {
+export const onGetProductsByFilter = (filters, isSelectedAll = false) => async (
+	dispatch,
+) => {
 	dispatch(onGetFiltersByFilters(filters));
-	dispatch(onGetProducts(filters, { isSelectedAll: false }));
+	dispatch(onGetProducts(filters, { isSelectedAll }));
 };
 
 export const getMoreProducts = (filters) => async (dispatch) => {
@@ -132,6 +136,8 @@ export const getMoreProducts = (filters) => async (dispatch) => {
 };
 
 export const setSelectedAll = (filters) => (dispatch) => {
-	dispatch(onGetFiltersByFilters(filters));
-	dispatch(onGetProducts(filters, { isSelectedAll: true }));
+	dispatch(onGetProductsByFilter(filters, true));
 };
+
+export const setFilters = (filters) => (dispatch) =>
+	dispatch(onActionCreator(SET_FILTERS, filters));

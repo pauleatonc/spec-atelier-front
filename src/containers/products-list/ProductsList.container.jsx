@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import debounce from 'lodash.debounce';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, ListContainer, Separator } from './ProductsList.styles';
-import { onGetProducts } from './ProductsList.actions';
+import { setFilters, onGetProducts } from './ProductsList.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
 import ProductCard from '../../components/cards/ProductCard';
@@ -27,7 +27,7 @@ const ProductList = () => {
 		debounce(
 			(name, newValue) =>
 				dispatch(
-					onGetProducts({
+					setFilters({
 						...filters,
 						[name]: newValue,
 					}),
