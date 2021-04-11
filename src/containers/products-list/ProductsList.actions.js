@@ -103,16 +103,9 @@ export const getBrands = (filters) => async (dispatch) => {
 	}
 };
 
-export const onGetFiltersByFilters = (filters) => (dispatch) => {
-	dispatch(getBrands({ ...filters }));
-	dispatch(getSections({ ...filters }));
-	dispatch(getItems({ ...filters }));
-};
-
 export const onGetProductsByFilter = (filters, isSelectedAll = false) => async (
 	dispatch,
 ) => {
-	dispatch(onGetFiltersByFilters(filters));
 	dispatch(onGetProducts(filters, { isSelectedAll }));
 };
 
@@ -138,5 +131,6 @@ export const setSelectedAll = (filters) => (dispatch) => {
 	dispatch(onGetProductsByFilter(filters, true));
 };
 
-export const setFilters = (filters) => (dispatch) =>
+export const setFilters = (filters) => (dispatch) => {
 	dispatch(onActionCreator(SET_FILTERS, filters));
+};

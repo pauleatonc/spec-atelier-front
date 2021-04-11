@@ -17,15 +17,6 @@ export const productsListInitialState = {
 	filters: {
 		page: 0,
 		limit: 10,
-		keyword: '',
-		section: [],
-		room_type: [],
-		project_type: [],
-		item: [],
-		client: [],
-		sort: '',
-		with_products: true,
-		most_used: false,
 	},
 	products: [],
 	items: [],
@@ -102,7 +93,7 @@ const productsListReducer = (
 		case SET_FILTERS:
 			return {
 				...state,
-				filters: payload,
+				filters: { ...state.filters, ...payload },
 			};
 		default: {
 			return state;

@@ -1,25 +1,52 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import debounce from 'lodash.debounce';
+import isDeepEqual from 'fast-deep-equal/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, ListContainer, Separator } from './ProductsList.styles';
-import { setFilters, onGetProducts } from './ProductsList.actions';
-import { productsListInitialState } from './ProductsList.reducer';
+import {
+	setFilters,
+	setSelectedAll,
+	onGetProductsByFilter,
+	cleanStoreProductList,
+} from './ProductsList.actions';
 import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
 import ProductCard from '../../components/cards/ProductCard';
 import ProductsListSeeMore from './ProductsListSeeMore';
 import ProductsSearchContainer from '../products-search/ProductsSearch.container';
 import ProductsFiltersContainer from '../products-filters/ProductsFilters.container';
+import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
 
-const ProductList = ({ extraFilters }) => {
+const ProductList = ({
+	extraFilters,
+	withSearch = true,
+	withFilter = true,
+}) => {
+	const defaultFilters = {
+		page: 0,
+		limit: 10,
+		keyword: '',
+		section: [],
+		room_type: [],
+		project_type: [],
+		item: [],
+		client: [],
+		sort: '',
+		with_products: true,
+		most_used: false,
+	};
 	const dispatch = useDispatch();
 	const { products, error, loading, filters } = useSelector(
 		(state) => state.productsList,
 	);
+	const filtersRef = useRef(filters);
+	if (!isDeepEqual(filtersRef.current, filters)) {
+		filtersRef.current = filters;
+	}
 
 	const [keyword, setKeywords] = useState(filters.keyword || '');
 	const initialFilters = {
-		...productsListInitialState.filters,
+		...defaultFilters,
 		...extraFilters,
 	};
 
@@ -33,7 +60,6 @@ const ProductList = ({ extraFilters }) => {
 			(name, newValue) =>
 				dispatch(
 					setFilters({
-						...filters,
 						[name]: newValue,
 					}),
 				),
@@ -47,18 +73,63 @@ const ProductList = ({ extraFilters }) => {
 		debouncedSave(name, value);
 	};
 
+	const onFilterAll = () => {
+		dispatch(setFilters(initialFilters));
+		setKeywords('');
+	};
+
+	useDidUpdateEffect(() => {
+		const {
+			section = [],
+			room_type = [],
+			project_type = [],
+			item = [],
+			brand = [],
+			sort = '',
+			keyword: storeKeyword = '',
+			most_used,
+			page,
+		} = filters;
+		if (
+			!storeKeyword &&
+			!section.length &&
+			!room_type.length &&
+			!project_type.length &&
+			!item.length &&
+			!brand.length &&
+			!sort &&
+			!most_used &&
+			page === 0
+		) {
+			dispatch(setSelectedAll(initialFilters));
+		} else if (page === 0) dispatch(onGetProductsByFilter(filters));
+	}, [filtersRef.current]);
+
 	useEffect(() => {
-		dispatch(onGetProducts(initialFilters));
+		dispatch(setFilters(initialFilters));
+		return () => {
+			dispatch(cleanStoreProductList());
+		};
 	}, []);
 
 	return (
 		<Container>
-			<ProductsSearchContainer
-				keyword={keyword}
-				onChangeParams={onChangeParams}
-			/>
-			<ProductsFiltersContainer initialFilters={initialFilters} />
-			<Separator />
+			{withSearch && (
+				<ProductsSearchContainer
+					keyword={keyword}
+					onChangeParams={onChangeParams}
+				/>
+			)}
+			{withFilter && (
+				<>
+					<ProductsFiltersContainer
+						filters={filters}
+						initialFilters={initialFilters}
+						onFilterAll={onFilterAll}
+					/>
+					<Separator />
+				</>
+			)}
 			{error && <ErrorMessage />}
 			{loading && (
 				<Container>
@@ -83,7 +154,7 @@ const ProductList = ({ extraFilters }) => {
 					/>
 				))}
 			</ListContainer>
-			<ProductsListSeeMore />
+			<ProductsListSeeMore filters={filters} />
 		</Container>
 	);
 };

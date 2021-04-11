@@ -17,7 +17,6 @@ import appReducer from './app-store/app.reducer';
 import brandListReducer from '../../containers/brands-list/BrandsList.reducer';
 import clientListReducer from '../../containers/clients-list/ClientsList.reducer';
 import clientReducer from '../../containers/client/client.reducer';
-import clientProductsListReducer from '../../containers/client-products-list/ClientProductsList.reducer';
 import modalContactFormReducer from '../../containers/modal-contact-form/ModalContactForm.reducers';
 import specDocumentReducer from '../../containers/spec-document/SpecDocument.reducer';
 import specHeaderReducer from '../../containers/spec-header/SpecHeader.reducer';
@@ -40,7 +39,6 @@ export default combineReducers({
 	newProject: newProjectReducer,
 	projectsList: projectsListReducer,
 	alert: alertReducer,
-	clientProductsList: clientProductsListReducer,
 	productsList: productsListReducer,
 	specHeader: specHeaderReducer,
 	specProductsSections: specProductsSectionsReducer,

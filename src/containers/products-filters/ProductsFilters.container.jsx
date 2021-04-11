@@ -1,11 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import isDeepEqual from 'fast-deep-equal/react';
 import {
 	getSections,
 	getItems,
-	setSelectedAll,
-	onGetProductsByFilter,
 	getBrands,
 	setFilters,
 } from '../products-list/ProductsList.actions';
@@ -19,23 +16,17 @@ import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
 /**
  * The ProductsFilters's container.
  */
-const ProductsFilters = ({ initialFilters }) => {
+const ProductsFilters = ({ initialFilters, filters, onFilterAll }) => {
 	const { project_types: projectTypes, room_types: roomTypes } = useSelector(
 		(state) => state.app,
 	);
 	const { loaded } = useSelector((state) => state.app);
-	const { isSelectedAll, filters, sections, items, brands } = useSelector(
+	const { isSelectedAll, sections, items, brands } = useSelector(
 		(state) => state.productsList,
 	);
 
-	const filtersRef = useRef(filters);
-	if (!isDeepEqual(filtersRef.current, filters)) {
-		filtersRef.current = filters;
-	}
 	const [roomTypesOptions, setRoomTypesOptions] = useState([]);
 	const dispatch = useDispatch();
-
-	const handleFilterAll = () => dispatch(setFilters(initialFilters));
 
 	const submitCallback = ({ name, value }) => {
 		if (name === 'project_type') {
@@ -70,9 +61,9 @@ const ProductsFilters = ({ initialFilters }) => {
 
 	useEffect(() => {
 		if (!loaded) dispatch(getAppData());
-		dispatch(getBrands());
-		dispatch(getSections());
-		dispatch(getItems());
+		dispatch(getBrands(initialFilters));
+		dispatch(getSections(initialFilters));
+		dispatch(getItems(initialFilters));
 		setRoomTypesOptions(roomTypes.map(mapToSelector));
 	}, []);
 
@@ -80,39 +71,12 @@ const ProductsFilters = ({ initialFilters }) => {
 		if (roomTypes) setRoomTypesOptions(roomTypes.map(mapToSelector));
 	}, [roomTypes]);
 
-	useDidUpdateEffect(() => {
-		const {
-			section = [],
-			room_type = [],
-			project_type = [],
-			item = [],
-			brand = [],
-			sort = '',
-			keyword = '',
-			most_used,
-			page,
-		} = filters;
-		if (
-			!keyword &&
-			!section.length &&
-			!room_type.length &&
-			!project_type.length &&
-			!item.length &&
-			!brand.length &&
-			!sort &&
-			!most_used &&
-			page === 0
-		) {
-			dispatch(setSelectedAll(initialFilters));
-		} else if (page === 0) dispatch(onGetProductsByFilter(filters));
-	}, [filtersRef.current]);
-
 	return (
 		<Container>
 			<Content>
 				<Button
 					selected={isSelectedAll}
-					onClick={handleFilterAll}
+					onClick={onFilterAll}
 					variant={isSelectedAll ? 'secondary' : 'default'}
 					inverse
 				>
