@@ -16,11 +16,16 @@ import ProductsListSeeMore from './ProductsListSeeMore';
 import ProductsSearchContainer from '../products-search/ProductsSearch.container';
 import ProductsFiltersContainer from '../products-filters/ProductsFilters.container';
 import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
+import {
+	DEFAULT_FILTER_KEYS,
+	FILTER_OPTIONS,
+} from '../../config/constants/products';
 
 const ProductList = ({
 	extraFilters,
 	withSearch = true,
 	withFilter = true,
+	filterOptionsKey,
 }) => {
 	const defaultFilters = {
 		page: 0,
@@ -31,12 +36,15 @@ const ProductList = ({
 		project_type: [],
 		item: [],
 		client: [],
+		filters: filterOptionsKey
+			? FILTER_OPTIONS[filterOptionsKey]
+			: DEFAULT_FILTER_KEYS,
 		sort: '',
 		with_products: true,
 		most_used: false,
 	};
 	const dispatch = useDispatch();
-	const { products, error, loading, filters } = useSelector(
+	const { products, error, loading, filters, filterOptions } = useSelector(
 		(state) => state.productsList,
 	);
 	const filtersRef = useRef(filters);
@@ -126,6 +134,7 @@ const ProductList = ({
 						filters={filters}
 						initialFilters={initialFilters}
 						onFilterAll={onFilterAll}
+						filterOptions={filterOptions}
 					/>
 					<Separator />
 				</>

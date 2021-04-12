@@ -22,6 +22,7 @@ export const productsListInitialState = {
 	items: [],
 	brands: [],
 	sections: [],
+	filterOptions: {},
 	isSelectedAll: true,
 	loading: true,
 	nextPage: null,

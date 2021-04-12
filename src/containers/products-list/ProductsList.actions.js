@@ -53,6 +53,7 @@ export const onGetProducts = (filters, extraPayload = {}) => async (
 			onActionCreator(GET_PRODUCTS_SUCCESS, {
 				nextPage: products?.next_page,
 				products: products?.list || products || [],
+				filterOptions: products?.filters || {},
 				total: products?.total || 0,
 				...extraPayload,
 			}),
@@ -116,6 +117,7 @@ export const getMoreProducts = (filters) => async (dispatch) => {
 			onActionCreator(GET_MORE_PRODUCTS, {
 				nextPage: products?.next_page,
 				products: products?.list || products || [],
+				filterOptions: products?.filters || {},
 				total: products?.total || 0,
 				filters,
 			}),
