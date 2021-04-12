@@ -17,6 +17,7 @@ export const TableBody = styled.tbody`
 
 export const RowTable = styled.tr`
 	border-bottom: 1px solid #e9e9e9;
+	background-color: ${({ isExpanded }) => (isExpanded ? '#fafafa' : '')};
 `;
 
 export const TableTh = styled.th`

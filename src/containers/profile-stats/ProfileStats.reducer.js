@@ -5,21 +5,27 @@ import {
 	GET_PROFILE_STATS_PROJECTS,
 	GET_PROFILE_STATS_PROJECTS_SUCCESS,
 	GET_PROFILE_STATS_PROJECTS_ERROR,
+	GET_PRODUCTS_BY_PROJECT,
+	GET_PRODUCTS_BY_PROJECT_SUCCESS,
+	GET_PRODUCTS_BY_PROJECT_ERROR,
+	GET_PROJECTS_BY_PRODUCT,
+	GET_PROJECTS_BY_PRODUCT_SUCCESS,
+	GET_PROJECTS_BY_PRODUCT_ERROR,
 } from './ProfileStats.actions';
 
 const ProfileStatsState = {
-	filters: {
-		page: 0,
-		limit: 10,
-		sort_by: null,
-		stat: null,
-	},
 	products: {
 		loading: false,
 		nextPage: null,
 		total: 0,
 		error: false,
 		list: [],
+		filters: {
+			page: 0,
+			limit: 10,
+			sort_by: null,
+			stat: null,
+		},
 	},
 	projects: {
 		loading: false,
@@ -27,6 +33,34 @@ const ProfileStatsState = {
 		total: 0,
 		error: false,
 		list: [],
+		filters: {
+			page: 0,
+			limit: 10,
+			sort_by: null,
+			stat: null,
+		},
+	},
+	productsByProject: {
+		loading: false,
+		nextPage: null,
+		total: 0,
+		error: false,
+		list: [],
+		filters: {
+			page: 0,
+			limit: 10,
+		},
+	},
+	projectsByProduct: {
+		loading: false,
+		nextPage: null,
+		total: 0,
+		error: false,
+		list: [],
+		filters: {
+			page: 0,
+			limit: 10,
+		},
 	},
 };
 
@@ -51,11 +85,10 @@ const ProfileStatsReducer = (
 		case GET_PROFILE_STATS_PRODUCTS_SUCCESS: {
 			return {
 				...state,
-				filters: { ...payload.filters },
 				products: {
 					loading: false,
 					error: false,
-					...payload.products,
+					...payload,
 				},
 			};
 		}
@@ -82,11 +115,10 @@ const ProfileStatsReducer = (
 		case GET_PROFILE_STATS_PROJECTS_SUCCESS: {
 			return {
 				...state,
-				filters: { ...payload.filters },
 				projects: {
 					loading: false,
 					error: false,
-					...payload.projects,
+					...payload,
 				},
 			};
 		}
@@ -94,6 +126,66 @@ const ProfileStatsReducer = (
 			return {
 				...state,
 				projects: {
+					...payload,
+					loading: false,
+					error: true,
+				},
+			};
+		}
+		case GET_PRODUCTS_BY_PROJECT: {
+			return {
+				...state,
+				productsByProject: {
+					...state.productsByProject,
+					loading: true,
+					error: false,
+				},
+			};
+		}
+		case GET_PRODUCTS_BY_PROJECT_SUCCESS: {
+			return {
+				...state,
+				productsByProject: {
+					loading: false,
+					error: false,
+					...payload,
+				},
+			};
+		}
+		case GET_PRODUCTS_BY_PROJECT_ERROR: {
+			return {
+				...state,
+				productsByProject: {
+					...payload,
+					loading: false,
+					error: true,
+				},
+			};
+		}
+		case GET_PROJECTS_BY_PRODUCT: {
+			return {
+				...state,
+				projectsByProduct: {
+					...state.projectsByProduct,
+					loading: true,
+					error: false,
+				},
+			};
+		}
+		case GET_PROJECTS_BY_PRODUCT_SUCCESS: {
+			return {
+				...state,
+				projectsByProduct: {
+					loading: false,
+					error: false,
+					...payload,
+				},
+			};
+		}
+		case GET_PROJECTS_BY_PRODUCT_ERROR: {
+			return {
+				...state,
+				projectsByProduct: {
 					...payload,
 					loading: false,
 					error: true,

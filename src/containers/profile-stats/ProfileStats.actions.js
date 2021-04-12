@@ -1,6 +1,7 @@
 import onActionCreator from '../../config/store/helpers';
 import { cleanObjectsAndArrays } from '../../modules/services';
 import { getStats } from '../../services/profile.service';
+import { formatTableData } from './uitls';
 
 export const GET_PROFILE_STATS_PRODUCTS = 'GET_PROFILE_STATS_PRODUCTS';
 export const GET_PROFILE_STATS_PRODUCTS_SUCCESS =
@@ -12,8 +13,16 @@ export const GET_PROFILE_STATS_PROJECTS_SUCCESS =
 	'GET_PROFILE_STATS_PROJECTS_SUCCESS';
 export const GET_PROFILE_STATS_PROJECTS_ERROR =
 	'GET_PROFILE_STATS_PROJECTS_ERROR';
+export const GET_PRODUCTS_BY_PROJECT = 'GET_PRODUCTS_BY_PROJECT';
+export const GET_PRODUCTS_BY_PROJECT_SUCCESS =
+	'GET_PRODUCTS_BY_PROJECT_SUCCESS';
+export const GET_PRODUCTS_BY_PROJECT_ERROR = 'GET_PRODUCTS_BY_PROJECT_ERROR';
+export const GET_PROJECTS_BY_PRODUCT = 'GET_PROJECTS_BY_PRODUCT';
+export const GET_PROJECTS_BY_PRODUCT_SUCCESS =
+	'GET_PROJECTS_BY_PRODUCT_SUCCESS';
+export const GET_PROJECTS_BY_PRODUCT_ERROR = 'GET_PROJECTS_BY_PRODUCT_ERROR';
 
-export const onGetStats = (filters) => (dispatch, getState) => {
+export const onGetStats = (filters, isSubRows) => (dispatch, getState) => {
 	const {
 		user: { id },
 	} = getState().auth;
@@ -21,40 +30,76 @@ export const onGetStats = (filters) => (dispatch, getState) => {
 		id,
 		filters: cleanObjectsAndArrays(filters),
 	};
-	if (filters?.stat === 'product_stats') {
-		dispatch(onActionCreator(GET_PROFILE_STATS_PRODUCTS));
+	const isProductStat = filters?.stat === 'product_stats';
+
+	if (isSubRows) {
+		dispatch(
+			onActionCreator(
+				isProductStat ? GET_PRODUCTS_BY_PROJECT : GET_PROJECTS_BY_PRODUCT,
+			),
+		);
 		getStats(params).then(
-			({ products }) =>
+			({ products, projects }) =>
 				dispatch(
-					onActionCreator(GET_PROFILE_STATS_PRODUCTS_SUCCESS, {
-						products: { ...products },
-						filters,
-					}),
+					onActionCreator(
+						isProductStat
+							? GET_PRODUCTS_BY_PROJECT_SUCCESS
+							: GET_PROJECTS_BY_PRODUCT_SUCCESS,
+						{
+							...products,
+							list: isProductStat
+								? formatTableData(products.list)
+								: formatTableData(projects.list),
+							filters,
+						},
+					),
 				),
 			(error) =>
 				dispatch(
-					onActionCreator(GET_PROFILE_STATS_PRODUCTS_ERROR, {
-						error: true,
-						nativeError: error,
-					}),
+					onActionCreator(
+						isProductStat
+							? GET_PRODUCTS_BY_PROJECT_ERROR
+							: GET_PROJECTS_BY_PRODUCT_ERROR,
+						{
+							error: true,
+							nativeError: error,
+						},
+					),
 				),
 		);
-	} else if (filters?.stat === 'project_stats') {
-		dispatch(onActionCreator(GET_PROFILE_STATS_PROJECTS));
+	} else {
+		dispatch(
+			onActionCreator(
+				isProductStat ? GET_PROFILE_STATS_PRODUCTS : GET_PROFILE_STATS_PROJECTS,
+			),
+		);
 		getStats(params).then(
-			({ projects }) =>
+			({ products, projects }) =>
 				dispatch(
-					onActionCreator(GET_PROFILE_STATS_PROJECTS_SUCCESS, {
-						projects: { ...projects },
-						filters,
-					}),
+					onActionCreator(
+						isProductStat
+							? GET_PROFILE_STATS_PRODUCTS_SUCCESS
+							: GET_PROFILE_STATS_PROJECTS_SUCCESS,
+						{
+							...(isProductStat ? products : projects),
+							list: isProductStat
+								? formatTableData(products.list)
+								: formatTableData(projects.list),
+							filters,
+						},
+					),
 				),
 			(error) =>
 				dispatch(
-					onActionCreator(GET_PROFILE_STATS_PROJECTS_ERROR, {
-						error: true,
-						nativeError: error,
-					}),
+					onActionCreator(
+						isProductStat
+							? GET_PROFILE_STATS_PRODUCTS_ERROR
+							: GET_PROFILE_STATS_PROJECTS_ERROR,
+						{
+							error: true,
+							nativeError: error,
+						},
+					),
 				),
 		);
 	}
