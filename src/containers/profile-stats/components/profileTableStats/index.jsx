@@ -67,16 +67,18 @@ const ProfileTableStats = ({
 					{rows.map((row) => {
 						prepareRow(row);
 						return (
-							<RowTable {...row.getRowProps()} isExpanded={row.isExpanded}>
-								{row.cells.map((cell) => {
-									return (
-										<TableTd {...cell.getCellProps()}>
-											{cell.render('Cell')}
-										</TableTd>
-									);
-								})}
+							<>
+								<RowTable {...row.getRowProps()} isExpanded={row.isExpanded}>
+									{row.cells.map((cell) => {
+										return (
+											<TableTd {...cell.getCellProps()}>
+												{cell.render('Cell')}
+											</TableTd>
+										);
+									})}
+								</RowTable>
 								{!!row.isExpanded && (
-									<>
+									<td colSpan="9">
 										<Table {...getSubTableProps()}>
 											<TableHead>
 												{subHeaderGroups.map((headerGroup) => (
@@ -106,9 +108,9 @@ const ProfileTableStats = ({
 												})}
 											</TableBody>
 										</Table>
-									</>
+									</td>
 								)}
-							</RowTable>
+							</>
 						);
 					})}
 				</TableBody>
