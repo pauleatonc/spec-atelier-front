@@ -16,21 +16,6 @@ const ProjectsStats = () => {
 	} = useSelector((state) => state.profileStats);
 	const dispatch = useDispatch();
 
-	/* 	const getProducts = (row) => {
-		row.toggleRowExpanded();
-		if (!row.isExpanded) {
-			dispatch(
-				onGetStats({
-					...filters,
-					stat: 'product_stats',
-					product: row.original.id,
-					page: 0,
-					limit: 10,
-				}),
-			);
-		}
-	}; */
-
 	const handlePaginateStats = (direction) =>
 		dispatch(
 			onGetStats({
@@ -38,6 +23,23 @@ const ProjectsStats = () => {
 				page: direction === 'next' ? filters.page + 1 : filters.page - 1,
 			}),
 		);
+
+	const hangleToggleRow = (row) => {
+		row.toggleRowExpanded();
+		if (!row.isExpanded)
+			dispatch(
+				onGetStats(
+					{
+						...filters,
+						page: 0,
+						limit: 0,
+						stat: 'product_stats',
+						product: row.original.id,
+					},
+					true,
+				),
+			);
+	};
 
 	const columns = useMemo(
 		() => [
@@ -50,6 +52,7 @@ const ProjectsStats = () => {
 						<Button
 							{...row.getToggleRowExpandedProps()}
 							variant={VARIANTS_BUTTON.CANCEL}
+							onClick={() => hangleToggleRow(row)}
 						>
 							{row.isExpanded ? 'Ocultar' : 'Ver productos'}
 						</Button>
