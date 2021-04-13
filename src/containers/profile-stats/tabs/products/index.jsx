@@ -11,50 +11,30 @@ import { COLUMNS as COLUMNS_PROJECTS } from '../projects/constants';
 
 const ProductsStats = () => {
 	const {
-		products: { filters, list, loading, total, next_page },
-		projectsByProduct: { list: subList },
+		products: { filters, list, loading, total, nextPage },
+		projectsByProduct: {
+			filters: subFilters,
+			list: subList,
+			loading: subLoading,
+			total: subTotal,
+			nextPage: subNextPage,
+		},
 	} = useSelector((state) => state.profileStats);
 	const dispatch = useDispatch();
-
-	const handlePaginateStats = (direction) =>
-		dispatch(
-			onGetStats({
-				...filters,
-				page: direction === 'next' ? filters.page + 1 : filters.page - 1,
-			}),
-		);
-
-	const hangleToggleRow = (row) => {
-		row.toggleRowExpanded();
-		if (!row.isExpanded)
-			dispatch(
-				onGetStats(
-					{
-						...filters,
-						page: 0,
-						limit: 0,
-						stat: 'project_stats',
-						product: row.original.id,
-					},
-					true,
-				),
-			);
-	};
-
 	const columns = useMemo(
 		() => [
 			...COLUMNS,
 			{
 				id: 'expander',
 				Header: () => null,
-				Cell: ({ row }) => {
+				Cell: ({ row, rows, expandedDepth }) => {
 					return !!row?.original?.projects_count ? (
 						<Button
 							{...row.getToggleRowExpandedProps()}
 							variant={VARIANTS_BUTTON.CANCEL}
-							onClick={() => hangleToggleRow(row)}
+							onClick={() => hangleToggleRow(row, rows, expandedDepth)}
 						>
-							{row.isExpanded ? 'Ocultar' : 'Ver proyectos'}
+							{row.isExpanded && !!subList.length ? 'Ocultar' : 'Ver proyectos'}
 						</Button>
 					) : null;
 				},
@@ -62,17 +42,7 @@ const ProductsStats = () => {
 		],
 		[],
 	);
-
 	const subColums = useMemo(() => COLUMNS_PROJECTS, []);
-
-	const handleChangeLimit = (limit) =>
-		dispatch(
-			onGetStats({
-				...filters,
-				page: 0,
-				limit,
-			}),
-		);
 
 	useEffect(() => {
 		if (!list.length)
@@ -86,20 +56,71 @@ const ProductsStats = () => {
 			);
 	}, []);
 
+	const handleChangeLimit = (limit, isSubRows = false) =>
+		dispatch(
+			onGetStats(
+				{
+					...(isSubRows ? subFilters : filters),
+					page: 0,
+					limit,
+				},
+				isSubRows,
+			),
+		);
+
+	const handlePaginateStats = (direction, isSubRows = false) =>
+		dispatch(
+			onGetStats(
+				{
+					...(isSubRows ? subFilters : filters),
+					page: direction === 'next' ? filters.page + 1 : filters.page - 1,
+				},
+				isSubRows,
+			),
+		);
+
+	const hangleToggleRow = (row, rows, expandedDepth) => {
+		if (expandedDepth >= 1) {
+			const rowExpanded = rows.find((item) => item.isExpanded === true);
+			if (row.original.id !== rowExpanded.original.id)
+				rowExpanded.toggleRowExpanded();
+		}
+		row.toggleRowExpanded();
+		if (!row.isExpanded)
+			dispatch(
+				onGetStats(
+					{
+						...filters,
+						page: 0,
+						limit: 10,
+						stat: 'project_stats',
+						product: row.original.id,
+					},
+					true,
+				),
+			);
+	};
+
 	return loading && !list.length ? (
-		<h1>Loading...</h1>
+		<h1>Cargando...</h1>
 	) : (
 		<TableStats
 			columns={columns}
 			data={list}
 			total={total}
-			next_page={next_page}
-			onPaginateStats={handlePaginateStats}
+			page={filters.page}
+			limit={filters.limit}
+			nextPage={nextPage}
 			loading={loading}
+			onPaginateStats={handlePaginateStats}
 			onChangeLimit={handleChangeLimit}
 			subColums={subColums}
 			subData={subList}
-			{...filters}
+			subTotal={subTotal}
+			subPage={subFilters.page}
+			subLimit={subFilters.limit}
+			subNextPage={subNextPage}
+			subLoading={subLoading}
 		/>
 	);
 };

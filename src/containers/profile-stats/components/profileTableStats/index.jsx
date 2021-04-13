@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTable, useExpanded } from 'react-table';
 
 import {
@@ -8,6 +8,7 @@ import {
 	TableHead,
 	TableBody,
 	TableTd,
+	IconType,
 } from './styles';
 import ProfileTablePaginator from '../profileTablePaginator';
 
@@ -17,12 +18,17 @@ const ProfileTableStats = ({
 	total,
 	page,
 	limit,
-	next_page,
+	nextPage,
 	loading,
 	onPaginateStats,
 	onChangeLimit,
 	subColums,
 	subData = [],
+	subTotal,
+	subPage,
+	subLimit,
+	subNextPage,
+	subLoading,
 }) => {
 	const {
 		getTableProps,
@@ -71,44 +77,78 @@ const ProfileTableStats = ({
 								<RowTable {...row.getRowProps()} isExpanded={row.isExpanded}>
 									{row.cells.map((cell) => {
 										return (
-											<TableTd {...cell.getCellProps()}>
+											<TableTd
+												{...cell.getCellProps()}
+												isProjectType={cell.column?.id === 'project_type'}
+											>
+												{cell.column?.id === 'project_type' && (
+													<IconType type={cell?.value.toUpperCase()} />
+												)}
 												{cell.render('Cell')}
 											</TableTd>
 										);
 									})}
 								</RowTable>
 								{!!row.isExpanded && (
-									<td colSpan="9">
-										<Table {...getSubTableProps()}>
-											<TableHead>
-												{subHeaderGroups.map((headerGroup) => (
-													<RowTable {...headerGroup.getHeaderGroupProps()}>
-														{headerGroup.headers.map((column) => (
-															<TableTh {...column.getHeaderProps()}>
-																{column.render('Header')}
-															</TableTh>
+									<tr>
+										{subLoading ? (
+											<TableTd colSpan="9">Cargando...</TableTd>
+										) : (
+											<td colSpan="9">
+												<Table {...getSubTableProps()}>
+													<TableHead>
+														{subHeaderGroups.map((headerGroup) => (
+															<RowTable {...headerGroup.getHeaderGroupProps()}>
+																<TableTh />
+																{headerGroup.headers.map((column) => (
+																	<TableTh {...column.getHeaderProps()}>
+																		{column.render('Header')}
+																	</TableTh>
+																))}
+															</RowTable>
 														))}
-													</RowTable>
-												))}
-											</TableHead>
-											<TableBody {...getSubTableBodyProps()}>
-												{subRows.map((row) => {
-													prepareSubRow(row);
-													return (
-														<RowTable {...row.getRowProps()}>
-															{row.cells.map((cell) => {
-																return (
-																	<TableTd {...cell.getCellProps()}>
-																		{cell.render('Cell')}
-																	</TableTd>
-																);
-															})}
-														</RowTable>
-													);
-												})}
-											</TableBody>
-										</Table>
-									</td>
+													</TableHead>
+													<TableBody {...getSubTableBodyProps()}>
+														{subRows.map((row) => {
+															prepareSubRow(row);
+															return (
+																<RowTable {...row.getRowProps()}>
+																	<TableTd />
+																	{row.cells.map((cell) => {
+																		return (
+																			<TableTd
+																				{...cell.getCellProps()}
+																				isProjectType={
+																					cell.column?.id === 'project_type'
+																				}
+																			>
+																				{cell.column?.id === 'project_type' && (
+																					<IconType
+																						type={cell?.value.toUpperCase()}
+																					/>
+																				)}
+																				{cell.render('Cell')}
+																			</TableTd>
+																		);
+																	})}
+																</RowTable>
+															);
+														})}
+													</TableBody>
+												</Table>
+												<ProfileTablePaginator
+													isSubRows
+													total={subTotal}
+													page={subPage}
+													limit={subLimit}
+													nextPage={subNextPage}
+													loading={subLoading}
+													onPaginateStats={onPaginateStats}
+													onChangeLimit={onChangeLimit}
+												/>
+											</td>
+										)}
+									</tr>
 								)}
 							</>
 						);
@@ -119,7 +159,7 @@ const ProfileTableStats = ({
 				total={total}
 				page={page}
 				limit={limit}
-				next_page={next_page}
+				nextPage={nextPage}
 				loading={loading}
 				onPaginateStats={onPaginateStats}
 				onChangeLimit={onChangeLimit}

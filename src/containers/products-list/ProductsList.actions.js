@@ -184,7 +184,7 @@ export const getBrands = (filters) => async (dispatch) => {
 
 export const updateDownloads = (stat, productId) => (dispatch) => {
 	updateDownloadsProduct({ stat, productId }).then(
-		(response) => console.log(response),
+		(response) => response,
 		(error) => console.error(error),
 	);
 };

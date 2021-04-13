@@ -21,6 +21,8 @@ export const Paginator = styled.footer`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: normal;
+	border-top: 1px solid #e9e9e9;
+	border-bottom: ${({ isSubRows }) => (isSubRows ? '1px solid #e9e9e9' : '')};
 `;
 
 export const ArrowPaginator = styled.button`

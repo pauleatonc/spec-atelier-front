@@ -16,7 +16,7 @@ import {
 const ProfileStatsState = {
 	products: {
 		loading: false,
-		nextPage: null,
+		nextPage: 0,
 		total: 0,
 		error: false,
 		list: [],
@@ -29,7 +29,7 @@ const ProfileStatsState = {
 	},
 	projects: {
 		loading: false,
-		nextPage: null,
+		nextPage: 0,
 		total: 0,
 		error: false,
 		list: [],
@@ -42,7 +42,7 @@ const ProfileStatsState = {
 	},
 	productsByProject: {
 		loading: false,
-		nextPage: null,
+		nextPage: 0,
 		total: 0,
 		error: false,
 		list: [],
@@ -53,7 +53,7 @@ const ProfileStatsState = {
 	},
 	projectsByProduct: {
 		loading: false,
-		nextPage: null,
+		nextPage: 0,
 		total: 0,
 		error: false,
 		list: [],
@@ -88,6 +88,7 @@ const ProfileStatsReducer = (
 				products: {
 					loading: false,
 					error: false,
+					nextPage: payload.next_page,
 					...payload,
 				},
 			};
@@ -118,6 +119,7 @@ const ProfileStatsReducer = (
 				projects: {
 					loading: false,
 					error: false,
+					nextPage: payload.next_page,
 					...payload,
 				},
 			};
@@ -148,6 +150,7 @@ const ProfileStatsReducer = (
 				productsByProject: {
 					loading: false,
 					error: false,
+					nextPage: payload.next_page,
 					...payload,
 				},
 			};
@@ -178,6 +181,7 @@ const ProfileStatsReducer = (
 				projectsByProduct: {
 					loading: false,
 					error: false,
+					nextPage: payload.next_page,
 					...payload,
 				},
 			};

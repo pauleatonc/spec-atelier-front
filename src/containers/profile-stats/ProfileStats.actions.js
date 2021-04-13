@@ -46,7 +46,7 @@ export const onGetStats = (filters, isSubRows) => (dispatch, getState) => {
 							? GET_PRODUCTS_BY_PROJECT_SUCCESS
 							: GET_PROJECTS_BY_PRODUCT_SUCCESS,
 						{
-							...products,
+							...(isProductStat ? products : projects),
 							list: isProductStat
 								? formatTableData(products.list)
 								: formatTableData(projects.list),

@@ -6,25 +6,26 @@ const ProfileTablePaginator = ({
 	total,
 	page,
 	limit,
-	next_page,
+	nextPage,
 	loading,
 	onPaginateStats,
 	onChangeLimit,
+	isSubRows,
 }) => {
 	const currentItemsView = limit * (page + 1);
 	const optionsSelect = ['10', '20', '30', '40', '50'];
 
 	const handleChangeLimit = ({ target: { value } }) => {
-		if (parseInt(value) !== limit) onChangeLimit(value);
+		if (parseInt(value) !== limit) onChangeLimit(value, isSubRows);
 	};
 
 	return (
-		<Paginator>
+		<Paginator isSubRows={isSubRows}>
 			<span>Items por página:</span>
 			<SelectPaginator
 				onChange={handleChangeLimit}
 				defaultValue={limit}
-				disabled={loading}
+				disabled={loading || limit > total}
 			>
 				{optionsSelect.map((val) => {
 					return (
@@ -39,13 +40,13 @@ const ProfileTablePaginator = ({
 			} de ${total}`}</span>
 			<ArrowPaginator
 				disabled={page === 0 || loading}
-				onClick={() => onPaginateStats('prev')}
+				onClick={() => onPaginateStats('prev', isSubRows)}
 			>
 				<i className="fas fa-angle-left"></i>
 			</ArrowPaginator>
 			<ArrowPaginator
-				disabled={!next_page || loading}
-				onClick={() => onPaginateStats('next')}
+				disabled={!nextPage || loading}
+				onClick={() => onPaginateStats('next', isSubRows)}
 			>
 				<i className="fas fa-angle-right"></i>
 			</ArrowPaginator>
