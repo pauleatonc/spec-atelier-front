@@ -1,148 +1,75 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  onGetProductsByFiltersAll,
-  getSections,
-  getItems,
-  setSelectedAll,
-  getProductsByFilter,
-  cleanStoreProductList,
-  getBrands
-} from '../products-list/ProductsList.actions';
+import { setFilters } from '../products-list/ProductsList.actions';
 import { Button } from '../../components/SpecComponents';
 import { Container, Content, Text } from './ProductsFilters.styles';
-import { getAppData } from '../../config/store/app-store/app.actions';
 import ButtonComboBox from './ButtonComboBox';
-import { mapToSelector } from '../../helpers/helpers';
+import { FILTER_VALUE } from '../../config/constants/products';
 
 /**
  * The ProductsFilters's container.
  */
-const ProductsFilters = () => {
-  const {
-    project_types: projectTypes,
-    room_types: roomTypes,
-  } = useSelector(state => state.app);
-  const { loaded } = useSelector(state => state.app);
-  const { isSelectedAll, filters, sections, items, brands } = useSelector(state => state.productsList);
-  const [roomTypesOptions, setRoomTypesOptions] = useState([]);
-  const dispatch = useDispatch();
+const ProductsFilters = ({
+	initialFilters,
+	filters,
+	onFilterAll,
+	filterOptions,
+}) => {
+	const { isSelectedAll } = useSelector((state) => state.productsList);
 
-  const handleFilterAll = () => dispatch(onGetProductsByFiltersAll());
-  const submitCallback = ({ name, value }) => {
-    if (name === 'project_type') {
-      const filteredRoomTypes = (
-        value.length
-          ? roomTypes.filter(rt => rt.project_types.some(rpt => value.some(val => val.value === rpt.id)))
-          : roomTypes
-      ).map(mapToSelector);
+	const dispatch = useDispatch();
 
-      const selectedRoomTypes = filters.room_type.filter(rt => rt.project_types.some(rpt => value.some(val => val.value === rpt.id)));
+	const submitCallback = ({ name, value }) => {
+		dispatch(setFilters({ ...filters, [name]: value, page: 0 }));
+	};
 
-      setRoomTypesOptions(filteredRoomTypes);
-      dispatch(getProductsByFilter({
-        ...filters,
-        room_type: selectedRoomTypes,
-        [name]: value,
-      }));
-    } else {
-      dispatch(getProductsByFilter({ ...filters, [name]: value }));
-    }
-  }
-
-  useEffect(() => {
-    if (!loaded) dispatch(getAppData());
-    dispatch(getBrands());
-    dispatch(getSections());
-    dispatch(getItems());
-    setRoomTypesOptions(roomTypes.map(mapToSelector));
-    return () => dispatch(cleanStoreProductList());
-  }, []);
-
-  useEffect(() => {
-    if (roomTypes) setRoomTypesOptions(roomTypes.map(mapToSelector));
-  }, [roomTypes]);
-
-  useEffect(() => {
-    const { section = [], room_type = [], project_type = [], item = [], brand = [], sort = '', keyword = '' } = filters;
-    if (!keyword && !section.length && !room_type.length && !project_type.length && !item.length && !brand.length && !sort) {
-      dispatch(setSelectedAll(true));
-    }
-  }, [filters]);
-
-  return (
-    <Container>
-      <Content>
-        <Button
-          selected={isSelectedAll}
-          onClick={handleFilterAll}
-          variant={isSelectedAll ? 'secondary' : 'default'}
-          inverse
-        >
-          <Text>Todos</Text>
-        </Button>
-        <ButtonComboBox
-          variant="secondary"
-          options={sections}
-          name="section"
-          onChange={submitCallback}
-          currentOptions={filters.section}
-          submit
-        >
-          <Text>Sección</Text>
-        </ButtonComboBox>
-        <ButtonComboBox
-          variant="secondary"
-          options={items}
-          name="item"
-          onChange={submitCallback}
-          currentOptions={filters.item}
-          submit
-        >
-          <Text>Partidas</Text>
-        </ButtonComboBox>
-        <ButtonComboBox
-          variant="secondary"
-          options={projectTypes}
-          name="project_type"
-          onChange={submitCallback}
-          isGrey={!isSelectedAll}
-          currentOptions={filters.project_type}
-          submit
-        >
-          <Text>Tipo de proyecto</Text>
-        </ButtonComboBox>
-        <Button
-          inverse
-          variant={filters.most_used ? 'secondary' : 'default'}
-          name="most_used"
-          onClick={() => submitCallback({ name: 'most_used', value: !filters.most_used })}
-        >
-          <Text>Mas usados</Text>
-        </Button>
-        <ButtonComboBox
-          variant="secondary"
-          options={roomTypesOptions}
-          name="room_type"
-          onChange={submitCallback}
-          currentOptions={filters.room_type}
-          submit
-        >
-          <Text>Recintos</Text>
-        </ButtonComboBox>
-        <ButtonComboBox
-          variant="secondary"
-          options={brands}
-          name="brand"
-          onChange={submitCallback}
-          currentOptions={filters.brand}
-          submit
-        >
-          <Text>Marcas</Text>
-        </ButtonComboBox>
-      </Content>
-    </Container>
-  );
+	return (
+		<Container>
+			<Content>
+				<Button
+					selected={isSelectedAll}
+					onClick={onFilterAll}
+					variant={isSelectedAll ? 'secondary' : 'default'}
+					inverse
+				>
+					<Text>Todos</Text>
+				</Button>
+				{initialFilters.filters.map((key) => {
+					if (key === 'most_used' || key === 'my_products') {
+						return (
+							<Button
+								key={key}
+								inverse
+								variant={filters[key] ? 'secondary' : 'default'}
+								name={key}
+								onClick={() =>
+									submitCallback({
+										name: 'most_used',
+										value: !filters[key],
+									})
+								}
+							>
+								<Text>{FILTER_VALUE[key].text}</Text>
+							</Button>
+						);
+					}
+					return (
+						<ButtonComboBox
+							key={key}
+							variant="secondary"
+							options={filterOptions?.[FILTER_VALUE[key].valueKey] || []}
+							name={key}
+							onChange={submitCallback}
+							currentOptions={filters[key]}
+							submit
+						>
+							<Text>{FILTER_VALUE[key].text}</Text>
+						</ButtonComboBox>
+					);
+				})}
+			</Content>
+		</Container>
+	);
 };
 
 export default ProductsFilters;

@@ -17,43 +17,38 @@ import appReducer from './app-store/app.reducer';
 import brandListReducer from '../../containers/brands-list/BrandsList.reducer';
 import clientListReducer from '../../containers/clients-list/ClientsList.reducer';
 import clientReducer from '../../containers/client/client.reducer';
-import clientProductsListReducer from '../../containers/client-products-list/ClientProductsList.reducer';
 import modalContactFormReducer from '../../containers/modal-contact-form/ModalContactForm.reducers';
 import specDocumentReducer from '../../containers/spec-document/SpecDocument.reducer';
 import specHeaderReducer from '../../containers/spec-header/SpecHeader.reducer';
 import specImagesModalReducer from '../../containers/spec-images-modal/SpecImagesModal.reducer';
 import specContentsReducer from '../../containers/spec-contents/SpecContents.reducer';
 import clientsImageSliderReducer from '../../containers/clients-images-slider/ClientsImageSlider.reducer';
-import ProfileProductsListReducer from '../../containers/profile-products/ProductsList.reducer';
 import ProfileReducer from '../../containers/profile-header/ProfileHeader.reducer';
 
-
 export default combineReducers({
-  auth: authReducer,
-  app: appReducer,
-  client: clientReducer,
-  clientsList: clientListReducer,
-  clientsImageSlider: clientsImageSliderReducer,
-  brandsList: brandListReducer,
+	auth: authReducer,
+	app: appReducer,
+	client: clientReducer,
+	clientsList: clientListReducer,
+	clientsImageSlider: clientsImageSliderReducer,
+	brandsList: brandListReducer,
 	login: loginReducer,
 	recoverPassword: recoverPasswordReducer,
-  modalContactForm: modalContactFormReducer,
-  newPassword: newPasswordReducer,
-  newProject: newProjectReducer,
-  projectsList: projectsListReducer,
-  alert: alertReducer,
-  clientProductsList: clientProductsListReducer,
-  productsList: productsListReducer,
-  specHeader: specHeaderReducer,
-  specProductsSections: specProductsSectionsReducer,
-  specProductsItems: specProductsItemsReducer,
-  specProducts: specProductsReducer,
-  specModalPorduct: specModalPorductReducer,
-  specCreateProduct: specCreateProductReducer,
-  specEditProduct: specEditProductReducer,
-  specDocument: specDocumentReducer,
-  specImagesModal: specImagesModalReducer,
-  specContents: specContentsReducer,
-  profile: ProfileReducer,
-  profileProductsList: ProfileProductsListReducer,
+	modalContactForm: modalContactFormReducer,
+	newPassword: newPasswordReducer,
+	newProject: newProjectReducer,
+	projectsList: projectsListReducer,
+	alert: alertReducer,
+	productsList: productsListReducer,
+	specHeader: specHeaderReducer,
+	specProductsSections: specProductsSectionsReducer,
+	specProductsItems: specProductsItemsReducer,
+	specProducts: specProductsReducer,
+	specModalPorduct: specModalPorductReducer,
+	specCreateProduct: specCreateProductReducer,
+	specEditProduct: specEditProductReducer,
+	specDocument: specDocumentReducer,
+	specImagesModal: specImagesModalReducer,
+	specContents: specContentsReducer,
+	profile: ProfileReducer,
 });
