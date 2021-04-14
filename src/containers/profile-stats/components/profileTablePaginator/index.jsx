@@ -23,7 +23,7 @@ const ProfileTablePaginator = ({
 
 	return (
 		<Paginator isSubRows={isSubRows}>
-			<span>Items por página:</span>
+			<span>Ítems por página:</span>
 			<SelectPaginator
 				onChange={handleChangeLimit}
 				defaultValue={limit}
