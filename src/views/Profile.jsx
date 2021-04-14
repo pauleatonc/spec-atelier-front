@@ -29,8 +29,8 @@ import { Button } from '../components/SpecComponents';
  */
 const Profile = () => {
 	const { user, loading } = useSelector((state) => state.profile);
-	const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
+  const product_filter = () => user?.client_role ? { client_products: true } : { my_products: true};
 	const handleCreateProduct = () => dispatch(onShowSpecCreateProductSuccess());
 
 	return (
@@ -47,7 +47,7 @@ const Profile = () => {
 								</Button>
 							</ButtonCreateContainer>
 							<ProductListContainer
-								extraFilters={{ my_products: true }}
+								extraFilters={{ product_filter }}
 								withoutPadding
 							/>
 						</>
