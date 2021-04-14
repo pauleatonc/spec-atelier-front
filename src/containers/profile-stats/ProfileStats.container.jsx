@@ -116,7 +116,8 @@ const ProfileStatsContainer = ({ stat }) => {
 
 	const handleSortTable = (column, isSubRows = false, e) => {
 		e.persist();
-		/* dispatch(
+		/* TODO: This method is for next Hito
+		dispatch(
 			onGetStats(
 				{
 					...(isSubRows ? subFilters : filters),

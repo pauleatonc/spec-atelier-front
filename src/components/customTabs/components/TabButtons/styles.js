@@ -4,6 +4,8 @@ import {
 	COLOR_LIGHTERGREY,
 	COLOR_LIGHTGREY,
 	COLOR_PRIMARY,
+	COLOR_WHITE,
+	COLOR_ALABASTER,
 } from '../../../../config/constants/styled-vars';
 
 export const ContainerTabs = styled.div`
@@ -45,11 +47,11 @@ export const ButtonTab = styled.button`
 export const ProfileStatsTabs = styled.div`
 	display: flex;
 	padding: 15px;
-	background-color: #fafafa;
+	background-color: ${COLOR_ALABASTER};
 `;
 
 export const ProfileStatsButtonTab = styled.div`
-	color: ${({ isActive }) => (isActive ? '#ffffff' : COLOR_PRIMARY)};
+	color: ${({ isActive }) => (isActive ? COLOR_WHITE : COLOR_PRIMARY)};
 	cursor: pointer;
 	margin: 0px 12px;
 	padding: 7px 20px;
