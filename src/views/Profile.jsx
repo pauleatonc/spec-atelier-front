@@ -46,7 +46,10 @@ const Profile = () => {
 									Crear
 								</Button>
 							</ButtonCreateContainer>
-							<ProductListContainer extraFilters={{ my_products: true }} />
+							<ProductListContainer
+								extraFilters={{ my_products: true }}
+								withoutPadding
+							/>
 						</>
 					</Tab>
 					{Object.keys(user).length && user?.client_role && !loading && (

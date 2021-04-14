@@ -26,6 +26,7 @@ const ProductList = ({
 	withSearch = true,
 	withFilter = true,
 	filterOptionsKey,
+	withoutPadding,
 }) => {
 	const defaultFilters = {
 		page: 0,
@@ -121,7 +122,7 @@ const ProductList = ({
 	}, []);
 
 	return (
-		<Container>
+		<Container withoutPadding={withoutPadding}>
 			{withSearch && (
 				<ProductsSearchContainer
 					keyword={keyword}
