@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTable, useExpanded } from 'react-table';
+import { useTable, useExpanded, useSortBy } from 'react-table';
 
 import {
 	Table,
@@ -9,6 +9,7 @@ import {
 	TableBody,
 	TableTd,
 	IconType,
+	IconSort,
 } from './styles';
 import ProfileTablePaginator from '../profileTablePaginator';
 
@@ -23,12 +24,13 @@ const ProfileTableStats = ({
 	onPaginateStats,
 	onChangeLimit,
 	subColums,
-	subData = [],
+	subData,
 	subTotal,
 	subPage,
 	subLimit,
 	subNextPage,
 	subLoading,
+	onSortTable,
 }) => {
 	const {
 		getTableProps,
@@ -40,7 +42,9 @@ const ProfileTableStats = ({
 		{
 			columns,
 			data,
+			manualSortBy: true,
 		},
+		useSortBy,
 		useExpanded,
 	);
 
@@ -50,10 +54,14 @@ const ProfileTableStats = ({
 		headerGroups: subHeaderGroups,
 		rows: subRows,
 		prepareRow: prepareSubRow,
-	} = useTable({
-		columns: subColums,
-		data: subData,
-	});
+	} = useTable(
+		{
+			columns: subColums,
+			data: subData,
+			manualSortBy: true,
+		},
+		useSortBy,
+	);
 
 	return (
 		<>
@@ -61,11 +69,22 @@ const ProfileTableStats = ({
 				<TableHead>
 					{headerGroups.map((headerGroup) => (
 						<RowTable {...headerGroup.getHeaderGroupProps()}>
-							{headerGroup.headers.map((column) => (
-								<TableTh {...column.getHeaderProps()}>
-									{column.render('Header')}
-								</TableTh>
-							))}
+							{headerGroup.headers.map((column) => {
+								return (
+									<TableTh
+										{...column.getHeaderProps(column.getSortByToggleProps())}
+										onClick={(e) => onSortTable(column, false, e)}
+									>
+										{column.render('Header')}
+										<IconSort
+											className={`fas ${
+												column.isSorted &&
+												(column.isSortedDesc ? 'fa-arrow-down' : 'fa-arrow-up')
+											}`}
+										/>
+									</TableTh>
+								);
+							})}
 						</RowTable>
 					))}
 				</TableHead>
@@ -75,19 +94,17 @@ const ProfileTableStats = ({
 						return (
 							<>
 								<RowTable {...row.getRowProps()} isExpanded={row.isExpanded}>
-									{row.cells.map((cell) => {
-										return (
-											<TableTd
-												{...cell.getCellProps()}
-												isProjectType={cell.column?.id === 'project_type'}
-											>
-												{cell.column?.id === 'project_type' && (
-													<IconType type={cell?.value.toUpperCase()} />
-												)}
-												{cell.render('Cell')}
-											</TableTd>
-										);
-									})}
+									{row.cells.map((cell) => (
+										<TableTd
+											{...cell.getCellProps()}
+											isProjectType={cell.column?.id === 'project_type'}
+										>
+											{cell.column?.id === 'project_type' && (
+												<IconType type={cell?.value.toUpperCase()} />
+											)}
+											{cell.render('Cell')}
+										</TableTd>
+									))}
 								</RowTable>
 								{!!row.isExpanded && (
 									<tr>
@@ -114,23 +131,21 @@ const ProfileTableStats = ({
 															return (
 																<RowTable {...row.getRowProps()}>
 																	<TableTd />
-																	{row.cells.map((cell) => {
-																		return (
-																			<TableTd
-																				{...cell.getCellProps()}
-																				isProjectType={
-																					cell.column?.id === 'project_type'
-																				}
-																			>
-																				{cell.column?.id === 'project_type' && (
-																					<IconType
-																						type={cell?.value.toUpperCase()}
-																					/>
-																				)}
-																				{cell.render('Cell')}
-																			</TableTd>
-																		);
-																	})}
+																	{row.cells.map((cell) => (
+																		<TableTd
+																			{...cell.getCellProps()}
+																			isProjectType={
+																				cell.column?.id === 'project_type'
+																			}
+																		>
+																			{cell.column?.id === 'project_type' && (
+																				<IconType
+																					type={cell?.value.toUpperCase()}
+																				/>
+																			)}
+																			{cell.render('Cell')}
+																		</TableTd>
+																	))}
 																</RowTable>
 															);
 														})}

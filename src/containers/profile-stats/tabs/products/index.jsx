@@ -34,7 +34,7 @@ const ProductsStats = () => {
 							variant={VARIANTS_BUTTON.CANCEL}
 							onClick={() => hangleToggleRow(row, rows, expandedDepth)}
 						>
-							{row.isExpanded && !!subList.length ? 'Ocultar' : 'Ver proyectos'}
+							{row.isExpanded ? 'Ocultar' : 'Ver proyectos'}
 						</Button>
 					) : null;
 				},
@@ -101,6 +101,22 @@ const ProductsStats = () => {
 			);
 	};
 
+	const handleSortTable = (column, isSubRows = false, e) => {
+		e.persist();
+		/* dispatch(
+			onGetStats(
+				{
+					...(isSubRows ? subFilters : filters),
+					page: 0,
+					limit: 10,
+					sort_by: sortBy,
+					sort_order: sortOrder,
+				},
+				isSubRows,
+			),
+		); */
+	};
+
 	return loading && !list.length ? (
 		<h1>Cargando...</h1>
 	) : (
@@ -121,6 +137,7 @@ const ProductsStats = () => {
 			subLimit={subFilters.limit}
 			subNextPage={subNextPage}
 			subLoading={subLoading}
+			onSortTable={handleSortTable}
 		/>
 	);
 };

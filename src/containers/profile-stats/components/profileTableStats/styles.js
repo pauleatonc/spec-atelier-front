@@ -66,3 +66,8 @@ export const IconType = styled.i`
 	background-size: cover;
 	margin-right: 5px;
 `;
+
+export const IconSort = styled.i`
+	margin-left: 10px;
+	font-size: 12px;
+`;

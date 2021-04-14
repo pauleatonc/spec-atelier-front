@@ -23,8 +23,9 @@ const ProfileStatsState = {
 		filters: {
 			page: 0,
 			limit: 10,
-			sort_by: null,
 			stat: null,
+			sort_by: null,
+			sort_order: null,
 		},
 	},
 	projects: {
@@ -36,8 +37,9 @@ const ProfileStatsState = {
 		filters: {
 			page: 0,
 			limit: 10,
-			sort_by: null,
 			stat: null,
+			sort_by: null,
+			sort_order: null,
 		},
 	},
 	productsByProject: {
@@ -49,6 +51,8 @@ const ProfileStatsState = {
 		filters: {
 			page: 0,
 			limit: 10,
+			sort_by: null,
+			sort_order: null,
 		},
 	},
 	projectsByProduct: {
@@ -60,6 +64,8 @@ const ProfileStatsState = {
 		filters: {
 			page: 0,
 			limit: 10,
+			sort_by: null,
+			sort_order: null,
 		},
 	},
 };

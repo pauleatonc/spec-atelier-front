@@ -101,6 +101,22 @@ const ProjectsStats = () => {
 			);
 	};
 
+	const handleSortTable = (column, isSubRows = false, e) => {
+		e.persist();
+		/* dispatch(
+			onGetStats(
+				{
+					...(isSubRows ? subFilters : filters),
+					page: 0,
+					limit: 10,
+					sort_by: sortBy,
+					sort_order: sortOrder,
+				},
+				isSubRows,
+			),
+		); */
+	};
+
 	return loading && !list.length ? (
 		<h1>Cargando...</h1>
 	) : (
@@ -121,6 +137,7 @@ const ProjectsStats = () => {
 			subLimit={subFilters.limit}
 			subNextPage={subNextPage}
 			subLoading={subLoading}
+			onSortTable={handleSortTable}
 		/>
 	);
 };
