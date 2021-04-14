@@ -4,10 +4,7 @@ import AppLayout from '../components/layouts/AppLayout';
 import Navbar from '../containers/navbar/Navbar.container';
 import Footer from '../components/footer';
 import ProfileHeader from '../containers/profile-header/ProfileHeader';
-import ProductList from '../containers/profile-products/ProductsList.container';
-import ProductsListSeeMore from '../containers/profile-products/ProductsListSeeMore';
-import ProfileProductsFilters from '../containers/profile-products-filters/ProductsFilters.container';
-import ProfileProductsSearch from '../containers/profile-products-search/ProductsSearch.container';
+import ProductListContainer from '../containers/products-list/ProductsList.container';
 import {
 	Separator,
 	ButtonCreateContainer,
@@ -15,7 +12,6 @@ import {
 } from './Products.styles';
 import ProfileChangePicture from '../containers/profile-change-picture/ProfileChangePicture';
 import { onShowSpecCreateProductSuccess } from '../containers/spec-create-product/SpecCreateProduct.actions';
-
 import AlertContainer from '../containers/alert/Alert.container';
 import SpecCreateProductOneContainer from '../containers/spec-create-product/SpecCreateProductStepOne.container';
 import SpecCreateProductTwoContainer from '../containers/spec-create-product/SpecCreateProductStepTwo.container';
@@ -54,11 +50,8 @@ const Profile = () => {
 									Crear
 								</Button>
 							</ButtonCreateContainer>
-							<ProfileProductsSearch />
-							<ProfileProductsFilters />
 							<Separator />
-							<ProductList />
-							<ProductsListSeeMore />
+							<ProductListContainer extraFilters={{ my_products: true }} />
 						</>
 					</Tab>
 					{Object.keys(user).length && user?.client_role && !loading && (
