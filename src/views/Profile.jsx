@@ -26,6 +26,7 @@ import ContactFormContainer from '../containers/modal-contact-form/ModalContactF
 import SpecModalProduct from '../containers/spec-modal-product/SpecModalProduct.container';
 
 import ProfileStats from '../containers/profile-stats/ProfileStats.container';
+import { PRODUCTS, PROJECTS } from '../containers/profile-stats/uitls';
 
 import CustomTabs from '../components/customTabs';
 import Tab from '../components/customTabs/components/Tab';
@@ -62,7 +63,14 @@ const Profile = () => {
 					</Tab>
 					{Object.keys(user).length && user?.client_role && !loading && (
 						<Tab title="Mis estadísticas">
-							<ProfileStats />
+							<CustomTabs isProfileStatsTabs>
+								<Tab title="Proyectos especificados">
+									<ProfileStats stat={PROJECTS} />
+								</Tab>
+								<Tab title="Mis productos">
+									<ProfileStats stat={PRODUCTS} />
+								</Tab>
+							</CustomTabs>
 						</Tab>
 					)}
 				</CustomTabs>

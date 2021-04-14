@@ -2,12 +2,10 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { onGetStats } from '../../ProfileStats.actions';
-import { COLUMNS } from './constants';
 import TableStats from '../../components/profileTableStats';
 import { Button } from '../../../../components/SpecComponents';
 import { VARIANTS_BUTTON } from '../../../../config/constants/button-variants';
-
-import { COLUMNS as COLUMNS_PROJECTS } from '../projects/constants';
+import { PAGINATOR_OPTIONS, STATS, EXPANDED, COLUMNS } from '../../uitls';
 
 const ProductsStats = () => {
 	const {
@@ -23,7 +21,7 @@ const ProductsStats = () => {
 	const dispatch = useDispatch();
 	const columns = useMemo(
 		() => [
-			...COLUMNS,
+			...COLUMNS.PRODUCTS,
 			{
 				id: 'expander',
 				Header: () => null,
@@ -34,7 +32,7 @@ const ProductsStats = () => {
 							variant={VARIANTS_BUTTON.CANCEL}
 							onClick={() => hangleToggleRow(row, rows, expandedDepth)}
 						>
-							{row.isExpanded ? 'Ocultar' : 'Ver proyectos'}
+							{row.isExpanded ? EXPANDED.HIDE : EXPANDED.VIEW_PROJECTS}
 						</Button>
 					) : null;
 				},
@@ -42,14 +40,14 @@ const ProductsStats = () => {
 		],
 		[],
 	);
-	const subColums = useMemo(() => COLUMNS_PROJECTS, []);
+	const subColums = useMemo(() => COLUMNS.PROJECTS, []);
 
 	useEffect(() => {
 		if (!list.length)
 			dispatch(
 				onGetStats({
 					...filters,
-					stat: 'product_stats',
+					stat: STATS.PRODUCTS,
 					page: 0,
 					limit: 10,
 				}),
@@ -73,7 +71,10 @@ const ProductsStats = () => {
 			onGetStats(
 				{
 					...(isSubRows ? subFilters : filters),
-					page: direction === 'next' ? filters.page + 1 : filters.page - 1,
+					page:
+						direction === PAGINATOR_OPTIONS.NEXT
+							? filters.page + 1
+							: filters.page - 1,
 				},
 				isSubRows,
 			),
@@ -93,7 +94,7 @@ const ProductsStats = () => {
 						...filters,
 						page: 0,
 						limit: 10,
-						stat: 'project_stats',
+						stat: STATS.PROJECTS,
 						product: row.original.id,
 					},
 					true,

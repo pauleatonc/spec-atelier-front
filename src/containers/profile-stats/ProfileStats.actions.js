@@ -1,7 +1,7 @@
 import onActionCreator from '../../config/store/helpers';
 import { cleanObjectsAndArrays } from '../../modules/services';
 import { getStats } from '../../services/profile.service';
-import { formatTableData } from './uitls';
+import { formatTableData, STATS } from './uitls';
 
 export const GET_PROFILE_STATS_PRODUCTS = 'GET_PROFILE_STATS_PRODUCTS';
 export const GET_PROFILE_STATS_PRODUCTS_SUCCESS =
@@ -30,7 +30,7 @@ export const onGetStats = (filters, isSubRows) => (dispatch, getState) => {
 		id,
 		filters: cleanObjectsAndArrays(filters),
 	};
-	const isProductStat = filters?.stat === 'product_stats';
+	const isProductStat = filters?.stat === STATS.PRODUCTS;
 
 	if (isSubRows) {
 		dispatch(

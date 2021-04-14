@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+import {
+	COLOR_ALABASTER,
+	COLOR_MERCURY,
+	COLOR_BLACK_OPACITY,
+	COLOR_BLACK_OPACITY_DARK,
+} from '../../../../config/constants/styled-vars';
+
 import INSTITUTIONAL from '../../../../assets/images/project/project_type/ic-institutional_grey.svg';
 import HOSPITAL from '../../../../assets/images/project/project_type/ic-hospitaler_grey.svg';
 import REAL_STATE from '../../../../assets/images/project/project_type/ic-real_state_grey.svg';
@@ -28,12 +35,12 @@ export const Table = styled.table`
 `;
 
 export const TableHead = styled.thead`
-	color: rgba(0, 0, 0, 0.54);
+	color: ${COLOR_BLACK_OPACITY};
 	font-size: 12px;
 `;
 
 export const TableBody = styled.tbody`
-	color: rgba(0, 0, 0, 0.87);
+	color: ${COLOR_BLACK_OPACITY_DARK};
 	font-size: 13px;
 	tr:last-child {
 		border-bottom: none;
@@ -41,8 +48,8 @@ export const TableBody = styled.tbody`
 `;
 
 export const RowTable = styled.tr`
-	border-bottom: 1px solid #e9e9e9;
-	background-color: ${({ isExpanded }) => (isExpanded ? '#fafafa' : '')};
+	border-bottom: 1px solid ${COLOR_MERCURY};
+	background-color: ${({ isExpanded }) => (isExpanded ? COLOR_ALABASTER : '')};
 `;
 
 export const TableTh = styled.th`

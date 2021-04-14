@@ -2,12 +2,10 @@ import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { onGetStats } from '../../ProfileStats.actions';
-import { COLUMNS } from './constants';
 import TableStats from '../../components/profileTableStats';
 import { Button } from '../../../../components/SpecComponents';
 import { VARIANTS_BUTTON } from '../../../../config/constants/button-variants';
-
-import { COLUMNS as COLUMNS_PRODUCST } from '../products/constants';
+import { PAGINATOR_OPTIONS, STATS, EXPANDED, COLUMNS } from '../../uitls';
 
 const ProjectsStats = () => {
 	const {
@@ -23,7 +21,7 @@ const ProjectsStats = () => {
 	const dispatch = useDispatch();
 	const columns = useMemo(
 		() => [
-			...COLUMNS,
+			...COLUMNS.PROJECTS,
 			{
 				id: 'expander',
 				Header: () => null,
@@ -34,7 +32,7 @@ const ProjectsStats = () => {
 							variant={VARIANTS_BUTTON.CANCEL}
 							onClick={() => hangleToggleRow(row, rows, expandedDepth)}
 						>
-							{row.isExpanded ? 'Ocultar' : 'Ver productos'}
+							{row.isExpanded ? EXPANDED.HIDE : EXPANDED.VIEW_PRODUCTS}
 						</Button>
 					);
 				},
@@ -42,14 +40,14 @@ const ProjectsStats = () => {
 		],
 		[],
 	);
-	const subColums = useMemo(() => COLUMNS_PRODUCST, []);
+	const subColums = useMemo(() => COLUMNS.PRODUCTS, []);
 
 	useEffect(() => {
 		if (!list.length)
 			dispatch(
 				onGetStats({
 					...filters,
-					stat: 'project_stats',
+					stat: STATS.PROJECTS,
 					page: 0,
 					limit: 10,
 				}),
@@ -73,7 +71,10 @@ const ProjectsStats = () => {
 			onGetStats(
 				{
 					...(isSubRows ? subFilters : filters),
-					page: direction === 'next' ? filters.page + 1 : filters.page - 1,
+					page:
+						direction === PAGINATOR_OPTIONS.NEXT
+							? filters.page + 1
+							: filters.page - 1,
 				},
 				isSubRows,
 			),
@@ -93,7 +94,7 @@ const ProjectsStats = () => {
 						...filters,
 						page: 0,
 						limit: 10,
-						stat: 'product_stats',
+						stat: STATS.PRODUCTS,
 						project: row.original.id,
 					},
 					true,

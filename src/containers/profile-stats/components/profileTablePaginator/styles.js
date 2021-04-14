@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
-import { COLOR_LIGHTGREY } from '../../../../config/constants/styled-vars';
+import {
+	COLOR_LIGHTGREY,
+	COLOR_MERCURY,
+} from '../../../../config/constants/styled-vars';
 
 export const SelectPaginator = styled.select`
 	width: 60px;
@@ -21,8 +24,9 @@ export const Paginator = styled.footer`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	border-top: 1px solid #e9e9e9;
-	border-bottom: ${({ isSubRows }) => (isSubRows ? '1px solid #e9e9e9' : '')};
+	border-top: 1px solid ${COLOR_MERCURY};
+	border-bottom: ${({ isSubRows }) =>
+		isSubRows ? `1px solid ${COLOR_MERCURY}` : ''};
 `;
 
 export const ArrowPaginator = styled.button`

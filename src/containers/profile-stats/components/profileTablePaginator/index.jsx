@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Paginator, ArrowPaginator, SelectPaginator } from './styles';
 
+import { LIMIT_OPTIONS, PAGINATOR_OPTIONS } from '../../uitls';
+
 const ProfileTablePaginator = ({
 	total,
 	page,
@@ -13,7 +15,6 @@ const ProfileTablePaginator = ({
 	isSubRows,
 }) => {
 	const currentItemsView = limit * (page + 1);
-	const optionsSelect = ['10', '20', '30', '40', '50'];
 
 	const handleChangeLimit = ({ target: { value } }) => {
 		if (parseInt(value) !== limit) onChangeLimit(value, isSubRows);
@@ -27,7 +28,7 @@ const ProfileTablePaginator = ({
 				defaultValue={limit}
 				disabled={loading || limit > total}
 			>
-				{optionsSelect.map((val) => {
+				{LIMIT_OPTIONS.map((val) => {
 					return (
 						<option key={val} value={val}>
 							{val}
@@ -40,13 +41,13 @@ const ProfileTablePaginator = ({
 			} de ${total}`}</span>
 			<ArrowPaginator
 				disabled={page === 0 || loading}
-				onClick={() => onPaginateStats('prev', isSubRows)}
+				onClick={() => onPaginateStats(PAGINATOR_OPTIONS.PREV, isSubRows)}
 			>
 				<i className="fas fa-angle-left"></i>
 			</ArrowPaginator>
 			<ArrowPaginator
 				disabled={!nextPage || loading}
-				onClick={() => onPaginateStats('next', isSubRows)}
+				onClick={() => onPaginateStats(PAGINATOR_OPTIONS.NEXT, isSubRows)}
 			>
 				<i className="fas fa-angle-right"></i>
 			</ArrowPaginator>
