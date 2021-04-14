@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import firebase from 'firebase/app';
 
 import ToolTip from '../tooltip/Tooltip';
 import { ANALYTICS_EVENTS } from '../../config/constants/analyticEvents';
