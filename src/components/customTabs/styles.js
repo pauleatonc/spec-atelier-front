@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { COLOR_MERCURY } from '../../../../config/constants/styled-vars';
+import { COLOR_MERCURY } from '../../config/constants/styled-vars';
 
 export const Container = styled.div`
 	width: 100%;
