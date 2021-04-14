@@ -5,11 +5,7 @@ import Navbar from '../containers/navbar/Navbar.container';
 import Footer from '../components/footer';
 import ProfileHeader from '../containers/profile-header/ProfileHeader';
 import ProductListContainer from '../containers/products-list/ProductsList.container';
-import {
-	Separator,
-	ButtonCreateContainer,
-	PaddingContainer,
-} from './Products.styles';
+import { ButtonCreateContainer, PaddingContainer } from './Products.styles';
 import ProfileChangePicture from '../containers/profile-change-picture/ProfileChangePicture';
 import { onShowSpecCreateProductSuccess } from '../containers/spec-create-product/SpecCreateProduct.actions';
 import AlertContainer from '../containers/alert/Alert.container';
@@ -50,7 +46,6 @@ const Profile = () => {
 									Crear
 								</Button>
 							</ButtonCreateContainer>
-							<Separator />
 							<ProductListContainer extraFilters={{ my_products: true }} />
 						</>
 					</Tab>

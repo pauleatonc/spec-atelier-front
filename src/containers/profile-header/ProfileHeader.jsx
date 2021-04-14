@@ -17,7 +17,6 @@ import {
 	InputText,
 	TextValue,
 	DropIcon,
-	ButtonCreateContainer,
 	ProfileNameInputContainer,
 } from './ProfileHeader.styles';
 import {
@@ -36,8 +35,6 @@ import {
 	setUserProfile,
 	onShowEditProfilePicture,
 } from './ProfileHeader.actions';
-import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
-import { Separator } from '../../components/navbar/navbar-profile/NavProfile.styles';
 import SelectorRelative from '../../components/basics/SelectorRelative';
 import { COLOR_GREEN_UNDERLINE } from '../../config/constants/styled-vars';
 
@@ -47,8 +44,6 @@ const ProductsHeader = () => {
 	const { cities } = useSelector((state) => state.app);
 	const [currentUser, setCurrentUser] = useState(user);
 	const dispatch = useDispatch();
-
-	const handleCreateProduct = () => dispatch(onShowSpecCreateProductSuccess());
 
 	const handleEditProfilePicture = () => dispatch(onShowEditProfilePicture());
 
@@ -194,17 +189,6 @@ const ProductsHeader = () => {
 					)}
 				</ProfileCity>
 			</ContentEdit>
-			<Item>
-				<ItemText>Mis Productos</ItemText>
-				<Separator />
-				<UnderLine />
-			</Item>
-
-			<ButtonCreateContainer>
-				<Button onClick={handleCreateProduct} variant="primary">
-					<i className="fa fa-plus" style={{ marginRight: '11px' }} /> Crear
-				</Button>
-			</ButtonCreateContainer>
 		</>
 	);
 };
