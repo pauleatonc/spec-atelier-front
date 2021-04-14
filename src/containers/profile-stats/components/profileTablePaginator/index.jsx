@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Paginator, ArrowPaginator, SelectPaginator } from './styles';
 
@@ -56,3 +57,14 @@ const ProfileTablePaginator = ({
 };
 
 export default ProfileTablePaginator;
+
+ProfileTablePaginator.propTypes = {
+	total: PropTypes.number,
+	page: PropTypes.number,
+	limit: PropTypes.number,
+	nextPage: PropTypes.number,
+	loading: PropTypes.bool,
+	onPaginateStats: PropTypes.func,
+	onChangeLimit: PropTypes.func,
+	isSubRows: PropTypes.bool,
+};

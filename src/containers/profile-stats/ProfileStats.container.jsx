@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { onGetStats } from './ProfileStats.actions';
 import TableStats from './components/profileTableStats';

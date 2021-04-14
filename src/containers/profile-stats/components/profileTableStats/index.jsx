@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTable, useExpanded, useSortBy } from 'react-table';
+import PropTypes from 'prop-types';
 
 import {
 	Table,
@@ -21,8 +22,6 @@ const ProfileTableStats = ({
 	limit,
 	nextPage,
 	loading,
-	onPaginateStats,
-	onChangeLimit,
 	subColums,
 	subData,
 	subTotal,
@@ -30,6 +29,8 @@ const ProfileTableStats = ({
 	subLimit,
 	subNextPage,
 	subLoading,
+	onPaginateStats,
+	onChangeLimit,
 	onSortTable,
 }) => {
 	const {
@@ -184,3 +185,23 @@ const ProfileTableStats = ({
 };
 
 export default ProfileTableStats;
+
+ProfileTableStats.propTypes = {
+	columns: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	total: PropTypes.number,
+	page: PropTypes.number,
+	limit: PropTypes.number,
+	nextPage: PropTypes.number,
+	loading: PropTypes.bool,
+	subColums: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	subData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+	subTotal: PropTypes.number,
+	subPage: PropTypes.number,
+	subLimit: PropTypes.number,
+	subNextPage: PropTypes.number,
+	subLoading: PropTypes.bool,
+	onPaginateStats: PropTypes.func,
+	onChangeLimit: PropTypes.func,
+	onSortTable: PropTypes.func,
+};
