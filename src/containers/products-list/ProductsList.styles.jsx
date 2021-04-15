@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { COLOR_LIGHTERGREY } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
-	padding: 16px 81px;
+	padding: 16px ${({ withoutPadding }) => (withoutPadding ? '0px' : '81px')};
 `;
 
 export const ListContainer = styled.section`

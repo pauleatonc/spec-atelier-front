@@ -5,6 +5,7 @@ import {
 	postJsonRequest,
 	patchJsonRequest,
 	deleteJsonRequest,
+	putJsonRequest,
 } from '../modules/requests';
 import {
 	cleanObjectsAndArrays,
@@ -124,4 +125,17 @@ export const removeProductDocuments = factoryService(
 			body,
 		);
 	},
+);
+
+/**
+ * Gets a product by the given item.
+ */
+export const updateDownloadsProduct = factoryService(({ stat, productId }) =>
+	patchJsonRequest(
+		`${API_BASE_URL}/product_stats/products//${productId}/update_downloads${formatParams(
+			{
+				stat,
+			},
+		)}`,
+	),
 );

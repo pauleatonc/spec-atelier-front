@@ -1,5 +1,9 @@
 import onActionCreator from '../../config/store/helpers';
-import { getProductById, getProducts } from '../../services/products.service';
+import {
+	getProductById,
+	getProducts,
+	updateDownloadsProduct,
+} from '../../services/products.service';
 import { getItems as getItemsService } from '../../services/items.service';
 import { cleanObjectsAndArrays } from '../../modules/services';
 import { getSections as getServiceSections } from '../../services/sections.service';
@@ -135,4 +139,11 @@ export const setSelectedAll = (filters) => (dispatch) => {
 
 export const setFilters = (filters) => (dispatch) => {
 	dispatch(onActionCreator(SET_FILTERS, filters));
+};
+
+export const updateDownloads = (stat, productId) => (dispatch) => {
+	updateDownloadsProduct({ stat, productId }).then(
+		(response) => response,
+		(error) => console.error(error),
+	);
 };

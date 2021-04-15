@@ -4,7 +4,6 @@ import {
   COLOR_GREY,
   COLOR_LIGHTGREY,
   COLOR_PRIMARY,
-  COLOR_WHITE,
   VIEW_HEADER_HEIGHT,
   COLOR_GREEN_UNDERLINE
 } from '../../config/constants/styled-vars';
@@ -189,12 +188,6 @@ export const TextValue = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-`;
-
-export const ButtonCreateContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 81px;
 `;
 
 export const ProfileNameInputContainer = styled.div`

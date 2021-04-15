@@ -7,10 +7,14 @@ import { Root, GlobalDraggableItemStyles } from './DraggableList.styles';
  * The DraggableList's component.
  */
 const DraggableList = props => {
-  const { children, onChange } = props;
+  const { children, onChange, blocks } = props;
   const [elements, setElements] = useState(Children.toArray(children));
   const handleDragEnd = event => {
-    if (!event.destination) {
+    
+    const selectedProduct = blocks.filter(product => product.id === event.draggableId);
+    const destination = blocks.filter((item, index) => index === event.destination.index);
+
+    if (!event.destination || selectedProduct[0].item !== destination[0].item) {
       return;
     }
 

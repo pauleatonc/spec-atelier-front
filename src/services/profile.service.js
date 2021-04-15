@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '../config/constants/environment';
 import { getJsonRequest, patchFormRequest, putJsonRequest } from '../modules/requests';
-import { factoryService } from '../modules/services';
+import { factoryService, formatParams } from '../modules/services';
 
 /**
  * Get user Profile
@@ -22,6 +22,11 @@ export const setProfileImage = factoryService(({ id, image }) => {
     const body = { image }
    return patchFormRequest(`${API_BASE_URL}/users/${id}/profile_image_upload`, body);
 })
+
+/**
+ * 
+ */
+export const getStats = factoryService(({ id, filters }) => getJsonRequest(`${API_BASE_URL}/users/${id}/stats${formatParams(filters)}`));
 
 // how: GET api/users/{:id}
 // update: PUT api/users/{:id} ==> espero user: {first_name: string, last_name: string, city: string, company: string }
