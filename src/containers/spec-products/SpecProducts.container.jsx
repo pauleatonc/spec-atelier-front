@@ -6,10 +6,15 @@ import {
 	onAttachSpecProduct,
 	onDetachSpecProduct,
 } from '../spec-document/SpecDocument.actions';
-import { onHideSpecProducts } from './SpecProducts.actions';
+import {
+	onHideSpecProducts,
+	onShowAttachModal,
+	onHideAttachModal,
+} from './SpecProducts.actions';
 import ProductListContainer from '../products-list/ProductsList.container';
 
 import { Overlay, Root, Body } from './SpecProducts.styles';
+import SpecModalAttachProduct from './SpecModalAttachProduct.container';
 import CreateProduct from '../../components/product/CreateProduct';
 import { onShowSpecCreateProductFromItemSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 
@@ -22,29 +27,39 @@ const SpecProductsList = () => {
 		useSelector((state) =>
 			state.specDocument.blocks?.filter((block) => block.type === 'Product'),
 		) || [];
-	const { collection: products = [], show, filters } = useSelector(
+	const { show, filters, showAttachModal, productToAttach } = useSelector(
 		(state) => state.specProducts,
 	);
 	const dispatch = useDispatch();
 
 	const handleHideSpecProducts = () => dispatch(onHideSpecProducts());
 
-	const handleCardClick = (productID) => (event) => {
+	const handleAttachSpecProduct = () => {
+		console.log('Attach', { productToAttach });
+		// return dispatch(
+		// 	onAttachSpecProduct({
+		// 		productID,
+		// 		specID,
+		// 		systemID: currentProduct?.systems[0]?.id,
+		// 	}),
+		// );
+	};
+
+	const handleCardClick = (product) => (event) => {
 		event.stopPropagation();
+		const { id: productID, items } = product;
 		const hasProduct = selectedProducts.find(
 			(selectedProduct) => selectedProduct?.element.id === productID,
 		);
-		const currentProduct = products.find((p) => p.id === productID);
+
 		if (hasProduct) {
 			return dispatch(onDetachSpecProduct({ productID, specID }));
 		}
-		return dispatch(
-			onAttachSpecProduct({
-				productID,
-				specID,
-				systemID: currentProduct?.systems[0]?.id,
-			}),
-		);
+
+		if (items.length) {
+			return dispatch(onShowAttachModal({ product }));
+		}
+		return handleAttachSpecProduct();
 	};
 
 	const handleCreateProduct = () => {
@@ -76,6 +91,12 @@ const SpecProductsList = () => {
 					/>
 				</Body>
 			</Root>
+			<SpecModalAttachProduct
+				showAttachModal={showAttachModal}
+				product={productToAttach}
+				onClose={() => dispatch(onHideAttachModal())}
+				onSubmit={handleAttachSpecProduct}
+			/>
 		</>
 	);
 };

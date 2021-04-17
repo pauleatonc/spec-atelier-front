@@ -218,9 +218,7 @@ const ProductList = ({
 							photo={product.images[0]?.urls?.small}
 							reference={product.reference}
 							title={product.name}
-							onClickCard={
-								onActionCard?.(product.id) || onClickProduct(product)
-							}
+							onClickCard={onActionCard?.(product) || onClickProduct(product)}
 							onClickSeeMore={onClickProduct(product)}
 							pdfs={product?.pdfs}
 							dwg={product?.dwg}

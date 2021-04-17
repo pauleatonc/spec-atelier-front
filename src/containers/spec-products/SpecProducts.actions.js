@@ -17,15 +17,21 @@ export const UPDATE_SPEC_PRODUCTS_FILTER_SECTION =
 	'UPDATE_SPEC_PRODUCTS_FILTER_SECTION';
 export const UPDATE_SPEC_PRODUCTS_FILTER_SORT =
 	'UPDATE_SPEC_PRODUCTS_FILTER_SORT';
-
 export const GET_SPEC_PRODUCTS_BY_ITEM = 'GET_SPEC_PRODUCTS_BY_ITEM';
+export const GET_SPEC_PRODUCTS_BY_SECTION = 'GET_SPEC_PRODUCTS_BY_SECTION';
+export const HIDE_SPEC_PRODUCTS = 'HIDE_SPEC_PRODUCTS';
+export const HIDE_SPEC_PRODUCTS_SUCCESS = 'HIDE_SPEC_PRODUCTS_SUCCESS';
+export const SHOW_SPEC_PRODUCTS = 'SHOW_SPEC_PRODUCTS';
+export const SHOW_SPEC_PRODUCTS_SUCCESS = 'SHOW_SPEC_PRODUCTS_SUCCESS';
+export const SHOW_ATTACH_MODAL = 'SHOW_ATTACH_MODAL';
+export const HIDE_ATTACH_MODAL = 'HIDE_ATTACH_MODAL';
+
 export const onGetSpecProductsByItem = (payload) => (dispatch) =>
 	batch(() => {
 		dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_ITEM, payload));
 		dispatch(onGetClients({ item: payload.itemID }));
 	});
 
-export const GET_SPEC_PRODUCTS_BY_SECTION = 'GET_SPEC_PRODUCTS_BY_SECTION';
 export const onGetSpecProductsBySection = (payload) => (dispatch) =>
 	batch(() => {
 		dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SECTION, payload));
@@ -33,8 +39,6 @@ export const onGetSpecProductsBySection = (payload) => (dispatch) =>
 		dispatch(onGetClients({ section: payload.sectionID }));
 	});
 
-export const HIDE_SPEC_PRODUCTS = 'HIDE_SPEC_PRODUCTS';
-export const HIDE_SPEC_PRODUCTS_SUCCESS = 'HIDE_SPEC_PRODUCTS_SUCCESS';
 export const onHideSpecProducts = () => (dispatch) =>
 	batch(() => {
 		dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS));
@@ -42,11 +46,16 @@ export const onHideSpecProducts = () => (dispatch) =>
 		dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_SUCCESS));
 	});
 
-export const SHOW_SPEC_PRODUCTS = 'SHOW_SPEC_PRODUCTS';
-export const SHOW_SPEC_PRODUCTS_SUCCESS = 'SHOW_SPEC_PRODUCTS_SUCCESS';
 export const onShowSpecProducts = () => (dispatch) =>
 	batch(() => {
 		dispatch(onShowSpecProductsSections());
 		dispatch(onActionCreator(SHOW_SPEC_PRODUCTS_SUCCESS));
 		dispatch(onGetClients());
 	});
+
+export const onShowAttachModal = (payload) => (dispatch) => {
+	dispatch(onActionCreator(SHOW_ATTACH_MODAL, payload));
+};
+export const onHideAttachModal = () => (dispatch) => {
+	dispatch(onActionCreator(HIDE_ATTACH_MODAL));
+};

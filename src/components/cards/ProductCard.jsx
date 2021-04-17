@@ -82,7 +82,7 @@ const ProductCard = (props) => {
 				</SeeMore>
 			</Footer>
 			{hover && !selected && canAdd && <Add onClick={onClickCard} />}
-			{selected && <Check />}
+			{selected && <Check onClick={onClickCard} />}
 		</Root>
 	);
 };
