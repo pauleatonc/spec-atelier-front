@@ -16,7 +16,7 @@ import {
 	Check,
 } from './ProductCard.styles';
 import noPhoto from '../../assets/images/icons/no-photo.svg';
-import { DownloadDocumentsIcons } from '../../components/SpecComponents';
+import { DownloadDocumentsIcons } from '../SpecComponents';
 
 /**
  * The ProductCard's component.
@@ -93,7 +93,6 @@ ProductCard.defaultProps = {
 	reference: '',
 	onClickCard: () => undefined,
 	onClickSeeMore: undefined,
-	category: '',
 };
 ProductCard.propTypes = {
 	category: PropTypes.string.isRequired,
@@ -104,7 +103,7 @@ ProductCard.propTypes = {
 	title: PropTypes.string.isRequired,
 	onClickCard: PropTypes.func,
 	onClickSeeMore: PropTypes.func,
-	productId: PropTypes.number,
+	productId: PropTypes.number.isRequired,
 };
 
 export default ProductCard;

@@ -22,6 +22,7 @@ export const GET_ITEMS_SUCCESS = 'GET_ITEMS_SUCCESS';
 export const GET_ITEMS_ERROR = 'GET_ITEMS_ERROR';
 export const GET_BRANDS_SUCCESS = 'GET_BRANDS_SUCCESS';
 export const GET_BRANDS_ERROR = 'GET_BRANDS_ERROR';
+export const SET_SELECTED_ALL = 'SET_SELECTED_ALL';
 
 export const SET_FILTERS = 'SET_FILTERS';
 
@@ -108,37 +109,12 @@ export const getBrands = (filters) => async (dispatch) => {
 	}
 };
 
-export const onGetProductsByFilter = (filters, isSelectedAll = false) => async (
-	dispatch,
-) => {
-	dispatch(onGetProducts(filters, { isSelectedAll }));
-};
-
-export const getMoreProducts = (filters) => async (dispatch) => {
-	try {
-		const { products } = await getProducts(cleanObjectsAndArrays(filters));
-		return dispatch(
-			onActionCreator(GET_MORE_PRODUCTS, {
-				nextPage: products?.next_page,
-				products: products?.list || products || [],
-				filterOptions: products?.filters || {},
-				total: products?.total || 0,
-				filters,
-			}),
-		);
-	} catch (error) {
-		return dispatch(
-			onActionCreator(GET_PRODUCTS_ERROR, { error: true, nativeError: error }),
-		);
-	}
-};
-
-export const setSelectedAll = (filters) => (dispatch) => {
-	dispatch(onGetProductsByFilter(filters, true));
-};
-
 export const setFilters = (filters) => (dispatch) => {
 	dispatch(onActionCreator(SET_FILTERS, filters));
+};
+
+export const setSelectedAll = (value) => (dispatch) => {
+	dispatch(onActionCreator(SET_SELECTED_ALL, value));
 };
 
 export const updateDownloads = (stat, productId) => (dispatch) => {
