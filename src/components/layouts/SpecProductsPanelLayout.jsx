@@ -26,7 +26,7 @@ const SpecProductsPanelLayout = (props) => {
 
 	return (
 		<Context.Provider value={contextPayload}>
-			<Overlay onClick={() => dispatch(onHideSpecProducts())} />
+			{show && <Overlay onClick={() => dispatch(onHideSpecProducts())} />}
 			<Root show={show}>
 				<Header>
 					<Title>Productos</Title>
