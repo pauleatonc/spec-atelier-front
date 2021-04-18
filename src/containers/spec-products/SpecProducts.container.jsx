@@ -34,15 +34,24 @@ const SpecProductsList = () => {
 
 	const handleHideSpecProducts = () => dispatch(onHideSpecProducts());
 
-	const handleAttachSpecProduct = () => {
-		console.log('Attach', { productToAttach });
-		// return dispatch(
-		// 	onAttachSpecProduct({
-		// 		productID,
-		// 		specID,
-		// 		systemID: currentProduct?.systems[0]?.id,
-		// 	}),
-		// );
+	const handleAttachSpecProduct = (selectedItems, product) => {
+		dispatch(onHideAttachModal());
+		const item = selectedItems.map(({ id }) => id);
+		const section = [];
+		selectedItems.forEach(({ section_id }) => {
+			if (!section.includes(section_id)) {
+				section.push(section_id);
+			}
+		});
+		return dispatch(
+			onAttachSpecProduct({
+				productID: product.id,
+				specID,
+				systemID: product?.systems[0]?.id,
+				item,
+				section,
+			}),
+		);
 	};
 
 	const handleCardClick = (product) => (event) => {
@@ -56,10 +65,10 @@ const SpecProductsList = () => {
 			return dispatch(onDetachSpecProduct({ productID, specID }));
 		}
 
-		if (items.length) {
+		if (items.length > 1) {
 			return dispatch(onShowAttachModal({ product }));
 		}
-		return handleAttachSpecProduct();
+		return handleAttachSpecProduct(items, product);
 	};
 
 	const handleCreateProduct = () => {
