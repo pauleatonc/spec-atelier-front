@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 
-export const Overlay = styled.div`
-	bottom: 0;
-	left: 0;
-	position: fixed;
-	right: 0;
-	top: 0;
-	z-index: 0;
-`;
-
 export const Root = styled.div`
 	background-color: #fff;
 	display: flex;

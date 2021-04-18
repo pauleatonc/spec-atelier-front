@@ -13,7 +13,7 @@ import {
 } from './SpecProducts.actions';
 import ProductListContainer from '../products-list/ProductsList.container';
 
-import { Overlay, Root, Body } from './SpecProducts.styles';
+import { Root, Body } from './SpecProducts.styles';
 import SpecModalAttachProduct from './SpecModalAttachProduct.container';
 import CreateProduct from '../../components/product/CreateProduct';
 import { onShowSpecCreateProductFromItemSuccess } from '../spec-create-product/SpecCreateProduct.actions';
@@ -31,8 +31,6 @@ const SpecProductsList = () => {
 		(state) => state.specProducts,
 	);
 	const dispatch = useDispatch();
-
-	const handleHideSpecProducts = () => dispatch(onHideSpecProducts());
 
 	const handleAttachSpecProduct = (selectedItems, product) => {
 		dispatch(onHideAttachModal());
@@ -84,7 +82,6 @@ const SpecProductsList = () => {
 
 	return (
 		<>
-			<Overlay onClick={handleHideSpecProducts} />
 			<Root>
 				<Body>
 					<ProductListContainer
