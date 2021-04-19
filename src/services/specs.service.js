@@ -16,13 +16,13 @@ import {
  * Add a block to the spec.
  */
 export const addSpecBlock = factoryService(
-	({ itemID, productID, sectionID, systemID, specID, userID }) =>
+	({ specID, userID, productID, systemID, params }) =>
 		postJsonRequest(
-			`${API_BASE_URL}/users/${userID}/project_specs/${specID}/create_product`,
+			`${API_BASE_URL}/users/${userID}/project_specs/${specID}/create_product${formatParams(
+				cleanObjectsAndArrays(params),
+			)}`,
 			{
-				item: itemID,
 				product: productID,
-				section: sectionID,
 				system: systemID,
 			},
 		),

@@ -23,7 +23,7 @@ export const FILTER_VALUE = {
 	section: { valueKey: 'sections', text: 'Sección' },
 	item: { valueKey: 'items', text: 'Partidas' },
 	project_type: { valueKey: 'project_types', text: 'Tipo de proyecto' },
-	most_used: { valueKey: 'most_used', text: 'Mas usados' },
+	most_used: { valueKey: 'most_used', text: 'Más usados' },
 	room_type: { valueKey: 'room_types', text: 'Recintos' },
 	brand: { valueKey: 'brands', text: 'Marcas' },
 	specification: { valueKey: 'specifications', text: 'Mis especificaciones' },

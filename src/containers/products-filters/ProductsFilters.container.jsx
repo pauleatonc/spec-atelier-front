@@ -20,7 +20,7 @@ const ProductsFilters = ({
 	const dispatch = useDispatch();
 
 	const submitCallback = ({ name, value }) => {
-		dispatch(setFilters({ ...filters, [name]: value, page: 0 }));
+		dispatch(setFilters({ ...filters, [name]: value }));
 	};
 
 	return (
@@ -44,7 +44,7 @@ const ProductsFilters = ({
 								name={key}
 								onClick={() =>
 									submitCallback({
-										name: 'most_used',
+										name: key,
 										value: !filters[key],
 									})
 								}

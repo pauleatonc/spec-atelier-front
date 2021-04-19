@@ -1,283 +1,110 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useEscapeKey } from '../../modules/hooks';
-import { onAttachSpecProduct, onDetachSpecProduct } from '../spec-document/SpecDocument.actions';
 import {
-  onGetSpecProductsByFilters,
-  onGetSpecProductsByFiltersAll,
-  onGetSpecProductsByPage,
-  onGetSpecProductsByKeyword,
-  onGetSpecProductsBySort,
-  onHideSpecProducts,
-  getMySpecifications,
-  getRoomTypes
+	onAttachSpecProduct,
+	onDetachSpecProduct,
+} from '../spec-document/SpecDocument.actions';
+import {
+	onHideSpecProducts,
+	onShowAttachModal,
+	onHideAttachModal,
 } from './SpecProducts.actions';
-import { getProduct } from '../spec-modal-product/SpecModalProduct.actions';
-import { useComboBox } from '../../components/inputs/Inputs.hooks';
-import SearchBar from '../../components/filters/SearchBar';
-import Tag from '../../components/filters/Tag';
-import ToggleMenu from '../../components/menus/ToggleMenu';
-import ComboBox from '../../components/inputs/ComboBox';
-import DropdownMenu from '../../components/menus/DropdownMenu';
-import Button from '../../components/buttons/Button';
-import ProductCard from '../../components/cards/ProductCard';
-import { Overlay, Root, Header, HeaderSearch, HeaderFilters, Body, BodyHeader, Sort, Total, Cards, LoadMore, Loading } from './SpecProducts.styles';
-import { mapToSelector } from '../../helpers/helpers';
+import ProductListContainer from '../products-list/ProductsList.container';
+
+import { Root, Body } from './SpecProducts.styles';
+import SpecModalAttachProduct from './SpecModalAttachProduct.container';
 import CreateProduct from '../../components/product/CreateProduct';
 import { onShowSpecCreateProductFromItemSuccess } from '../spec-create-product/SpecCreateProduct.actions';
-import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 /**
  * The SpecProductsList's container.
  */
 const SpecProductsList = () => {
-  const { id: specID } = useParams();
-  const { project_types: projectTypes, room_types: roomTypes } = useSelector(state => state.app);
-  const { brands } = useSelector(state => state.brandsList);
-  const selectedProducts = useSelector(state => state.specDocument.blocks?.filter(block => block.type === 'Product')) || [];
-  const {
-    nextPage,
-    collection: products = [],
-    loading,
-    show,
-    total,
-    filters,
-    specifications = [],
-  } = useSelector(state => state.specProducts);
-  const dispatch = useDispatch();
+	const { id: specID } = useParams();
+	const selectedProducts =
+		useSelector((state) =>
+			state.specDocument.blocks?.filter((block) => block.type === 'Product'),
+		) || [];
+	const { show, filters, showAttachModal, productToAttach } = useSelector(
+		(state) => state.specProducts,
+	);
+	const dispatch = useDispatch();
 
-  const [keywordValue, setKeywordValue] = useState('');
-  const [sortValue, setSortValue] = useState({});
-  const [roomTypesOptions, setRoomTypesOptions] = useState(roomTypes);
+	const handleAttachSpecProduct = (selectedItems, product) => {
+		dispatch(onHideAttachModal());
+		const item = selectedItems.map(({ id }) => id);
+		const section = [];
+		selectedItems.forEach(({ section_id }) => {
+			if (!section.includes(section_id)) {
+				section.push(section_id);
+			}
+		});
+		return dispatch(
+			onAttachSpecProduct({
+				productID: product.id,
+				specID,
+				systemID: product?.systems[0]?.id,
+				item,
+				section,
+			}),
+		);
+	};
 
-  const handleHideSpecProducts = () => dispatch(onHideSpecProducts());
-  const handleKeywordChange = event => {
-    setKeywordValue(event.target.value);
-    dispatch(onGetSpecProductsByKeyword({ keyword: event.target.value }));
-  };
+	const handleCardClick = (product) => (event) => {
+		event.stopPropagation();
+		const { id: productID, items } = product;
+		const hasProduct = selectedProducts.find(
+			(selectedProduct) => selectedProduct?.element.id === productID,
+		);
 
-  const handleSortChange = option => {
-    setSortValue(option);
-    dispatch(onGetSpecProductsBySort({ sort: option.value }));
-  };
+		if (hasProduct) {
+			return dispatch(onDetachSpecProduct({ productID, specID }));
+		}
 
-  const handleCardClick = productID => event => {
-    event.stopPropagation();
-    const hasProduct = selectedProducts.find(selectedProduct => selectedProduct?.element.id === productID);
-    const currentProduct = products.find(p => p.id === productID);
-    if (hasProduct) {
-      return dispatch(onDetachSpecProduct({ productID, specID }));
-    }
-    return dispatch(onAttachSpecProduct({ productID, specID, systemID: currentProduct?.systems[0]?.id }));
-  };
+		if (items.length > 1) {
+			return dispatch(onShowAttachModal({ product }));
+		}
+		return handleAttachSpecProduct(items, product);
+	};
 
-  const handleLoadMoreClick = () => dispatch(onGetSpecProductsByPage());
+	const handleCreateProduct = () => {
+		dispatch(
+			onShowSpecCreateProductFromItemSuccess({
+				itemID: filters.item,
+				sectionID: filters.section,
+			}),
+		);
+	};
 
-  const handleSeeMoreClick = selectedProduct => event => {
-    event.stopPropagation();
-    dispatch(getProduct(selectedProduct));
-  }
+	useEscapeKey(show, () => dispatch(onHideSpecProducts()));
 
-  const { values: brandsValues, set: setBrandsValues, onSubmit: onBrandsSubmit } =
-    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'brand', value: values })) });
-
-  const { values: projectTypeValues, set: setProjectTypeValues, onSubmit: onProjectTypeSubmit } =
-    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'project_type', value: values })) });
-
-  const { values: roomTypeValues, set: setRoomTypeValues, onSubmit: onRoomTypeSubmit } =
-    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'room_type', value: values })) });
-
-  const { values: specValues, set: setSpecValues, onSubmit: onSpecSubmit } =
-    useComboBox({ initialValue: [], submitCallback: values => dispatch(onGetSpecProductsByFilters({ key: 'specification', value: values })) });
-
-  const { values: myProductsSelected, set: setMyProducsSelected, onSubmit: onMyProductsSubmit } =
-    useComboBox({ initialValue: false, submitCallback: () => dispatch(onGetSpecProductsByFilters({ key: 'my_products', value: true })) });
-
-  const handleBrandsSubmit = close => event => {
-    close();
-    onBrandsSubmit(event);
-  };
-
-  const handleSpecSubmit = close => event => {
-    close();
-    onSpecSubmit(event);
-  };
-
-  const handleProjectTypeSubmit = close => event => {
-    const filteredRoomTypes = roomTypes
-      .filter(rt => rt.project_types.some(rpt => event.some(spt => spt.value === rpt.id)))
-      .map(mapToSelector);
-    dispatch(getRoomTypes({ project_types: event.map(({ value }) => value) }));
-    onProjectTypeSubmit(event);
-    setRoomTypesOptions(filteredRoomTypes);
-    close();
-  };
-
-  const handleRoomTypeSubmit = close => event => {
-    close();
-    onRoomTypeSubmit(event);
-  };
-
-  const handleFilterAll = () => {
-    setBrandsValues([]);
-    setProjectTypeValues([]);
-    setRoomTypeValues([]);
-    setMyProducsSelected(false);
-    dispatch(onGetSpecProductsByFiltersAll());
-  };
-
-  const handleCreateProduct = () => {
-    dispatch(onShowSpecCreateProductFromItemSuccess({ itemID: filters.item, sectionID: filters.section }));
-  };
-
-  const allFilterIsSelected = brandsValues.length === 0 && projectTypeValues.length === 0 && roomTypeValues.length === 0 && !myProductsSelected && specValues.length === 0;
-
-  useEscapeKey(show, () => dispatch(onHideSpecProducts()));
-  useEffect(() => {
-    if (show) {
-      dispatch(getMySpecifications());
-      dispatch(getRoomTypes({}));
-      return;
-    }
-
-    setBrandsValues([]);
-    setProjectTypeValues([]);
-    setRoomTypeValues([]);
-    setSortValue({});
-    setSpecValues([]);
-    setMyProducsSelected(false);
-  }, [show]);
-
-  useEffect(() => {
-    setRoomTypesOptions(roomTypes);
-  }, [roomTypes]);
-  return (
-    <>
-      <Overlay onClick={handleHideSpecProducts} />
-      <Root>
-        <Header>
-          <HeaderSearch>
-            <SearchBar justifyContent="center" maxWidth="432px" placeholder="Buscar" value={keywordValue} onChange={handleKeywordChange} />
-          </HeaderSearch>
-          <HeaderFilters>
-            <Tag selected={allFilterIsSelected} onClick={handleFilterAll}>Todos</Tag>
-            <Tag selected={!!myProductsSelected} onClick={onMyProductsSubmit}>Mis productos</Tag>
-            <ToggleMenu anchor={<Tag selected={brandsValues.length > 0}>Marcas</Tag>} width="291px">
-              {onClose => (
-                <ComboBox
-                  optionAll
-                  submit
-                  options={brands.filter(({ products_count }) => products_count).map(brand => ({ label: brand.name || '', value: brand.id }))}
-                  placeholder="Selecciona"
-                  type="list"
-                  values={brandsValues}
-                  variant="secondary"
-                  onSubmit={handleBrandsSubmit(onClose)}
-                />
-              )}
-            </ToggleMenu>
-            <ToggleMenu anchor={<Tag selected={projectTypeValues.length > 0}>Tipo de proyecto</Tag>} width="291px">
-              {onClose => (
-                <ComboBox
-                  optionAll
-                  submit
-                  options={projectTypes.map(projectType => ({ label: projectType.name || '', value: projectType.id }))}
-                  placeholder="Selecciona"
-                  type="list"
-                  values={projectTypeValues}
-                  variant="secondary"
-                  onSubmit={handleProjectTypeSubmit(onClose)}
-                />
-              )}
-            </ToggleMenu>
-            <ToggleMenu anchor={<Tag selected={!!specValues.length}>Mis especificaciones</Tag>} width="291px">
-              {onClose => (
-                <ComboBox
-                  optionAll
-                  submit
-                  options={specifications.map(s => ({ label: s.name || '', value: s.id }))}
-                  placeholder="Selecciona"
-                  type="list"
-                  values={specValues}
-                  variant="secondary"
-                  onSubmit={handleSpecSubmit(onClose)}
-                />
-              )}
-            </ToggleMenu>
-            <ToggleMenu anchor={<Tag selected={roomTypeValues.length > 0}>Recintos</Tag>} width="291px">
-              {onClose => (
-                <ComboBox
-                  optionAll
-                  submit
-                  options={roomTypesOptions.map(rt => ({ label: rt.name || '', value: rt.id }))}
-                  placeholder="Selecciona"
-                  type="list"
-                  values={roomTypeValues}
-                  variant="secondary"
-                  onSubmit={handleRoomTypeSubmit(onClose)}
-                />
-              )}
-            </ToggleMenu>
-          </HeaderFilters>
-        </Header>
-        <Body>
-          <BodyHeader>
-            {loading && 'Cargando...'}
-            {!!products.length && !loading && (
-              <>
-                <Sort>
-                  <DropdownMenu
-                    options={[
-                      { label: 'Nuevos', value: 'created_at' },
-                      { label: 'Más usados', value: 'most_used' },
-                    ]}
-                    placeholder="Ordenar por"
-                    value={sortValue}
-                    width="179px"
-                    onChange={handleSortChange}
-                  />
-                </Sort>
-                <Total>{`${products.length} de ${total} producto(s)`}</Total>
-              </>
-            )}
-          </BodyHeader>
-          {!!products.length &&
-            <Cards>
-              {products.map(product => {
-                const selected = selectedProducts.find(selectedProduct => selectedProduct?.element.original_product_id === product.id);
-                return (
-                  <ProductCard
-                    canAdd
-                    category={product.system?.name || ''}
-                    description={product.short_desc || product.long_desc}
-                    key={`product-card-${product.id}`}
-                    photo={product.images[0]?.urls?.small}
-                    reference={product.reference || ''}
-                    selected={Boolean(selected)}
-                    title={product?.name}
-                    onClickCard={handleCardClick(product.id)}
-                    onClickSeeMore={handleSeeMoreClick(product)}
-                    pdfs={product?.pdfs}
-                    dwg={product?.dwg}
-                    bim={product?.bim}
-                    productId={product.id}
-                  />
-                );
-              })}
-            </Cards>
-          }
-          {!products.length && !loading && <CreateProduct onClickCreate={handleCreateProduct} />}
-          {!!products.length && nextPage !== null && (
-            <LoadMore>
-              {loading && <Loading>Cargando...</Loading>}
-              {!loading && <Button variant={VARIANTS_BUTTON.GRAY} onClick={handleLoadMoreClick}>Ver más</Button>}
-            </LoadMore>
-          )}
-        </Body>
-      </Root>
-    </>
-  );
+	return (
+		<>
+			<Root>
+				<Body>
+					<ProductListContainer
+						extraFilters={{ limit: 20 }}
+						filterOptionsKey="spec"
+						canAdd
+						selectedProducts={selectedProducts}
+						withoutPadding
+						customEmpty
+						emptyListComponent={CreateProduct}
+						onActionCard={handleCardClick}
+						onClickCreate={handleCreateProduct}
+					/>
+				</Body>
+			</Root>
+			<SpecModalAttachProduct
+				showAttachModal={showAttachModal}
+				product={productToAttach}
+				onClose={() => dispatch(onHideAttachModal())}
+				onSubmit={handleAttachSpecProduct}
+			/>
+		</>
+	);
 };
 
 export default SpecProductsList;

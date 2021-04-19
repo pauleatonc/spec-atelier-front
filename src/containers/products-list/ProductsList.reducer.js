@@ -6,11 +6,11 @@ import {
 	GET_SECTIONS_SUCCESS,
 	GET_ITEMS_SUCCESS,
 	GET_ITEMS_ERROR,
-	GET_MORE_PRODUCTS,
 	CLEAN_PRODUCT_LIST_STORE,
 	GET_BRANDS_SUCCESS,
 	GET_BRANDS_ERROR,
 	SET_FILTERS,
+	SET_SELECTED_ALL,
 } from './ProductsList.actions';
 
 export const productsListInitialState = {
@@ -43,14 +43,6 @@ const productsListReducer = (
 			return {
 				...state,
 				loading: true,
-				error: false,
-			};
-		}
-		case GET_MORE_PRODUCTS: {
-			return {
-				...state,
-				filters: { ...payload.filters },
-				products: [...state.products, ...(payload?.products || [])],
 				error: false,
 			};
 		}
@@ -95,6 +87,11 @@ const productsListReducer = (
 			return {
 				...state,
 				filters: { ...state.filters, ...payload },
+			};
+		case SET_SELECTED_ALL:
+			return {
+				...state,
+				isSelectedAll: payload,
 			};
 		default: {
 			return state;

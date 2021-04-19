@@ -37,24 +37,29 @@ export const onGetSpecBlocks = (specID) => async (dispatch, getState) => {
 export const ADD_SPEC_BLOCK = 'ADD_SPEC_BLOCK';
 export const ADD_SPEC_BLOCK_ERROR = 'ADD_SPEC_BLOCK_ERROR';
 export const ADD_SPEC_BLOCK_SUCCESS = 'ADD_SPEC_BLOCK_SUCCESS';
-export const onAddSpecBlock = ({ specID, blockID, systemID }) => async (
-	dispatch,
-	getState,
-) => {
+export const onAddSpecBlock = ({
+	specID,
+	productID,
+	systemID,
+	...rest
+}) => async (dispatch, getState) => {
+	dispatch(onShowAlertSuccess({ message: 'Añadiendo producto...' }));
 	dispatch(onActionCreator(ADD_SPEC_BLOCK));
 	try {
-		const { auth, specProducts } = getState();
-		const [block] = specProducts.collection
-			.filter((specProduct) => specProduct.id === blockID)
-			.map((specProduct) => ({
-				itemID: specProduct.items[0]?.id || '',
-				productID: specProduct.id,
-				sectionID: specProduct.section.id,
-				systemID,
-			}));
+		const { auth } = getState();
+
 		const { blocks: updatedBlocks } = await addSpecBlock(
-			{ ...block, specID, userID: auth.user?.id, systemID },
+			{
+				params: { ...rest },
+				productID,
+				systemID,
+				specID,
+				userID: auth.user?.id,
+			},
 			ADD_SPEC_BLOCK,
+		);
+		dispatch(
+			onShowAlertSuccess({ message: 'Añadiste producto a una sección' }),
 		);
 
 		return dispatch(
@@ -76,12 +81,7 @@ export const onAttachSpecProduct = (payload) => (dispatch) =>
 		dispatch(
 			onAddSpecBlock({
 				...payload,
-				blockID: payload.productID,
-				systemID: payload.systemID,
 			}),
-		);
-		dispatch(
-			onShowAlertSuccess({ message: 'Añadiste producto a una sección' }),
 		);
 	});
 
