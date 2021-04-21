@@ -21,6 +21,7 @@ export const GET_PROJECTS_BY_PRODUCT = 'GET_PROJECTS_BY_PRODUCT';
 export const GET_PROJECTS_BY_PRODUCT_SUCCESS =
 	'GET_PROJECTS_BY_PRODUCT_SUCCESS';
 export const GET_PROJECTS_BY_PRODUCT_ERROR = 'GET_PROJECTS_BY_PRODUCT_ERROR';
+export const CLEAR_STATS = 'CLEAR_STATS';
 
 export const onGetStats = (filters, isSubRows) => (dispatch, getState) => {
 	const {
@@ -104,3 +105,5 @@ export const onGetStats = (filters, isSubRows) => (dispatch, getState) => {
 		);
 	}
 };
+
+export const onClearStats = () => onActionCreator(CLEAR_STATS)

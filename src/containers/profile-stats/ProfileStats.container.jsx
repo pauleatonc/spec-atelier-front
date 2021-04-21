@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { onGetStats } from './ProfileStats.actions';
+import { onGetStats, onClearStats } from './ProfileStats.actions';
 import TableStats from './components/profileTableStats';
 import { Button } from '../../components/SpecComponents';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
@@ -100,6 +100,12 @@ const ProfileStatsContainer = ({ stat }) => {
 			});
 	}, [stat]);
 
+	useEffect(() => {
+		return () => {
+			dispatch(onClearStats());
+		};
+	}, []);
+
 	const handleChangeLimit = (limit, isSubRows = false) =>
 		onGetStatsByFilter({ page: 0, limit }, isSubRows);
 
@@ -114,9 +120,9 @@ const ProfileStatsContainer = ({ stat }) => {
 			isSubRows,
 		);
 
-	const handleSortTable = (column, isSubRows = false, e) => {
+	/* const handleSortTable = (column, isSubRows = false, e) => {
 		e.persist();
-		/* TODO: This method is for next Hito
+		TODO: This method is for next Hito
 		dispatch(
 			onGetStats(
 				{
@@ -128,8 +134,8 @@ const ProfileStatsContainer = ({ stat }) => {
 				},
 				isSubRows,
 			),
-		); */
-	};
+		);
+	}; */
 
 	return loading && !list.length ? (
 		<h1>Cargando...</h1>
@@ -151,7 +157,7 @@ const ProfileStatsContainer = ({ stat }) => {
 			subLoading={subLoading}
 			onPaginateStats={handlePaginateStats}
 			onChangeLimit={handleChangeLimit}
-			onSortTable={handleSortTable}
+			onSortTable={() => {}}
 		/>
 	);
 };

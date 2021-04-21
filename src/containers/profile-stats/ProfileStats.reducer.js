@@ -11,6 +11,7 @@ import {
 	GET_PROJECTS_BY_PRODUCT,
 	GET_PROJECTS_BY_PRODUCT_SUCCESS,
 	GET_PROJECTS_BY_PRODUCT_ERROR,
+	CLEAR_STATS
 } from './ProfileStats.actions';
 
 const ProfileStatsState = {
@@ -201,6 +202,9 @@ const ProfileStatsReducer = (
 					error: true,
 				},
 			};
+		}
+		case CLEAR_STATS: {
+			return ProfileStatsState
 		}
 		default: {
 			return state;

@@ -6,9 +6,8 @@ import { Container, BorderContainer } from './styles';
 const CustomTabs = ({ children, isProfileStatsTabs }) => {
 	const [isActiveTab, setIsActiveTab] = useState(children[0].props.title);
 	const handleChangeTab = (tab) => setIsActiveTab(tab);
-
+	const tabs = [];
 	let content;
-	let tabs = [];
 
 	return (
 		<Container>
