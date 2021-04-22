@@ -106,4 +106,4 @@ export const onGetStats = (filters, isSubRows) => (dispatch, getState) => {
 	}
 };
 
-export const onClearStats = () => onActionCreator(CLEAR_STATS)
+export const onClearStats = () => onActionCreator(CLEAR_STATS);

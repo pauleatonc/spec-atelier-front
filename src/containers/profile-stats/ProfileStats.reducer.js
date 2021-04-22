@@ -11,7 +11,7 @@ import {
 	GET_PROJECTS_BY_PRODUCT,
 	GET_PROJECTS_BY_PRODUCT_SUCCESS,
 	GET_PROJECTS_BY_PRODUCT_ERROR,
-	CLEAR_STATS
+	CLEAR_STATS,
 } from './ProfileStats.actions';
 
 const ProfileStatsState = {
@@ -95,7 +95,7 @@ const ProfileStatsReducer = (
 				products: {
 					loading: false,
 					error: false,
-					nextPage: payload.next_page,
+					nextPage: payload.next_page || 0,
 					...payload,
 				},
 			};
@@ -126,7 +126,7 @@ const ProfileStatsReducer = (
 				projects: {
 					loading: false,
 					error: false,
-					nextPage: payload.next_page,
+					nextPage: payload.next_page || 0,
 					...payload,
 				},
 			};
@@ -157,7 +157,7 @@ const ProfileStatsReducer = (
 				productsByProject: {
 					loading: false,
 					error: false,
-					nextPage: payload.next_page,
+					nextPage: payload.next_page || 0,
 					...payload,
 				},
 			};
@@ -188,7 +188,7 @@ const ProfileStatsReducer = (
 				projectsByProduct: {
 					loading: false,
 					error: false,
-					nextPage: payload.next_page,
+					nextPage: payload.next_page || 0,
 					...payload,
 				},
 			};
@@ -204,7 +204,7 @@ const ProfileStatsReducer = (
 			};
 		}
 		case CLEAR_STATS: {
-			return ProfileStatsState
+			return ProfileStatsState;
 		}
 		default: {
 			return state;

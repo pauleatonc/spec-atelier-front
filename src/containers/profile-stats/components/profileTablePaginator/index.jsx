@@ -18,7 +18,8 @@ const ProfileTablePaginator = ({
 	const currentItemsView = limit * (page + 1);
 
 	const handleChangeLimit = ({ target: { value } }) => {
-		if (parseInt(value, 10) !== limit) onChangeLimit(value, isSubRows);
+		if (parseInt(value, 10) !== limit)
+			onChangeLimit(parseInt(value, 10), isSubRows);
 	};
 
 	return (

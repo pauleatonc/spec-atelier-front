@@ -6,7 +6,14 @@ import { onGetStats, onClearStats } from './ProfileStats.actions';
 import TableStats from './components/profileTableStats';
 import { Button } from '../../components/SpecComponents';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import { PAGINATOR_OPTIONS, STATS, EXPANDED, COLUMNS, PRODUCTS } from './uitls';
+import {
+	PAGINATOR_OPTIONS,
+	STATS,
+	EXPANDED,
+	COLUMNS,
+	PRODUCTS,
+	SORT_ORDER_OPTIONS,
+} from './uitls';
 
 const ProfileStatsContainer = ({ stat }) => {
 	const dispatch = useDispatch();
@@ -120,22 +127,26 @@ const ProfileStatsContainer = ({ stat }) => {
 			isSubRows,
 		);
 
-	/* const handleSortTable = (column, isSubRows = false, e) => {
-		e.persist();
-		TODO: This method is for next Hito
-		dispatch(
-			onGetStats(
+	const handleSortTable = (column, isSubRows = false) => {
+		const sortOrder = isSubRows ? subFilters.sort_order : filters.sort_order;
+		const sortBy = isSubRows ? subFilters.sort_by : filters.sort_by;
+		const sortOrderParam =
+			sortOrder === SORT_ORDER_OPTIONS.ASC
+				? SORT_ORDER_OPTIONS.DESC
+				: SORT_ORDER_OPTIONS.ASC;
+
+		if (column.canSort)
+			onGetStatsByFilter(
 				{
-					...(isSubRows ? subFilters : filters),
 					page: 0,
 					limit: 10,
-					sort_by: sortBy,
-					sort_order: sortOrder,
+					sort_by: column.id,
+					sort_order:
+						sortBy === column.id ? sortOrderParam : SORT_ORDER_OPTIONS.ASC,
 				},
 				isSubRows,
-			),
-		);
-	}; */
+			);
+	};
 
 	return loading && !list.length ? (
 		<h1>Cargando...</h1>
@@ -157,7 +168,11 @@ const ProfileStatsContainer = ({ stat }) => {
 			subLoading={subLoading}
 			onPaginateStats={handlePaginateStats}
 			onChangeLimit={handleChangeLimit}
-			onSortTable={() => {}}
+			onSortTable={handleSortTable}
+			sortBy={filters.sort_by}
+			sortOrder={filters.sort_order}
+			subSortBy={subFilters.sort_by}
+			subSortOrder={subFilters.sort_order}
 		/>
 	);
 };

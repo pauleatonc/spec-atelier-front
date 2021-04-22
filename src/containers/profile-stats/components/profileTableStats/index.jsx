@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTable, useExpanded, useSortBy } from 'react-table';
+import { useTable, useExpanded } from 'react-table';
 import PropTypes from 'prop-types';
 
 import {
@@ -13,6 +13,7 @@ import {
 	IconSort,
 } from './styles';
 import ProfileTablePaginator from '../profileTablePaginator';
+import { SORT_ORDER_OPTIONS } from '../../uitls';
 
 const ProfileTableStats = ({
 	columns,
@@ -32,6 +33,10 @@ const ProfileTableStats = ({
 	onPaginateStats,
 	onChangeLimit,
 	onSortTable,
+	sortBy,
+	sortOrder,
+	subSortBy,
+	subSortOrder,
 }) => {
 	const {
 		getTableProps,
@@ -43,9 +48,7 @@ const ProfileTableStats = ({
 		{
 			columns,
 			data,
-			manualSortBy: true,
 		},
-		useSortBy,
 		useExpanded,
 	);
 
@@ -55,14 +58,10 @@ const ProfileTableStats = ({
 		headerGroups: subHeaderGroups,
 		rows: subRows,
 		prepareRow: prepareSubRow,
-	} = useTable(
-		{
-			columns: subColums,
-			data: subData,
-			manualSortBy: true,
-		},
-		useSortBy,
-	);
+	} = useTable({
+		columns: subColums,
+		data: subData,
+	});
 
 	return (
 		<>
@@ -73,14 +72,17 @@ const ProfileTableStats = ({
 							{headerGroup.headers.map((column) => {
 								return (
 									<TableTh
-										{...column.getHeaderProps(column.getSortByToggleProps())}
-										onClick={(e) => onSortTable(column, false, e)}
+										{...column.getHeaderProps()}
+										onClick={() => onSortTable(column)}
+										canSort={column.canSort}
 									>
 										{column.render('Header')}
 										<IconSort
 											className={`fas ${
-												column.isSorted &&
-												(column.isSortedDesc ? 'fa-arrow-down' : 'fa-arrow-up')
+												column.id === sortBy &&
+												(sortOrder === SORT_ORDER_OPTIONS.ASC
+													? 'fa-arrow-up'
+													: 'fa-arrow-down')
 											}`}
 										/>
 									</TableTh>
@@ -118,33 +120,46 @@ const ProfileTableStats = ({
 														{subHeaderGroups.map((headerGroup) => (
 															<RowTable {...headerGroup.getHeaderGroupProps()}>
 																<TableTh />
-																{headerGroup.headers.map((column) => (
-																	<TableTh {...column.getHeaderProps()}>
-																		{column.render('Header')}
+																{headerGroup.headers.map((subColum) => (
+																	<TableTh
+																		{...subColum.getHeaderProps()}
+																		onClick={() => onSortTable(subColum, true)}
+																		canSort={subColum.canSort}
+																	>
+																		{subColum.render('Header')}
+																		<IconSort
+																			className={`fas ${
+																				subColum.id === subSortBy &&
+																				(subSortOrder === SORT_ORDER_OPTIONS.ASC
+																					? 'fa-arrow-up'
+																					: 'fa-arrow-down')
+																			}`}
+																		/>
 																	</TableTh>
 																))}
 															</RowTable>
 														))}
 													</TableHead>
 													<TableBody {...getSubTableBodyProps()}>
-														{subRows.map((row) => {
-															prepareSubRow(row);
+														{subRows.map((subRow) => {
+															prepareSubRow(subRow);
 															return (
-																<RowTable {...row.getRowProps()}>
+																<RowTable {...subRow.getRowProps()}>
 																	<TableTd />
-																	{row.cells.map((cell) => (
+																	{subRow.cells.map((subCell) => (
 																		<TableTd
-																			{...cell.getCellProps()}
+																			{...subCell.getCellProps()}
 																			isProjectType={
-																				cell.column?.id === 'project_type'
+																				subCell.column?.id === 'project_type'
 																			}
 																		>
-																			{cell.column?.id === 'project_type' && (
+																			{subCell.column?.id ===
+																				'project_type' && (
 																				<IconType
-																					type={cell?.value.toUpperCase()}
+																					type={subCell?.value.toUpperCase()}
 																				/>
 																			)}
-																			{cell.render('Cell')}
+																			{subCell.render('Cell')}
 																		</TableTd>
 																	))}
 																</RowTable>
@@ -189,19 +204,19 @@ export default ProfileTableStats;
 ProfileTableStats.propTypes = {
 	columns: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-	total: PropTypes.number,
-	page: PropTypes.number,
-	limit: PropTypes.number,
-	nextPage: PropTypes.number,
-	loading: PropTypes.bool,
+	total: PropTypes.number.isRequired,
+	page: PropTypes.number.isRequired,
+	limit: PropTypes.number.isRequired,
+	nextPage: PropTypes.number.isRequired,
+	loading: PropTypes.bool.isRequired,
 	subColums: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 	subData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-	subTotal: PropTypes.number,
-	subPage: PropTypes.number,
-	subLimit: PropTypes.number,
-	subNextPage: PropTypes.number,
-	subLoading: PropTypes.bool,
-	onPaginateStats: PropTypes.func,
-	onChangeLimit: PropTypes.func,
-	onSortTable: PropTypes.func,
+	subTotal: PropTypes.number.isRequired,
+	subPage: PropTypes.number.isRequired,
+	subLimit: PropTypes.number.isRequired,
+	subNextPage: PropTypes.number.isRequired,
+	subLoading: PropTypes.bool.isRequired,
+	onPaginateStats: PropTypes.func.isRequired,
+	onChangeLimit: PropTypes.func.isRequired,
+	onSortTable: PropTypes.func.isRequired,
 };

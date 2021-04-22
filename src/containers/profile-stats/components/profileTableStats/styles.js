@@ -55,6 +55,7 @@ export const RowTable = styled.tr`
 export const TableTh = styled.th`
 	padding: 15px;
 	text-align: center;
+	cursor: ${({ canSort }) => (canSort ? 'pointer' : 'default')};
 `;
 
 export const TableTd = styled.td`
