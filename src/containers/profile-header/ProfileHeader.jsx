@@ -11,9 +11,6 @@ import {
 	ProfilePhoto,
 	Photo,
 	IconPhoto,
-	Item,
-	ItemText,
-	UnderLine,
 	InputText,
 	TextValue,
 	DropIcon,
@@ -24,8 +21,6 @@ import {
 	PROFILE_HEADER_2X,
 	PROFILE_HEADER_3X,
 	PROFILE_PHOTO_DEFAULT,
-	PROFILE_PHOTO_DEFAULT_2X,
-	PROFILE_PHOTO_DEFAULT_3X,
 	ICON_CAMERA,
 	ICON_ARROW_DOWN,
 } from '../../assets/Images';
@@ -91,10 +86,7 @@ const ProductsHeader = () => {
 				/>
 				<ProfilePhoto>
 					<Photo
-						sr={user.profile_image?.urls.medium || PROFILE_PHOTO_DEFAULT}
-						srcSet={`${
-							user.profile_image?.urls.medium || PROFILE_PHOTO_DEFAULT_2X
-						}, ${user.profile_image?.urls.small || PROFILE_PHOTO_DEFAULT_3X}`}
+						src={user.profile_image?.urls.medium || PROFILE_PHOTO_DEFAULT}
 					/>
 					<IconPhoto onClick={handleEditProfilePicture}>
 						<img src={ICON_CAMERA} alt="camara" />

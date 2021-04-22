@@ -18,7 +18,8 @@ const ProfileTablePaginator = ({
 	const currentItemsView = limit * (page + 1);
 
 	const handleChangeLimit = ({ target: { value } }) => {
-		if (parseInt(value) !== limit) onChangeLimit(value, isSubRows);
+		if (parseInt(value, 10) !== limit)
+			onChangeLimit(parseInt(value, 10), isSubRows);
 	};
 
 	return (
@@ -27,7 +28,7 @@ const ProfileTablePaginator = ({
 			<SelectPaginator
 				onChange={handleChangeLimit}
 				defaultValue={limit}
-				disabled={loading || limit > total}
+				disabled={loading || LIMIT_OPTIONS[0] > total}
 			>
 				{LIMIT_OPTIONS.map((val) => {
 					return (
@@ -44,13 +45,13 @@ const ProfileTablePaginator = ({
 				disabled={page === 0 || loading}
 				onClick={() => onPaginateStats(PAGINATOR_OPTIONS.PREV, isSubRows)}
 			>
-				<i className="fas fa-angle-left"></i>
+				<i className="fas fa-angle-left" />
 			</ArrowPaginator>
 			<ArrowPaginator
 				disabled={!nextPage || loading}
 				onClick={() => onPaginateStats(PAGINATOR_OPTIONS.NEXT, isSubRows)}
 			>
-				<i className="fas fa-angle-right"></i>
+				<i className="fas fa-angle-right" />
 			</ArrowPaginator>
 		</Paginator>
 	);
@@ -58,13 +59,18 @@ const ProfileTablePaginator = ({
 
 export default ProfileTablePaginator;
 
+ProfileTablePaginator.defaultProps = {
+	nextPage: 0,
+	isSubRows: false,
+};
+
 ProfileTablePaginator.propTypes = {
-	total: PropTypes.number,
-	page: PropTypes.number,
-	limit: PropTypes.number,
+	total: PropTypes.number.isRequired,
+	page: PropTypes.number.isRequired,
+	limit: PropTypes.number.isRequired,
 	nextPage: PropTypes.number,
-	loading: PropTypes.bool,
-	onPaginateStats: PropTypes.func,
-	onChangeLimit: PropTypes.func,
+	loading: PropTypes.bool.isRequired,
+	onPaginateStats: PropTypes.func.isRequired,
+	onChangeLimit: PropTypes.func.isRequired,
 	isSubRows: PropTypes.bool,
 };
