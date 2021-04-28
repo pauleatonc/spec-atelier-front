@@ -39,22 +39,23 @@ const Profile = () => {
 		<AppLayout footer={<Footer />} header={<Navbar />}>
 			<ProfileHeader />
 			<PaddingContainer>
-				<CustomTabs>
-					<Tab title="Mis Productos">
-						<>
-							<ButtonCreateContainer>
-								<Button onClick={handleCreateProduct} variant="primary">
-									<i className="fa fa-plus" style={{ marginRight: '11px' }} />{' '}
-									Crear
-								</Button>
-							</ButtonCreateContainer>
-							<ProductListContainer
-								extraFilters={product_filter}
-								withoutPadding
-							/>
-						</>
-					</Tab>
-					{Object.keys(user).length && user?.client_role && !loading && (
+				{Object.keys(user).length && !loading && (
+          <CustomTabs>
+            <Tab title="Mis Productos">
+              <>
+                <ButtonCreateContainer>
+                  <Button onClick={handleCreateProduct} variant="primary">
+                    <i className="fa fa-plus" style={{ marginRight: '11px' }} />{' '}
+                    Crear
+                  </Button>
+                </ButtonCreateContainer>
+                <ProductListContainer
+                  extraFilters={product_filter}
+                  withoutPadding
+                />
+              </>
+            </Tab>
+					{user?.client_role && !loading && (
 						<Tab title="Mis estadísticas">
 							<CustomTabs isProfileStatsTabs>
 								<Tab title="Proyectos especificados">
@@ -67,6 +68,7 @@ const Profile = () => {
 						</Tab>
 					)}
 				</CustomTabs>
+      )}
 			</PaddingContainer>
 			<ProfileChangePicture />
 			<SpecCreateProductOneContainer />
