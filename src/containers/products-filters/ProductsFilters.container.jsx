@@ -62,6 +62,7 @@ const ProductsFilters = ({
 							onChange={submitCallback}
 							currentOptions={filters[key]}
 							submit
+							onChangeSubmit
 						>
 							<Text>{FILTER_VALUE[key].text}</Text>
 						</ButtonComboBox>

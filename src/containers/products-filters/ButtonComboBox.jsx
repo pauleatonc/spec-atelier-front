@@ -17,6 +17,8 @@ const propTypes = {
 	name: PropTypes.string.isRequired,
 	children: PropTypes.element,
 	onChange: PropTypes.func,
+	submit: PropTypes.bool.isRequired,
+	onChangeSubmit: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -24,6 +26,7 @@ const defaultProps = {
 	currentOptions: [],
 	children: null,
 	onChange: () => {},
+	onChangeSubmit: false,
 };
 
 const ButtonComboBox = ({
@@ -34,6 +37,7 @@ const ButtonComboBox = ({
 	onChange,
 	submit,
 	variant,
+	onChangeSubmit,
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const toggle = () => setIsOpen(!isOpen);
@@ -51,7 +55,7 @@ const ButtonComboBox = ({
 
 	const onChangeOption = (value) => {
 		setTempValues(value);
-		set({ name, value });
+		if (!onChangeSubmit) set(value);
 	};
 
 	const onClickOusite = (callback) => {
@@ -89,7 +93,8 @@ const ButtonComboBox = ({
 	const innerRef = onClickOusite(() => {
 		if (!isOpen) return;
 		set(values);
-		setIsOpen(false);
+		if (onChangeSubmit) submitCallback(tempValues);
+		else setIsOpen(false);
 	});
 
 	return (
@@ -113,6 +118,7 @@ const ButtonComboBox = ({
 					submit={submit}
 					onSubmit={onSubmit}
 					optionAll
+					onChangeSubmit={onChangeSubmit}
 				/>
 			</Content>
 		</Container>
