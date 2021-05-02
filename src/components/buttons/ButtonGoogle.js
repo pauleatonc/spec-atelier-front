@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { GoogleLogin } from 'react-google-login';
+import { useDispatch } from 'react-redux';
 import toCapitalize from '../../helpers/prettie-format-strings.helper';
 import { GOOGLE_CLIENT_ID } from '../../config/constants/environment';
-import { useDispatch } from 'react-redux';
 import { googleLoginAction } from '../../containers/auth/auth.actions';
 import { Button } from '../SpecComponents';
 import { Text } from './ButtonGoogle.styles';
@@ -24,7 +24,7 @@ const ButtonGoogleLogin = props => {
     dispatch(googleLoginAction(user));
   };
 
-  const responseError  = googleResponse => {
+  const responseError = googleResponse => {
     //TODO: Handle and create Snackbar to this error
   };
 
@@ -37,7 +37,7 @@ const ButtonGoogleLogin = props => {
       onFailure={responseError}
       render={renderProps => (
         <Button variant="primary" onClick={renderProps.onClick} disabled={renderProps.disabled}>
-          <i className="fab fa-google" style={{ fontSize: 14, fontWeight: 'noraml', marginRight: 8 }}/>
+          <i className="fab fa-google" style={{ fontSize: 14, fontWeight: 'noraml', marginRight: 8 }} />
           <Text>{label}</Text>
         </Button>
       )}
