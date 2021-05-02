@@ -189,7 +189,7 @@ const SpecDocument = () => {
               Eliminar imagen
             </BlockMenuItem>
           )}
-          {selectedBlock?.type === 'Product' && (
+          {selectedBlock?.type === 'Product' && selectedBlock?.element?.user_owned && (
             <BlockMenuItem onClick={handleEditProduct(selectedBlock)}>Editar</BlockMenuItem>
           )}
           <BlockMenuItem onClick={handleRemoveBlock(selectedBlockID)}>Eliminar</BlockMenuItem>
