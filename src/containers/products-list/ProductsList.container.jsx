@@ -51,6 +51,7 @@ const ProductList = ({
 		project_type: [],
 		specification: [],
 		item: [],
+		subitem: [],
 		client: [],
 		filters: filterOptionsKey
 			? FILTER_OPTIONS[filterOptionsKey]
@@ -120,6 +121,7 @@ const ProductList = ({
 			room_type = [],
 			project_type = [],
 			item = [],
+			subitem = [],
 			brand = [],
 			sort = '',
 			keyword: storeKeyword = '',
@@ -133,6 +135,7 @@ const ProductList = ({
 			!room_type.length &&
 			!project_type.length &&
 			!item.length &&
+			!subitem.length &&
 			!brand.length &&
 			!specification.length &&
 			!sort &&

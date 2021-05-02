@@ -1,19 +1,33 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import arrowDownSource from '../../assets/images/icons/arrow-down.svg';
+import arrowUpActiveSource from '../../assets/images/icons/arrow-up-active.svg';
 import {
 	onGetSpecProductsByItem,
 	onGetSpecProductsBySection,
+	onUpdateFilterSubitem
 } from '../spec-products/SpecProducts.actions';
 import { setFilters } from '../products-list/ProductsList.actions';
-import { onHideSpecProductsItemsSuccess } from './SpecProductsItems.actions';
 import Breadcrumbs from '../../components/basics/Breadcrumbs';
-import { Root, Header, Body, Loading, Item } from './SpecProductsItems.styles';
+import Collapsible from '../../components/basics/Collapsible';
+
+import { onHideSpecProductsItemsSuccess } from './SpecProductsItems.actions';
+import {
+	Root,
+	Header,
+	Body,
+	Loading,
+	Item,
+	ArrowIcon,
+	Divisor
+} from './SpecProductsItems.styles';
 
 /**
  * The SpecProductsItems' container.
  */
 const SpecProductsItems = () => {
-	const { item: selectedItemID } = useSelector(
+	const { item: selectedItemID, subitem: selectedSubitemID } = useSelector(
 		(state) => state.specProducts.filters,
 	);
 	const { collection: items, show } = useSelector(
@@ -21,16 +35,22 @@ const SpecProductsItems = () => {
 	);
 	const dispatch = useDispatch();
 	const handleShowSections = () => {
-		dispatch(setFilters({ section: [], item: [] }));
-		dispatch(onGetSpecProductsBySection({ sectionID: '', itemID: '' }));
+		dispatch(setFilters({ section: [], item: [], subitem: [] }));
+		dispatch(onGetSpecProductsBySection({ section: '', item: '', subitem: '' }));
 		dispatch(onHideSpecProductsItemsSuccess());
 	};
-	const handleItemClick = (itemID) => () => {
-		if (itemID) {
-			dispatch(setFilters({ item: [itemID] }));
-			dispatch(onGetSpecProductsByItem({ itemID }));
+	const handleItemClick = (item) => () => {
+		if (item) {
+			dispatch(setFilters({ item: [item], subitem: [] }));
+			dispatch(onGetSpecProductsByItem({ item, subitem: '' }));
 		}
 	};
+
+	const handleSubitemClick = (subitem) => {
+		console.log({ subitem });
+		dispatch(onUpdateFilterSubitem({ subitem }));
+		dispatch(setFilters({ subitem: [subitem] }));
+	}
 
 	if (!show) {
 		return null;
@@ -50,13 +70,40 @@ const SpecProductsItems = () => {
 			{items.length > 0 && (
 				<Body>
 					{items.map((item) => (
-						<Item
-							active={item.id === selectedItemID}
-							key={item.id}
-							onClick={handleItemClick(item.id)}
-						>
-							{item.code}. {item.name}
-						</Item>
+						<Fragment key={item.id}>
+							<Item
+								active={item.id === selectedItemID}
+								onClick={handleItemClick(item.id)}
+							>
+								<span>
+									{item.code}. {item.name}
+								</span>
+								{!!item.subitems.length && (
+									<ArrowIcon
+										src={
+											item.id === selectedItemID
+												? arrowUpActiveSource
+												: arrowDownSource
+										}
+									/>
+								)}
+							</Item>
+							<Collapsible show={selectedItemID === item.id}>
+                  {item.subitems.map(subitem => (
+                    <Item
+											active={subitem.id === selectedSubitemID}
+                      key={subitem.id}
+                      padding="0 0 0 25px"
+											onClick={() => handleSubitemClick(subitem.id)}
+                    >
+                      <span>
+                        {subitem.name}
+                      </span>
+                    </Item>
+                  ))}
+									<Divisor />
+                </Collapsible>
+						</Fragment>
 					))}
 				</Body>
 			)}

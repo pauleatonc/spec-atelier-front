@@ -31,13 +31,13 @@ const SpecProductsSections = () => {
 	const dispatch = useDispatch();
 	const handleSectionClick = (sectionID) => () => {
 		dispatch(setFilters({ section: [sectionID] }));
-		dispatch(onGetSpecProductsBySection({ sectionID }));
+		dispatch(onGetSpecProductsBySection({ section: sectionID }));
 	};
 
 	useSpecProductsPanelLayout(show);
 	useDidUpdateEffect(() => {
 		if (isSelectedAll) {
-			dispatch(onGetSpecProductsBySection({ sectionID: '', itemID: '' }));
+			dispatch(onGetSpecProductsBySection({ section: '', item: '', subitem: '' }));
 			dispatch(onHideSpecProductsItemsSuccess());
 		}
 	}, [isSelectedAll]);
