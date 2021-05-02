@@ -31,12 +31,18 @@ export const onUpdateProductConfig = (specID, project_config) => async (
 ) => {
 	try {
 		const { auth } = getState();
-		await updateProjectConfig({
+		const response = await updateProjectConfig({
 			specID,
 			userID: auth.user?.id,
 			project_config,
 		});
-		dispatch(onActionCreator(UPDATE_PRODUCT_CONFIG_SUCCESS));
+		if (response.status) {
+			dispatch(
+				onShowAlertSuccess({ message: 'Error al guardar la configuración' }),
+			);
+		} else {
+			dispatch(onActionCreator(UPDATE_PRODUCT_CONFIG_SUCCESS));
+		}
 	} catch (error) {
 		dispatch(
 			onShowAlertSuccess({ message: 'Error al guardar la configuración' }),

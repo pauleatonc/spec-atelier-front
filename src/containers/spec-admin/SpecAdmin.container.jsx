@@ -36,11 +36,12 @@ const SpecAdmin = () => {
 	];
 
 	const calculatedOptions = {
-		all: () => ({
+		all: (value) => ({
 			...options.reduce(
 				(acum, option) => ({ ...acum, [option.key]: true }),
 				{},
 			),
+			all: !value,
 			short_desc: false,
 		}),
 		short_desc: (value) => ({
