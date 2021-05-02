@@ -32,6 +32,9 @@ const WhoWeUs = () => {
 		<div className="who-we-us">
 			<div className="who-we-us__section">
 				<div className="who-we-us__section__inner">
+					<div className="who-we-us__section__inner__icon">
+						<img src={data[0].icon} alt={data[0].title} />
+					</div>
 					<div className="who-we-us__section__inner__info">
 						<h4 className="who-we-us__section__inner__info__title">
 							{data[0].title}
@@ -43,13 +46,13 @@ const WhoWeUs = () => {
 							{data[0].description}
 						</p>
 					</div>
-					<div className="who-we-us__section__inner__icon">
-						<img src={data[0].icon} />
-					</div>
 				</div>
 			</div>
 			<div className="who-we-us__section">
 				<div className="who-we-us__section__inner">
+					<div className="who-we-us__section__inner__icon">
+						<img src={data[1].icon} alt={data[1].title} />
+					</div>
 					<div className="who-we-us__section__inner__info">
 						<h4 className="who-we-us__section__inner__info__title">
 							{data[1].title}
@@ -61,13 +64,13 @@ const WhoWeUs = () => {
 							{data[1].description}
 						</p>
 					</div>
-					<div className="who-we-us__section__inner__icon">
-						<img src={data[1].icon} />
-					</div>
 				</div>
 			</div>
 			<div className="who-we-us__section">
 				<div className="who-we-us__section__inner">
+					<div className="who-we-us__section__inner__icon">
+						<img src={data[2].icon} alt={data[0].title} />
+					</div>
 					<div className="who-we-us__section__inner__info">
 						<h4 className="who-we-us__section__inner__info__title">
 							{data[2].title}
@@ -79,9 +82,7 @@ const WhoWeUs = () => {
 							{data[2].description}
 						</p>
 					</div>
-					<div className="who-we-us__section__inner__icon">
-						<img src={data[2].icon} />
-					</div>
+
 				</div>
 			</div>
 		</div>
