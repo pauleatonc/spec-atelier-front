@@ -22,8 +22,8 @@ export const onSetLocalConfig = (localConfig) => (dispatch) => {
 
 export const EDIT_CONFIG = 'UPDATE_CONFIG';
 export const UPDATE_PRODUCT_CONFIG_SUCCESS = 'UPDATE_PRODUCT_CONFIG_SUCCESS';
-export const onEditConfig = (key, value) => (dispatch) => {
-	dispatch(onActionCreator(EDIT_CONFIG, { key, value }));
+export const onEditConfig = (newConfig) => (dispatch) => {
+	dispatch(onActionCreator(EDIT_CONFIG, { newConfig }));
 };
 export const onUpdateProductConfig = (specID, project_config) => async (
 	dispatch,

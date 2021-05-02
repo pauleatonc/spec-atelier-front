@@ -39,7 +39,7 @@ const specAdminReducer = (state = specAdminState, { type, payload }) => {
 				initialConfig: false,
 				localConfig: {
 					...state.localConfig,
-					[payload.key]: payload.value,
+					...payload.newConfig,
 				},
 			};
 		}

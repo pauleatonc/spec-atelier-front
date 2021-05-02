@@ -27,11 +27,40 @@ const SpecAdmin = () => {
 	);
 	const { config } = useSelector((state) => state.specDocument.project);
 	const { id: specID } = useParams();
+	const options = [
+		{ key: 'all', text: 'Todos' },
+		{ key: 'short_desc', text: 'Descripción corta' },
+		{ key: 'long_desc', text: 'Descriptción larga' },
+		{ key: 'reference', text: 'Referencia' },
+		{ key: 'brand', text: 'Marca' },
+	];
+
+	const calculatedOptions = {
+		all: () => ({
+			...options.reduce(
+				(acum, option) => ({ ...acum, [option.key]: true }),
+				{},
+			),
+			short_desc: false,
+		}),
+		short_desc: (value) => ({
+			short_desc: !value,
+			long_desc: false,
+		}),
+		long_desc: (value) => ({
+			short_desc: false,
+			long_desc: !value,
+		}),
+	};
 
 	const dispatch = useDispatch();
 
 	const handleItemClick = (key) => {
-		dispatch(onEditConfig(key, !localConfig[key]));
+		const newConfig = calculatedOptions[key]?.(localConfig[key]) || {
+			[key]: !localConfig[key],
+			all: false,
+		};
+		dispatch(onEditConfig(newConfig));
 	};
 
 	useDidUpdateEffect(() => {
@@ -49,14 +78,6 @@ const SpecAdmin = () => {
 			);
 		}
 	}, [localConfig]);
-
-	const options = [
-		{ key: 'all', text: 'Todos' },
-		{ key: 'short_desc', text: 'Descripción corta' },
-		{ key: 'long_desc', text: 'Descriptción larga' },
-		{ key: 'reference', text: 'Referencia' },
-		{ key: 'brand', text: 'Marca' },
-	];
 
 	return (
 		<Root show={show}>
