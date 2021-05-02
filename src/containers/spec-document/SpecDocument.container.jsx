@@ -40,6 +40,7 @@ import {
   ProductDescription,
   ProductSystem,
   ProductReference,
+  ProductBrand
 } from './SpecDocument.styles';
 import specAddSource from '../../assets/images/icons/spec-add.svg';
 import threeDotsVerticalSource from '../../assets/images/icons/three-dots-vertical.svg';
@@ -50,6 +51,7 @@ import threeDotsVerticalSource from '../../assets/images/icons/three-dots-vertic
 const SpecDocument = () => {
   const { id: specID } = useParams();
   const { blocks } = useSelector(state => state.specDocument);
+	const { localConfig } = useSelector((state) => state.specAdmin);
   const {url, path} = useLocation();
   const dispatch = useDispatch();
   const [selectedBlockID, setSelectedBlockID] = useState('');
@@ -233,9 +235,11 @@ const SpecDocument = () => {
                     {block.type === 'Product' && (
                       <BlockContent>
                         <ProductTitle>{block?.element?.name}</ProductTitle>
-                        {block?.element?.long_desc && <ProductDescription dangerouslySetInnerHTML={{ __html: block?.element?.long_desc?.replace(/\n/g, '<br />') }} />}
+                        {block?.element?.long_desc && localConfig.long_desc && <ProductDescription dangerouslySetInnerHTML={{ __html: block?.element?.long_desc?.replace(/\n/g, '<br />') }} />}
+                        {block?.element?.short_desc && localConfig.short_desc && <ProductDescription>{ block?.element?.short_desc }</ProductDescription>}
                         {block?.element?.system && <ProductSystem>{`Sistema constructivo: ${block?.element?.system?.name}`}</ProductSystem>}
-                        {block?.element?.reference && <ProductReference>{`Referencia ${block?.element?.reference}`}</ProductReference>}
+                        {block?.element?.brand && localConfig.brand && <ProductBrand>{`Marca: ${block?.element?.brand?.name}`}</ProductBrand>}
+                        {block?.element?.reference && localConfig.reference && <ProductReference>{`Referencia: ${block?.element?.reference}`}</ProductReference>}
                       </BlockContent>
                     )}
                   </>
