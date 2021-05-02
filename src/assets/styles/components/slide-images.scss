@@ -6,19 +6,24 @@
 	&__inner {
 		margin-left: auto;
 		margin-right: auto;
-		padding-bottom: 56px;
-		padding-top: 105px;
+		padding-bottom: 30px;
+		padding-top: 120px;
 		height: $total-parent;
 		width: $width-90;
 		position: relative;
 
 		&__title {
-			font-family: 'Akzidenz Grotesk - bold condenced';
+			font-family: 'Lato';
 			color: $black-color;
-			font-size: $font-size-xl;
+			font-size: $font-size-l;
 			letter-spacing: 1.5px;
 			text-align: center;
 			padding-bottom: 60px;
+
+			@media only screen and (max-width: 768px) {
+				width: 200px;
+				margin: 0 auto;
+			}
 		}
 
 		.container {
