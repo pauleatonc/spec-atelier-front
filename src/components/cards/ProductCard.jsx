@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+
 import {
 	Root,
 	Content,
@@ -14,9 +16,15 @@ import {
 	SeeMore,
 	Add,
 	Check,
+	DotsIcon,
+	ActionsMenuItem
 } from './ProductCard.styles';
 import noPhoto from '../../assets/images/icons/no-photo.svg';
+import threeDotsVerticalSource from '../../assets/images/icons/three-dots-vertical.svg';
+import { onShowSpecEditProduct } from '../../containers/spec-edit-product/SpecEditProduct.actions';
 import { DownloadDocumentsIcons } from '../SpecComponents';
+import useDropdown from '../basics/Dropdown.hooks';
+import Dropdown from '../basics/Dropdown';
 
 /**
  * The ProductCard's component.
@@ -36,10 +44,32 @@ const ProductCard = (props) => {
 		onClickSeeMore,
 		canAdd,
 		productId,
+		canEdit,
+		canDelete
 	} = props;
 	const [hover, setHover] = useState(false);
+	const dispatch = useDispatch();
+	const {
+    anchor: actionsAnchor,
+    onClose: handleActionsMenuClose,
+    onOpen: handleActionsMenuOpen,
+  } = useDropdown();
 	const handleCardMouseEnter = () => setHover(true);
 	const handleCardMouseLeave = () => setHover(false);
+	const handleShowActions = event => {
+		event.stopPropagation();
+		handleActionsMenuOpen(event);
+	}
+	const handleHideActions = event => {
+		event.stopPropagation();
+		handleActionsMenuClose(event);
+	}
+
+	const handleEditProduct = () => {
+		handleActionsMenuClose();
+		dispatch(onShowSpecEditProduct({ id: productId }));
+	}
+
 	const photoStyles = {
 		backgroundImage: `url('${photo || noPhoto}')`,
 		backgroundSize: photo ? 'cover' : 'initial',
@@ -83,6 +113,17 @@ const ProductCard = (props) => {
 			</Footer>
 			{hover && !selected && canAdd && <Add onClick={onClickCard} />}
 			{selected && <Check onClick={onClickCard} />}
+			{(canEdit || canDelete) && <DotsIcon src={threeDotsVerticalSource} onClick={handleShowActions} /> }
+			<Dropdown
+        anchorRef={actionsAnchor}
+        offset={{ x: -8, y: -8 }}
+        open={Boolean(actionsAnchor)}
+        origin={{ x: 'right', y: 'top' }}
+        onClose={handleHideActions}
+      >
+        {canEdit && <ActionsMenuItem onClick={handleEditProduct}>Editar</ActionsMenuItem>}
+				{canDelete && <ActionsMenuItem>Eliminar</ActionsMenuItem>}
+      </Dropdown>
 		</Root>
 	);
 };

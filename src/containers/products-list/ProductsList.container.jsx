@@ -36,6 +36,8 @@ const ProductList = ({
 	filterOptionsKey,
 	withoutPadding,
 	canAdd,
+	canEdit,
+	canDelete,
 	selectedProducts = [],
 	customEmpty,
 	emptyListComponent: EmptyListComponent,
@@ -229,6 +231,8 @@ const ProductList = ({
 							productId={product.id}
 							selected={Boolean(selected)}
 							canAdd={canAdd}
+							canEdit={canEdit}
+							canDelete={canDelete}
 						/>
 					);
 				})}

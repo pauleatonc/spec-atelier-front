@@ -52,6 +52,8 @@ const Profile = () => {
                 <ProductListContainer
                   extraFilters={product_filter}
                   withoutPadding
+									canEdit
+									canDelete
                 />
               </>
             </Tab>
