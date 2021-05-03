@@ -152,7 +152,7 @@ const ProductList = ({
 	}, [filtersRef.current]);
 
 	useEffect(() => {
-		dispatch(setFilters(initialFilters));
+		dispatch(onGetProducts(initialFilters));
 		return () => {
 			dispatch(cleanStoreProductList());
 		};
