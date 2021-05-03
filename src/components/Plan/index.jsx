@@ -13,9 +13,9 @@ import {
 	ContainerIWantItButton,
 	FooterInfo,
 } from './styles';
-import Button from '../../../../buttons/Button';
-import { VARIANTS_BUTTON } from '../../../../../config/constants/button-variants';
-import { TYPES } from '../../constants';
+import Button from '../buttons/Button';
+import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+import { TYPES } from './constants';
 
 const Plan = ({ type, title, subtitle, itemsInfo, footerInfo }) => {
 	return (

@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import {
 	COLOR_BLACK,
 	MEDIA_QUERY_SMALL,
-} from '../../../config/constants/styled-vars';
+} from '../../config/constants/styled-vars';
 
-import PLANS_BACKGROUND from '../../../assets/images/home/plans_background.png';
+import PLANS_BACKGROUND from '../../assets/images/home/plans_background.png';
 
 export const Container = styled.section`
 	display: flex;

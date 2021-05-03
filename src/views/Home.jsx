@@ -5,7 +5,8 @@ import NavBar from '../containers/navbar/Navbar.container';
 import Footer from '../components/footer';
 import Header from '../components/home/header';
 import WhoWeUs from '../components/home/who-we-us';
-import WhyBeSupplier from '../components/home/plans/Plans';
+import Plans from '../components/Plans';
+import { DATA_PLANS } from '../components/home/constants';
 import ClientsImageSlider from '../containers/clients-images-slider/ClientsImageSlider.container';
 
 /**
@@ -18,7 +19,10 @@ const Home = () => {
 				<Header />
 				<WhoWeUs />
 				<ClientsImageSlider />
-				<WhyBeSupplier />
+				<Plans
+					dataPlans={DATA_PLANS}
+					title="Planes que se adaptan a tus necesidades:"
+				/>
 			</AppLayout>
 		</HttpsRedirect>
 	);

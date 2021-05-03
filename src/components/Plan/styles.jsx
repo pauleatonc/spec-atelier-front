@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import {
 	COLOR_WHITE,
 	MEDIA_QUERY_SMALL,
-} from '../../../../../config/constants/styled-vars';
-import { TYPES } from '../../constants';
+} from '../../config/constants/styled-vars';
+import { TYPES } from './constants';
 
 export const Container = styled.div`
 	display: flex;
