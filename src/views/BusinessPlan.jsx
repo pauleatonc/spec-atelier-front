@@ -2,17 +2,30 @@ import React from 'react';
 import AppLayout from '../components/layouts/AppLayout';
 import Navbar from '../containers/navbar/Navbar.container';
 import Footer from '../components/footer';
-import CLIENT_HEADER from '../assets/images/collaborators/collaborators_header.jpg';
-import { ImgHeader } from './Collaborators.styles';
 
 import Plans from '../components/Plans';
-import { DATA_PLANS } from '../containers/BusinessPlan/constants';
+import BusinessSectionInformation from '../components/businessSectionInformation';
+import {
+	BUSINESS_PLANS,
+	BUSINESS_SECTIONS_INFORMATION,
+} from '../config/constants/businessPlans';
 
 const BusinessPlan = () => {
 	return (
 		<AppLayout footer={<Footer />} header={<Navbar />}>
-			<ImgHeader background={CLIENT_HEADER} />
-			<Plans dataPlans={DATA_PLANS} />
+			<BusinessSectionInformation
+				header
+				image={BUSINESS_SECTIONS_INFORMATION.INFORMATION_HEADER.image}
+				title={BUSINESS_SECTIONS_INFORMATION.INFORMATION_HEADER.title}
+			/>
+			<Plans dataPlans={BUSINESS_PLANS} />
+			<BusinessSectionInformation
+				image={BUSINESS_SECTIONS_INFORMATION.INFORMATION_OUR_COMUNITY.image}
+				title={BUSINESS_SECTIONS_INFORMATION.INFORMATION_OUR_COMUNITY.title}
+				subtitle={
+					BUSINESS_SECTIONS_INFORMATION.INFORMATION_OUR_COMUNITY.subtitle
+				}
+			/>
 		</AppLayout>
 	);
 };

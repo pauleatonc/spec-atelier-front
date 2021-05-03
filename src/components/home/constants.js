@@ -1,5 +1,5 @@
 import { TYPES } from '../Plan/constants';
-import { DATA_PLANS as BUSINESS_PLANS } from '../../containers/BusinessPlan/constants';
+import { BUSINESS_PLANS } from '../../config/constants/businessPlans';
 
 export const DATA_PLANS = [
     {
