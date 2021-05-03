@@ -35,6 +35,7 @@ export const InfoContainer = styled.div`
 	width: 340px;
 	${MEDIA_QUERY_STANDAR_MEDIUM} {
 		width: 90%;
+		max-width: 340px;
 	}
 `;
 
