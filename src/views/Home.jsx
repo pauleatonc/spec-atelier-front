@@ -3,7 +3,7 @@ import HttpsRedirect from 'react-https-redirect';
 import AppLayout from '../components/layouts/AppLayout';
 import NavBar from '../containers/navbar/Navbar.container';
 import Footer from '../components/footer';
-import HeaderHome from '../components/home/header';
+import Header from '../components/home/header';
 import WhoWeUs from '../components/home/who-we-us';
 import WhyBeSupplier from '../components/home/plans/Plans';
 import ClientsImageSlider from '../containers/clients-images-slider/ClientsImageSlider.container';
@@ -15,7 +15,7 @@ const Home = () => {
 	return (
 		<HttpsRedirect>
 			<AppLayout footer={<Footer />} header={<NavBar fixed />}>
-				<HeaderHome />
+				<Header />
 				<WhoWeUs />
 				<ClientsImageSlider />
 				<WhyBeSupplier />

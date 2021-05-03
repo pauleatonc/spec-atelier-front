@@ -44,5 +44,3 @@ export const ButtonContainer = styled.div`
 		justify-content: center;
 	}
 `;
-
-// PLAN COMPONENT

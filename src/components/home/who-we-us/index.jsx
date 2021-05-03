@@ -1,29 +1,34 @@
 import React from 'react';
 
 import { DATA } from './constants';
+import {
+	Container,
+	Section,
+	Icon,
+	InfoContainer,
+	Title,
+	TextDescription,
+	BannerSliderContainer,
+	BannerSlider,
+} from './styles';
 
 const WhoWeUs = () => {
 	return (
-		<div className="who-we-us">
+		<Container>
+			<BannerSliderContainer>
+				<BannerSlider />
+			</BannerSliderContainer>
 			{DATA.map((section) => (
-				<div className="who-we-us__section">
-					<img
-						className="who-we-us__section__icon"
-						src={section.icon}
-						alt={section.title}
-					/>
-					<div className="who-we-us__section__info">
-						<h4 className="who-we-us__section__info__title">{section.title}</h4>
-						<p className="who-we-us__section__info__descent">
-							{section.descent}
-						</p>
-						<p className="who-we-us__section__info__description">
-							{section.description}
-						</p>
-					</div>
-				</div>
+				<Section>
+					<Icon src={section.icon} alt={section.title} />
+					<InfoContainer>
+						<Title>{section.title}</Title>
+						<TextDescription subtitle>{section.descent}</TextDescription>
+						<TextDescription>{section.description}</TextDescription>
+					</InfoContainer>
+				</Section>
 			))}
-		</div>
+		</Container>
 	);
 };
 
