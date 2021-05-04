@@ -22,6 +22,7 @@ import specDocumentReducer from '../../containers/spec-document/SpecDocument.red
 import specHeaderReducer from '../../containers/spec-header/SpecHeader.reducer';
 import specImagesModalReducer from '../../containers/spec-images-modal/SpecImagesModal.reducer';
 import specContentsReducer from '../../containers/spec-contents/SpecContents.reducer';
+import specAdminReducer from '../../containers/spec-admin/SpecAdmin.reducer';
 import clientsImageSliderReducer from '../../containers/clients-images-slider/ClientsImageSlider.reducer';
 import ProfileReducer from '../../containers/profile-header/ProfileHeader.reducer';
 import ProfileStatsReducer from '../../containers/profile-stats/ProfileStats.reducer';
@@ -51,6 +52,7 @@ export default combineReducers({
 	specDocument: specDocumentReducer,
 	specImagesModal: specImagesModalReducer,
 	specContents: specContentsReducer,
+	specAdmin: specAdminReducer,
 	profile: ProfileReducer,
 	profileStats: ProfileStatsReducer,
 });

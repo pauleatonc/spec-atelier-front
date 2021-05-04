@@ -13,6 +13,7 @@ import SpecCreateProductThreeContainer from '../containers/spec-create-product/S
 import SpecEditProductContainer from '../containers/spec-edit-product/SpecEditProduct.container';
 import SpecImagesModalContainer from '../containers/spec-images-modal/SpecImagesModal.container';
 import SpecContentsContainer from '../containers/spec-contents/SpecContents.container';
+import SpecAdminContainer from '../containers/spec-admin/SpecAdmin.container';
 import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayout';
 import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
 
@@ -22,35 +23,41 @@ import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
  * The Specification's view.
  */
 const Specification = () => {
-  return (
-    <>
-      <Root>
-        <Header>
-          <SpecHeaderContainer />
-        </Header>
-        <Main>
-          <SpecDocumentContainer />
-          <Navigation>
-            <SpecNavigatorContainer />
-            <Panels>
-              <SpecProductsPanelLayout filtersPanels={[<SpecProductsSectionsContainer />, <SpecProductsItemsContainer />]}>
-                <SpecProductsContainer />
-              </SpecProductsPanelLayout>
-              <SpecContentsContainer />
-            </Panels>
-          </Navigation>
-        </Main>
-      </Root>
-      <SpecCreateProductOneContainer />
-      <SpecCreateProductTwoContainer />
-      <SpecCreateProductThreeContainer />
-      <SpecEditProductContainer />
-      <SpecImagesModalContainer />
-      <AlertContainer />
-      <SpecModalProduct />
-      <ContactFormContainer type="product" />
-    </>
-  );
+	return (
+		<>
+			<Root>
+				<Header>
+					<SpecHeaderContainer />
+				</Header>
+				<Main>
+					<SpecDocumentContainer />
+					<Navigation>
+						<SpecNavigatorContainer />
+						<Panels>
+							<SpecProductsPanelLayout
+								filtersPanels={[
+									<SpecProductsSectionsContainer />,
+									<SpecProductsItemsContainer />,
+								]}
+							>
+								<SpecProductsContainer />
+							</SpecProductsPanelLayout>
+							<SpecContentsContainer />
+							<SpecAdminContainer />
+						</Panels>
+					</Navigation>
+				</Main>
+			</Root>
+			<SpecCreateProductOneContainer />
+			<SpecCreateProductTwoContainer />
+			<SpecCreateProductThreeContainer />
+			<SpecEditProductContainer />
+			<SpecImagesModalContainer />
+			<AlertContainer />
+			<SpecModalProduct />
+			<ContactFormContainer type="product" />
+		</>
+	);
 };
 
 export default Specification;

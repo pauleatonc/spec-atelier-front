@@ -84,17 +84,19 @@ const SpecProductsList = () => {
 		<>
 			<Root>
 				<Body>
-					<ProductListContainer
-						extraFilters={{ limit: 20 }}
-						filterOptionsKey="spec"
-						canAdd
-						selectedProducts={selectedProducts}
-						withoutPadding
-						customEmpty
-						emptyListComponent={CreateProduct}
-						onActionCard={handleCardClick}
-						onClickCreate={handleCreateProduct}
-					/>
+					{show && (
+						<ProductListContainer
+							extraFilters={{ limit: 20 }}
+							filterOptionsKey="spec"
+							canAdd
+							selectedProducts={selectedProducts}
+							withoutPadding
+							customEmpty
+							emptyListComponent={CreateProduct}
+							onActionCard={handleCardClick}
+							onClickCreate={handleCreateProduct}
+						/>
+					)}
 				</Body>
 			</Root>
 			<SpecModalAttachProduct
