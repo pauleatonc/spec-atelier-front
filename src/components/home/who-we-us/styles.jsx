@@ -69,27 +69,27 @@ export const TextDescription = styled.p`
 `;
 
 export const BannerSliderContainer = styled.div`
-	width: 100%;
+	width: 525px;
 	height: 160px;
 	position: absolute;
 	top: -35px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	${MEDIA_QUERY_STANDAR_MEDIUM} {
 		position: relative;
 		height: auto;
 		padding-top: 145px;
 		padding-bottom: 110px;
+		width: 100%;
 	}
 `;
 
 export const BannerSlider = styled.div`
-	width: 525px;
+	width: 100%;
 	height: 160px;
 	border-radius: 12px;
 	background-color: black;
 	box-shadow: 0 2px 4px 0 rgba(201, 198, 198, 0.5);
+	color: #ffffff;
+	text-align: center;
 	${MEDIA_QUERY_STANDAR_MEDIUM} {
 		height: 290px;
 	}
