@@ -28,7 +28,7 @@ const SpecAdmin = () => {
 	const { config } = useSelector((state) => state.specDocument.project);
 	const { id: specID } = useParams();
 	const options = [
-		{ key: 'all', text: 'Todos' },
+		{ key: 'default', text: 'Predeterminado' },
 		{ key: 'short_desc', text: 'Descripción corta' },
 		{ key: 'long_desc', text: 'Descriptción larga' },
 		{ key: 'reference', text: 'Referencia' },
@@ -36,30 +36,34 @@ const SpecAdmin = () => {
 	];
 
 	const calculatedOptions = {
-		all: (value) => ({
-			...options.reduce(
-				(acum, option) => ({ ...acum, [option.key]: true }),
-				{},
-			),
-			all: !value,
-			short_desc: false,
-		}),
-		short_desc: (value) => ({
-			short_desc: !value,
+		default: (newValue) => {
+			return {
+				...options.reduce(
+					(acum, option) => ({ ...acum, [option.key]: newValue }),
+					{},
+				),
+				default: newValue,
+				short_desc: false,
+			};
+		},
+		short_desc: (newValue) => ({
+			short_desc: newValue,
 			long_desc: false,
+			default: false
 		}),
-		long_desc: (value) => ({
+		long_desc: (newValue) => ({
 			short_desc: false,
-			long_desc: !value,
+			long_desc: newValue,
+			default: false
 		}),
 	};
 
 	const dispatch = useDispatch();
 
 	const handleItemClick = (key) => {
-		const newConfig = calculatedOptions[key]?.(localConfig[key]) || {
+		const newConfig = calculatedOptions[key]?.(!localConfig[key]) || {
 			[key]: !localConfig[key],
-			all: false,
+			default: false,
 		};
 		dispatch(onEditConfig(newConfig));
 	};
