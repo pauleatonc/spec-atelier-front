@@ -5,7 +5,7 @@ import arrowDownSource from '../../assets/images/icons/arrow-down.svg';
 import arrowUpActiveSource from '../../assets/images/icons/arrow-up-active.svg';
 import {
 	onGetSpecProductsByItem,
-	onGetSpecProductsBySection,
+	onUpdateFilterSection,
 	onUpdateFilterSubitem
 } from '../spec-products/SpecProducts.actions';
 import { setFilters } from '../products-list/ProductsList.actions';
@@ -36,7 +36,7 @@ const SpecProductsItems = () => {
 	const dispatch = useDispatch();
 	const handleShowSections = () => {
 		dispatch(setFilters({ section: [], item: [], subitem: [] }));
-		dispatch(onGetSpecProductsBySection({ section: '', item: '', subitem: '' }));
+		dispatch(onUpdateFilterSection({ section: '', item: '', subitem: '' }));
 		dispatch(onHideSpecProductsItemsSuccess());
 	};
 	const handleItemClick = (item) => () => {
@@ -47,7 +47,6 @@ const SpecProductsItems = () => {
 	};
 
 	const handleSubitemClick = (subitem) => {
-		console.log({ subitem });
 		dispatch(onUpdateFilterSubitem({ subitem }));
 		dispatch(setFilters({ subitem: [subitem] }));
 	}
@@ -88,7 +87,7 @@ const SpecProductsItems = () => {
 									/>
 								)}
 							</Item>
-							<Collapsible show={selectedItemID === item.id}>
+							<Collapsible show={selectedItemID === item.id && item.subitems.length}>
                   {item.subitems.map(subitem => (
                     <Item
 											active={subitem.id === selectedSubitemID}
