@@ -9,6 +9,7 @@ const Plans = ({ dataPlans, title }) => {
 			{title && <Title>{title}</Title>}
 			{dataPlans.map((plan) => (
 				<Plan
+					key={plan.id}
 					type={plan.type}
 					title={plan.title}
 					subtitle={plan.subtitle}

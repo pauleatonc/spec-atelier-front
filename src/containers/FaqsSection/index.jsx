@@ -9,8 +9,8 @@ const FaqsSection = ({ faqList }) => {
 			<ContainerTitle>
 				<Title>Preguntas frecuentes</Title>
 			</ContainerTitle>
-			{faqList.map(({ title, subtitle }) => (
-				<FaqItem title={title} subtitle={subtitle} />
+			{faqList.map(({ id, title, subtitle, body }) => (
+				<FaqItem key={id} title={title} subtitle={subtitle} body={body} />
 			))}
 		</Container>
 	);

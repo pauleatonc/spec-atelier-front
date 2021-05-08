@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 
-import { Container, Title, IconExpan, ExpandableContent } from './styles';
+import {
+	Container,
+	Title,
+	IconExpan,
+	ExpandableContent,
+	TextExpandable,
+} from './styles';
 
-const FaqItem = ({ title, subtitle }) => {
+const FaqItem = ({ title, subtitle, body }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	return (
 		<Container onClick={() => setIsExpanded(!isExpanded)}>
@@ -12,7 +18,12 @@ const FaqItem = ({ title, subtitle }) => {
 			) : (
 				<IconExpan className="fas fa-chevron-down" />
 			)}
-			{isExpanded && <ExpandableContent>{subtitle}</ExpandableContent>}
+			{isExpanded && (
+				<ExpandableContent>
+					<TextExpandable>{subtitle}</TextExpandable>
+					{body && <TextExpandable>{body}</TextExpandable>}
+				</ExpandableContent>
+			)}
 		</Container>
 	);
 };

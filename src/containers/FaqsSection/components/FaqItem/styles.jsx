@@ -38,11 +38,15 @@ export const IconExpan = styled.i`
 
 export const ExpandableContent = styled.div`
 	width: 90%;
-	margin-top: 30px;
+	margin-top: 20px;
 	font-family: Lato;
 	font-size: 16px;
 	letter-spacing: 0.96px;
 	${MEDIA_QUERY_STANDAR_MEDIUM} {
 		font-size: 14px;
 	}
+`;
+
+export const TextExpandable = styled.p`
+	margin: 10px 0;
 `;

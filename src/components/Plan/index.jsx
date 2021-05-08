@@ -36,7 +36,7 @@ const Plan = ({ type, title, subtitle, itemsInfo, footerInfo }) => {
 			)}
 			<TitleInfo>Este plan incluye</TitleInfo>
 			{itemsInfo.map((item) => (
-				<ItemInfo>
+				<ItemInfo key={item.id}>
 					<IconCheck type={type} className="fas fa-check" />
 					<ItemDesc>{item.text}</ItemDesc>
 				</ItemInfo>
