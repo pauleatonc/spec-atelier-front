@@ -11,8 +11,8 @@ const specAdminState = {
 	savedConfig: 0,
 	initialConfig: true,
 	localConfig: {
-		all: true,
-		short_desc: true,
+		default: true,
+		short_desc: false,
 		long_desc: true,
 		reference: true,
 		brand: true,

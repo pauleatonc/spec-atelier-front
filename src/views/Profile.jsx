@@ -39,7 +39,7 @@ const Profile = () => {
 		<AppLayout footer={<Footer />} header={<Navbar />}>
 			<ProfileHeader />
 			<PaddingContainer>
-				{Object.keys(user).length && !loading && (
+				{!!Object.keys(user).length && !loading && (
           <CustomTabs>
             <Tab title="Mis Productos">
               <>
@@ -52,6 +52,8 @@ const Profile = () => {
                 <ProductListContainer
                   extraFilters={product_filter}
                   withoutPadding
+									canEdit
+									canDelete
                 />
               </>
             </Tab>

@@ -3,6 +3,7 @@ import {
 	SHOW_SPEC_PRODUCTS_SUCCESS,
 	UPDATE_SPEC_PRODUCTS_FILTER_ITEM,
 	UPDATE_SPEC_PRODUCTS_FILTER_SECTION,
+	UPDATE_SPEC_PRODUCTS_FILTER_SUBITEM,
 	SHOW_ATTACH_MODAL,
 	HIDE_ATTACH_MODAL,
 } from './SpecProducts.actions';
@@ -12,6 +13,7 @@ const specProductsState = {
 	filters: {
 		item: '',
 		section: '',
+		subitem: ''
 	},
 	loading: false,
 	show: false,
@@ -37,7 +39,7 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
 				...state,
 				filters: {
 					...state.filters,
-					item: payload.itemID,
+					...payload,
 				},
 			};
 		}
@@ -46,8 +48,7 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
 				...state,
 				filters: {
 					...state.filters,
-					section: payload.sectionID,
-					item: payload.itemID,
+					...payload
 				},
 			};
 		}
@@ -63,6 +64,15 @@ const specProductsReducer = (state = specProductsState, { payload, type }) => {
 				...state,
 				showAttachModal: false,
 				productToAttach: {},
+			};
+		}
+		case UPDATE_SPEC_PRODUCTS_FILTER_SUBITEM: {
+			return {
+				...state,
+				filters: {
+					...state.filters,
+				 	...payload,
+				},
 			};
 		}
 		default: {

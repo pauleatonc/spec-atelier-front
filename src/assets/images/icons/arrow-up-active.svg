@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <path id="pa1125ccaa" d="M1.41 0.59L6 5.17 10.59 0.59 12 2 6 8 0 2z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g transform="translate(-78 -65) translate(78 65) matrix(1 0 0 -1 6 16)">
+                    <use fill="#19BEA8" fill-rule="nonzero" xlink:href="#pa1125ccaa"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

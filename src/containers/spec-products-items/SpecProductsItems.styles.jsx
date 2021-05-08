@@ -44,6 +44,10 @@ export const Item = styled.p`
   font-size: 12px;
   letter-spacing: 1px;
   margin: 0 0 15px;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  padding: ${({ padding = '0' }) => padding};
 
   &:hover {
     color: #3FBFAD;
@@ -57,3 +61,12 @@ Item.defaultProps = {
 Item.propTypes = {
   active: PropTypes.bool,
 };
+
+export const ArrowIcon = styled.img`
+  pointer-event: none;
+  user-select: none;
+`;
+
+export const Divisor = styled.div`
+  height: 15px;
+`;

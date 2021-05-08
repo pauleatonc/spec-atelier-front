@@ -19,6 +19,15 @@ const hoverPropTypes = {
   hover: PropTypes.bool,
 };
 
+export const DotsIcon = styled.img`
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  top: 4px;
+  user-select: none;
+  visibility: hidden;
+`;
+
 export const Root = styled.div`
   background-color: ${({ selected = false }) => selected ? '#F2F2F2' : '#FFF'};
   border: 1px solid ${({ hover = false, selected = false }) => hover && !selected ? '#31cbb7' : '#E0E0E0'};
@@ -35,6 +44,9 @@ export const Root = styled.div`
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 30px;
+  }
+  &:hover ${DotsIcon} {
+    visibility: visible;
   }
 `;
 
@@ -199,4 +211,24 @@ export const Add = styled(BaseStates)`
 
 export const Check = styled(BaseStates)`
   background-image: url('${checkSource}');
+`;
+
+export const ActionsMenuItem = styled.section`
+  background-color: transparent;
+  border-bottom: 1px solid #B3B3B3;
+  color: ${COLOR_MINE_SHAFT};
+  cursor: pointer;
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 14px 0px 16px 35px;
+  width: 187px;
+
+  &:hover {
+    background-color: #EEE;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
 `;

@@ -25,7 +25,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
     case ADD_SPEC_BLOCK_IMAGE_SUCCESS:
     case ADD_SPEC_BLOCK_TEXT_SUCCESS:
     case GET_SPEC_BLOCKS_SUCCESS:
-      return { ...state, blocks: payload.blocks, project: payload.project };
+      return { ...state, blocks: payload.blocks, project: { ...state.project, ...payload.project } };
     case REMOVE_SPEC_BLOCK_SUCCESS:
     case REMOVE_SPEC_BLOCK_IMAGE_SUCCESS:
     case REMOVE_SPEC_BLOCK_TEXT_SUCCESS:

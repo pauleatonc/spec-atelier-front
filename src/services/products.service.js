@@ -139,3 +139,14 @@ export const updateDownloadsProduct = factoryService(({ stat, productId }) =>
 		)}`,
 	),
 );
+
+/**
+ * Delete product
+ */
+ export const deleteProduct = factoryService(
+	({ productId }) => {
+		return deleteJsonRequest(
+			`${API_BASE_URL}/products/${productId}`
+		);
+	},
+);

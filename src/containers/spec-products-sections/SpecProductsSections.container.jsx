@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onGetSpecProductsBySection } from '../spec-products/SpecProducts.actions';
+import { onGetSpecProductsBySection, onUpdateFilterSection } from '../spec-products/SpecProducts.actions';
 import { onHideSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
 import { setFilters } from '../products-list/ProductsList.actions';
 import useSpecProductsPanelLayout from '../../components/layouts/SpecProductsPanelLayout.hook';
@@ -31,13 +31,13 @@ const SpecProductsSections = () => {
 	const dispatch = useDispatch();
 	const handleSectionClick = (sectionID) => () => {
 		dispatch(setFilters({ section: [sectionID] }));
-		dispatch(onGetSpecProductsBySection({ sectionID }));
+		dispatch(onGetSpecProductsBySection({ section: sectionID }));
 	};
 
 	useSpecProductsPanelLayout(show);
 	useDidUpdateEffect(() => {
 		if (isSelectedAll) {
-			dispatch(onGetSpecProductsBySection({ sectionID: '', itemID: '' }));
+			dispatch(onUpdateFilterSection({ section: '', item: '', subitem: ''}))
 			dispatch(onHideSpecProductsItemsSuccess());
 		}
 	}, [isSelectedAll]);
