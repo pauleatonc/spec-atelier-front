@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
 	Container,
@@ -13,6 +14,7 @@ import {
 	ContainerIWantItButton,
 	FooterInfo,
 } from './styles';
+import { LinkRegister } from '../navbar/navbar-login/NavbarLogin.styles';
 import Button from '../buttons/Button';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 import { TYPES } from './constants';
@@ -29,9 +31,13 @@ const Plan = ({ type, title, subtitle, itemsInfo, footerInfo }) => {
 			<Subtitle type={type}>{subtitle}</Subtitle>
 			{type === TYPES.ARCHITECT && (
 				<ContainerCreateButton>
-					<Button variant={VARIANTS_BUTTON.PRIMARY} onClick={() => {}}>
-						Crear cuenta
-					</Button>
+					<Link
+						to="/registration"
+						data-view="registration"
+						style={{ textDecoration: 'none' }}
+					>
+						<LinkRegister>Crear cuenta</LinkRegister>
+					</Link>
 				</ContainerCreateButton>
 			)}
 			<TitleInfo>Este plan incluye</TitleInfo>

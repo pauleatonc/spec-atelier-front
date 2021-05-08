@@ -1,7 +1,5 @@
 import React from 'react';
-
-import Button from '../../buttons/Button';
-import { VARIANTS_BUTTON } from '../../../config/constants/button-variants';
+import { Link } from 'react-router-dom';
 
 import {
 	Container,
@@ -11,6 +9,7 @@ import {
 	VideoBanner,
 	ContainerButtonBanner,
 } from './styles';
+import { LinkRegister } from '../../navbar/navbar-login/NavbarLogin.styles';
 
 const Header = () => (
 	<Container>
@@ -23,13 +22,13 @@ const Header = () => (
 				especificación de proyectos de construcción.
 			</TextBanner>
 			<ContainerButtonBanner>
-				<Button
-					variant={VARIANTS_BUTTON.PRIMARY}
-					width="130"
-					onClick={() => {}}
+				<Link
+					to="/registration"
+					data-view="registration"
+					style={{ textDecoration: 'none' }}
 				>
-					Únete
-				</Button>
+					<LinkRegister>Únete</LinkRegister>
+				</Link>
 			</ContainerButtonBanner>
 		</InfoContainer>
 		<VideoBanner

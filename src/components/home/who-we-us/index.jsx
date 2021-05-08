@@ -39,7 +39,7 @@ const WhoWeUs = () => {
 				</Slider>
 			</BannerSliderContainer>
 			{DATA.map((section) => (
-				<Section>
+				<Section key={section.title}>
 					<Icon src={section.icon} alt={section.title} />
 					<InfoContainer>
 						<Title>{section.title}</Title>

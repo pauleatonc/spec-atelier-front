@@ -51,7 +51,7 @@ export const TextBanner = styled.p`
 	margin-bottom: ${({ mBottom = '0' }) => mBottom};
 `;
 
-export const Titlebanner = styled.h1`
+export const Titlebanner = styled.span`
 	font-size: 30px;
 	font-weight: bold;
 	line-height: normal;
