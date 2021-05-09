@@ -280,3 +280,11 @@ export const ProductReference = styled.p`
   letter-spacing: 1px;
   line-height: 1.6;
 `;
+
+export const ProductBrand = styled.p`
+  color: ${COLOR_MINE_SHAFT};
+  font-family: Lato;
+  font-size: 11px;
+  letter-spacing: 1px;
+  line-height: 1.6;
+`;
