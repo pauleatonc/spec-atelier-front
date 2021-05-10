@@ -35,6 +35,7 @@ const ProfileChangePicture = () => {
 	const hiddenFileInput = useRef(null);
 	const iconEditorRef = useRef(null);
 	const dispatch = useDispatch();
+
 	const { onClose: handleClose, onExiting: handleExiting } = useModal({
 		closeCallback: () => dispatch(onHideEditProfilePicture()),
 	});
@@ -49,12 +50,20 @@ const ProfileChangePicture = () => {
 		setAvatar(fileUploaded);
 	};
 
-	const handleSaveProfilePicture = () =>
-		dispatch(onChangeProfilePicture(avatar));
+	const handleSaveProfilePicture = () => {
+		const img = iconEditorRef.current.getImageScaledToCanvas().toDataURL();
+		let imageFile;
+		fetch(img)
+			.then((res) => res.blob())
+			.then((blob) => {
+				imageFile = new File([blob], avatar.name);
+				dispatch(onChangeProfilePicture(imageFile));
+			});
+	};
 
 	useEffect(() => {
-		if (user.profile_image) setAvatar(user.profile_image.urls.medium);
-	}, [user.profile_image]);
+		if (user?.profile_image?.urls) setAvatar(user.profile_image.urls.medium);
+	}, [user.profile_image?.urls]);
 
 	return (
 		<ModalLayout
