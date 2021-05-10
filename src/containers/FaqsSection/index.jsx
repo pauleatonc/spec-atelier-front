@@ -1,12 +1,14 @@
 import React from 'react';
 
-import { Container, ContainerTitle, Title } from './styles';
+import { Container, ContainerTitle, Title, IconFaqs } from './styles';
 import FaqItem from './components/FaqItem';
+import ICON_FAQS from '../../assets/images/businessPlan/icon_faqs.png';
 
 const FaqsSection = ({ faqList }) => {
 	return (
 		<Container>
 			<ContainerTitle>
+				<IconFaqs src={ICON_FAQS} />
 				<Title>Preguntas frecuentes</Title>
 			</ContainerTitle>
 			{faqList.map(({ id, title, subtitle, body }) => (
