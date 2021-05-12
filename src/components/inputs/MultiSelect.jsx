@@ -165,7 +165,10 @@ const MultiSelect = (props) => {
 				})}
 				{showButtons && (
 					<Actions>
-						<Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY} onClick={handleClickClean}>
+						<Button
+							variant={VARIANTS_BUTTON.CANCEL_SECONDARY}
+							onClick={handleClickClean}
+						>
 							Borrar
 						</Button>
 						<Button variant={variant} onClick={handleClickSubmit}>
