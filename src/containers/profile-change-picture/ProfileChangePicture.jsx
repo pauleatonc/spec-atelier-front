@@ -27,7 +27,7 @@ import {
 } from './ProfileChangePicture.styles';
 
 const ProfileChangePicture = () => {
-	const { showEditProfilePicture, user } = useSelector(
+	const { showEditProfilePicture, user, loading } = useSelector(
 		(state) => state.profile,
 	);
 	const [zomAvatar, setZoomAvatar] = useState(1);
@@ -62,7 +62,7 @@ const ProfileChangePicture = () => {
 	};
 
 	useEffect(() => {
-		if (user?.profile_image?.urls) setAvatar(user.profile_image.urls.medium);
+		if (user?.profile_image?.urls) setAvatar(user.profile_image.urls.original);
 	}, [user.profile_image?.urls]);
 
 	return (
@@ -135,11 +135,11 @@ const ProfileChangePicture = () => {
 				<Footer>
 					<Button
 						variant={VARIANTS_BUTTON.PRIMARY}
-						width="113px"
+						width="130px"
 						onClick={handleSaveProfilePicture}
-						disabled={!avatar?.name}
+						disabled={!avatar?.name || loading}
 					>
-						Guardar
+						{loading ? 'Guardando...' : 'Guardar'}
 					</Button>
 				</Footer>
 			</Root>

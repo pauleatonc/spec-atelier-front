@@ -29,7 +29,7 @@ const NavProfile = () => {
 				<ProfilePictureContainer>
 					{user?.profile_image?.urls ? (
 						<ProfilePictureImage
-							src={user?.profile_image?.urls.thumb}
+							src={user?.profile_image?.urls.original}
 							alt="profile icon"
 						/>
 					) : (
