@@ -45,7 +45,7 @@ export const BUSINESS_SECTIONS_INFORMATION = {
 		title:
 			'Nuestra comunidad de arquitectos y profesionales de la construcción',
 		subtitle:
-			'se encuentra constantemente desarrollando proyectos y especificando las soluciones para la construcción de nuestra comunidad de proveedores.',
+			'se encuentra constantemente desarrollando proyectos y especificando las soluciones para la construcción de nuestra comunidad de proveedores.',
 	},
 };
 

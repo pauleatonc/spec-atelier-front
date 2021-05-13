@@ -95,6 +95,7 @@ const MultiSelect = (props) => {
 
 	const handleCloseBehaviour = () => {
 		if (!changeOnCLose) onChange(lastState);
+		if (changeOnCLose) onSubmit(selectedOptions);
 		handleClose();
 	};
 
