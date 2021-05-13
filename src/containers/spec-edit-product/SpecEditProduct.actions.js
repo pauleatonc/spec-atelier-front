@@ -13,6 +13,7 @@ import {
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS } from '../spec-products-sections/SpecProductsSections.actions';
 import { onHideSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
+import { onGetProducts } from '../products-list/ProductsList.actions';
 import { cleanObject } from '../../modules/services';
 import { onGetSpecBlocks } from '../spec-document/SpecDocument.actions';
 
@@ -91,10 +92,11 @@ export const onEditSpecProduct = ({
 	documentsToDelete,
 	imagesToDelete,
 	specID,
-}) => async (dispatch) => {
+}) => async (dispatch, getState) => {
 	try {
 		dispatch(onActionCreator(EDIT_SPEC_PRODUCT));
 		const patch = [editProduct(cleanObject(product))];
+		const { productsList } = getState();
 
 		if (images?.length)
 			patch.concat(uploadProductImages({ productID: product.id, images }));
@@ -119,6 +121,7 @@ export const onEditSpecProduct = ({
 		return batch(() => {
 			dispatch(onGetSpecBlocks(specID));
 			dispatch(onActionCreator(EDIT_SPEC_PRODUCT_SUCCESS));
+			dispatch(onGetProducts(productsList.filters))
 			dispatch(
 				onShowAlertSuccess({ message: 'Producto editado exitosamente' }),
 			);

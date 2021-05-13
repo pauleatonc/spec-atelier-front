@@ -11,6 +11,9 @@ import {
 	GET_BRANDS_ERROR,
 	SET_FILTERS,
 	SET_SELECTED_ALL,
+	DELETE_PRODUCT,
+	DELETE_PRODUCT_SUCCESS,
+	DELETE_PRODUCT_ERROR
 } from './ProductsList.actions';
 
 export const productsListInitialState = {
@@ -39,7 +42,8 @@ const productsListReducer = (
 	{ payload, type },
 ) => {
 	switch (type) {
-		case GET_PRODUCTS: {
+		case GET_PRODUCTS:
+		case DELETE_PRODUCT: {
 			return {
 				...state,
 				loading: true,
@@ -47,7 +51,8 @@ const productsListReducer = (
 			};
 		}
 		case GET_PRODUCTS_ERROR:
-		case GET_PRODUCTS_SUCCESS: {
+		case GET_PRODUCTS_SUCCESS:
+		case DELETE_PRODUCT_SUCCESS: {
 			return {
 				...state,
 				...payload,
@@ -78,6 +83,7 @@ const productsListReducer = (
 		case GET_SECTIONS_ERROR:
 		case GET_ITEMS_ERROR:
 		case GET_BRANDS_ERROR:
+		case DELETE_PRODUCT_ERROR:
 			return { ...state };
 		case CLEAN_PRODUCT_LIST_STORE:
 			return {

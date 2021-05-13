@@ -8,3 +8,7 @@ export const redirectToProjectsWhenIsLogin = () => {
 export const redirectToHomesWhenIsLogout = () => {
 	window.location.href = `${mapFrontUrls[handleGetEnvironment()]}/`;
 };
+
+export const redirectToLoginWhenIsLogout = () => {
+	window.location.href = `${mapFrontUrls[handleGetEnvironment()]}/login`;
+};

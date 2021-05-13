@@ -45,7 +45,7 @@ const Login = () => {
 			</ButtonGoogleContainer>
 
 			<TextInfo size={14}>O si prefieres inicia con tu cuenta Spec</TextInfo>
-			<form autoComplete="off">
+			<form autoComplete="on">
 				<TextInput
 					type="email"
 					name="email"

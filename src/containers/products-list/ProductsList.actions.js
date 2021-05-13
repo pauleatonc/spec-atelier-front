@@ -3,11 +3,13 @@ import {
 	getProductById,
 	getProducts,
 	updateDownloadsProduct,
+	deleteProduct,
 } from '../../services/products.service';
 import { getItems as getItemsService } from '../../services/items.service';
 import { cleanObjectsAndArrays } from '../../modules/services';
 import { getSections as getServiceSections } from '../../services/sections.service';
 import { getBrands as getServiceBrands } from '../../services/brands.service';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_PRODUCTS_ERROR = 'GET_PRODUCTS_ERROR';
@@ -27,6 +29,10 @@ export const SET_SELECTED_ALL = 'SET_SELECTED_ALL';
 export const SET_FILTERS = 'SET_FILTERS';
 
 export const CLEAN_PRODUCT_LIST_STORE = 'CLEAN_PRODUCT_LIST_STORE';
+
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
+export const DELETE_PRODUCT_ERROR = 'DELETE_PRODUCT_ERROR';
 
 export const cleanStoreProductList = () => (dispatch) =>
 	dispatch(onActionCreator(CLEAN_PRODUCT_LIST_STORE));
@@ -122,4 +128,30 @@ export const updateDownloads = (stat, productId) => (dispatch) => {
 		(response) => response,
 		(error) => console.error(error),
 	);
+};
+
+export const onDeleteProduct = (productId) => async (dispatch, getState) => {
+	try {
+		const { filters } = getState().productsList;
+		dispatch(onActionCreator(DELETE_PRODUCT));
+		const response = await deleteProduct({ productId });
+		if (response?.status >= 400) {
+			dispatch(
+				onActionCreator(GET_PRODUCT_ERROR, { loading: false, error: true }),
+			);
+			dispatch(
+				onShowAlertSuccess({ message: 'Error al eliminar el producto.' }),
+			);
+			return;
+		}
+
+		dispatch(onActionCreator(DELETE_PRODUCT_SUCCESS));
+		dispatch(
+			onShowAlertSuccess({ message: 'Se eliminó el producto exitosamente.' }),
+		);
+		dispatch(onGetProducts(filters));
+	} catch (error) {
+		dispatch(onActionCreator(DELETE_PRODUCT_ERROR));
+		dispatch(onShowAlertSuccess({ message: 'Error al eliminar el producto.' }));
+	}
 };

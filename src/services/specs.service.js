@@ -146,3 +146,15 @@ export const downloadBudged = factoryService(({ specID, userID }) =>
 		`${API_BASE_URL}/users/${userID}/project_specs/${specID}/download_budget`,
 	),
 );
+
+/**
+ * update project configuration
+ */
+
+export const updateProjectConfig = factoryService(
+	({ specID, project_config, userID }) =>
+		postJsonRequest(
+			`${API_BASE_URL}/users/${userID}/projects/${specID}/project_configs`,
+			{ project_config },
+		),
+);

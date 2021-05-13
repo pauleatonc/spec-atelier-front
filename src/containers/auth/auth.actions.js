@@ -51,17 +51,23 @@ export const loginAction = data => async dispatch => {
 /**
  * Logout action
  */
-export const logoutAction = data => async dispatch => {
-  try {
-    await logOut(data);
-  } finally {
-    deleteLocalStorage('token');
-    deleteLocalStorage('userID');
-    dispatch(onActionCreator(LOG_OUT, {
-      isLogin: false,
-      user: undefined,
-    }));
-  }
+export const logoutAction = data => dispatch => {
+  return new Promise((resolve, reject) => {
+    try {
+      logOut(data).then(() => {
+        deleteLocalStorage('token');
+        deleteLocalStorage('userID');
+        dispatch(onActionCreator(LOG_OUT, {
+          isLogin: false,
+          user: undefined,
+        }));
+        resolve('done');
+      });
+    } catch (error) {
+      reject(error);
+    }
+
+  })
 };
 
 /** 

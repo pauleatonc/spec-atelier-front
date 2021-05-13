@@ -1,3 +1,5 @@
+import { setLocalStorage } from '../helpers/localstorage.helper';
+
 import cancellationSingleton from './cancellation';
 
 /**
@@ -9,7 +11,14 @@ export const factoryService = (callback) => {
 	return (serviceArgs, actionType = null) => {
 		setTimeout(() => cancellation.register(actionType), 0);
 
-		return callback(serviceArgs).catch((error) => {
+		return callback(serviceArgs)
+		.then(response => {
+			if(response?.status === 401) {
+				setLocalStorage({ key: 'responseStatus', value: '401'});
+			} 
+			return response;
+		})
+		.catch((error) => {
 			throw error.toString();
 		});
 	};

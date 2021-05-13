@@ -114,6 +114,7 @@ export const BlockDotsIcon = styled.img`
 export const BlockImage = styled.section`
   display: flex;
   width: 98px;
+  padding: 10px;
 `;
 
 export const BlockContent = styled.section`
@@ -273,6 +274,14 @@ export const ProductSystem = styled.p`
 `;
 
 export const ProductReference = styled.p`
+  color: ${COLOR_MINE_SHAFT};
+  font-family: Lato;
+  font-size: 11px;
+  letter-spacing: 1px;
+  line-height: 1.6;
+`;
+
+export const ProductBrand = styled.p`
   color: ${COLOR_MINE_SHAFT};
   font-family: Lato;
   font-size: 11px;
