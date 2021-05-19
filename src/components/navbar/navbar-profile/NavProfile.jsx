@@ -9,6 +9,7 @@ import {
 	Option,
 	Separator,
 	ProfilePictureContainer,
+	ProfilePictureImage,
 } from './NavProfile.styles';
 
 const NavProfile = () => {
@@ -27,7 +28,10 @@ const NavProfile = () => {
 			>
 				<ProfilePictureContainer>
 					{user?.profile_image?.urls ? (
-						<img src={user?.profile_image?.urls.thumb} alt="profile icon" />
+						<ProfilePictureImage
+							src={user?.profile_image?.urls.original}
+							alt="profile icon"
+						/>
 					) : (
 						<i className="fas fa-user-circle" />
 					)}

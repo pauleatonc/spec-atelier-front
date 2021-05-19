@@ -28,10 +28,12 @@ export const SHADOW_GREY =
 // Media Queries
 export const MAX_SCREEN_SMALL = 768;
 export const MAX_SCREEN_MEDIUM = 1080;
+export const STANDAR_MEDIUM = 992;
 export const MEDIA_QUERY_SMALL = `@media (max-width: ${MAX_SCREEN_SMALL}px)`;
-export const MEDIA_QUERY_MEDIUM = `@media (min-width: ${
-	MAX_SCREEN_SMALL + 1
-}px) and (max-width: ${MAX_SCREEN_MEDIUM}px)`;
+export const MEDIA_QUERY_MEDIUM = `@media (min-width: ${MAX_SCREEN_SMALL + 1
+	}px) and (max-width: ${MAX_SCREEN_MEDIUM}px)`;
+
+export const MEDIA_QUERY_STANDAR_MEDIUM = `@media (max-width: ${STANDAR_MEDIUM}px)`;
 
 // Navbar
 export const NAVBAR_HEIGHT = '64px';

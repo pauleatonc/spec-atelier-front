@@ -53,12 +53,6 @@ const SliderImages = ({ images }) => {
 			{
 				breakpoint: 768,
 				settings: {
-					slidesToShow: 2,
-				},
-			},
-			{
-				breakpoint: 375,
-				settings: {
 					slidesToShow: 1,
 				},
 			},
@@ -67,7 +61,7 @@ const SliderImages = ({ images }) => {
 	return (
 		<div className="slide">
 			<div className="slide__inner">
-				<h1 className="slide__inner__title">Principales empresas</h1>
+				<h1 className="slide__inner__title">Principales colaboradores</h1>
 				<Slider {...settings}>{handlePrintImages(images)}</Slider>
 			</div>
 		</div>

@@ -5,7 +5,6 @@ import ButtonGoogleLogin from '../../../components/buttons/ButtonGoogle';
 
 import {
 	Container,
-	Content,
 	HeaderText,
 	RegisterLink,
 	RegisterText,
