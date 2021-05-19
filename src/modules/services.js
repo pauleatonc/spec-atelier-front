@@ -1,4 +1,6 @@
-import { setLocalStorage } from '../helpers/localstorage.helper';
+import { setLocalStorage, getLocalStorage } from '../helpers/localstorage.helper';
+import { redirectToProjectsWhenIsLogin } from '../helpers/redirect.helper';
+
 
 import cancellationSingleton from './cancellation';
 
@@ -12,9 +14,14 @@ export const factoryService = (callback) => {
 		setTimeout(() => cancellation.register(actionType), 0);
 
 		return callback(serviceArgs)
-		.then(response => {
-			if(response?.status === 401) {
-				setLocalStorage({ key: 'responseStatus', value: '401'});
+		.then(({ response, status }) => {
+			if(status === 401) {
+				const responseStatus = getLocalStorage('responseStatus');
+				if(!responseStatus) {
+					setLocalStorage({ key: 'responseStatus', value: '401' });
+					redirectToProjectsWhenIsLogin();
+				}
+
 			} 
 			return response;
 		})
