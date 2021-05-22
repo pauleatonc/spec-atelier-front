@@ -8,7 +8,6 @@ import {
 	uploadProductDocuments,
 } from '../../services/products.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
-import { onGetSpecProducts } from '../spec-products/SpecProducts.actions';
 import { setFilters } from '../products-list/ProductsList.actions';
 
 export const GET_SPEC_PRODUCTS_SYSTEMS = 'GET_SPEC_PRODUCTS_SYSTEMS';
@@ -92,7 +91,6 @@ export const onCreateSpecProduct = ({ documents, images }) => async (
 		return batch(() => {
 			dispatch(onActionCreator(CREATE_SPEC_PRODUCT_SUCCESS));
 			dispatch(onShowAlertSuccess({ message: 'Producto creado exitosamente' }));
-			dispatch(onGetSpecProducts());
 			dispatch(
 				setFilters({
 					...productFilters,

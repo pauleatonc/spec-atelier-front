@@ -5,7 +5,6 @@ import ButtonGoogleLogin from '../../../components/buttons/ButtonGoogle';
 
 import {
 	Container,
-	Content,
 	HeaderText,
 	RegisterLink,
 	RegisterText,
@@ -15,12 +14,18 @@ import {
 } from '../Auth.styles';
 import { TextInput, Button } from '../../../components/SpecComponents';
 import { loginAction } from '../auth.actions';
+import {
+	deleteLocalStorage,
+} from '../../../helpers/localstorage.helper';
 
 const Login = () => {
 	const { state } = useLocation();
 	const [user, setUser] = useState({ password: '', email: state?.email || '' });
 	const dispatch = useDispatch();
-	const handleSubmit = () => dispatch(loginAction({ user }));
+	const handleSubmit = () => {
+		deleteLocalStorage('responseStatus');
+		dispatch(loginAction({ user }));
+	} 
 	const onChangeUser = ({ target: { name, value } }) =>
 		setUser({ ...user, [name]: value });
 

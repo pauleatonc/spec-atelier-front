@@ -19,6 +19,7 @@ export const initialState = {
   error: '',
   sended: false,
   status: false,
+  isAutoLogout: false
 };
 
 const authReducer = (state = initialState, action = {}) => {
@@ -28,6 +29,7 @@ const authReducer = (state = initialState, action = {}) => {
         ...state,
         isLogin: action.payload.isLogin,
         user: action.payload.user,
+        isAutoLogout: false
       };
     case GOOGLE_LOG_IN:
       return {
@@ -52,6 +54,7 @@ const authReducer = (state = initialState, action = {}) => {
         ...state,
         isLogin: action.payload.isLogin,
         user: action.payload.user,
+        isAutoLogout: action.payload.isAutoLogout
       };
     }
     case REGISTRATION:

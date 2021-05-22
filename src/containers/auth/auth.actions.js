@@ -70,6 +70,20 @@ export const logoutAction = data => dispatch => {
   })
 };
 
+/**
+ * Logout action
+ */
+ export const autoLogout = () => dispatch => {
+  deleteLocalStorage('token');
+  deleteLocalStorage('userID');
+  dispatch(onActionCreator(LOG_OUT, {
+    isLogin: false,
+    user: undefined,
+    isAutoLogout: true
+  }));
+};
+
+
 /** 
  * Register on pp
 */
