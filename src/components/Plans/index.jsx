@@ -15,6 +15,7 @@ const Plans = ({ dataPlans, title }) => {
 					subtitle={plan.subtitle}
 					itemsInfo={plan.info}
 					footerInfo={plan.footer}
+					onClick={plan.onClick}
 				/>
 			))}
 		</Container>
