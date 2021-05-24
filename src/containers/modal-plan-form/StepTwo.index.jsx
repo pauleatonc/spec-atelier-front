@@ -10,7 +10,7 @@ import closeSource from '../../assets/images/icons/close.svg';
 import { CloseIcon } from '../profile-change-picture/ProfileChangePicture.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
-import { onHideModal, sendContactData } from './actions';
+import { onHideModalStepTwo, sendContactData } from './actions';
 import {
 	Container,
 	ButtonCloseContainer,
@@ -37,7 +37,7 @@ const PlanFormStepTwo = () => {
 	const dispatch = useDispatch();
 
 	const { onClose: handleClose, onExiting: handleExiting } = useModal({
-		closeCallback: () => dispatch(onHideModal()),
+		closeCallback: () => dispatch(onHideModalStepTwo()),
 	});
 
 	const FormContactSchema = Yup.object().shape({
@@ -72,7 +72,7 @@ const PlanFormStepTwo = () => {
 				<ButtonCloseContainer>
 					<CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
 				</ButtonCloseContainer>
-				<StepsContainer mBottom="90">
+				<StepsContainer mBottom="90" mobileMBottom="48">
 					<Step>
 						<StepNumber>1</StepNumber>
 						<StepText>Plan</StepText>
@@ -111,7 +111,7 @@ const PlanFormStepTwo = () => {
 								value={values.phone}
 							/>
 						</ContainerInputs>
-						<ContainerInputs>
+						<ContainerInputs textAreaContainer>
 							<InputForm
 								name="user_company_name"
 								placeholder="Nombre de la empresa"

@@ -64,7 +64,7 @@ const PlanForm = () => {
 				<ButtonCloseContainer>
 					<CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
 				</ButtonCloseContainer>
-				<StepsContainer mBottom="70">
+				<StepsContainer mBottom="70" mobileMBottom="48">
 					<Step activeStep>
 						<StepNumber>1</StepNumber>
 						<StepText>Plan</StepText>

@@ -5,6 +5,7 @@ import { postPlanContact } from '../../services/plans.service';
 
 export const SHOW_MODAL_STEP_ONE = 'SHOW_MODAL_STEP_ONE';
 export const SHOW_MODAL_STEP_TWO = 'SHOW_MODAL_STEP_TWO';
+export const HIDE_MODAL_STEP_TWO = 'HIDE_MODAL_STEP_TWO';
 export const SHOW_SUCCESS_MODAL = 'SHOW_SUCCESS_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
@@ -14,6 +15,9 @@ export const onShowModalStepTwo = (itemsTotal) => (dispatch) => { dispatch(onAct
 
 export const onHideModal = () => (dispatch) =>
     dispatch(onActionCreator(HIDE_MODAL));
+
+export const onHideModalStepTwo = () => (dispatch) =>
+    dispatch(onActionCreator(HIDE_MODAL_STEP_TWO));
 
 export const sendContactData = (params) => dispatch => {
     postPlanContact(params).then((response) => {
