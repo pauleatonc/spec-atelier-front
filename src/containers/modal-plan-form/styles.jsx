@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
 	COLOR_WHITE,
-	MEDIA_QUERY_STANDAR_MEDIUM,
+	MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
@@ -11,7 +11,7 @@ export const Container = styled.section`
 	flex-wrap: wrap;
 	background-color: ${COLOR_WHITE};
 	max-height: 566px;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		max-width: ${({ isModalSuccess }) => (isModalSuccess ? '380px' : '100%')};
 		max-height: 100%;
 	}
@@ -31,7 +31,7 @@ export const DetailPlanContainer = styled.div`
 	width: 100%;
 	padding: 0 65px 125px 78px;
 	justify-content: space-between;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		flex-wrap: wrap;
 		justify-content: center;
 		padding: 0 36px 50px 36px;
@@ -42,7 +42,7 @@ export const PlanDescription = styled.div`
 	display: flex;
 	flex-direction: column;
 	max-width: 265px;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		max-width: 100%;
 		width: 100%;
 		margin-bottom: 52px;
@@ -109,7 +109,7 @@ export const PlanCostContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-end;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		align-items: center;
 	}
 `;
@@ -120,7 +120,7 @@ export const ContainerInputCost = styled.div`
 	border-radius: 15px;
 	border: solid 1px #e5e5e5;
 	margin-bottom: 40px;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		flex-direction: column;
 		height: 210px;
 		width: 100%;
@@ -135,7 +135,7 @@ export const InputCostContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 270px;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		flex: 1;
 	}
 `;
@@ -150,7 +150,7 @@ export const Cost = styled.div`
 	padding-right: 30px;
 	text-align: right;
 	justify-content: center;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		width: 100%;
 		height: 90px;
 		border-left: none;
@@ -204,7 +204,7 @@ export const StepsContainer = styled.div`
 	width: 100%;
 	margin-bottom: ${({ mBottom }) => `${mBottom}px`};
 	padding: 0 65px 0 78px;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		padding: 0 36px;
 		align-items: flex-start;
 		margin-bottom: ${({ mobileMBottom = '0' }) => `${mobileMBottom}px`};
@@ -216,7 +216,7 @@ export const Step = styled.div`
 	align-items: center;
 	margin-right: 46px;
 	opacity: ${({ activeStep }) => (activeStep ? '1' : '0.49')};
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		flex-direction: column;
 		justify-content: center;
 		margin-right: 35px;
@@ -241,7 +241,7 @@ export const StepNumber = styled.div`
 	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		margin-bottom: 7px;
 	}
 `;
@@ -261,7 +261,7 @@ export const TitleForm = styled.h1`
 	text-align: center;
 	color: #5a5a5a;
 	margin-bottom: 8px;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		display: none;
 	}
 `;
@@ -272,7 +272,7 @@ export const SubtitleForm = styled.h3`
 	text-align: center;
 	color: #5a5a5a;
 	margin-bottom: 56px;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		display: none;
 	}
 `;
@@ -284,7 +284,7 @@ export const FormPlan = styled.form`
 	flex-wrap: wrap;
 	justify-content: space-between;
 	margin-bottom: 45px;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
@@ -297,7 +297,7 @@ export const ContainerInputs = styled.div`
 	max-width: 350px;
 	display: flex;
 	flex-direction: column;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		width: 100%;
 		align-items: center;
 		justify-content: center;
@@ -324,7 +324,7 @@ export const InputForm = styled.input`
 		outline: none;
 	}
 
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		margin-bottom: 13px;
 		width: 100%;
 		max-width: 300px;
@@ -346,7 +346,7 @@ export const TextAreaForm = styled.textarea`
 		outline: none;
 	}
 
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
+	${MEDIA_QUERY_SMALL} {
 		width: 100%;
 		max-width: 300px;
 	}
