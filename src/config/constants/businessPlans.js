@@ -30,9 +30,9 @@ export const BUSINESS_PLANS = [
 		title: 'Plan variable 100%',
 		onClick: onShowModalStepOne('variable_plan'),
 		subtitle:
-			'Paga solamente cuando se descargue la especificación de tu solución.',
+			'Paga solamente cuando se descargue la especificación de tu solución.',
 		footer:
-			'* Se cobra cada vez que se descargue una especicación, indistintamente si el proyecto ya había sido descargado previamente.',
+			'* Se cobra cada vez que se descargue una especificación, indistintamente si el proyecto ya había sido descargado previamente.',
 		cost: '$20.00',
 		labelCost: '¿Cuántas descargas de especificaciones esperas tener?',
 		collectionPeriod: 'Fijo/Mes',
