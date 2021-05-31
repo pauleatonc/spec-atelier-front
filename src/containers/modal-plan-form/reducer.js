@@ -10,7 +10,7 @@ const initialState = {
     loading: true,
     stepOne: { show: false },
     stepTwo: { show: false },
-    showSuccessModal: true,
+    showSuccessModal: false,
     plan_type: 'fixed_plan',
     items_total: 1,
     user_name: '',
