@@ -10,7 +10,7 @@ import closeSource from '../../assets/images/icons/close.svg';
 import { CloseIcon } from '../profile-change-picture/ProfileChangePicture.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
-import { onHideModalStepTwo, sendContactData } from './actions';
+import { onHideModalStepTwo, sendContactData, onHideModal } from './actions';
 import {
 	Container,
 	ButtonCloseContainer,
@@ -32,13 +32,22 @@ const PlanFormStepTwo = () => {
 	const {
 		plan_type,
 		items_total,
+		user_name,
+		email,
+		phone,
+		user_company_name,
+		message,
 		stepTwo: { show },
 	} = useSelector((state) => state.modalPlanForm);
 	const dispatch = useDispatch();
 
-	const { onClose: handleClose, onExiting: handleExiting } = useModal({
-		closeCallback: () => dispatch(onHideModalStepTwo()),
-	});
+	const initialValues = {
+		user_name,
+		email,
+		phone,
+		user_company_name,
+		message,
+	};
 
 	const FormContactSchema = Yup.object().shape({
 		user_name: Yup.string().required('Required'),
@@ -47,14 +56,15 @@ const PlanFormStepTwo = () => {
 		user_company_name: Yup.string().required('Required'),
 	});
 
-	const { handleChange, handleSubmit, values, isValid, dirty } = useFormik({
-		initialValues: {
-			user_name: '',
-			email: '',
-			phone: '',
-			user_company_name: '',
-			message: '',
-		},
+	const {
+		handleChange,
+		handleSubmit,
+		values,
+		isValid,
+		dirty,
+		resetForm,
+	} = useFormik({
+		initialValues,
 		onSubmit: (vals) => {
 			const params = {
 				...vals,
@@ -62,9 +72,16 @@ const PlanFormStepTwo = () => {
 				items_total,
 			};
 			dispatch(sendContactData(params));
+			resetForm({});
 		},
 		validationSchema: FormContactSchema,
 	});
+
+	const { onClose: handleClose, onExiting: handleExiting } = useModal({
+		closeCallback: () => dispatch(onHideModal(resetForm)),
+	});
+
+	const handleBack = () => dispatch(onHideModalStepTwo());
 
 	return (
 		<ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
@@ -127,6 +144,13 @@ const PlanFormStepTwo = () => {
 						</ContainerInputs>
 					</FormPlan>
 					<ContainerButtons>
+						<Button
+							onClick={handleBack}
+							variant={VARIANTS_BUTTON.CANCEL}
+							width="160px"
+						>
+							Atras
+						</Button>
 						<Button
 							disabled={!(isValid && dirty)}
 							onClick={handleSubmit}

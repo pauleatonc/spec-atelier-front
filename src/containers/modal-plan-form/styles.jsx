@@ -10,10 +10,8 @@ export const Container = styled.section`
 	display: flex;
 	flex-wrap: wrap;
 	background-color: ${COLOR_WHITE};
-	max-height: 566px;
 	${MEDIA_QUERY_SMALL} {
 		max-width: ${({ isModalSuccess }) => (isModalSuccess ? '380px' : '100%')};
-		max-height: 100%;
 	}
 `;
 
@@ -23,7 +21,7 @@ export const ButtonCloseContainer = styled.div`
 	padding-right: 30px;
 	display: flex;
 	justify-content: flex-end;
-	margin-bottom: 28px;
+	margin-bottom: ${({ isSuccessModal }) => (isSuccessModal ? '0px' : '28px')};
 `;
 
 export const DetailPlanContainer = styled.div`
@@ -341,6 +339,7 @@ export const TextAreaForm = styled.textarea`
 	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 1px;
+	resize: none;
 
 	:focus-visible {
 		outline: none;
@@ -358,6 +357,10 @@ export const ContainerButtons = styled.div`
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 50px;
+
+	button {
+		margin 0 5px;
+	}
 `;
 
 export const ContainerModalSuccess = styled.div`

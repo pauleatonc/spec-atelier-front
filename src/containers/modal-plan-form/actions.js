@@ -13,15 +13,16 @@ export const onShowModalStepOne = (type) => (dispatch) => { dispatch(onActionCre
 
 export const onShowModalStepTwo = (itemsTotal) => (dispatch) => { dispatch(onActionCreator(SHOW_MODAL_STEP_TWO, { itemsTotal })); }
 
-export const onHideModal = () => (dispatch) =>
+export const onHideModal = (reset) => (dispatch) => {
+    if (reset) reset();
     dispatch(onActionCreator(HIDE_MODAL));
+}
 
 export const onHideModalStepTwo = () => (dispatch) =>
     dispatch(onActionCreator(HIDE_MODAL_STEP_TWO));
 
 export const sendContactData = (params) => dispatch => {
-    postPlanContact(params).then((response) => {
-        console.log(response);
+    postPlanContact(params).then(() => {
         batch(() => {
             dispatch(onHideModal());
             dispatch(onActionCreator(SHOW_SUCCESS_MODAL));

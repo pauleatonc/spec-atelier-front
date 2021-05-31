@@ -10,7 +10,7 @@ const initialState = {
     loading: true,
     stepOne: { show: false },
     stepTwo: { show: false },
-    showSuccessModal: false,
+    showSuccessModal: true,
     plan_type: 'fixed_plan',
     items_total: 1,
     user_name: '',
@@ -41,6 +41,7 @@ const reducer = (state = initialState, { payload, type }) => {
         case HIDE_MODAL_STEP_TWO:
             return {
                 ...state,
+                stepOne: { show: true },
                 stepTwo: { show: false }
             };
         case SHOW_SUCCESS_MODAL:

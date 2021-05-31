@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import useModal from '../../components/layouts/ModalLayout.hooks';
 import iconSuccess from '../../assets/images/businessPlan/icon_phone.svg';
+import closeSource from '../../assets/images/icons/close.svg';
+import { CloseIcon } from '../profile-change-picture/ProfileChangePicture.styles';
 
 import { onHideModal } from './actions';
 import {
@@ -12,6 +14,7 @@ import {
 	IconSuccess,
 	TitleSuccess,
 	TextBodySuccess,
+	ButtonCloseContainer,
 } from './styles';
 
 const ModalSuccess = () => {
@@ -28,6 +31,9 @@ const ModalSuccess = () => {
 			onExiting={handleExiting}
 		>
 			<Container isModalSuccess>
+				<ButtonCloseContainer isSuccessModal>
+					<CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
+				</ButtonCloseContainer>
 				<ContainerModalSuccess>
 					<IconSuccess src={iconSuccess} />
 					<TitleSuccess>¡Muy bien, recibimos tu solicitud!</TitleSuccess>
