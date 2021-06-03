@@ -104,7 +104,7 @@ const PlanFormStepTwo = () => {
 						Conversemos sobre las necesidades de tu empresa.
 					</TitleForm>
 					<SubtitleForm>
-						Déjanos tus datos y en minutos nos contáctaremos.
+						Déjanos tus datos y en minutos nos contactaremos.
 					</SubtitleForm>
 					<FormPlan>
 						<ContainerInputs>
@@ -149,7 +149,7 @@ const PlanFormStepTwo = () => {
 							variant={VARIANTS_BUTTON.CANCEL}
 							width="160px"
 						>
-							Atras
+							Atrás
 						</Button>
 						<Button
 							disabled={!(isValid && dirty)}

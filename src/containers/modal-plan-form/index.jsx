@@ -44,6 +44,7 @@ const PlanForm = () => {
 		plan_type,
 		items_total,
 	} = useSelector((state) => state.modalPlanForm);
+	const isFixedPlan = plan_type === 'fixed_plan';
 	const dispatch = useDispatch();
 	const selectedPlan = BUSINESS_PLANS.find((item) => item.id === plan_type);
 	const {
@@ -57,6 +58,20 @@ const PlanForm = () => {
 			setItemsTotalValue(1);
 		},
 	});
+
+	const getValue = (totalItems) => {
+		let val = 0;
+		if (isFixedPlan) {
+			for (let i = 0; i < parseInt(totalItems, 10); i += 1) {
+				if (i <= 9) val += 10;
+				if (i > 9 && i <= 49) val += 5;
+				if (i > 49) val += 3;
+			}
+		} else {
+			val = totalItems * 0.25;
+		}
+		return `$${val}${val - Math.floor(val) === 0 ? '.00' : ''}`;
+	};
 
 	return (
 		<ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
@@ -101,7 +116,7 @@ const PlanForm = () => {
 									<InputCostLabel>{selectedPlan.labelCost}</InputCostLabel>
 								</InputCostContainer>
 								<Cost>
-									<PlanCost>{selectedPlan.cost}</PlanCost>
+									<PlanCost>{getValue(itemsTotalValue)}</PlanCost>
 									<PlanPeriod>{selectedPlan.collectionPeriod}</PlanPeriod>
 								</Cost>
 							</ContainerInputCost>

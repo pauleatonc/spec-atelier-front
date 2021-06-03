@@ -12,9 +12,8 @@ export const BUSINESS_PLANS = [
 		subtitle:
 			' Por un valor fijo, permite que descarguen tus especificaciones de forma ilimitada.',
 		onClick: onShowModalStepOne('fixed_plan'),
-		cost: '$12.00',
 		labelCost: 'Cantidad de productos para especificar',
-		collectionPeriod: 'Fijo/Mes',
+		collectionPeriod: 'USD/Fijo/Mes',
 		info: [
 			{
 				id: 1,
@@ -27,15 +26,14 @@ export const BUSINESS_PLANS = [
 	{
 		id: 'variable_plan',
 		type: TYPES.PROVIDER,
-		title: 'Plan variable 100%',
+		title: 'Plan Variable 100%',
 		onClick: onShowModalStepOne('variable_plan'),
 		subtitle:
 			'Paga solamente cuando se descargue la especificación de tu solución.',
 		footer:
 			'* Se cobra cada vez que se descargue una especificación, indistintamente si el proyecto ya había sido descargado previamente.',
-		cost: '$20.00',
 		labelCost: '¿Cuántas descargas de especificaciones esperas tener?',
-		collectionPeriod: 'Fijo/Mes',
+		collectionPeriod: 'USD',
 		info: [
 			{ id: 1, text: 'Número ilimitado de productos en la plataforma.' },
 			{ id: 2, text: 'Estadísticas de uso de productos.' },
