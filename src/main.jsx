@@ -12,6 +12,7 @@ import Login from './views/auth/Login';
 import Registration from './views/auth/Registration';
 import RecoverPassword from './views/auth/RecoverPassword';
 import NewPassword from './views/auth/NewPassword';
+import ActAsAnotherUser from './views/ActAsAnotherUser';
 import Products from './views/Products';
 import Projects from './views/Projects';
 import Project from './views/Project';
@@ -53,6 +54,7 @@ const Main = () => {
             <PrivateRoute exact component={Project} path="/projects/project/:id" />
             <PrivateRoute exact component={Profile} path="/profile" />
             <PrivateRoute exact component={Specification} path="/specs/:id" />
+            <PrivateRoute exact component={ActAsAnotherUser} path="/act-as-another-user"/>
             <Redirect to="/projects" />
           </Switch>
         </Router>

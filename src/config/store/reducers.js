@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import loginReducer from '../../reducers/login.reducer';
 import recoverPasswordReducer from '../../reducers/recover_password.reducer';
 import newPasswordReducer from '../../reducers/new_password.reducer';
+import actAsAnotherUserListReducer from '../../containers/act-as-another-user/ActAsAnotherUser.reducer';
 import alertReducer from '../../containers/alert/Alert.reducer';
 import productsListReducer from '../../containers/products-list/ProductsList.reducer';
 import specProductsSectionsReducer from '../../containers/spec-products-sections/SpecProductsSections.reducer';
@@ -29,7 +30,8 @@ import ProfileStatsReducer from '../../containers/profile-stats/ProfileStats.red
 
 export default combineReducers({
 	auth: authReducer,
-	app: appReducer,
+  app: appReducer,
+  actAsAnotherUserList: actAsAnotherUserListReducer,
 	client: clientReducer,
 	clientsList: clientListReducer,
 	clientsImageSlider: clientsImageSliderReducer,

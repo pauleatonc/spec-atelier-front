@@ -1,8 +1,8 @@
 import React from 'react';
-import { Container, SearchContaienr } from './ProductsSearch.styles';
+import { Container, SearchContaienr } from './Search.styles';
 import { SearchBar } from '../../components/SpecComponents';
 
-const ProductsSearch = ({ keyword, onChangeParams }) => {
+const Search = ({ keyword, onChangeParams, placeholder }) => {
 	return (
 		<Container>
 			<SearchContaienr>
@@ -10,7 +10,7 @@ const ProductsSearch = ({ keyword, onChangeParams }) => {
 					name="keyword"
 					justifyContent="center"
 					maxWidth="432px"
-					placeholder="Buscar producto"
+					placeholder={placeholder}
 					value={keyword}
 					onChange={onChangeParams}
 				/>
@@ -19,4 +19,4 @@ const ProductsSearch = ({ keyword, onChangeParams }) => {
 	);
 };
 
-export default ProductsSearch;
+export default Search;

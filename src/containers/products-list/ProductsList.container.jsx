@@ -21,7 +21,7 @@ import { Loading, ErrorMessage } from '../../components/SpecComponents';
 import ProductCard from '../../components/cards/ProductCard';
 import DropdownMenu from '../../components/menus/DropdownMenu';
 import ProductsListSeeMore from './ProductsListSeeMore';
-import ProductsSearchContainer from '../products-search/ProductsSearch.container';
+import ProductsSearchContainer from '../search/Search.container';
 import ProductsFiltersContainer from '../products-filters/ProductsFilters.container';
 import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
 import {
@@ -32,9 +32,9 @@ import {
 const ProductList = ({
 	extraFilters,
 	withSearch = true,
-	withFilter = true,
-	filterOptionsKey,
-	withoutPadding,
+  withFilter = true,
+  filterOptionsKey,
+  withoutPadding,
 	canAdd,
 	canEdit,
 	canDelete,
@@ -147,8 +147,8 @@ const ProductList = ({
 			dispatch(setSelectedAll(true));
 		} else {
 			dispatch(setSelectedAll(false));
-		}
-		dispatch(onGetProducts(filters));
+    }
+    dispatch(onGetProducts(filters));
 	}, [filtersRef.current]);
 
 	useEffect(() => {
@@ -163,7 +163,8 @@ const ProductList = ({
 			{withSearch && (
 				<ProductsSearchContainer
 					keyword={keyword}
-					onChangeParams={onChangeParams}
+          onChangeParams={onChangeParams}
+          placeholder='Buscar producto'
 				/>
 			)}
 			{withFilter && (

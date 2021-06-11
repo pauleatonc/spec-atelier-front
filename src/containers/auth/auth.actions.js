@@ -5,6 +5,9 @@ import {
   deleteLocalStorage,
 } from '../../helpers/localstorage.helper';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
+import { impersonateUser } from '../../services/users.service';
+import { getUsers } from '../act-as-another-user/ActAsAnotherUser.actions';
+import { clearProjects } from '../projects-list/ProjectsList.actions';
 
 /**
  * Contants
@@ -20,6 +23,8 @@ export const RECOVER_PASSWORD = 'RECOVER_PASSWORD';
 export const RECOVER_PASSWORD_ERROR = 'RECOVER_PASSWORD_ERROR';
 export const NEW_PASSWORD = 'NEW_PASSWORD';
 export const NEW_PASSWORD_ERROR = 'NEW_PASSWORD_ERROR';
+export const IMPERSONATE_USER_ERROR = 'IMPERSONATE_USER_ERROR'
+export const CLEAR_IMPERSONATED = 'CLEAR_IMPERSONATED';
 
 /**
  * Login action
@@ -61,6 +66,7 @@ export const logoutAction = data => dispatch => {
           isLogin: false,
           user: undefined,
         }));
+        dispatch(clearProjects());
         resolve('done');
       });
     } catch (error) {
@@ -84,7 +90,7 @@ export const logoutAction = data => dispatch => {
 };
 
 
-/** 
+/**
  * Register on pp
 */
 
@@ -177,3 +183,24 @@ export const setNewPassword = ({ token, password }) => async dispatch => {
     });
   };
 };
+
+export const becomeUser = params => async dispatch => {
+  try {
+    const response = await impersonateUser(params);
+    if (response?.status >= 400) dispatch(onActionCreator(IMPERSONATE_USER_ERROR, { loading: false }));
+    const { user } = response;
+    setLocalStorage({ key: 'token', value: user.jwt });
+    setLocalStorage({ key: 'userID', value: user.id });
+    dispatch(onActionCreator(LOG_IN, {
+      isLogin: true,
+      user,
+      loader: true,
+      impersonated: true
+    }));
+    dispatch(getUsers({user_id: user.id}));
+  } catch (error) {
+    dispatch(onActionCreator(IMPERSONATE_USER_ERROR, { error }));
+  }
+};
+
+export const clearImpersonated = () => dispatch => dispatch(onActionCreator(CLEAR_IMPERSONATED))

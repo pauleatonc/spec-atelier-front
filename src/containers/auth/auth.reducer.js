@@ -11,6 +11,7 @@ import {
   RECOVER_PASSWORD_ERROR,
   NEW_PASSWORD,
   NEW_PASSWORD_ERROR,
+  CLEAR_IMPERSONATED
 } from './auth.actions';
 
 export const initialState = {
@@ -19,7 +20,8 @@ export const initialState = {
   error: '',
   sended: false,
   status: false,
-  isAutoLogout: false
+  isAutoLogout: false,
+  impersonated: false
 };
 
 const authReducer = (state = initialState, action = {}) => {
@@ -29,13 +31,21 @@ const authReducer = (state = initialState, action = {}) => {
         ...state,
         isLogin: action.payload.isLogin,
         user: action.payload.user,
-        isAutoLogout: false
+        isAutoLogout: false,
+        impersonated: action.payload.impersonated || false
       };
+    case CLEAR_IMPERSONATED:
+      return {
+        ...state,
+        impersonated: false
+      }
     case GOOGLE_LOG_IN:
       return {
         ...state,
         isLogin: action.payload.isLogin,
         user: action.payload.user,
+        isAutoLogout: false,
+        impersonated: action.payload.impersonated || false
       };
     case LOG_IN_ERROR:
       return {
