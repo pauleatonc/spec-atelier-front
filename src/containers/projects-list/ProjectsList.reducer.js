@@ -5,6 +5,7 @@ import {
   ADD_PROJECT_TO_LIST,
   DELETE_PROJECT,
   DELETE_PROJECT_ERROR,
+  CLEAR_PROJECTS
 } from './ProjectsList.actions';
 
 const sortFilters = [
@@ -45,6 +46,10 @@ const projectsReducer = (state = initialProjectState, { payload, type }) => {
         params: payload?.params,
         loading: false,
         error: undefined,
+      };
+    case CLEAR_PROJECTS:
+      return {
+        ...initialProjectState
       };
     case GET_MORE_PROJECTS:
       const newProjects = payload?.projects?.list || [];

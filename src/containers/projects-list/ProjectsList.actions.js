@@ -8,6 +8,7 @@ export const GET_PROJECTS_ERROR = 'GET_PROJECTS_ERROR';
 export const ADD_PROJECT_TO_LIST = 'ADD_PROJECT_TO_LIST';
 export const DELETE_PROJECT = 'DELETE_PROJECT';
 export const DELETE_PROJECT_ERROR = 'DELETE_PROJECT_ERROR';
+export const CLEAR_PROJECTS = 'CLEAR_PROJECTS';
 
 export const getMyProjects = params => async (dispatch, getState) => {
   try {
@@ -32,7 +33,6 @@ export const getMoreProjects = params => async (dispatch, getState) => {
 export const deleteProject = ({ id }) => async (dispatch, getState) => {
   try {
     const { user } = getState().auth;
-    const response = await deleteProjectService({ userId: user.id, projectId: id });
     dispatch(onActionCreator(DELETE_PROJECT, { projectId: id }));
   } catch (error) {
     dispatch(onShowAlertSuccess({ message: "Error al eliminar el proyecto"}))
@@ -42,3 +42,4 @@ export const deleteProject = ({ id }) => async (dispatch, getState) => {
 
 export const addProjectToList = project => dispatch => dispatch(onActionCreator(ADD_PROJECT_TO_LIST,  { project }));
 
+export const clearProjects = () => dispatch => dispatch(onActionCreator(CLEAR_PROJECTS));
