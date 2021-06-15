@@ -2,6 +2,13 @@ import styled from 'styled-components';
 import {
 	COLOR_WHITE,
 	MEDIA_QUERY_SMALL,
+	CARIBBEAN_GREEN,
+	SILVER,
+	MERCURY,
+	ALTO,
+	ALABASTER,
+	SCORPION,
+	GALLERY,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
@@ -51,7 +58,7 @@ export const Title = styled.h1`
 	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
-	color: #00bea7;
+	color: ${CARIBBEAN_GREEN};
 	margin-bottom: 16px;
 `;
 
@@ -66,7 +73,7 @@ export const Subtitle = styled.h2`
 export const Separator = styled.div`
 	height: 1px;
 	width: 100%;
-	background-color: #c9c9c9;
+	background-color: ${SILVER};
 	margin-bottom: 21px;
 `;
 
@@ -85,7 +92,7 @@ export const ItemInfo = styled.div`
 
 export const IconCheck = styled.i`
 	font-size: 12px;
-	color: #00bfa7;
+	color: ${CARIBBEAN_GREEN};
 	margin-right: 10px;
 `;
 
@@ -116,7 +123,7 @@ export const ContainerInputCost = styled.div`
 	height: 120px;
 	display: flex;
 	border-radius: 15px;
-	border: solid 1px #e5e5e5;
+	border: solid 1px ${MERCURY};
 	margin-bottom: 40px;
 	${MEDIA_QUERY_SMALL} {
 		flex-direction: column;
@@ -143,8 +150,8 @@ export const Cost = styled.div`
 	display: flex;
 	flex-direction: column;
 	border-radius: 5px 15px 15px 5px;
-	border-left: solid 1px #e5e5e5;
-	background-color: #f8f8f8;
+	border-left: solid 1px ${MERCURY};
+	background-color: ${ALABASTER};
 	padding-right: 30px;
 	text-align: right;
 	justify-content: center;
@@ -152,7 +159,7 @@ export const Cost = styled.div`
 		width: 100%;
 		height: 90px;
 		border-left: none;
-		border-top: solid 1px #e5e5e5;
+		border-top: solid 1px ${MERCURY};
 		padding: 0;
 		text-align: center;
 		justify-content: center;
@@ -177,7 +184,7 @@ export const InputCost = styled.input`
 	width: 85px;
 	height: 36px;
 	border-radius: 21.5px;
-	border: solid 1px #dbdbdb;
+	border: solid 1px ${ALTO};
 	text-align: center;
 	margin-bottom: 20px;
 	font-family: Lato;
@@ -257,7 +264,7 @@ export const TitleForm = styled.h1`
 	font-size: 17px;
 	font-weight: bold;
 	text-align: center;
-	color: #5a5a5a;
+	color: ${SCORPION};
 	margin-bottom: 8px;
 	${MEDIA_QUERY_SMALL} {
 		display: none;
@@ -268,7 +275,7 @@ export const SubtitleForm = styled.h3`
 	font-family: Lato;
 	font-size: 12px;
 	text-align: center;
-	color: #5a5a5a;
+	color: ${SCORPION};
 	margin-bottom: 56px;
 	${MEDIA_QUERY_SMALL} {
 		display: none;
@@ -310,7 +317,7 @@ export const InputForm = styled.input`
 	width: 350px;
 	height: 35px;
 	border-radius: 21.5px;
-	border: solid 1px #eeeeee;
+	border: solid 1px ${GALLERY};
 	padding-left: 27px;
 	margin-bottom: ${({ withoutMarginBottom }) =>
 		withoutMarginBottom ? '0px' : '25px'};
@@ -332,7 +339,7 @@ export const InputForm = styled.input`
 export const TextAreaForm = styled.textarea`
 	width: 350px;
 	border-radius: 21.5px;
-	border: solid 1px #eeeeee;
+	border: solid 1px ${GALLERY};
 	padding-left: 27px;
 	padding-top: 9px;
 	flex: 1;
@@ -384,7 +391,7 @@ export const TitleSuccess = styled.h1`
 	font-size: 17px;
 	font-weight: bold;
 	text-align: center;
-	color: #5a5a5a;
+	color: ${SCORPION};
 	margin-bottom: 10px;
 `;
 
@@ -392,5 +399,5 @@ export const TextBodySuccess = styled.p`
 	font-family: Lato;
 	font-size: 14px;
 	text-align: center;
-	color: #5a5a5a;
+	color: ${SCORPION};
 `;
