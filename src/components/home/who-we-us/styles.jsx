@@ -90,7 +90,13 @@ export const BannerSlider = styled.div`
 	box-shadow: 0 2px 4px 0 rgba(201, 198, 198, 0.5);
 	color: #ffffff;
 	text-align: center;
+	overflow: hidden;
 	${MEDIA_QUERY_STANDAR_MEDIUM} {
 		height: 290px;
+	}
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 `;

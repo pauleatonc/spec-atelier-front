@@ -2,6 +2,9 @@ import React from 'react';
 import Slider from 'react-slick';
 
 import { DATA } from './constants';
+import WALTER_SENTENCE from './images/walter_sentence.png';
+import JOIN_UP from './images/join_up.png';
+import BUILDING_AND_INNVOVATING from './images/building_and_innovating.png';
 import {
 	Container,
 	Section,
@@ -28,13 +31,25 @@ const WhoWeUs = () => {
 			<BannerSliderContainer>
 				<Slider {...settings}>
 					<BannerSlider>
-						<h3>1</h3>
+						<img
+							className="container__images_content__image"
+							src={WALTER_SENTENCE}
+							alt="walter sentence"
+						/>
 					</BannerSlider>
 					<BannerSlider>
-						<h3>2</h3>
+						<img
+							className="container__images_content__image"
+							src={JOIN_UP}
+							alt="join up"
+						/>
 					</BannerSlider>
 					<BannerSlider>
-						<h3>3</h3>
+						<img
+							className="container__images_content__image"
+							src={BUILDING_AND_INNVOVATING}
+							alt="building and innovating"
+						/>
 					</BannerSlider>
 				</Slider>
 			</BannerSliderContainer>
