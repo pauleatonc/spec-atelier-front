@@ -40,6 +40,7 @@ const MultiSelect = (props) => {
 		onSubmit,
 		optionAll,
 		changeOnCLose,
+		offsetY,
 	} = props;
 	const {
 		anchor,
@@ -136,7 +137,7 @@ const MultiSelect = (props) => {
 			<Dropdown
 				anchorRef={anchor}
 				maxHeight="212px"
-				offset={{ x: 0, y: 14 }}
+				offset={{ x: 0, y: offsetY || 14 }}
 				open={Boolean(anchor)}
 				width={width || anchorWidth}
 				onClose={handleCloseBehaviour}
@@ -165,7 +166,10 @@ const MultiSelect = (props) => {
 				})}
 				{showButtons && (
 					<Actions>
-						<Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY} onClick={handleClickClean}>
+						<Button
+							variant={VARIANTS_BUTTON.CANCEL_SECONDARY}
+							onClick={handleClickClean}
+						>
 							Borrar
 						</Button>
 						<Button variant={variant} onClick={handleClickSubmit}>

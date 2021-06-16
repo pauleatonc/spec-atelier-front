@@ -71,9 +71,12 @@ export const onCreateSpecProduct = ({ documents, images }) => async (
 			section: stepOne.section.map(mapId),
 			item: stepOne.item.map(mapId),
 			system: stepOne.system.map(mapId),
-			description: stepTwo.description,
+			long_desc: stepTwo.long_desc,
+			short_desc: stepTwo.short_desc,
 			brand: stepTwo.brand.label,
+			unit: stepTwo.unit,
 			price: stepTwo.price,
+			reference: stepTwo.reference
 		};
 		const response = await createProduct(payload);
 
