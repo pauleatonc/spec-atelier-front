@@ -86,7 +86,7 @@ const ProductsHeader = () => {
 				/>
 				<ProfilePhoto>
 					<Photo
-						src={user.profile_image?.urls.medium || PROFILE_PHOTO_DEFAULT}
+						src={user.profile_image?.urls.original || PROFILE_PHOTO_DEFAULT}
 					/>
 					<IconPhoto onClick={handleEditProfilePicture}>
 						<img src={ICON_CAMERA} alt="camara" />
