@@ -17,7 +17,7 @@ const NavProfile = () => {
 	const { user } = useSelector((state) => state.profile);
 	const togglOptions = () => setShowOtions(!showOptions);
 	const dispatch = useDispatch();
-	const onLogout = () => dispatch(logoutAction());
+  const onLogout = () => dispatch(logoutAction());
 	return (
 		<>
 			<ProfileButton
@@ -42,6 +42,12 @@ const NavProfile = () => {
 					<Link to="/profile" style={{ textDecoration: 'none' }}>
 						<Option>Perfil</Option>
 					</Link>
+          <Separator />
+          { (user?.superadmin_role || user?.impersonated) && (
+            <Link to="/act-as-another-user" style={{ textDecoration: 'none' }}>
+						  <Option>Suplantar Usuario</Option>
+					  </Link>)
+          }
 					<Separator />
 					<Option onClick={onLogout}>Cerrar sesión</Option>
 				</OptionsContent>

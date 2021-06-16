@@ -58,7 +58,7 @@ export const deleteJsonRequest = factoryRequest((url, payload, options) => {
 		url,
 		{ body, headers, method: 'DELETE' },
 		options,
-	).then((response) => response.json());
+	).then((response) =>  ({ response: response.json(), status: response?.status }));
 });
 
 /**
@@ -71,7 +71,7 @@ export const getJsonRequest = factoryRequest((url, _, options) => {
 		url,
 		{ headers, method: 'GET' },
 		options,
-	).then((response) => response.json());
+	).then((response) => ({ response: response.json(), status: response?.status }));
 });
 
 /**
@@ -85,7 +85,7 @@ export const patchJsonRequest = factoryRequest((url, payload, options) => {
 		url,
 		{ body, headers, method: 'PATCH' },
 		options,
-	).then((response) => response.json());
+	).then((response) => ({ response: response.json(), status: response?.status }));
 });
 
 
@@ -110,7 +110,7 @@ export const patchJsonRequest = factoryRequest((url, payload, options) => {
 		url,
 		{ body: formData, headers, method: 'PATCH' },
 		options,
-	).then((response) => response.json());
+	).then((response) => ({ response: response.json(), status: response?.status }));
 });
 
 /**
@@ -135,7 +135,7 @@ export const postFormRequest = factoryRequest((url, payload, options) => {
 		url,
 		{ headers, body: formData, method: 'POST' },
 		options,
-	).then((response) => response.json());
+	).then((response) => ({ response: response.json(), status: response?.status }));
 });
 
 /**
@@ -149,7 +149,7 @@ export const postJsonRequest = factoryRequest((url, payload, options) => {
 		url,
 		{ body, headers, method: 'POST' },
 		options,
-	).then((response) => response.json());
+	).then((response) => ({ response: response.json(), status: response?.status }));
 });
 
 /**
@@ -163,7 +163,7 @@ export const putJsonRequest = factoryRequest((url, payload, options) => {
 		url,
 		{ body, headers, method: 'PUT' },
 		options,
-	).then((response) => response.json());
+	).then((response) => ({ response: response.json(), status: response?.status }));
 });
 
 /**
@@ -175,5 +175,5 @@ export const getBlobRequest = factoryRequest((url, _, options) => {
 		url,
 		{ headers, method: 'GET' },
 		options,
-	).then((response) => response.blob());
+	).then((response) => ({ response: response.blob(), status: response?.status }));
 });

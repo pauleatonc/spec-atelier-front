@@ -7,6 +7,7 @@ import { Loading, ErrorMessage } from '../../components/SpecComponents';
 
 const ProjectsList = () => {
   const { projects, error, loading, params } = useSelector(state => state.projectsList);
+  const { user } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const history = useHistory();
   const goToSpecification = specID => () => history.push(`/specs/${specID}`);
@@ -29,9 +30,9 @@ const ProjectsList = () => {
     <div className="projects__inner__body">
       {!!projects.length &&
         projects.map(project => (
-          <ProjectCard 
-            {...project} 
-            key={project.id} 
+          <ProjectCard
+            {...project}
+            key={project.id}
             onClick={goToSpecification(project.project_spec_id)}
             onChangeMenuOption={onChangeMenuOption(project)}
           />
