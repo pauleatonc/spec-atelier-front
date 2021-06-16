@@ -1,6 +1,8 @@
 import { TYPES } from '../../components/Plan/constants';
 import INFORMATION_HEADER_IMAGE from '../../assets/images/businessPlan/img_business_plan_banner.png';
 import INFORMATION_OUR_COMUNITY_IMAGE from '../../assets/images/businessPlan/img_our_community.png';
+import { onShowModalStepOne } from '../../containers/modal-plan-form/actions';
+
 
 export const BUSINESS_PLANS = [
 	{
@@ -8,7 +10,10 @@ export const BUSINESS_PLANS = [
 		type: TYPES.PROVIDER,
 		title: 'Plan Fijo',
 		subtitle:
-			' Por un valor fijo, permite que descarguen tus especificaciones de forma ilimitada.',
+			' Por un valor fijo, permite que descarguen tus especificaciones de forma ilimitada.',
+		onClick: onShowModalStepOne('fixed_plan'),
+		labelCost: 'Cantidad de productos para especificar',
+		collectionPeriod: 'USD/Fijo/Mes',
 		info: [
 			{
 				id: 1,
@@ -21,11 +26,14 @@ export const BUSINESS_PLANS = [
 	{
 		id: 'variable_plan',
 		type: TYPES.PROVIDER,
-		title: 'Plan variable 100%',
+		title: 'Plan Variable 100%',
+		onClick: onShowModalStepOne('variable_plan'),
 		subtitle:
-			'Paga solamente cuando se descargue la especificación de tu solución.',
+			'Paga solamente cuando se descargue la especificación de tu solución.',
 		footer:
-			'* Se cobra cada vez que se descargue una especicación, indistintamente si el proyecto ya había sido descargado previamente.',
+			'* Se cobra cada vez que se descargue una especificación, indistintamente si el proyecto ya había sido descargado previamente.',
+		labelCost: '¿Cuántas descargas de especificaciones esperas tener?',
+		collectionPeriod: 'USD',
 		info: [
 			{ id: 1, text: 'Número ilimitado de productos en la plataforma.' },
 			{ id: 2, text: 'Estadísticas de uso de productos.' },

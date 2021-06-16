@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import {
@@ -19,7 +20,9 @@ import Button from '../buttons/Button';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 import { TYPES } from './constants';
 
-const Plan = ({ type, title, subtitle, itemsInfo, footerInfo }) => {
+const Plan = ({ type, title, subtitle, itemsInfo, footerInfo, onClick }) => {
+	const dispatch = useDispatch();
+	const handleOnClick = () => onClick && dispatch(onClick);
 	return (
 		<Container type={type}>
 			<Descriptor type={type}>
@@ -50,7 +53,7 @@ const Plan = ({ type, title, subtitle, itemsInfo, footerInfo }) => {
 			{!!footerInfo && <FooterInfo>{footerInfo}</FooterInfo>}
 			{type === TYPES.PROVIDER && (
 				<ContainerIWantItButton containFooterInfo={!!footerInfo}>
-					<Button variant={VARIANTS_BUTTON.PRIMARY} onClick={() => {}}>
+					<Button variant={VARIANTS_BUTTON.PRIMARY} onClick={handleOnClick}>
 						¡Lo quiero!
 					</Button>
 				</ContainerIWantItButton>

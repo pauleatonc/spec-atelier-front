@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import {
 	MEDIA_QUERY_SMALL,
 	MEDIA_QUERY_STANDAR_MEDIUM,
+	BOTTLE_GREEN,
+	ALABASTER,
+	COLOR_WHITE,
+	COLOR_GRAY_OPACITY,
 } from '../../../config/constants/styled-vars';
 
 export const Container = styled.section`
@@ -10,7 +14,7 @@ export const Container = styled.section`
 	justify-content: center;
 	align-items: center;
 	padding: 200px 0px 100px 0px;
-	background-color: #f9f9f9;
+	background-color: ${ALABASTER};
 	position: relative;
 	${MEDIA_QUERY_STANDAR_MEDIUM} {
 		flex-wrap: wrap;
@@ -41,7 +45,7 @@ export const Icon = styled.img`
 `;
 
 export const InfoContainer = styled.div`
-	colo: rgb(8, 38, 44);
+	colo: ${BOTTLE_GREEN};
 `;
 
 export const Title = styled.h1`
@@ -83,14 +87,40 @@ export const BannerSliderContainer = styled.div`
 `;
 
 export const BannerSlider = styled.div`
+	display: flex !important;
+	align-items: center;
 	width: 100%;
 	height: 160px;
 	border-radius: 12px;
-	background-color: black;
-	box-shadow: 0 2px 4px 0 rgba(201, 198, 198, 0.5);
-	color: #ffffff;
+	box-shadow: 0 2px 4px 0 ${COLOR_GRAY_OPACITY};
 	text-align: center;
+	overflow: hidden;
+	background-color: ${COLOR_WHITE};
+
+	img {
+		width: 230px;
+		height: 100%;
+		object-fit: cover;
+	}
+
 	${MEDIA_QUERY_STANDAR_MEDIUM} {
 		height: 290px;
+		flex-direction: column;
+		img {
+			width: 100%;
+			height: 156px;
+		}
 	}
+`;
+
+export const TextSlider = styled.div`
+	font-family: Lato;
+	font-size: 18px;
+	font-weight: bold;
+	box-sizing: border-box;
+	padding: 0px 33px;
+	flex: 1;
+	justify-content: center;
+	align-items: center;
+	display: flex;
 `;

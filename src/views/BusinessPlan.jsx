@@ -10,6 +10,9 @@ import {
 	FAQ_LIST,
 } from '../config/constants/businessPlans';
 import FaqsSection from '../containers/FaqsSection';
+import ModalPlanFormStepOne from '../containers/modal-plan-form';
+import ModalPlanFormStepTwo from '../containers/modal-plan-form/StepTwo.index';
+import ModalSuccess from '../containers/modal-plan-form/SuccessModal.index';
 
 const BusinessPlan = () => {
 	return (
@@ -28,6 +31,9 @@ const BusinessPlan = () => {
 				}
 			/>
 			<FaqsSection faqList={FAQ_LIST} />
+			<ModalPlanFormStepOne />
+			<ModalPlanFormStepTwo />
+			<ModalSuccess />
 		</AppLayout>
 	);
 };

@@ -2,6 +2,9 @@ import React from 'react';
 import Slider from 'react-slick';
 
 import { DATA } from './constants';
+import WALTER_SENTENCE from './images/walter_sentence.png';
+import JOIN_UP from './images/join_up.png';
+import BUILDING_AND_INNVOVATING from './images/building_and_innovating.png';
 import {
 	Container,
 	Section,
@@ -11,6 +14,7 @@ import {
 	TextDescription,
 	BannerSliderContainer,
 	BannerSlider,
+	TextSlider,
 } from './styles';
 
 const WhoWeUs = () => {
@@ -28,13 +32,36 @@ const WhoWeUs = () => {
 			<BannerSliderContainer>
 				<Slider {...settings}>
 					<BannerSlider>
-						<h3>1</h3>
+						<img
+							className="container__images_content__image"
+							src={JOIN_UP}
+							alt="join up"
+						/>
+						<TextSlider>
+							¡No lo pienses más, se uno de nuestros proveedores!
+						</TextSlider>
 					</BannerSlider>
 					<BannerSlider>
-						<h3>2</h3>
+						<img
+							className="container__images_content__image"
+							src={BUILDING_AND_INNVOVATING}
+							alt="building and innovating"
+						/>
+						<TextSlider>
+							Seguimos desarrollando nuevas funcionalidades para construir la
+							mejor herramienta para tus especificaciones.
+						</TextSlider>
 					</BannerSlider>
 					<BannerSlider>
-						<h3>3</h3>
+						<img
+							className="container__images_content__image"
+							src={WALTER_SENTENCE}
+							alt="walter sentence"
+						/>
+						<TextSlider>
+							Dedica más tiempo a la arquitectura, y nosotros te ayudamos con
+							las especificaciones.
+						</TextSlider>
 					</BannerSlider>
 				</Slider>
 			</BannerSliderContainer>
