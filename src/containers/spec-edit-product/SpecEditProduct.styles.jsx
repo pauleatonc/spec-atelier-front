@@ -173,7 +173,7 @@ export const ImagesContainer = styled.section`
 	display: flex;
 	flex: 1;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: space-around;
 `;
 
 export const DocContainer = styled.div`
