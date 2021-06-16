@@ -14,6 +14,7 @@ import {
 	TextDescription,
 	BannerSliderContainer,
 	BannerSlider,
+	TextSlider,
 } from './styles';
 
 const WhoWeUs = () => {
@@ -33,16 +34,12 @@ const WhoWeUs = () => {
 					<BannerSlider>
 						<img
 							className="container__images_content__image"
-							src={WALTER_SENTENCE}
-							alt="walter sentence"
-						/>
-					</BannerSlider>
-					<BannerSlider>
-						<img
-							className="container__images_content__image"
 							src={JOIN_UP}
 							alt="join up"
 						/>
+						<TextSlider>
+							¡No lo pienses más, se uno de nuestros proveedores!
+						</TextSlider>
 					</BannerSlider>
 					<BannerSlider>
 						<img
@@ -50,6 +47,21 @@ const WhoWeUs = () => {
 							src={BUILDING_AND_INNVOVATING}
 							alt="building and innovating"
 						/>
+						<TextSlider>
+							Seguimos desarrollando nuevas funcionalidades para construir la
+							mejor herramienta para tus especificaciones.
+						</TextSlider>
+					</BannerSlider>
+					<BannerSlider>
+						<img
+							className="container__images_content__image"
+							src={WALTER_SENTENCE}
+							alt="walter sentence"
+						/>
+						<TextSlider>
+							Dedica más tiempo a la arquitectura, y nosotros te ayudamos con
+							las especificaciones.
+						</TextSlider>
 					</BannerSlider>
 				</Slider>
 			</BannerSliderContainer>

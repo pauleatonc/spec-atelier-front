@@ -87,20 +87,40 @@ export const BannerSliderContainer = styled.div`
 `;
 
 export const BannerSlider = styled.div`
+	display: flex !important;
+	align-items: center;
 	width: 100%;
 	height: 160px;
 	border-radius: 12px;
-	background-color: black;
 	box-shadow: 0 2px 4px 0 ${COLOR_GRAY_OPACITY};
-	color: ${COLOR_WHITE};
 	text-align: center;
 	overflow: hidden;
-	${MEDIA_QUERY_STANDAR_MEDIUM} {
-		height: 290px;
-	}
+	background-color: ${COLOR_WHITE};
+
 	img {
-		width: 100%;
+		width: 230px;
 		height: 100%;
 		object-fit: cover;
 	}
+
+	${MEDIA_QUERY_STANDAR_MEDIUM} {
+		height: 290px;
+		flex-direction: column;
+		img {
+			width: 100%;
+			height: 156px;
+		}
+	}
+`;
+
+export const TextSlider = styled.div`
+	font-family: Lato;
+	font-size: 18px;
+	font-weight: bold;
+	box-sizing: border-box;
+	padding: 0px 33px;
+	flex: 1;
+	justify-content: center;
+	align-items: center;
+	display: flex;
 `;
