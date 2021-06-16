@@ -159,7 +159,7 @@ const SpecCreateProductStepOne = () => {
 						padding="36px 0 0"
 					>
 						<MultiSelect
-							changeOnCLose={false}
+							changeOnCLose
 							showButtons
 							options={sections.map(mapToSelector)}
 							placeholder="Categoriza el producto"
@@ -169,7 +169,7 @@ const SpecCreateProductStepOne = () => {
 							optionAll={false}
 						/>
 						<MultiSelect
-							changeOnCLose={false}
+							changeOnCLose
 							showButtons
 							options={items.map(mapToSelector)}
 							placeholder="Elige una partida"
@@ -180,7 +180,7 @@ const SpecCreateProductStepOne = () => {
 							disabled={!items.length}
 						/>
 						<MultiSelect
-							changeOnCLose={false}
+							changeOnCLose
 							showButtons
 							options={systems.map(mapToSelector)}
 							placeholder="Elige un sistema"
