@@ -577,6 +577,7 @@ const SpecEditProduct = () => {
 								<div>
 									<Label>Tipo de proyecto</Label>
 									<MultiSelect
+										changeOnCLose
 										offsetY={-264}
 										showButtons
 										options={project_types.map(mapToSelector)}
@@ -588,6 +589,7 @@ const SpecEditProduct = () => {
 								<div>
 									<Label>Tipo de Obra</Label>
 									<MultiSelect
+										changeOnCLose
 										offsetY={-264}
 										showButtons
 										options={work_types.map(mapToSelector)}
@@ -599,6 +601,7 @@ const SpecEditProduct = () => {
 								<div>
 									<Label>Tipo de habitación</Label>
 									<MultiSelect
+										changeOnCLose
 										offsetY={-264}
 										showButtons
 										options={roomTypesOptions}
