@@ -33,7 +33,6 @@ import {
 	Input,
 	Select,
 	Button,
-	Loading,
 	Modal,
 	ImageDelete,
 	AttachedImages,
@@ -66,7 +65,9 @@ const SpecEditProduct = () => {
 	const { collection: sections = [] } = useSelector(
 		(state) => state.specProductsSections,
 	);
-	const { collection: items = [] } = useSelector((state) => state.specProductsItems);
+	const { collection: items = [] } = useSelector(
+		(state) => state.specProductsItems,
+	);
 	const { project_types = [], room_types = [], work_types = [] } = useSelector(
 		(state) => state.app,
 	);
@@ -91,11 +92,28 @@ const SpecEditProduct = () => {
 		set: setPriceValue,
 		value: priceValue,
 	} = useInput('', 'currency');
+
 	const {
-		onChange: handleDescriptionChange,
-		set: setDescriptionValue,
-		value: descriptionValue,
+		onChange: handleReferenceChange,
+		set: setReferenceValue,
+		value: referenceValue,
+	} = useInput('');
+	const {
+		onChange: handleUnitChange,
+		set: setUnitValue,
+		value: unitValue,
+	} = useInput('');
+
+	const {
+		onChange: handleLongDescChange,
+		set: setLongDescValue,
+		value: longDescValue,
 	} = useTextarea(product.long_desc);
+	const {
+		onChange: handleShortDescChange,
+		set: setShortDescValue,
+		value: shortDescValue,
+	} = useTextarea(product.short_desc);
 	const {
 		onChange: onSectionChange,
 		set: setSectionValue,
@@ -136,20 +154,20 @@ const SpecEditProduct = () => {
 		onSectionChange(options);
 		setItemValue([]);
 		setSystemValue([]);
-  };
+	};
 
-  const onSubmitSection = () => {
-    dispatch(onGetSpecProductsItems({ sections: sectionValue }));
-  };
+	const onSubmitSection = () => {
+		dispatch(onGetSpecProductsItems({ sections: sectionValue }));
+	};
 
 	const handleItemChange = (option) => {
 		onItemChange(option);
 		setSystemValue([]);
-  };
+	};
 
-  const onSubmitItem = () => {
+	const onSubmitItem = () => {
 		dispatch(onGetSpecProductsSystems({ items: itemValue }));
-  };
+	};
 
 	const { onClose: handleClose, onExiting: handleExiting } = useModal({
 		closeCallback: () => {
@@ -162,8 +180,11 @@ const SpecEditProduct = () => {
 			setImagesToDelete([]);
 			setDocumentsToDelete([]);
 			setNameValue('');
-			setDescriptionValue('');
+			setLongDescValue('');
+			setShortDescValue('');
 			setPriceValue('');
+			setReferenceValue('');
+			setUnitValue('');
 			setSectionValue([]);
 			setDocumentsValues([]);
 			setRoomTypesOptions([]);
@@ -221,7 +242,7 @@ const SpecEditProduct = () => {
 		name: file.name,
 	});
 
-	const mapToId = ({ id }) => id;
+	const mapToId = ({ id: idMap }) => idMap;
 
 	const handleAttachReject = (reason) =>
 		dispatch(onShowAlertSuccess({ message: reason }));
@@ -258,22 +279,32 @@ const SpecEditProduct = () => {
 		]);
 	};
 
-	const isSameArray = (arr1, arr2) => arr1.every(ae1 => arr2.some(ae2 => ae1.id === ae2.id));
+	const isSameArray = (arr1, arr2) =>
+		arr1.every((ae1) => arr2.some((ae2) => ae1.id === ae2.id));
 	const onSave = () =>
 		dispatch(
 			onEditSpecProduct({
 				product: {
 					id: product.id,
-          name: product.name !== nameValue ? nameValue : undefined,
+					name: product.name !== nameValue ? nameValue : undefined,
 					brand: product.brand?.id !== brandValue?.id ? brandValue : undefined,
 					long_desc:
-						product.long_desc !== descriptionValue
-						? descriptionValue
-						: undefined,
+						product.long_desc !== longDescValue ? longDescValue : undefined,
+					short_desc:
+						product.short_desc !== shortDescValue ? shortDescValue : undefined,
 					price: product.price !== priceValue ? priceValue : undefined,
-					item: isSameArray(product.items, itemValue) ? itemValue.map(mapToId) : undefined,
-					section: isSameArray(product.sections, sectionValue) ? sectionValue.map(mapToId) : undefined,
-					system: isSameArray(product.systems, systemValue) ? systemValue.map(mapToId) : undefined,
+					reference:
+						product.reference !== referenceValue ? referenceValue : undefined,
+					unit: product.unit !== unitValue ? unitValue : undefined,
+					item: isSameArray(product.items, itemValue)
+						? itemValue.map(mapToId)
+						: undefined,
+					section: isSameArray(product.sections, sectionValue)
+						? sectionValue.map(mapToId)
+						: undefined,
+					system: isSameArray(product.systems, systemValue)
+						? systemValue.map(mapToId)
+						: undefined,
 					room_type: roomTypeValues.length
 						? roomTypeValues.map((rt) => rt.id)
 						: undefined,
@@ -306,12 +337,15 @@ const SpecEditProduct = () => {
 
 	useEffect(() => {
 		if (product.id) {
-			setDescriptionValue(product.long_desc);
+			setLongDescValue(product.long_desc);
+			setShortDescValue(product.short_desc);
 			setNameValue(product.name);
 			setSectionValue(product.sections.map(mapToSelector));
 			setItemValue(product.items.map(mapToSelector));
 			setSystemValue(product?.systems.map(mapToSelector));
 			setPriceValue(product.price || '');
+			setReferenceValue(product.reference || '');
+			setUnitValue(product.unit || '');
 			setBrandValue(mapToSelector(product.brand));
 			setImagesValues(product.images.map(mapToImages));
 			setDocumentsValues(product.pdfs.map(mapToFiles));
@@ -339,6 +373,7 @@ const SpecEditProduct = () => {
 				<Section padding="0 0 20px 0" width="50%">
 					<Label>Nombre del producto</Label>
 					<Input
+						type="form"
 						placeholder="Nombre"
 						value={nameValue}
 						width="490px"
@@ -353,16 +388,30 @@ const SpecEditProduct = () => {
 							<i className="fas fa-plus" /> Añadir imagen
 						</Text>
 						<ImagesContainer>
-							{imagesValues.map((img) => (
-								<ImageDelete
-									key={img.id}
-									width={imageWidth}
-									height={imagesHeight}
-									img={img}
-									onDelete={handleDeleteImg}
-									hideDelete={!!img.hide_delete}
-								/>
-							))}
+							{imagesValues.map((img) =>
+								imagesValues.length === 1 ? (
+									<ImageDelete
+										key={img.id}
+										width={imageWidth}
+										height={imagesHeight}
+										img={img}
+										onDelete={handleDeleteImg}
+										hideDelete={!!img.hide_delete}
+									/>
+								) : (
+									imagesValues.length > 1 &&
+									img.src !== '' && (
+										<ImageDelete
+											key={img.id}
+											width={imageWidth}
+											height={imagesHeight}
+											img={img}
+											onDelete={handleDeleteImg}
+											hideDelete={!!img.hide_delete}
+										/>
+									)
+								),
+							)}
 						</ImagesContainer>
 						<Text onClick={toggleDocumentsModal}>
 							<i className="fas fa-plus" /> Añadir archivo
@@ -400,14 +449,27 @@ const SpecEditProduct = () => {
 					{/* Right */}
 					<div>
 						<Section padding="0 0 10px">
-							<Label>Descripción</Label>
-							<TextArea
-								minHeightTextArea="118px"
-								placeholder="Detalla el producto"
-								value={descriptionValue}
-								onChange={handleDescriptionChange}
-								name="log_desc"
-							/>
+							<div>
+								<Label>Descripción corta</Label>
+								<TextArea
+									minHeightTextArea="75px"
+									placeholder="Detalla el producto"
+									value={shortDescValue}
+									onChange={handleShortDescChange}
+									name="short_desc"
+									maxlength={200}
+								/>
+							</div>
+							<div>
+								<Label>Descripción larga</Label>
+								<TextArea
+									minHeightTextArea="118px"
+									placeholder="Detalla el producto"
+									value={longDescValue}
+									onChange={handleLongDescChange}
+									name="long_desc"
+								/>
+							</div>
 						</Section>
 						<Section
 							alignItems="flex-end"
@@ -418,7 +480,7 @@ const SpecEditProduct = () => {
 							<div>
 								<Label>Sección</Label>
 								<MultiSelect
-									changeOnCLose={false}
+									changeOnCLose
 									showButtons
 									options={sections.map(mapToSelector)}
 									placeholder="Elige una sección"
@@ -431,7 +493,7 @@ const SpecEditProduct = () => {
 							<div>
 								<Label>Partida</Label>
 								<MultiSelect
-									changeOnCLose={false}
+									changeOnCLose
 									showButtons
 									options={items.map(mapToSelector)}
 									placeholder="Elige una partida"
@@ -445,7 +507,7 @@ const SpecEditProduct = () => {
 							<div>
 								<Label>Sistema</Label>
 								<MultiSelect
-									changeOnCLose={false}
+									changeOnCLose
 									showButtons
 									options={systems.map(mapToSelector)}
 									placeholder="Elige un sistema"
@@ -474,11 +536,34 @@ const SpecEditProduct = () => {
 							<div>
 								<Label>Precio</Label>
 								<Input
+									type="form"
 									placeholder="Precio"
 									value={priceValue}
 									width="100%"
 									onChange={handlePriceChange}
 									name="price"
+								/>
+							</div>
+							<div>
+								<Label>Referencia</Label>
+								<Input
+									type="form"
+									placeholder="Referencia"
+									value={referenceValue}
+									width="100%"
+									onChange={handleReferenceChange}
+									name="reference"
+								/>
+							</div>
+							<div>
+								<Label>Unidad</Label>
+								<Input
+									type="form"
+									placeholder="Unidad"
+									value={unitValue}
+									width="100%"
+									onChange={handleUnitChange}
+									name="unit"
 								/>
 							</div>
 						</Section>
@@ -492,6 +577,8 @@ const SpecEditProduct = () => {
 								<div>
 									<Label>Tipo de proyecto</Label>
 									<MultiSelect
+										changeOnCLose
+										offsetY={-264}
 										showButtons
 										options={project_types.map(mapToSelector)}
 										placeholder="Elige un tipo de proyecto"
@@ -502,6 +589,8 @@ const SpecEditProduct = () => {
 								<div>
 									<Label>Tipo de Obra</Label>
 									<MultiSelect
+										changeOnCLose
+										offsetY={-264}
 										showButtons
 										options={work_types.map(mapToSelector)}
 										placeholder="Elige un tipo de obra"
@@ -512,6 +601,8 @@ const SpecEditProduct = () => {
 								<div>
 									<Label>Tipo de habitación</Label>
 									<MultiSelect
+										changeOnCLose
+										offsetY={-264}
 										showButtons
 										options={roomTypesOptions}
 										placeholder={

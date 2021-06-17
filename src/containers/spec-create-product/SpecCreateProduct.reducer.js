@@ -16,7 +16,7 @@ import {
 const createProductState = {
   brandsCollection: [],
   stepOne: { show: false },
-  stepTwo: { show: false },
+  stepTwo: { show: false, },
   stepThree: { show: false },
   systemsCollection: [],
 };
