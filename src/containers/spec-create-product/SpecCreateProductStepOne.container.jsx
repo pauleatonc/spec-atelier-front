@@ -144,6 +144,7 @@ const SpecCreateProductStepOne = () => {
 					</Section>
 					<Section padding="41px 0 0">
 						<Input
+							type="form"
 							label="Nombre del producto"
 							placeholder="Nombre"
 							value={nameValue}

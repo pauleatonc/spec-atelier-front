@@ -13,7 +13,7 @@ import {
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS } from '../spec-products-sections/SpecProductsSections.actions';
 import { onHideSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
-import { onGetProducts } from '../products-list/ProductsList.actions';
+import { onGetProducts, setFilters } from '../products-list/ProductsList.actions';
 import { cleanObject } from '../../modules/services';
 import { onGetSpecBlocks } from '../spec-document/SpecDocument.actions';
 
@@ -48,7 +48,7 @@ export const onGetSpecProductsSystems = ({ items } = { items: [] }) => async (
 	dispatch(onActionCreator(GET_SPEC_PRODUCTS_SYSTEMS));
 
 	try {
-		const response = await getProductsSystems(items);
+		const response = await getProductsSystems({ item: items });
 
 		return dispatch(
 			onActionCreator(GET_SPEC_PRODUCTS_SYSTEMS_SUCCESS, {
@@ -97,6 +97,7 @@ export const onEditSpecProduct = ({
 		dispatch(onActionCreator(EDIT_SPEC_PRODUCT));
 		const patch = [editProduct(cleanObject(product))];
 		const { productsList } = getState();
+		const { filters: productFilters } = productsList;
 
 		if (images?.length)
 			patch.concat(uploadProductImages({ productID: product.id, images }));
@@ -119,11 +120,18 @@ export const onEditSpecProduct = ({
 		const results = await Promise.all(patch);
 		if (results.some((r) => r.error)) throw Error;
 		return batch(() => {
-			dispatch(onGetSpecBlocks(specID));
+			if (specID) dispatch(onGetSpecBlocks(specID));
 			dispatch(onActionCreator(EDIT_SPEC_PRODUCT_SUCCESS));
 			dispatch(onGetProducts(productsList.filters))
 			dispatch(
 				onShowAlertSuccess({ message: 'Producto editado exitosamente' }),
+			);
+			dispatch(
+				setFilters({
+					...productFilters,
+					page: 0,
+					limit: 10,
+				}),
 			);
 		});
 	} catch (error) {

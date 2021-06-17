@@ -21,10 +21,10 @@ const Footer = () => (
 					</Link> */}
           <Link className="footer__inner__menu__container__link" to="/products">
             Productos
-					</Link>
-          <Link className="footer__inner__menu__container__link" to="/clients">
+          </Link>
+          <Link className="footer__inner__menu__container__link" to="/collaborators">
             Marcas
-					</Link>
+          </Link>
         </Menu>
         <ImageConainer>
           <Image src={LOGO_CCHC} width="120px" height="64px" />
@@ -37,16 +37,16 @@ const Footer = () => (
           <div className="footer__inner__info__container__contacts">
             <h3 className="footer__inner__info__container__contacts__title">
               Contáctanos
-						</h3>
+            </h3>
             <p className="footer__inner__info__container__contacts__contact">
               <i className="far fa-envelope footer__inner__info__container__contacts__contact__icon" />
               <span className="footer__inner__info__container__contacts__contact__text">
                 <a href="mailto:contacto@specatelier.com">
                   contacto@specatelier.com
-								</a>
+                </a>
               </span>
             </p>
-          {/*   <p className="footer__inner__info__container__contacts__contact">
+            {/*   <p className="footer__inner__info__container__contacts__contact">
               <i className="fab fa-whatsapp footer__inner__info__container__contacts__contact__icon" />
               <span className="footer__inner__info__container__contacts__contact__text">
                 <a
@@ -65,7 +65,7 @@ const Footer = () => (
           <div className="footer__inner__info__container__social_network">
             <h3 className="footer__inner__info__container__social_network__title">
               Síguenos en
-						</h3>
+            </h3>
             <a href="https://www.instagram.com/specatelier/" className="footer__inner__info__container__social_network__link">
               <i className="fab fa-instagram footer__inner__info__container__social_network__link__icon" />
             </a>
@@ -78,10 +78,10 @@ const Footer = () => (
           <p className="footer__inner__info__container__copyright">
             <span className="footer__inner__info__container__copyright__text">
               Copyright &copy; 2020 Walla Group SPA.
-						</span>{' '}
+            </span>{' '}
             <span className="footer__inner__info__container__copyright__text">
               Todos los derechos reservados.
-						</span>
+            </span>
           </p>
         </div>
       </RightContent>
