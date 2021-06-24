@@ -11,6 +11,7 @@ export const Root = styled.div`
   position: absolute;
   top: 0;
   width: 360px;
+  overflow-x: scroll;
 `;
 
 Root.defaultProps = {
