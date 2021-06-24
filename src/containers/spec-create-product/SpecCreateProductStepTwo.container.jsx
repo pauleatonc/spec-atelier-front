@@ -129,7 +129,6 @@ const SpecCreateProductStepTwo = () => {
 		!longDescValue ||
 		!referenceValue ||
 		!brandValue.label ||
-		!priceValue ||
 		!unitValue;
 
 	useEffect(() => {
