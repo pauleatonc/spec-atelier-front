@@ -14,6 +14,7 @@ import arrowDownSource from '../../assets/images/icons/arrow-down.svg';
 import arrowUpSource from '../../assets/images/icons/arrow-up.svg';
 import arrowBack from '../../assets/images/icons/arrow_back.svg';
 import { onHideSpecContents } from './SpecContents.actions';
+import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 
 /**
  * The SpecContents' container.
@@ -127,8 +128,12 @@ const SpecContents = () => {
 											padding="0 23px 0 77px"
 											title={product.element.title}
 											href={`${pathname}#${product.id}`}
+											onClick={() => {
+												if (MAX_SCREEN_SMALL_NAV_JS)
+													dispatch(onHideSpecContents());
+											}}
 										>
-											<span>{product.element.name}</span>
+											<span>{`${product.element.name}`}</span>
 											<span>&nbsp;</span>
 										</ListItem>
 									))}

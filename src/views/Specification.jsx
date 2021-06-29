@@ -48,10 +48,13 @@ const Specification = () => {
 									<SpecProductsSectionsContainer
 										setShowFilters={setShowFilters}
 										setSelectedSection={setSelectedSection}
+										selectedSection={selectedSection}
 									/>,
 									<SpecProductsItemsContainer
 										setShowFilters={setShowFilters}
 										setSelectedItem={setSelectedItem}
+										selectedSection={selectedSection}
+										selectedItem={selectedItem}
 									/>,
 								]}
 							>

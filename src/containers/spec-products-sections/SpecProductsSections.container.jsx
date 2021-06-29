@@ -25,7 +25,11 @@ import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 /**
  * The SpecProductsSections' container.
  */
-const SpecProductsSections = ({ setShowFilters, setSelectedSection }) => {
+const SpecProductsSections = ({
+	setShowFilters,
+	selectedSection,
+	setSelectedSection,
+}) => {
 	const { section: selectedSectionID } = useSelector(
 		(state) => state.specProducts.filters,
 	);
@@ -55,7 +59,16 @@ const SpecProductsSections = ({ setShowFilters, setSelectedSection }) => {
 	return (
 		<Root>
 			<Header>
-				<Breadcrumbs items={[{ label: 'Secciones' }]} />
+				<Breadcrumbs
+					items={[
+						{
+							label:
+								(window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches &&
+									selectedSection) ||
+								'Secciones',
+						},
+					]}
+				/>
 				<CloseIcon
 					alt="Cerrar"
 					src={closeSource}

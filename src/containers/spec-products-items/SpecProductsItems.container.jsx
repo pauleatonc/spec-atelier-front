@@ -31,7 +31,12 @@ import {
 /**
  * The SpecProductsItems' container.
  */
-const SpecProductsItems = ({ setShowFilters, setSelectedItem }) => {
+const SpecProductsItems = ({
+	setShowFilters,
+	setSelectedItem,
+	selectedSection,
+	selectedItem,
+}) => {
 	const { item: selectedItemID, subitem: selectedSubitemID } = useSelector(
 		(state) => state.specProducts.filters,
 	);
@@ -82,8 +87,19 @@ const SpecProductsItems = ({ setShowFilters, setSelectedItem }) => {
 			<Header>
 				<Breadcrumbs
 					items={[
-						{ label: 'Secciones', onClick: handleShowSections },
-						{ label: 'Partidas' },
+						{
+							label:
+								(window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches &&
+									selectedSection) ||
+								'Secciones',
+							onClick: handleShowSections,
+						},
+						{
+							label:
+								(window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches &&
+									selectedItem) ||
+								'Partidas',
+						},
 					]}
 				/>
 				<CloseIcon
