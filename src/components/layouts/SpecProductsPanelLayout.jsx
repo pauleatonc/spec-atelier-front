@@ -95,7 +95,7 @@ const SpecProductsPanelLayout = ({
 										dispatch(
 											onShowAlertSuccess({
 												message:
-													'Debes seleccionar una seccion antes de seleccionar una partida',
+													'Debes seleccionar una sección antes de seleccionar una partida',
 											}),
 										);
 								},

@@ -9,8 +9,8 @@ import docSource from '../../assets/images/icons/spec-doc.svg';
 import docActiveSource from '../../assets/images/icons/spec-doc_active.svg';
 import itemsSource from '../../assets/images/icons/spec-items.svg';
 import itemsActiveSource from '../../assets/images/icons/spec-items_active.svg';
-import filesPlus from '../../assets/images/icons/files_plus.svg';
-import filesPlusActive from '../../assets/images/icons/files_plus_active.svg';
+import settingLines from '../../assets/images/icons/setting-lines.svg';
+import settingLinesActive from '../../assets/images/icons/setting-lines_active.svg';
 import {
 	onHideSpecContents,
 	onShowSpecContents,
@@ -80,8 +80,8 @@ const SpecNavigator = () => {
 			</Section>
 			<Section>
 				<NavIcon
-					src={showAdmin ? filesPlusActive : filesPlus}
-					srcActive={filesPlusActive}
+					src={showAdmin ? settingLinesActive : settingLines}
+					srcActive={settingLinesActive}
 					onClick={handleAdminClick}
 				/>
 			</Section>
