@@ -123,7 +123,7 @@ export const setSelectedAll = (value) => (dispatch) => {
 	dispatch(onActionCreator(SET_SELECTED_ALL, value));
 };
 
-export const updateDownloads = (stat, productId) => (dispatch) => {
+export const updateDownloads = (stat, productId) => {
 	updateDownloadsProduct({ stat, productId }).then(
 		(response) => response,
 		(error) => console.error(error),

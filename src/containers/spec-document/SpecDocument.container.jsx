@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import { onShowSpecEditProduct } from '../spec-edit-product/SpecEditProduct.actions';
 import { onShowSpecImagesModalSuccess } from '../spec-images-modal/SpecImagesModal.actions';
@@ -44,6 +44,7 @@ import {
 } from './SpecDocument.styles';
 import specAddSource from '../../assets/images/icons/spec-add.svg';
 import threeDotsVerticalSource from '../../assets/images/icons/three-dots-vertical.svg';
+import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 
 /**
  * The SpecDocument's container.
@@ -52,7 +53,6 @@ const SpecDocument = () => {
 	const { id: specID } = useParams();
 	const { blocks } = useSelector((state) => state.specDocument);
 	const { localConfig } = useSelector((state) => state.specAdmin);
-	const { url, path } = useLocation();
 	const dispatch = useDispatch();
 	const [selectedBlockID, setSelectedBlockID] = useState('');
 	const [selectedBlockTextID, setSelectedBlockTextID] = useState('');
@@ -160,14 +160,13 @@ const SpecDocument = () => {
 
 	return (
 		<Root>
-			<AddIcon
-				alt="Agregar sección"
-				src={specAddSource}
-				onClick={handleAddMenuOpen}
-			/>
 			<Dropdown
 				anchorRef={addAnchor}
-				offset={{ x: -8, y: -8 }}
+				offset={
+					window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches
+						? { x: 0, y: -80 }
+						: { x: -7, y: -7 }
+				}
 				open={Boolean(addAnchor)}
 				origin={{ x: 'right', y: 'top' }}
 				onClose={handleAddMenuClose}
@@ -332,6 +331,11 @@ const SpecDocument = () => {
 					})}
 				</DraggableList>
 			</Page>
+			<AddIcon
+				alt="Agregar sección"
+				src={specAddSource}
+				onClick={handleAddMenuOpen}
+			/>
 		</Root>
 	);
 };
