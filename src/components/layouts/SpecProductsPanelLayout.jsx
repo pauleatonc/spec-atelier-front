@@ -20,7 +20,10 @@ import {
 import Breadcrumbs from '../basics/Breadcrumbs';
 import arrowBack from '../../assets/images/icons/arrow_back.svg';
 import { onShowAlertSuccess } from '../../containers/alert/Alert.actions';
-import { onShowSpecProductsItems } from '../../containers/spec-products-items/SpecProductsItems.actions';
+import {
+	onShowSpecProductsItems,
+	onHideSpecProductsItemsSuccess,
+} from '../../containers/spec-products-items/SpecProductsItems.actions';
 import { setFilters } from '../../containers/products-list/ProductsList.actions';
 
 /**
@@ -81,6 +84,7 @@ const SpecProductsPanelLayout = ({
 										);
 										setSelectedSection('');
 										setSelectedItem('');
+										dispatch(onHideSpecProductsItemsSuccess());
 									}
 									setShowFilters(true);
 								},
