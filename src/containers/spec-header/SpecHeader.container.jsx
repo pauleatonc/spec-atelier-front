@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { Root, Separator, Section, ProjectName, Download, Monetization } from './SpecHeader.styles';
+import { Root, Separator, Section, ProjectName, Download, Monetization, Logo, MobileLogo } from './SpecHeader.styles';
 import logoSource from '../../assets/images/logo-spec.png';
 import logo2xSource from '../../assets/images/logo-spec@2x.png';
 import logo3xSource from '../../assets/images/logo-spec@3x.png';
+import logoIcon from '../../assets/images/logo-icon.png';
 import { cleanDownload, downloadSpecDocument, downloadBudgetDocument } from './SpecHeader.actions';
 
 /**
@@ -39,7 +40,12 @@ const SpecHeader = () => {
     <Root>
       <Section>
         <Link to="/projects" data-view="projects">
-          <img alt="Specatelier" src={logoSource} srcSet={`${logo2xSource} 2x, ${logo3xSource} 3x`} />
+          <Logo>
+           <img alt="Specatelier" src={logoSource} srcSet={`${logo2xSource} 2x, ${logo3xSource} 3x`} />
+          </Logo>
+          <MobileLogo>
+           <img alt="Specatelier" src={logoIcon} />
+          </MobileLogo>
         </Link>
       </Section>
       <Separator />

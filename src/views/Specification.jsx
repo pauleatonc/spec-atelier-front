@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AlertContainer from '../containers/alert/Alert.container';
 import SpecHeaderContainer from '../containers/spec-header/SpecHeader.container';
 import SpecDocumentContainer from '../containers/spec-document/SpecDocument.container';
@@ -23,6 +23,9 @@ import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
  * The Specification's view.
  */
 const Specification = () => {
+	const [showFilters, setShowFilters] = useState(false);
+	const [selectedSection, setSelectedSection] = useState('');
+	const [selectedItem, setSelectedItem] = useState('');
 	return (
 		<>
 			<Root>
@@ -35,9 +38,24 @@ const Specification = () => {
 						<SpecNavigatorContainer />
 						<Panels>
 							<SpecProductsPanelLayout
+								showFilters={showFilters}
+								selectedSection={selectedSection}
+								selectedItem={selectedItem}
+								setShowFilters={setShowFilters}
+								setSelectedSection={setSelectedSection}
+								setSelectedItem={setSelectedItem}
 								filtersPanels={[
-									<SpecProductsSectionsContainer />,
-									<SpecProductsItemsContainer />,
+									<SpecProductsSectionsContainer
+										setShowFilters={setShowFilters}
+										setSelectedSection={setSelectedSection}
+										selectedSection={selectedSection}
+									/>,
+									<SpecProductsItemsContainer
+										setShowFilters={setShowFilters}
+										setSelectedItem={setSelectedItem}
+										selectedSection={selectedSection}
+										selectedItem={selectedItem}
+									/>,
 								]}
 							>
 								<SpecProductsContainer />

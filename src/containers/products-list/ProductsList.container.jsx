@@ -9,6 +9,8 @@ import {
 	BodyHeader,
 	Total,
 	Sort,
+	MobileFilters,
+	Filters
 } from './ProductsList.styles';
 import {
 	setFilters,
@@ -83,6 +85,7 @@ const ProductList = ({
 		...defaultFilters,
 		...extraFilters,
 	};
+	const [showMobileFilters, setShowMobileFilter] = useState(false);
 
 	const onClickProduct = (selectedProduct) => (event) => {
 		event.stopPropagation();
@@ -106,6 +109,10 @@ const ProductList = ({
 		setKeywords(value);
 		debouncedSave(name, value);
 	};
+
+	const onClickFilter = () => {
+		setShowMobileFilter((current) => !current);
+	}
 
 	const onFilterAll = () => {
 		dispatch(setFilters(initialFilters));
@@ -163,18 +170,34 @@ const ProductList = ({
 			{withSearch && (
 				<ProductsSearchContainer
 					keyword={keyword}
-          onChangeParams={onChangeParams}
-          placeholder='Buscar producto'
+					onChangeParams={onChangeParams}
+					onClickFilter={onClickFilter}
+          			placeholder='Buscar producto'
 				/>
 			)}
 			{withFilter && (
 				<>
-					<ProductsFiltersContainer
-						filters={filters}
-						initialFilters={initialFilters}
-						onFilterAll={onFilterAll}
-						filterOptions={filterOptions}
-					/>
+					<Filters>
+						<ProductsFiltersContainer
+							filters={filters}
+							initialFilters={initialFilters}
+							onFilterAll={onFilterAll}
+							filterOptions={filterOptions}
+						/>
+					</Filters>
+					{
+						showMobileFilters && (
+							<MobileFilters>
+								<ProductsFiltersContainer
+										filters={filters}
+										initialFilters={initialFilters}
+										onFilterAll={onFilterAll}
+										filterOptions={filterOptions}
+									/>
+							</MobileFilters>
+						)
+					}
+
 					<Separator />
 				</>
 			)}

@@ -4,11 +4,14 @@ import { useParams } from 'react-router-dom';
 
 import CheckBoxList from '../../components/inputs/CheckBoxList';
 import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
+import { ButtonBack } from '../../components/layouts/SpecProductsPanelLayout.styles';
+import arrowBack from '../../assets/images/icons/arrow_back.svg';
 
 import {
 	onSetLocalConfig,
 	onEditConfig,
 	onUpdateProductConfig,
+	onHideSpecAdmin,
 } from './SpecAdmin.actions';
 import {
 	Root,
@@ -49,12 +52,12 @@ const SpecAdmin = () => {
 		short_desc: (newValue) => ({
 			short_desc: newValue,
 			long_desc: false,
-			default: false
+			default: false,
 		}),
 		long_desc: (newValue) => ({
 			short_desc: false,
 			long_desc: newValue,
-			default: false
+			default: false,
 		}),
 	};
 
@@ -86,7 +89,12 @@ const SpecAdmin = () => {
 
 	return (
 		<Root show={show}>
-			<PanelTitle>Administrar especificación</PanelTitle>
+			<PanelTitle>
+				<ButtonBack role="button" onClick={() => dispatch(onHideSpecAdmin())}>
+					<img alt="arrow back" src={arrowBack} />
+				</ButtonBack>
+				Administrar especificación
+			</PanelTitle>
 			<TextConfig>
 				<TextConfigTitle>Configurar textos</TextConfigTitle>
 				<TextConfigDesc>
