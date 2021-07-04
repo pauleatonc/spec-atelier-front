@@ -56,6 +56,7 @@ const productsListReducer = (
 			return {
 				...state,
 				...payload,
+				products: [...state.products, ...payload.products],
 				loading: false,
 				error: false,
 			};

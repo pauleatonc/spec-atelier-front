@@ -238,7 +238,7 @@ const ProductList = ({
 					);
 				})}
 			</ListContainer>
-			<ProductsListSeeMore filters={filters} initialFilters={initialFilters} />
+			<ProductsListSeeMore filters={filters} />
 		</Container>
 	);
 };
