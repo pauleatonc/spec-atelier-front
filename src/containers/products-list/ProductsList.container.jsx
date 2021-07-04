@@ -32,9 +32,9 @@ import {
 const ProductList = ({
 	extraFilters,
 	withSearch = true,
-  withFilter = true,
-  filterOptionsKey,
-  withoutPadding,
+  	withFilter = true,
+  	filterOptionsKey,
+  	withoutPadding,
 	canAdd,
 	canEdit,
 	canDelete,
@@ -43,6 +43,7 @@ const ProductList = ({
 	emptyListComponent: EmptyListComponent,
 	onActionCard,
 	onClickCreate,
+	viewKey
 }) => {
 	const defaultFilters = {
 		page: 0,
@@ -62,6 +63,7 @@ const ProductList = ({
 		with_products: true,
 		most_used: false,
 		my_products: false,
+		view: viewKey
 	};
 	const dispatch = useDispatch();
 	const {

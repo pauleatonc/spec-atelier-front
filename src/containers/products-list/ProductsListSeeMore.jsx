@@ -17,7 +17,6 @@ const ProductsListSeeMore = ({ filters }) => {
 			setFilters({
 				...filters,
 				page: nextPage,
-				showed_products: products
 			}),
 		);
 	};

@@ -20,6 +20,7 @@ export const productsListInitialState = {
 	filters: {
 		page: 0,
 		limit: 10,
+		view: null
 	},
 	products: [],
 	items: [],
