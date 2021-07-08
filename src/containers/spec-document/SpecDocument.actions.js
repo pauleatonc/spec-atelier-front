@@ -122,7 +122,9 @@ export const onDetachSpecProduct = ({ productID, specID }) => (
 ) => {
 	const { specDocument } = getState();
 	const selectedBlock =
-		specDocument.blocks.find((block) => block.element?.id === productID) || {};
+		specDocument.blocks.find(
+			(block) => block.element?.original_product_id === productID,
+		) || {};
 
 	return dispatch(onRemoveSpecBlock({ specID, blockID: selectedBlock?.id }));
 };
@@ -301,7 +303,7 @@ export const onSortSpecBlocks = ({ blocksIDs, specID }) => async (
 
 	try {
 		const { auth, specDocument } = getState();
-		const sortedSpecBlocks = blocksIDs.reduce((blocks, blockID, index) => {
+		const sortedSpecBlocks = blocksIDs.reduce((blocks, blockID) => {
 			const found = specDocument.blocks.find((block) => block.id === blockID);
 
 			if (!found) {
