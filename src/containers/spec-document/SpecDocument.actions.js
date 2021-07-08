@@ -12,6 +12,7 @@ import {
 	deleteSpecBlockText,
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
+import { onGetProducts } from '../products-list/ProductsList.actions';
 
 export const GET_SPEC_BLOCKS = 'GET_SPEC_BLOCKS';
 export const GET_SPEC_BLOCKS_ERROR = 'GET_SPEC_BLOCKS_ERROR';
@@ -46,7 +47,10 @@ export const onAddSpecBlock = ({
 	dispatch(onShowAlertSuccess({ message: 'Añadiendo producto...' }));
 	dispatch(onActionCreator(ADD_SPEC_BLOCK));
 	try {
-		const { auth } = getState();
+		const {
+			auth,
+			productsList: { filters },
+		} = getState();
 
 		const { blocks: updatedBlocks } = await addSpecBlock(
 			{
@@ -59,14 +63,14 @@ export const onAddSpecBlock = ({
 			ADD_SPEC_BLOCK,
 		);
 		dispatch(
-			onShowAlertSuccess({ message: 'Añadiste producto a una sección' }),
-		);
-
-		return dispatch(
 			onActionCreator(ADD_SPEC_BLOCK_SUCCESS, { blocks: updatedBlocks }),
 		);
+		dispatch(onGetProducts(filters));
+		dispatch(
+			onShowAlertSuccess({ message: 'Añadiste producto a una sección' }),
+		);
 	} catch (error) {
-		return dispatch(
+		dispatch(
 			onActionCreator(ADD_SPEC_BLOCK_ERROR, {
 				error: true,
 				nativeError: error,
@@ -92,21 +96,29 @@ export const onRemoveSpecBlock = ({ blockID, specID }) => async (
 	dispatch,
 	getState,
 ) => {
+	dispatch(onShowAlertSuccess({ message: 'Removiendo producto...' }));
 	dispatch(onActionCreator(REMOVE_SPEC_BLOCK));
 
 	try {
-		const { auth } = getState();
+		const {
+			auth,
+			productsList: { filters },
+		} = getState();
 		const { blocks: updatedBlocks } = await deleteSpecBlock({
 			blockID,
 			specID,
 			userID: auth.user?.id,
 		});
 
-		return dispatch(
+		dispatch(
 			onActionCreator(REMOVE_SPEC_BLOCK_SUCCESS, { blocks: updatedBlocks }),
 		);
+		dispatch(onGetProducts(filters));
+		dispatch(
+			onShowAlertSuccess({ message: 'Removiste el producto de una sección' }),
+		);
 	} catch (error) {
-		return dispatch(
+		dispatch(
 			onActionCreator(REMOVE_SPEC_BLOCK_ERROR, {
 				error: true,
 				nativeError: error,
@@ -122,7 +134,9 @@ export const onDetachSpecProduct = ({ productID, specID }) => (
 ) => {
 	const { specDocument } = getState();
 	const selectedBlock =
-		specDocument.blocks.find((block) => block.element?.id === productID) || {};
+		specDocument.blocks.find(
+			(block) => block.element?.original_product_id === productID,
+		) || {};
 
 	return dispatch(onRemoveSpecBlock({ specID, blockID: selectedBlock?.id }));
 };
@@ -301,7 +315,7 @@ export const onSortSpecBlocks = ({ blocksIDs, specID }) => async (
 
 	try {
 		const { auth, specDocument } = getState();
-		const sortedSpecBlocks = blocksIDs.reduce((blocks, blockID, index) => {
+		const sortedSpecBlocks = blocksIDs.reduce((blocks, blockID) => {
 			const found = specDocument.blocks.find((block) => block.id === blockID);
 
 			if (!found) {

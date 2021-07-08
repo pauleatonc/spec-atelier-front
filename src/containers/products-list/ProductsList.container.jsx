@@ -32,9 +32,9 @@ import {
 const ProductList = ({
 	extraFilters,
 	withSearch = true,
-  withFilter = true,
-  filterOptionsKey,
-  withoutPadding,
+	withFilter = true,
+	filterOptionsKey,
+	withoutPadding,
 	canAdd,
 	canEdit,
 	canDelete,
@@ -43,6 +43,7 @@ const ProductList = ({
 	emptyListComponent: EmptyListComponent,
 	onActionCard,
 	onClickCreate,
+	isSpec,
 }) => {
 	const defaultFilters = {
 		page: 0,
@@ -147,8 +148,8 @@ const ProductList = ({
 			dispatch(setSelectedAll(true));
 		} else {
 			dispatch(setSelectedAll(false));
-    }
-    dispatch(onGetProducts(filters));
+		}
+		dispatch(onGetProducts(filters));
 	}, [filtersRef.current]);
 
 	useEffect(() => {
@@ -163,8 +164,8 @@ const ProductList = ({
 			{withSearch && (
 				<ProductsSearchContainer
 					keyword={keyword}
-          onChangeParams={onChangeParams}
-          placeholder='Buscar producto'
+					onChangeParams={onChangeParams}
+					placeholder="Buscar producto"
 				/>
 			)}
 			{withFilter && (
@@ -230,10 +231,20 @@ const ProductList = ({
 							dwg={product?.dwg}
 							bim={product?.bim}
 							productId={product.id}
-							selected={Boolean(selected)}
+							selected={
+								isSpec
+									? product?.project_spec_info.items_full_used
+									: Boolean(selected)
+							}
 							canAdd={canAdd}
 							canEdit={canEdit}
 							canDelete={canDelete}
+							specInfo={product?.project_spec_info}
+							itemsUsed={
+								product?.project_spec_info?.items_used.length > 0 &&
+								product?.project_spec_info?.items_used.length <
+									product.items.length
+							}
 						/>
 					);
 				})}

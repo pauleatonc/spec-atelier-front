@@ -41,7 +41,7 @@ const SpecProductsList = () => {
 				section.push(section_id);
 			}
 		});
-		return dispatch(
+		dispatch(
 			onAttachSpecProduct({
 				productID: product.id,
 				specID,
@@ -56,17 +56,13 @@ const SpecProductsList = () => {
 		event.stopPropagation();
 		const { id: productID, items } = product;
 		const hasProduct = selectedProducts.find(
-			(selectedProduct) => selectedProduct?.element.id === productID,
+			(selectedProduct) =>
+				selectedProduct?.element.original_product_id === productID,
 		);
 
-		if (hasProduct) {
-			return dispatch(onDetachSpecProduct({ productID, specID }));
-		}
-
-		if (items.length > 1) {
-			return dispatch(onShowAttachModal({ product }));
-		}
-		return handleAttachSpecProduct(items, product);
+		if (items.length > 1) dispatch(onShowAttachModal({ product }));
+		else if (hasProduct) dispatch(onDetachSpecProduct({ productID, specID }));
+		else handleAttachSpecProduct(items, product);
 	};
 
 	const handleCreateProduct = () => {
@@ -86,7 +82,8 @@ const SpecProductsList = () => {
 				<Body>
 					{show && (
 						<ProductListContainer
-							extraFilters={{ limit: 20 }}
+							isSpec
+							extraFilters={{ limit: 20, project_spec: specID }}
 							filterOptionsKey="spec"
 							canAdd
 							selectedProducts={selectedProducts}
