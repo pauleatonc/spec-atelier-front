@@ -13,6 +13,8 @@ import {
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { onGetProducts } from '../products-list/ProductsList.actions';
+import { closeModal } from '../spec-modal-product/SpecModalProduct.actions';
+import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 
 export const GET_SPEC_BLOCKS = 'GET_SPEC_BLOCKS';
 export const GET_SPEC_BLOCKS_ERROR = 'GET_SPEC_BLOCKS_ERROR';
@@ -69,6 +71,8 @@ export const onAddSpecBlock = ({
 		dispatch(
 			onShowAlertSuccess({ message: 'Añadiste producto a una sección' }),
 		);
+		if (window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches)
+			dispatch(closeModal());
 	} catch (error) {
 		dispatch(
 			onActionCreator(ADD_SPEC_BLOCK_ERROR, {
@@ -117,6 +121,8 @@ export const onRemoveSpecBlock = ({ blockID, specID }) => async (
 		dispatch(
 			onShowAlertSuccess({ message: 'Removiste el producto de una sección' }),
 		);
+		if (window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches)
+			dispatch(closeModal());
 	} catch (error) {
 		dispatch(
 			onActionCreator(REMOVE_SPEC_BLOCK_ERROR, {

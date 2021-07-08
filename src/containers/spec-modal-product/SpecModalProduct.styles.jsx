@@ -29,7 +29,7 @@ export const Container = styled.div`
 		width: 100vw;
 		border-radius: 0;
 		height: 100vh;
-		padding: 5px;
+		padding: 0;
 		position: relative;
 	}
 `;
@@ -42,6 +42,9 @@ export const Content = styled.section`
 	flex-direction: column;
 	letter-spacing: 1px;
 	font-family: Lato;
+	${MEDIA_QUERY_SMALL} {
+		height: 100vh;
+	}
 `;
 
 export const Header = styled.section`
@@ -79,7 +82,7 @@ export const Section = styled.section`
 	height: ${HEIGHT_CONTENT};
 	padding: ${PADDING_CONTENT};
 	${MEDIA_QUERY_SMALL} {
-		height: 100%;
+		height: 90vh;
 		flex-direction: column;
 	}
 `;
@@ -89,6 +92,9 @@ export const ImagesContainer = styled.section`
 	flex: 1;
 	flex-direction: column;
 	overflow-y: auto;
+	${MEDIA_QUERY_SMALL} {
+		display: none;
+	}
 `;
 
 export const ImagesContent = styled.div`
@@ -114,6 +120,9 @@ export const ProductImageSelectedContainer = styled.div`
 	padding: 16px;
 	display: flex;
 	min-height: 200px;
+	${MEDIA_QUERY_SMALL} {
+		flex: initial;
+	}
 `;
 
 export const ProductImageSelected = styled.div`
@@ -129,9 +138,8 @@ export const InfoContainer = styled.section`
 	display: flex;
 	padding: ${PADDING_CONTENT};
 	${MEDIA_QUERY_SMALL} {
-		flex: 1;
-		min-height: ${HEIGHT_CONTENT};
-		margin-bottom: 35px;
+		height: 39%;
+		flex: initial;
 	}
 `;
 
@@ -166,11 +174,6 @@ export const ProductDescription = styled.div`
 	line-height: normal;
 	letter-spacing: 1px;
 	color: ${COLOR_BLACK};
-
-	${MEDIA_QUERY_SMALL} {
-		height: 200px;
-		overflow-y: scroll;
-	}
 `;
 
 export const ProductBrand = styled.div`
