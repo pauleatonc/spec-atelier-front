@@ -46,6 +46,7 @@ const ProductList = ({
 	onActionCard,
 	onClickCreate,
 	isSpec,
+	viewKey,
 }) => {
 	const defaultFilters = {
 		page: 0,
@@ -65,6 +66,7 @@ const ProductList = ({
 		with_products: true,
 		most_used: false,
 		my_products: false,
+		view: viewKey,
 	};
 	const dispatch = useDispatch();
 	const {
@@ -270,7 +272,7 @@ const ProductList = ({
 					);
 				})}
 			</ListContainer>
-			<ProductsListSeeMore filters={filters} initialFilters={initialFilters} />
+			<ProductsListSeeMore filters={filters} />
 		</Container>
 	);
 };

@@ -20,6 +20,7 @@ export const productsListInitialState = {
 	filters: {
 		page: 0,
 		limit: 10,
+		view: null
 	},
 	products: [],
 	items: [],
@@ -56,6 +57,7 @@ const productsListReducer = (
 			return {
 				...state,
 				...payload,
+				products: [...state.products, ...payload.products],
 				loading: false,
 				error: false,
 			};

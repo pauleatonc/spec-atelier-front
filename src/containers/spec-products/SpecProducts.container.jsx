@@ -11,7 +11,7 @@ import {
 	onShowAttachModal,
 	onHideAttachModal,
 } from './SpecProducts.actions';
-import ProductListContainer from '../products-list/ProductsList.container';
+import ProductsListContainer from '../products-list/ProductsList.container';
 
 import { Root, Body } from './SpecProducts.styles';
 import SpecModalAttachProduct from './SpecModalAttachProduct.container';
@@ -81,7 +81,7 @@ const SpecProductsList = () => {
 			<Root>
 				<Body>
 					{show && (
-						<ProductListContainer
+						<ProductsListContainer
 							isSpec
 							extraFilters={{ limit: 20, project_spec: specID }}
 							filterOptionsKey="spec"
@@ -92,6 +92,7 @@ const SpecProductsList = () => {
 							emptyListComponent={CreateProduct}
 							onActionCard={handleCardClick}
 							onClickCreate={handleCreateProduct}
+							viewKey="spec_products"
 						/>
 					)}
 				</Body>
