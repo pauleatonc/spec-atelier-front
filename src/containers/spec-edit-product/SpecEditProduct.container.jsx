@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {
 	onHideSpecEditProduct,
 	onGetSpecProductsSystems,
@@ -27,6 +28,7 @@ import {
 	DocContainer,
 	ImagesContainer,
 	ProductContent,
+	DraggableImageContainer,
 } from './SpecEditProduct.styles';
 import {
 	TextArea,
@@ -38,7 +40,7 @@ import {
 	AttachedImages,
 	AttachedDocuments,
 } from '../../components/SpecComponents';
-import { mapToSelector } from '../../helpers/helpers';
+import { mapToSelector, reorderList } from '../../helpers/helpers';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import DocumentItem from '../../components/attachments/DocumentItem';
 import MultiSelect from '../../components/inputs/MultiSelect';
@@ -367,6 +369,20 @@ const SpecEditProduct = () => {
 			? '100%'
 			: `${Number.parseInt(100 / Math.ceil(imagesValues.length / 3), 10)}%`;
 
+	const handleDragEnd = (result) => {
+		if (!result.destination) {
+			return;
+		}
+
+		const reorderListImages = reorderList(
+			imagesValues,
+			result.source.index,
+			result.destination.index,
+		);
+
+		setImagesValues(reorderListImages);
+	};
+
 	return (
 		<Modal show={show} onClose={handleClose} onExiting={handleExiting}>
 			<Root>
@@ -387,32 +403,60 @@ const SpecEditProduct = () => {
 						<Text onClick={openModalImg}>
 							<i className="fas fa-plus" /> Añadir imagen
 						</Text>
-						<ImagesContainer>
-							{imagesValues.map((img) =>
-								imagesValues.length === 1 ? (
-									<ImageDelete
-										key={img.id}
-										width={imageWidth}
-										height={imagesHeight}
-										img={img}
-										onDelete={handleDeleteImg}
-										hideDelete={!!img.hide_delete}
-									/>
-								) : (
-									imagesValues.length > 1 &&
-									img.src !== '' && (
-										<ImageDelete
-											key={img.id}
-											width={imageWidth}
-											height={imagesHeight}
-											img={img}
-											onDelete={handleDeleteImg}
-											hideDelete={!!img.hide_delete}
-										/>
-									)
-								),
-							)}
-						</ImagesContainer>
+
+						<DragDropContext onDragEnd={handleDragEnd}>
+							<Droppable
+								droppableId="droppable-images-list"
+								direction="horizontal"
+							>
+								{(dropProvided) => (
+									<ImagesContainer
+										ref={dropProvided.innerRef}
+										{...dropProvided.droppableProps}
+									>
+										{imagesValues.map((img, index) =>
+											imagesValues.length === 1 ? (
+												<ImageDelete
+													key={img.id}
+													width={imageWidth}
+													height={imagesHeight}
+													img={img}
+													onDelete={handleDeleteImg}
+													hideDelete={!!img.hide_delete}
+												/>
+											) : (
+												imagesValues.length > 1 &&
+												img.src !== '' && (
+													<Draggable
+														draggableId={`draggable-${img.id}`}
+														key={img.id}
+														index={index}
+													>
+														{(dragProvided) => (
+															<DraggableImageContainer
+																ref={dragProvided.innerRef}
+																width={imageWidth}
+																height={imagesHeight}
+																{...dragProvided.draggableProps}
+																{...dragProvided.dragHandleProps}
+															>
+																<ImageDelete
+																	key={img.id}
+																	img={img}
+																	onDelete={handleDeleteImg}
+																	hideDelete={!!img.hide_delete}
+																/>
+															</DraggableImageContainer>
+														)}
+													</Draggable>
+												)
+											),
+										)}
+									</ImagesContainer>
+								)}
+							</Droppable>
+						</DragDropContext>
+
 						<Text onClick={toggleDocumentsModal}>
 							<i className="fas fa-plus" /> Añadir archivo
 						</Text>

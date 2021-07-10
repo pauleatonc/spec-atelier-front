@@ -168,12 +168,10 @@ export const Text = styled.div`
 `;
 
 export const ImagesContainer = styled.section`
+	display: flex;
+	flex-wrap: wrap;
 	height: 260px;
 	border: dotted 1px ${COLOR_GREY};
-	display: flex;
-	flex: 1;
-	flex-wrap: wrap;
-	justify-content: space-around;
 `;
 
 export const DocContainer = styled.div`
@@ -191,4 +189,7 @@ export const DocContent = styled.div`
 	flex-direction: column;
 `;
 
-export const DocText = styled.div``;
+export const DraggableImageContainer = styled.div`
+	width: ${({ width }) => width};
+	height: ${({ height }) => height};
+`;
