@@ -325,7 +325,9 @@ const SpecEditProduct = () => {
 					[],
 				),
 				images: imagesValues.map((img, index) =>
-					img.file ? { ...img, order: index } : { id: img.id, order: index },
+					img.file
+						? { ...img, order: index }
+						: { image_id: img.id, order: index },
 				),
 				imagesToDelete,
 				documentsToDelete,
