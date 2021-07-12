@@ -158,13 +158,27 @@ export const Text = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 0.63px;
-	text-align: right;
 	color: ${COLOR_PRIMARY};
 	margin: 12px 0;
 	cursor: pointer;
 	&:first-child {
 		margin-top: 0;
 	}
+`;
+
+export const SubtitleContent = styled.p`
+	color: rgba(33, 33, 33, 0.44);
+	font-family: Lato;
+	font-size: 12px;
+	letter-spacing: 0.75px;
+	margin-bottom: 12px;
+	margin-left: 8px;
+`;
+
+export const ContainerHeaderContent = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
 `;
 
 export const ImagesContainer = styled.section`

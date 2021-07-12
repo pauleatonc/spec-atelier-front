@@ -256,7 +256,7 @@ const ProductList = ({
 							productId={product.id}
 							selected={
 								isSpec
-									? product?.project_spec_info.items_full_used
+									? product?.project_spec_info?.items_full_used
 									: Boolean(selected)
 							}
 							canAdd={canAdd}

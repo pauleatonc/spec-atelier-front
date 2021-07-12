@@ -29,6 +29,8 @@ import {
 	ImagesContainer,
 	ProductContent,
 	DraggableImageContainer,
+	SubtitleContent,
+	ContainerHeaderContent,
 } from './SpecEditProduct.styles';
 import {
 	TextArea,
@@ -261,6 +263,7 @@ const SpecEditProduct = () => {
 				src: URL.createObjectURL(img),
 				file: img,
 				isNew: true,
+				order: imagesValues.length,
 			})),
 		]);
 	};
@@ -321,9 +324,8 @@ const SpecEditProduct = () => {
 					(acc, doc) => (doc.isNew ? [...acc, doc.file] : acc),
 					[],
 				),
-				images: imagesValues.reduce(
-					(acc, img) => (img.isNew ? [...acc, img.file] : acc),
-					[],
+				images: imagesValues.map((img, index) =>
+					img.file ? { ...img, order: index } : { id: img.id, order: index },
 				),
 				imagesToDelete,
 				documentsToDelete,
@@ -400,10 +402,14 @@ const SpecEditProduct = () => {
 				<ProductContainer>
 					{/* Left */}
 					<ProductContent>
-						<Text onClick={openModalImg}>
-							<i className="fas fa-plus" /> Añadir imagen
-						</Text>
-
+						<ContainerHeaderContent>
+							<Text onClick={openModalImg}>
+								<i className="fas fa-plus" /> Añadir imagen
+							</Text>
+							<SubtitleContent>
+								(Puedes ordenarlas. La primera se mostrará por defecto)
+							</SubtitleContent>
+						</ContainerHeaderContent>
 						<DragDropContext onDragEnd={handleDragEnd}>
 							<Droppable
 								droppableId="droppable-images-list"

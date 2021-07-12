@@ -155,9 +155,14 @@ const AttachedImages = (props) => {
 					</DragDropContext>
 
 					{images.length > 0 && (
-						<Action onClick={handleOpen}>
-							Sube imágene{maxSize === 1 ? '' : 's'}
-						</Action>
+						<>
+							<Action onClick={handleOpen}>
+								Sube imágene{maxSize === 1 ? '' : 's'}.
+							</Action>
+							<EmptyText marginLeft={15} marginTop={7}>
+								Puedes ordenarlas. La primera se mostrará por defecto
+							</EmptyText>
+						</>
 					)}
 				</>
 			)}
