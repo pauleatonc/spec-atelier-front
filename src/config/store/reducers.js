@@ -28,6 +28,7 @@ import clientsImageSliderReducer from '../../containers/clients-images-slider/Cl
 import ProfileReducer from '../../containers/profile-header/ProfileHeader.reducer';
 import ProfileStatsReducer from '../../containers/profile-stats/ProfileStats.reducer';
 import ModalPlanFormReducer from '../../containers/modal-plan-form/reducer';
+import dataSectionsReducer from '../../containers/spec-contents-buttons/SpecContentsButtons.reducer'
 
 export default combineReducers({
 	auth: authReducer,
@@ -58,5 +59,6 @@ export default combineReducers({
 	specAdmin: specAdminReducer,
 	profile: ProfileReducer,
 	profileStats: ProfileStatsReducer,
-	modalPlanForm: ModalPlanFormReducer
+	modalPlanForm: ModalPlanFormReducer,
+	dataSection: dataSectionsReducer
 });
