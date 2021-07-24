@@ -44,7 +44,6 @@ const authReducer = (state = initialState, action = {}) => {
         ...state,
         isLogin: action.payload.isLogin,
         user: action.payload.user,
-        isAutoLogout: false,
         impersonated: action.payload.impersonated || false
       };
     case LOG_IN_ERROR:
