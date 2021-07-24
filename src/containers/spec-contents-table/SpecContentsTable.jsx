@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTable, useExpanded } from 'react-table';
+import { useSelector } from 'react-redux';
 import {
 	Root,
 	ContentTable,
@@ -25,7 +26,13 @@ import iconArrowDown from '../../assets/images/icons/blue-arrow-down.svg';
 import iconArrowUp from '../../assets/images/icons/blue-arrow-up.svg';
 import CurrentInputTable from './components/CurrentInputTable';
 
+const transformData = (data) => [...data];
+
 const SpecContentsTable = () => {
+	const { blocks } = useSelector((state) => state.specDocument);
+
+	const formatedData = transformData(blocks);
+
 	const data = React.useMemo(
 		() => [
 			{
