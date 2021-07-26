@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useTable, useExpanded } from 'react-table';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	Root,
 	ContentTable,
@@ -25,101 +25,87 @@ import specDownloadSource from '../../assets/images/icons/ic-download.svg';
 import iconArrowDown from '../../assets/images/icons/blue-arrow-down.svg';
 import iconArrowUp from '../../assets/images/icons/blue-arrow-up.svg';
 import CurrentInputTable from './components/CurrentInputTable';
-
-const transformData = (data) => [...data];
+//import PubSub from 'pubsub-js'
+import { sendData } from './SpecContentsTable.actions';
 
 const SpecContentsTable = () => {
-	const { blocks } = useSelector((state) => state.specDocument);
-
-	const formatedData = transformData(blocks);
-
+	const dispatch = useDispatch();
+    const {bodyData} = useSelector(state => state);	
+	const { blocks, project } = useSelector((state) => state.specDocument);
+	const sectionsBlocks = blocks.filter(block => block.type === 'Section');
+	const datapb =  blocks.filter(block => block.type === 'Product')
+	.map(productBlock => ({
+		...productBlock,
+		subtotal:4
+	}));
+	const dataArray = sectionsBlocks.map(sectionBlock => ({
+		id: sectionBlock.element.id,
+		desc: sectionBlock.element.name,
+		unidad: '',
+		cnt: 0,
+		subtotal: 0,
+		type: sectionBlock.type,
+		//...sectionBlock,
+		subRows: blocks
+			.filter(block => block.type === 'Item' && block.section === sectionBlock.element.id)
+			.map(itemBlock => ({
+			//...itemBlock,
+			id: itemBlock.element.id,
+			desc: itemBlock.element.name,
+			unidad: '',
+			cnt: 0,
+			subtotal: datapb.filter(block => block.type === 'Product' && block.item === itemBlock.element.id)
+			.reduce((a, b) => a = a + b.subtotal, 0),
+			type: itemBlock.type,
+			subRows: blocks.filter(block => block.type === 'Product' && block.item === itemBlock.element.id)
+			.map(productBlock => ({
+				id: productBlock.element.id,
+				desc: productBlock.element.name,
+				unidad: '',
+				cnt: 0,
+				subtotal: 4, // viene del endpoint
+				type: productBlock.type,
+			})),
+			})),
+	}));
+	const datapb2 = dataArray.filter(block => block.type === 'Section').map(itemBlock => ({
+		row: itemBlock.subRows, 
+		type: 'Item',
+		id: itemBlock.id
+	}));
+	const dataArrayFinal = sectionsBlocks.map(sectionBlock => ({
+		id: sectionBlock.element.id,
+		desc: sectionBlock.element.name,
+		unidad: '',
+		cnt: 0,
+		subtotal: datapb2.filter(block => block.type === 'Item' && block.id === sectionBlock.element.id)
+		.map(datanum => datanum.row).reduce((a, b) => a = a + b[0].subtotal, 0),
+		type: sectionBlock.type,
+		subRows: blocks
+			.filter(block => block.type === 'Item' && block.section === sectionBlock.element.id)
+			.map(itemBlock => ({
+			id: itemBlock.element.id,
+			desc: itemBlock.element.name,
+			unidad: '',
+			cnt: 0,
+			subtotal: datapb.filter(block => block.type === 'Product' && block.item === itemBlock.element.id)
+			.reduce((a, b) => a = a + b.subtotal, 0),
+			type: itemBlock.type,
+			subRows: blocks.filter(block => block.type === 'Product' && block.item === itemBlock.element.id)
+			.map(productBlock => ({
+				id: productBlock.element.id,
+				desc: productBlock.element.name,
+				unidad: '',
+				cnt: 0,
+				subtotal: 4, // viene del endpoint
+				type: productBlock.type,
+			})),
+			})),
+	}));
+	const dataProducts = datapb.filter(block => block.type === 'Product');
+	const totalProducts = dataProducts.reduce((a, b) => a = a + b.subtotal, 0);
 	const data = React.useMemo(
-		() => [
-			{
-				id: '1',
-				desc: 'TERMINACION',
-				unidad: '',
-				cnt: '',
-				subtotal: '$500000',
-				type: 'Section',
-				subRows: [
-					{
-						id: '1.1',
-						desc: 'Puertas',
-						unidad: '',
-						cnt: '',
-						subtotal: '3000',
-						type: 'Partida',
-						subRows: [
-							{
-								id: '1.2',
-								desc: '007 Puerta detalle',
-								unidad: 'Unidad del endpoint',
-								cnt: '5',
-								subtotal: '2500',
-								type: 'Producto',
-							},
-						],
-					},
-				],
-			},
-			{
-				id: '1',
-				desc: 'TERMINACION',
-				unidad: '',
-				cnt: '',
-				subtotal: '$3000',
-				type: 'Section',
-				subRows: [
-					{
-						id: '1.1',
-						desc: 'Puertas',
-						unidad: '',
-						cnt: '',
-						subtotal: '$3000',
-						type: 'Partida',
-						subRows: [
-							{
-								id: '1.2',
-								desc: '007 Puerta detalle',
-								unidad: 'Unidad del endpoint',
-								cnt: '',
-								subtotal: '2500',
-								type: 'Producto',
-							},
-						],
-					},
-				],
-			},
-			{
-				id: '1',
-				desc: 'TERMINACION',
-				unidad: '',
-				cnt: '',
-				subtotal: '$3000',
-				type: 'Section',
-				subRows: [
-					{
-						id: '1.1',
-						desc: 'Puertas',
-						unidad: '',
-						cnt: '0',
-						subtotal: '$3000',
-						type: 'Partida',
-						subRows: [
-							{
-								id: '1.2',
-								desc: '007 Puerta detalle',
-								unidad: 'Unidad del endpoint',
-								cnt: 'input',
-								subtotal: '2500',
-								type: 'Producto',
-							},
-						],
-					},
-				],
-			},
-		],
+		() => dataArrayFinal,
 		[],
 	);
 
@@ -138,10 +124,12 @@ const SpecContentsTable = () => {
 				Header: 'Cantidad',
 				Cell: ({ row }) => {
 					return (
-						row?.original?.type === 'Producto' && (
+						row?.original?.type === 'Product' && (
 							<CurrentInputTable
 								tableInputType="quantity"
 								value={row?.original?.cnt}
+								enlacer={row?.original?.id}
+								// onChange={e => setQuantity(e.target.value)}
 							/>
 						)
 					);
@@ -151,11 +139,14 @@ const SpecContentsTable = () => {
 				Header: 'Subtotal',
 				Cell: ({ row }) => {
 					switch (row?.original?.type) {
-						case 'Producto':
+						case 'Product':
 							return (
-								<>
-									<CurrentInputTable value={row?.original?.subtotal} />
-								</>
+								row?.original?.subtotal === 0 ? (
+									<CurrentInputTable
+										tableInputType="subtotal"
+										value={row?.original?.subtotal} 
+										enlacer={row?.original?.id} />
+								): row?.original?.subtotal 
 							);
 						default:
 							return <>{row?.original?.subtotal}</>;
@@ -182,7 +173,7 @@ const SpecContentsTable = () => {
 								/>
 							);
 
-						case 'Partida':
+						case 'Item':
 							return (
 								<ImgSubtotal
 									{...row.getToggleRowExpandedProps()}
@@ -190,7 +181,7 @@ const SpecContentsTable = () => {
 								/>
 							);
 						default:
-							return <ButtonConsult>Consultar</ButtonConsult>;
+							return <ButtonConsult>Consultar precio</ButtonConsult>;
 					}
 				},
 			},
@@ -214,7 +205,7 @@ const SpecContentsTable = () => {
 		<Root>
 			<ContentTable>
 				<Header>
-					<Title>Itemizado y presupuesto</Title>
+					<Title>Itemizado y presupuesto del {project.name}</Title>
 					<ButtonsHeader>
 						<Button>Expandir Filas</Button>
 						<Button>
@@ -244,7 +235,7 @@ const SpecContentsTable = () => {
 										return (
 											<TD
 												{...cell.getCellProps()}
-												isTypeUnity={cell?.row?.original?.type === 'Producto'}
+												isTypeUnity={cell?.row?.original?.type === 'Product'}
 											>
 												{cell.render('Cell')}
 											</TD>
@@ -256,9 +247,9 @@ const SpecContentsTable = () => {
 					</TBODY>
 				</Table>
 				<TableFooter>
-					<TableElements>30 elementos especificados</TableElements>
+					<TableElements>{dataProducts.length} elementos especificados</TableElements>
 					<TableTotal>Total</TableTotal>
-					<TableTotal>$40000</TableTotal>
+					<TableTotal>${totalProducts}</TableTotal>
 				</TableFooter>
 			</ContentTable>
 		</Root>

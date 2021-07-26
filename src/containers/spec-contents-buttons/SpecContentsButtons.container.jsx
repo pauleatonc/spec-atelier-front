@@ -14,12 +14,15 @@ import specAddSourceW from '../../assets/images/icons/ic-table.svg';
 const SpecContentButtons = () => {
     const dispatch = useDispatch();
     const {dataSection} = useSelector(state => state);
+    const {
+		option: { option },
+	} = dataSection;
     const handdleShowTable = (option) => {
         dispatch(requestFile({option:option}));
     }
     return (
         <Root>
-            <ContentButton>
+            <ContentButton isTypeTable={option === 'T'}>
                 <AddIcon
                     alt="Listar tabla"
                     src={specAddSourceW}

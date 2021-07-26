@@ -15,7 +15,7 @@ export const ContentButton = styled.div`
     position: relative; 
     margin-left: auto;
     margin-right: auto;
-    width: 587px;
+    width: ${({ isTypeTable }) => (isTypeTable ? '965px':'587px' )};
 `;
 
 export const AddIcon = styled.img`

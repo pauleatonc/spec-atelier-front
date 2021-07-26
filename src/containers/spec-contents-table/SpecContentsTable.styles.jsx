@@ -15,16 +15,17 @@ export const ContentTable = styled.div`
     position: relative; 
     margin-left: auto;
     margin-right: auto;
-    width: 827px;
+    width: 970px;
     height: 597px;
 `;
 
 export const Header = styled.div`
     width: 100%;
     height: 46px;
-    padding: 2%;
+    padding-top: 2%;
     padding-left: 5%;
     padding-right: 3%;
+    padding-bottom: 4%;
     font-family: Lato;
     font-size: 16px;
     font-weight: bold;
@@ -33,18 +34,22 @@ export const Header = styled.div`
     line-height: 0.94;
     letter-spacing: normal;
     background-color: rgba(255, 255, 255);
+    border-radius: 2px;
+    border: solid 1px #e9e9e9;
 `;
 
 export const TableFooter = styled.div`
-    width: 825px;
+    width: 970px;
     height: 51px;
     padding: 17px 72px 12px 24px;
     background-color: rgba(0, 196, 172, 0.06);
     display: flex;
+    border-radius: 2px;
+    border: solid 1px #e9e9e9;
 `;
 
 export const TableElements = styled.h1`
-    width: 466px;
+    width: 515px;
     height: 17px;
     font-family: Lato;
     font-size: 14px;
@@ -142,7 +147,7 @@ export const TD = styled.td`
     border-bottom: 1px solid #dddddd;
     padding-left: 15px;
     padding-top: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 20px;
     width: 20px;
     font-family: Lato;
     font-size: 12px;
@@ -188,5 +193,5 @@ export const ButtonConsult = styled.div`
     color: #00c3ac;
     height: 20px;
     float: right;
-    margin-right: 32%;
+    margin-right: 40%;
 `;
