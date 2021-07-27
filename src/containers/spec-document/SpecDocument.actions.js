@@ -10,6 +10,7 @@ import {
 	updateSpecBlockImage,
 	updateSpecBlockText,
 	deleteSpecBlockText,
+	updateProduct,
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 
@@ -297,11 +298,11 @@ export const onSortSpecBlocks = ({ blocksIDs, specID }) => async (
 	dispatch,
 	getState,
 ) => {
-	dispatch(onActionCreator(SORT_SPEC_BLOCKS));
+	onActionCreator(SORT_SPEC_BLOCKS);
 
 	try {
 		const { auth, specDocument } = getState();
-		const sortedSpecBlocks = blocksIDs.reduce((blocks, blockID, index) => {
+		const sortedSpecBlocks = blocksIDs.reduce((blocks, blockID) => {
 			const found = specDocument.blocks.find((block) => block.id === blockID);
 
 			if (!found) {
@@ -331,4 +332,23 @@ export const onSortSpecBlocks = ({ blocksIDs, specID }) => async (
 			}),
 		);
 	}
+};
+
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
+export const UPDATE_PRODUCT_ERROR = 'UPDATE_PRODUCT_ERROR';
+export const handleUpdateProduct = (data) => async (dispatch) => {
+	dispatch(onActionCreator(UPDATE_PRODUCT));
+	updateProduct(data).then(
+		(response) => {
+			// TODO: update
+			dispatch(onActionCreator(UPDATE_PRODUCT_SUCCESS));
+			console.log(response);
+		},
+		(error) => {
+			// TODO: update
+			dispatch(onActionCreator(UPDATE_PRODUCT_ERROR));
+			console.log(error);
+		},
+	);
 };

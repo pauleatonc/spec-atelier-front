@@ -29,12 +29,11 @@ import ProfileReducer from '../../containers/profile-header/ProfileHeader.reduce
 import ProfileStatsReducer from '../../containers/profile-stats/ProfileStats.reducer';
 import ModalPlanFormReducer from '../../containers/modal-plan-form/reducer';
 import dataSectionsReducer from '../../containers/spec-contents-buttons/SpecContentsButtons.reducer';
-import bodyDataReducer from '../../containers/spec-contents-table/SpecContentsTable.reducer';
 
 export default combineReducers({
 	auth: authReducer,
-  app: appReducer,
-  actAsAnotherUserList: actAsAnotherUserListReducer,
+	app: appReducer,
+	actAsAnotherUserList: actAsAnotherUserListReducer,
 	client: clientReducer,
 	clientsList: clientListReducer,
 	clientsImageSlider: clientsImageSliderReducer,
@@ -62,5 +61,4 @@ export default combineReducers({
 	profileStats: ProfileStatsReducer,
 	modalPlanForm: ModalPlanFormReducer,
 	dataSection: dataSectionsReducer,
-	bodyData: bodyDataReducer
 });

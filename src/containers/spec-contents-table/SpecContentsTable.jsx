@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { useTable, useExpanded } from 'react-table';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -25,101 +25,126 @@ import specDownloadSource from '../../assets/images/icons/ic-download.svg';
 import iconArrowDown from '../../assets/images/icons/blue-arrow-down.svg';
 import iconArrowUp from '../../assets/images/icons/blue-arrow-up.svg';
 import CurrentInputTable from './components/CurrentInputTable';
-//import PubSub from 'pubsub-js'
-import { sendData } from './SpecContentsTable.actions';
+import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
 
 const SpecContentsTable = () => {
 	const dispatch = useDispatch();
-    const {bodyData} = useSelector(state => state);	
 	const { blocks, project } = useSelector((state) => state.specDocument);
-	const sectionsBlocks = blocks.filter(block => block.type === 'Section');
-	const datapb =  blocks.filter(block => block.type === 'Product')
-	.map(productBlock => ({
-		...productBlock,
-		subtotal:0
-	}));
-	const dataArray = sectionsBlocks.map(sectionBlock => ({
+	const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
+	const datapb = blocks
+		.filter((block) => block.type === 'Product')
+		.map((productBlock) => ({
+			...productBlock,
+			subtotal: 0,
+		}));
+	const dataArray = sectionsBlocks.map((sectionBlock) => ({
 		id: sectionBlock.element.id,
 		desc: sectionBlock.element.name,
 		unidad: '',
 		cnt: 0,
 		subtotal: 0,
 		type: sectionBlock.type,
-		//...sectionBlock,
 		subRows: blocks
-			.filter(block => block.type === 'Item' && block.section === sectionBlock.element.id)
-			.map(itemBlock => ({
-			//...itemBlock,
-			id: itemBlock.element.id,
-			desc: itemBlock.element.name,
-			unidad: '',
-			cnt: 0,
-			subtotal: datapb.filter(block => block.type === 'Product' && block.item === itemBlock.element.id)
-			.reduce((a, b) => a = a + b.subtotal, 0),
-			type: itemBlock.type,
-			subRows: blocks.filter(block => block.type === 'Product' && block.item === itemBlock.element.id)
-			.map(productBlock => ({
-				id: productBlock.element.id,
-				desc: productBlock.element.name,
+			.filter(
+				(block) =>
+					block.type === 'Item' && block.section === sectionBlock.element.id,
+			)
+			.map((itemBlock) => ({
+				id: itemBlock.element.id,
+				desc: itemBlock.element.name,
 				unidad: '',
 				cnt: 0,
-				subtotal: 0, // viene del endpoint
-				type: productBlock.type,
-			})),
+				subtotal: datapb
+					.filter(
+						(block) =>
+							block.type === 'Product' && block.item === itemBlock.element.id,
+					)
+					.reduce((a, b) => (a = a + b.subtotal), 0),
+				type: itemBlock.type,
+				subRows: blocks
+					.filter(
+						(block) =>
+							block.type === 'Product' && block.item === itemBlock.element.id,
+					)
+					.map((productBlock) => ({
+						id: productBlock.element.id,
+						desc: productBlock.element.name,
+						unidad: '',
+						cnt: 0,
+						subtotal: 0,
+						type: productBlock.type,
+					})),
 			})),
 	}));
-	const datapb2 = dataArray.filter(block => block.type === 'Section').map(itemBlock => ({
-		row: itemBlock.subRows, 
-		type: 'Item',
-		id: itemBlock.id
-	}));
-	const dataArrayFinal = sectionsBlocks.map(sectionBlock => ({
+	const datapb2 = dataArray
+		.filter((block) => block.type === 'Section')
+		.map((itemBlock) => ({
+			row: itemBlock.subRows,
+			type: 'Item',
+			id: itemBlock.id,
+		}));
+	const dataArrayFinal = sectionsBlocks.map((sectionBlock) => ({
 		id: sectionBlock.element.id,
 		desc: sectionBlock.element.name,
 		unidad: '',
 		cnt: 0,
-		subtotal: datapb2.filter(block => block.type === 'Item' && block.id === sectionBlock.element.id)
-		.map(datanum => datanum.row).reduce((a, b) => a = a + b[0].subtotal, 0),
+		subtotal: datapb2
+			.filter(
+				(block) =>
+					block.type === 'Item' && block.id === sectionBlock.element.id,
+			)
+			.map((datanum) => datanum.row)
+			.reduce((a, b) => (a = a + b[0].subtotal), 0),
 		type: sectionBlock.type,
 		subRows: blocks
-			.filter(block => block.type === 'Item' && block.section === sectionBlock.element.id)
-			.map(itemBlock => ({
-			id: itemBlock.element.id,
-			desc: itemBlock.element.name,
-			unidad: '',
-			cnt: 0,
-			subtotal: datapb.filter(block => block.type === 'Product' && block.item === itemBlock.element.id)
-			.reduce((a, b) => a = a + b.subtotal, 0),
-			type: itemBlock.type,
-			subRows: blocks.filter(block => block.type === 'Product' && block.item === itemBlock.element.id)
-			.map(productBlock => ({
-				id: productBlock.element.id,
-				desc: productBlock.element.name,
+			.filter(
+				(block) =>
+					block.type === 'Item' && block.section === sectionBlock.element.id,
+			)
+			.map((itemBlock) => ({
+				id: itemBlock.element.id,
+				desc: itemBlock.element.name,
 				unidad: '',
 				cnt: 0,
-				subtotal: 0, // viene del endpoint
-				type: productBlock.type,
-			})),
+				subtotal: datapb
+					.filter(
+						(block) =>
+							block.type === 'Product' && block.item === itemBlock.element.id,
+					)
+					.reduce((a, b) => (a = a + b.subtotal), 0),
+				type: itemBlock.type,
+				subRows: blocks
+					.filter(
+						(block) =>
+							block.type === 'Product' && block.item === itemBlock.element.id,
+					)
+					.map((productBlock) => ({
+						id: productBlock.element.id,
+						desc: productBlock.element.name,
+						unidad: '',
+						cnt: 0,
+						subtotal: 0, // viene del endpoint
+						type: productBlock.type,
+					})),
 			})),
 	}));
-	const dataProducts = datapb.filter(block => block.type === 'Product');
-	const totalProducts = dataProducts.reduce((a, b) => a = a + b.subtotal, 0);
-	const data = React.useMemo(
-		() => dataArrayFinal,
-		[],
-	);
-	const [currentValueQ, setCurrentValueQ] = useState();
-	const [currentValueS, setCurrentValueS] = useState();
-	const inputF = (a,b) => {
-		//console.log(a,b);
-		console.log(currentValueQ);
-	}
+	const dataProducts = datapb.filter((block) => block.type === 'Product');
+	const totalProducts = dataProducts.reduce((a, b) => (a = a + b.subtotal), 0);
+	const data = React.useMemo(() => dataArrayFinal, []);
+
+	const handleOnBlurInput = (tableInputType, inputValue, productId) => {
+		const body = {
+			id: productId,
+			[tableInputType]: inputValue,
+		};
+		dispatch(handleUpdateProduct(body));
+	};
 
 	const columns = React.useMemo(
 		() => [
 			{
 				Header: 'Item',
-				accessor: 'id', // accessor is the "key" in the data
+				accessor: 'id',
 			},
 			{
 				Header: 'Descripción',
@@ -134,10 +159,8 @@ const SpecContentsTable = () => {
 							<CurrentInputTable
 								tableInputType="quantity"
 								value={row?.original?.cnt}
-								enlacer={row?.original?.id}
-								customOnBlur={inputF}
-								row={row?.original}
-								// onChange={e => setQuantity(e.target.value)}
+								onBlurInput={handleOnBlurInput}
+								row={row.original}
 							/>
 						)
 					);
@@ -148,15 +171,15 @@ const SpecContentsTable = () => {
 				Cell: ({ row }) => {
 					switch (row?.original?.type) {
 						case 'Product':
-							return (
-								row?.original?.subtotal === 0 ? (
-									<CurrentInputTable
-										tableInputType="subtotal"
-										value={row?.original?.subtotal} 
-										enlacer={row?.original?.id}
-										customOnBlur={inputF}
-										row={row?.original} />
-								): row?.original?.subtotal 
+							return row?.original?.subtotal === 0 ? (
+								<CurrentInputTable
+									tableInputType="price_user"
+									value={row?.original?.subtotal}
+									onBlurInput={handleOnBlurInput}
+									row={row.original}
+								/>
+							) : (
+								row?.original?.subtotal
 							);
 						default:
 							return <>{row?.original?.subtotal}</>;
@@ -257,7 +280,9 @@ const SpecContentsTable = () => {
 					</TBODY>
 				</Table>
 				<TableFooter>
-					<TableElements>{dataProducts.length} elementos especificados</TableElements>
+					<TableElements>
+						{dataProducts.length} elementos especificados
+					</TableElements>
 					<TableTotal>Total</TableTotal>
 					<TableTotal>${totalProducts}</TableTotal>
 				</TableFooter>

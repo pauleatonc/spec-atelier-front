@@ -9,38 +9,16 @@ const CurrentInputTable = ({
 	disabled,
 	tableInputType,
 	enlacer,
-	customOnBlur,
+	onBlurInput,
 	row,
 	...restProps
 }) => {
 	const [currentValue, setCurrentValue] = useState(value);
-	const [body, setBody] = useState([]);
-	const onChangeCurrentValue = ({ target: { value: inputValue} }) => {
-		setCurrentValue(inputValue)
+	const onChangeCurrentValue = ({ target: { value: inputValue } }) => {
+		setCurrentValue(inputValue);
 	};
-	const handleSubmit = ({ target: { value: inputValue} }) => {
-		// TODO: Add endpoint call
-
-		// switch (tableInputType) {
-		// 	case 'quantity':
-		// 		setBody(body => [
-		// 		{
-		// 			id: enlacer,
-		// 			quantity: currentValueQ,
-		// 			price_user: currentValueS
-		// 		}])
-		// 		break;
-		// 	case 'subtotal':
-		// 		setBody(body => [
-		// 		{
-		// 			id: enlacer,
-		// 			quantity: currentValueQ,
-		// 			price_user: currentValueS
-		// 		}])
-		// 		break;
-		// 	default:
-		// 		break;
-		// }
+	const handleBlur = ({ target: { value: inputValue } }) => {
+		onBlurInput(tableInputType, inputValue, row.id);
 	};
 
 	return (
@@ -51,26 +29,20 @@ const CurrentInputTable = ({
 			value={currentValue}
 			onChange={onChangeCurrentValue}
 			colorUnderline={COLOR_GREEN_UNDERLINE}
-			onBlur={handleSubmit}
+			onBlur={handleBlur}
 			{...restProps}
 		/>
 	);
 };
 
 CurrentInputTable.defaultProps = {
-	value: 0,
 	type: 'number',
-	disabled: false,
-	enlacer: 0
 };
 CurrentInputTable.propTypes = {
-	value: PropTypes.number,
+	value: PropTypes.string.isRequired,
 	type: PropTypes.oneOf(['number', 'underline', 'form']),
-	tableInputType: PropTypes.oneOf(['subtotal', 'quantity']).isRequired,
-	disabled: PropTypes.bool,
-	enlacer: PropTypes.number,
-	customOnBlur: PropTypes.func,
-	row: PropTypes.any
+	tableInputType: PropTypes.oneOf(['price_user', 'quantity']).isRequired,
+	onBlurInput: PropTypes.func.isRequired,
 };
 
 export default CurrentInputTable;
