@@ -9,61 +9,49 @@ const CurrentInputTable = ({
 	disabled,
 	tableInputType,
 	enlacer,
+	customOnBlur,
+	row,
 	...restProps
 }) => {
 	const [currentValue, setCurrentValue] = useState(value);
-	const [currentValueQ, setCurrentValueQ] = useState(value);
-	const [currentValueS, setCurrentValueS] = useState(value);
 	const [body, setBody] = useState([]);
 	const onChangeCurrentValue = ({ target: { value: inputValue} }) => {
 		setCurrentValue(inputValue)
-		switch (tableInputType) {
-			case 'quantity':
-				setCurrentValueQ(parseInt(inputValue))
-				break;
-			case 'subtotal':
-				setCurrentValueS(parseInt(inputValue))
-				break;
-			default:
-				break;
-		}
-		// tableInputType === 'quantity' && setCurrentValueQ(parseInt(inputValue))
-		// tableInputType === 'subtotal' && setCurrentValueS(parseInt(inputValue))
 	};
-	const handleSubmitQuantity = ({ target: { value: inputValue} }) => {
+	const handleSubmit = ({ target: { value: inputValue} }) => {
 		// TODO: Add endpoint call
-		switch (tableInputType) {
-			case 'quantity':
-				setBody(body => [...body,
-				{
-					id: enlacer,
-					quantity: currentValueQ,
-					price_user: currentValueS
-				}])
-				break;
-			case 'subtotal':
-				setBody(body => [...body,
-				{
-					id: enlacer,
-					quantity: currentValueQ,
-					price_user: currentValueS
-				}])
-				break;
-			default:
-				break;
-		}
+
+		// switch (tableInputType) {
+		// 	case 'quantity':
+		// 		setBody(body => [
+		// 		{
+		// 			id: enlacer,
+		// 			quantity: currentValueQ,
+		// 			price_user: currentValueS
+		// 		}])
+		// 		break;
+		// 	case 'subtotal':
+		// 		setBody(body => [
+		// 		{
+		// 			id: enlacer,
+		// 			quantity: currentValueQ,
+		// 			price_user: currentValueS
+		// 		}])
+		// 		break;
+		// 	default:
+		// 		break;
+		// }
 	};
-	console.log(body);
+
 	return (
 		<Input
 			type="underline"
 			inputType="number"
-			width="18px"
+			width="58px"
 			value={currentValue}
 			onChange={onChangeCurrentValue}
 			colorUnderline={COLOR_GREEN_UNDERLINE}
-			onBlur={handleSubmitQuantity}
-			enlacer="0"
+			onBlur={handleSubmit}
 			{...restProps}
 		/>
 	);
@@ -81,6 +69,8 @@ CurrentInputTable.propTypes = {
 	tableInputType: PropTypes.oneOf(['subtotal', 'quantity']).isRequired,
 	disabled: PropTypes.bool,
 	enlacer: PropTypes.number,
+	customOnBlur: PropTypes.func,
+	row: PropTypes.any
 };
 
 export default CurrentInputTable;

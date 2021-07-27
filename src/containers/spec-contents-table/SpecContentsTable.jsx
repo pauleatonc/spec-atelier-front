@@ -36,7 +36,7 @@ const SpecContentsTable = () => {
 	const datapb =  blocks.filter(block => block.type === 'Product')
 	.map(productBlock => ({
 		...productBlock,
-		subtotal:4
+		subtotal:0
 	}));
 	const dataArray = sectionsBlocks.map(sectionBlock => ({
 		id: sectionBlock.element.id,
@@ -63,7 +63,7 @@ const SpecContentsTable = () => {
 				desc: productBlock.element.name,
 				unidad: '',
 				cnt: 0,
-				subtotal: 4, // viene del endpoint
+				subtotal: 0, // viene del endpoint
 				type: productBlock.type,
 			})),
 			})),
@@ -97,7 +97,7 @@ const SpecContentsTable = () => {
 				desc: productBlock.element.name,
 				unidad: '',
 				cnt: 0,
-				subtotal: 4, // viene del endpoint
+				subtotal: 0, // viene del endpoint
 				type: productBlock.type,
 			})),
 			})),
@@ -108,6 +108,12 @@ const SpecContentsTable = () => {
 		() => dataArrayFinal,
 		[],
 	);
+	const [currentValueQ, setCurrentValueQ] = useState();
+	const [currentValueS, setCurrentValueS] = useState();
+	const inputF = (a,b) => {
+		//console.log(a,b);
+		console.log(currentValueQ);
+	}
 
 	const columns = React.useMemo(
 		() => [
@@ -129,6 +135,8 @@ const SpecContentsTable = () => {
 								tableInputType="quantity"
 								value={row?.original?.cnt}
 								enlacer={row?.original?.id}
+								customOnBlur={inputF}
+								row={row?.original}
 								// onChange={e => setQuantity(e.target.value)}
 							/>
 						)
@@ -145,7 +153,9 @@ const SpecContentsTable = () => {
 									<CurrentInputTable
 										tableInputType="subtotal"
 										value={row?.original?.subtotal} 
-										enlacer={row?.original?.id} />
+										enlacer={row?.original?.id}
+										customOnBlur={inputF}
+										row={row?.original} />
 								): row?.original?.subtotal 
 							);
 						default:
