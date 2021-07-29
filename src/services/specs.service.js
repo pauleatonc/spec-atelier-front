@@ -160,5 +160,5 @@ export const updateProjectConfig = factoryService(
 );
 
 export const updateProduct = factoryService((body) =>
-	postJsonRequest(`${API_BASE_URL}/products/update`, body),
+	patchJsonRequest(`${API_BASE_URL}/products/update`, body),
 );

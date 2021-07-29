@@ -121,6 +121,9 @@ export const ImgSubtotal = styled.img`
     margin-left: 33%;
 `;
 
+export const ImgExpanderAll = styled.img`
+    display: none;
+`;
 export const Table = styled.table`
     width: 100%;
     border-radius: 2px;
