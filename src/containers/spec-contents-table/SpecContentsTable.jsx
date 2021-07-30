@@ -91,8 +91,9 @@ const SpecContentsTable = () => {
 	}));
 
 	const dataArrayFinal = sectionsBlocks.map((sectionBlock) => ({
+		item_id: sectionBlock.element.item_id,
 		id: sectionBlock.element.id,
-		desc: sectionBlock.element.name,
+		desc: sectionBlock.element.item_title,
 		unidad: '',
 		cnt: 0,
 		subtotal: datapb2
@@ -109,8 +110,9 @@ const SpecContentsTable = () => {
 					block.type === 'Item' && block.section === sectionBlock.element.id,
 			)
 			.map((itemBlock) => ({
+				item_id: itemBlock.element.item_id,
 				id: itemBlock.element.id,
-				desc: itemBlock.element.name,
+				desc: itemBlock.element.item_title,
 				unidad: '',
 				cnt: 0,
 				subtotal: blocks
@@ -126,8 +128,9 @@ const SpecContentsTable = () => {
 							block.type === 'Product' && block.item === itemBlock.element.id,
 					)
 					.map((productBlock) => ({
+						item_id: productBlock.element.item_id, 
 						id: productBlock.element.id,
-						desc: productBlock.element.name,
+						desc: productBlock.element.item_title,
 						unidad: '',
 						cnt: 0,
 						subtotal: productBlock?.element?.price_user === null?productBlock?.element?.price:productBlock?.element?.price_user,
@@ -136,26 +139,31 @@ const SpecContentsTable = () => {
 					})),
 			})),
 	}));
-	console.log(dataArrayFinal);
 	const dataProducts = blocks.filter((block) => block.type === 'Product');
-	const totalProducts = dataProducts.reduce((a, b) => (a = a + b.subtotal), 0);
+	const totalProducts = dataProducts.map((datanum) => datanum.element).reduce((a, b) => (a = a + b.price), 0);
 	const data = React.useMemo(() => dataArrayFinal, []);
 
 	const [valueInput, setValueInput] = useState(0);
+	const validate = (inputValue) => {
+		setValueInput(inputValue);
+		console.log(valueInput);
+	}
 	const handleOnBlurInput = (tableInputType, inputValue, productId) => {
 		if (parseInt(valueInput) === parseInt(inputValue)){
 			console.log("no today");
 		}else{
+			validate(parseInt(inputValue));
 			setValueInput(parseInt(inputValue));
 			const body = {
-				product:{
-					//id: productId,
-					[tableInputType]: parseInt(inputValue),
+				id: productId,
+				data:{
+					product:{
+						[tableInputType]: parseInt(inputValue),
+					}
 				}
 			};
-			dispatch(handleUpdateProduct(body));
+			//dispatch(handleUpdateProduct(body));
 		}
-		console.log(valueInput);
 	};
 	const [expandAll, setExpandAll] = useState();
 	const simulateClick = (e) => {
@@ -170,7 +178,7 @@ const SpecContentsTable = () => {
 		() => [
 			{
 				Header: 'Item',
-				accessor: 'id',
+				accessor: 'item_id',
 			},
 			{
 				Header: 'Descripción',

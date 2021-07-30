@@ -338,6 +338,7 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
 export const UPDATE_PRODUCT_ERROR = 'UPDATE_PRODUCT_ERROR';
 export const handleUpdateProduct = (data) => async (dispatch) => {
+	console.log(data);
 	dispatch(onActionCreator(UPDATE_PRODUCT));
 	updateProduct(data).then(
 		(response) => {
