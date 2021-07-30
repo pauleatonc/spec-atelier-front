@@ -37,13 +37,14 @@ const SpecContentsTable = () => {
 	const handleDownloadBudgetClick = () => dispatch(downloadBudgetDocument({ specID: id }));
 	const { blocks, project } = useSelector((state) => state.specDocument);
 	const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
-	const datapb = blocks
+	const productsReducer = blocks
 		.filter((block) => block.type === 'Product')
 		.map((productBlock) => ({
 			...productBlock,
-			subtotal: 0,
+			subtotal: productBlock?.element?.price_user === null?productBlock?.element?.price:productBlock?.element?.price_user,
 		}));
-	const dataArray = sectionsBlocks.map((sectionBlock) => ({
+	
+	const blocksReducer = sectionsBlocks.map((sectionBlock) => ({
 		id: sectionBlock.element.id,
 		desc: sectionBlock.element.name,
 		unidad: '',
@@ -60,12 +61,11 @@ const SpecContentsTable = () => {
 				desc: itemBlock.element.name,
 				unidad: '',
 				cnt: 0,
-				subtotal: blocks
+				subtotal: productsReducer
 					.filter(
 						(block) =>
 							block.type === 'Product' && block.item === itemBlock.element.id,
-					)
-					.map((datanum) => datanum.element).reduce((a, b) => (a = a + b.price), 0),
+					).reduce((a, b) => (a = a + b.subtotal), 0),
 				type: itemBlock.type,
 				subRows: blocks
 					.filter(
@@ -83,26 +83,19 @@ const SpecContentsTable = () => {
 			})),
 	}));
 	
-	const datapb2 = dataArray
-		.filter((block) => block.type === 'Section').map((itemBlock) => ({
-			row: itemBlock.subRows,
-			type: 'Item',
-			id: itemBlock.id,
+	const itemReducer = blocksReducer.map((itemBlock) => ({
+		id: itemBlock.id,
+		row: itemBlock.subRows.map((datanum) => datanum.subtotal).reduce((a, b) => (a = a + b), 0)
 	}));
-
 	const dataArrayFinal = sectionsBlocks.map((sectionBlock) => ({
 		item_id: sectionBlock.element.item_id,
 		id: sectionBlock.element.id,
 		desc: sectionBlock.element.item_title,
 		unidad: '',
 		cnt: 0,
-		subtotal: datapb2
-			.filter(
-				(block) =>
-					block.type === 'Item' && block.id === sectionBlock.element.id,
-			)
-			.map((datanum) => datanum.row)
-			.reduce((a, b) => (a = a + b[0].subtotal), 0),
+		subtotal: itemReducer.filter((block) =>block.id === sectionBlock.element.id)
+			.map((datanum) => datanum.row),
+			//.reduce((a, b) => (a = a + b), 0),
 		type: sectionBlock.type,
 		subRows: blocks
 			.filter(
@@ -115,12 +108,11 @@ const SpecContentsTable = () => {
 				desc: itemBlock.element.item_title,
 				unidad: '',
 				cnt: 0,
-				subtotal: blocks
+				subtotal: productsReducer
 						.filter(
 							(block) =>
 								block.type === 'Product' && block.item === itemBlock.element.id,
-						)
-						.map((datanum) => datanum.element).reduce((a, b) => (a = a + b.price), 0),
+						).reduce((a, b) => (a = a + b.subtotal), 0),
 				type: itemBlock.type,
 				subRows: blocks
 					.filter(
@@ -139,10 +131,13 @@ const SpecContentsTable = () => {
 					})),
 			})),
 	}));
-	const dataProducts = blocks.filter((block) => block.type === 'Product');
-	const totalProducts = dataProducts.map((datanum) => datanum.element).reduce((a, b) => (a = a + b.price), 0);
+	console.log(dataArrayFinal);
+	const dataProducts = blocks.filter((block) => block.type === 'Product').map((productBlock) => ({
+		...productBlock,
+		subtotal: productBlock?.element?.price_user === null?productBlock?.element?.price:productBlock?.element?.price_user,
+	}));
+	const totalProducts = dataProducts.reduce((a, b) => (a = a + b.subtotal), 0);
 	const data = React.useMemo(() => dataArrayFinal, []);
-
 	const [valueInput, setValueInput] = useState(0);
 	const validate = (inputValue) => {
 		setValueInput(inputValue);
@@ -287,8 +282,8 @@ const SpecContentsTable = () => {
 					<Title>Itemizado y presupuesto del {project.name}</Title>
 					<ButtonsHeader>
 						<Button onClick={allExpand}>Expandir Filas</Button>
-						<Button>
-							<ImgButton src={specDownloadSource} onClick={handleDownloadBudgetClick} title="Descargar presupuesto" />
+						<Button title="Descargar presupuesto" onClick={handleDownloadBudgetClick}>
+							<ImgButton src={specDownloadSource} />
 							Descargar
 						</Button>
 					</ButtonsHeader>
