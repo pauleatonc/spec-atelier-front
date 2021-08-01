@@ -14,11 +14,23 @@ const CurrentInputTable = ({
 	...restProps
 }) => {
 	const [currentValue, setCurrentValue] = useState(value);
+	const [prevValueP, setPrevValueP] = useState(0);
+	const [prevValueQ, setPrevValueQ] = useState(0);
 	const onChangeCurrentValue = ({ target: { value: inputValue } }) => {
 		setCurrentValue(inputValue);
 	};
-	const handleBlur = ({ target: { value: inputValue } }) => {
-		onBlurInput(tableInputType, inputValue, row.id);
+	const handleBlur = ({ target: { value: inputValue} }) => {
+		if (tableInputType === 'price_user') {
+			if(prevValueP !== parseInt(inputValue)){
+				onBlurInput(tableInputType, inputValue, row.id);
+				setPrevValueP(parseInt(inputValue));
+			}
+		}else{
+			if(prevValueQ !== parseInt(inputValue)){
+				onBlurInput(tableInputType, inputValue, row.id);
+				setPrevValueQ(parseInt(inputValue));
+			}
+		}
 	};
 
 	return (

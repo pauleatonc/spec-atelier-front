@@ -124,28 +124,29 @@ export const ImgSubtotal = styled.img`
 export const ImgExpanderAll = styled.img`
     display: none;
 `;
+
 export const Table = styled.table`
     width: 100%;
     border-radius: 2px;
     border: solid 1px #e9e9e9;
     background-color: #ffffff;
 `;
-export const THEAD = styled.thead`
+export const TableThead = styled.thead`
     padding: 8px;
     height: 46px;
     text-align: left;
 `;
-export const TBODY = styled.tbody`
+export const TableTbody = styled.tbody`
     width: 2px;
     height: 46px;
     text-align: left;
 `;
 
-export const TR = styled.tr`
+export const TableTr = styled.tr`
     height: 5px;
 `;
 
-export const TD = styled.td`
+export const TableTd = styled.td`
     border-top: 1px solid #dddddd;
     border-bottom: 1px solid #dddddd;
     padding-left: 15px;
@@ -162,7 +163,7 @@ export const TD = styled.td`
     color: rgba(0, 0, 0, 0.87);
 `;
 
-export const TH = styled.th`
+export const TableTh = styled.th`
     padding: 2%;
     width: auto;
     height: 15px;

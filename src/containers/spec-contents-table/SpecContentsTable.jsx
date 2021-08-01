@@ -7,11 +7,11 @@ import {
 	ContentTable,
 	Header,
 	Table,
-	THEAD,
-	TBODY,
-	TR,
-	TD,
-	TH,
+	TableThead,
+	TableTbody,
+	TableTr,
+	TableTd,
+	TableTh,
 	Title,
 	ButtonsHeader,
 	Button,
@@ -28,13 +28,13 @@ import iconArrowDown from '../../assets/images/icons/blue-arrow-down.svg';
 import iconArrowUp from '../../assets/images/icons/blue-arrow-up.svg';
 import CurrentInputTable from './components/CurrentInputTable';
 import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
-import { cleanDownload, downloadSpecDocument, downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
+import { downloadTableDocument } from '../spec-header/SpecHeader.actions';
 import getStoredState from 'redux-persist/es/getStoredState';
 
 const SpecContentsTable = () => {
 	const dispatch = useDispatch();
 	const { id } = useParams();
-	const handleDownloadBudgetClick = () => dispatch(downloadBudgetDocument({ specID: id }));
+	const handleDownloadTableClick = () => dispatch(downloadTableDocument({ specID: id }));
 	const { blocks, project } = useSelector((state) => state.specDocument);
 	const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
 	const productsReducer = blocks
@@ -131,34 +131,23 @@ const SpecContentsTable = () => {
 					})),
 			})),
 	}));
-	console.log(dataArrayFinal);
 	const dataProducts = blocks.filter((block) => block.type === 'Product').map((productBlock) => ({
 		...productBlock,
 		subtotal: productBlock?.element?.price_user === null?productBlock?.element?.price:productBlock?.element?.price_user,
 	}));
 	const totalProducts = dataProducts.reduce((a, b) => (a = a + b.subtotal), 0);
 	const data = React.useMemo(() => dataArrayFinal, []);
-	const [valueInput, setValueInput] = useState(0);
-	const validate = (inputValue) => {
-		setValueInput(inputValue);
-		console.log(valueInput);
-	}
-	const handleOnBlurInput = (tableInputType, inputValue, productId) => {
-		if (parseInt(valueInput) === parseInt(inputValue)){
-			console.log("no today");
-		}else{
-			validate(parseInt(inputValue));
-			setValueInput(parseInt(inputValue));
-			const body = {
-				id: productId,
-				data:{
-					product:{
-						[tableInputType]: parseInt(inputValue),
-					}
+
+	const handleOnBlurInput = (tableInputType, inputValue, productId, resp) => {
+		const body = {
+			id: productId,
+			data:{
+				product:{
+					[tableInputType]: parseInt(inputValue),
 				}
-			};
-			//dispatch(handleUpdateProduct(body));
-		}
+			}
+		};
+		dispatch(handleUpdateProduct(body));
 	};
 	const [expandAll, setExpandAll] = useState();
 	const simulateClick = (e) => {
@@ -282,43 +271,43 @@ const SpecContentsTable = () => {
 					<Title>Itemizado y presupuesto del {project.name}</Title>
 					<ButtonsHeader>
 						<Button onClick={allExpand}>Expandir Filas</Button>
-						<Button title="Descargar presupuesto" onClick={handleDownloadBudgetClick}>
+						<Button title="Descargar presupuesto" onClick={handleDownloadTableClick}>
 							<ImgButton src={specDownloadSource} />
 							Descargar
 						</Button>
 					</ButtonsHeader>
 				</Header>
 				<Table {...getTableProps()}>
-					<THEAD>
+					<TableThead>
 						{headerGroups.map((headerGroup) => (
-							<TR {...headerGroup.getHeaderGroupProps()}>
+							<TableTr {...headerGroup.getHeaderGroupProps()}>
 								{headerGroup.headers.map((column) => (
-									<TH {...column.getHeaderProps()}>
+									<TableTh {...column.getHeaderProps()}>
 										{column.render('Header')}
-									</TH>
+									</TableTh>
 								))}
-							</TR>
+							</TableTr>
 						))}
-					</THEAD>
-					<TBODY {...getTableBodyProps()}>
+					</TableThead>
+					<TableTbody {...getTableBodyProps()}>
 						{rows.map((row) => {
 							prepareRow(row);
 							return (
-								<TR {...row.getRowProps()}>
+								<TableTr {...row.getRowProps()}>
 									{row.cells.map((cell) => {
 										return (
-											<TD
+											<TableTd
 												{...cell.getCellProps()}
 												isTypeUnity={cell?.row?.original?.type === 'Product'}
 											>
 												{cell.render('Cell')}
-											</TD>
+											</TableTd>
 										);
 									})}
-								</TR>
+								</TableTr>
 							);
 						})}
-					</TBODY>
+					</TableTbody>
 				</Table>
 				<TableFooter>
 					<TableElements>
