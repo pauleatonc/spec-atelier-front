@@ -15,6 +15,7 @@ import {
 	DELETE_PRODUCT_SUCCESS,
 	DELETE_PRODUCT_ERROR,
 	CLEAN_PRODUCT_LIST_DATA,
+	UPDATE_PRODUCTS_WITH_PRODUCT,
 } from './ProductsList.actions';
 
 export const productsListInitialState = {
@@ -106,6 +107,11 @@ const productsListReducer = (
 			return {
 				...state,
 				isSelectedAll: payload,
+			};
+		case UPDATE_PRODUCTS_WITH_PRODUCT:
+			return {
+				...state,
+				products: payload.products,
 			};
 		default: {
 			return state;

@@ -120,7 +120,7 @@ const SpecDocument = () => {
 	};
 	const handleRemoveBlock = (blockID) => () => {
 		handleHideBlockEditor();
-		dispatch(onRemoveSpecBlock({ blockID, specID }));
+		dispatch(onRemoveSpecBlock({ block: [blockID], specID }));
 	};
 	const handleBlockImageRemove = (blockID) => () => {
 		handleBlockMenuClose();

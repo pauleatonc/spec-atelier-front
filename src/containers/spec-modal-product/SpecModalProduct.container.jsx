@@ -99,6 +99,14 @@ const SpecModalProduct = () => {
 		return handleAttachSpecProduct();
 	};
 
+	const getButtonText = () => {
+		if (product.items.length > 1) {
+			return 'Añadir / Remover';
+		}
+		if (hasProduct) return 'Remover';
+		return 'Añadir';
+	};
+
 	return (
 		<Modal show={showModalProduct} onClose={onCloseModal}>
 			<Container>
@@ -190,7 +198,7 @@ const SpecModalProduct = () => {
 						width="100%"
 						onClick={handleAddProduct}
 					>
-						{hasProduct ? 'Remover' : 'Añadir'}
+						{getButtonText()}
 					</Button>
 				</AddButtonContainer>
 			</Container>

@@ -20,41 +20,63 @@ import {
 
 function SpecModalAttachProduct({
 	showAttachModal,
-	onSubmit,
+	onAttach,
+	onDetach,
 	onClose,
 	product,
 }) {
 	const { items = [], sections = [], project_spec_info } = product;
 
 	const [selectedOptions, setSelectedOptions] = useState([]);
+	const [deselectedOptions, setDeselectedOptions] = useState([]);
+	const [toAttachOptions, setToAttachOptions] = useState([]);
 
-	const handleClickOption = (option, selected) => () => {
+	const handleClickOption = (option, selected, isUsed) => {
+		let toAttachtUpdatedOptions;
+		const updatedDeselectedOptions =
+			isUsed && selected
+				? deselectedOptions.concat(option)
+				: deselectedOptions.filter(
+						(selectOption) => selectOption.id !== option.id,
+				  );
+
+		setDeselectedOptions(updatedDeselectedOptions);
+
 		const updatedOptions = selected
 			? selectedOptions.filter((selectOption) => selectOption.id !== option.id)
 			: selectedOptions.concat(option);
 
 		setSelectedOptions(updatedOptions);
+
+		if (!isUsed) {
+			toAttachtUpdatedOptions = selected
+				? toAttachOptions.filter(
+						(selectOption) => selectOption.id !== option.id,
+				  )
+				: toAttachOptions.concat(option);
+
+			setToAttachOptions(toAttachtUpdatedOptions);
+		}
 	};
 
 	const handleOnSubmit = () => {
-		onSubmit(selectedOptions, product);
-		setSelectedOptions([]);
+		if (toAttachOptions.length) onAttach(toAttachOptions, product);
+		if (deselectedOptions.length) onDetach(product);
 	};
 
-	const handleClose = () => {
-		setSelectedOptions([]);
-		onClose();
-	};
+	useEffect(() => {
+		if (project_spec_info) setSelectedOptions(project_spec_info?.items_used);
+	}, [project_spec_info]);
 
 	return (
-		<Modal show={showAttachModal} onClose={handleClose}>
+		<Modal show={showAttachModal} onClose={onClose}>
 			<Container>
 				<Content>
 					<ButtonClose
 						role="button"
 						tabIndex="0"
-						onKeyDown={handleClose}
-						onClick={handleClose}
+						onKeyDown={onClose}
+						onClick={onClose}
 					>
 						<i className="fas fa-times" />
 					</ButtonClose>
@@ -71,17 +93,22 @@ function SpecModalAttachProduct({
 										.filter(({ section_id }) => section_id === id)
 										.map((item) => {
 											const { id: itemId, name: itemName } = item;
-											const selected = selectedOptions.find((selectedOption) => selectedOption.id === itemId);
-											const isAdded = project_spec_info?.items_used.find((addedOption) => addedOption.id === itemId)
+											const selected = selectedOptions.find(
+												(selectedOption) => selectedOption.id === itemId,
+											);
+											const isUsed = project_spec_info?.items_used.find(
+												(usedOption) => usedOption.id === itemId,
+											);
 											return (
 												<Option
 													key={itemId}
-													disabled={isAdded}
-													onClick={!isAdded && handleClickOption(item, selected)}
+													onClick={() =>
+														handleClickOption(item, selected, isUsed)
+													}
 												>
 													<OptionCheckboxIcon
 														src={
-															(selected || isAdded) ? checkboxOnSource : checkboxOffSource
+															selected ? checkboxOnSource : checkboxOffSource
 														}
 													/>
 													<OptionText>{itemName}</OptionText>
@@ -91,12 +118,8 @@ function SpecModalAttachProduct({
 								</Options>
 							))}
 						</OptionsList>
-						<Button
-							variant="primary"
-							onClick={handleOnSubmit}
-							disabled={!selectedOptions.length}
-						>
-							Añadir
+						<Button variant="primary" onClick={handleOnSubmit}>
+							Guardar
 						</Button>
 					</Section>
 				</Content>

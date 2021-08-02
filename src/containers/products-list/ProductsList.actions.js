@@ -159,3 +159,15 @@ export const onDeleteProduct = (productId) => async (dispatch, getState) => {
 		dispatch(onShowAlertSuccess({ message: 'Error al eliminar el producto.' }));
 	}
 };
+
+export const UPDATE_PRODUCTS_WITH_PRODUCT = 'UPDATE_PRODUCTS_WITH_PRODUCT';
+export const updateProductsWithProduct = (product) => (dispatch, getState) => {
+	const { products } = getState().productsList;
+	const filteredProducst = products.filter((prd) => prd.id !== product.id);
+	const updatedProducts = [product, ...filteredProducst];
+	dispatch(
+		onActionCreator(UPDATE_PRODUCTS_WITH_PRODUCT, {
+			products: updatedProducts,
+		}),
+	);
+};

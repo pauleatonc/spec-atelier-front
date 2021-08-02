@@ -52,6 +52,10 @@ const SpecProductsList = () => {
 		);
 	};
 
+	const handleDetachSpecProduct = (product) => {
+		dispatch(onDetachSpecProduct({ productID: product.id, specID }));
+	};
+
 	const handleCardClick = (product) => (event) => {
 		event.stopPropagation();
 		const { id: productID, items } = product;
@@ -61,7 +65,7 @@ const SpecProductsList = () => {
 		);
 
 		if (items.length > 1) dispatch(onShowAttachModal({ product }));
-		else if (hasProduct) dispatch(onDetachSpecProduct({ productID, specID }));
+		else if (hasProduct) handleDetachSpecProduct(items, product);
 		else handleAttachSpecProduct(items, product);
 	};
 
@@ -101,7 +105,8 @@ const SpecProductsList = () => {
 				showAttachModal={showAttachModal}
 				product={productToAttach}
 				onClose={() => dispatch(onHideAttachModal())}
-				onSubmit={handleAttachSpecProduct}
+				onAttach={handleAttachSpecProduct}
+				onDetach={handleDetachSpecProduct}
 			/>
 		</>
 	);
