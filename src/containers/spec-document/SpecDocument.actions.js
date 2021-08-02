@@ -102,13 +102,13 @@ export const onRemoveSpecBlock = ({ block, specID }) => async (
 
 	try {
 		const { auth } = getState();
-		const { blocks: updatedBlocks } = await deleteSpecBlock({
+		const { blocks: updatedBlocks, product } = await deleteSpecBlock({
 			block,
 			specID,
 			userID: auth.user?.id,
 		});
 
-		//dispatch(updateProductsWithProduct(product));
+		dispatch(updateProductsWithProduct(product));
 		dispatch(
 			onActionCreator(REMOVE_SPEC_BLOCK_SUCCESS, { blocks: updatedBlocks }),
 		);
@@ -136,8 +136,7 @@ export const onDetachSpecProduct = ({ productID, specID }) => (
 	const blocks = specDocument.blocks
 		.filter((block) => block.element?.original_product_id === productID)
 		.map((filterBlocks) => filterBlocks.id);
-	console.log(blocks, specDocument);
-	//return dispatch(onRemoveSpecBlock({ specID, block: blocks }));
+	return dispatch(onRemoveSpecBlock({ specID, block: blocks }));
 };
 
 export const ADD_SPEC_BLOCK_IMAGE = 'ADD_SPEC_BLOCK_IMAGE';
