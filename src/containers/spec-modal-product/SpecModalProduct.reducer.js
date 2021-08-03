@@ -3,6 +3,9 @@ import {
 	GET_PRODUCT_ERROR,
 	SHOW_MODAL_PRODUCT,
 	CLOSE_MODAL_PRODUCT,
+	GET_IMAGE_SIZE_DATA,
+	GET_IMAGE_SIZE_DATA_ERROR,
+	GET_IMAGE_SIZE_DATA_SUCCESS,
 } from './SpecModalProduct.actions';
 
 export const initialState = {
@@ -10,6 +13,9 @@ export const initialState = {
 	error: false,
 	loader: true,
 	showModalProduct: false,
+	imageSizeData: {
+		loading: false,
+	},
 };
 
 const productsReducer = (state = initialState, action) => {
@@ -38,6 +44,30 @@ const productsReducer = (state = initialState, action) => {
 		case CLOSE_MODAL_PRODUCT:
 			return {
 				...initialState,
+			};
+		case GET_IMAGE_SIZE_DATA:
+			return {
+				...state,
+				imageSizeData: {
+					loading: true,
+				},
+			};
+		case GET_IMAGE_SIZE_DATA_SUCCESS:
+			return {
+				...state,
+				imageSizeData: {
+					loading: false,
+					width: payload.width,
+					height: payload.height,
+				},
+			};
+		case GET_IMAGE_SIZE_DATA_ERROR:
+			return {
+				...state,
+				imageSizeData: {
+					loading: false,
+					error: payload.errorMessage,
+				},
 			};
 		default:
 			return state;

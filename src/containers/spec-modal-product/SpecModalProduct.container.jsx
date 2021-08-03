@@ -29,7 +29,7 @@ import {
 } from './SpecModalProduct.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
-import { closeModal } from './SpecModalProduct.actions';
+import { closeModal, getImageSizeData } from './SpecModalProduct.actions';
 import {
 	onAttachSpecProduct,
 	onDetachSpecProduct,
@@ -44,7 +44,7 @@ import closeSource from '../../assets/images/icons/close.svg';
 const SpecModalProduct = () => {
 	const { id: specID } = useParams();
 	const getFirstImg = (data) => (data?.images?.length && data.images[0]) || {};
-	const { product, showModalProduct, hasProduct } = useSelector(
+	const { product, showModalProduct, hasProduct, imageSizeData } = useSelector(
 		(state) => state.specModalPorduct,
 	);
 	const [selectedImg, selectImg] = useState(getFirstImg());
@@ -54,8 +54,15 @@ const SpecModalProduct = () => {
 	const isRegisteredClient = !!product?.client.id && !!product?.client.name;
 
 	useEffect(() => {
-		if (product && showModalProduct) selectImg(getFirstImg(product));
+		if (product && showModalProduct) {
+			selectImg(getFirstImg(product));
+		}
 	}, [product, showModalProduct]);
+
+	useEffect(() => {
+		if (selectedImg?.urls?.medium)
+			dispatch(getImageSizeData(selectedImg?.urls?.medium));
+	}, [selectedImg]);
 
 	const onContact = () =>
 		dispatch(
@@ -106,6 +113,8 @@ const SpecModalProduct = () => {
 		if (hasProduct) return 'Remover';
 		return 'Añadir';
 	};
+
+	console.log(imageSizeData);
 
 	return (
 		<Modal show={showModalProduct} onClose={onCloseModal}>
