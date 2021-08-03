@@ -4,7 +4,6 @@ import checkboxOffSource from '../../assets/images/icons/checkbox-off.svg';
 import checkboxOnSource from '../../assets/images/icons/checkbox-on.svg';
 import {
 	Container,
-	Content,
 	ButtonClose,
 	Header,
 	Title,
@@ -17,6 +16,7 @@ import {
 	OptionCheckboxIcon,
 	OptionText,
 } from './SpecModalAttachProduct.styles';
+import closeSource from '../../assets/images/icons/close.svg';
 
 function SpecModalAttachProduct({
 	showAttachModal,
@@ -71,58 +71,54 @@ function SpecModalAttachProduct({
 	return (
 		<Modal show={showAttachModal} onClose={onClose}>
 			<Container>
-				<Content>
+				<Header>
+					<Title>¿Dónde quieres añadir la información?</Title>
 					<ButtonClose
 						role="button"
 						tabIndex="0"
+						alt="Cerrar"
+						src={closeSource}
 						onKeyDown={onClose}
 						onClick={onClose}
-					>
-						<i className="fas fa-times" />
-					</ButtonClose>
-					<Header>
-						<Title>¿Dónde quieres añadir la información?</Title>
-					</Header>
-					<Section>
-						<OptionsList>
-							{sections.map(({ id, name }) => (
-								<Options key={id}>
-									<Separator />
-									<SectionName>{name}</SectionName>
-									{items
-										.filter(({ section_id }) => section_id === id)
-										.map((item) => {
-											const { id: itemId, name: itemName } = item;
-											const selected = selectedOptions.find(
-												(selectedOption) => selectedOption.id === itemId,
-											);
-											const isUsed = project_spec_info?.items_used.find(
-												(usedOption) => usedOption.id === itemId,
-											);
-											return (
-												<Option
-													key={itemId}
-													onClick={() =>
-														handleClickOption(item, selected, isUsed)
-													}
-												>
-													<OptionCheckboxIcon
-														src={
-															selected ? checkboxOnSource : checkboxOffSource
-														}
-													/>
-													<OptionText>{itemName}</OptionText>
-												</Option>
-											);
-										})}
-								</Options>
-							))}
-						</OptionsList>
-						<Button variant="primary" onClick={handleOnSubmit}>
-							Guardar
-						</Button>
-					</Section>
-				</Content>
+					/>
+				</Header>
+				<Section>
+					<OptionsList>
+						{sections.map(({ id, name }) => (
+							<Options key={id}>
+								<Separator />
+								<SectionName>{name}</SectionName>
+								{items
+									.filter(({ section_id }) => section_id === id)
+									.map((item) => {
+										const { id: itemId, name: itemName } = item;
+										const selected = selectedOptions.find(
+											(selectedOption) => selectedOption.id === itemId,
+										);
+										const isUsed = project_spec_info?.items_used.find(
+											(usedOption) => usedOption.id === itemId,
+										);
+										return (
+											<Option
+												key={itemId}
+												onClick={() =>
+													handleClickOption(item, selected, isUsed)
+												}
+											>
+												<OptionCheckboxIcon
+													src={selected ? checkboxOnSource : checkboxOffSource}
+												/>
+												<OptionText>{itemName}</OptionText>
+											</Option>
+										);
+									})}
+							</Options>
+						))}
+					</OptionsList>
+					<Button variant="primary" onClick={handleOnSubmit}>
+						Guardar
+					</Button>
+				</Section>
 			</Container>
 		</Modal>
 	);

@@ -11,18 +11,10 @@ const HEIGHT_CONTENT = '350px';
 
 export const Container = styled.div`
 	width: 400px;
-	padding: 40px;
+	padding: 30px;
 	background-color: ${COLOR_WHITE};
 	border-radius: 4px;
 	min-height: ${HEIGHT_CONTENT};
-	${MEDIA_QUERY_SMALL} {
-		border-radius: 0;
-		height: 100%;
-		padding: 5px;
-	}
-`;
-
-export const Content = styled.section`
 	font-weight: normal;
 	font-stretch: normal;
 	font-style: normal;
@@ -30,19 +22,27 @@ export const Content = styled.section`
 	flex-direction: column;
 	letter-spacing: 1px;
 	font-family: Lato;
+	${MEDIA_QUERY_SMALL} {
+		border-radius: 0;
+		height: 100vh;
+		padding: 16px;
+	}
 `;
 
-export const ButtonClose = styled.span`
+export const ButtonClose = styled.img`
 	display: flex;
 	justify-content: flex-end;
 	cursor: pointer;
 	outline: none;
+	width: 30px;
+	height: 30px;
 `;
 
 export const Header = styled.section`
 	padding: ${PADDING_CONTENT};
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	margin-right: 8px;
 `;
 
@@ -75,7 +75,7 @@ export const Section = styled.section`
 	padding: ${PADDING_CONTENT};
 	flex-direction: column;
 	${MEDIA_QUERY_SMALL} {
-		height: 100%;
+		height: 90vh;
 		flex-direction: column;
 	}
 `;
@@ -113,14 +113,14 @@ export const Option = styled.section`
 	align-items: center;
 	box-sizing: border-box;
 	color: #212121;
-	cursor: ${({ disabled }) => disabled ? 'default' : 'pointer'};;
+	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 	display: flex;
 	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 0.86px;
 	padding: 10px 16px;
 	width: 100%;
-	background-color: ${({ disabled }) => disabled ? '#eee' : 'none'};
+	background-color: ${({ disabled }) => (disabled ? '#eee' : 'none')};
 
 	&:hover {
 		background-color: #eee;
