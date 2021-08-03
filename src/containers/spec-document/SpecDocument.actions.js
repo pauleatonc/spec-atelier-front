@@ -128,14 +128,27 @@ export const onRemoveSpecBlock = ({ block, specID }) => async (
 };
 
 export const DETACH_SPEC_PRODUCT = 'DETACH_SPEC_PRODUCT';
-export const onDetachSpecProduct = ({ productID, specID }) => (
+export const onDetachSpecProduct = ({ product, specID, items }) => (
 	dispatch,
 	getState,
 ) => {
+	const blocks = [];
 	const { specDocument } = getState();
-	const blocks = specDocument.blocks
-		.filter((block) => block.element?.original_product_id === productID)
-		.map((filterBlocks) => filterBlocks.id);
+	if (items) {
+		items.forEach(({ id }) => {
+			specDocument.blocks
+				.filter(
+					(block) =>
+						block.item === id &&
+						block.element?.original_product_id === product.id,
+				)
+				.forEach((filterBlocks) => blocks.push(filterBlocks.id));
+		});
+	} else
+		specDocument.blocks
+			.filter((block) => block.element?.original_product_id === product.id)
+			.forEach((filterBlocks) => blocks.push(filterBlocks.id));
+
 	return dispatch(onRemoveSpecBlock({ specID, block: blocks }));
 };
 

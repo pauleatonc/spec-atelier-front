@@ -60,8 +60,14 @@ function SpecModalAttachProduct({
 	};
 
 	const handleOnSubmit = () => {
-		if (toAttachOptions.length) onAttach(toAttachOptions, product);
-		if (deselectedOptions.length) onDetach(product);
+		if (toAttachOptions.length) {
+			onAttach(toAttachOptions, product);
+			setToAttachOptions([]);
+		}
+		if (deselectedOptions.length) {
+			onDetach(product, deselectedOptions);
+			setDeselectedOptions([]);
+		}
 	};
 
 	useEffect(() => {

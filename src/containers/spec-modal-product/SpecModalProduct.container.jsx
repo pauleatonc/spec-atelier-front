@@ -96,25 +96,18 @@ const SpecModalProduct = () => {
 	};
 
 	const handleAddProduct = () => {
-		if (hasProduct) {
-			return dispatch(onDetachSpecProduct({ productID: product?.id, specID }));
-		}
-
-		if (product.items.length > 1) {
+		if (product.items.length > 1)
 			return dispatch(onShowAttachModal({ product }));
-		}
+		if (hasProduct) return dispatch(onDetachSpecProduct({ product, specID }));
+
 		return handleAttachSpecProduct();
 	};
 
 	const getButtonText = () => {
-		if (product.items.length > 1) {
-			return 'Añadir / Remover';
-		}
+		if (product.items.length > 1) return 'Añadir / Remover';
 		if (hasProduct) return 'Remover';
 		return 'Añadir';
 	};
-
-	console.log(imageSizeData);
 
 	return (
 		<Modal show={showModalProduct} onClose={onCloseModal}>
