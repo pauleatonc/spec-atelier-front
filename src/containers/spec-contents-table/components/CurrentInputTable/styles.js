@@ -1,7 +1,16 @@
 import styled from 'styled-components';
 
 export const TableInput = styled.input`
-    border-style: none;
-    width: 56px;
-    border-bottom: solid 1px rgb(187 187 187);
+	border-style: none;
+	outline: none;
+	width: 58px;
+	border-bottom: solid 1px rgba(0, 0, 0, 0.28);
+	font-family: Lato;
+	font-size: 12px;
+	caret-color: #00c3ac;
+	padding-bottom: 5px;
+	&:active,
+	&:focus {
+		border-bottom: solid 1px #00c3ac;
+	}
 `;

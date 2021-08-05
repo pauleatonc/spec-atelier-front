@@ -9,7 +9,9 @@ import {
 	onSetLocalConfig,
 	onEditConfig,
 	onUpdateProductConfig,
+	onHideSpecAdmin,
 } from './SpecAdmin.actions';
+import { Overlay } from '../../components/layouts/SpecProductsPanelLayout.styles';
 import {
 	Root,
 	PanelTitle,
@@ -18,6 +20,7 @@ import {
 	TextConfigDesc,
 	TextConfigList,
 } from './SpecAdmin.styles';
+
 /**
  * The SpecAdmin' container.
  */
@@ -49,12 +52,12 @@ const SpecAdmin = () => {
 		short_desc: (newValue) => ({
 			short_desc: newValue,
 			long_desc: false,
-			default: false
+			default: false,
 		}),
 		long_desc: (newValue) => ({
 			short_desc: false,
 			long_desc: newValue,
-			default: false
+			default: false,
 		}),
 	};
 
@@ -86,6 +89,7 @@ const SpecAdmin = () => {
 
 	return (
 		<Root show={show}>
+			{show && <Overlay onClick={() => dispatch(onHideSpecAdmin())} />}
 			<PanelTitle>Administrar especificación</PanelTitle>
 			<TextConfig>
 				<TextConfigTitle>Configurar textos</TextConfigTitle>

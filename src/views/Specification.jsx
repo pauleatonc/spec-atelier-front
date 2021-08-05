@@ -27,9 +27,7 @@ import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
  */
 const Specification = () => {
 	const { dataSection } = useSelector((state) => state);
-	const {
-		option: { option },
-	} = dataSection;
+	const { option } = dataSection;
 	return (
 		<>
 			<Root>

@@ -1,7 +1,7 @@
-import React,{useState} from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTable, useExpanded } from 'react-table';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
 	Root,
 	ContentTable,
@@ -9,19 +9,19 @@ import {
 	Table,
 	TableThead,
 	TableTbody,
-	TableTr,
 	TableTd,
 	TableTh,
 	Title,
 	ButtonsHeader,
 	Button,
 	ImgButton,
-	ImgSubtotal,
+	IconExpan,
 	ButtonConsult,
-	TableFooter,
+	ContentFooter,
 	TableElements,
 	TableTotal,
-	ImgExpanderAll
+	ImgExpanderAll,
+	ContainerTotalTable,
 } from './SpecContentsTable.styles';
 import specDownloadSource from '../../assets/images/icons/ic-download.svg';
 import iconArrowDown from '../../assets/images/icons/blue-arrow-down.svg';
@@ -29,21 +29,29 @@ import iconArrowUp from '../../assets/images/icons/blue-arrow-up.svg';
 import CurrentInputTable from './components/CurrentInputTable';
 import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
 import { downloadTableDocument } from '../spec-header/SpecHeader.actions';
-import getStoredState from 'redux-persist/es/getStoredState';
 
 const SpecContentsTable = () => {
-	const dispatch = useDispatch();
 	const { id } = useParams();
-	const handleDownloadTableClick = () => dispatch(downloadTableDocument({ specID: id }));
+	const dispatch = useDispatch();
 	const { blocks, project } = useSelector((state) => state.specDocument);
+	const [expandAll, setExpandAll] = useState();
+	const [toggleExpanded, setToggleExpanded] = useState(false);
+
+	const handleDownloadTableClick = () =>
+		dispatch(downloadTableDocument({ specID: id }));
+
 	const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
+
 	const productsReducer = blocks
 		.filter((block) => block.type === 'Product')
 		.map((productBlock) => ({
 			...productBlock,
-			subtotal: productBlock?.element?.price_user === null?productBlock?.element?.price:productBlock?.element?.price_user,
+			subtotal:
+				productBlock?.element?.price_user === null
+					? productBlock?.element?.price
+					: productBlock?.element?.price_user,
 		}));
-	
+
 	const blocksReducer = sectionsBlocks.map((sectionBlock) => ({
 		id: sectionBlock.element.id,
 		desc: sectionBlock.element.name,
@@ -65,7 +73,8 @@ const SpecContentsTable = () => {
 					.filter(
 						(block) =>
 							block.type === 'Product' && block.item === itemBlock.element.id,
-					).reduce((a, b) => (a = a + b.subtotal), 0),
+					)
+					.reduce((a, b) => (a += b.subtotal), 0),
 				type: itemBlock.type,
 				subRows: blocks
 					.filter(
@@ -77,25 +86,31 @@ const SpecContentsTable = () => {
 						desc: productBlock.element.name,
 						unidad: '',
 						cnt: 0,
-						subtotal: productBlock?.element?.price_user === null?'D'+productBlock?.element?.price:'U'+productBlock?.element?.price_user,
+						subtotal:
+							productBlock?.element?.price_user === null
+								? `D${productBlock?.element?.price}`
+								: `U${productBlock?.element?.price_user}`,
 						type: productBlock.type,
 					})),
 			})),
 	}));
-	
+
 	const itemReducer = blocksReducer.map((itemBlock) => ({
 		id: itemBlock.id,
-		row: itemBlock.subRows.map((datanum) => datanum.subtotal).reduce((a, b) => (a = a + b), 0)
+		row: itemBlock.subRows
+			.map((datanum) => datanum.subtotal)
+			.reduce((a, b) => (a += b), 0),
 	}));
+
 	const dataArrayFinal = sectionsBlocks.map((sectionBlock) => ({
 		item_id: sectionBlock.element.item_id,
 		id: sectionBlock.element.id,
 		desc: sectionBlock.element.item_title,
 		unidad: '',
 		cnt: 0,
-		subtotal: itemReducer.filter((block) =>block.id === sectionBlock.element.id)
+		subtotal: itemReducer
+			.filter((block) => block.id === sectionBlock.element.id)
 			.map((datanum) => datanum.row),
-			//.reduce((a, b) => (a = a + b), 0),
 		type: sectionBlock.type,
 		subRows: blocks
 			.filter(
@@ -109,10 +124,11 @@ const SpecContentsTable = () => {
 				unidad: '',
 				cnt: 0,
 				subtotal: productsReducer
-						.filter(
-							(block) =>
-								block.type === 'Product' && block.item === itemBlock.element.id,
-						).reduce((a, b) => (a = a + b.subtotal), 0),
+					.filter(
+						(block) =>
+							block.type === 'Product' && block.item === itemBlock.element.id,
+					)
+					.reduce((a, b) => (a += b.subtotal), 0),
 				type: itemBlock.type,
 				subRows: blocks
 					.filter(
@@ -120,48 +136,63 @@ const SpecContentsTable = () => {
 							block.type === 'Product' && block.item === itemBlock.element.id,
 					)
 					.map((productBlock) => ({
-						item_id: productBlock.element.item_id, 
+						item_id: productBlock.element.item_id,
 						id: productBlock.element.id,
 						desc: productBlock.element.item_title,
-						unidad: '',
-						cnt: productBlock?.element?.quantity === null ? 0 : productBlock?.element?.quantity,
-						subtotal: productBlock?.element?.price_user === null?productBlock?.element?.price:productBlock?.element?.price_user,
+						unidad: productBlock?.element?.unit,
+						cnt:
+							productBlock?.element?.quantity === null
+								? 0
+								: productBlock?.element?.quantity,
+						subtotal:
+							productBlock?.element?.price_user === null
+								? productBlock?.element?.price
+								: productBlock?.element?.price_user,
 						type: productBlock.type,
-						priceUser: productBlock?.element?.price_user === null?false:true
+						priceUser: productBlock?.element?.price_user !== null,
 					})),
 			})),
 	}));
-	const dataProducts = blocks.filter((block) => block.type === 'Product').map((productBlock) => ({
-		...productBlock,
-		subtotal: productBlock?.element?.price_user === null?productBlock?.element?.price:productBlock?.element?.price_user,
-	}));
-	const totalProducts = dataProducts.reduce((a, b) => (a = a + b.subtotal), 0);
-	const data = React.useMemo(() => dataArrayFinal, []);
 
-	const handleOnBlurInput = (tableInputType, inputValue, productId, resp) => {
+	const dataProducts = blocks
+		.filter((block) => block.type === 'Product')
+		.map((productBlock) => ({
+			...productBlock,
+			subtotal:
+				productBlock?.element?.price_user === null
+					? productBlock?.element?.price
+					: productBlock?.element?.price_user,
+		}));
+
+	const totalProducts = dataProducts.reduce((a, b) => (a += b.subtotal), 0);
+
+	const data = useMemo(() => dataArrayFinal, [blocks]);
+
+	const handleOnBlurInput = (tableInputType, inputValue, productId) => {
 		const body = {
 			id: productId,
-			data:{
-				product:{
-					[tableInputType]: parseInt(inputValue),
-				}
-			}
+			data: {
+				product: {
+					[tableInputType]: parseInt(inputValue, 10),
+				},
+			},
 		};
 		dispatch(handleUpdateProduct(body));
 	};
-	const [expandAll, setExpandAll] = useState();
+
 	const simulateClick = (e) => {
 		setExpandAll(e);
-	}
+	};
 
 	const allExpand = () => {
+		setToggleExpanded(!toggleExpanded);
 		expandAll.click();
-	}
+	};
 
-	const columns = React.useMemo(
+	const columns = useMemo(
 		() => [
 			{
-				Header: 'Item',
+				Header: 'Ítem',
 				accessor: 'item_id',
 			},
 			{
@@ -189,29 +220,31 @@ const SpecContentsTable = () => {
 				Cell: ({ row }) => {
 					switch (row?.original?.type) {
 						case 'Product':
-							if(row?.original?.priceUser === true){
-								return(
+							if (row?.original?.priceUser === true) {
+								return (
 									<CurrentInputTable
-									tableInputType="price_user"
-									value={row?.original?.subtotal}
-									onBlurInput={handleOnBlurInput}
-									row={row.original}
-								/>
-								)
-							}else{
-								if(row?.original?.subtotal === 0 || row?.original?.subtotal === null){
-									return(
-										<CurrentInputTable
+										tableInputType="price_user"
+										value={row?.original?.subtotal}
+										onBlurInput={handleOnBlurInput}
+										row={row.original}
+									/>
+								);
+							}
+							if (
+								row?.original?.subtotal === 0 ||
+								row?.original?.subtotal === null
+							) {
+								return (
+									<CurrentInputTable
 										tableInputType="price_user"
 										value={0}
 										onBlurInput={handleOnBlurInput}
 										row={row.original}
 									/>
-									)
-								}else{
-									return (row?.original?.subtotal)
-								}
+								);
 							}
+							return row?.original?.subtotal;
+
 						default:
 							return <>{row?.original?.subtotal}</>;
 					}
@@ -219,7 +252,7 @@ const SpecContentsTable = () => {
 			},
 			{
 				id: 'expander',
-				Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }) =>( 
+				Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }) => (
 					<ImgExpanderAll
 						{...getToggleAllRowsExpandedProps()}
 						src={isAllRowsExpanded ? iconArrowUp : iconArrowDown}
@@ -230,17 +263,17 @@ const SpecContentsTable = () => {
 					switch (row?.original?.type) {
 						case 'Section':
 							return (
-								<ImgSubtotal
+								<IconExpan
 									{...row.getToggleRowExpandedProps()}
-									src={row.isExpanded ? iconArrowUp : iconArrowDown}
+									className={`fas fa-chevron-${row.isExpanded ? 'up' : 'down'}`}
 								/>
 							);
 
 						case 'Item':
 							return (
-								<ImgSubtotal
+								<IconExpan
 									{...row.getToggleRowExpandedProps()}
-									src={row.isExpanded ? iconArrowUp : iconArrowDown}
+									className={`fas fa-chevron-${row.isExpanded ? 'up' : 'down'}`}
 								/>
 							);
 						default:
@@ -251,6 +284,7 @@ const SpecContentsTable = () => {
 		],
 		[],
 	);
+
 	const {
 		getTableProps,
 		getTableBodyProps,
@@ -267,55 +301,72 @@ const SpecContentsTable = () => {
 	return (
 		<Root>
 			<ContentTable>
-				<Header>
-					<Title>Itemizado y presupuesto del {project.name}</Title>
-					<ButtonsHeader>
-						<Button onClick={allExpand}>Expandir Filas</Button>
-						<Button title="Descargar presupuesto" onClick={handleDownloadTableClick}>
-							<ImgButton src={specDownloadSource} />
-							Descargar
-						</Button>
-					</ButtonsHeader>
-				</Header>
 				<Table {...getTableProps()}>
 					<TableThead>
+						<Header colSpan="6">
+							<Title>Itemizado y presupuesto: {project.name}</Title>
+							<ButtonsHeader>
+								<Button onClick={allExpand}>{`${
+									toggleExpanded ? 'Contraer' : 'Expandir'
+								} Filas`}</Button>
+								<Button
+									title="Descargar presupuesto"
+									onClick={handleDownloadTableClick}
+								>
+									<ImgButton src={specDownloadSource} />
+									Descargar
+								</Button>
+							</ButtonsHeader>
+						</Header>
+					</TableThead>
+					<TableThead>
 						{headerGroups.map((headerGroup) => (
-							<TableTr {...headerGroup.getHeaderGroupProps()}>
+							<tr {...headerGroup.getHeaderGroupProps()}>
 								{headerGroup.headers.map((column) => (
-									<TableTh {...column.getHeaderProps()}>
+									<TableTh
+										{...column.getHeaderProps()}
+										isDesc={column.id === 'desc'}
+									>
 										{column.render('Header')}
 									</TableTh>
 								))}
-							</TableTr>
+							</tr>
 						))}
 					</TableThead>
 					<TableTbody {...getTableBodyProps()}>
 						{rows.map((row) => {
 							prepareRow(row);
 							return (
-								<TableTr {...row.getRowProps()}>
-									{row.cells.map((cell) => {
-										return (
-											<TableTd
-												{...cell.getCellProps()}
-												isTypeUnity={cell?.row?.original?.type === 'Product'}
-											>
-												{cell.render('Cell')}
-											</TableTd>
-										);
-									})}
-								</TableTr>
+								<tr {...row.getRowProps()}>
+									{row.cells.map((cell) => (
+										<TableTd
+											{...cell.getCellProps()}
+											isTypeUnity={cell?.row?.original?.type === 'Product'}
+											isDesc={cell.column.id === 'desc'}
+										>
+											{cell.render('Cell')}
+										</TableTd>
+									))}
+								</tr>
 							);
 						})}
 					</TableTbody>
+					<tfoot>
+						<tr>
+							<td colSpan="6">
+								<ContentFooter>
+									<TableElements>
+										{dataProducts.length} elementos especificados
+									</TableElements>
+									<ContainerTotalTable>
+										<TableTotal mRight="36">Total</TableTotal>
+										<TableTotal>${totalProducts}</TableTotal>
+									</ContainerTotalTable>
+								</ContentFooter>
+							</td>
+						</tr>
+					</tfoot>
 				</Table>
-				<TableFooter>
-					<TableElements>
-						{dataProducts.length} elementos especificados
-					</TableElements>
-					<TableTotal>Total</TableTotal>
-					<TableTotal>${totalProducts}</TableTotal>
-				</TableFooter>
 			</ContentTable>
 		</Root>
 	);

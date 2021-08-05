@@ -1,201 +1,164 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
 	box-sizing: border-box;
-    display: -webkit-box;
+	display: -webkit-box;
 	height: 100%;
-    position: relative;
-    width: 100%;
-    margin-bottom: 1%;
+	position: relative;
+	width: 100%;
+	margin-bottom: 1%;
 `;
 
 export const ContentTable = styled.div`
-    position: relative; 
-    margin-left: auto;
-    margin-right: auto;
-    width: 970px;
-    height: 597px;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 970px;
+	height: 597px;
 `;
 
-export const Header = styled.div`
-    width: 100%;
-    height: 46px;
-    padding-top: 2%;
-    padding-left: 5%;
-    padding-right: 3%;
-    padding-bottom: 4%;
-    font-family: Lato;
-    font-size: 16px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 0.94;
-    letter-spacing: normal;
-    background-color: rgba(255, 255, 255);
-    border-radius: 2px;
-    border: solid 1px #e9e9e9;
+export const Header = styled.td`
+	width: 100%;
+	height: 46px;
+	padding: 18px 20px 18px 38px;
+	font-family: Lato;
+	font-size: 16px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 0.94;
+	letter-spacing: normal;
+	background-color: rgba(255, 255, 255);
+	border-radius: 2px;
+	border: solid 1px #e9e9e9;
 `;
 
-export const TableFooter = styled.div`
-    width: 970px;
-    height: 51px;
-    padding: 17px 72px 12px 24px;
-    background-color: rgba(0, 196, 172, 0.06);
-    display: flex;
-    border-radius: 2px;
-    border: solid 1px #e9e9e9;
+export const ContentFooter = styled.div`
+	display: flex;
+	justify-content: space-between;
+	background-color: rgba(0, 196, 172, 0.06);
+	border: solid 1px #e9e9e9;
+	padding: 20px 120px 20px 35px;
 `;
 
 export const TableElements = styled.h1`
-    width: 515px;
-    height: 17px;
-    font-family: Lato;
-    font-size: 14px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.07;
-    letter-spacing: normal;
-    color: rgba(0, 0, 0, 0.87);
+	font-family: Lato;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 1.07;
+	color: rgba(0, 0, 0, 0.87);
 `;
 
 export const TableTotal = styled.h1`
-    width: 80px;
-    height: 17px;
-    font-family: Lato;
-    font-size: 14px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.07;
-    letter-spacing: normal;
-    color: rgba(0, 0, 0, 0.87);
-    float: right;
+	height: 17px;
+	font-family: Lato;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 1.07;
+	color: rgba(0, 0, 0, 0.87);
+	margin-right: ${({ mRight }) => `${mRight}px` || '0'};
 `;
 
 export const Title = styled.div`
-    font-family: Lato;
-    font-size: 16px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 0.94;
-    letter-spacing: normal;
-    float: left;
+	font-family: Lato;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 0.94;
+	float: left;
 `;
 
 export const ButtonsHeader = styled.div`
-    font-family: Lato;
-    font-size: 16px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 0.94;
-    letter-spacing: normal;
-    display: flex;
-    float: right;
+	font-family: Lato;
+	font-size: 16px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 0.94;
+	letter-spacing: normal;
+	display: flex;
+	float: right;
 `;
 export const Button = styled.div`
-    cursor: pointer;
-    font-family: Lato;
-    font-size: 14px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #00c3ac;
-    height: 20px;
-    display: flex;
+	cursor: pointer;
+	font-family: Lato;
+	font-size: 14px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #00c3ac;
+	height: 20px;
+	display: flex;
 `;
 export const ImgButton = styled.img`
-    margin: 0px 5px 0px 39px;
+	margin: 0px 5px 0px 39px;
 `;
 
-export const ImgSubtotal = styled.img`
-    cursor: pointer;
-    height: 24px;
-    margin-left: 33%;
-`;
+export const ImgSubtotal = styled.img``;
 
 export const ImgExpanderAll = styled.img`
-    display: none;
+	display: none;
 `;
 
 export const Table = styled.table`
-    width: 100%;
-    border-radius: 2px;
-    border: solid 1px #e9e9e9;
-    background-color: #ffffff;
+	width: 100%;
+	border-radius: 2px;
+	border: solid 1px #e9e9e9;
+	background-color: #ffffff;
 `;
 export const TableThead = styled.thead`
-    padding: 8px;
-    height: 46px;
-    text-align: left;
+	padding: 8px;
+	height: 46px;
+	text-align: left;
 `;
 export const TableTbody = styled.tbody`
-    width: 2px;
-    height: 46px;
-    text-align: left;
-`;
-
-export const TableTr = styled.tr`
-    height: 5px;
+	width: 2px;
+	height: 46px;
+	text-align: left;
 `;
 
 export const TableTd = styled.td`
-    border-top: 1px solid #dddddd;
-    border-bottom: 1px solid #dddddd;
-    padding-left: 15px;
-    padding-top: 15px;
-    padding-bottom: 20px;
-    width: 20px;
-    font-family: Lato;
-    font-size: 12px;
-    font-weight: ${({ isTypeUnity }) => (isTypeUnity ? 'normal' : 'bold')};
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 0.92;
-    letter-spacing: normal;
-    color: rgba(0, 0, 0, 0.87);
+	padding: ${({ isTypeUnity }) => (isTypeUnity ? '15px' : '20px')} 15px;
+	border-top: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+	font-family: Lato;
+	font-size: 12px;
+	font-weight: ${({ isTypeUnity }) => (isTypeUnity ? 'normal' : 'bold')};
+	line-height: 0.92;
+	letter-spacing: normal;
+	color: rgba(0, 0, 0, 0.87);
+	text-align: ${({ isDesc }) => (isDesc ? 'left' : 'center')};
 `;
 
 export const TableTh = styled.th`
-    padding: 2%;
-    width: auto;
-    height: 15px;
-    margin: 24px 31px 36px 0;
-    font-family: Lato;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.25;
-    letter-spacing: normal;
-    color: rgba(0, 0, 0, 0.54);
+	font-family: Lato;
+	font-size: 12px;
+	line-height: 1.25;
+	letter-spacing: normal;
+	color: rgba(0, 0, 0, 0.54);
+	padding: 20px 15px;
+	text-align: ${({ isDesc }) => (isDesc ? 'left' : 'center')};
 `;
 
 export const TableInput = styled.input`
-    border-style: none;
-    width: 56px;
-    border-bottom: solid 1px rgb(187 187 187);
+	border-style: none;
+	width: 56px;
+	border-bottom: solid 1px rgb(187 187 187);
 `;
 
 export const ButtonConsult = styled.div`
-    cursor: pointer;
-    font-family: Lato;
-    font-size: 14px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #00c3ac;
-    height: 20px;
-    float: right;
-    margin-right: 40%;
+	font-family: Lato;
+	font-size: 14px;
+	font-weight: bold;
+	color: #00c3ac;
+`;
+
+export const IconExpan = styled.i`
+	color: #1fc2ac;
+`;
+
+export const ContainerTotalTable = styled.div`
+	display: flex;
 `;
