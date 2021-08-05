@@ -102,8 +102,8 @@ const SpecContentsTable = () => {
 			.reduce((a, b) => (a += b), 0),
 	}));
 
-	const dataArrayFinal = sectionsBlocks.map((sectionBlock) => ({
-		item_id: sectionBlock.element.item_id,
+	const formatedDataTable = sectionsBlocks.map((sectionBlock) => ({
+		item_id: `${sectionBlock.element.item_id}.`,
 		id: sectionBlock.element.id,
 		desc: sectionBlock.element.item_title,
 		unidad: '',
@@ -118,7 +118,7 @@ const SpecContentsTable = () => {
 					block.type === 'Item' && block.section === sectionBlock.element.id,
 			)
 			.map((itemBlock) => ({
-				item_id: itemBlock.element.item_id,
+				item_id: `${itemBlock.element.item_id}.`,
 				id: itemBlock.element.id,
 				desc: itemBlock.element.item_title,
 				unidad: '',
@@ -136,7 +136,7 @@ const SpecContentsTable = () => {
 							block.type === 'Product' && block.item === itemBlock.element.id,
 					)
 					.map((productBlock) => ({
-						item_id: productBlock.element.item_id,
+						item_id: `${productBlock.element.item_id}.`,
 						id: productBlock.element.id,
 						desc: productBlock.element.item_title,
 						unidad: productBlock?.element?.unit,
@@ -166,7 +166,7 @@ const SpecContentsTable = () => {
 
 	const totalProducts = dataProducts.reduce((a, b) => (a += b.subtotal), 0);
 
-	const data = useMemo(() => dataArrayFinal, [blocks]);
+	const data = useMemo(() => formatedDataTable, [blocks]);
 
 	const handleOnBlurInput = (tableInputType, inputValue, productId) => {
 		const body = {
@@ -359,7 +359,7 @@ const SpecContentsTable = () => {
 										{dataProducts.length} elementos especificados
 									</TableElements>
 									<ContainerTotalTable>
-										<TableTotal mRight="36">Total</TableTotal>
+										<TableTotal mRight="36">Total:</TableTotal>
 										<TableTotal>${totalProducts}</TableTotal>
 									</ContainerTotalTable>
 								</ContentFooter>

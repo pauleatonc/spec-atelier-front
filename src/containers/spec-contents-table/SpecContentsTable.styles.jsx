@@ -20,7 +20,7 @@ export const ContentTable = styled.div`
 export const Header = styled.td`
 	width: 100%;
 	height: 46px;
-	padding: 18px 20px 18px 38px;
+	padding: 20px 35px;
 	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
@@ -38,7 +38,7 @@ export const ContentFooter = styled.div`
 	justify-content: space-between;
 	background-color: rgba(0, 196, 172, 0.06);
 	border: solid 1px #e9e9e9;
-	padding: 20px 120px 20px 35px;
+	padding: 20px 35px;
 `;
 
 export const TableElements = styled.h1`
