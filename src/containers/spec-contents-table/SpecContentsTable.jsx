@@ -124,7 +124,7 @@ const SpecContentsTable = () => {
 						id: productBlock.element.id,
 						desc: productBlock.element.item_title,
 						unidad: '',
-						cnt: 0,
+						cnt: productBlock?.element?.quantity === null ? 0 : productBlock?.element?.quantity,
 						subtotal: productBlock?.element?.price_user === null?productBlock?.element?.price:productBlock?.element?.price_user,
 						type: productBlock.type,
 						priceUser: productBlock?.element?.price_user === null?false:true
