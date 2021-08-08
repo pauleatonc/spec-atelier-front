@@ -57,6 +57,7 @@ const SpecContentsTable = () => {
 		desc: sectionBlock.element.name,
 		unidad: '',
 		cnt: 0,
+		precio: '',
 		subtotal: 0,
 		type: sectionBlock.type,
 		subRows: blocks
@@ -69,6 +70,7 @@ const SpecContentsTable = () => {
 				desc: itemBlock.element.name,
 				unidad: '',
 				cnt: 0,
+				precio: '',
 				subtotal: productsReducer
 					.filter(
 						(block) =>
@@ -86,6 +88,9 @@ const SpecContentsTable = () => {
 						desc: productBlock.element.name,
 						unidad: '',
 						cnt: 0,
+						precio: productBlock?.element?.price_user === null
+						? `D${productBlock?.element?.price}`
+						: `U${productBlock?.element?.price_user}`,
 						subtotal:
 							productBlock?.element?.price_user === null
 								? `D${productBlock?.element?.price}`
@@ -108,6 +113,7 @@ const SpecContentsTable = () => {
 		desc: sectionBlock.element.item_title,
 		unidad: '',
 		cnt: 0,
+		precio: '',
 		subtotal: itemReducer
 			.filter((block) => block.id === sectionBlock.element.id)
 			.map((datanum) => datanum.row),
@@ -123,6 +129,7 @@ const SpecContentsTable = () => {
 				desc: itemBlock.element.item_title,
 				unidad: '',
 				cnt: 0,
+				precio: '',
 				subtotal: productsReducer
 					.filter(
 						(block) =>
@@ -144,6 +151,9 @@ const SpecContentsTable = () => {
 							productBlock?.element?.quantity === null
 								? 0
 								: productBlock?.element?.quantity,
+						precio: productBlock?.element?.price_user === null
+						? `$${productBlock?.element?.price}`
+						: `$${productBlock?.element?.price_user}`,
 						subtotal:
 							productBlock?.element?.price_user === null
 								? productBlock?.element?.price
@@ -153,7 +163,6 @@ const SpecContentsTable = () => {
 					})),
 			})),
 	}));
-
 	const dataProducts = blocks
 		.filter((block) => block.type === 'Product')
 		.map((productBlock) => ({
@@ -216,6 +225,16 @@ const SpecContentsTable = () => {
 				},
 			},
 			{
+				Header: 'Precio',
+				Cell: ({ row }) => {
+					return (
+						row?.original?.type === 'Product' && (
+							row?.original?.precio
+						)
+					);
+				},
+			},
+			{
 				Header: 'Subtotal',
 				Cell: ({ row }) => {
 					switch (row?.original?.type) {
@@ -242,11 +261,12 @@ const SpecContentsTable = () => {
 										row={row.original}
 									/>
 								);
+							}else{
+								return '$'+row?.original?.subtotal;
 							}
-							return row?.original?.subtotal;
 
 						default:
-							return <>{row?.original?.subtotal}</>;
+							return <>{'$'+row?.original?.subtotal}</>;
 					}
 				},
 			},
