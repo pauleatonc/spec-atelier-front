@@ -29,15 +29,12 @@ export const Header = styled.td`
 	line-height: 0.94;
 	letter-spacing: normal;
 	background-color: rgba(255, 255, 255);
-	border-radius: 2px;
-	border: solid 1px #e9e9e9;
 `;
 
 export const ContentFooter = styled.div`
 	display: flex;
 	justify-content: space-between;
 	background-color: rgba(0, 196, 172, 0.06);
-	border: solid 1px #e9e9e9;
 	padding: 20px 35px;
 `;
 
@@ -112,6 +109,8 @@ export const TableThead = styled.thead`
 	padding: 8px;
 	height: 46px;
 	text-align: left;
+	border-radius: 2px;
+	border: solid 1px #e9e9e9;
 `;
 export const TableTbody = styled.tbody`
 	width: 2px;
