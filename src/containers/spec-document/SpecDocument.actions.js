@@ -341,9 +341,9 @@ export const UPDATE_BLOCKS = 'UPDATE_BLOCKS';
 export const handleUpdateProduct = (data) => async (dispatch) => {
 	dispatch(onActionCreator(UPDATE_PRODUCT));
 	updateProduct(data).then(
-		({ product }) => { //se destructura response
+		(response) => {
+			// se destructura response
 			dispatch(onActionCreator(UPDATE_PRODUCT_SUCCESS));
-			dispatch(onActionCreator(UPDATE_BLOCKS, { product }))
 		},
 		(error) => {
 			// TODO: update

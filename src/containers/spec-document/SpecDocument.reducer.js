@@ -11,7 +11,6 @@ import {
 	UPDATE_PRODUCT,
 	UPDATE_PRODUCT_SUCCESS,
 	UPDATE_PRODUCT_ERROR,
-	UPDATE_BLOCKS,
 } from './SpecDocument.actions';
 
 const specDocumentState = {
@@ -47,13 +46,6 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
 		case UPDATE_PRODUCT_SUCCESS:
 		case UPDATE_PRODUCT_ERROR: {
 			return { ...state };
-		}
-		case UPDATE_BLOCKS: {
-			const blocks = state.blocks.filter((block) => block.type === 'Product' && block.element.id === payload.product.id)
-			return { ...state,
-					blocks:[...state.blocks.filter((block) => block?.element?.id !== payload.product.id),
-					{...blocks,
-					price_user:payload.product.price_user}]};
 		}
 		default: {
 			return state;

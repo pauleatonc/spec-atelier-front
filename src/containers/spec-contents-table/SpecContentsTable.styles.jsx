@@ -123,7 +123,7 @@ export const TableTd = styled.td`
 	border-top: 1px solid #dddddd;
 	border-bottom: 1px solid #dddddd;
 	font-family: Lato;
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: ${({ isTypeUnity }) => (isTypeUnity ? 'normal' : 'bold')};
 	line-height: 0.92;
 	letter-spacing: normal;
@@ -133,7 +133,7 @@ export const TableTd = styled.td`
 
 export const TableTh = styled.th`
 	font-family: Lato;
-	font-size: 12px;
+	font-size: 13px;
 	line-height: 1.25;
 	letter-spacing: normal;
 	color: rgba(0, 0, 0, 0.54);
