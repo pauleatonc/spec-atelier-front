@@ -174,7 +174,7 @@ const SpecContentsTable = () => {
 
 	const totalProducts = dataProducts.reduce((a, b) => (a += b.subtotal), 0);
 
-	const data = useMemo(() => formatedDataTable, [blocks]);
+	const data = useMemo(() => formatedDataTable, []);
 
 	const handleOnBlurInput = (tableInputType, inputValue, productId) => {
 		const body = {

@@ -51,7 +51,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
 		case UPDATE_BLOCKS: {
 			const blocks = state.blocks.filter((block) => block.type === 'Product' && block.element.id === payload.product.id)
 			return { ...state,
-					blocks:[...state.blocks.filter((block) => block.element.id !== payload.product.id),
+					blocks:[...state.blocks.filter((block) => block?.element?.id !== payload.product.id),
 					{...blocks,
 					price_user:payload.product.price_user}]};
 		}
