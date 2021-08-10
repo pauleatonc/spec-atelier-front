@@ -337,14 +337,13 @@ export const onSortSpecBlocks = ({ blocksIDs, specID }) => async (
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
 export const UPDATE_PRODUCT_ERROR = 'UPDATE_PRODUCT_ERROR';
+export const UPDATE_BLOCKS = 'UPDATE_BLOCKS';
 export const handleUpdateProduct = (data) => async (dispatch) => {
-	console.log(data);
 	dispatch(onActionCreator(UPDATE_PRODUCT));
 	updateProduct(data).then(
-		(response) => {
-			// TODO: update
+		({ product }) => { //se destructura response
 			dispatch(onActionCreator(UPDATE_PRODUCT_SUCCESS));
-			console.log(response);
+			dispatch(onActionCreator(UPDATE_BLOCKS, { product }))
 		},
 		(error) => {
 			// TODO: update

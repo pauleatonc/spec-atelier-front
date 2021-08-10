@@ -36,7 +36,6 @@ const SpecContentsTable = () => {
 	const { blocks, project } = useSelector((state) => state.specDocument);
 	const [expandAll, setExpandAll] = useState();
 	const [toggleExpanded, setToggleExpanded] = useState(false);
-
 	const handleDownloadTableClick = () =>
 		dispatch(downloadTableDocument({ specID: id }));
 
@@ -227,16 +226,6 @@ const SpecContentsTable = () => {
 			{
 				Header: 'Precio',
 				Cell: ({ row }) => {
-					return (
-						row?.original?.type === 'Product' && (
-							row?.original?.precio
-						)
-					);
-				},
-			},
-			{
-				Header: 'Subtotal',
-				Cell: ({ row }) => {
 					switch (row?.original?.type) {
 						case 'Product':
 							if (row?.original?.priceUser === true) {
@@ -268,6 +257,16 @@ const SpecContentsTable = () => {
 						default:
 							return <>{'$'+row?.original?.subtotal}</>;
 					}
+				},
+			},
+			{
+				Header: 'Subtotal',
+				Cell: ({ row }) => {
+					return (
+						row?.original?.type === 'Product' && (
+							row?.original?.precio
+						)
+					);
 				},
 			},
 			{
@@ -373,7 +372,7 @@ const SpecContentsTable = () => {
 					</TableTbody>
 					<tfoot>
 						<tr>
-							<td colSpan="6">
+							<td colSpan="7">
 								<ContentFooter>
 									<TableElements>
 										{dataProducts.length} elementos especificados
