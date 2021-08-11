@@ -108,7 +108,7 @@ export const onRemoveSpecBlock = ({ block, specID }) => async (
 			userID: auth.user?.id,
 		});
 
-		dispatch(updateProductsWithProduct(product));
+		if (product) dispatch(updateProductsWithProduct(product));
 		dispatch(
 			onActionCreator(REMOVE_SPEC_BLOCK_SUCCESS, { blocks: updatedBlocks }),
 		);
