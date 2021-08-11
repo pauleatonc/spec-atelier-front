@@ -107,7 +107,7 @@ const SpecContentsTable = () => {
 			},
 			{
 				Header: 'Subtotal',
-				accessor: 'subtotal',
+				Cell: ({ row }) => `$${row?.original?.subtotal}`,
 			},
 			{
 				id: 'expander',
