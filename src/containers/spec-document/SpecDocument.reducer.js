@@ -12,11 +12,13 @@ import {
 	UPDATE_PRODUCT_SUCCESS,
 	UPDATE_PRODUCT_ERROR,
 } from './SpecDocument.actions';
+import { getFormatedTableData } from './utils';
 
 const specDocumentState = {
 	blocks: [],
 	loading: false,
 	project: {},
+	quoteTable: [],
 };
 
 /**
@@ -32,6 +34,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
 				...state,
 				blocks: payload.blocks,
 				project: { ...state.project, ...payload.project },
+				quoteTable: getFormatedTableData(payload.blocks),
 			};
 		case REMOVE_SPEC_BLOCK_SUCCESS:
 		case REMOVE_SPEC_BLOCK_IMAGE_SUCCESS:
@@ -42,10 +45,14 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
 		case SORT_SPEC_BLOCKS_SUCCESS: {
 			return { ...state, blocks: payload.blocks };
 		}
-		case UPDATE_PRODUCT:
+		case UPDATE_PRODUCT: {
+			return { ...state };
+		}
 		case UPDATE_PRODUCT_SUCCESS:
 		case UPDATE_PRODUCT_ERROR: {
-			return { ...state };
+			return {
+				...state,
+			};
 		}
 		default: {
 			return state;

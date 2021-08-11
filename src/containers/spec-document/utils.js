@@ -77,9 +77,9 @@ export const getFormatedTableData = (blocks) => {
 		unit: '',
 		cnt: 0,
 		price: '',
-		subtotal: itemReducer
-			.filter((block) => block.id === sectionBlock.element.id)
-			.map((datanum) => datanum.row),
+		subtotal: itemReducer.filter(
+			(block) => block.id === sectionBlock.element.id,
+		)[0].row,
 		type: sectionBlock.type,
 		subRows: blocks
 			.filter(

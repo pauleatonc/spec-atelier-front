@@ -28,15 +28,13 @@ const CurrentInputTable = ({
 	const handleBlur = ({ target: { value: inputValue } }) => {
 		if (tableInputType === 'price_user') {
 			if (inputValue > 99 && prevValueP !== parseInt(inputValue, 10)) {
-				onBlurInput(tableInputType, inputValue, row.id);
+				onBlurInput(tableInputType, inputValue, row);
 				setPrevValueP(parseInt(inputValue, 10));
 			}
-			
 		} else if (prevValueQ !== parseInt(inputValue, 10)) {
-			onBlurInput(tableInputType, inputValue, row.id);
+			onBlurInput(tableInputType, inputValue, row);
 			setPrevValueQ(parseInt(inputValue, 10));
 		}
-
 	};
 
 	return (

@@ -28,34 +28,14 @@ import iconArrowDown from '../../assets/images/icons/blue-arrow-down.svg';
 import iconArrowUp from '../../assets/images/icons/blue-arrow-up.svg';
 import CurrentInputTable from './components/CurrentInputTable';
 import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
-import { downloadTableDocument } from '../spec-header/SpecHeader.actions';
-
-import { getFormatedTableData } from './utils';
+import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
 
 const SpecContentsTable = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
-	const { blocks, project } = useSelector((state) => state.specDocument);
+	const { project, quoteTable } = useSelector((state) => state.specDocument);
 	const [expandAll, setExpandAll] = useState();
 	const [toggleExpanded, setToggleExpanded] = useState(false);
-	const handleDownloadTableClick = () =>
-		dispatch(downloadTableDocument({ specID: id }));
-
-	const data = useMemo(() => getFormatedTableData(blocks), [blocks]);
-
-	const totalProducts = data.reduce((a, b) => (a += b.subtotal[0]), 0);
-
-	const handleOnBlurInput = (tableInputType, inputValue, productId) => {
-		const body = {
-			id: productId,
-			data: {
-				product: {
-					[tableInputType]: parseInt(inputValue, 10),
-				},
-			},
-		};
-		dispatch(handleUpdateProduct(body));
-	};
 
 	const simulateClick = (e) => {
 		setExpandAll(e);
@@ -64,6 +44,23 @@ const SpecContentsTable = () => {
 	const allExpand = () => {
 		setToggleExpanded(!toggleExpanded);
 		expandAll.click();
+	};
+
+	const handleDownloadTableClick = () =>
+		dispatch(downloadBudgetDocument({ specID: id }));
+
+	const totalProducts = quoteTable.reduce((a, b) => (a += b.subtotal), 0);
+
+	const handleOnBlurInput = (tableInputType, inputValue, row) => {
+		const body = {
+			id: row.original.id,
+			data: {
+				product: {
+					[tableInputType]: parseInt(inputValue, 10),
+				},
+			},
+		};
+		dispatch(handleUpdateProduct(body, tableInputType));
 	};
 
 	const columns = useMemo(
@@ -85,7 +82,7 @@ const SpecContentsTable = () => {
 							tableInputType="quantity"
 							value={row?.original?.cnt}
 							onBlurInput={handleOnBlurInput}
-							row={row.original}
+							row={row}
 						/>
 					),
 			},
@@ -101,7 +98,7 @@ const SpecContentsTable = () => {
 								tableInputType="price_user"
 								value={row?.original?.price_user}
 								onBlurInput={handleOnBlurInput}
-								row={row.original}
+								row={row}
 							/>
 						);
 					}
@@ -156,7 +153,7 @@ const SpecContentsTable = () => {
 	} = useTable(
 		{
 			columns,
-			data,
+			data: quoteTable,
 		},
 		useExpanded,
 	);
@@ -219,7 +216,7 @@ const SpecContentsTable = () => {
 							<td colSpan="7">
 								<ContentFooter>
 									<TableElements>
-										{data.length} elementos especificados
+										{quoteTable.length} elementos especificados
 									</TableElements>
 									<ContainerTotalTable>
 										<TableTotal mRight="36">Total:</TableTotal>

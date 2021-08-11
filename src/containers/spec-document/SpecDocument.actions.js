@@ -19,7 +19,6 @@ export const GET_SPEC_BLOCKS_ERROR = 'GET_SPEC_BLOCKS_ERROR';
 export const GET_SPEC_BLOCKS_SUCCESS = 'GET_SPEC_BLOCKS_SUCCESS';
 export const onGetSpecBlocks = (specID) => async (dispatch, getState) => {
 	dispatch(onActionCreator(GET_SPEC_BLOCKS));
-
 	try {
 		const { auth } = getState();
 		const { blocks = [], project = {} } =
@@ -338,12 +337,16 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
 export const UPDATE_PRODUCT_ERROR = 'UPDATE_PRODUCT_ERROR';
 export const UPDATE_BLOCKS = 'UPDATE_BLOCKS';
-export const handleUpdateProduct = (data) => async (dispatch) => {
+export const handleUpdateProduct = (data, tableInputType) => async (
+	dispatch,
+) => {
 	dispatch(onActionCreator(UPDATE_PRODUCT));
 	updateProduct(data).then(
-		(response) => {
+		({ product }) => {
 			// se destructura response
-			dispatch(onActionCreator(UPDATE_PRODUCT_SUCCESS));
+			dispatch(
+				onActionCreator(UPDATE_PRODUCT_SUCCESS, { product, tableInputType }),
+			);
 		},
 		(error) => {
 			// TODO: update
