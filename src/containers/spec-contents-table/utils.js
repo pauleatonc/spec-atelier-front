@@ -1,5 +1,6 @@
 export const getFormatedTableData = (blocks) => {
 	const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
+
 	const productsReducer = blocks
 		.filter((block) => block.type === 'Product')
 		.map((productBlock) => ({
@@ -8,6 +9,7 @@ export const getFormatedTableData = (blocks) => {
 				? productBlock?.element?.price_user
 				: productBlock?.element?.price,
 		}));
+
 	const blocksReducer = sectionsBlocks.map((sectionBlock) => ({
 		id: sectionBlock.element.id,
 		desc: sectionBlock.element.name,
@@ -32,7 +34,13 @@ export const getFormatedTableData = (blocks) => {
 						(block) =>
 							block.type === 'Product' && block.item === itemBlock.element.id,
 					)
-					.reduce((a, b) => (a += b.subtotal), 0),
+					.reduce(
+						(a, b) =>
+							(a +=
+								(b.element.quantity || 1) *
+								(b.element.price_user || b.element.price)),
+						0,
+					),
 				type: itemBlock.type,
 				subRows: blocks
 					.filter(
@@ -44,24 +52,24 @@ export const getFormatedTableData = (blocks) => {
 						desc: productBlock.element.name,
 						unit: '',
 						cnt: 0,
-						price:
-							productBlock?.element?.price_user === null
-								? `D${productBlock?.element?.price}`
-								: `U${productBlock?.element?.price_user}`,
-						subtotal:
-							productBlock?.element?.price_user === null
-								? `D${productBlock?.element?.price}`
-								: `U${productBlock?.element?.price_user}`,
+						price: productBlock?.element?.price_user
+							? `U${productBlock?.element?.price_user}`
+							: `D${productBlock?.element?.price}`,
+						subtotal: productBlock?.element?.price_user
+							? `U${productBlock?.element?.price_user}`
+							: `D${productBlock?.element?.price}`,
 						type: productBlock.type,
 					})),
 			})),
 	}));
+
 	const itemReducer = blocksReducer.map((itemBlock) => ({
 		id: itemBlock.id,
 		row: itemBlock.subRows
 			.map((datanum) => datanum.subtotal)
 			.reduce((a, b) => (a += b), 0),
 	}));
+
 	return sectionsBlocks.map((sectionBlock) => ({
 		item_id: `${sectionBlock.element.item_id}.`,
 		id: sectionBlock.element.id,
@@ -90,7 +98,13 @@ export const getFormatedTableData = (blocks) => {
 						(block) =>
 							block.type === 'Product' && block.item === itemBlock.element.id,
 					)
-					.reduce((a, b) => (a += b.subtotal), 0),
+					.reduce(
+						(a, b) =>
+							(a +=
+								(b.element.quantity || 1) *
+								(b.element.price_user || b.element.price)),
+						0,
+					),
 				type: itemBlock.type,
 				subRows: blocks
 					.filter(

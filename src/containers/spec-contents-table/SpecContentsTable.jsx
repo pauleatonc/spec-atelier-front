@@ -41,19 +41,9 @@ const SpecContentsTable = () => {
 	const handleDownloadTableClick = () =>
 		dispatch(downloadTableDocument({ specID: id }));
 
-	const dataProducts = blocks
-		.filter((block) => block.type === 'Product')
-		.map((productBlock) => ({
-			...productBlock,
-			subtotal:
-				productBlock?.element?.price_user === null
-					? productBlock?.element?.price
-					: productBlock?.element?.price_user,
-		}));
-
-	const totalProducts = dataProducts.reduce((a, b) => (a += b.subtotal), 0);
-
 	const data = useMemo(() => getFormatedTableData(blocks), [blocks]);
+
+	const totalProducts = data.reduce((a, b) => (a += b.subtotal[0]), 0);
 
 	const handleOnBlurInput = (tableInputType, inputValue, productId) => {
 		const body = {
@@ -229,7 +219,7 @@ const SpecContentsTable = () => {
 							<td colSpan="7">
 								<ContentFooter>
 									<TableElements>
-										{dataProducts.length} elementos especificados
+										{data.length} elementos especificados
 									</TableElements>
 									<ContainerTotalTable>
 										<TableTotal mRight="36">Total:</TableTotal>
