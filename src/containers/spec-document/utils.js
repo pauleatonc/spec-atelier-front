@@ -111,22 +111,25 @@ export const getFormatedTableData = (blocks) => {
 						(block) =>
 							block.type === 'Product' && block.item === itemBlock.element.id,
 					)
-					.map((productBlock) => ({
-						item_id: `${productBlock.element.item_id}.`,
-						id: productBlock.element.id,
-						desc: productBlock.element.item_title,
-						unit: productBlock?.element?.unit,
-						cnt: !productBlock?.element?.quantity
-							? 1
-							: productBlock?.element?.quantity,
-						price: productBlock?.element?.price,
-						subtotal:
-							(productBlock?.element?.quantity || 1) *
-							(productBlock?.element?.price ||
-								productBlock?.element?.price_user),
-						type: productBlock.type,
-						price_user: productBlock?.element?.price_user,
-					})),
+					.map((productBlock) => {
+						return {
+							item_id: `${productBlock.element.item_id}.`,
+							id: productBlock.element.id,
+							desc: productBlock.element.item_title,
+							unit: productBlock?.element?.unit,
+							cnt: !productBlock?.element?.quantity
+								? 1
+								: productBlock?.element?.quantity,
+							price: productBlock?.element?.price,
+							subtotal:
+								(productBlock?.element?.quantity || 1) *
+								(productBlock?.element?.price ||
+									productBlock?.element?.price_user),
+							type: productBlock.type,
+							price_user: productBlock?.element?.price_user,
+							item: productBlock.item,
+						};
+					}),
 			})),
 	}));
 };

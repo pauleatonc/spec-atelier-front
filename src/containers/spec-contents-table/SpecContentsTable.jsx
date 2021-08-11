@@ -60,7 +60,7 @@ const SpecContentsTable = () => {
 				},
 			},
 		};
-		dispatch(handleUpdateProduct(body, tableInputType));
+		dispatch(handleUpdateProduct(body, tableInputType, row.original.item));
 	};
 
 	const columns = useMemo(
@@ -107,7 +107,7 @@ const SpecContentsTable = () => {
 			},
 			{
 				Header: 'Subtotal',
-				Cell: ({ row }) => `$${row?.original?.subtotal}`,
+				accessor: 'subtotal',
 			},
 			{
 				id: 'expander',
@@ -154,6 +154,7 @@ const SpecContentsTable = () => {
 		{
 			columns,
 			data: quoteTable,
+			autoResetExpanded: false,
 		},
 		useExpanded,
 	);

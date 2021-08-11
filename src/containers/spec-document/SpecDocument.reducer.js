@@ -10,7 +10,6 @@ import {
 	UPDATE_SPEC_BLOCK_TEXT_SUCCESS,
 	UPDATE_PRODUCT,
 	UPDATE_PRODUCT_SUCCESS,
-	UPDATE_PRODUCT_ERROR,
 } from './SpecDocument.actions';
 import { getFormatedTableData } from './utils';
 
@@ -48,10 +47,27 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
 		case UPDATE_PRODUCT: {
 			return { ...state };
 		}
-		case UPDATE_PRODUCT_SUCCESS:
-		case UPDATE_PRODUCT_ERROR: {
+		case UPDATE_PRODUCT_SUCCESS: {
+			const filterBlock = state.blocks.filter(
+				(block) =>
+					block.type === 'Product' &&
+					block.element.id === payload.product.id &&
+					block.item === payload.item,
+			);
+			filterBlock[0].element = {
+				...filterBlock[0].element,
+				[payload.tableInputType]: payload.product[payload.tableInputType],
+			};
+			const idsBlocks = state.blocks.map((block) => block.id);
+			const indexFilterBlock = idsBlocks.indexOf(filterBlock[0].id);
+
+			const newBlocks = [
+				...state.blocks.filter((block) => block.id !== filterBlock[0].id),
+			];
+			newBlocks.splice(indexFilterBlock, 0, filterBlock[0]);
 			return {
 				...state,
+				quoteTable: getFormatedTableData(newBlocks),
 			};
 		}
 		default: {
