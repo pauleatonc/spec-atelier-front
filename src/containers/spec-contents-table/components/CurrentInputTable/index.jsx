@@ -15,8 +15,8 @@ const CurrentInputTable = ({
 	...restProps
 }) => {
 	const [currentValue, setCurrentValue] = useState(value);
-	const [prevValueP, setPrevValueP] = useState(0);
-	const [prevValueQ, setPrevValueQ] = useState(0);
+	const [prevValueP, setPrevValueP] = useState(value);
+	const [prevValueQ, setPrevValueQ] = useState(value);
 	const onChangeCurrentValue = ({
 		target: {
 			value: inputValue,
