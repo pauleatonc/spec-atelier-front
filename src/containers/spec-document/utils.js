@@ -117,7 +117,7 @@ export const getFormatedTableData = (blocks) => {
 						desc: productBlock.element.item_title,
 						unit: productBlock?.element?.unit,
 						cnt: !productBlock?.element?.quantity
-							? 0
+							? 1
 							: productBlock?.element?.quantity,
 						price: productBlock?.element?.price,
 						subtotal:
