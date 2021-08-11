@@ -48,6 +48,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
 			return { ...state };
 		}
 		case UPDATE_PRODUCT_SUCCESS: {
+			const idsBlocks = state.blocks.map((block) => block.id);
 			const filterBlock = state.blocks.filter(
 				(block) =>
 					block.type === 'Product' &&
@@ -58,9 +59,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
 				...filterBlock[0].element,
 				[payload.tableInputType]: payload.product[payload.tableInputType],
 			};
-			const idsBlocks = state.blocks.map((block) => block.id);
 			const indexFilterBlock = idsBlocks.indexOf(filterBlock[0].id);
-
 			const newBlocks = [
 				...state.blocks.filter((block) => block.id !== filterBlock[0].id),
 			];
