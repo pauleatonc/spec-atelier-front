@@ -31,9 +31,11 @@ const CurrentInputTable = ({
 				onBlurInput(tableInputType, inputValue, row);
 				setPrevValueP(parseInt(inputValue, 10));
 			}
-		} else if (prevValueQ !== parseInt(inputValue, 10)) {
-			onBlurInput(tableInputType, inputValue, row);
-			setPrevValueQ(parseInt(inputValue, 10));
+		} else if (tableInputType === 'quantity') {
+			if (inputValue > 1 && prevValueQ !== parseInt(inputValue, 10)) {
+				onBlurInput(tableInputType, inputValue, row);
+				setPrevValueQ(parseInt(inputValue, 10));
+			}
 		}
 	};
 

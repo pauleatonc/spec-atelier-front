@@ -6,9 +6,8 @@ export const TableInput = styled.input`
 	width: 58px;
 	border-bottom: solid 1px rgba(0, 0, 0, 0.28);
 	font-family: Lato;
-	font-size: 12px;
+	font-size: 13px;
 	caret-color: #00c3ac;
-	padding-bottom: 5px;
 	&:active,
 	&:focus {
 		border-bottom: solid 1px #00c3ac;

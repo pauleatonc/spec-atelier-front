@@ -73,7 +73,7 @@ const SpecContentsTable = () => {
 				Header: 'Descripción',
 				accessor: 'desc',
 			},
-			{ Header: 'unit', accessor: 'unit' },
+			{ Header: 'Unidad', accessor: 'unit' },
 			{
 				Header: 'Cantidad',
 				Cell: ({ row }) =>
@@ -87,7 +87,7 @@ const SpecContentsTable = () => {
 					),
 			},
 			{
-				Header: 'price',
+				Header: 'Precio',
 				Cell: ({ row }) => {
 					if (row?.original?.type === 'Product') {
 						if (row?.original?.price) {
@@ -169,7 +169,7 @@ const SpecContentsTable = () => {
 							<ButtonsHeader>
 								<Button onClick={allExpand}>{`${
 									toggleExpanded ? 'Contraer' : 'Expandir'
-								} Filas`}</Button>
+								} filas`}</Button>
 								<Button
 									title="Descargar presupuesto"
 									onClick={handleDownloadTableClick}

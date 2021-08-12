@@ -20,7 +20,7 @@ export const ContentTable = styled.div`
 export const Header = styled.td`
 	width: 100%;
 	height: 46px;
-	padding: 20px 35px;
+	padding: 20px;
 	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
@@ -35,7 +35,7 @@ export const ContentFooter = styled.div`
 	display: flex;
 	justify-content: space-between;
 	background-color: rgba(0, 196, 172, 0.06);
-	padding: 20px 35px;
+	padding: 20px;
 `;
 
 export const TableElements = styled.h1`
@@ -119,7 +119,7 @@ export const TableTbody = styled.tbody`
 `;
 
 export const TableTd = styled.td`
-	padding: ${({ isTypeUnity }) => (isTypeUnity ? '15px' : '20px')} 15px;
+	padding: ${({ isTypeUnity }) => (isTypeUnity ? '16.5px' : '20px')} 15px;
 	border-top: 1px solid #dddddd;
 	border-bottom: 1px solid #dddddd;
 	font-family: Lato;
