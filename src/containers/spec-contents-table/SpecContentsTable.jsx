@@ -135,8 +135,14 @@ const SpecContentsTable = () => {
 									className={`fas fa-chevron-${row.isExpanded ? 'up' : 'down'}`}
 								/>
 							);
+						case 'Product':
+							return !row?.original?.price ? (
+								<ButtonConsult>Consultar precio</ButtonConsult>
+							) : (
+								''
+							);
 						default:
-							return <ButtonConsult>Consultar precio</ButtonConsult>;
+							return '';
 					}
 				},
 			},
