@@ -58,14 +58,14 @@ export const getProduct = (clientId) => async (dispatch) => {
 	}
 };
 
-export const onGetProducts = (filters, extraPayload = {}) => async (
+export const onGetProducts = (filters, extraPayload = {}, seeMore) => async (
 	dispatch,
 ) => {
 	dispatch(onActionCreator(GET_PRODUCTS));
 	try {
 		const { products } = await getProducts(cleanObjectsAndArrays(filters));
 		return dispatch(
-			onActionCreator(GET_PRODUCTS_SUCCESS, {
+			onActionCreator(seeMore ? GET_MORE_PRODUCTS : GET_PRODUCTS_SUCCESS, {
 				nextPage: products?.next_page,
 				products: products?.list || products || [],
 				filterOptions: products?.filters || {},
@@ -158,4 +158,16 @@ export const onDeleteProduct = (productId) => async (dispatch, getState) => {
 		dispatch(onActionCreator(DELETE_PRODUCT_ERROR));
 		dispatch(onShowAlertSuccess({ message: 'Error al eliminar el producto.' }));
 	}
+};
+
+export const UPDATE_PRODUCTS_WITH_PRODUCT = 'UPDATE_PRODUCTS_WITH_PRODUCT';
+export const updateProductsWithProduct = (product) => (dispatch, getState) => {
+	const { products } = getState().productsList;
+	const filteredProducst = products.filter((prd) => prd.id !== product.id);
+	const updatedProducts = [product, ...filteredProducst];
+	dispatch(
+		onActionCreator(UPDATE_PRODUCTS_WITH_PRODUCT, {
+			products: updatedProducts,
+		}),
+	);
 };

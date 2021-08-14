@@ -42,12 +42,12 @@ export const addSpecBlockText = factoryService(
 /**
  * Delete a block from the spec.
  */
-export const deleteSpecBlock = factoryService(({ blockID, specID, userID }) =>
-	deleteJsonRequest(
+export const deleteSpecBlock = factoryService(({ block, specID, userID }) => {
+	return deleteJsonRequest(
 		`${API_BASE_URL}/users/${userID}/project_specs/${specID}/remove_block`,
-		{ block: blockID },
-	),
-);
+		{ block },
+	);
+});
 
 /**
  * Delete the image of the given block.

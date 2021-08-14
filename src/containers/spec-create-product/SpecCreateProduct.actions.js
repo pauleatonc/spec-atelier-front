@@ -101,6 +101,7 @@ export const onCreateSpecProduct = ({ documents, images }) => async (
 			dispatch(
 				setFilters({
 					...productFilters,
+					with_product: response.product.id,
 					page: 0,
 					limit: 10,
 				}),

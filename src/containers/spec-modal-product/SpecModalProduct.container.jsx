@@ -29,7 +29,7 @@ import {
 } from './SpecModalProduct.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
-import { closeModal } from './SpecModalProduct.actions';
+import { closeModal, getImageSizeData } from './SpecModalProduct.actions';
 import {
 	onAttachSpecProduct,
 	onDetachSpecProduct,
@@ -44,7 +44,7 @@ import closeSource from '../../assets/images/icons/close.svg';
 const SpecModalProduct = () => {
 	const { id: specID } = useParams();
 	const getFirstImg = (data) => (data?.images?.length && data.images[0]) || {};
-	const { product, showModalProduct, hasProduct } = useSelector(
+	const { product, showModalProduct, hasProduct, imageSizeData } = useSelector(
 		(state) => state.specModalPorduct,
 	);
 	const [selectedImg, selectImg] = useState(getFirstImg());
@@ -54,8 +54,15 @@ const SpecModalProduct = () => {
 	const isRegisteredClient = !!product?.client.id && !!product?.client.name;
 
 	useEffect(() => {
-		if (product && showModalProduct) selectImg(getFirstImg(product));
+		if (product && showModalProduct) {
+			selectImg(getFirstImg(product));
+		}
 	}, [product, showModalProduct]);
+
+	useEffect(() => {
+		if (selectedImg?.urls?.medium)
+			dispatch(getImageSizeData(selectedImg?.urls?.medium));
+	}, [selectedImg]);
 
 	const onContact = () =>
 		dispatch(
@@ -89,14 +96,17 @@ const SpecModalProduct = () => {
 	};
 
 	const handleAddProduct = () => {
-		if (hasProduct) {
-			return dispatch(onDetachSpecProduct({ productID: product?.id, specID }));
-		}
-
-		if (product.items.length > 1) {
+		if (product.items.length > 1)
 			return dispatch(onShowAttachModal({ product }));
-		}
+		if (hasProduct) return dispatch(onDetachSpecProduct({ product, specID }));
+
 		return handleAttachSpecProduct();
+	};
+
+	const getButtonText = () => {
+		if (product.items.length > 1) return 'Añadir / Remover';
+		if (hasProduct) return 'Remover';
+		return 'Añadir';
 	};
 
 	return (
@@ -190,7 +200,7 @@ const SpecModalProduct = () => {
 						width="100%"
 						onClick={handleAddProduct}
 					>
-						{hasProduct ? 'Remover' : 'Añadir'}
+						{getButtonText()}
 					</Button>
 				</AddButtonContainer>
 			</Container>

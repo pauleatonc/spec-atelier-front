@@ -203,7 +203,6 @@ const ProductList = ({
 				</>
 			)}
 			<BodyHeader>
-				{loading && 'Cargando...'}
 				{!!products.length && !loading && (
 					<>
 						<Sort>

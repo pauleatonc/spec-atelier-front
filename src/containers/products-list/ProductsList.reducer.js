@@ -15,6 +15,8 @@ import {
 	DELETE_PRODUCT_SUCCESS,
 	DELETE_PRODUCT_ERROR,
 	CLEAN_PRODUCT_LIST_DATA,
+	UPDATE_PRODUCTS_WITH_PRODUCT,
+	GET_MORE_PRODUCTS,
 } from './ProductsList.actions';
 
 export const productsListInitialState = {
@@ -58,7 +60,6 @@ const productsListReducer = (
 			return {
 				...state,
 				...payload,
-				products: [...state.products, ...payload.products],
 				loading: false,
 				error: false,
 			};
@@ -107,6 +108,20 @@ const productsListReducer = (
 				...state,
 				isSelectedAll: payload,
 			};
+		case UPDATE_PRODUCTS_WITH_PRODUCT:
+			return {
+				...state,
+				products: payload.products,
+			};
+		case GET_MORE_PRODUCTS: {
+			return {
+				...state,
+				...payload,
+				products: [...state.products, ...payload.products],
+				loading: false,
+				error: false,
+			};
+		}
 		default: {
 			return state;
 		}
