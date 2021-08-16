@@ -4,6 +4,7 @@ import { COLOR_GREEN_UNDERLINE } from '../../../../config/constants/styled-vars'
 
 import { TableInput } from './styles';
 
+
 const CurrentInputTable = ({
 	value,
 	type,
@@ -27,12 +28,20 @@ const CurrentInputTable = ({
 	};
 	const handleBlur = ({ target: { value: inputValue } }) => {
 		if (tableInputType === 'price_user') {
+			if(inputValue <= 99){
+				setCurrentValue(100);
+				inputValue = 100;
+			}
 			if (inputValue > 99 && prevValueP !== parseInt(inputValue, 10)) {
 				onBlurInput(tableInputType, inputValue, row);
 				setPrevValueP(parseInt(inputValue, 10));
 			}
 		} else if (tableInputType === 'quantity') {
-			if (inputValue > 1 && prevValueQ !== parseInt(inputValue, 10)) {
+			if(inputValue <= 0){
+				setCurrentValue(1);
+				inputValue = 1;
+			}
+			if (inputValue > 0 && prevValueQ !== parseInt(inputValue, 10)) {
 				onBlurInput(tableInputType, inputValue, row);
 				setPrevValueQ(parseInt(inputValue, 10));
 			}
