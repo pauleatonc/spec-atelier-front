@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { COLOR_GREEN_UNDERLINE } from '../../../../config/constants/styled-vars';
 
 import { TableInput } from './styles';
-
+import CurrencyInput from './CurrencyInput'
 
 const CurrentInputTable = ({
 	value,
@@ -49,15 +49,23 @@ const CurrentInputTable = ({
 	};
 
 	return (
-		<TableInput
+		// <TableInput
+		// 	type="text"
+		// 	pattern="[0-9]*"
+		// 	value={currentValue}
+		// 	onChange={onChangeCurrentValue}
+		// 	colorUnderline={COLOR_GREEN_UNDERLINE}
+		// 	onBlur={handleBlur}
+		// 	{...restProps}
+		// />
+			<CurrencyInput 
+			placeholder="$0.00" 
 			type="text"
-			pattern="[0-9]*"
 			value={currentValue}
 			onChange={onChangeCurrentValue}
 			colorUnderline={COLOR_GREEN_UNDERLINE}
 			onBlur={handleBlur}
-			{...restProps}
-		/>
+			{...restProps} />
 	);
 };
 
