@@ -27,16 +27,15 @@ import specDownloadSource from '../../assets/images/icons/ic-download.svg';
 import iconArrowDown from '../../assets/images/icons/blue-arrow-down.svg';
 import iconArrowUp from '../../assets/images/icons/blue-arrow-up.svg';
 import CurrentInputTable from './components/CurrentInputTable';
-import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
+import { handleUpdateProduct, handleUpdateCountExpand } from '../spec-document/SpecDocument.actions';
 import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
 
 const SpecContentsTable = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
-	const { project, quoteTable } = useSelector((state) => state.specDocument);
+	const { project, quoteTable, totalExpandManual } = useSelector((state) => state.specDocument);
 	const [expandAll, setExpandAll] = useState();
 	const [toggleExpanded, setToggleExpanded] = useState(false);
-
 	const simulateClick = (e) => {
 		setExpandAll(e);
 	};
@@ -62,6 +61,12 @@ const SpecContentsTable = () => {
 		};
 		dispatch(handleUpdateProduct(body, tableInputType, row.original.item));
 	};
+	let count = 0;
+	const pb = (val) => {
+		//console.log(val);
+		//setExpandCount({});
+		//countExpand++;
+	}
 
 	const columns = useMemo(
 		() => [
@@ -125,6 +130,7 @@ const SpecContentsTable = () => {
 								<IconExpan
 									{...row.getToggleRowExpandedProps()}
 									className={`fas fa-chevron-${row.isExpanded ? 'up' : 'down'}`}
+									//onclick={pb(row.isExpanded ? 1 : 0)}
 								/>
 							);
 
@@ -133,6 +139,7 @@ const SpecContentsTable = () => {
 								<IconExpan
 									{...row.getToggleRowExpandedProps()}
 									className={`fas fa-chevron-${row.isExpanded ? 'up' : 'down'}`}
+									//onclick={pb(row.isExpanded ? 1 : 0)}
 								/>
 							);
 						case 'Product':
@@ -156,6 +163,7 @@ const SpecContentsTable = () => {
 		headerGroups,
 		rows,
 		prepareRow,
+		state: { expanded },
 	} = useTable(
 		{
 			columns,
@@ -164,7 +172,16 @@ const SpecContentsTable = () => {
 		},
 		useExpanded,
 	);
-
+	const dataExpanded = JSON.stringify({ expanded: expanded }, null, 2);
+	const expandedJSON = JSON.parse(dataExpanded);
+	const arrayExpandeJSON = Object.values(expandedJSON.expanded);
+	const lenghtArray = arrayExpandeJSON.length;
+	const totalExpander = totalExpandManual[0].length+totalExpandManual[1].length;
+	if(lenghtArray == totalExpander){ 
+		setToggleExpanded(!toggleExpanded);
+		expandAll.click();
+	}
+	
 	return (
 		<Root>
 			<ContentTable>
@@ -174,7 +191,7 @@ const SpecContentsTable = () => {
 							<Title>Itemizado y presupuesto: {project.name}</Title>
 							<ButtonsHeader>
 								<Button onClick={allExpand}>{`${
-									toggleExpanded ? 'Contraer' : 'Expandir'
+									 (toggleExpanded ? 'Contraer' : lenghtArray == totalExpander ? 'Contraer' : 'Expandir')
 								} filas`}</Button>
 								<Button
 									title="Descargar presupuesto"

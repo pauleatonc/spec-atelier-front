@@ -11,13 +11,14 @@ import {
 	UPDATE_PRODUCT,
 	UPDATE_PRODUCT_SUCCESS,
 } from './SpecDocument.actions';
-import { getFormatedTableData } from './utils';
+import { getFormatedTableData, getTotalExpandManual } from './utils';
 
 const specDocumentState = {
 	blocks: [],
 	loading: false,
 	project: {},
 	quoteTable: [],
+	totalExpandManual: 0,
 };
 
 /**
@@ -34,6 +35,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
 				blocks: payload.blocks,
 				project: { ...state.project, ...payload.project },
 				quoteTable: getFormatedTableData(payload.blocks),
+				totalExpandManual: getTotalExpandManual(payload.blocks),
 			};
 		case REMOVE_SPEC_BLOCK_SUCCESS:
 		case REMOVE_SPEC_BLOCK_IMAGE_SUCCESS:

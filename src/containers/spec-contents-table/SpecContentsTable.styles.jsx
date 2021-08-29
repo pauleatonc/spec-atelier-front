@@ -154,7 +154,7 @@ export const ButtonConsult = styled.div`
 	color: #00c3ac;
 `;
 
-export const IconExpan = styled.i`
+export const IconExpan = styled.div`
 	color: #1fc2ac;
 `;
 

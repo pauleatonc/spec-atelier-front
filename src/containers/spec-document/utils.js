@@ -133,3 +133,10 @@ export const getFormatedTableData = (blocks) => {
 			})),
 	}));
 };
+
+export const getTotalExpandManual = (blocks) => {
+	const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
+	const itemsBlocks = blocks.filter((block) => block.type === 'Item');
+	const array = [sectionsBlocks,itemsBlocks]
+	return array;
+}
