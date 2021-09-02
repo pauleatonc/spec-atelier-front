@@ -16,13 +16,27 @@ const defaultMaskOptions = {
   allowLeadingZeroes: false,
 }
 
+const CurrentInputStyles = {
+  'borderStyle': 'none',
+	'outline': 'none',
+	'width': '58px',
+	'border-bottom': 'solid 1px rgba(0, 0, 0, 0.28)',
+	'fontFamily': 'Lato',
+	'fontSize': '13px',
+	'caretColor': '#00c3ac',
+  '&:active': '',
+	'&:focus': {
+		'borderBottom': 'solid 1px #00c3ac',
+	}
+}
+
 const CurrencyInput = ({ maskOptions, ...inputProps }) => {
   const currencyMask = createNumberMask({
     ...defaultMaskOptions,
     ...maskOptions,
   })
 
-  return <MaskedInput mask={currencyMask} {...inputProps} />
+  return <MaskedInput style={CurrentInputStyles} mask={currencyMask} {...inputProps} />
 }
 
 CurrencyInput.defaultProps = {

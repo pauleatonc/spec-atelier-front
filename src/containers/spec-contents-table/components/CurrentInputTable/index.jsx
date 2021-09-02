@@ -62,13 +62,14 @@ const CurrentInputTable = ({
 		/>
 		:
 		<CurrencyInput 
-		placeholder="$0.00" 
-		type="text"
-		value={currentValue}
-		onChange={onChangeCurrentValue}
-		colorUnderline={COLOR_GREEN_UNDERLINE}
-		onBlur={handleBlur}
-		{...restProps} />}
+			placeholder="$0.00" 
+			type="text"
+			value={currentValue}
+			onChange={onChangeCurrentValue}
+			colorUnderline={COLOR_GREEN_UNDERLINE}
+			onBlur={handleBlur}
+			{...restProps} 
+		/>}
 		</>
 	);
 };
