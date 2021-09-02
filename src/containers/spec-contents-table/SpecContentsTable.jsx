@@ -61,12 +61,6 @@ const SpecContentsTable = () => {
 		};
 		dispatch(handleUpdateProduct(body, tableInputType, row.original.item));
 	};
-	let count = 0;
-	const pb = (val) => {
-		//console.log(val);
-		//setExpandCount({});
-		//countExpand++;
-	}
 
 	const columns = useMemo(
 		() => [
@@ -181,7 +175,7 @@ const SpecContentsTable = () => {
 		setToggleExpanded(!toggleExpanded);
 		expandAll.click();
 	}
-	
+
 	return (
 		<Root>
 			<ContentTable>

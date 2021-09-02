@@ -147,11 +147,6 @@ export const downloadBudged = factoryService(({ specID, userID }) =>
 	),
 );
 
-export const downloadTable = factoryService(({ specID, userID }) =>
-	getBlobRequest(
-		`${API_BASE_URL}/users/${userID}/project_specs/${specID}/download_pricing`,
-	),
-);
 
 /**
  * update project configuration

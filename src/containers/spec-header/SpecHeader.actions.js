@@ -1,5 +1,5 @@
 import onActionCreator from '../../config/store/helpers';
-import { downloadSpec, downloadBudged, downloadTable } from '../../services/specs.service';
+import { downloadSpec, downloadBudged } from '../../services/specs.service';
 
 export const LOADING_SPEC_DOWNLOAD = 'LOADING_SPEC_DOWNLOAD';
 export const DOWNLOAD_URL_SUCCESS = 'DOWNLOAD_URL_SUCCESS';
@@ -42,26 +42,6 @@ export const downloadBudgetDocument = ({ specID }) => (dispatch, getState) => {
 	const { auth } = getState();
 	dispatch(onActionCreator(LOADING_BUDGET_DOWNLOAD));
 	downloadBudged({ specID, userID: auth.user?.id }).then(
-		(response) => {
-			startDownload(response, 'presupuesto.xls');
-			return dispatch(onActionCreator(DOWNLOAD_BUDGET_SUCCESS));
-		},
-		(error) => {
-			console.error(error);
-			return dispatch(
-				onActionCreator(DOWNLOAD_BUDGET_ERROR, {
-					error: true,
-					nativeError: error,
-				}),
-			);
-		},
-	);
-};
-
-export const downloadTableDocument = ({ specID }) => (dispatch, getState) => {
-	const { auth } = getState();
-	dispatch(onActionCreator(LOADING_BUDGET_DOWNLOAD));
-	downloadTable({ specID, userID: auth.user?.id }).then(
 		(response) => {
 			startDownload(response, 'presupuesto.xls');
 			return dispatch(onActionCreator(DOWNLOAD_BUDGET_SUCCESS));

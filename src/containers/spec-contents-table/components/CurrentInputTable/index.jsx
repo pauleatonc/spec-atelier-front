@@ -27,6 +27,7 @@ const CurrentInputTable = ({
 		if (valid) setCurrentValue(inputValue);
 	};
 	const handleBlur = ({ target: { value: inputValue } }) => {
+		inputValue = inputValue.replace('$','');
 		if (tableInputType === 'price_user') {
 			if(inputValue <= 99){
 				setCurrentValue(100);
@@ -47,25 +48,28 @@ const CurrentInputTable = ({
 			}
 		}
 	};
-
 	return (
-		// <TableInput
-		// 	type="text"
-		// 	pattern="[0-9]*"
-		// 	value={currentValue}
-		// 	onChange={onChangeCurrentValue}
-		// 	colorUnderline={COLOR_GREEN_UNDERLINE}
-		// 	onBlur={handleBlur}
-		// 	{...restProps}
-		// />
-			<CurrencyInput 
-			placeholder="$0.00" 
+		<>
+		{tableInputType === "quantity"?
+		<TableInput
 			type="text"
+			pattern="[0-9]*"
 			value={currentValue}
 			onChange={onChangeCurrentValue}
 			colorUnderline={COLOR_GREEN_UNDERLINE}
 			onBlur={handleBlur}
-			{...restProps} />
+			{...restProps}
+		/>
+		:
+		<CurrencyInput 
+		placeholder="$0.00" 
+		type="text"
+		value={currentValue}
+		onChange={onChangeCurrentValue}
+		colorUnderline={COLOR_GREEN_UNDERLINE}
+		onBlur={handleBlur}
+		{...restProps} />}
+		</>
 	);
 };
 
