@@ -1,7 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import AlertContainer from '../containers/alert/Alert.container';
 import SpecHeaderContainer from '../containers/spec-header/SpecHeader.container';
+import SpecContentButtons from '../containers/spec-contents-buttons/SpecContentsButtons.container';
 import SpecDocumentContainer from '../containers/spec-document/SpecDocument.container';
+import SpecContentsTable from '../containers/spec-contents-table/SpecContentsTable';
 import SpecNavigatorContainer from '../containers/spec-navigator/SpecNavigator.container';
 import SpecProductsSectionsContainer from '../containers/spec-products-sections/SpecProductsSections.container';
 import SpecProductsItemsContainer from '../containers/spec-products-items/SpecProductsItems.container';
@@ -23,14 +26,18 @@ import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
  * The Specification's view.
  */
 const Specification = () => {
+	const { dataSection } = useSelector((state) => state);
+	const { option } = dataSection;
 	return (
 		<>
 			<Root>
 				<Header>
 					<SpecHeaderContainer />
 				</Header>
+				<SpecContentButtons />
 				<Main>
-					<SpecDocumentContainer />
+					{option === 'T' ? <SpecContentsTable /> : <SpecDocumentContainer />}
+
 					<Navigation>
 						<SpecNavigatorContainer />
 						<Panels>

@@ -147,6 +147,7 @@ export const downloadBudged = factoryService(({ specID, userID }) =>
 	),
 );
 
+
 /**
  * update project configuration
  */
@@ -157,4 +158,8 @@ export const updateProjectConfig = factoryService(
 			`${API_BASE_URL}/users/${userID}/projects/${specID}/project_configs`,
 			{ project_config },
 		),
+);
+
+export const updateProduct = factoryService((body) =>
+	patchJsonRequest(`${API_BASE_URL}/products/`+body.id, body.data),
 );
