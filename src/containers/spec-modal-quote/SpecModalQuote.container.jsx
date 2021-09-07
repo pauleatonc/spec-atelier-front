@@ -40,15 +40,18 @@ import { closeModal } from './SpecModalQuote.actions';
 import CurrentInputModal from './components/CurrentInputModal';
 import CurrentTextrModal from './components/CurrentTextModal';
 
-const SpecModalQuote = () => {
+const SpecModalQuote = ({initialValues}) => {
+  const dispatch = useDispatch();
   let isMounted = true;
   const getFirstImg = data => (data?.images?.length && data.images[0]) || {};
-  const { product, showModalQuote, user } = useSelector(state => state.specModalQuote);
+  const { product, showModalQuote } = useSelector(state => state.specModalQuote);
+  const { user, loading } = useSelector((state) => state.profile);
   const [selectedImg, selectImg] = useState(getFirstImg());
   const onSelectImg = img => () => selectImg(img);
 
-  const isRegisteredClient = !!product?.client.id && !!product?.client.name;
-  //console.log(user?.user?.first_name);
+  //console.log(initialValues);
+ 
+  // console.log(first_name);
 
   const onCloseModal = () => {
     dispatch(closeModal())
@@ -64,20 +67,13 @@ const SpecModalQuote = () => {
   const handleSendQuote = () => {
     
   }
-  const nameR = user?.user?.first_name ===  null ? '' : user?.user?.first_name === '' ? '' : user?.user?.first_name+' '+user?.user?.last_name;
-  console.log(nameR);
-  const [nameState, setNameState] = useState(nameR);
-  const formik = useFormik({
-    initialValues: {
-      name: nameR,
-      company: user?.user?.company ===  null ? '' : user?.user?.company === '' ? '' : user?.user?.company,
-      email: user?.user?.email ===  null ? '' : user?.user?.email === '' ? '' : user?.user?.email,
-    },
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
-  const dispatch = useDispatch();
+  const {
+		values,
+	} = useFormik({
+		initialValues,
+	});
+  console.log(values, initialValues);
+  
 
   if (!showModalQuote) return null;
   if (!product || !product.id) return <Loading />
@@ -116,14 +112,14 @@ const SpecModalQuote = () => {
             </ProductSection>
 
             <ContactSection>
-            <form onSubmit={formik.handleSubmit}>
+            <form>
               <TitleContact>Datos de contacto:</TitleContact>
                 <GroupInput>
                   <TitleGroup>Nombre</TitleGroup>
                   <CurrentInputModal 
                     name="name"
                     tableInputType="name"
-                    value={formik.values.name}
+                    value={values.first_name}
                   />
                 </GroupInput>
                 <GroupInput>
@@ -131,7 +127,7 @@ const SpecModalQuote = () => {
                   <CurrentInputModal
                     name="company"
                     tableInputType="company"
-                    value={formik.values.company}
+                    value={values.company}
                   />
                 </GroupInput>
                 <GroupInput>
@@ -139,7 +135,7 @@ const SpecModalQuote = () => {
                   <CurrentInputModal
                     name="email"
                     tableInputType="email"
-                    value={formik.values.email}
+                    value={values.email}
                   />
                 </GroupInput>
                 <GroupInput>

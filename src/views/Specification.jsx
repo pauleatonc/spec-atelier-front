@@ -29,6 +29,17 @@ import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
 const Specification = () => {
 	const { dataSection } = useSelector((state) => state);
 	const { option } = dataSection;
+	const {
+		first_name,
+		company,
+		email,
+		} = useSelector((state) => state.profile.user);
+	  const initialValues = {
+			first_name,
+		company,
+		email,
+		};
+		
 	return (
 		<>
 			<Root>
@@ -63,7 +74,7 @@ const Specification = () => {
 			<SpecImagesModalContainer />
 			<AlertContainer />
 			<SpecModalProduct />
-			<SpecModalQuote />
+			<SpecModalQuote initialValues={initialValues} />
 			<ContactFormContainer type="product" />
 		</>
 	);

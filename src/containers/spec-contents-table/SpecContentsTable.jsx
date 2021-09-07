@@ -41,6 +41,9 @@ const SpecContentsTable = () => {
 	const simulateClick = (e) => {
 		setExpandAll(e);
 	};
+
+
+
 	const allExpand = () => {
 		setToggleExpanded(!toggleExpanded);
 		expandAll.click();
