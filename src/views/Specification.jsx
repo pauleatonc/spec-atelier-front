@@ -10,6 +10,7 @@ import SpecProductsSectionsContainer from '../containers/spec-products-sections/
 import SpecProductsItemsContainer from '../containers/spec-products-items/SpecProductsItems.container';
 import SpecProductsContainer from '../containers/spec-products/SpecProducts.container';
 import SpecModalProduct from '../containers/spec-modal-product/SpecModalProduct.container';
+import SpecModalQuote from '../containers/spec-modal-quote/SpecModalQuote.container';
 import SpecCreateProductOneContainer from '../containers/spec-create-product/SpecCreateProductStepOne.container';
 import SpecCreateProductTwoContainer from '../containers/spec-create-product/SpecCreateProductStepTwo.container';
 import SpecCreateProductThreeContainer from '../containers/spec-create-product/SpecCreateProductStepThree.container';
@@ -62,6 +63,7 @@ const Specification = () => {
 			<SpecImagesModalContainer />
 			<AlertContainer />
 			<SpecModalProduct />
+			<SpecModalQuote />
 			<ContactFormContainer type="product" />
 		</>
 	);

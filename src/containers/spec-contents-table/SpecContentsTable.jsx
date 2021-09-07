@@ -27,19 +27,20 @@ import specDownloadSource from '../../assets/images/icons/ic-download.svg';
 import iconArrowDown from '../../assets/images/icons/blue-arrow-down.svg';
 import iconArrowUp from '../../assets/images/icons/blue-arrow-up.svg';
 import CurrentInputTable from './components/CurrentInputTable';
-import { handleUpdateProduct, handleUpdateCountExpand } from '../spec-document/SpecDocument.actions';
+import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
 import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
+import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
 
 const SpecContentsTable = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const { project, quoteTable, totalExpandManual } = useSelector((state) => state.specDocument);
+	const { user, loading } = useSelector((state) => state.profile);
 	const [expandAll, setExpandAll] = useState();
 	const [toggleExpanded, setToggleExpanded] = useState(false);
 	const simulateClick = (e) => {
 		setExpandAll(e);
 	};
-
 	const allExpand = () => {
 		setToggleExpanded(!toggleExpanded);
 		expandAll.click();
@@ -60,6 +61,11 @@ const SpecContentsTable = () => {
 			},
 		};
 		dispatch(handleUpdateProduct(body, tableInputType, row.original.item));
+	};
+
+	const onClickProduct = (selectedProduct) => (event) => {
+		event.stopPropagation();
+		dispatch(getProduct(selectedProduct,user));
 	};
 
 	const columns = useMemo(
@@ -138,7 +144,7 @@ const SpecContentsTable = () => {
 							);
 						case 'Product':
 							return !row?.original?.price ? (
-								<ButtonConsult>Consultar precio</ButtonConsult>
+								<ButtonConsult onClick={onClickProduct(row?.original)}>Consultar precio</ButtonConsult>
 							) : (
 								''
 							);

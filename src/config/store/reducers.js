@@ -9,6 +9,7 @@ import specProductsSectionsReducer from '../../containers/spec-products-sections
 import specProductsItemsReducer from '../../containers/spec-products-items/SpecProductsItems.reducer';
 import specProductsReducer from '../../containers/spec-products/SpecProducts.reducer';
 import specModalPorductReducer from '../../containers/spec-modal-product/SpecModalProduct.reducer';
+import specModalQuoteReducer from '../../containers/spec-modal-quote/SpecModalQuote.reducer';
 import specCreateProductReducer from '../../containers/spec-create-product/SpecCreateProduct.reducer';
 import specEditProductReducer from '../../containers/spec-edit-product/SpecEditProduct.reducer';
 import authReducer from '../../containers/auth/auth.reducer';
@@ -51,6 +52,7 @@ export default combineReducers({
 	specProductsItems: specProductsItemsReducer,
 	specProducts: specProductsReducer,
 	specModalPorduct: specModalPorductReducer,
+	specModalQuote: specModalQuoteReducer,
 	specCreateProduct: specCreateProductReducer,
 	specEditProduct: specEditProductReducer,
 	specDocument: specDocumentReducer,
