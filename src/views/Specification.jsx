@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import AlertContainer from '../containers/alert/Alert.container';
 import SpecHeaderContainer from '../containers/spec-header/SpecHeader.container';
@@ -10,7 +10,6 @@ import SpecProductsSectionsContainer from '../containers/spec-products-sections/
 import SpecProductsItemsContainer from '../containers/spec-products-items/SpecProductsItems.container';
 import SpecProductsContainer from '../containers/spec-products/SpecProducts.container';
 import SpecModalProduct from '../containers/spec-modal-product/SpecModalProduct.container';
-import SpecModalQuote from '../containers/spec-modal-quote/SpecModalQuote.container';
 import SpecCreateProductOneContainer from '../containers/spec-create-product/SpecCreateProductStepOne.container';
 import SpecCreateProductTwoContainer from '../containers/spec-create-product/SpecCreateProductStepTwo.container';
 import SpecCreateProductThreeContainer from '../containers/spec-create-product/SpecCreateProductStepThree.container';
@@ -29,16 +28,6 @@ import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
 const Specification = () => {
 	const { dataSection } = useSelector((state) => state);
 	const { option } = dataSection;
-	const {
-		first_name,
-		company,
-		email,
-		} = useSelector((state) => state.profile.user);
-	  const initialValues = {
-			first_name,
-		company,
-		email,
-		};
 		
 	return (
 		<>
@@ -74,7 +63,6 @@ const Specification = () => {
 			<SpecImagesModalContainer />
 			<AlertContainer />
 			<SpecModalProduct />
-			<SpecModalQuote initialValues={initialValues} />
 			<ContactFormContainer type="product" />
 		</>
 	);

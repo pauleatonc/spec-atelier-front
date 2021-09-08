@@ -29,6 +29,7 @@ import iconArrowUp from '../../assets/images/icons/blue-arrow-up.svg';
 import CurrentInputTable from './components/CurrentInputTable';
 import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
 import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
+import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
 import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
 
 const SpecContentsTable = () => {
@@ -41,6 +42,18 @@ const SpecContentsTable = () => {
 	const simulateClick = (e) => {
 		setExpandAll(e);
 	};
+	const {
+		first_name,
+		company,
+		email,
+		description,
+		} = useSelector((state) => state.profile.user);
+	const initialValues = {
+			first_name,
+			company,
+			email,
+			description,
+		};
 
 
 
@@ -255,6 +268,7 @@ const SpecContentsTable = () => {
 					</tfoot>
 				</Table>
 			</ContentTable>
+			<SpecModalQuote initialValues={initialValues} />
 		</Root>
 	);
 };

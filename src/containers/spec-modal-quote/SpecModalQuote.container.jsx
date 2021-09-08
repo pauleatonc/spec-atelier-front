@@ -45,34 +45,30 @@ const SpecModalQuote = ({initialValues}) => {
   let isMounted = true;
   const getFirstImg = data => (data?.images?.length && data.images[0]) || {};
   const { product, showModalQuote } = useSelector(state => state.specModalQuote);
-  const { user, loading } = useSelector((state) => state.profile);
   const [selectedImg, selectImg] = useState(getFirstImg());
   const onSelectImg = img => () => selectImg(img);
-
-  //console.log(initialValues);
  
   // console.log(first_name);
 
   const onCloseModal = () => {
     dispatch(closeModal())
   };
-  // const [data2, setData2] = useState(data);
-  //  const handleOnBlurInput = (tableInputType, inputValue) => {
-  //   setData(data.map((itemMap) => ({
-  //     ...itemMap,
-  //     [tableInputType]: inputValue,
-  //   })));
-	//  };
-
-  const handleSendQuote = () => {
-    
-  }
+  
   const {
-		values,
+    handleChange,
+    handleSubmit,
+    values,
 	} = useFormik({
 		initialValues,
+    onSubmit: (vals) => {
+			const params = {
+				...vals,
+			};
+      console.log(params);
+			//dispatch(sendContactData(params));
+		},
 	});
-  console.log(values, initialValues);
+  //console.log(values, initialValues);
   
 
   if (!showModalQuote) return null;
@@ -119,6 +115,7 @@ const SpecModalQuote = ({initialValues}) => {
                   <CurrentInputModal 
                     name="name"
                     tableInputType="name"
+                    onChange={handleChange}
                     value={values.first_name}
                   />
                 </GroupInput>
@@ -127,6 +124,7 @@ const SpecModalQuote = ({initialValues}) => {
                   <CurrentInputModal
                     name="company"
                     tableInputType="company"
+                    onChange={handleChange}
                     value={values.company}
                   />
                 </GroupInput>
@@ -135,16 +133,20 @@ const SpecModalQuote = ({initialValues}) => {
                   <CurrentInputModal
                     name="email"
                     tableInputType="email"
+                    onChange={handleChange}
                     value={values.email}
                   />
                 </GroupInput>
                 <GroupInput>
                   <TitleGroup>Descripción</TitleGroup>
                   <CurrentTextrModal
+                    name="description"
+                    onChange={handleChange}
                     tableInputType="description"
+                    value={values.description}
                   />
                 </GroupInput>
-                <ButtonQuote onClick={handleSendQuote}>
+                <ButtonQuote onClick={handleSubmit}>
                   <TitleButton>Solicitar cotización</TitleButton>
                 </ButtonQuote>
             </form>
