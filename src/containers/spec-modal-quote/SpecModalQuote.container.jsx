@@ -39,7 +39,7 @@ const SpecModalQuote = ({initialValues}) => {
   const onSelectImg = img => () => selectImg(img);
 
   const onCloseModal = () => {
-    dispatch(closeModal())
+    dispatch(closeModal(resetForm))
   };
 
   const FormContactSchema = Yup.object().shape({
@@ -73,11 +73,9 @@ const SpecModalQuote = ({initialValues}) => {
 		},
     validationSchema: FormContactSchema,
 	});
-  
 
   if (!showModalQuote) return null;
   if (!product || !product.id) return <Loading />
-
   return (
     <Modal show={showModalQuote} onClose={onCloseModal}>
       <Container>

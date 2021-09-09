@@ -47,4 +47,7 @@ export const sendQuoteA = (params) => async dispatch => {
 	);
 }
 
-export const closeModal = () => dispatch => dispatch(onActionCreator(CLOSE_MODAL_QUOTE, {}));
+export const closeModal = (reset) => dispatch => {
+  if (reset) reset();
+  dispatch(onActionCreator(CLOSE_MODAL_QUOTE, {}))
+};
