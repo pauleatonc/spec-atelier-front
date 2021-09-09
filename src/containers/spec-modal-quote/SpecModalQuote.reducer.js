@@ -3,7 +3,9 @@ import {
   GET_PRODUCT_ERROR_QUOTE,
   SHOW_MODAL_QUOTE,
   CLOSE_MODAL_QUOTE,
-  DATA_USER
+  DATA_USER,
+  SEND_QUOTE,
+  SEND_QUOTE_ERROR
 } from './SpecModalQuote.actions';
 
 export const initialState = {
@@ -44,6 +46,11 @@ const productsReducer = (state = initialState, action) => {
       return{
         ...state,
         user: payload,
+      }
+    case SEND_QUOTE:
+      return{
+        ...state,
+        error: false
       }
     default:
       return state;

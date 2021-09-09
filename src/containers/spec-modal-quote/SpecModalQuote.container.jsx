@@ -5,19 +5,8 @@ import {
   ButtonClose,
   Container,
   Content,
-  HeaderProduct,
-  Title,
   Section,
-  ImagesContainer,
   ImagesContent,
-  ProductImageSelectedContainer,
-  ProductImageSelected,
-  InfoContainer,
-  InfoContent,
-  ProductName,
-  ProductDescription,
-  ProductBrand,
-  Actions,
   ProductSection,
   ContactSection,
   TitleContact,
@@ -33,12 +22,13 @@ import {
   TitleProductName,
   ProductDesc,
   ProductSpan,
+  TextAreaForm,
+  TableInput,
+  MessageRequired
 } from './SpecModalQuote.styles';
 import { useFormik } from 'formik';
-import { closeModal } from './SpecModalQuote.actions';
-//import { openContactModal } from '../modal-contact-form/ModalContactForm.actions';
-import CurrentInputModal from './components/CurrentInputModal';
-import CurrentTextrModal from './components/CurrentTextModal';
+import { closeModal, sendQuoteA } from './SpecModalQuote.actions';
+import * as Yup from 'yup';
 
 const SpecModalQuote = ({initialValues}) => {
   const dispatch = useDispatch();
@@ -47,28 +37,42 @@ const SpecModalQuote = ({initialValues}) => {
   const { product, showModalQuote } = useSelector(state => state.specModalQuote);
   const [selectedImg, selectImg] = useState(getFirstImg());
   const onSelectImg = img => () => selectImg(img);
- 
-  // console.log(first_name);
 
   const onCloseModal = () => {
     dispatch(closeModal())
   };
+
+  const FormContactSchema = Yup.object().shape({
+		name: Yup.string().required('El nombre es requerido'),
+		email: Yup.string().email('Email invalido').required('El correo es requerido'),
+		company: Yup.string().required('La empresa es requerida').nullable(),
+		description: Yup.string().required('La descripción es requerida'),
+	});
   
   const {
     handleChange,
     handleSubmit,
+    errors,
     values,
+    resetForm,
 	} = useFormik({
 		initialValues,
     onSubmit: (vals) => {
-			const params = {
-				...vals,
+			const body = {
+				empresa: vals.company,
+        message: vals.description,
+        email: vals.email,
+        nombre: vals.name
 			};
-      console.log(params);
-			//dispatch(sendContactData(params));
+      const params = {
+        id: product.id,
+        data: body
+      }
+      dispatch(sendQuoteA(params));
+      //resetForm({});
 		},
+    validationSchema: FormContactSchema,
 	});
-  //console.log(values, initialValues);
   
 
   if (!showModalQuote) return null;
@@ -100,8 +104,10 @@ const SpecModalQuote = ({initialValues}) => {
                   </ImagesContent>
                 </ContentImage>
                 <ContentDataProduct>
+                  <ProductSpan>Referencia / Rerencia</ProductSpan>
                   <TitleProductName>{product.name}</TitleProductName>
                   <ProductDesc>{product.long_desc}</ProductDesc>
+                  <ProductSpan>Producto: referencia referencia</ProductSpan>
                   <ProductSpan>{`Referencia: ${product?.systems?.first?.name || ''}: ${product?.brand?.name || ''}`}</ProductSpan>
                 </ContentDataProduct>
               </ContentProduct>
@@ -112,39 +118,43 @@ const SpecModalQuote = ({initialValues}) => {
               <TitleContact>Datos de contacto:</TitleContact>
                 <GroupInput>
                   <TitleGroup>Nombre</TitleGroup>
-                  <CurrentInputModal 
+                  <TableInput 
                     name="name"
-                    tableInputType="name"
                     onChange={handleChange}
-                    value={values.first_name}
+                    value={values.name}
+                    isRequired={errors.name === 'Required'}
                   />
+                  <MessageRequired>{errors.name ? errors.name : ''}</MessageRequired>
                 </GroupInput>
                 <GroupInput>
                   <TitleGroup>Empresa</TitleGroup>
-                  <CurrentInputModal
+                  <TableInput
                     name="company"
-                    tableInputType="company"
                     onChange={handleChange}
                     value={values.company}
+                    isRequired={errors.company === 'Required'}
                   />
+                  <MessageRequired>{errors.company? errors.company : ''}</MessageRequired>
                 </GroupInput>
                 <GroupInput>
                   <TitleGroup>Correo</TitleGroup>
-                  <CurrentInputModal
+                  <TableInput
                     name="email"
-                    tableInputType="email"
                     onChange={handleChange}
                     value={values.email}
+                    isRequired={errors.email === 'Required'}
                   />
+                  <MessageRequired>{errors.email ? errors.email:''}</MessageRequired>
                 </GroupInput>
                 <GroupInput>
                   <TitleGroup>Descripción</TitleGroup>
-                  <CurrentTextrModal
+                  <TextAreaForm
                     name="description"
                     onChange={handleChange}
-                    tableInputType="description"
                     value={values.description}
+                    isRequired={errors.description === 'Required'}
                   />
+                  <MessageRequired>{errors.description ? errors.description:''}</MessageRequired>
                 </GroupInput>
                 <ButtonQuote onClick={handleSubmit}>
                   <TitleButton>Solicitar cotización</TitleButton>

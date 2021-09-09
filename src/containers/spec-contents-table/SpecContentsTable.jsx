@@ -44,17 +44,16 @@ const SpecContentsTable = () => {
 	};
 	const {
 		first_name,
+		last_name,
 		company,
-		email,
-		description,
+		email
 		} = useSelector((state) => state.profile.user);
 	const initialValues = {
-			first_name,
-			company,
-			email,
-			description,
+			name:first_name+' '+last_name, 
+			company: company ? company : '',
+			email: email? email : '',
+			description: '',
 		};
-
 
 
 	const allExpand = () => {
@@ -146,7 +145,6 @@ const SpecContentsTable = () => {
 								<IconExpan
 									{...row.getToggleRowExpandedProps()}
 									className={`fas fa-chevron-${row.isExpanded ? 'up' : 'down'}`}
-									//onclick={pb(row.isExpanded ? 1 : 0)}
 								/>
 							);
 
@@ -155,7 +153,6 @@ const SpecContentsTable = () => {
 								<IconExpan
 									{...row.getToggleRowExpandedProps()}
 									className={`fas fa-chevron-${row.isExpanded ? 'up' : 'down'}`}
-									//onclick={pb(row.isExpanded ? 1 : 0)}
 								/>
 							);
 						case 'Product':

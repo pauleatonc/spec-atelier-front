@@ -153,7 +153,6 @@ export const ProductDescription = styled.div`
   font-size: 12px;
   overflow-y: auto;
   height: 100%;
-  font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -197,6 +196,8 @@ export const ProductSection = styled.div`
 
 export const ContactSection = styled.div`
   width: 50%;
+  height: 355px;
+  overflow: auto;
 `;
 
 export const TitleContact = styled.span`
@@ -241,7 +242,7 @@ export const TitleGroup = styled.label`
 export const GroupInput = styled.div`
   display: grid;
   width: 100%;
-  margin-top: 23px;
+  margin-top: 18px;
 `;
 
 export const GroupTitle = styled.div`
@@ -256,7 +257,7 @@ export const ButtonQuote = styled.div`
   border-radius: 19.5px;
   background-color: #17bda7;
   cursor: pointer;
-  margin-top: 59px;
+  margin-top: 17px;
   float: right;
 `;
 
@@ -276,7 +277,7 @@ export const TitleButton = styled.span`
 
 export const ContentProduct = styled.div`
   width: 90%;
-  height: 182px;
+  height: 275px;
   padding: 0 0 31px;
   border-radius: 9px;
   border: solid 1px #e0e0e0;
@@ -285,20 +286,18 @@ export const ContentProduct = styled.div`
 
 export const ContentImage = styled.div`
   width: 40%;
-  margin-top: 25px;
+  margin-top: 80px;
 `;
 
 export const ContentDataProduct = styled.div`
   width: 100%;
   margin-top: 25px;
-  height: 124px;
   overflow: auto;
   display: grid;
 `;
 
 export const TitleProductName = styled.span`
   width: 268px;
-  height: 13px;
   font-family: Lato;
   font-size: 11px;
   font-weight: bold;
@@ -307,6 +306,7 @@ export const TitleProductName = styled.span`
   line-height: normal;
   letter-spacing: 0.92px;
   color: var(--black);
+  margin-top: 10px;
 `;
 
 export const ProductDesc = styled.span`
@@ -332,4 +332,55 @@ export const ProductSpan = styled.span`
   letter-spacing: 0.83px;
   color: var(--black);
   margin-top: 10px;
+`;
+
+export const TextAreaForm = styled.textarea`
+  width: 98%;
+	border-radius: 5px;
+	padding-left: 2px;
+	padding-top: 9px;
+	flex: 1;
+	font-family: Lato;
+	font-size: 12px;
+	letter-spacing: 1px;
+	resize: none;
+	:focus-visible {
+		outline: none;
+	}
+  margin-top: 4px;
+  border-color: ${({ isRequired }) => (isRequired ? 'red' : '#e0e0e0')};
+  &:active,
+	&:focus {
+		border: solid 1px #00c3ac;
+	}
+`;
+
+export const TableInput = styled.input`
+	border-style: none;
+	outline: none;
+	width: 98%;
+	border-bottom: solid 1px rgba(0, 0, 0, 0.28);
+  padding: 10.6px 13px 5.4px 0px;
+	font-family: Lato;
+	font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+	caret-color: #00c3ac;
+    letter-spacing: 1.17px;
+	&:active,
+	&:focus {
+		border-bottom: solid 1px #00c3ac;
+	}
+`;
+
+export const MessageRequired = styled.p`
+  font-size: 12px !important;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+  color: red;
 `;

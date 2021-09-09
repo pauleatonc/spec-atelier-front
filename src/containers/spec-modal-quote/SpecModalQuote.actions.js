@@ -2,6 +2,9 @@
 import onActionCreator from '../../config/store/helpers';
 import { getProductById } from '../../services/products.service';
 import { getProfile } from '../../services/profile.service';
+import {
+	sendQuote
+} from '../../services/specs.service';
 
 export const GET_PRODUCT_QUOTE = 'GET_PRODUCT_QUOTE';
 export const GET_PRODUCT_ERROR_QUOTE = 'GET_PRODUCT_ERROR_QUOTE';
@@ -24,5 +27,24 @@ export const getProduct = ({ id },user) => async dispatch => {
     }));
   }
 };
+
+export const SEND_QUOTE = 'SEND_QUOTE';
+export const SEND_QUOTE_ERROR = 'SEND_QUOTE_ERROR';
+export const sendQuoteA = (params) => async dispatch => {
+	sendQuote(params).then(
+    dispatch(
+      onActionCreator(SEND_QUOTE, {
+        params,
+        error: false
+      }),
+    ),
+		(error) => {
+			// TODO: update
+			dispatch(onActionCreator(SEND_QUOTE_ERROR, {
+        error: true
+      }));
+		},
+	);
+}
 
 export const closeModal = () => dispatch => dispatch(onActionCreator(CLOSE_MODAL_QUOTE, {}));
