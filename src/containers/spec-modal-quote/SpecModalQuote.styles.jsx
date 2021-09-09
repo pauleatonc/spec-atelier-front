@@ -373,6 +373,7 @@ export const TableInput = styled.input`
 	&:focus {
 		border-bottom: solid 1px #00c3ac;
 	}
+  border-color: ${({ isRequired }) => (isRequired ? 'red' : '#e0e0e0')};
 `;
 
 export const MessageRequired = styled.p`

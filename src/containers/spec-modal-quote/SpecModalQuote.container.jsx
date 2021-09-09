@@ -120,7 +120,7 @@ const SpecModalQuote = ({initialValues}) => {
                     name="name"
                     onChange={handleChange}
                     value={values.name}
-                    isRequired={errors.name === 'Required'}
+                    isRequired={errors.name}
                   />
                   <MessageRequired>{errors.name ? errors.name : ''}</MessageRequired>
                 </GroupInput>
@@ -130,7 +130,7 @@ const SpecModalQuote = ({initialValues}) => {
                     name="company"
                     onChange={handleChange}
                     value={values.company}
-                    isRequired={errors.company === 'Required'}
+                    isRequired={errors.company}
                   />
                   <MessageRequired>{errors.company? errors.company : ''}</MessageRequired>
                 </GroupInput>
@@ -140,7 +140,7 @@ const SpecModalQuote = ({initialValues}) => {
                     name="email"
                     onChange={handleChange}
                     value={values.email}
-                    isRequired={errors.email === 'Required'}
+                    isRequired={errors.email}
                   />
                   <MessageRequired>{errors.email ? errors.email:''}</MessageRequired>
                 </GroupInput>
@@ -150,7 +150,7 @@ const SpecModalQuote = ({initialValues}) => {
                     name="description"
                     onChange={handleChange}
                     value={values.description}
-                    isRequired={errors.description === 'Required'}
+                    isRequired={errors.description}
                   />
                   <MessageRequired>{errors.description ? errors.description:''}</MessageRequired>
                 </GroupInput>
