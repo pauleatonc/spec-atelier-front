@@ -24,8 +24,17 @@ import {
   ProductSpan,
   TextAreaForm,
   TableInput,
-  MessageRequired
+  MessageRequired,
+  Root,
+	Content2,
+	Photo,
+	Details,
+	Title2,
+	Description,
+	Category,
+	Reference,
 } from './SpecModalQuote.styles';
+import noPhoto from '../../assets/images/icons/no-photo.svg';
 import { useFormik } from 'formik';
 import { closeModal, sendQuoteA } from './SpecModalQuote.actions';
 import * as Yup from 'yup';
@@ -35,6 +44,7 @@ const SpecModalQuote = ({initialValues}) => {
   let isMounted = true;
   const getFirstImg = data => (data?.images?.length && data.images[0]) || {};
   const { product, showModalQuote } = useSelector(state => state.specModalQuote);
+  const { project } = useSelector((state) => state.specDocument);
   const [selectedImg, selectImg] = useState(getFirstImg());
   const onSelectImg = img => () => selectImg(img);
 
@@ -59,11 +69,13 @@ const SpecModalQuote = ({initialValues}) => {
 		initialValues,
     onSubmit: (vals) => {
 			const body = {
-				empresa: vals.company,
-        message: vals.description,
-        email: vals.email,
-        nombre: vals.name
-			};
+          product_quote:{
+            message: vals.description,
+            contact_email: vals.email,
+            contact_company: vals.company,
+            contact_name: vals.name,
+            project_spec_id: project.id
+          }};
       const params = {
         id: product.id,
         data: body
@@ -73,7 +85,10 @@ const SpecModalQuote = ({initialValues}) => {
 		},
     validationSchema: FormContactSchema,
 	});
-
+  const photoStyles = {
+		backgroundImage: `url('${product?.images[0].urls.original || noPhoto}')`,
+		backgroundSize: product?.images[0].urls.original ? 'cover' : 'initial',
+	};
   if (!showModalQuote) return null;
   if (!product || !product.id) return <Loading />
   return (
@@ -96,18 +111,21 @@ const SpecModalQuote = ({initialValues}) => {
                 <TitleProduct>Este es el producto que quieres cotizar:</TitleProduct>
               </GroupTitle>
               <ContentProduct>
-                <ContentImage>
-                  <ImagesContent>
-                    <Image src={product?.images[0]?.urls?.medium} type="responsive" height="122px" width="100px" objectFit="contains"/>
-                  </ImagesContent>
-                </ContentImage>
-                <ContentDataProduct>
-                  <ProductSpan>Referencia / Rerencia</ProductSpan>
-                  <TitleProductName>{product.name}</TitleProductName>
-                  <ProductDesc>{product.long_desc}</ProductDesc>
-                  <ProductSpan>Producto: referencia referencia</ProductSpan>
-                  <ProductSpan>{`Referencia: ${product?.systems?.first?.name || ''}: ${product?.brand?.name || ''}`}</ProductSpan>
-                </ContentDataProduct>
+                <Root>
+                <Content2>
+                  <Photo style={photoStyles} />
+                  <Details>
+                    <Title2>{product.name}</Title2>
+                    <Description>{product.short_desc || product.long_desc}</Description>
+                    <Category>
+                      {product.system?.name ? `Sistema constructivo: ${product.system?.name}` : ''}
+                    </Category>
+                    <Reference>{`Referencia ${
+                      product.reference || 'sin especificar'
+                    }`}</Reference>
+                  </Details>
+                </Content2>
+              </Root>
               </ContentProduct>
             </ProductSection>
 
@@ -145,7 +163,7 @@ const SpecModalQuote = ({initialValues}) => {
                   <MessageRequired>{errors.email ? errors.email:''}</MessageRequired>
                 </GroupInput>
                 <GroupInput>
-                  <TitleGroup>Descripción</TitleGroup>
+                  <TitleGroup>Mensaje</TitleGroup>
                   <TextAreaForm
                     name="description"
                     onChange={handleChange}

@@ -111,7 +111,7 @@ const SpecContentsTable = () => {
 				Cell: ({ row }) => {
 					if (row?.original?.type === 'Product') {
 						if (row?.original?.price) {
-							return `$${row?.original?.price}`;
+							return `$${row?.original?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
 						}
 						return (
 							<CurrentInputTable
@@ -127,7 +127,7 @@ const SpecContentsTable = () => {
 			},
 			{
 				Header: 'Subtotal',
-				Cell: ({ row }) => `$${row?.original?.subtotal}`,
+				Cell: ({ row }) => `$${row?.original?.subtotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`,
 			},
 			{
 				id: 'expander',
@@ -253,11 +253,11 @@ const SpecContentsTable = () => {
 							<td colSpan="7">
 								<ContentFooter>
 									<TableElements>
-										{quoteTable.length} elementos especificados
+										{totalExpandManual[2].length} elementos especificados
 									</TableElements>
 									<ContainerTotalTable>
 										<TableTotal mRight="36">Total:</TableTotal>
-										<TableTotal>${totalProducts}</TableTotal>
+										<TableTotal>${totalProducts.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</TableTotal>
 									</ContainerTotalTable>
 								</ContentFooter>
 							</td>

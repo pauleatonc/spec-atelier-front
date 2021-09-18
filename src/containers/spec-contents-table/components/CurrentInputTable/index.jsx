@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { COLOR_GREEN_UNDERLINE } from '../../../../config/constants/styled-vars';
 
-import { TableInput } from './styles';
 import CurrencyInput from './CurrencyInput'
 
 const CurrentInputTable = ({
@@ -28,21 +27,22 @@ const CurrentInputTable = ({
 	};
 	const handleBlur = ({ target: { value: inputValue } }) => {
 		inputValue = inputValue.replace('$','');
+		inputValue = inputValue.replaceAll('.','');
 		if (tableInputType === 'price_user') {
-			if(inputValue <= 99){
+			if(parseInt(inputValue) <= 99){
 				setCurrentValue(100);
 				inputValue = 100;
 			}
-			if (inputValue > 99 && prevValueP !== parseInt(inputValue, 10)) {
+			if (parseInt(inputValue) > 99 && prevValueP !== parseInt(inputValue, 10)) {
 				onBlurInput(tableInputType, inputValue, row);
 				setPrevValueP(parseInt(inputValue, 10));
 			}
 		} else if (tableInputType === 'quantity') {
-			if(inputValue <= 0){
+			if(parseInt(inputValue) <= 0){
 				setCurrentValue(1);
 				inputValue = 1;
 			}
-			if (inputValue > 0 && prevValueQ !== parseInt(inputValue, 10)) {
+			if (parseInt(inputValue) > 0 && prevValueQ !== parseInt(inputValue, 10)) {
 				onBlurInput(tableInputType, inputValue, row);
 				setPrevValueQ(parseInt(inputValue, 10));
 			}
@@ -51,9 +51,10 @@ const CurrentInputTable = ({
 	return (
 		<>
 		{tableInputType === "quantity"?
-		<TableInput
+		<CurrencyInput
 			type="text"
-			pattern="[0-9]*"
+			typeInput="quantity"
+			//pattern="[0-9]*"
 			value={currentValue}
 			onChange={onChangeCurrentValue}
 			colorUnderline={COLOR_GREEN_UNDERLINE}
@@ -64,6 +65,7 @@ const CurrentInputTable = ({
 		<CurrencyInput 
 			placeholder="$0.00" 
 			type="text"
+			typeInput="price"
 			value={currentValue}
 			onChange={onChangeCurrentValue}
 			colorUnderline={COLOR_GREEN_UNDERLINE}

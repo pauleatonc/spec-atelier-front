@@ -6,6 +6,7 @@ import {
   COLOR_SECONDARY,
   MEDIA_QUERY_SMALL,
   COLOR_BLACK,
+  COLOR_MINE_SHAFT
 } from '../../config/constants/styled-vars';
 
 const HEIGHT_CONTENT = '350px';
@@ -192,12 +193,29 @@ export const ButtonContact = styled.input`
 
 export const ProductSection = styled.div`
   width: 50%;
+  ${MEDIA_QUERY_SMALL} {
+    width: 100%;
+  }
 `;
 
 export const ContactSection = styled.div`
   width: 50%;
   height: 355px;
   overflow: auto;
+  @media (max-width: 400px){
+    margin-top: 10px !important;
+    width: 100% !important;
+    text-align: center !important;
+    overflow: auto !important;
+    height: 180px !important;
+  }
+  ${MEDIA_QUERY_SMALL} {
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    overflow: auto;
+    height: 277px;
+  }
 `;
 
 export const TitleContact = styled.span`
@@ -248,6 +266,9 @@ export const GroupInput = styled.div`
 export const GroupTitle = styled.div`
   display: grid;
   width: 100%;
+  ${MEDIA_QUERY_SMALL} {
+    text-align: center;
+  }
 `;
 
 export const ButtonQuote = styled.div`
@@ -280,13 +301,18 @@ export const ContentProduct = styled.div`
   height: 275px;
   padding: 0 0 31px;
   border-radius: 9px;
-  border: solid 1px #e0e0e0;
   display: flex;
+  ${MEDIA_QUERY_SMALL} {
+    width: 100%;
+  }
 `;
 
 export const ContentImage = styled.div`
   width: 40%;
   margin-top: 80px;
+  ${MEDIA_QUERY_SMALL} {
+    display: none;
+  }
 `;
 
 export const ContentDataProduct = styled.div`
@@ -294,6 +320,9 @@ export const ContentDataProduct = styled.div`
   margin-top: 25px;
   overflow: auto;
   display: grid;
+  ${MEDIA_QUERY_SMALL} {
+    text-align:center;
+  }
 `;
 
 export const TitleProductName = styled.span`
@@ -307,6 +336,9 @@ export const TitleProductName = styled.span`
   letter-spacing: 0.92px;
   color: var(--black);
   margin-top: 10px;
+  ${MEDIA_QUERY_SMALL} {
+    width: 100%;
+  }
 `;
 
 export const ProductDesc = styled.span`
@@ -320,6 +352,9 @@ export const ProductDesc = styled.span`
   letter-spacing: 0.83px;
   color: rgba(33, 33, 33, 0.51);
   margin-top: 10px;
+  ${MEDIA_QUERY_SMALL} {
+    width: 100%;
+  }
 `;
 
 export const ProductSpan = styled.span`
@@ -332,6 +367,9 @@ export const ProductSpan = styled.span`
   letter-spacing: 0.83px;
   color: var(--black);
   margin-top: 10px;
+  ${MEDIA_QUERY_SMALL} {
+    width: 100%;
+  }
 `;
 
 export const TextAreaForm = styled.textarea`
@@ -384,4 +422,83 @@ export const MessageRequired = styled.p`
   line-height: normal;
   letter-spacing: 1px;
   color: red;
+`;
+
+export const Root = styled.div`
+  background-color: #FFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 9px;
+  display: inline-grid;
+  grid-template-rows: 146px 43px;
+  height: 148px;
+  margin: 0 0 16px;
+  margin-top: 55px;
+  overflow: visible;
+  position: relative;
+  width: 100%;
+`;
+
+export const Content2 = styled.div`
+  display: grid;
+  grid-template-columns: 105px auto;
+  overflow: hidden;
+`;
+
+export const Photo = styled.section`
+  background-color: rgba(216, 216, 216, 0.47);
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-radius: 9px 0px 0px 9px
+`;
+
+export const Details = styled.section`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 24px 15px 15px;
+`;
+
+const BaseDetails = styled.p`
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  font-family: Lato;
+  -webkit-line-clamp: 2;
+  margin: 0 0 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const Title2 = styled(BaseDetails)`
+  color: ${COLOR_MINE_SHAFT};
+  font-size: 11px;
+  letter-spacing: 0.92px;
+`;
+
+export const Description = styled(BaseDetails)`
+  color: rgba(33, 33, 33, 0.51);
+  font-size: 10px;
+  letter-spacing: 0.83px;
+  -webkit-line-clamp: 3;
+`;
+
+export const Category = styled.p`
+  color: ${COLOR_MINE_SHAFT};
+  font-family: Lato;
+  font-size: 10px;
+  letter-spacing: 0.83px;
+  margin: auto 0 7px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+export const Reference = styled.p`
+  color: ${COLOR_MINE_SHAFT};
+  font-family: Lato;
+  font-size: 10px;
+  letter-spacing: 0.83px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;

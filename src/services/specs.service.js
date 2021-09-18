@@ -165,5 +165,5 @@ export const updateProduct = factoryService((body) =>
 );
 
 export const sendQuote = factoryService((body) =>
-	patchJsonRequest(`${API_BASE_URL}/products/`+body.id+`/product_quote`,body.data),
+	postJsonRequest(`${API_BASE_URL}/products/`+body.id+`/quote`,body.data),
 );
