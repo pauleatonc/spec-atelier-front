@@ -54,7 +54,6 @@ const CurrentInputTable = ({
 		<CurrencyInput
 			type="text"
 			typeInput="quantity"
-			//pattern="[0-9]*"
 			value={currentValue}
 			onChange={onChangeCurrentValue}
 			colorUnderline={COLOR_GREEN_UNDERLINE}

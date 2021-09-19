@@ -81,7 +81,6 @@ const SpecModalQuote = ({initialValues}) => {
         data: body
       }
       dispatch(sendQuoteA(params));
-      //resetForm({});
 		},
     validationSchema: FormContactSchema,
 	});
