@@ -77,14 +77,14 @@ const SpecModalProduct = () => {
                   onClick={onSelectImg(img)}
                   active={!!(img.id && img.id === selectedImg.id && product?.images?.length > 1)}
                 >
-                  <Image src={img?.urls?.medium} type="responsive" height="80px" maxWidth="100%" objectFit="contains"/>
+                  <Image src={img?.urls?.medium || img?.urls?.original} type="responsive" height="80px" maxWidth="100%" objectFit="contains"/>
                 </ImagesContent>
               )}
             </ImagesContainer>
             {/* Image primary */}
             <ProductImageSelectedContainer>
               <ProductImageSelected>
-                <Image src={selectedImg?.urls?.medium} type="responsive"  height="240px" objectFit="contains" />
+                <Image src={selectedImg?.urls?.medium || selectedImg?.urls?.original} type="responsive"  height="240px" objectFit="contains" />
               </ProductImageSelected>
             </ProductImageSelectedContainer>
             {/* Info Product */}

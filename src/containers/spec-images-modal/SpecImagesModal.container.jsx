@@ -54,7 +54,7 @@ const SpecImagesModal = () => {
           <Figures>
             {selectedProductBlock?.element?.images?.map(image => (
               <Figure key={`block-image-${image.id}`} selected={image.id === selectedImage} onClick={handleSelectImage(image.id)}>
-                <Image selected={image.id === selectedImage} source={image?.urls?.small || '#'} />
+                <Image selected={image.id === selectedImage} source={image?.urls?.small || image?.urls?.original} />
                 {image.id === selectedImage && <CheckIcon src={checkSource} />}
               </Figure>
             ))}

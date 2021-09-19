@@ -22,6 +22,7 @@ const Input = (props) => {
 		variant,
 		type,
 		disabled,
+		inputType,
 		...restProps
 	} = props;
 
@@ -32,7 +33,7 @@ const Input = (props) => {
 				<InputBase
 					name={name}
 					placeholder={placeholder}
-					type="text"
+					type={inputType}
 					value={value}
 					onChange={onChange}
 				/>
@@ -43,7 +44,7 @@ const Input = (props) => {
 					disabled={disabled}
 					placeholder={placeholder}
 					variant={variant}
-					type="text"
+					type={inputType}
 					value={value}
 					onChange={onChange}
 					{...restProps}
@@ -55,7 +56,7 @@ const Input = (props) => {
 					disabled={disabled}
 					placeholder={placeholder}
 					variant={variant}
-					type="text"
+					type={inputType}
 					value={value}
 					onChange={onChange}
 					{...restProps}
@@ -72,6 +73,7 @@ Input.defaultProps = {
 	name: '',
 	type: 'default',
 	disabled: false,
+	inputType: 'text',
 };
 Input.propTypes = {
 	label: PropTypes.string,
@@ -82,6 +84,7 @@ Input.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	type: PropTypes.oneOf(['default', 'underline', 'form']),
 	disabled: PropTypes.bool,
+	inputType: PropTypes.string,
 };
 
 export default Input;

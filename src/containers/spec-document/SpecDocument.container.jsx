@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import { onShowSpecEditProduct } from '../spec-edit-product/SpecEditProduct.actions';
 import { onShowSpecImagesModalSuccess } from '../spec-images-modal/SpecImagesModal.actions';
@@ -52,7 +52,6 @@ const SpecDocument = () => {
 	const { id: specID } = useParams();
 	const { blocks } = useSelector((state) => state.specDocument);
 	const { localConfig } = useSelector((state) => state.specAdmin);
-	const { url, path } = useLocation();
 	const dispatch = useDispatch();
 	const [selectedBlockID, setSelectedBlockID] = useState('');
 	const [selectedBlockTextID, setSelectedBlockTextID] = useState('');
@@ -264,7 +263,10 @@ const SpecDocument = () => {
 													src={
 														block?.element?.images.find(
 															(image) => image.id === block.product_block_image,
-														)?.urls?.small || '#'
+														)?.urls?.small ||
+														block?.element?.images.find(
+															(image) => image.id === block.product_block_image,
+														)?.urls?.original 
 													}
 												/>
 											</BlockImage>
