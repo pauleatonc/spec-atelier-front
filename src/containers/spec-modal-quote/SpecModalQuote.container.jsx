@@ -55,7 +55,6 @@ const SpecModalQuote = ({initialValues}) => {
   const FormContactSchema = Yup.object().shape({
 		name: Yup.string().required('El nombre es requerido'),
 		email: Yup.string().email('Email invalido').required('El correo es requerido'),
-		//company: Yup.string().required('La empresa es requerida').nullable(),
 		description: Yup.string().required('La descripción es requerida'),
 	});
   
