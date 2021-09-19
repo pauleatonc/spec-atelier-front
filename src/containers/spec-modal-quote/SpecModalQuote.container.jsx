@@ -55,7 +55,7 @@ const SpecModalQuote = ({initialValues}) => {
   const FormContactSchema = Yup.object().shape({
 		name: Yup.string().required('El nombre es requerido'),
 		email: Yup.string().email('Email invalido').required('El correo es requerido'),
-		company: Yup.string().required('La empresa es requerida').nullable(),
+		//company: Yup.string().required('La empresa es requerida').nullable(),
 		description: Yup.string().required('La descripción es requerida'),
 	});
   
@@ -89,7 +89,7 @@ const SpecModalQuote = ({initialValues}) => {
 		backgroundSize: product?.images[0].urls.original ? 'cover' : 'initial',
 	};
   if (!showModalQuote) return null;
-  if (!product || !product.id) return <Loading />
+  if (!product || !product.id) return <></>
   return (
     <Modal show={showModalQuote} onClose={onCloseModal}>
       <Container>
