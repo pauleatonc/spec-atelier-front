@@ -163,3 +163,7 @@ export const updateProjectConfig = factoryService(
 export const updateProduct = factoryService((body) =>
 	patchJsonRequest(`${API_BASE_URL}/products/`+body.id, body.data),
 );
+
+export const sendQuote = factoryService((body) =>
+	postJsonRequest(`${API_BASE_URL}/products/`+body.id+`/quote`,body.data),
+);

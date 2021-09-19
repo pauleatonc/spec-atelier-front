@@ -152,6 +152,7 @@ export const ButtonConsult = styled.div`
 	font-size: 14px;
 	font-weight: bold;
 	color: #00c3ac;
+	cursor: pointer;
 `;
 
 export const IconExpan = styled.div`

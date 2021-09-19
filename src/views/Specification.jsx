@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import AlertContainer from '../containers/alert/Alert.container';
 import SpecHeaderContainer from '../containers/spec-header/SpecHeader.container';
@@ -28,6 +28,7 @@ import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
 const Specification = () => {
 	const { dataSection } = useSelector((state) => state);
 	const { option } = dataSection;
+		
 	return (
 		<>
 			<Root>

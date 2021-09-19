@@ -27,18 +27,34 @@ import specDownloadSource from '../../assets/images/icons/ic-download.svg';
 import iconArrowDown from '../../assets/images/icons/blue-arrow-down.svg';
 import iconArrowUp from '../../assets/images/icons/blue-arrow-up.svg';
 import CurrentInputTable from './components/CurrentInputTable';
-import { handleUpdateProduct, handleUpdateCountExpand } from '../spec-document/SpecDocument.actions';
+import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
 import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
+import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
+import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
 
 const SpecContentsTable = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const { project, quoteTable, totalExpandManual } = useSelector((state) => state.specDocument);
+	const { user, loading } = useSelector((state) => state.profile);
 	const [expandAll, setExpandAll] = useState();
 	const [toggleExpanded, setToggleExpanded] = useState(false);
 	const simulateClick = (e) => {
 		setExpandAll(e);
 	};
+	const {
+		first_name,
+		last_name,
+		company,
+		email
+		} = useSelector((state) => state.profile.user);
+	const initialValues = {
+			name:first_name+' '+last_name, 
+			company: company ? company : '',
+			email: email? email : '',
+			description: '',
+		};
+
 
 	const allExpand = () => {
 		setToggleExpanded(!toggleExpanded);
@@ -60,6 +76,11 @@ const SpecContentsTable = () => {
 			},
 		};
 		dispatch(handleUpdateProduct(body, tableInputType, row.original.item));
+	};
+
+	const onClickProduct = (selectedProduct) => (event) => {
+		event.stopPropagation();
+		dispatch(getProduct(selectedProduct,user));
 	};
 
 	const columns = useMemo(
@@ -90,7 +111,7 @@ const SpecContentsTable = () => {
 				Cell: ({ row }) => {
 					if (row?.original?.type === 'Product') {
 						if (row?.original?.price) {
-							return `$${row?.original?.price}`;
+							return `$${row?.original?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
 						}
 						return (
 							<CurrentInputTable
@@ -106,7 +127,7 @@ const SpecContentsTable = () => {
 			},
 			{
 				Header: 'Subtotal',
-				Cell: ({ row }) => `$${row?.original?.subtotal}`,
+				Cell: ({ row }) => `$${row?.original?.subtotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`,
 			},
 			{
 				id: 'expander',
@@ -124,7 +145,6 @@ const SpecContentsTable = () => {
 								<IconExpan
 									{...row.getToggleRowExpandedProps()}
 									className={`fas fa-chevron-${row.isExpanded ? 'up' : 'down'}`}
-									//onclick={pb(row.isExpanded ? 1 : 0)}
 								/>
 							);
 
@@ -133,12 +153,11 @@ const SpecContentsTable = () => {
 								<IconExpan
 									{...row.getToggleRowExpandedProps()}
 									className={`fas fa-chevron-${row.isExpanded ? 'up' : 'down'}`}
-									//onclick={pb(row.isExpanded ? 1 : 0)}
 								/>
 							);
 						case 'Product':
 							return !row?.original?.price ? (
-								<ButtonConsult>Consultar precio</ButtonConsult>
+								<ButtonConsult onClick={onClickProduct(row?.original)}>Consultar precio</ButtonConsult>
 							) : (
 								''
 							);
@@ -234,11 +253,11 @@ const SpecContentsTable = () => {
 							<td colSpan="7">
 								<ContentFooter>
 									<TableElements>
-										{quoteTable.length} elementos especificados
+										{totalExpandManual[2].length} elementos especificados
 									</TableElements>
 									<ContainerTotalTable>
 										<TableTotal mRight="36">Total:</TableTotal>
-										<TableTotal>${totalProducts}</TableTotal>
+										<TableTotal>${totalProducts.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</TableTotal>
 									</ContainerTotalTable>
 								</ContentFooter>
 							</td>
@@ -246,6 +265,7 @@ const SpecContentsTable = () => {
 					</tfoot>
 				</Table>
 			</ContentTable>
+			<SpecModalQuote initialValues={initialValues} />
 		</Root>
 	);
 };
