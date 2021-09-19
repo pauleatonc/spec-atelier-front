@@ -88,9 +88,9 @@ const SpecModalQuote = ({initialValues}) => {
 		backgroundSize: product?.images[0].urls.original ? 'cover' : 'initial',
 	};
   if (!showModalQuote) return null;
-  if (!product || !product.id) return <></>
   return (
     <Modal show={showModalQuote} onClose={onCloseModal}>
+      {!product || !product.id ? <Loading /> : 
       <Container>
         <Content>
           <ButtonClose
@@ -101,7 +101,7 @@ const SpecModalQuote = ({initialValues}) => {
           >
             <i className="fas fa-times" />
           </ButtonClose>
-           
+          
           <Section>
 
             <ProductSection>
@@ -177,7 +177,7 @@ const SpecModalQuote = ({initialValues}) => {
             </ContactSection>
           </Section>
         </Content>
-      </Container>
+      </Container> }
     </Modal>
   );
 };
