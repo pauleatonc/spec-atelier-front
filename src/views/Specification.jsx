@@ -17,7 +17,7 @@ import SpecAdminContainer from '../containers/spec-admin/SpecAdmin.container';
 import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayout';
 import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
 
-import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
+import { Root, Main, Navigation, Panels } from './Specification.styles';
 
 /**
  * The Specification's view.
@@ -26,9 +26,7 @@ const Specification = () => {
 	return (
 		<>
 			<Root>
-				<Header>
-					<SpecHeaderContainer />
-				</Header>
+				<SpecHeaderContainer />
 				<Main>
 					<SpecDocumentContainer />
 					<Navigation>

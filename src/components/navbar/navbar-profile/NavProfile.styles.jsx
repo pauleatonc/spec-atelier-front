@@ -5,10 +5,10 @@ import {
 	NAVBAR_HEIGHT,
 	COLOR_WHITE,
 	COLOR_LIGHTERGREY,
+	COLOR_GREY,
 } from '../../../config/constants/styled-vars';
 
 export const ProfileButton = styled.div`
-	width: 100px;
 	color: ${({ isOpen }) => (!isOpen ? COLOR_BLACK : COLOR_PRIMARY)};
 	display: flex;
 	height: 100%;
@@ -74,4 +74,25 @@ export const ProfilePictureContainer = styled.div`
 export const ProfilePictureImage = styled.img`
 	width: 100%;
 	height: 100%;
+`;
+
+export const ProfileInfo = styled.div`
+	display: flex;
+	align-items: center;
+	padding-left: 30px;
+`;
+
+export const ContainerNameUser = styled.div`
+	height: 60px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: 10px;
+`;
+
+export const InfoUserName = styled.p`
+	font-family: Lato;
+	font-size: 14px;
+	margin-bottom: 2px;
+	color: ${({ gray }) => (gray ? COLOR_GREY : COLOR_BLACK)};
 `;
