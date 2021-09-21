@@ -2,7 +2,13 @@ import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import NavProfile from '../../../navbar-profile/NavProfile';
 import { BurgerMenu } from '../../burger-menu/BurgerMenu';
-import { ItemsContainer, Item, ItemText, UnderLine, ProfileBurgerMenuContent } from './styles';
+import {
+  ItemsContainer,
+  Item,
+  ItemText,
+  UnderLine,
+  ProfileBurgerMenuContent,
+} from './styles';
 
 const items = [
   { id: 'projects', label: 'Proyectos', to: '/projects' },

@@ -27,9 +27,7 @@ import ItemsNavBar from '../../components/navbar/navbar-app/Components/ItemsNavB
 import { onShowModal } from '../spec-modal-team/actions';
 import { TYPE_MODALS } from '../spec-modal-team/constants';
 
-/**
- * The SpecHeader's container.
- */
+/** The SpecHeader's container */
 const SpecHeader = () => {
   const dispatch = useDispatch();
   const { id } = useParams();

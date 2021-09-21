@@ -51,7 +51,8 @@ export const Option = styled.div`
 export const OptionsContent = styled.section`
   width: 260px;
   background-color: ${WHITE};
-  box-shadow: 0 1px 3px 0 rgba(${BLACK}, 0.2), 0 2px 1px -1px rgba(${BLACK}, 0.12), 0 1px 1px 0 rgba(${BLACK}, 0.14);
+  box-shadow: 0 1px 3px 0 rgba(${BLACK}, 0.2),
+    0 2px 1px -1px rgba(${BLACK}, 0.12), 0 1px 1px 0 rgba(${BLACK}, 0.14);
 `;
 
 export const Separator = styled.div`
