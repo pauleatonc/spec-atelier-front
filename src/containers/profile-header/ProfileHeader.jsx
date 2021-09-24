@@ -33,7 +33,7 @@ import {
 import SelectorRelative from '../../components/basics/SelectorRelative';
 import { COLOR_GREEN_UNDERLINE } from '../../config/constants/styled-vars';
 
-const ProductsHeader = () => {
+const ProfileHeader = () => {
 	const [isEditting, setIsEditing] = useState(false);
 	const { user, loading } = useSelector((state) => state.profile);
 	const { cities } = useSelector((state) => state.app);
@@ -184,4 +184,4 @@ const ProductsHeader = () => {
 		</>
 	);
 };
-export default ProductsHeader;
+export default ProfileHeader;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Root = styled.div`
 	background-color: #f6f6f6;
 	display: grid;
-	grid-template-rows: 115px 50px auto;
+	grid-template-rows: 115px auto;
 	height: 100%;
 	margin: 0;
 	overflow: auto;

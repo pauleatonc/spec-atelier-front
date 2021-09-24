@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import AlertContainer from '../containers/alert/Alert.container';
 import SpecHeaderContainer from '../containers/spec-header/SpecHeader.container';
@@ -20,7 +20,7 @@ import SpecAdminContainer from '../containers/spec-admin/SpecAdmin.container';
 import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayout';
 import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
 
-import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
+import { Root, Main, Navigation, Panels } from './Specification.styles';
 
 /**
  * The Specification's view.
@@ -28,13 +28,11 @@ import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
 const Specification = () => {
 	const { dataSection } = useSelector((state) => state);
 	const { option } = dataSection;
-		
+
 	return (
 		<>
 			<Root>
-				<Header>
-					<SpecHeaderContainer />
-				</Header>
+				<SpecHeaderContainer />
 				<SpecContentButtons />
 				<Main>
 					{option === 'T' ? <SpecContentsTable /> : <SpecDocumentContainer />}
