@@ -1,6 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-unresolved */
 import getEndPoint from '@Configurations/config';
 import { LOG_IN, LOG_IN_ERROR, LOG_OUT } from '@Configurations/constants';
 import {

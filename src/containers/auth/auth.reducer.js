@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import {
 	LOG_IN,
 	LOG_OUT,
