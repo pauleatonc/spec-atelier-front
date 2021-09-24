@@ -148,25 +148,28 @@ export const registrationAction = (data) => async (dispatch) => {
  */
 
 export const googleLoginAction = (data) => async (dispatch) => {
-	try {
-		const response = await googleLogin(data);
-		setLocalStorage({ key: 'token', value: response.user.jwt });
-		return dispatch({
-			type: GOOGLE_LOG_IN,
-			payload: {
-				isLogin: response.logged_in,
-				user: response.user,
-			},
-		});
-	} catch (error) {
-		return dispatch({
-			type: GOOGLE_LOG_IN_ERROR,
-			payload: {
-				isLogin: false,
-				error,
-			},
-		});
-	}
+	googleLogin(data).then(
+		(response) => {
+			deleteLocalStorage('responseStatus');
+			setLocalStorage({ key: 'token', value: response.user.jwt });
+			dispatch({
+				type: GOOGLE_LOG_IN,
+				payload: {
+					isLogin: response.logged_in,
+					user: response.user,
+				},
+			});
+		},
+		(error) => {
+			dispatch({
+				type: GOOGLE_LOG_IN_ERROR,
+				payload: {
+					isLogin: false,
+					error,
+				},
+			});
+		},
+	);
 };
 
 // Send email to recover password

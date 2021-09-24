@@ -61,6 +61,7 @@ export const logoutAction = (dispatch) => () => {
 		.then(() => {
 			deleteLocalStorage('token');
 			deleteLocalStorage('userID');
+			deleteLocalStorage('responseStatus');
 			return dispatch({
 				type: LOG_OUT,
 				payload: {
