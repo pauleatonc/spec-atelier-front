@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AlertContainer from '../containers/alert/Alert.container';
 import SpecHeaderContainer from '../containers/spec-header/SpecHeader.container';
@@ -25,7 +25,7 @@ import {
 	SPEC_TABLE
   } from '../config/constants/button-variants';
 
-import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
+import { Root, Main, Navigation, Panels } from './Specification.styles';
 
 /**
  * The Specification's view.
@@ -37,12 +37,11 @@ const Specification = () => {
 	useEffect(() => {
 		dispatch(changeOption(ESPEC_DOCUMENT));
 	}, []);
+
 	return (
 		<>
 			<Root>
-				<Header>
-					<SpecHeaderContainer />
-				</Header>
+				<SpecHeaderContainer />
 				<SpecContentButtons />
 				<Main>
 					{option === SPEC_TABLE ? <SpecContentsTable /> : <SpecDocumentContainer />}
