@@ -79,10 +79,10 @@ const SpecHeader = () => {
 				</Section>
 				<Separator />
 				<PermissionsButtonContainer>
-					<Button variant="primary" onClick={() => console.log('permisos')}>
+					{/* <Button variant="primary" onClick={() => console.log('permisos')}>
 						<i className="fas fa-share-alt" />
 						&emsp;Equipo
-					</Button>
+					</Button> */}
 				</PermissionsButtonContainer>
 			</SpecOptions>
 			<ItemsNavBar />
