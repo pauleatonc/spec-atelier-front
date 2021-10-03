@@ -69,67 +69,73 @@ const SpecContents = () => {
 	}, [show]);
 
 	return (
-		<Root show={show}>
+		<>
 			{show && <Overlay onClick={() => dispatch(onHideSpecContents())} />}
-			<PanelTitle>Tabla de contenidos</PanelTitle>
-			<ListTitle>Indice de Partidas</ListTitle>
-			{sections.map((section) => (
-				<Fragment key={section.id}>
-					<ListItem
-						title={section.element.name}
-						onClick={handleSectionClick(section.id)}
-						href={
-							selectedSection === section.id
-								? `${pathname}#${section.id}`
-								: 'javascript:;'
-						}
-					>
-						<span>{section.element.name}</span>
-						<ArrowIcon
-							src={
-								selectedSection === section.id ? arrowUpSource : arrowDownSource
+			<Root show={show}>
+				<PanelTitle>Tabla de contenidos</PanelTitle>
+				<ListTitle>Indice de Partidas</ListTitle>
+				{sections.map((section) => (
+					<Fragment key={section.id}>
+						<ListItem
+							title={section.element.name}
+							onClick={handleSectionClick(section.id)}
+							href={
+								selectedSection === section.id
+									? `${pathname}#${section.id}`
+									: 'javascript:;'
 							}
-						/>
-					</ListItem>
-					<Collapsible show={selectedSection === section.id}>
-						{section.items.map((item) => (
-							<Fragment key={item.id}>
-								<ListItem
-									padding="0 23px 0 62px"
-									title={item.element.name}
-									onClick={handleItemClick(item.id)}
-									href={
-										selectedItem === item.id
-											? `${pathname}#${item.id}`
-											: 'javascript:;'
-									}
-								>
-									<span>{item.element.name}</span>
-									<ArrowIcon
-										src={
-											selectedItem === item.id ? arrowUpSource : arrowDownSource
+						>
+							<span>{section.element.name}</span>
+							<ArrowIcon
+								src={
+									selectedSection === section.id
+										? arrowUpSource
+										: arrowDownSource
+								}
+							/>
+						</ListItem>
+						<Collapsible show={selectedSection === section.id}>
+							{section.items.map((item) => (
+								<Fragment key={item.id}>
+									<ListItem
+										padding="0 23px 0 62px"
+										title={item.element.name}
+										onClick={handleItemClick(item.id)}
+										href={
+											selectedItem === item.id
+												? `${pathname}#${item.id}`
+												: 'javascript:;'
 										}
-									/>
-								</ListItem>
-								<Collapsible show={selectedItem === item.id}>
-									{item.products.map((product) => (
-										<ListItem
-											key={product.id}
-											padding="0 23px 0 77px"
-											title={product.element.title}
-											href={`${pathname}#${product.id}`}
-										>
-											<span>{product.element.name}</span>
-											<span>&nbsp;</span>
-										</ListItem>
-									))}
-								</Collapsible>
-							</Fragment>
-						))}
-					</Collapsible>
-				</Fragment>
-			))}
-		</Root>
+									>
+										<span>{item.element.name}</span>
+										<ArrowIcon
+											src={
+												selectedItem === item.id
+													? arrowUpSource
+													: arrowDownSource
+											}
+										/>
+									</ListItem>
+									<Collapsible show={selectedItem === item.id}>
+										{item.products.map((product) => (
+											<ListItem
+												key={product.id}
+												padding="0 23px 0 77px"
+												title={product.element.title}
+												href={`${pathname}#${product.id}`}
+											>
+												<span>{product.element.name}</span>
+												<span>&nbsp;</span>
+											</ListItem>
+										))}
+									</Collapsible>
+								</Fragment>
+							))}
+						</Collapsible>
+					</Fragment>
+				))}
+			</Root>
+		</>
 	);
 };
 
