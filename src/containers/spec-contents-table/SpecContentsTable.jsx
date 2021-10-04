@@ -31,6 +31,7 @@ import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
 import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
 import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
 import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
+import { changeOption } from '../spec-contents-buttons/SpecContentsButtons.actions';
 
 const SpecContentsTable = () => {
 	const { id } = useParams();
