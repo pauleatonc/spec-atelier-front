@@ -21,6 +21,8 @@ import {
 	downloadBudgetDocument,
 } from './SpecHeader.actions';
 import ItemsNavBar from '../../components/navbar/navbar-app/Components/ItemsNavBar';
+import { onShowModal } from '../spec-modal-team/actions';
+import { TYPE_MODALS } from '../spec-modal-team/constants';
 
 /**
  * The SpecHeader's container.
@@ -30,6 +32,8 @@ const SpecHeader = () => {
 	const { id } = useParams();
 	const { project } = useSelector((state) => state.specDocument);
 	const { url } = useSelector((state) => state.specHeader);
+
+	const openModalTeam = () => dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
 
 	const handleDownloadClick = () =>
 		dispatch(downloadSpecDocument({ specID: id }));
@@ -79,7 +83,7 @@ const SpecHeader = () => {
 				</Section>
 				<Separator />
 				<PermissionsButtonContainer>
-					<Button variant="primary" onClick={() => console.log('permisos')}>
+					<Button variant="primary" onClick={openModalTeam}>
 						<i className="fas fa-share-alt" />
 						&emsp;Equipo
 					</Button>

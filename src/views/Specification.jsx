@@ -19,6 +19,8 @@ import SpecContentsContainer from '../containers/spec-contents/SpecContents.cont
 import SpecAdminContainer from '../containers/spec-admin/SpecAdmin.container';
 import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayout';
 import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
+import SpecModalTeam from '../containers/spec-modal-team';
+import SpecModalTeamNewMember from '../containers/spec-modal-team/newMember';
 
 import { Root, Main, Navigation, Panels } from './Specification.styles';
 
@@ -61,6 +63,8 @@ const Specification = () => {
 			<SpecImagesModalContainer />
 			<AlertContainer />
 			<SpecModalProduct />
+			<SpecModalTeam />
+			<SpecModalTeamNewMember />
 			<ContactFormContainer type="product" />
 		</>
 	);
