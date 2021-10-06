@@ -88,23 +88,25 @@ const SpecAdmin = () => {
 	}, [localConfig]);
 
 	return (
-		<Root show={show}>
+		<>
 			{show && <Overlay onClick={() => dispatch(onHideSpecAdmin())} />}
-			<PanelTitle>Administrar especificación</PanelTitle>
-			<TextConfig>
-				<TextConfigTitle>Configurar textos</TextConfigTitle>
-				<TextConfigDesc>
-					Elige los textos que quieres mostrar en la especificación:
-				</TextConfigDesc>
-				<TextConfigList>
-					<CheckBoxList
-						options={options}
-						onItemClick={handleItemClick}
-						values={localConfig}
-					/>
-				</TextConfigList>
-			</TextConfig>
-		</Root>
+			<Root show={show}>
+				<PanelTitle>Administrar especificación</PanelTitle>
+				<TextConfig>
+					<TextConfigTitle>Configurar textos</TextConfigTitle>
+					<TextConfigDesc>
+						Elige los textos que quieres mostrar en la especificación:
+					</TextConfigDesc>
+					<TextConfigList>
+						<CheckBoxList
+							options={options}
+							onItemClick={handleItemClick}
+							values={localConfig}
+						/>
+					</TextConfigList>
+				</TextConfig>
+			</Root>
+		</>
 	);
 };
 
