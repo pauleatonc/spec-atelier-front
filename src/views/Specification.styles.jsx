@@ -11,12 +11,6 @@ export const Root = styled.div`
 	width: 100%;
 `;
 
-export const Header = styled.header`
-	box-sizing: border-box;
-	padding: 10px 0 0;
-	width: 100%;
-`;
-
 export const Main = styled.div`
 	display: flex;
 	height: 100%;
