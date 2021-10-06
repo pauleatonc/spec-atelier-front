@@ -30,6 +30,7 @@ import ProfileReducer from '../../containers/profile-header/ProfileHeader.reduce
 import ProfileStatsReducer from '../../containers/profile-stats/ProfileStats.reducer';
 import ModalPlanFormReducer from '../../containers/modal-plan-form/reducer';
 import dataSectionsReducer from '../../containers/spec-contents-buttons/SpecContentsButtons.reducer';
+import specModalTeamReducer from '../../containers/spec-modal-team/reducer';
 
 export default combineReducers({
 	auth: authReducer,
@@ -63,4 +64,5 @@ export default combineReducers({
 	profileStats: ProfileStatsReducer,
 	modalPlanForm: ModalPlanFormReducer,
 	dataSection: dataSectionsReducer,
+	specModalTeam: specModalTeamReducer,
 });

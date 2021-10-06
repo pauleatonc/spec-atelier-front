@@ -22,11 +22,12 @@ import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayo
 import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
 import { changeOption } from '../containers/spec-contents-buttons/SpecContentsButtons.actions';
 import { SPEC_DOCUMENT } from '../config/constants/button-variants';
+import SpecModalTeam from '../containers/spec-modal-team';
+import SpecModalTeamNewMember from '../containers/spec-modal-team/newMember';
+
 import { Root, Main, Navigation, Panels } from './Specification.styles';
 
-/**
- * The Specification's view.
- */
+/** The Specification's view */
 const Specification = () => {
   const dispatch = useDispatch();
   const [showFilters, setShowFilters] = useState(false);
@@ -94,6 +95,8 @@ const Specification = () => {
       <SpecImagesModalContainer />
       <AlertContainer />
       <SpecModalProduct />
+      <SpecModalTeam />
+      <SpecModalTeamNewMember />
       <ContactFormContainer type="product" />
     </>
   );
