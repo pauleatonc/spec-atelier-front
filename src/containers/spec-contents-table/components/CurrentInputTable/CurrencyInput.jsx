@@ -33,13 +33,15 @@ const CurrentInputStyles = {
   'borderStyle': 'none',
 	'outline': 'none',
 	'width': '58px',
-	'border-bottom': 'solid 1px rgba(0, 0, 0, 0.28)',
+	'borderBottom': 'solid 1px rgba(0, 0, 0, 0.28)',
 	'fontFamily': 'Lato',
 	'fontSize': '13px',
 	'caretColor': '#00c3ac',
-  '&:active': '',
+  '&:active': {
+    'borderBottom': '1px solid rgb(0, 195, 172) !important',
+  },
 	'&:focus': {
-		'borderBottom': 'solid 1px #00c3ac',
+		'borderBottom': '1px solid rgb(0, 195, 172) !important',
 	}
 }
 

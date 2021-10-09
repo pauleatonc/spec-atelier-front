@@ -21,6 +21,7 @@ export const ButtonClose = styled.span`
 
 export const Container = styled.div`
   width: 80%;
+  height: 500px;
   padding: 40px;
   background-color: ${COLOR_WHITE};
   border-radius: 4px;
@@ -195,26 +196,26 @@ export const ProductSection = styled.div`
   width: 50%;
   ${MEDIA_QUERY_SMALL} {
     width: 100%;
+    height: 250px;
   }
 `;
 
 export const ContactSection = styled.div`
   width: 50%;
   height: 355px;
-  overflow: auto;
   @media (max-width: 400px){
     margin-top: 10px !important;
     width: 100% !important;
     text-align: center !important;
     overflow: auto !important;
-    height: 180px !important;
+    height: 198px !important;
   }
   ${MEDIA_QUERY_SMALL} {
     margin-top: 10px;
     width: 100%;
     text-align: center;
     overflow: auto;
-    height: 277px;
+    height: 328px;
   }
 `;
 
@@ -271,13 +272,14 @@ export const GroupTitle = styled.div`
   }
 `;
 
-export const ButtonQuote = styled.div`
+export const ButtonQuote = styled.button`
   width: 182px;
   height: 34px;
   padding: 6px 20px 9px 21px;
   border-radius: 19.5px;
+  border-color: #17bda7;
+  border: none;
   background-color: #17bda7;
-  cursor: pointer;
   margin-top: 17px;
   float: right;
 `;
@@ -422,6 +424,7 @@ export const MessageRequired = styled.p`
   line-height: normal;
   letter-spacing: 1px;
   color: red;
+  height: 15px;
 `;
 
 export const Root = styled.div`
@@ -432,10 +435,14 @@ export const Root = styled.div`
   grid-template-rows: 146px 43px;
   height: 148px;
   margin: 0 0 16px;
-  margin-top: 55px;
+  margin-top: 75px;
   overflow: visible;
   position: relative;
   width: 100%;
+  ${MEDIA_QUERY_SMALL} {
+    width: 100%;
+    margin-top: 35px;
+  }
 `;
 
 export const Content2 = styled.div`

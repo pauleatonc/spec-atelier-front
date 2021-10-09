@@ -1,7 +1,11 @@
 import { CHANGE_OPTION } from './SpecContentsButtons.actions';
+import {
+	ESPEC_DOCUMENT,
+	SPEC_TABLE
+  } from '../../config/constants/button-variants';
 
 const dataSectionState = {
-	option: 'F',
+	option: ESPEC_DOCUMENT,
 };
 
 const dataSectionsReducer = (state = dataSectionState, { payload, type }) => {

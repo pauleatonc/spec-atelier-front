@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import AlertContainer from '../containers/alert/Alert.container';
 import SpecHeaderContainer from '../containers/spec-header/SpecHeader.container';
 import SpecContentButtons from '../containers/spec-contents-buttons/SpecContentsButtons.container';
@@ -21,6 +21,11 @@ import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayo
 import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
 import SpecModalTeam from '../containers/spec-modal-team';
 import SpecModalTeamNewMember from '../containers/spec-modal-team/newMember';
+import { changeOption } from '../containers/spec-contents-buttons/SpecContentsButtons.actions';
+import {
+	ESPEC_DOCUMENT,
+	SPEC_TABLE,
+} from '../config/constants/button-variants';
 
 import { Root, Main, Navigation, Panels } from './Specification.styles';
 
@@ -28,8 +33,12 @@ import { Root, Main, Navigation, Panels } from './Specification.styles';
  * The Specification's view.
  */
 const Specification = () => {
+	const dispatch = useDispatch();
 	const { dataSection } = useSelector((state) => state);
 	const { option } = dataSection;
+	useEffect(() => {
+		dispatch(changeOption(ESPEC_DOCUMENT));
+	}, []);
 
 	return (
 		<>
@@ -37,7 +46,11 @@ const Specification = () => {
 				<SpecHeaderContainer />
 				<SpecContentButtons />
 				<Main>
-					{option === 'T' ? <SpecContentsTable /> : <SpecDocumentContainer />}
+					{option === SPEC_TABLE ? (
+						<SpecContentsTable />
+					) : (
+						<SpecDocumentContainer />
+					)}
 
 					<Navigation>
 						<SpecNavigatorContainer />

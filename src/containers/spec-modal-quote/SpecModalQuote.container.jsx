@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Loading, Modal, Button, Image, DownloadDocumentsIcons } from '../../components/SpecComponents';
 import {
@@ -6,7 +6,6 @@ import {
   Container,
   Content,
   Section,
-  ImagesContent,
   ProductSection,
   ContactSection,
   TitleContact,
@@ -17,11 +16,6 @@ import {
   ButtonQuote,
   TitleButton,
   ContentProduct,
-  ContentImage,
-  ContentDataProduct,
-  TitleProductName,
-  ProductDesc,
-  ProductSpan,
   TextAreaForm,
   TableInput,
   MessageRequired,
@@ -38,6 +32,7 @@ import noPhoto from '../../assets/images/icons/no-photo.svg';
 import { useFormik } from 'formik';
 import { closeModal, sendQuoteA } from './SpecModalQuote.actions';
 import * as Yup from 'yup';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 const SpecModalQuote = ({initialValues}) => {
   const dispatch = useDispatch();
@@ -54,8 +49,8 @@ const SpecModalQuote = ({initialValues}) => {
 
   const FormContactSchema = Yup.object().shape({
 		name: Yup.string().required('El nombre es requerido'),
-		email: Yup.string().email('Email invalido').required('El correo es requerido'),
-		description: Yup.string().required('La descripción es requerida'),
+		email: Yup.string().email('Email inválido').required('El correo es requerido'),
+		description: Yup.string().required('El mensaje es requerido'),
 	});
   
   const {
@@ -80,6 +75,11 @@ const SpecModalQuote = ({initialValues}) => {
         data: body
       }
       dispatch(sendQuoteA(params));
+      dispatch(
+        onShowAlertSuccess({ message: 'Hemos enviado la solicitud de la cotización.' }),
+      );
+      dispatch(closeModal(resetForm));
+  
 		},
     validationSchema: FormContactSchema,
 	});
@@ -87,6 +87,7 @@ const SpecModalQuote = ({initialValues}) => {
 		backgroundImage: `url('${product?.images[0].urls.original || noPhoto}')`,
 		backgroundSize: product?.images[0].urls.original ? 'cover' : 'initial',
 	};
+  const errorsLength = Object.keys(errors).length;
   if (!showModalQuote) return null;
   return (
     <Modal show={showModalQuote} onClose={onCloseModal}>
@@ -170,7 +171,7 @@ const SpecModalQuote = ({initialValues}) => {
                   />
                   <MessageRequired>{errors.description ? errors.description:''}</MessageRequired>
                 </GroupInput>
-                <ButtonQuote onClick={handleSubmit}>
+                <ButtonQuote onClick={handleSubmit} style={{"cursor":  errorsLength > 0 ? "not-allowed" : 'pointer'}} disabled={errorsLength > 0 ? 'true' : ''}>
                   <TitleButton>Solicitar cotización</TitleButton>
                 </ButtonQuote>
             </form>

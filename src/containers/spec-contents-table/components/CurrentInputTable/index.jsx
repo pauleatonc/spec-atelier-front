@@ -62,7 +62,7 @@ const CurrentInputTable = ({
 		/>
 		:
 		<CurrencyInput 
-			placeholder="$0.00" 
+			placeholder="$0" 
 			type="text"
 			typeInput="price"
 			value={currentValue}
