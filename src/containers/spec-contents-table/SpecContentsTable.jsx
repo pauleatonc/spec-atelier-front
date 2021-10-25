@@ -31,31 +31,28 @@ import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
 import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
 import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
 import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
-import { changeOption } from '../spec-contents-buttons/SpecContentsButtons.actions';
 
 const SpecContentsTable = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
-	const { project, quoteTable, totalExpandManual } = useSelector((state) => state.specDocument);
-	const { user, loading } = useSelector((state) => state.profile);
+	const { project, quoteTable, totalExpandManual } = useSelector(
+		(state) => state.specDocument,
+	);
+	const { user } = useSelector((state) => state.profile);
 	const [expandAll, setExpandAll] = useState();
 	const [toggleExpanded, setToggleExpanded] = useState(false);
 	const simulateClick = (e) => {
 		setExpandAll(e);
 	};
-	const {
-		first_name,
-		last_name,
-		company,
-		email
-		} = useSelector((state) => state.profile.user);
+	const { first_name, last_name, company, email } = useSelector(
+		(state) => state.profile.user,
+	);
 	const initialValues = {
-			name:first_name+' '+last_name, 
-			company: company ? company : '',
-			email: email? email : '',
-			description: '',
-		};
-
+		name: `${first_name} ${last_name}`,
+		company: company || '',
+		email: email || '',
+		description: '',
+	};
 
 	const allExpand = () => {
 		setToggleExpanded(!toggleExpanded);
@@ -81,7 +78,7 @@ const SpecContentsTable = () => {
 
 	const onClickProduct = (selectedProduct) => (event) => {
 		event.stopPropagation();
-		dispatch(getProduct(selectedProduct,user));
+		dispatch(getProduct(selectedProduct, user));
 	};
 
 	const columns = useMemo(
@@ -112,7 +109,9 @@ const SpecContentsTable = () => {
 				Cell: ({ row }) => {
 					if (row?.original?.type === 'Product') {
 						if (row?.original?.price) {
-							return `$${row?.original?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+							return `$${row?.original?.price
+								.toString()
+								.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
 						}
 						return (
 							<CurrentInputTable
@@ -128,7 +127,10 @@ const SpecContentsTable = () => {
 			},
 			{
 				Header: 'Subtotal',
-				Cell: ({ row }) => `$${row?.original?.subtotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`,
+				Cell: ({ row }) =>
+					`$${row?.original?.subtotal
+						.toString()
+						.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`,
 			},
 			{
 				id: 'expander',
@@ -158,7 +160,9 @@ const SpecContentsTable = () => {
 							);
 						case 'Product':
 							return !row?.original?.price ? (
-								<ButtonConsult onClick={onClickProduct(row?.original)}>Consultar precio</ButtonConsult>
+								<ButtonConsult onClick={onClickProduct(row?.original)}>
+									Consultar precio
+								</ButtonConsult>
 							) : (
 								''
 							);
@@ -190,8 +194,9 @@ const SpecContentsTable = () => {
 	const expandedJSON = JSON.parse(dataExpanded);
 	const arrayExpandeJSON = Object.values(expandedJSON.expanded);
 	const lenghtArray = arrayExpandeJSON.length;
-	const totalExpander = totalExpandManual[0].length+totalExpandManual[1].length;
-	if(lenghtArray == totalExpander){ 
+	const totalExpander =
+		totalExpandManual[0].length + totalExpandManual[1].length;
+	if (lenghtArray == totalExpander) {
 		setToggleExpanded(!toggleExpanded);
 		expandAll.click();
 	}
@@ -205,7 +210,11 @@ const SpecContentsTable = () => {
 							<Title>Itemizado y presupuesto: {project.name}</Title>
 							<ButtonsHeader>
 								<Button onClick={allExpand}>{`${
-									 (toggleExpanded ? 'Contraer' : lenghtArray == totalExpander ? 'Contraer' : 'Expandir')
+									toggleExpanded
+										? 'Contraer'
+										: lenghtArray == totalExpander
+										? 'Contraer'
+										: 'Expandir'
 								} filas`}</Button>
 								<Button
 									title="Descargar presupuesto"
@@ -258,7 +267,12 @@ const SpecContentsTable = () => {
 									</TableElements>
 									<ContainerTotalTable>
 										<TableTotal mRight="36">Total:</TableTotal>
-										<TableTotal>${totalProducts.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</TableTotal>
+										<TableTotal>
+											$
+											{totalProducts
+												.toString()
+												.replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+										</TableTotal>
 									</ContainerTotalTable>
 								</ContentFooter>
 							</td>
