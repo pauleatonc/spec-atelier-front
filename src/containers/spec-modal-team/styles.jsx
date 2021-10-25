@@ -18,6 +18,7 @@ export const ButtonCloseContainer = styled.div`
 `;
 
 export const Title = styled.h1`
+	width: 100%;
 	font-family: Lato;
 	font-size: 14px;
 	font-weight: bold;
@@ -83,11 +84,21 @@ export const Searcher = styled.input`
 	}
 `;
 
-export const Permissions = styled.p`
+export const PermissionSelectorContainer = styled.div`
+	flex: 1;
+`;
+
+export const PermisionLabel = styled.p`
 	font-family: Lato;
 	font-size: 12px;
 	font-weight: bold;
-	flex: 1;
+	color: #42bfad;
+	margin-right: 5px;
+`;
+
+export const IconArrowDown = styled.img`
+	font-size: 12px;
+	color: #42bfad;
 `;
 
 export const TitleConfig = styled.h1`
@@ -119,4 +130,24 @@ export const ContainerButtons = styled.div`
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
+`;
+
+export const NewMemberButton = styled.div`
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	margin-bottom: 35px;
+`;
+
+export const AddIcon = styled.img`
+	width: 20px;
+	height: 20px;
+	margin-right: 18px;
+`;
+
+export const AddMemberLabel = styled.p`
+	color: #45c3b1;
+	font-family: Lato;
+	font-size: 12px;
+	font-weight: bold;
 `;

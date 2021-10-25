@@ -5,25 +5,22 @@ import { Button } from '../../components/SpecComponents';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import useModal from '../../components/layouts/ModalLayout.hooks';
 import closeSource from '../../assets/images/icons/close.svg';
+import addIconSource from '../../assets/images/icons/add-circle-outline-primary.svg';
 import { CloseIcon } from '../profile-change-picture/ProfileChangePicture.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
-import { onHideModal } from './actions';
+import ProjectInfoShare from './components/ProjectInfoShare';
+import { onHideModal, onShowModal } from './actions';
+import { TYPE_MODALS } from './constants';
 import {
 	Container,
 	ButtonCloseContainer,
 	Title,
-	SearcherContainer,
-	DisclaimerUserNotSpec,
-	IconInfo,
-	DescDisclaimer,
-	EmailDesc,
-	Label,
-	Searcher,
-	Permissions,
-	TitleConfig,
-	Message,
 	ContainerButtons,
+	TitleConfig,
+	NewMemberButton,
+	AddIcon,
+	AddMemberLabel,
 } from './styles';
 
 const SpecModalTeam = () => {
@@ -32,9 +29,14 @@ const SpecModalTeam = () => {
 	const { onClose: handleClose, onExiting: handleExiting } = useModal({
 		closeCallback: () => dispatch(onHideModal()),
 		exitingCallback: () => {
-			console.log('close');
+			console.log('exitingCallback in SpecModalTeam');
 		},
 	});
+
+	const showNewMemberModal = () => {
+		dispatch(onHideModal());
+		dispatch(onShowModal(TYPE_MODALS.NEW_MEMBER_MODAL));
+	};
 
 	return (
 		<ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
@@ -42,36 +44,20 @@ const SpecModalTeam = () => {
 				<ButtonCloseContainer>
 					<CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
 				</ButtonCloseContainer>
-				<Title>Invita a tu equipo al proyecto</Title>
-				<SearcherContainer>
-					<Label>Compartir con:</Label>
-					<Searcher placeholder="Añade a un miembro del equipo" />
-					<Permissions>Puede ver</Permissions>
-				</SearcherContainer>
-				<DisclaimerUserNotSpec>
-					<IconInfo className="fas fa-info-circle" />
-					<DescDisclaimer>
-						<EmailDesc>carolina.perez@gmail.com</EmailDesc> no es parte de
-						SpecAtelier, se enviará un correo para unirse y tener acceso al
-						proyecto.
-					</DescDisclaimer>
-				</DisclaimerUserNotSpec>
-				<TitleConfig>¿Quién quieres compartir?</TitleConfig>
-				<Message placeholder="Añade un mensaje (opcional)" />
+				<Title>Tu Equipo</Title>
+				<NewMemberButton onClick={showNewMemberModal}>
+					<AddIcon alt="Agregar nuevo miembro" src={addIconSource} />
+					<AddMemberLabel>Nuevo miembro</AddMemberLabel>
+				</NewMemberButton>
+				<TitleConfig>Partidas compartidas:</TitleConfig>
+				<ProjectInfoShare />
 				<ContainerButtons>
-					<Button
-						variant={VARIANTS_BUTTON.CANCEL}
-						width="120px"
-						onClick={() => console.log('cancelar')}
-					>
-						Cancelar
-					</Button>
 					<Button
 						variant={VARIANTS_BUTTON.PRIMARY}
 						width="120px"
-						onClick={() => console.log('enviar')}
+						onClick={handleClose}
 					>
-						Enviar
+						Cerrar
 					</Button>
 				</ContainerButtons>
 			</Container>
