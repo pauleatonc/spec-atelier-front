@@ -11,10 +11,13 @@ import {
 	Monetization,
 	SpecOptions,
 	PermissionsButtonContainer,
+	Logo,
+	MobileLogo,
 } from './SpecHeader.styles';
 import logoSource from '../../assets/images/logo-spec.png';
 import logo2xSource from '../../assets/images/logo-spec@2x.png';
 import logo3xSource from '../../assets/images/logo-spec@3x.png';
+import logoIcon from '../../assets/images/logo-icon.png';
 import {
 	cleanDownload,
 	downloadSpecDocument,
@@ -55,13 +58,18 @@ const SpecHeader = () => {
 	return (
 		<Root>
 			<SpecOptions>
-				<Section withoutPaddingLeft>
+				<Section>
 					<Link to="/projects" data-view="projects">
-						<img
-							alt="Specatelier"
-							src={logoSource}
-							srcSet={`${logo2xSource} 2x, ${logo3xSource} 3x`}
-						/>
+						<Logo>
+							<img
+								alt="Specatelier"
+								src={logoSource}
+								srcSet={`${logo2xSource} 2x, ${logo3xSource} 3x`}
+							/>
+						</Logo>
+						<MobileLogo>
+							<img alt="Specatelier" src={logoIcon} />
+						</MobileLogo>
 					</Link>
 				</Section>
 				<Separator />

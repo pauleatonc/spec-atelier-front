@@ -4,6 +4,7 @@ import {
 	COLOR_WHITE,
 	COLOR_MINE_SHAFT,
 	COLOR_DARKGREY,
+	MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -11,12 +12,19 @@ export const Root = styled.div`
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12),
 		0 1px 1px 0 rgba(0, 0, 0, 0.14);
 	display: ${({ show = false }) => (show ? 'initial' : 'none')};
-	height: 100%;
+	height: calc(100vh - 122px);
 	left: 0;
 	position: absolute;
 	top: 0;
 	width: 360px;
 	font-family: Lato;
+	z-index: 1;
+
+	${MEDIA_QUERY_SMALL} {
+		width: 100vw;
+		height: 100vh;
+		top: -35px;
+	}
 `;
 
 Root.defaultProps = {

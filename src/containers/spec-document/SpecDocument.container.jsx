@@ -44,6 +44,7 @@ import {
 } from './SpecDocument.styles';
 import specAddSource from '../../assets/images/icons/spec-add.svg';
 import threeDotsVerticalSource from '../../assets/images/icons/three-dots-vertical.svg';
+import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 
 /**
  * The SpecDocument's container.
@@ -119,7 +120,7 @@ const SpecDocument = () => {
 	};
 	const handleRemoveBlock = (blockID) => () => {
 		handleHideBlockEditor();
-		dispatch(onRemoveSpecBlock({ blockID, specID }));
+		dispatch(onRemoveSpecBlock({ block: [blockID], specID }));
 	};
 	const handleBlockImageRemove = (blockID) => () => {
 		handleBlockMenuClose();
@@ -159,14 +160,13 @@ const SpecDocument = () => {
 
 	return (
 		<Root>
-			<AddIcon
-				alt="Agregar sección"
-				src={specAddSource}
-				onClick={handleAddMenuOpen}
-			/>
 			<Dropdown
 				anchorRef={addAnchor}
-				offset={{ x: -8, y: -8 }}
+				offset={
+					window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches
+						? { x: 0, y: -80 }
+						: { x: -7, y: -7 }
+				}
 				open={Boolean(addAnchor)}
 				origin={{ x: 'right', y: 'top' }}
 				onClose={handleAddMenuClose}
@@ -174,6 +174,7 @@ const SpecDocument = () => {
 				<AddMenuItem onClick={handleShowProducts}>Añadir producto</AddMenuItem>
 				<AddMenuItem onClick={handleCreateProduct}>Crear producto</AddMenuItem>
 			</Dropdown>
+
 			{Boolean(blockAnchor) && selectedBlock && (
 				<Dropdown
 					anchorRef={blockAnchor}
@@ -334,6 +335,15 @@ const SpecDocument = () => {
 					})}
 				</DraggableList>
 			</Page>
+			<AddIcon
+				alt="Agregar sección"
+				src={specAddSource}
+				onClick={
+					window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches
+						? handleShowProducts
+						: handleAddMenuOpen
+				}
+			/>
 		</Root>
 	);
 };
