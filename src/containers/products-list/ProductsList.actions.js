@@ -61,6 +61,7 @@ export const getProduct = (clientId) => async (dispatch) => {
 export const onGetProducts = (filters, extraPayload = {}, seeMore) => async (
 	dispatch,
 ) => {
+	if (!seeMore) dispatch(cleanProductListData());
 	dispatch(onActionCreator(GET_PRODUCTS));
 	try {
 		const { products } = await getProducts(cleanObjectsAndArrays(filters));
