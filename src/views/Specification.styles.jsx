@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { MEDIA_QUERY_SMALL } from '../config/constants/styled-vars';
 
 export const Root = styled.div`
 	background-color: #f6f6f6;
@@ -9,6 +10,20 @@ export const Root = styled.div`
 	overflow: auto;
 	padding: 0;
 	width: 100%;
+
+	${MEDIA_QUERY_SMALL} {
+		grid-template-rows: 85px auto;
+	}
+`;
+
+export const Header = styled.header`
+	box-sizing: border-box;
+	padding: 10px 0 0;
+	width: 100%;
+
+	${MEDIA_QUERY_SMALL} {
+		padding: 0px;
+	}
 `;
 
 export const Main = styled.div`
@@ -18,6 +33,7 @@ export const Main = styled.div`
 	padding: 0 0 10px;
 	position: relative;
 	width: 100%;
+	margin-bottom: 60px;
 `;
 
 export const Navigation = styled.div`
@@ -28,6 +44,15 @@ export const Navigation = styled.div`
 	max-height: calc(100vh - 115px);
 	position: fixed;
 	top: 115px;
+
+	${MEDIA_QUERY_SMALL} {
+		grid-template-rows: auto 62px;
+		width: 100%;
+		grid-template-columns: unset;
+		top: unset;
+		height: unset;
+		max-height: unset;
+	}
 `;
 
 export const Panels = styled.section`

@@ -37,6 +37,6 @@ export const SHOW_SPEC_PRODUCTS_ITEMS_SUCCESS =
 	'SHOW_SPEC_PRODUCTS_ITEMS_SUCCESS';
 export const onShowSpecProductsItems = (obj) => (dispatch) =>
 	batch(() => {
-    dispatch(onActionCreator(SHOW_SPEC_PRODUCTS_ITEMS_SUCCESS));
-		dispatch(onGetSpecProductsItems({sections: [obj.section]}));
+		dispatch(onActionCreator(SHOW_SPEC_PRODUCTS_ITEMS_SUCCESS));
+		dispatch(onGetSpecProductsItems({ sections: [obj.section] }));
 	});

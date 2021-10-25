@@ -1,24 +1,35 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
+import { COLOR_MINE_SHAFT, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
-	box-sizing: border-box;
-	height: 100%;
-	position: relative;
-	width: 587px;
+  box-sizing: border-box;
+  height: 100%;
+  position: relative;
+  width: 587px;
+
+  ${MEDIA_QUERY_SMALL} {
+    width: 100%;
+  }
 `;
 
 export const AddIcon = styled.img`
 	cursor: pointer;
-	float: right;
-	margin: 8px 7px 0 0;
-	position: sticky;
-	top: 8px;
+    margin: 8px 7px 0 0;
+    position: absolute;
+    top: 0;
+    right: 0;
 
-	&:active {
-		transform: scale(0.95);
-	}
+  &:active {
+    transform: scale(.95);
+  }
+
+  ${MEDIA_QUERY_SMALL} {
+	position: fixed;
+    bottom: 70px;
+    right: 10px;
+    top: unset;
+  }
 `;
 
 export const AddMenuItem = styled.section`
@@ -42,12 +53,16 @@ export const AddMenuItem = styled.section`
 `;
 
 export const Page = styled.section`
-	background-color: #fff;
-	border: 1px solid #979797;
-	margin: 0 0 5px;
-	min-height: 710px;
-	padding: 40px 66px 40px 52px;
-	width: 100%;
+  background-color: #FFF;
+  border: 1px solid #979797;
+  margin: 0 0 5px;
+  min-height: 710px;
+  padding: 40px 66px 40px 52px;
+  width: 100%;
+
+  ${MEDIA_QUERY_SMALL} {
+    padding: 29px 19px;
+  }
 `;
 
 export const Group = styled.section`

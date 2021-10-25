@@ -13,13 +13,17 @@ import {
 	SET_SELECTED_ALL,
 	DELETE_PRODUCT,
 	DELETE_PRODUCT_SUCCESS,
-	DELETE_PRODUCT_ERROR
+	DELETE_PRODUCT_ERROR,
+	CLEAN_PRODUCT_LIST_DATA,
+	UPDATE_PRODUCTS_WITH_PRODUCT,
+	GET_MORE_PRODUCTS,
 } from './ProductsList.actions';
 
 export const productsListInitialState = {
 	filters: {
 		page: 0,
 		limit: 10,
+		view: null,
 	},
 	products: [],
 	items: [],
@@ -89,6 +93,11 @@ const productsListReducer = (
 			return {
 				...productsListInitialState,
 			};
+		case CLEAN_PRODUCT_LIST_DATA:
+			return {
+				...productsListInitialState,
+				filters: state.filters,
+			};
 		case SET_FILTERS:
 			return {
 				...state,
@@ -99,6 +108,20 @@ const productsListReducer = (
 				...state,
 				isSelectedAll: payload,
 			};
+		case UPDATE_PRODUCTS_WITH_PRODUCT:
+			return {
+				...state,
+				products: payload.products,
+			};
+		case GET_MORE_PRODUCTS: {
+			return {
+				...state,
+				...payload,
+				products: [...state.products, ...payload.products],
+				loading: false,
+				error: false,
+			};
+		}
 		default: {
 			return state;
 		}

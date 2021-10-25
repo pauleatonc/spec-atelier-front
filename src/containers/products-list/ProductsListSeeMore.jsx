@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Loading } from '../../components/SpecComponents';
 import { ButtonSection, LoadingContainer } from './ProductsListSeeMore.styles';
-import { setFilters } from './ProductsList.actions';
+import { onGetProducts } from './ProductsList.actions';
 
-const ProductsListSeeMore = ({ filters, initialFilters }) => {
-	const { products, total } = useSelector((state) => state.productsList);
+const ProductsListSeeMore = ({ filters }) => {
+	const { products, total, nextPage } = useSelector(
+		(state) => state.productsList,
+	);
 	const [showButton, setShowButton] = useState(true);
 	const [loading, setLoading] = useState(false);
 
@@ -14,10 +16,14 @@ const ProductsListSeeMore = ({ filters, initialFilters }) => {
 	const onClickSeeMore = () => {
 		setLoading(true);
 		dispatch(
-			setFilters({
-				...filters,
-				limit: filters.limit + initialFilters.limit,
-			}),
+			onGetProducts(
+				{
+					...filters,
+					page: nextPage,
+				},
+				{},
+				true,
+			),
 		);
 	};
 
