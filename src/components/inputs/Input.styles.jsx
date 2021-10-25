@@ -30,7 +30,6 @@ export const Input = styled.input`
 	background-color: #eee;
 	border: 0;
 	border-radius: 21.5px;
-	color: ${COLOR_MINE_SHAFT};
 	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 1px;
@@ -40,6 +39,7 @@ export const Input = styled.input`
 	&:active,
 	&:focus {
 		outline: 0;
+		color: ${COLOR_MINE_SHAFT};
 	}
 
 	&::placeholder {
@@ -69,6 +69,11 @@ export const InputUnderline = styled.input`
 	background-color: ${COLOR_WHITE};
 	border-radius: 0;
 	text-align: ${({ textAlign }) => textAlign || 'left'};
+	&:active,
+	&:focus {
+		outline: 0;
+		color: ${COLOR_BLACK};
+	}
 `;
 
 export const InputForm = styled.input`

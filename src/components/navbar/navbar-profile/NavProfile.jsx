@@ -10,6 +10,9 @@ import {
 	Separator,
 	ProfilePictureContainer,
 	ProfilePictureImage,
+	ProfileInfo,
+	ContainerNameUser,
+	InfoUserName,
 } from './NavProfile.styles';
 
 const NavProfile = () => {
@@ -17,7 +20,7 @@ const NavProfile = () => {
 	const { user } = useSelector((state) => state.profile);
 	const togglOptions = () => setShowOtions(!showOptions);
 	const dispatch = useDispatch();
-  const onLogout = () => dispatch(logoutAction());
+	const onLogout = () => dispatch(logoutAction());
 	return (
 		<>
 			<ProfileButton
@@ -39,15 +42,36 @@ const NavProfile = () => {
 			</ProfileButton>
 			<ProfileOptions show={showOptions}>
 				<OptionsContent>
+					{user.first_name && user.email && (
+						<>
+							<ProfileInfo>
+								<ProfilePictureContainer>
+									{user?.profile_image?.urls ? (
+										<ProfilePictureImage
+											src={user?.profile_image?.urls.original}
+											alt="profile icon"
+										/>
+									) : (
+										<i className="fas fa-user-circle" />
+									)}
+								</ProfilePictureContainer>
+								<ContainerNameUser>
+									<InfoUserName>{`${user.first_name} ${user.last_name}`}</InfoUserName>
+									<InfoUserName gray>{user.email}</InfoUserName>
+								</ContainerNameUser>
+							</ProfileInfo>
+							<Separator />
+						</>
+					)}
 					<Link to="/profile" style={{ textDecoration: 'none' }}>
 						<Option>Perfil</Option>
 					</Link>
-          <Separator />
-          { (user?.superadmin_role || user?.impersonated) && (
-            <Link to="/act-as-another-user" style={{ textDecoration: 'none' }}>
-						  <Option>Suplantar Usuario</Option>
-					  </Link>)
-          }
+					<Separator />
+					{(user?.superadmin_role || user?.impersonated) && (
+						<Link to="/act-as-another-user" style={{ textDecoration: 'none' }}>
+							<Option>Suplantar Usuario</Option>
+						</Link>
+					)}
 					<Separator />
 					<Option onClick={onLogout}>Cerrar sesión</Option>
 				</OptionsContent>

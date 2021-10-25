@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import AlertContainer from '../containers/alert/Alert.container';
 import SpecHeaderContainer from '../containers/spec-header/SpecHeader.container';
+import SpecContentButtons from '../containers/spec-contents-buttons/SpecContentsButtons.container';
 import SpecDocumentContainer from '../containers/spec-document/SpecDocument.container';
+import SpecContentsTable from '../containers/spec-contents-table/SpecContentsTable';
 import SpecNavigatorContainer from '../containers/spec-navigator/SpecNavigator.container';
 import SpecProductsSectionsContainer from '../containers/spec-products-sections/SpecProductsSections.container';
 import SpecProductsItemsContainer from '../containers/spec-products-items/SpecProductsItems.container';
@@ -16,24 +19,41 @@ import SpecContentsContainer from '../containers/spec-contents/SpecContents.cont
 import SpecAdminContainer from '../containers/spec-admin/SpecAdmin.container';
 import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayout';
 import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
+import { changeOption } from '../containers/spec-contents-buttons/SpecContentsButtons.actions';
+import {
+	ESPEC_DOCUMENT,
+	SPEC_TABLE,
+} from '../config/constants/button-variants';
 
-import { Root, Header, Main, Navigation, Panels } from './Specification.styles';
+import { Root, Main, Navigation, Panels } from './Specification.styles';
 
 /**
  * The Specification's view.
  */
 const Specification = () => {
+	const dispatch = useDispatch();
 	const [showFilters, setShowFilters] = useState(false);
 	const [selectedSection, setSelectedSection] = useState('');
 	const [selectedItem, setSelectedItem] = useState('');
+	const { dataSection } = useSelector((state) => state);
+	const { option } = dataSection;
+
+	useEffect(() => {
+		dispatch(changeOption(ESPEC_DOCUMENT));
+	}, []);
+
 	return (
 		<>
 			<Root>
-				<Header>
-					<SpecHeaderContainer />
-				</Header>
+				<SpecHeaderContainer />
+				<SpecContentButtons />
 				<Main>
-					<SpecDocumentContainer />
+					{option === SPEC_TABLE ? (
+						<SpecContentsTable />
+					) : (
+						<SpecDocumentContainer />
+					)}
+
 					<Navigation>
 						<SpecNavigatorContainer />
 						<Panels>

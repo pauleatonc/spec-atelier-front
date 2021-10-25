@@ -264,7 +264,10 @@ const SpecDocument = () => {
 													src={
 														block?.element?.images.find(
 															(image) => image.id === block.product_block_image,
-														)?.urls?.small || '#'
+														)?.urls?.small ||
+														block?.element?.images.find(
+															(image) => image.id === block.product_block_image,
+														)?.urls?.original 
 													}
 												/>
 											</BlockImage>

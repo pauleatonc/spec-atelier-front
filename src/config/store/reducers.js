@@ -9,6 +9,7 @@ import specProductsSectionsReducer from '../../containers/spec-products-sections
 import specProductsItemsReducer from '../../containers/spec-products-items/SpecProductsItems.reducer';
 import specProductsReducer from '../../containers/spec-products/SpecProducts.reducer';
 import specModalPorductReducer from '../../containers/spec-modal-product/SpecModalProduct.reducer';
+import specModalQuoteReducer from '../../containers/spec-modal-quote/SpecModalQuote.reducer';
 import specCreateProductReducer from '../../containers/spec-create-product/SpecCreateProduct.reducer';
 import specEditProductReducer from '../../containers/spec-edit-product/SpecEditProduct.reducer';
 import authReducer from '../../containers/auth/auth.reducer';
@@ -28,11 +29,12 @@ import clientsImageSliderReducer from '../../containers/clients-images-slider/Cl
 import ProfileReducer from '../../containers/profile-header/ProfileHeader.reducer';
 import ProfileStatsReducer from '../../containers/profile-stats/ProfileStats.reducer';
 import ModalPlanFormReducer from '../../containers/modal-plan-form/reducer';
+import dataSectionsReducer from '../../containers/spec-contents-buttons/SpecContentsButtons.reducer';
 
 export default combineReducers({
 	auth: authReducer,
-  app: appReducer,
-  actAsAnotherUserList: actAsAnotherUserListReducer,
+	app: appReducer,
+	actAsAnotherUserList: actAsAnotherUserListReducer,
 	client: clientReducer,
 	clientsList: clientListReducer,
 	clientsImageSlider: clientsImageSliderReducer,
@@ -50,6 +52,7 @@ export default combineReducers({
 	specProductsItems: specProductsItemsReducer,
 	specProducts: specProductsReducer,
 	specModalPorduct: specModalPorductReducer,
+	specModalQuote: specModalQuoteReducer,
 	specCreateProduct: specCreateProductReducer,
 	specEditProduct: specEditProductReducer,
 	specDocument: specDocumentReducer,
@@ -58,5 +61,6 @@ export default combineReducers({
 	specAdmin: specAdminReducer,
 	profile: ProfileReducer,
 	profileStats: ProfileStatsReducer,
-	modalPlanForm: ModalPlanFormReducer
+	modalPlanForm: ModalPlanFormReducer,
+	dataSection: dataSectionsReducer,
 });

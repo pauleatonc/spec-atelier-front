@@ -10,6 +10,7 @@ import {
 	updateSpecBlockImage,
 	updateSpecBlockText,
 	deleteSpecBlockText,
+	updateProduct,
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { updateProductsWithProduct } from '../products-list/ProductsList.actions';
@@ -21,7 +22,6 @@ export const GET_SPEC_BLOCKS_ERROR = 'GET_SPEC_BLOCKS_ERROR';
 export const GET_SPEC_BLOCKS_SUCCESS = 'GET_SPEC_BLOCKS_SUCCESS';
 export const onGetSpecBlocks = (specID) => async (dispatch, getState) => {
 	dispatch(onActionCreator(GET_SPEC_BLOCKS));
-
 	try {
 		const { auth } = getState();
 		const { blocks = [], project = {} } =
@@ -322,7 +322,7 @@ export const onSortSpecBlocks = ({ blocksIDs, specID }) => async (
 	dispatch,
 	getState,
 ) => {
-	dispatch(onActionCreator(SORT_SPEC_BLOCKS));
+	onActionCreator(SORT_SPEC_BLOCKS);
 
 	try {
 		const { auth, specDocument } = getState();
@@ -356,4 +356,31 @@ export const onSortSpecBlocks = ({ blocksIDs, specID }) => async (
 			}),
 		);
 	}
+};
+
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
+export const UPDATE_PRODUCT_ERROR = 'UPDATE_PRODUCT_ERROR';
+export const UPDATE_BLOCKS = 'UPDATE_BLOCKS';
+export const handleUpdateProduct = (data, tableInputType, item) => async (
+	dispatch,
+) => {
+	dispatch(onActionCreator(UPDATE_PRODUCT));
+	updateProduct(data).then(
+		({ product }) => {
+			// se destructura response
+			dispatch(
+				onActionCreator(UPDATE_PRODUCT_SUCCESS, {
+					product,
+					tableInputType,
+					item,
+				}),
+			);
+		},
+		(error) => {
+			// TODO: update
+			dispatch(onActionCreator(UPDATE_PRODUCT_ERROR));
+			console.log(error);
+		},
+	);
 };

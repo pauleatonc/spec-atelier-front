@@ -238,7 +238,7 @@ const SpecEditProduct = () => {
 	const closeModalImg = () => setImagesModal(false);
 	const toggleDocumentsModal = () => setDocumentsModal(!documentsModal);
 
-	const mapToImages = (img) => ({ ...img, src: img?.urls?.medium });
+	const mapToImages = (img) => ({ ...img, src: img?.urls?.medium || img?.urls?.original });
 	const mapToFiles = (file) => ({
 		id: file.id,
 		file,

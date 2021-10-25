@@ -44,7 +44,7 @@ import closeSource from '../../assets/images/icons/close.svg';
 const SpecModalProduct = () => {
 	const { id: specID } = useParams();
 	const getFirstImg = (data) => (data?.images?.length && data.images[0]) || {};
-	const { product, showModalProduct, hasProduct, imageSizeData } = useSelector(
+	const { product, showModalProduct, hasProduct } = useSelector(
 		(state) => state.specModalPorduct,
 	);
 	const [selectedImg, selectImg] = useState(getFirstImg());
@@ -143,7 +143,7 @@ const SpecModalProduct = () => {
 										}
 									>
 										<Image
-											src={img?.urls?.medium}
+											src={img?.urls?.medium || img?.urls?.original}
 											type="responsive"
 											height="80px"
 											maxWidth="100%"
@@ -156,7 +156,7 @@ const SpecModalProduct = () => {
 						<ProductImageSelectedContainer>
 							<ProductImageSelected>
 								<Image
-									src={selectedImg?.urls?.medium}
+									src={selectedImg?.urls?.medium || selectedImg?.urls?.original}
 									type="responsive"
 									height="240px"
 									objectFit="contains"

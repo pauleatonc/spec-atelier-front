@@ -4,7 +4,10 @@ import { useParams } from 'react-router-dom';
 
 import CheckBoxList from '../../components/inputs/CheckBoxList';
 import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
-import { ButtonBack } from '../../components/layouts/SpecProductsPanelLayout.styles';
+import {
+	ButtonBack,
+	Overlay,
+} from '../../components/layouts/SpecProductsPanelLayout.styles';
 import arrowBack from '../../assets/images/icons/arrow_back.svg';
 
 import {
@@ -21,6 +24,7 @@ import {
 	TextConfigDesc,
 	TextConfigList,
 } from './SpecAdmin.styles';
+
 /**
  * The SpecAdmin' container.
  */
@@ -88,27 +92,30 @@ const SpecAdmin = () => {
 	}, [localConfig]);
 
 	return (
-		<Root show={show}>
-			<PanelTitle>
-				<ButtonBack role="button" onClick={() => dispatch(onHideSpecAdmin())}>
-					<img alt="arrow back" src={arrowBack} />
-				</ButtonBack>
-				Administrar especificación
-			</PanelTitle>
-			<TextConfig>
-				<TextConfigTitle>Configurar textos</TextConfigTitle>
-				<TextConfigDesc>
-					Elige los textos que quieres mostrar en la especificación:
-				</TextConfigDesc>
-				<TextConfigList>
-					<CheckBoxList
-						options={options}
-						onItemClick={handleItemClick}
-						values={localConfig}
-					/>
-				</TextConfigList>
-			</TextConfig>
-		</Root>
+		<>
+			{show && <Overlay onClick={() => dispatch(onHideSpecAdmin())} />}
+			<Root show={show}>
+				<PanelTitle>
+					<ButtonBack role="button" onClick={() => dispatch(onHideSpecAdmin())}>
+						<img alt="arrow back" src={arrowBack} />
+					</ButtonBack>
+					Administrar especificación
+				</PanelTitle>
+				<TextConfig>
+					<TextConfigTitle>Configurar textos</TextConfigTitle>
+					<TextConfigDesc>
+						Elige los textos que quieres mostrar en la especificación:
+					</TextConfigDesc>
+					<TextConfigList>
+						<CheckBoxList
+							options={options}
+							onItemClick={handleItemClick}
+							values={localConfig}
+						/>
+					</TextConfigList>
+				</TextConfig>
+			</Root>
+		</>
 	);
 };
 
