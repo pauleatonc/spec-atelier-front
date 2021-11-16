@@ -67,17 +67,17 @@ const NavNotifications = () => {
 				!detail?.watched ? ids2.push(detail.id) : ''
 			),
 		);
-		const objc = {
-			[`string`]: `{"ids[]":`+ids2.map((data) => (data?.id ? data.id : data)).join(`,"ids[]":`)+`}`
-		};
+		// const objc = {
+		// 	[`string`]: `{"ids[]":`+ids2.map((data) => (data?.id ? data.id : data)).join(`,"ids[]":`)+`}`
+		// };
 
-		console.log(JSON.parse(objc.string));
+		//console.log(JSON.parse(objc.string));
 		setShowOtions(!showOptions);
 		setTotalNews(0);
 		updateNot ? setUdateNot(false) : setUdateNot(true);
 		if(!updateNot && totalNews > 0){
 			const body = {
-				notifications: JSON.parse(objc.string),
+				notifications: {ids:ids2},
 				idUser: user.id
 			}
 			dispatch(watchNotifications(body));
