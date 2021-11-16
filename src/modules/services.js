@@ -89,6 +89,23 @@ export const cleanObjectsAndArrays = (obj = {}) =>
 		return { ...acc, [key]: value };
 	}, {});
 
+export const cleanObjectsAndArrays2 = (obj = {}) =>
+	Object.entries(obj).reduce((acc, [key, value]) => {
+		if (!value && typeof value !== 'boolean') return acc;
+		if (value && typeof value === 'object' && value.id)
+			return { ...acc, [key]: value.id };
+		if (Array.isArray(value))
+			return value.length
+				? {
+						...acc,
+						[`${key}[]`]: `${key}[]=`+value
+							.map((data) => (data?.id ? data.id : data))
+							.join(`,${key}[]=`),
+				  }
+				: acc;
+		return { ...acc, [`ids[]`]: value };
+	}, {});
+
 /**
  * Format Object of params to string
  */

@@ -13,18 +13,35 @@ import {
 	TextInfo,
 } from '../Auth.styles';
 import { TextInput, Button } from '../../../components/SpecComponents';
-import { loginAction } from '../auth.actions';
+import { loginAction, accepthNotificationsAC, rejectNotifications } from '../auth.actions';
 import {
 	deleteLocalStorage,
 } from '../../../helpers/localstorage.helper';
+import { useParams } from 'react-router';
 
 const Login = () => {
 	const { state } = useLocation();
 	const [user, setUser] = useState({ password: '', email: state?.email || '' });
 	const dispatch = useDispatch();
+	const { action , id } = useParams();
+	console.log(id);
 	const handleSubmit = () => {
 		deleteLocalStorage('responseStatus');
 		dispatch(loginAction({ user }));
+		if(id === undefined){
+			console.log("indefinida");
+		}else{
+			const data = {
+				projectId: id,
+				notifiId: id
+			};
+			if(action === 'accept_invitation'){
+				dispatch(accepthNotificationsAC(data));
+			}
+			if(action === 'reject_invitation'){
+				dispatch(rejectNotifications(data));
+			}
+		}
 	} 
 	const onChangeUser = ({ target: { name, value } }) =>
 		setUser({ ...user, [name]: value });

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '../../components/SpecComponents';
@@ -19,6 +19,8 @@ import {
 	cleanDownload,
 	downloadSpecDocument,
 	downloadBudgetDocument,
+	getNotifications,
+	initialNotiId,
 } from './SpecHeader.actions';
 import ItemsNavBar from '../../components/navbar/navbar-app/Components/ItemsNavBar';
 
@@ -29,8 +31,7 @@ const SpecHeader = () => {
 	const dispatch = useDispatch();
 	const { id } = useParams();
 	const { project } = useSelector((state) => state.specDocument);
-	const { url } = useSelector((state) => state.specHeader);
-
+	const { url, notificationsList, initialNotifiId } = useSelector((state) => state.specHeader);
 	const handleDownloadClick = () =>
 		dispatch(downloadSpecDocument({ specID: id }));
 	const handleDownloadBudgetClick = () =>
@@ -39,6 +40,10 @@ const SpecHeader = () => {
 	useEffect(() => {
 		return () => dispatch(cleanDownload());
 	}, []);
+
+
+
+	
 
 	useEffect(() => {
 		const downloadDoc = () => {
@@ -52,6 +57,8 @@ const SpecHeader = () => {
 		};
 		if (url) downloadDoc();
 	}, [url]);
+
+
 	return (
 		<Root>
 			<SpecOptions>

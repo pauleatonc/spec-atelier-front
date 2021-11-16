@@ -11,11 +11,31 @@ import ClientsImageSlider from '../containers/clients-images-slider/ClientsImage
 import ModalPlanFormStepOne from '../containers/modal-plan-form';
 import ModalPlanFormStepTwo from '../containers/modal-plan-form/StepTwo.index';
 import ModalSuccess from '../containers/modal-plan-form/SuccessModal.index';
-
+import { onShowAlertSuccess } from '../containers/alert/Alert.actions';
+import { rejectNotifications } from '../containers/auth/auth.actions';
+import { useParams, useLocation } from 'react-router';
+import { useDispatch } from 'react-redux';
 /**
  * The Home's view.
  */
 const Home = () => {
+	const dispatch = useDispatch();
+	const { pathname } = useLocation();
+	//const params = useParams();
+	const data = pathname.search("/home/"); 
+	const array_url = pathname.split('/');
+	console.log(pathname);
+	// if(action === "refuse_invitation"){
+	// 	const data = {
+	// 			projectId: id,
+	// 			notifiId: id
+	// 		};
+	// 		//dispatch(rejectNotifications(data));
+	// 	dispatch(
+	// 	  onShowAlertSuccess({ message: 'Proyecto rechazado.' }),
+	// 	);
+	// 	console.log("rechazado");
+	// }
 	return (
 		<HttpsRedirect>
 			<AppLayout footer={<Footer />} header={<NavBar fixed />}>

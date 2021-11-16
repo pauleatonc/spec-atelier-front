@@ -17,6 +17,7 @@ export const Root = styled.div`
 	border-top-right-radius: 2px;
 	padding: 4px 20px 4px 36px;
 	align-items: flex-end;
+	position: relative;
 `;
 
 export const Separator = styled.span`

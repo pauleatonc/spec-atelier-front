@@ -6,6 +6,8 @@ import {
 	googleLogin,
 	recoveryPassword,
 	newPassword,
+	acceptNotification,
+	rejectNotification,
 } from '../../services/auth.service';
 import {
 	setLocalStorage,
@@ -32,6 +34,10 @@ export const NEW_PASSWORD = 'NEW_PASSWORD';
 export const NEW_PASSWORD_ERROR = 'NEW_PASSWORD_ERROR';
 export const IMPERSONATE_USER_ERROR = 'IMPERSONATE_USER_ERROR';
 export const CLEAR_IMPERSONATED = 'CLEAR_IMPERSONATED';
+export const ACCEPT_NOTIFICATION = 'ACCEPT_NOTIFICATION';
+export const ACCEPT_NOTIFICATION_ERROR = 'ACCEPT_NOTIFICATION_ERROR';
+export const REJECT_NOTIFICATION = 'REJECT_NOTIFICATION';
+export const REJECT_NOTIFICATION_ERROR = 'REJECT_NOTIFICATION_ERROR';
 
 /**
  * Login action
@@ -233,3 +239,25 @@ export const becomeUser = (params) => async (dispatch) => {
 
 export const clearImpersonated = () => (dispatch) =>
 	dispatch(onActionCreator(CLEAR_IMPERSONATED));
+
+export const accepthNotificationsAC = (body) => async (dispatch) =>  {
+	try {
+			//const response = await acceptNotification(body);
+			return dispatch(onActionCreator(ACCEPT_NOTIFICATION));
+		} catch (error) {
+			return dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
+				error: true,
+			}));
+		}
+} 
+
+export const rejectNotifications = (body) => async (dispatch) =>  {
+	try {
+		//const response = await rejectNotification(body);
+		return dispatch(onActionCreator(REJECT_NOTIFICATION));
+	} catch (error) {
+		return dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
+			error: true,
+		}));
+	}
+}
