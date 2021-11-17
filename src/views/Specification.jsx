@@ -24,7 +24,6 @@ import { changeOption } from '../containers/spec-contents-buttons/SpecContentsBu
 import { SPEC_DOCUMENT } from '../config/constants/button-variants';
 import SpecModalTeam from '../containers/spec-modal-team';
 import SpecModalTeamNewMember from '../containers/spec-modal-team/newMember';
-
 import { Root, Main, Navigation, Panels } from './Specification.styles';
 
 /** The Specification's view */
