@@ -1,4 +1,4 @@
-import React, { useState, useMemo, Fragment } from 'react';
+import React, { useState, useMemo, Fragment, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import Collapsible from '../../../../components/basics/Collapsible';
@@ -14,11 +14,16 @@ import {
 	ListItem,
 } from './styles';
 
-const ProjectInfoShare = ({ withChecks }) => {
-	const [isAllProject, setIsAllProject] = useState(false);
+const ProjectInfoShare = ({
+	withChecks,
+	isAllProject,
+	setIsAllProject,
+	selectedSections,
+	setSelectedSections,
+	selectedItems,
+	setSelectedItems,
+}) => {
 	const [showSections, setShowSections] = useState([]);
-	const [selectedSections, setSelectedSections] = useState([]);
-	const [selectedItems, setSelectedItems] = useState([]);
 	const { blocks } = useSelector((state) => state.specDocument);
 
 	const itemsBlocks = useMemo(
@@ -51,8 +56,6 @@ const ProjectInfoShare = ({ withChecks }) => {
 			setSelectedItems([]);
 			setIsAllProject(false);
 		} else {
-			setSelectedSections(sections.map((sec) => sec.id));
-			setSelectedItems(itemsBlocks.map((item) => item.id));
 			setIsAllProject(true);
 		}
 	};
@@ -78,6 +81,13 @@ const ProjectInfoShare = ({ withChecks }) => {
 		} else setSelectedItems([...selectedItems, itemID]);
 	};
 
+	useEffect(() => {
+		if (isAllProject) {
+			setSelectedSections(sections.map((sec) => sec.id));
+			setSelectedItems(itemsBlocks.map((item) => item.id));
+		}
+	}, [isAllProject]);
+
 	return (
 		<Container>
 			{withChecks && (
@@ -90,9 +100,8 @@ const ProjectInfoShare = ({ withChecks }) => {
 			)}
 			{sections.map((section) => {
 				const isShowSection = showSections.find((sec) => sec === section.id);
-				const isSelectedSection = selectedSections.find(
-					(sec) => sec === section.id,
-				);
+				const isSelectedSection =
+					withChecks && selectedSections.find((sec) => sec === section.id);
 				return (
 					<Fragment key={section.id}>
 						<ListItem title={section.element.name}>
@@ -112,9 +121,8 @@ const ProjectInfoShare = ({ withChecks }) => {
 						</ListItem>
 						<Collapsible show={isShowSection}>
 							{section.items.map((item) => {
-								const isSelectedItem = selectedItems.find(
-									(itm) => itm === item.id,
-								);
+								const isSelectedItem =
+									withChecks && selectedItems.find((itm) => itm === item.id);
 								return (
 									<Fragment key={item.id}>
 										<ListItem padding="0 23px" title={item.element.name}>
