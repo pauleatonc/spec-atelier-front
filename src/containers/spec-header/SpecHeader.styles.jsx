@@ -101,10 +101,16 @@ export const SpecOptions = styled.div`
   flex: 1;
 `;
 
+export const ContainerTeam = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const PermissionsButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   padding: 0 23px;
+  margin-rigth: 25px;
 `;
