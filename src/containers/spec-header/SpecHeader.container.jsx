@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '../../components/SpecComponents';
+import IconUser from '../../components/IconUser';
 import {
   Root,
   Separator,
@@ -13,6 +14,7 @@ import {
   PermissionsButtonContainer,
   Logo,
   MobileLogo,
+  ContainerTeam,
 } from './SpecHeader.styles';
 import logoSource from '../../assets/images/logo-spec.png';
 import logo2xSource from '../../assets/images/logo-spec@2x.png';
@@ -33,8 +35,14 @@ const SpecHeader = () => {
   const { id } = useParams();
   const { project } = useSelector((state) => state.specDocument);
   const { url } = useSelector((state) => state.specHeader);
-
-  const openModalTeam = () => dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
+  const openModalTeam = () =>
+    dispatch(
+      onShowModal(
+        project?.team.length
+          ? TYPE_MODALS.TEAM_MODAL
+          : TYPE_MODALS.NEW_MEMBER_MODAL,
+      ),
+    );
 
   const handleDownloadClick = () =>
     dispatch(downloadSpecDocument({ specID: id }));
@@ -57,6 +65,7 @@ const SpecHeader = () => {
     };
     if (url) downloadDoc();
   }, [url]);
+
   return (
     <Root>
       <SpecOptions>
@@ -88,12 +97,22 @@ const SpecHeader = () => {
           />
         </Section>
         <Separator />
-        <PermissionsButtonContainer>
-          <Button variant="primary" onClick={openModalTeam}>
-            <i className="fas fa-share-alt" />
-            &emsp;Equipo
-          </Button>
-        </PermissionsButtonContainer>
+        <ContainerTeam>
+          <PermissionsButtonContainer>
+            <Button variant="primary" onClick={openModalTeam}>
+              <i className="fas fa-share-alt" />
+              &emsp;Equipo
+            </Button>
+          </PermissionsButtonContainer>
+          {project?.team &&
+            project?.team.map((member, index) => (
+              <IconUser
+                horizontalList
+                user={member.user}
+                zIndex={project?.team.length - index}
+              />
+            ))}
+        </ContainerTeam>
       </SpecOptions>
       <ItemsNavBar />
     </Root>
