@@ -21,6 +21,7 @@ import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayo
 import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
 import SpecModalTeam from '../containers/spec-modal-team';
 import SpecModalTeamNewMember from '../containers/spec-modal-team/newMember';
+import DetailMemberModal from '../containers/spec-modal-team/detailMember';
 import { changeOption } from '../containers/spec-contents-buttons/SpecContentsButtons.actions';
 import {
 	ESPEC_DOCUMENT,
@@ -97,6 +98,7 @@ const Specification = () => {
 			<SpecModalProduct />
 			<SpecModalTeam />
 			<SpecModalTeamNewMember />
+			<DetailMemberModal />
 			<ContactFormContainer type="product" />
 		</>
 	);
