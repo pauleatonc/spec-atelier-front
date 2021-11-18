@@ -83,8 +83,8 @@ const ProjectInfoShare = ({
 
 	useEffect(() => {
 		if (isAllProject) {
-			setSelectedSections(sections.map((sec) => sec.id));
-			setSelectedItems(itemsBlocks.map((item) => item.id));
+			setSelectedSections(sections.map((sec) => sec.element.id));
+			setSelectedItems(itemsBlocks.map((item) => item.element.id));
 		}
 	}, [isAllProject]);
 
@@ -99,9 +99,12 @@ const ProjectInfoShare = ({
 				</SelectAllProject>
 			)}
 			{sections.map((section) => {
-				const isShowSection = showSections.find((sec) => sec === section.id);
+				const isShowSection = showSections.find(
+					(sec) => sec === section.element.id,
+				);
 				const isSelectedSection =
-					withChecks && selectedSections.find((sec) => sec === section.id);
+					withChecks &&
+					selectedSections.find((sec) => sec === section.element.id);
 				return (
 					<Fragment key={section.id}>
 						<ListItem title={section.element.name}>
@@ -110,19 +113,20 @@ const ProjectInfoShare = ({
 									className={
 										isSelectedSection ? 'fas fa-check-square' : 'far fa-square'
 									}
-									onClick={handleSelectSection(section.id)}
+									onClick={handleSelectSection(section.element.id)}
 								/>
 							)}
 							<span>{section.element.name}</span>
 							<ArrowIcon
-								onClick={handleShowSection(section.id)}
+								onClick={handleShowSection(section.element.id)}
 								src={isShowSection ? arrowUpSource : arrowDownSource}
 							/>
 						</ListItem>
 						<Collapsible show={isShowSection}>
 							{section.items.map((item) => {
 								const isSelectedItem =
-									withChecks && selectedItems.find((itm) => itm === item.id);
+									withChecks &&
+									selectedItems.find((itm) => itm === item.element.id);
 								return (
 									<Fragment key={item.id}>
 										<ListItem padding="0 23px" title={item.element.name}>
@@ -133,7 +137,7 @@ const ProjectInfoShare = ({
 															? 'fas fa-check-square'
 															: 'far fa-square'
 													}
-													onClick={handleSelectItem(item.id)}
+													onClick={handleSelectItem(item.element.id)}
 												/>
 											)}
 											<span>{item.element.name}</span>
