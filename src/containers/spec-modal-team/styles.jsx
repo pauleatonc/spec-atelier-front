@@ -7,31 +7,33 @@ export const Container = styled.section`
 	display: flex;
 	flex-wrap: wrap;
 	background-color: ${COLOR_WHITE};
-	padding: 25px 30px 27px 44px;
+	padding: 40px;
 	border-radius: 8px;
 `;
 
 export const ButtonCloseContainer = styled.div`
 	width: 100%;
 	display: flex;
-	justify-content: flex-end;
+	align-items: center;
+	margin-bottom: ${({ mBottom = 35 }) => `${mBottom}px`};
+	justify-content: ${({ flexEnd = false }) =>
+		flexEnd ? `flex-end` : `space-between`};
 `;
 
 export const Title = styled.h1`
-	width: 100%;
 	font-family: Lato;
 	font-size: 14px;
 	font-weight: bold;
-	margin-bottom: 35px;
 `;
 
 export const SearcherContainer = styled.div`
 	display: flex;
 	width: 100%;
 	align-items: center;
+	margin-bottom: 25px;
 `;
 
-export const DisclaimerUserNotSpec = styled.div`
+export const Disclaimer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -39,7 +41,7 @@ export const DisclaimerUserNotSpec = styled.div`
 	height: 58px;
 	background-color: rgba(58, 192, 172, 0.08);
 	border-radius: 2px;
-	margin: 25px 0px;
+	margin-bottom: 25px;
 `;
 
 export const IconInfo = styled.i`
@@ -64,13 +66,22 @@ export const Label = styled.h3`
 	flex: 1;
 `;
 
-export const Searcher = styled.input`
+export const InputMailContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	position: relative;
 	flex: 4;
 	max-width: 350px;
 	margin-left: 13px;
 	margin-right: 17px;
+`;
+
+export const Searcher = styled.input`
+	width: 100%;
 	border-radius: 4px;
-	border: solid 1px #d6d6d6;
+	border: solid 1px
+		${({ inputMailInvalid = false }) =>
+			inputMailInvalid ? `#ff001f` : `#d6d6d6`};
 	font-family: Lato;
 	font-size: 12px;
 	height: 34px;
@@ -90,7 +101,7 @@ export const PermissionSelectorContainer = styled.div`
 
 export const PermisionLabel = styled.p`
 	font-family: Lato;
-	font-size: 12px;
+	font-size: ${({ fontSize = 12 }) => `${fontSize}px`};
 	font-weight: bold;
 	color: #42bfad;
 	margin-right: 5px;
@@ -101,13 +112,18 @@ export const IconArrowDown = styled.img`
 	color: #42bfad;
 `;
 
-export const TitleConfig = styled.h1`
+export const TitleConfigContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 13px;
+	border-bottom: 1px solid #e5e5e5;
 	width: 100%;
+`;
+
+export const TitleConfig = styled.h1`
 	font-family: Lato;
 	font-size: 14px;
 	font-weight: bold;
-	padding-bottom: 13px;
-	border-bottom: 1px solid #e5e5e5;
 `;
 
 export const Message = styled.textarea`
@@ -137,6 +153,7 @@ export const NewMemberButton = styled.div`
 	align-items: center;
 	cursor: pointer;
 	margin-bottom: 35px;
+	margin-top: 20px;
 `;
 
 export const AddIcon = styled.img`
@@ -150,4 +167,62 @@ export const AddMemberLabel = styled.p`
 	font-family: Lato;
 	font-size: 12px;
 	font-weight: bold;
+`;
+
+export const ContainerTeam = styled.div`
+	width: 100%;
+`;
+
+export const InfoUserContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 60px;
+	align-items: center;
+`;
+
+export const InfoUser = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+`;
+
+export const ItemInfo = styled.p`
+	font-family: Lato;
+	font-size: 14px;
+	font-weight: bold;
+`;
+
+export const DeleteUser = styled.div`
+	cursor: pointer;
+	display: flex;
+`;
+
+export const LabelDelete = styled.i`
+	margin-right: 8px;
+	font-family: Lato;
+	font-size: 14px;
+	font-weight: bold;
+	color: #757575;
+`;
+
+export const IconDelete = styled.i`
+	color: #757575;
+`;
+
+export const ResendLabel = styled.span`
+	cursor: pointer;
+	font-family: Lato;
+	font-size: 12px;
+	color: #ff7e45;
+`;
+
+export const ErrorInput = styled.p`
+	position: absolute;
+	font-family: Lato;
+	font-size: 12px;
+	color: #ff001f;
+	bottom: -15px;
+	left: 5px;
 `;
