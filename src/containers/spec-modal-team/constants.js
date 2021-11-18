@@ -5,6 +5,8 @@ export const TYPE_MODALS = {
 };
 
 export const OPTIONS_PERMISION = [
-	{ id: 'edit', label: 'Editar EETTT', value: 'edit' },
+	{ id: 'write', label: 'Editar EETT', value: 'write' },
 	{ id: 'watch', label: 'Ver EETT', value: 'watch' },
 ];
+
+export const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
