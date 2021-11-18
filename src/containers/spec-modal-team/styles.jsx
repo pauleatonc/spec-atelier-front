@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { COLOR_WHITE } from '../../config/constants/styled-vars';
+import {
+	COLOR_WHITE,
+	PUERTO_RICO,
+	TORCH_RED,
+	ALTO,
+	COLOR_DARKGREY,
+	MERCURY,
+	CORAL,
+} from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
 	width: 100%;
@@ -45,7 +53,7 @@ export const Disclaimer = styled.div`
 `;
 
 export const IconInfo = styled.i`
-	color: #3ac0ad;
+	color: ${PUERTO_RICO};
 	margin-right: 12px;
 `;
 
@@ -81,14 +89,14 @@ export const Searcher = styled.input`
 	border-radius: 4px;
 	border: solid 1px
 		${({ inputMailInvalid = false }) =>
-			inputMailInvalid ? `#ff001f` : `#d6d6d6`};
+			inputMailInvalid ? `${TORCH_RED}` : `${ALTO}`};
 	font-family: Lato;
 	font-size: 12px;
 	height: 34px;
 	padding-left: 15px;
-	caret-color: #45c3b1;
+	caret-color: ${PUERTO_RICO};
 	&::placeholder {
-		color: #d6d6d6;
+		color: ${ALTO};
 	}
 	&:focus {
 		outline: none;
@@ -103,20 +111,20 @@ export const PermisionLabel = styled.p`
 	font-family: Lato;
 	font-size: ${({ fontSize = 12 }) => `${fontSize}px`};
 	font-weight: bold;
-	color: #42bfad;
+	color: ${PUERTO_RICO};
 	margin-right: 5px;
 `;
 
 export const IconArrowDown = styled.img`
 	font-size: 12px;
-	color: #42bfad;
+	color: ${PUERTO_RICO};
 `;
 
 export const TitleConfigContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	padding-bottom: 13px;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 1px solid ${MERCURY};
 	width: 100%;
 `;
 
@@ -163,7 +171,7 @@ export const AddIcon = styled.img`
 `;
 
 export const AddMemberLabel = styled.p`
-	color: #45c3b1;
+	color: ${PUERTO_RICO};
 	font-family: Lato;
 	font-size: 12px;
 	font-weight: bold;
@@ -204,25 +212,25 @@ export const LabelDelete = styled.i`
 	font-family: Lato;
 	font-size: 14px;
 	font-weight: bold;
-	color: #757575;
+	color: ${COLOR_DARKGREY};
 `;
 
 export const IconDelete = styled.i`
-	color: #757575;
+	color: ${COLOR_DARKGREY};
 `;
 
 export const ResendLabel = styled.span`
 	cursor: pointer;
 	font-family: Lato;
 	font-size: 12px;
-	color: #ff7e45;
+	color: ${CORAL};
 `;
 
 export const ErrorInput = styled.p`
 	position: absolute;
 	font-family: Lato;
 	font-size: 12px;
-	color: #ff001f;
+	color: ${TORCH_RED};
 	bottom: -15px;
 	left: 5px;
 `;

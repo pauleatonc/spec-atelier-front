@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
+import { COLOR_MINE_SHAFT, ALTO } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
 	width: 100%;
@@ -30,7 +30,7 @@ Section.propTypes = {
 export const Input = styled.input`
 	align-items: center;
 	background-color: transparent;
-	border: 1px solid #d6d6d6;
+	border: 1px solid ${ALTO};
 	border-radius: 9px;
 	color: ${COLOR_MINE_SHAFT};
 	cursor: pointer;

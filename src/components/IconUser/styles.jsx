@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PUERTO_RICO } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
 	align-items: center;
@@ -12,7 +13,8 @@ export const Container = styled.section`
 	margin-left: ${({ horizontalList }) => (horizontalList ? `-5px` : `0`)};
 
 	:nth-child(odd) {
-		background-color: ${({ horizontalList }) => horizontalList && `#42bfad`};
+		background-color: ${({ horizontalList }) =>
+			horizontalList && `${PUERTO_RICO}`};
 	}
 `;
 

@@ -4,6 +4,7 @@ import {
 	SHADOW_GREY,
 	COLOR_MINE_SHAFT,
 	COLOR_LIGHTGREY,
+	PUERTO_RICO,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.div`
@@ -48,7 +49,7 @@ export const Option = styled.section`
 
 	&:hover {
 		background-color: #eee;
-		${({ hoverPrimaryColor }) => hoverPrimaryColor && 'color: #3ac0ad'};
+		${({ hoverPrimaryColor }) => hoverPrimaryColor && `color: ${PUERTO_RICO}`};
 	}
 
 	&:first-child {
