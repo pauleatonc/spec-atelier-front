@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PUERTO_RICO } from '../../../../config/constants/styled-vars';
 
 export const Container = styled.section`
 	display: flex;
@@ -19,6 +20,6 @@ export const Email = styled.p`
 	font-size: 12px;
 	margin-left: 14px;
 	&:hover {
-		color: #42bfad;
+		color: ${PUERTO_RICO};
 	}
 `;

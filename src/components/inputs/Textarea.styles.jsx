@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { ALTO, MINE_SHAFT, MINE_SHAFT_RGB } from '../../config/constants/styled-vars';
+import {
+  ALTO,
+  MINE_SHAFT,
+  MINE_SHAFT_RGB,
+} from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
@@ -30,12 +34,10 @@ export const Textarea = styled.textarea`
   padding: 11px 19px;
   resize: none;
   width: 100%;
-
   &:active,
   &:focus {
     outline: 0;
   }
-
   &::placeholder {
     color: rgba(${MINE_SHAFT_RGB}, 0.46);
   }

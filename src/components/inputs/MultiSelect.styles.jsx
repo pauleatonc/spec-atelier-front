@@ -44,16 +44,13 @@ export const Input = styled.input`
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
-
   &:active,
   &:focus {
     outline: 0;
   }
-
   &::placeholder {
     color: rgba(${MINE_SHAFT_RGB}, 0.46);
   }
-
   &:disabled {
     background-color: ${ALTO};
     cursor: not-allowed;
@@ -95,15 +92,12 @@ export const Option = styled.section`
   letter-spacing: 0.86px;
   padding: 10px 16px;
   width: 100%;
-
   &:hover {
     background-color: ${GALLERY};
   }
-
   &:first-child {
     margin: 6px 0 0;
   }
-
   &:last-child {
     margin: 0 0 6px;
   }
