@@ -81,12 +81,6 @@ export const ListItem = styled.a`
 	&:hover {
 		background-color: ${GALLERY_OPACITY};
 	}
-
-	& span {
-		overflow-x: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
 `;
 
 ListItem.defaultProps = {
