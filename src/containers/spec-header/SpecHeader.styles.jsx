@@ -113,6 +113,5 @@ export const PermissionsButtonContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	height: 100%;
-	padding: 0 23px;
-	margin-rigth: 25px;
+	margin: 0 23px;
 `;
