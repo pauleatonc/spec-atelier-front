@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '../../components/SpecComponents';
-import IconUser from '../../components/IconUser';
 import {
 	Root,
 	Separator,
@@ -99,22 +98,25 @@ const SpecHeader = () => {
 					/>
 				</Section>
 				<Separator />
-				<ContainerTeam>
-					<PermissionsButtonContainer>
-						<Button variant="primary" onClick={openModalTeam}>
-							<i className="fas fa-share-alt" />
-							&emsp;Equipo
-						</Button>
-					</PermissionsButtonContainer>
-					{project?.team &&
-						project?.team.map((member, index) => (
+				{project?.team && (
+					<ContainerTeam>
+						<PermissionsButtonContainer>
+							<Button width="120px" variant="primary" onClick={openModalTeam}>
+								<i className="fas fa-share-alt" />
+								&emsp;Equipo
+							</Button>
+						</PermissionsButtonContainer>
+						{/*
+						TODO: validate in next hito
+						 {project?.team.map((member, index) => (
 							<IconUser
 								horizontalList
 								user={member.user}
 								zIndex={project?.team.length - index}
 							/>
-						))}
-				</ContainerTeam>
+						))} */}
+					</ContainerTeam>
+				)}
 			</SpecOptions>
 			<ItemsNavBar />
 		</Root>
