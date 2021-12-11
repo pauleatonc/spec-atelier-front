@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import {
-	COLOR_BLACK,
-	COLOR_PRIMARY,
-	NAVBAR_HEIGHT,
-	COLOR_WHITE,
-	COLOR_GREY,
-} from '../../../config/constants/styled-vars';
+    COLOR_BLACK,
+    COLOR_PRIMARY,
+    NAVBAR_HEIGHT,
+    COLOR_WHITE,
+    COLOR_GREY,
+} from '../../config/constants/styled-vars';
 
 export const ProfileButton = styled.div`
 	color: ${({ isOpen }) => (!isOpen ? COLOR_BLACK : COLOR_PRIMARY)};
@@ -18,7 +18,6 @@ export const ProfileButton = styled.div`
 `;
 
 export const ProfileOptions = styled.section`
-	height: 446px;
 	width: 360px;
 	position: absolute;
 	right: 82px;
@@ -56,8 +55,8 @@ export const OptionsContent = styled.section`
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12),
 		0 1px 1px 0 rgba(0, 0, 0, 0.14);
 	&::-webkit-scrollbar {
-		width: 8px;
-  		height: 120px;
+		width: 13px;
+		height: 120px;
 	}
 	&::-webkit-scrollbar-track {
 		background: transparent;
@@ -116,7 +115,7 @@ export const ContainerNameUser = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin-left: 10px;
+	margin-left: 12px;
 	margin-top: 44px;
 `;
 
@@ -244,4 +243,3 @@ export const LoadingNoti = styled.label`
 	color: #757575;
 	text-align:center;
 `;
-

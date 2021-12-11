@@ -42,9 +42,9 @@ const Main = () => {
 				<Router>
 					<Switch>
 						<PublicRoute exact restricted component={Home} path="/" />
-						<PublicRoute exact restricted component={Home} path="/pb/:action/:id" />
+						<PublicRoute exact restricted component={Home} path="/projects/:action/:id/:project_id" />
 						<PublicRoute exact restricted component={Login} path="/login" />
-						<PublicRoute exact restricted component={Login} path="/login/:action/:id" />
+						<PublicRoute exact restricted component={Login} path="/login/:action/:id/:project_id" />
 						<PublicRoute
 							exact
 							restricted
@@ -77,7 +77,7 @@ const Main = () => {
 						/>
 						<PublicRoute exact component={BusinessPlan} path="/business_plan" />
 						<PrivateRoute exact component={Projects} path="/projects" />
-						<PrivateRoute exact component={Projects} path="/projects/email/:action/:id" />
+						<PrivateRoute exact component={Projects} path="/projects/:action/:id?:project_id" />
 						<PrivateRoute exact component={Project} path="/projects/project" />
 						<PrivateRoute
 							exact

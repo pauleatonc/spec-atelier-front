@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import ButtonGoogleLogin from '../../../components/buttons/ButtonGoogle';
 
@@ -13,36 +13,20 @@ import {
 	TextInfo,
 } from '../Auth.styles';
 import { TextInput, Button } from '../../../components/SpecComponents';
-import { loginAction, accepthNotificationsAC, rejectNotifications } from '../auth.actions';
+import { loginAction } from '../auth.actions';
 import {
 	deleteLocalStorage,
 } from '../../../helpers/localstorage.helper';
-import { useParams } from 'react-router';
 
 const Login = () => {
 	const { state } = useLocation();
 	const [user, setUser] = useState({ password: '', email: state?.email || '' });
 	const dispatch = useDispatch();
-	const { action , id } = useParams();
-	console.log(id);
+	const { action, id, project_id } = useParams();
 	const handleSubmit = () => {
 		deleteLocalStorage('responseStatus');
-		dispatch(loginAction({ user }));
-		if(id === undefined){
-			console.log("indefinida");
-		}else{
-			const data = {
-				projectId: id,
-				notifiId: id
-			};
-			if(action === 'accept_invitation'){
-				dispatch(accepthNotificationsAC(data));
-			}
-			if(action === 'reject_invitation'){
-				dispatch(rejectNotifications(data));
-			}
-		}
-	} 
+		dispatch(loginAction({ user, action: { idNoti: id, Idproject: project_id, actionUrl: action } }));
+	}
 	const onChangeUser = ({ target: { name, value } }) =>
 		setUser({ ...user, [name]: value });
 
@@ -64,7 +48,7 @@ const Login = () => {
 			<LoginTitle>Inicia sesión</LoginTitle>
 
 			<ButtonGoogleContainer>
-				<ButtonGoogleLogin label="Iniciar con Google" />
+				<ButtonGoogleLogin label="Iniciar con Google" action={action} id={id} project_id={project_id} />
 			</ButtonGoogleContainer>
 
 			<TextInfo size={14}>O si prefieres inicia con tu cuenta Spec</TextInfo>

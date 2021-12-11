@@ -8,7 +8,6 @@ import {
 } from '../modules/requests';
 import {
 	cleanObjectsAndArrays,
-	cleanObjectsAndArrays2,
 	factoryService,
 	formatParams,
 } from '../modules/services';
@@ -162,20 +161,20 @@ export const updateProjectConfig = factoryService(
 );
 
 export const updateProduct = factoryService((body) =>
-	patchJsonRequest(`${API_BASE_URL}/products/`+body.id, body.data),
+	patchJsonRequest(`${API_BASE_URL}/products/${body.id}`, body.data),
 );
 
 export const sendQuote = factoryService((body) =>
-	postJsonRequest(`${API_BASE_URL}/products/`+body.id+`/quote`,body.data),
+	postJsonRequest(`${API_BASE_URL}/products/${body.id}/quote`, body.data),
 );
 
 export const getNotificationsList = factoryService((id) =>
-	getJsonRequest(`${API_BASE_URL}/users/`+id+`/notifications?permissions=true`),
+	getJsonRequest(`${API_BASE_URL}/users/${id}/notifications?permissions=true`),
 );
 
 export const updateNotificationsWatch = factoryService((body) =>
 	patchJsonRequest(
-		`${API_BASE_URL}/users/${body.idUser}/notifications/mark_as_watched`,{notifications: body.notifications},
+		`${API_BASE_URL}/users/${body.idUser}/notifications/mark_as_watched`, { notifications: body.notifications },
 	),
 );
 

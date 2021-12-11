@@ -15,6 +15,7 @@ import {
 	ACCEPT_NOTIFICATION_ERROR,
 	REJECT_NOTIFICATION,
 	REJECT_NOTIFICATION_ERROR,
+	CLEAR_ACCEPT_ACTION,
 } from './auth.actions';
 
 export const initialState = {
@@ -25,7 +26,7 @@ export const initialState = {
 	status: false,
 	isAutoLogout: false,
 	impersonated: false,
-	isAccept: false,
+	acceptAction: false,
 	isReject: false,
 };
 
@@ -109,15 +110,17 @@ const authReducer = (state = initialState, action = {}) => {
 				error: action.payload.error,
 			};
 		case ACCEPT_NOTIFICATION:
-			return{...state, isAccept: true, };
-		case ACCEPT_NOTIFICATION_ERROR:{
-			return{...state, error: 'Accept'};
+			return { ...state, acceptAction: true, };
+		case ACCEPT_NOTIFICATION_ERROR: {
+			return { ...state, error: 'Accept' };
 		}
 		case REJECT_NOTIFICATION:
-			return{...state, isReject: true, }
-		case REJECT_NOTIFICATION_ERROR:{
-			return{...state, error: 'Reject'};
+			return { ...state, isReject: true, }
+		case REJECT_NOTIFICATION_ERROR: {
+			return { ...state, error: 'Reject' };
 		}
+		case CLEAR_ACCEPT_ACTION:
+			return { ...state, acceptAction: false }
 		default:
 			return state;
 	}

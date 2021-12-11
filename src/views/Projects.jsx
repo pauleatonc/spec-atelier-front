@@ -1,5 +1,4 @@
-import React, {useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import AppLayout from '../components/layouts/AppLayout';
 import { NavbarApp } from '../components/SpecComponents';
 import Footer from '../components/footer';
@@ -13,45 +12,9 @@ import ProjectsNoneContainer from '../containers/projects-list/ProjectsNone.cont
 import HEADER_IMG from '../assets/images/project/project_background_header.png';
 
 import { Container, Content } from './Projects.styles';
-import { useParams } from 'react-router';
-import {
-	accepthNotificationsAC,
-  rejectNotifications
-} from '../containers/projects-list/ProjectsList.actions';
-import { onShowAlertSuccess } from '../containers/alert/Alert.actions';
+import AlertContainer from '../containers/alert/Alert.container';
 
 const Projects = () => {
-  const dispatch = useDispatch();
-  const { isAccept, isReject } = useSelector((state) => state.auth);
-  const { action , id } = useParams();
-  if(action === "accept_invitation"){
-    const data = {
-			projectId: id,
-			notifiId: id
-		};
-		//dispatch(accepthNotificationsAC(data));
-    dispatch(
-      onShowAlertSuccess({ message: 'Proyecto aceptado.' }),
-    );
-    //console.log("accept");
-  }
-  if(action === "refuse_invitation"){
-    const data = {
-			projectId: id,
-			notifiId: id
-		};
-		//dispatch(rejectNotifications(data));
-    dispatch(
-      onShowAlertSuccess({ message: 'Proyecto rechazado.' }),
-    );
-    //console.log("reject");
-  }
-  useEffect(() => {
-    if(isAccept){dispatch(onShowAlertSuccess({ message: 'Proyecto aceptado.' }))};
-    //if(isReject){dispatch(onShowAlertSuccess({ message: 'Proyecto rechazado.' }))};
-    //console.log(isReject);
-	}, [isAccept]);
-
   return (
     <AppLayout footer={<Footer />} header={<NavbarApp />}>
       <ProjectsHeader
@@ -68,6 +31,7 @@ const Projects = () => {
           <ProjectsSeeMoreButtonContainer />
         </Content>
       </Container>
+      <AlertContainer />
     </AppLayout>
   );
 };

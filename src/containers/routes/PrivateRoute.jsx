@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { Route, Redirect, useLocation } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { useLocation } from 'react-router';
 import { getLocalStorage } from '../../helpers/localstorage.helper';
 import { autoLogout } from '../auth/auth.actions';
 import { getAppData } from '../../config/store/app-store/app.actions';
@@ -12,7 +12,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 	const { isLogin, isAutoLogout } = useSelector((state) => state.auth);
 	const { loaded } = useSelector((state) => state.app);
 	const dispatch = useDispatch();
-	const { pathname } = useLocation();
+	const { pathname, search } = useLocation();
 	const getData = () => {
 		dispatch(getAppData());
 		dispatch(getUserProfile());
@@ -35,7 +35,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			dispatch(getNotifications());
-	}, 10000);
+	}, 30000);
 		return () => clearInterval(interval);
 	}, []);
 
@@ -51,13 +51,15 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 				if (!isLogin) {
 					if(pathname.search("/projects/accept_invitation/") === 0 ){
 						const array_url = pathname.split('/');
-						return <Redirect to={`/login/${array_url[2]}/${array_url[3]}`} />;
+						const array_var = search.split('=');
+						return <Redirect to={`/login/${array_url[2]}/${array_url[3]}/${array_var[1]}`} />;
 					}
 					if(pathname.search("/projects/refuse_invitation/") === 0 ){
 						const array_url = pathname.split('/');
-						return <Redirect to={`/pb/${array_url[2]}/${array_url[3]}`} />;
+						const array_var = search.split('=');
+						return <Redirect to={`/projects/${array_url[2]}/${array_url[3]}/${array_var[1]}`} />;		
 					}
-					//return <Redirect to="/login" />;
+					return <Redirect to="/login" />;
 				}
 
 				if (isLogin) {

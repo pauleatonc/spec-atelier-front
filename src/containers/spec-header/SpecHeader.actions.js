@@ -1,5 +1,6 @@
 import onActionCreator from '../../config/store/helpers';
 import { downloadSpec, downloadBudged, getNotificationsList, updateNotificationsWatch, acceptNotification, rejectNotification, undoRejectNotification } from '../../services/specs.service';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 export const LOADING_SPEC_DOWNLOAD = 'LOADING_SPEC_DOWNLOAD';
 export const DOWNLOAD_URL_SUCCESS = 'DOWNLOAD_URL_SUCCESS';
@@ -20,6 +21,7 @@ export const REJECT_NOTIFICATION = 'REJECT_NOTIFICATION';
 export const REJECT_NOTIFICATION_ERROR = 'REJECT_NOTIFICATION_ERROR';
 export const UNDO_REJECT_NOTIFICATION = 'UNDO_REJECT_NOTIFICATION';
 export const UNDO_REJECT_NOTIFICATION_ERROR = 'UNDO_REJECT_NOTIFICATION_ERROR';
+export const NOTIFICATION_SUCCESS = 'NOTIFICATION_SUCCESS';
 
 const startDownload = (file, fileName) => {
 	const url = window.URL.createObjectURL(file);
@@ -70,74 +72,74 @@ export const downloadBudgetDocument = ({ specID }) => (dispatch, getState) => {
 	);
 };
 
-export const getNotifications = () => async (dispatch,getState) =>  {
+export const getNotifications = () => async (dispatch, getState) => {
 	const { auth } = getState();
 	try {
 		const response = await getNotificationsList(auth.user?.id);
 		dispatch(onActionCreator(GET_NOTIFICATIONS, response));
 		return data;
-	  } catch (error) {
+	} catch (error) {
 		return dispatch(onActionCreator(GET_NOTIFICATIONS_ERROR, {
-		  error: true,
-		}));
-	  }
-} 
-
-export const initialNotiId = () => async (dispatch,getState) =>  {
-	const { auth } = getState();
-	try {
-		const response = await getNotificationsList(auth.user?.id);
-		dispatch(onActionCreator(GET_NOTIFICATIONS, response));
-		const data = Object.values(response).map((item,i) => Object.assign({}, Object.values(response), { id: item.id })) // object to array data
-		return dispatch(onActionCreator(INITIAL_NOTI, data));
-	  } catch (error) {
-		return dispatch(onActionCreator(INITIAL_NOTI_ERROR, {
-		  error: true,
-		}));
-	  }
-} 
-
-export const watchNotifications = (body) => async (dispatch) =>  {
-	try {
-		const response = await updateNotificationsWatch(body);
-		return dispatch(onActionCreator(WATCH_NOTIFICATIONS, response));
-	} catch (error) {
-		return dispatch(onActionCreator(WATCH_NOTIFICATIONS_ERROR, {
 			error: true,
 		}));
 	}
-} 
+}
 
-export const accepthNotificationsAC = (body) => async (dispatch) =>  {
-	try {
-		const response = await acceptNotification(body);
-		return dispatch(onActionCreator(ACCEPT_NOTIFICATION, response));
-	} catch (error) {
-		return dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
-			error: true,
-		}));
-	}
-} 
 
-export const rejectNotifications = (body) => async (dispatch) =>  {
-	try {
-		const response = await rejectNotification(body);
-		return dispatch(onActionCreator(REJECT_NOTIFICATION, response));
-	} catch (error) {
-		return dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
-			error: true,
-		}));
-	}
-} 
+export const watchNotifications = (body) => async (dispatch) => {
+	updateNotificationsWatch(body).then((response) => {
+		dispatch(onActionCreator(WATCH_NOTIFICATIONS, response));
+		dispatch(getNotifications());
+	}, (error) => {
+		dispatch(onActionCreator(WATCH_NOTIFICATIONS_ERROR, {
+			error
+		}))
+	})
+}
 
-export const undoRejectNotifications = (body) => async (dispatch) =>  {
-	try {
-		const response = await undoRejectNotification(body);
-		return dispatch(onActionCreator(UNDO_REJECT_NOTIFICATION, response));
-	} catch (error) {
-		return dispatch(onActionCreator(UNDO_REJECT_NOTIFICATION_ERROR, {
-			error: true,
-		}));
-	}
-} 
+export const accepthNotificationsAC = (body) => async (dispatch) => {
+	dispatch(onActionCreator(ACCEPT_NOTIFICATION));
+	acceptNotification(body).then((response) => {
+		dispatch(getNotifications());
+		dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+	}, (error) => {
+		dispatch(
+			onShowAlertSuccess({ message: 'Error al aceptar proyecto.' }),
+		);
+		dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
+			error
+		}))
+	})
+}
+
+export const rejectNotifications = (body) => async (dispatch) => {
+	dispatch(onActionCreator(REJECT_NOTIFICATION));
+	rejectNotification(body).then((response) => {
+		//console.log(response.status)
+		dispatch(getNotifications());
+		dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+	}, (error) => {
+		dispatch(
+			onShowAlertSuccess({ message: 'Error al rechazar proyecto.' }),
+		);
+		dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
+			error
+		}))
+	}).catch(error => console.log(error));
+}
+
+export const undoRejectNotifications = (body) => async (dispatch) => {
+	dispatch(onActionCreator(UNDO_REJECT_NOTIFICATION));
+	undoRejectNotification(body).then((response) => {
+		dispatch(getNotifications());
+		dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+	}, (error) => {
+		dispatch(
+			onShowAlertSuccess({ message: 'Error al deshacer proyecto.' }),
+		);
+		dispatch(onActionCreator(UNDO_REJECT_NOTIFICATION_ERROR, {
+			error
+		}))
+	})
+}
 

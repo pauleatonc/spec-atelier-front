@@ -6,124 +6,80 @@ import {
 	OptionsContent,
 	Separator,
 	ProfilePictureContainer,
-	ProfilePictureContainer2,
 	ProfilePictureImage,
-	ContainerNameUser,
-	InfoUserName,
-	InfoUserName2,
-    ListHeader,
-    TitleHeader,
-    LinkHeader,
-    ListItem,
-	ContentActions,
-	ContentPoint,
-	NewPoint,
-	ActionPerformed,
-	LinkSeeAll,
-	UndoSpan,
-	CountNoti
+	ListHeader,
+	TitleHeader,
+	LinkHeader,
+	CountNoti,
 
 } from './NavNotifications.styles';
-import Button from '../../buttons/Button';
-import { VARIANTS_BUTTON } from '../../../config/constants/button-variants';
-import  IconNoti  from '../../../assets/images/icons/spec-notifications.svg';
-import  User2  from '../../../assets/images/user2.jpg';
-import { useMemo } from 'react';
+import IconNoti from '../../../assets/images/icons/spec-notifications.svg';
 import {
-	watchNotifications,
-	accepthNotificationsAC,
-	rejectNotifications,
-	undoRejectNotifications,
-	getNotifications
+	watchNotifications
 } from '../../../containers/spec-header/SpecHeader.actions';
-import {
-	cleanObjectsAndArrays2
-} from '../../../modules/services';
+import ClickAwayListener from 'react-click-away-listener';
+import Notifications from '../../notifications/Notification';
 
 const NavNotifications = () => {
 	const dispatch = useDispatch();
 	const [showOptions, setShowOtions] = useState(false);
-	const [ updateNot, setUdateNot] = useState(false);
+	const [updateNot, setUdateNot] = useState(false);
 	const { user } = useSelector((state) => state.profile);
-	const { project } = useSelector((state) => state.specDocument);
 	const { notificationsList } = useSelector((state) => state.specHeader);
-	const data = useMemo(() => Object.values(notificationsList), [notificationsList]); // object to array data
+	const [data, setData] = useState(Object.values(notificationsList));
 	const array_news = [];
-	const listlNews = data.map((item) => 
-		item.list.map((detail) => 
-			!detail?.watched ? array_news.push(detail.watched) : ''
+	const array_total = [];
+	const listlNews = Object.values(notificationsList).map((item) =>
+		item.list.map((detail) =>
+			array_total.push(detail.watched)
 		)
-	); 
+	);
+
 	const [totalNews, setTotalNews] = useState(0);
+	const [totalNoti, setTotalNoti] = useState(0);
+	const [updateClickAway, setUdateClickAway] = useState(false);
 	useEffect(() => {
 		setTotalNews(array_news.length);
+		setData(Object.values(notificationsList));
+		if (!data[0]?.total) {
+			console.log("caminante");
+		}
 	}, [notificationsList]);
 
+	useEffect(() => {
+		setTotalNoti(listlNews);
+	}, []);
+
+
 	const togglOptions = () => {
-		//console.log(totalNews);
 		const ids2 = [];
-		const listId =  data.map((item,i) => 
-			item.list.map((detail,e) => 
+		const listId = data.map((item) =>
+			item.list.map((detail) =>
 				!detail?.watched ? ids2.push(detail.id) : ''
 			),
 		);
-		const objc = {
-			[`string`]: `{"ids[]":`+ids2.map((data) => (data?.id ? data.id : data)).join(`,"ids[]":`)+`}`
-		};
-
-		console.log(JSON.parse(objc.string));
 		setShowOtions(!showOptions);
 		setTotalNews(0);
 		updateNot ? setUdateNot(false) : setUdateNot(true);
-		if(!updateNot && totalNews > 0){
+		if (updateNot && ids2.length > 0) {
 			const body = {
-				notifications: JSON.parse(objc.string),
+				notifications: { ids: ids2 },
 				idUser: user.id
 			}
 			dispatch(watchNotifications(body));
-		} 
+			setData(Object.values(notificationsList));
+		}
 	};
 
-	const [action,setAction] = useState('deafult');
-	const [actionId,setActionId] = useState();
-	const accept = (id) => {
-		const data = {
-			idUser: user.id,
-			projectId: project.id,
-			notifiId: id
-		};
-		dispatch(accepthNotificationsAC(data));
-		setAction('accept');
-		setActionId(id);
-		dispatch(getNotifications());
-	}
-
-	const reject = (id) => {
-		const data = {
-			idUser: user.id,
-			projectId: project.id,
-			notifiId: id
-		};
-		dispatch(rejectNotifications(data));
-		setAction('reject');
-		setActionId(id);
-		dispatch(getNotifications());
-	}
-
-	const undoReject = (id) => {
-		const data = {
-			idUser: user.id,
-			projectId: project.id,
-			notifiId: id
-		};
-		dispatch(undoRejectNotifications(data));
-		setAction('deafult');
-		setActionId(id);
-		dispatch(getNotifications());
-	}
+	const handleClickAway = () => {
+		updateClickAway ? setUdateClickAway(false) : setUdateClickAway(true);
+		if (updateClickAway && updateNot) {
+			togglOptions();
+		}
+	};
 
 	return (
-		<>	
+		<>
 			<ProfileButton
 				type="button"
 				onClick={togglOptions}
@@ -135,115 +91,43 @@ const NavNotifications = () => {
 						src={IconNoti}
 						alt="notifications icon"
 					/>
-					{totalNews > 0 &&(
+					{totalNews > 0 && (
 						<CountNoti>
 							{totalNews}
 						</CountNoti>
 					)}
 				</ProfilePictureContainer>
 			</ProfileButton>
-			<ProfileOptions show={showOptions}>
-				<OptionsContent>
-                    <ListHeader>
-                        <TitleHeader>Notificaciones</TitleHeader>
-                        <LinkHeader>Ver todo</LinkHeader>
-                    </ListHeader>
-					{data.map((column, i) => 
-						column.list.map((detail, d) => 
-							detail.item.item_type === 'ProjectInvitation' &&( // type notification
-								<>
-								<ContentPoint key={d}>
-									{!detail?.triggered && (<NewPoint/>)}
-									<ListItem  style={{backgroundColor: detail?.watched ? 'none' : '#42bfad26'}}>
-										<ProfilePictureContainer2>
-											{detail?.item?.permission?.user?.profile_image ? (
-												<ProfilePictureImage
-													src={detail?.item?.permission?.user?.profile_image}
-													alt="profile icon"
-												/>
-											) : (
-												<ProfilePictureImage
-													src={User2}
-													alt="profile icon"
-												/>
-											)}
-										</ProfilePictureContainer2>
-										<ContainerNameUser>
-											<InfoUserName gray>{detail?.date}</InfoUserName>
-											<InfoUserName gray>{detail?.item?.message}</InfoUserName>
-											<ContentActions>
-												{detail?.item?.status == 'Proyecto Aceptado' &&(
-													<>
-														<ActionPerformed>Proyecto aceptado</ActionPerformed>
-														<LinkSeeAll href={detail?.item?.actions[0].url}>Ir al proyecto</LinkSeeAll>
-													</>
-												)}
-												{detail?.item?.status == 'Proyecto Rechazado' &&(
-													<>
-														<ActionPerformed>Proyecto rechazado</ActionPerformed>
-														<UndoSpan onClick={() => undoReject(detail?.id)}>Deshacer</UndoSpan>
-													</>
-												)}
-												{!detail?.item?.status &&(
-													<>
-														<Button variant={VARIANTS_BUTTON.SECONDARY} onClick={() => reject(detail?.item?.item_id)}>
-															Rechazar
-														</Button>
-														<Button variant={VARIANTS_BUTTON.PRIMARY} onClick={() => accept(detail?.item?.item_id)} style={{marginLeft: '11px'}}>
-															Aceptar
-														</Button>
-													</>
-												)}
-											</ContentActions>
-										</ContainerNameUser>
-									</ListItem>
-								</ContentPoint>
-								<Separator />
-								</>
+			<ClickAwayListener onClickAway={handleClickAway}>
+				<ProfileOptions show={showOptions}>
+					<OptionsContent>
+						<ListHeader>
+							<TitleHeader>Notificaciones</TitleHeader>
+							<LinkHeader>Ver todo</LinkHeader>
+						</ListHeader>
+
+						{data.map((column) =>
+							column.list.map((detail, d) => (
+								<Notifications key={d}
+									itemType={detail.item.item_type}
+									triggered={detail?.triggered}
+									watched={detail?.watched}
+									profileImage={detail?.item?.permission?.user?.profile_image.urls.original}
+									date={detail?.date}
+									message={detail?.item?.message}
+									status={detail?.item?.status}
+									itemId={detail?.item?.item_id}
+									projectUrl={detail?.item?.actions}
+									projectId={detail?.item?.project_id}
+								/>
 							)
-						)
-					)}
-					
-					{/* <ContentPoint>
-						<NewPoint/>
-						<ListItem newItem>
-							{user.first_name && user.email && (
-								<>
-									<ProfilePictureContainer2>
-										{user?.profile_image?.urls ? (
-											<ProfilePictureImage
-												//src={user?.profile_image?.urls.original}
-												src={User2}
-												alt="profile icon"
-											/>
-										) : (
-											<ProfilePictureImage
-												//src={user?.profile_image?.urls.original}
-												src={User2}
-												alt="profile icon"
-											/>
-										)}
-									</ProfilePictureContainer2>
-									<ContainerNameUser>
-										<InfoUserName gray>{'Hoy'}</InfoUserName>
-										<InfoUserName gray>{`${user.first_name} ${user.last_name}`} <InfoUserName2>quiere compartir el proyecto --Project Name--</InfoUserName2></InfoUserName>
-										<ContentActions>
-											<Button variant={VARIANTS_BUTTON.SECONDARY} onClick={action}>
-												Rechazar
-											</Button>
-											<Button variant={VARIANTS_BUTTON.PRIMARY} onClick={action} style={{marginLeft: '11px'}}>
-												Aceptar
-											</Button>
-											
-										</ContentActions>
-									</ContainerNameUser>
-								</>
-							)}
-						</ListItem>
-					</ContentPoint>
-					<Separator /> */}
-				</OptionsContent>
-			</ProfileOptions>
+							)
+						)}
+
+						<Separator />
+					</OptionsContent>
+				</ProfileOptions>
+			</ClickAwayListener>
 		</>
 	);
 };

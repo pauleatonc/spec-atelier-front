@@ -87,9 +87,9 @@ const projectsReducer = (state = initialProjectState, { payload, type }) => {
         projects: state.projects.unshift(payload.project),
       }
     case ACCEPT_NOTIFICATION:
-			return {...state};
+      return { ...state, loading: false };
     case REJECT_NOTIFICATION:
-      return {...state};
+      return { ...state, loading: false };
     default: {
       return state;
     }

@@ -14,20 +14,20 @@ export const factoryService = (callback) => {
 		setTimeout(() => cancellation.register(actionType), 0);
 
 		return callback(serviceArgs)
-		.then(({ response, status }) => {
-			if(status === 401) {
-				const responseStatus = getLocalStorage('responseStatus');
-				if(!responseStatus) {
-					setLocalStorage({ key: 'responseStatus', value: '401' });
-					redirectToProjectsWhenIsLogin();
-				}
+			.then(({ response, status }) => {
+				if (status === 401) {
+					const responseStatus = getLocalStorage('responseStatus');
+					if (!responseStatus) {
+						setLocalStorage({ key: 'responseStatus', value: '401' });
+						redirectToProjectsWhenIsLogin();
+					}
 
-			} 
-			return response;
-		})
-		.catch((error) => {
-			throw error.toString();
-		});
+				}
+				return response;
+			})
+			.catch((error) => {
+				throw error.toString();
+			});
 	};
 };
 
@@ -80,11 +80,11 @@ export const cleanObjectsAndArrays = (obj = {}) =>
 		if (Array.isArray(value))
 			return value.length
 				? {
-						...acc,
-						[`${key}[]`]: value
-							.map((data) => (data?.id ? data.id : data))
-							.join(`&${key}[]=`),
-				  }
+					...acc,
+					[`${key}[]`]: value
+						.map((data) => (data?.id ? data.id : data))
+						.join(`&${key}[]=`),
+				}
 				: acc;
 		return { ...acc, [key]: value };
 	}, {});
@@ -97,11 +97,11 @@ export const cleanObjectsAndArrays2 = (obj = {}) =>
 		if (Array.isArray(value))
 			return value.length
 				? {
-						...acc,
-						[`${key}[]`]: `${key}[]=`+value
-							.map((data) => (data?.id ? data.id : data))
-							.join(`,${key}[]=`),
-				  }
+					...acc,
+					[`${key}[]`]: `${key}[]=` + value
+						.map((data) => (data?.id ? data.id : data))
+						.join(`,${key}[]=`),
+				}
 				: acc;
 		return { ...acc, [`ids[]`]: value };
 	}, {});

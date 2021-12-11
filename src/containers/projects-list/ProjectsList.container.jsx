@@ -1,23 +1,59 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, useParams, useLocation } from 'react-router';
 import ProjectCard from '../../components/project/ProjectCard';
-import { getMyProjects, deleteProject } from './ProjectsList.actions';
+import { getMyProjects, deleteProject, accepthNotificationsAC, rejectNotifications } from './ProjectsList.actions';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
+import { clearAccepAction } from '../auth/auth.actions';
+import {
+  getLocalStorage,
+  deleteLocalStorage,
+} from '@Helpers/localstorage.helper';
+
 
 const ProjectsList = () => {
   const { projects, error, loading, params } = useSelector(state => state.projectsList);
-  const { user } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const history = useHistory();
   const goToSpecification = specID => () => history.push(`/specs/${specID}`);
-  const onChangeMenuOption =  ({ id }) => opt => {
-    if (opt.id === 'DELETE')  dispatch(deleteProject({ id }));
-    else if (opt.id === 'MODIFY')  history.push(`/projects/project/${id}`);
+  const onChangeMenuOption = ({ id }) => opt => {
+    if (opt.id === 'DELETE') dispatch(deleteProject({ id }));
+    else if (opt.id === 'MODIFY') history.push(`/projects/project/${id}`);
   }
+  const token = getLocalStorage('isAcceptStore');
 
   useEffect(() => {
     if (!projects.length) dispatch(getMyProjects(params));
+  }, []);
+
+  const { pathname, search } = useLocation();
+  const { acceptAction } = useSelector((state) => state.auth);
+  const { action } = useParams();
+  const array_var = search.split('=');
+  const array_url = pathname.split('/');
+  const data = {
+    projectId: array_var[1],
+    notifiId: array_url[3]
+  };
+
+  useEffect(() => {
+    if (action === "accept_invitation") {
+      dispatch(accepthNotificationsAC(data));
+    }
+    if (action === "refuse_invitation") {
+      dispatch(rejectNotifications(data));
+    }
+  }, [action]);
+
+
+  useEffect(() => {
+    console.log(token);
+    if (token) {
+      dispatch(onShowAlertSuccess({ message: 'Proyecto aceptado.' }));
+      deleteLocalStorage('isAcceptStore');
+      console.log(token);
+    }
   }, []);
 
   if (loading) return <Loading />;

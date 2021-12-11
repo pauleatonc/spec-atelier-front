@@ -39,33 +39,43 @@ export const deleteProject = ({ id }) => async (dispatch, getState) => {
     const { user } = getState().auth;
     dispatch(onActionCreator(DELETE_PROJECT, { projectId: id }));
   } catch (error) {
-    dispatch(onShowAlertSuccess({ message: "Error al eliminar el proyecto"}))
+    dispatch(onShowAlertSuccess({ message: "Error al eliminar el proyecto" }))
     dispatch(onActionCreator(DELETE_PROJECT_ERROR, { loading: false, error: true }));
   }
 };
 
-export const addProjectToList = project => dispatch => dispatch(onActionCreator(ADD_PROJECT_TO_LIST,  { project }));
+export const addProjectToList = project => dispatch => dispatch(onActionCreator(ADD_PROJECT_TO_LIST, { project }));
 
 export const clearProjects = () => dispatch => dispatch(onActionCreator(CLEAR_PROJECTS));
 
-export const accepthNotificationsAC = (body) => async (dispatch) =>  {
-  try {
-		const response = await acceptNotification(body);
-		return dispatch(onActionCreator(ACCEPT_NOTIFICATION, response));
-	} catch (error) {
-		return dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
-			error: true,
-		}));
-	}
-} 
+export const accepthNotificationsAC = (body) => async (dispatch) => {
+  acceptNotification(body).then((response) => {
+    dispatch(
+      onShowAlertSuccess({ message: response.message }),
+    );
+    dispatch(onActionCreator(ACCEPT_NOTIFICATION, response));
+  }, (error) => {
+    dispatch(
+      onShowAlertSuccess({ message: 'Error al aceptar proyecto.' }),
+    );
+    dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
+      error
+    }))
+  })
+}
 
-export const rejectNotifications = (body) => async (dispatch) =>  {
-	try {
-		const response = await rejectNotification(body);
-		return dispatch(onActionCreator(REJECT_NOTIFICATION, response));
-	} catch (error) {
-		return dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
-			error: true,
-		}));
-	}
-} 
+export const rejectNotifications = (body) => async (dispatch) => {
+  rejectNotification(body).then((response) => {
+    dispatch(
+      onShowAlertSuccess({ message: response.message }),
+    );
+    dispatch(onActionCreator(REJECT_NOTIFICATION, response));
+  }, (error) => {
+    dispatch(
+      onShowAlertSuccess({ message: 'Error al rechazar proyecto.' }),
+    );
+    dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
+      error
+    }))
+  })
+}

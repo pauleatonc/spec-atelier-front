@@ -9,10 +9,10 @@ import {
 	GET_NOTIFICATIONS,
 	GET_NOTIFICATIONS_ERROR,
 	INITIAL_NOTI,
-	INITIAL_NOTI_ERROR,
 	WATCH_NOTIFICATIONS,
 	WATCH_NOTIFICATIONS_ERROR,
 	ACCEPT_NOTIFICATION,
+	NOTIFICATION_SUCCESS,
 	ACCEPT_NOTIFICATION_ERROR,
 	REJECT_NOTIFICATION,
 	REJECT_NOTIFICATION_ERROR,
@@ -48,19 +48,29 @@ const specDocumentReducer = (state = specHeaderState, { payload, type }) => {
 		case DOWNLOAD_BUDGET_ERROR:
 			return { ...state, loading: false };
 		case GET_NOTIFICATIONS:
-			return { ...state, notificationsList: payload};
+			return { ...state, notificationsList: payload };
 		case GET_NOTIFICATIONS_ERROR:
-			return { ...state};
+			return { ...state };
 		case INITIAL_NOTI:
-			return { ...state, initialNotifiId: payload};
-		case WATCH_NOTIFICATIONS: 
-			return {...state};
+			return { ...state, initialNotifiId: payload };
+		case WATCH_NOTIFICATIONS:
+			return { ...state };
+		case WATCH_NOTIFICATIONS_ERROR:
+			return { ...state, error: 'watch', };
 		case ACCEPT_NOTIFICATION:
-			return {...state};
+			return { ...state, loading: true, };
+		case NOTIFICATION_SUCCESS:
+			return { ...state, loading: false, };
+		case ACCEPT_NOTIFICATION_ERROR:
+			return { ...state, error: 'accept' };
 		case REJECT_NOTIFICATION:
-			return {...state};
+			return { ...state, loading: true };
+		case REJECT_NOTIFICATION_ERROR:
+			return { ...state, error: 'reject', loading: false };
 		case UNDO_REJECT_NOTIFICATION:
-			return {...UNDO_REJECT_NOTIFICATION};
+			return { ...state, loading: true };
+		case UNDO_REJECT_NOTIFICATION_ERROR:
+			return { ...state, error: 'undo', loading: false };
 		default: {
 			return state;
 		}

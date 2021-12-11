@@ -38,6 +38,7 @@ export const ACCEPT_NOTIFICATION = 'ACCEPT_NOTIFICATION';
 export const ACCEPT_NOTIFICATION_ERROR = 'ACCEPT_NOTIFICATION_ERROR';
 export const REJECT_NOTIFICATION = 'REJECT_NOTIFICATION';
 export const REJECT_NOTIFICATION_ERROR = 'REJECT_NOTIFICATION_ERROR';
+export const CLEAR_ACCEPT_ACTION = 'CLEAR_ACCEPT_ACTION';
 
 /**
  * Login action
@@ -50,6 +51,19 @@ export const loginAction = (data) => async (dispatch) => {
 		if (error) throw error;
 		setLocalStorage({ key: 'token', value: user.jwt });
 		setLocalStorage({ key: 'userID', value: user.id });
+		if (data.action.idNoti !== undefined) {
+			if (data.action.actionUrl === "accept_invitation") {
+				deleteLocalStorage('isAcceptStore');
+				setLocalStorage({ key: 'isAcceptStore', value: true });
+				acceptNotification(data.action).then((response) => {
+					dispatch(onActionCreator(ACCEPT_NOTIFICATION, response));
+				}, (e) => {
+					dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
+						e
+					}))
+				})
+			}
+		}
 		return dispatch(
 			onActionCreator(LOG_IN, {
 				isLogin: true,
@@ -165,6 +179,19 @@ export const googleLoginAction = (data) => async (dispatch) => {
 					user: response.user,
 				},
 			});
+			if (data.action.idNoti !== undefined) {
+				if (data.action.actionUrl === "accept_invitation") {
+					deleteLocalStorage('isAcceptStore');
+					setLocalStorage({ key: 'isAcceptStore', value: true });
+					acceptNotification(data.action).then((response) => {
+						dispatch(onActionCreator(ACCEPT_NOTIFICATION, response));
+					}, (e) => {
+						dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
+							e
+						}))
+					})
+				}
+			}
 		},
 		(error) => {
 			dispatch({
@@ -240,24 +267,21 @@ export const becomeUser = (params) => async (dispatch) => {
 export const clearImpersonated = () => (dispatch) =>
 	dispatch(onActionCreator(CLEAR_IMPERSONATED));
 
-export const accepthNotificationsAC = (body) => async (dispatch) =>  {
-	try {
-			//const response = await acceptNotification(body);
-			return dispatch(onActionCreator(ACCEPT_NOTIFICATION));
-		} catch (error) {
-			return dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
-				error: true,
-			}));
-		}
-} 
-
-export const rejectNotifications = (body) => async (dispatch) =>  {
-	try {
-		//const response = await rejectNotification(body);
-		return dispatch(onActionCreator(REJECT_NOTIFICATION));
-	} catch (error) {
-		return dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
-			error: true,
-		}));
-	}
+export const rejectNotifications = (body) => async (dispatch) => {
+	rejectNotification(body).then((response) => {
+		dispatch(
+			onShowAlertSuccess({ message: response.message }),
+		);
+		dispatch(onActionCreator(REJECT_NOTIFICATION, response));
+	}, (error) => {
+		dispatch(
+			onShowAlertSuccess({ message: 'Error al rechazar proyecto.' }),
+		);
+		dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
+			error
+		}))
+	})
 }
+
+export const clearAccepAction = () => (dispatch) =>
+	dispatch(onActionCreator(CLEAR_ACCEPT_ACTION));
