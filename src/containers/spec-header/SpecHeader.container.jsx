@@ -13,6 +13,7 @@ import {
 	PermissionsButtonContainer,
 	Logo,
 	MobileLogo,
+	ContainerTeam,
 } from './SpecHeader.styles';
 import logoSource from '../../assets/images/logo-spec.png';
 import logo2xSource from '../../assets/images/logo-spec@2x.png';
@@ -24,6 +25,8 @@ import {
 	downloadBudgetDocument,
 } from './SpecHeader.actions';
 import ItemsNavBar from '../../components/navbar/navbar-app/Components/ItemsNavBar';
+import { onShowModal } from '../spec-modal-team/actions';
+import { TYPE_MODALS } from '../spec-modal-team/constants';
 
 /**
  * The SpecHeader's container.
@@ -33,6 +36,14 @@ const SpecHeader = () => {
 	const { id } = useParams();
 	const { project } = useSelector((state) => state.specDocument);
 	const { url } = useSelector((state) => state.specHeader);
+	const openModalTeam = () =>
+		dispatch(
+			onShowModal(
+				project?.team.length
+					? TYPE_MODALS.TEAM_MODAL
+					: TYPE_MODALS.NEW_MEMBER_MODAL,
+			),
+		);
 
 	const handleDownloadClick = () =>
 		dispatch(downloadSpecDocument({ specID: id }));
@@ -55,6 +66,7 @@ const SpecHeader = () => {
 		};
 		if (url) downloadDoc();
 	}, [url]);
+
 	return (
 		<Root>
 			<SpecOptions>
@@ -86,12 +98,25 @@ const SpecHeader = () => {
 					/>
 				</Section>
 				<Separator />
-				<PermissionsButtonContainer>
-					<Button variant="primary" onClick={() => console.log('permisos')}>
-						<i className="fas fa-share-alt" />
-						&emsp;Equipo
-					</Button>
-				</PermissionsButtonContainer>
+				{project?.team && (
+					<ContainerTeam>
+						<PermissionsButtonContainer>
+							<Button width="120px" variant="primary" onClick={openModalTeam}>
+								<i className="fas fa-share-alt" />
+								&emsp;Equipo
+							</Button>
+						</PermissionsButtonContainer>
+						{/*
+						TODO: validate in next hito
+						 {project?.team.map((member, index) => (
+							<IconUser
+								horizontalList
+								user={member.user}
+								zIndex={project?.team.length - index}
+							/>
+						))} */}
+					</ContainerTeam>
+				)}
 			</SpecOptions>
 			<ItemsNavBar />
 		</Root>

@@ -26,6 +26,9 @@ export const MERCURY = '#E5E5E5';
 export const ALTO = '#DBDBDB';
 export const SCORPION = '#5A5A5A';
 export const GALLERY = '#EEEEEE';
+export const PUERTO_RICO = '#42BFAD';
+export const TORCH_RED = '#FD0E35';
+export const CORAL = '#FF7E45';
 
 export const COLOR_BLACK_OPACITY = 'rgba(0, 0, 0, 0.54)';
 export const COLOR_BLACK_OPACITY_DARK = 'rgba(0, 0, 0, 0.87)';

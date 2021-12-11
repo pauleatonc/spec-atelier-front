@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import {
 	COLOR_BLACK,
 	COLOR_LIGHTGREY,
+	ALTO,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -27,7 +28,7 @@ export const Section = styled.div`
 export const Input = styled.input`
 	align-items: center;
 	background-color: transparent;
-	border: 1px solid #d6d6d6;
+	border: 1px solid ${ALTO};
 	border-radius: 9px;
 	color: #212121;
 	cursor: pointer;

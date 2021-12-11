@@ -5,6 +5,7 @@ import {
 	COLOR_WHITE,
 	COLOR_BLACK,
 	COLOR_MINE_SHAFT,
+	ALTO,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -80,7 +81,7 @@ export const InputForm = styled.input`
 	background-color: transparent;
 	height: 40px;
 
-	border: 1px solid #d6d6d6;
+	border: 1px solid ${ALTO};
 	outline: 0;
 	min-width: 100px;
 	width: 100%;
