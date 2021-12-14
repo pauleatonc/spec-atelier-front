@@ -45,9 +45,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 		<Route
 			{...rest}
 			render={(props) => {
-				// if (!isLogin && isAutoLogout) {
-				// 	return <Redirect to="/login" />;
-				// }
 				if (!isLogin) {
 					if(pathname.search("/projects/accept_invitation/") === 0 ){
 						const array_url = pathname.split('/');
@@ -59,7 +56,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 						const array_var = search.split('=');
 						return <Redirect to={`/projects/${array_url[2]}/${array_url[3]}/${array_var[1]}`} />;		
 					}
-					return <Redirect to="/login" />;
+					if(isAutoLogout){
+						return <Redirect to="/login" />;
+					}
 				}
 
 				if (isLogin) {

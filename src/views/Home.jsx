@@ -11,7 +11,6 @@ import ClientsImageSlider from '../containers/clients-images-slider/ClientsImage
 import ModalPlanFormStepOne from '../containers/modal-plan-form';
 import ModalPlanFormStepTwo from '../containers/modal-plan-form/StepTwo.index';
 import ModalSuccess from '../containers/modal-plan-form/SuccessModal.index';
-import { onShowAlertSuccess } from '../containers/alert/Alert.actions';
 import { rejectNotifications } from '../containers/auth/auth.actions';
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';

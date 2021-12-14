@@ -41,11 +41,11 @@ export const deleteProject = factoryService(
 export const acceptNotification = factoryService((body) =>
 	patchJsonRequest(
 		`${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/accept`,
-	),
+	),true,
 );
 
 export const rejectNotification = factoryService((body) =>
 	patchJsonRequest(
 		`${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/refuse`,
-	),
+	),true,
 );

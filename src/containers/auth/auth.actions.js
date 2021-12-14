@@ -54,9 +54,15 @@ export const loginAction = (data) => async (dispatch) => {
 		if (data.action.idNoti !== undefined) {
 			if (data.action.actionUrl === "accept_invitation") {
 				deleteLocalStorage('isAcceptStore');
-				setLocalStorage({ key: 'isAcceptStore', value: true });
+				deleteLocalStorage('messageAcceptStore');
 				acceptNotification(data.action).then((response) => {
-					dispatch(onActionCreator(ACCEPT_NOTIFICATION, response));
+					if(response.codeStatus === 200){
+						setLocalStorage({ key: 'isAcceptStore', value: true });
+						setLocalStorage({ key: 'messageAcceptStore', value: response.message });
+						dispatch(onActionCreator(ACCEPT_NOTIFICATION, response));
+					}else{
+						setLocalStorage({ key: 'isAcceptStore', value: response.codeStatus });
+					}
 				}, (e) => {
 					dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
 						e
@@ -182,9 +188,14 @@ export const googleLoginAction = (data) => async (dispatch) => {
 			if (data.action.idNoti !== undefined) {
 				if (data.action.actionUrl === "accept_invitation") {
 					deleteLocalStorage('isAcceptStore');
-					setLocalStorage({ key: 'isAcceptStore', value: true });
-					acceptNotification(data.action).then((response) => {
-						dispatch(onActionCreator(ACCEPT_NOTIFICATION, response));
+					acceptNotification(data.action).then((resp) => {
+						if(resp.codeStatus === 200){
+							setLocalStorage({ key: 'isAcceptStore', value: true });
+							setLocalStorage({ key: 'messageAcceptStore', value: resp.message });
+							dispatch(onActionCreator(ACCEPT_NOTIFICATION, resp));
+						}else{
+							setLocalStorage({ key: 'isAcceptStore', value: resp.codeStatus });
+						}
 					}, (e) => {
 						dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
 							e
@@ -269,10 +280,27 @@ export const clearImpersonated = () => (dispatch) =>
 
 export const rejectNotifications = (body) => async (dispatch) => {
 	rejectNotification(body).then((response) => {
-		dispatch(
-			onShowAlertSuccess({ message: response.message }),
-		);
-		dispatch(onActionCreator(REJECT_NOTIFICATION, response));
+		if(response.codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not session found' }),
+			);
+		}
+		if(response.codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not found' }),
+			);
+		}
+		if(response.codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Internal server' }),
+			);
+		}
+		if(response.codeStatus === 200){
+			dispatch(
+				onShowAlertSuccess({ message: response.message }),
+			);
+			dispatch(onActionCreator(REJECT_NOTIFICATION, response));
+		}
 	}, (error) => {
 		dispatch(
 			onShowAlertSuccess({ message: 'Error al rechazar proyecto.' }),

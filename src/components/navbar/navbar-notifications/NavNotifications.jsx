@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	ProfileButton,
-	ProfileOptions,
+	NotificationsButton,
+	NotificationsOption,
 	OptionsContent,
 	Separator,
 	ProfilePictureContainer,
@@ -22,6 +22,7 @@ import Notifications from '../../notifications/Notification';
 
 const NavNotifications = () => {
 	const dispatch = useDispatch();
+	const { isLogin } = useSelector((state) => state.auth);
 	const [showOptions, setShowOtions] = useState(false);
 	const [updateNot, setUdateNot] = useState(false);
 	const { user } = useSelector((state) => state.profile);
@@ -31,7 +32,7 @@ const NavNotifications = () => {
 	const array_total = [];
 	const listlNews = Object.values(notificationsList).map((item) =>
 		item.list.map((detail) =>
-			array_total.push(detail.watched)
+			!detail.watched ? array_news.push(detail.watched): array_total.push(detail.watched)
 		)
 	);
 
@@ -41,9 +42,6 @@ const NavNotifications = () => {
 	useEffect(() => {
 		setTotalNews(array_news.length);
 		setData(Object.values(notificationsList));
-		if (!data[0]?.total) {
-			console.log("caminante");
-		}
 	}, [notificationsList]);
 
 	useEffect(() => {
@@ -61,13 +59,15 @@ const NavNotifications = () => {
 		setShowOtions(!showOptions);
 		setTotalNews(0);
 		updateNot ? setUdateNot(false) : setUdateNot(true);
-		if (updateNot && ids2.length > 0) {
+		if (!updateNot && ids2.length > 0) {
 			const body = {
 				notifications: { ids: ids2 },
 				idUser: user.id
 			}
-			dispatch(watchNotifications(body));
-			setData(Object.values(notificationsList));
+			if(user.id){
+				dispatch(watchNotifications(body));
+			}
+			//setData(Object.values(notificationsList));
 		}
 	};
 
@@ -78,9 +78,10 @@ const NavNotifications = () => {
 		}
 	};
 
+	if (isLogin) 
 	return (
 		<>
-			<ProfileButton
+			<NotificationsButton
 				type="button"
 				onClick={togglOptions}
 				onKeyPress={togglOptions}
@@ -97,10 +98,12 @@ const NavNotifications = () => {
 						</CountNoti>
 					)}
 				</ProfilePictureContainer>
-			</ProfileButton>
+			</NotificationsButton>
 			<ClickAwayListener onClickAway={handleClickAway}>
-				<ProfileOptions show={showOptions}>
-					<OptionsContent>
+			<>
+			{array_news.length+array_total.length === 1 &&(
+				<NotificationsOption show={showOptions} style={{height: 'auto'}}>
+					<OptionsContent style={{height: 'auto'}}>
 						<ListHeader>
 							<TitleHeader>Notificaciones</TitleHeader>
 							<LinkHeader>Ver todo</LinkHeader>
@@ -108,25 +111,62 @@ const NavNotifications = () => {
 
 						{data.map((column) =>
 							column.list.map((detail, d) => (
-								<Notifications key={d}
-									itemType={detail.item.item_type}
-									triggered={detail?.triggered}
-									watched={detail?.watched}
-									profileImage={detail?.item?.permission?.user?.profile_image.urls.original}
-									date={detail?.date}
-									message={detail?.item?.message}
-									status={detail?.item?.status}
-									itemId={detail?.item?.item_id}
-									projectUrl={detail?.item?.actions}
-									projectId={detail?.item?.project_id}
-								/>
+								<>
+								{detail?.item &&(
+									<>
+										<Notifications key={d}
+											itemType={detail?.item?.item_type}
+											triggered={detail?.triggered}
+											watched={detail?.watched}
+											date={detail?.date}
+											message={detail?.item?.message}
+											status={detail?.item?.status}
+											itemId={detail?.item?.item_id}
+											projectUrl={detail?.item?.actions}
+											projectId={detail?.item?.project_id}
+											userData={detail?.item?.permission?.user}
+										/>
+									</>
+								)}
+								</>
 							)
 							)
 						)}
 
 						<Separator />
 					</OptionsContent>
-				</ProfileOptions>
+				</NotificationsOption>
+			)}
+			{array_news.length+array_total.length > 1 &&(
+				<NotificationsOption show={showOptions} style={{height: '446px'}}>
+						<OptionsContent style={{height: '446px'}}>
+							<ListHeader>
+								<TitleHeader>Notificaciones</TitleHeader>
+								<LinkHeader>Ver todo</LinkHeader>
+							</ListHeader>
+							{data.map((column) =>
+								column.list.map((detail, d) => (
+									<Notifications key={d}
+										itemType={detail?.item?.item_type}
+										triggered={detail?.triggered}
+										watched={detail?.watched}
+										date={detail?.date}
+										message={detail?.item?.message}
+										status={detail?.item?.status}
+										itemId={detail?.item?.item_id}
+										projectUrl={detail?.item?.actions}
+										projectId={detail?.item?.project_id}
+										userData={detail?.item?.permission?.user}
+									/>
+								)
+								)
+							)}
+
+							<Separator />
+						</OptionsContent>
+				</NotificationsOption>
+			)}
+			</>
 			</ClickAwayListener>
 		</>
 	);

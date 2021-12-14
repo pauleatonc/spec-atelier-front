@@ -181,17 +181,17 @@ export const updateNotificationsWatch = factoryService((body) =>
 export const acceptNotification = factoryService((body) =>
 	patchJsonRequest(
 		`${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/accept`,
-	),
+	),true,
 );
 
 export const rejectNotification = factoryService((body) =>
 	patchJsonRequest(
 		`${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/refuse`,
-	),
+	),true,
 );
 
 export const undoRejectNotification = factoryService((body) =>
 	patchJsonRequest(
 		`${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/refused_undo`,
-	),
+	),true,
 );

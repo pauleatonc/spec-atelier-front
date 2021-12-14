@@ -7,7 +7,7 @@ import cancellationSingleton from './cancellation';
 /**
  * Factory to create a wrapper to call services.
  */
-export const factoryService = (callback) => {
+export const factoryService = (callback, isStatus) => {
 	const cancellation = cancellationSingleton();
 
 	return (serviceArgs, actionType = null) => {
@@ -23,10 +23,13 @@ export const factoryService = (callback) => {
 					}
 
 				}
-				return response;
+				if (!isStatus) {return response;}
+				if (isStatus) {return {resp:response,codeStatus:status};}
 			})
-			.catch((error) => {
-				throw error.toString();
+			.catch((error, status) => {
+			
+				if (isStatus) {throw status}
+				if (!isStatus) {throw error.toString();}
 			});
 	};
 };
@@ -87,23 +90,6 @@ export const cleanObjectsAndArrays = (obj = {}) =>
 				}
 				: acc;
 		return { ...acc, [key]: value };
-	}, {});
-
-export const cleanObjectsAndArrays2 = (obj = {}) =>
-	Object.entries(obj).reduce((acc, [key, value]) => {
-		if (!value && typeof value !== 'boolean') return acc;
-		if (value && typeof value === 'object' && value.id)
-			return { ...acc, [key]: value.id };
-		if (Array.isArray(value))
-			return value.length
-				? {
-					...acc,
-					[`${key}[]`]: `${key}[]=` + value
-						.map((data) => (data?.id ? data.id : data))
-						.join(`,${key}[]=`),
-				}
-				: acc;
-		return { ...acc, [`ids[]`]: value };
 	}, {});
 
 /**

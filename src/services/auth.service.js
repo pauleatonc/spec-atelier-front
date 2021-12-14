@@ -39,11 +39,11 @@ export const newPassword = factoryService(({ token, password }) => getJsonReques
 export const acceptNotification = factoryService((body) =>
 	patchJsonRequest(
 		`${API_BASE_URL}/projects/${body.Idproject}/invitations/${body.idNoti}/accept`,
-	),
+	),true,
 );
 
 export const rejectNotification = factoryService((body) =>
 	patchJsonRequest(
 		`${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/refuse`,
-	),
+	),true,
 );

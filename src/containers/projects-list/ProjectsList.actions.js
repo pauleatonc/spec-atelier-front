@@ -50,10 +50,27 @@ export const clearProjects = () => dispatch => dispatch(onActionCreator(CLEAR_PR
 
 export const accepthNotificationsAC = (body) => async (dispatch) => {
   acceptNotification(body).then((response) => {
-    dispatch(
-      onShowAlertSuccess({ message: response.message }),
-    );
-    dispatch(onActionCreator(ACCEPT_NOTIFICATION, response));
+    if(response.codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not session found' }),
+			);
+		}
+		if(response.codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not found' }),
+			);
+		}
+    if(response.codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Internal server' }),
+			);
+		}
+		if(response.codeStatus === 200){
+			dispatch(
+        onShowAlertSuccess({ message: response.message }),
+      );
+      dispatch(onActionCreator(ACCEPT_NOTIFICATION, response));
+		}
   }, (error) => {
     dispatch(
       onShowAlertSuccess({ message: 'Error al aceptar proyecto.' }),
@@ -66,10 +83,27 @@ export const accepthNotificationsAC = (body) => async (dispatch) => {
 
 export const rejectNotifications = (body) => async (dispatch) => {
   rejectNotification(body).then((response) => {
-    dispatch(
-      onShowAlertSuccess({ message: response.message }),
-    );
-    dispatch(onActionCreator(REJECT_NOTIFICATION, response));
+    if(response.codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not session found' }),
+			);
+		}
+		if(response.codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not found' }),
+			);
+		}
+    if(response.codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Internal server' }),
+			);
+		}
+		if(response.codeStatus === 200){
+			dispatch(
+        onShowAlertSuccess({ message: response.message }),
+      );
+      dispatch(onActionCreator(REJECT_NOTIFICATION, response));
+		}
   }, (error) => {
     dispatch(
       onShowAlertSuccess({ message: 'Error al rechazar proyecto.' }),

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams, useLocation } from 'react-router';
 import ProjectCard from '../../components/project/ProjectCard';
 import { getMyProjects, deleteProject, accepthNotificationsAC, rejectNotifications } from './ProjectsList.actions';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
-import { clearAccepAction } from '../auth/auth.actions';
 import {
   getLocalStorage,
   deleteLocalStorage,
@@ -22,13 +21,13 @@ const ProjectsList = () => {
     else if (opt.id === 'MODIFY') history.push(`/projects/project/${id}`);
   }
   const token = getLocalStorage('isAcceptStore');
+  const resMessage = getLocalStorage('messageAcceptStore');
 
   useEffect(() => {
     if (!projects.length) dispatch(getMyProjects(params));
   }, []);
 
   const { pathname, search } = useLocation();
-  const { acceptAction } = useSelector((state) => state.auth);
   const { action } = useParams();
   const array_var = search.split('=');
   const array_url = pathname.split('/');
@@ -48,13 +47,20 @@ const ProjectsList = () => {
 
 
   useEffect(() => {
-    console.log(token);
     if (token) {
-      dispatch(onShowAlertSuccess({ message: 'Proyecto aceptado.' }));
+      if(token === '401'){
+        dispatch(onShowAlertSuccess({ message: 'session not found' }));
+      }
+      if(token === '404'){
+        dispatch(onShowAlertSuccess({ message: 'Not found' }));
+      }
+      if(token === '200'){
+        dispatch(onShowAlertSuccess({ message: resMessage }));
+        deleteLocalStorage('messageAcceptStore');
+      }
       deleteLocalStorage('isAcceptStore');
-      console.log(token);
     }
-  }, []);
+  }, [token]);
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage />;

@@ -29,7 +29,7 @@ export const ProfileOptions = styled.section`
 export const Option = styled.div`
 	height: 60px;
 	font-family: Lato;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: normal;
 	font-stretch: normal;
 	font-style: normal;
@@ -76,21 +76,12 @@ export const Separator = styled.div`
 `;
 
 export const ProfilePictureContainer = styled.div`
-	width: 22px;
-	height: 30px;
-	border-radius: 50%;
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 30px;
-`;
-
-export const ProfilePictureContainer2 = styled.div`
-	padding: 36px;
+	margin-left: 27px;
+	padding-bottom: 36px;
 	padding-right: 4%;
 	padding-top: 30px;
 	height: 30px;
+	width: 100px;
 	border-radius: 50%;
 	overflow: hidden;
 	display: flex;
@@ -112,23 +103,28 @@ export const ProfileInfo = styled.div`
 
 export const ContainerNameUser = styled.div`
 	height: 60px;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin-left: 12px;
 	margin-top: 44px;
+	margin-right: 23px;
 `;
 
-export const InfoUserName = styled.p`
+export const InfoUserName = styled.span`
 	font-family: Lato;
-	font-size: 14px;
+	font-size: 12px;
 	margin-bottom: 2px;
 	color: ${({ gray }) => (gray ? COLOR_GREY : COLOR_BLACK)};
+	b{
+		font-weight: bold;
+		color: #656565;
+	}
 `;
 
 export const InfoUserName2 = styled.label`
 	font-family: Lato;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: bold;
 	margin-bottom: 2px;
 	color: ${({ gray }) => (gray ? COLOR_GREY : COLOR_BLACK)};
@@ -140,7 +136,7 @@ export const ListHeader = styled.div`
 
 export const TitleHeader = styled.label`
     font-family: Lato;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     margin-bottom: 2px;
     text-align: left;
@@ -148,7 +144,7 @@ export const TitleHeader = styled.label`
 
 export const LinkHeader = styled.a`
     font-family: Lato;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 2px;
     text-align: right;
     color: #42bfad;
@@ -188,7 +184,7 @@ export const NewPoint = styled.span`
 export const ActionPerformed = styled.label`
 	margin-top: 16px;
 	font-family: Lato;
-    font-size: 14px;
+    font-size: 12px;
 	letter-spacing: 1px;
     margin-bottom: 2px;
     text-align: left;
@@ -198,25 +194,25 @@ export const ActionPerformed = styled.label`
 export const LinkSeeAll = styled.a`
 	margin-top: 16px;
 	font-family: Lato;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 2px;
     text-align: right;
     color: #42bfad;
     text-decoration: none;
     float: right;
-	margin-left: 10px;
+	margin-left: 43px;
 `;
 
 export const UndoSpan = styled.span`
 	margin-top: 16px;
 	font-family: Lato;
-	font-size: 14px;
+	font-size: 12px;
 	margin-bottom: 2px;
 	text-align: right;
 	color: #42bfad;
 	text-decoration: none;
 	float: right;
-	margin-left: 10px;
+	margin-left: 53px;
 	cursor: pointer;
 `;
 

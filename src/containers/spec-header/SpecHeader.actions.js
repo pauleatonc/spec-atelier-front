@@ -100,8 +100,25 @@ export const watchNotifications = (body) => async (dispatch) => {
 export const accepthNotificationsAC = (body) => async (dispatch) => {
 	dispatch(onActionCreator(ACCEPT_NOTIFICATION));
 	acceptNotification(body).then((response) => {
-		dispatch(getNotifications());
-		dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		if(response.codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not session found' }),
+			);
+		}
+		if(response.codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not found' }),
+			);
+		}
+		if(response.codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Internal server' }),
+			);
+		}
+		if(response.codeStatus === 200){
+			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+			dispatch(getNotifications());
+		}
 	}, (error) => {
 		dispatch(
 			onShowAlertSuccess({ message: 'Error al aceptar proyecto.' }),
@@ -115,9 +132,25 @@ export const accepthNotificationsAC = (body) => async (dispatch) => {
 export const rejectNotifications = (body) => async (dispatch) => {
 	dispatch(onActionCreator(REJECT_NOTIFICATION));
 	rejectNotification(body).then((response) => {
-		//console.log(response.status)
-		dispatch(getNotifications());
-		dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		if(response.codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not session found' }),
+			);
+		}
+		if(response.codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not found' }),
+			);
+		}
+		if(response.codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Internal server' }),
+			);
+		}
+		if(response.codeStatus === 200){
+			dispatch(getNotifications());
+			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		}
 	}, (error) => {
 		dispatch(
 			onShowAlertSuccess({ message: 'Error al rechazar proyecto.' }),
@@ -125,14 +158,31 @@ export const rejectNotifications = (body) => async (dispatch) => {
 		dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
 			error
 		}))
-	}).catch(error => console.log(error));
+	})
 }
 
 export const undoRejectNotifications = (body) => async (dispatch) => {
 	dispatch(onActionCreator(UNDO_REJECT_NOTIFICATION));
 	undoRejectNotification(body).then((response) => {
-		dispatch(getNotifications());
-		dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		if(response.codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not session found' }),
+			);
+		}
+		if(response.codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not found' }),
+			);
+		}
+		if(response.codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Internal server' }),
+			);
+		}
+		if(response.codeStatus === 200){
+			dispatch(getNotifications());
+			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		}
 	}, (error) => {
 		dispatch(
 			onShowAlertSuccess({ message: 'Error al deshacer proyecto.' }),

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '../../components/SpecComponents';
@@ -18,9 +18,7 @@ import logo3xSource from '../../assets/images/logo-spec@3x.png';
 import {
 	cleanDownload,
 	downloadSpecDocument,
-	downloadBudgetDocument,
-	getNotifications,
-	initialNotiId,
+	downloadBudgetDocument
 } from './SpecHeader.actions';
 import ItemsNavBar from '../../components/navbar/navbar-app/Components/ItemsNavBar';
 
@@ -31,7 +29,7 @@ const SpecHeader = () => {
 	const dispatch = useDispatch();
 	const { id } = useParams();
 	const { project } = useSelector((state) => state.specDocument);
-	const { url, notificationsList, initialNotifiId } = useSelector((state) => state.specHeader);
+	const { url } = useSelector((state) => state.specHeader);
 	const handleDownloadClick = () =>
 		dispatch(downloadSpecDocument({ specID: id }));
 	const handleDownloadBudgetClick = () =>

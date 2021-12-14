@@ -2,12 +2,11 @@ import styled from 'styled-components';
 import {
 	COLOR_BLACK,
 	COLOR_PRIMARY,
-	NAVBAR_HEIGHT,
 	COLOR_WHITE,
 	COLOR_GREY,
 } from '../../../config/constants/styled-vars';
 
-export const ProfileButton = styled.div`
+export const NotificationsButton = styled.div`
 	color: ${({ isOpen }) => (!isOpen ? COLOR_BLACK : COLOR_PRIMARY)};
 	display: flex;
 	height: 100%;
@@ -15,16 +14,30 @@ export const ProfileButton = styled.div`
 	justify-content: center;
 	cursor: pointer;
     width: 5%;
+	margin-left: auto; 
+    margin-right: 17px;
 `;
 
-export const ProfileOptions = styled.section`
-	height: 446px;
+export const NotificationsOption = styled.section`
 	width: 360px;
 	position: absolute;
-	right: 82px;
+	right: 57px;
 	display: ${({ show }) => !show && 'none'};
-	top: ${NAVBAR_HEIGHT};
+	top: 69px;
 	z-index: 2;
+	box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.25), 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+	&:before {
+		content: '';
+		width: 25px;
+		height: 25px;
+		position: absolute;
+		top: -4px;
+		background: white;
+		transform: rotate(45deg) skew(15deg, 15deg);
+		right: 13px;
+		box-shadow: -5px -5px 2px -4px rgb(0 0 0 / 25%);
+		border-radius: 4px;
+	}
 `;
 
 export const Option = styled.div`
@@ -50,11 +63,9 @@ export const Option = styled.div`
 `;
 
 export const OptionsContent = styled.section`
-	height: 327px;
+	width: 360px;
 	overflow: overlay;
 	background-color: ${COLOR_WHITE};
-	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12),
-		0 1px 1px 0 rgba(0, 0, 0, 0.14);
 	&::-webkit-scrollbar {
 		width: 8px;
   		height: 120px;
@@ -67,7 +78,7 @@ export const OptionsContent = styled.section`
 		border: 3px rgba(117, 117, 117, 0.3);
 		background: rgba(117, 117, 117, 0.3);
 		border-right: 6px transparent solid;
-	}
+	} 
 `;
 
 export const Separator = styled.div`
@@ -137,6 +148,8 @@ export const InfoUserName2 = styled.label`
 
 export const ListHeader = styled.div`
     padding: 8%;
+	padding-left: 26px;
+	padding-bottom: 5px;
 `;
 
 export const TitleHeader = styled.label`
@@ -154,7 +167,7 @@ export const LinkHeader = styled.a`
     text-align: right;
     color: #42bfad;
     text-decoration: none;
-    float: right;
+    margin-left: 155px;
 `;
 
 export const ListItem = styled.div`
@@ -244,4 +257,3 @@ export const LoadingNoti = styled.label`
 	color: #757575;
 	text-align:center;
 `;
-
