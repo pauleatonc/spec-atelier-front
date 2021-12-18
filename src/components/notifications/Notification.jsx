@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -39,8 +39,19 @@ const Notifications = (props) => {
         userData
     } = props;
     const dispatch = useDispatch();
-    const { loading } = useSelector((state) => state.specHeader);
-
+    const { loadingNoti } = useSelector((state) => state.specHeader);
+    const [ accionStatus, setAccionStatus ] = useState(status);
+    const [ itemIdStatus, setItemIdStatus ] = useState(itemId);
+    const [ projectIdStatus, setProjectIdStatus] = useState(projectId);
+    const [ watchedStatus, setWatchedStatus ] = useState(watched);
+    const [ triggeredStatus, setTriggeredStatus ] = useState(triggered);
+    const [ projectUrlStatus, setProjectUrlStatus] = useState();
+    useEffect(() => {
+        if(status === "Proyecto Aceptado"){
+            setProjectUrlStatus(projectUrl[0].url);
+        }
+		
+	}, []);
 
     const accept = (id, pId) => {
         const body = {
@@ -48,16 +59,33 @@ const Notifications = (props) => {
             idProject: pId,
             notifiId: id
         };
-        dispatch(accepthNotificationsAC(body));
+        const resp = dispatch(accepthNotificationsAC(body));
+        resp.then((data) => {
+            data.resp.then((r) => {
+                setAccionStatus(r?.notification?.item?.status);
+                setProjectUrlStatus(r?.notification?.item?.actions[0]?.url);
+                setWatchedStatus(r?.notification?.watched);
+                setTriggeredStatus(r?.notification?.triggered);
+            })
+        })
     }
 
     const reject = (id, pId) => {
         const body = {
             idUser:  userData.id,
-            idProject: pId,
+            idProject: pId, 
             notifiId: id
         };
-        dispatch(rejectNotifications(body));
+        const resp = dispatch(rejectNotifications(body));
+        resp.then((data) => {
+            data.resp.then((r) => {
+                setAccionStatus(r?.notification?.item?.status);
+                setItemIdStatus(r?.notification?.item?.item_id);
+                setProjectIdStatus(r?.notification?.item?.project_id);
+                setWatchedStatus(r?.notification?.watched);
+                setTriggeredStatus(r?.notification?.triggered);
+            })
+        })
     }
 
     const undoReject = (id, pId) => {
@@ -66,89 +94,23 @@ const Notifications = (props) => {
             idProject: pId,
             notifiId: id
         };
-        dispatch(undoRejectNotifications(body));
+        const resp = dispatch(undoRejectNotifications(body));
+        resp.then((data) => {
+            data.resp.then((r) => {
+                setAccionStatus(r?.notification?.item?.status);
+                setItemIdStatus(r?.notification?.item?.item_id);
+                setProjectIdStatus(r?.notification?.item?.project_id);
+                setWatchedStatus(r?.notification?.watched);
+                setTriggeredStatus(r?.notification?.triggered);
+            })
+        })
     }
     if (itemType === 'ProjectInvitation') {
         return (
             <ContentPrimary>
                 <ContentPoint>
-                    {triggered === false && (<NewPoint />)}
-                    {watched && (
-                        <ListItem style={{ backgroundColor: 'none' }}>
-                            <ProfilePictureContainer>
-                                <IconUser
-                                    user={userData}
-                                    size={56}
-                                    fontSize={24} 
-                                />
-                            </ProfilePictureContainer>
-                            <ContainerNameUser>
-                                <InfoUserName gray>{date}</InfoUserName>
-                                <InfoUserName gray dangerouslySetInnerHTML={{__html:message}} />
-                                <ContentActions>
-                                    {status === 'Proyecto Aceptado' && (
-                                        <>
-                                            {loading && (
-                                                <>
-                                                    <ActionPerformed>Proyecto aceptado {watched}</ActionPerformed>
-                                                    <LinkSeeAll href={projectUrl[0].url} style={{ color: 'rgb(156 221 212)', pointerEvents: 'none' }} disabled>Ir al proyecto</LinkSeeAll>
-                                                </>
-                                            )}
-                                            {!loading && (
-                                                <>
-                                                    <ActionPerformed>Proyecto aceptado {watched}</ActionPerformed>
-                                                    <LinkSeeAll href={projectUrl[0].url}>Ir al proyecto</LinkSeeAll>
-                                                </>
-                                            )}
-                                        </>
-                                    )}
-                                    {status === 'Proyecto Rechazado' && (
-                                        <>
-                                            {loading && (
-                                                <>
-                                                    <ActionPerformed>Proyecto rechazado</ActionPerformed>
-                                                    <UndoSpan onClick={() => undoReject(itemId, projectId)} style={{ color: 'rgb(156 221 212)', pointerEvents: 'none' }} disabled>Deshacer</UndoSpan>
-                                                </>
-                                            )}
-                                            {!loading && (
-                                                <>
-                                                    <ActionPerformed>Proyecto rechazado</ActionPerformed>
-                                                    <UndoSpan onClick={() => undoReject(itemId, projectId)}>Deshacer</UndoSpan>
-                                                </>
-                                            )}
-                                        </>
-                                    )}
-                                    {!status && (
-                                        <>
-                                            {loading && (
-                                                <>
-                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} style={{ background: '#efecec' }} onClick={() => reject(itemId, projectId)} disabled>
-                                                        Rechazar
-                                                    </Button>
-                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} style={{ marginLeft: '11px', background: 'rgb(156 221 212);' }} disabled>
-                                                        Aceptar
-                                                    </Button>
-                                                </>
-                                            )}
-                                            {!loading && (
-                                                <>
-                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} onClick={() => reject(itemId, projectId)}>
-                                                        Rechazar
-                                                    </Button>
-                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} onClick={() => accept(itemId, projectId)} style={{ marginLeft: '11px' }}>
-                                                        Aceptar
-                                                    </Button>
-                                                </>
-                                            )}
-                                        </>
-                                    )}
-                                    {loading}
-                                </ContentActions>
-                            </ContainerNameUser>
-                        </ListItem>
-                         
-                    )}
-                    {!watched && (
+                    {triggeredStatus === false && (<NewPoint />)}
+                    {watchedStatus === false && (
                         <ListItem style={{ backgroundColor: '#42bfad26' }}>
                             <ProfilePictureContainer>
                                 <IconUser
@@ -163,41 +125,41 @@ const Notifications = (props) => {
                                 <ContentActions>
                                     {status === 'Proyecto Aceptado' && (
                                         <>
-                                            {loading && (
+                                            {loadingNoti && (
                                                 <>
-                                                    <ActionPerformed>Proyecto aceptado {watched}</ActionPerformed>
-                                                    <LinkSeeAll href={projectUrl[0].url} style={{ color: 'rgb(156 221 212)', pointerEvents: 'none' }} disabled>Ir al proyecto</LinkSeeAll>
+                                                    <ActionPerformed>Proyecto aceptado</ActionPerformed>
+                                                    <LinkSeeAll href={projectUrlStatus} style={{ color: 'rgb(156 221 212)', pointerEvents: 'none' }} disabled>Ir al proyecto</LinkSeeAll>
                                                 </>
                                             )}
-                                            {!loading && (
+                                            {!loadingNoti && (
                                                 <>
-                                                    <ActionPerformed>Proyecto aceptado {watched}</ActionPerformed>
-                                                    <LinkSeeAll href={projectUrl[0].url}>Ir al proyecto</LinkSeeAll>
+                                                    <ActionPerformed>Proyecto aceptado </ActionPerformed>
+                                                    <LinkSeeAll href={projectUrlStatus}>Ir al proyecto</LinkSeeAll>
                                                 </>
                                             )}
                                         </>
                                     )}
                                     {status === 'Proyecto Rechazado' && (
                                         <>
-                                            {loading && (
+                                            {loadingNoti && (
                                                 <>
                                                     <ActionPerformed>Proyecto rechazado</ActionPerformed>
-                                                    <UndoSpan onClick={() => undoReject(itemId, projectId)} style={{ color: 'rgb(156 221 212)', pointerEvents: 'none' }} disabled>Deshacer</UndoSpan>
+                                                    <UndoSpan onClick={() => undoReject(itemIdStatus, projectIdStatus)} style={{ color: 'rgb(156 221 212)', pointerEvents: 'none' }} disabled>Deshacer</UndoSpan>
                                                 </>
                                             )}
-                                            {!loading && (
+                                            {!loadingNoti && (
                                                 <>
                                                     <ActionPerformed>Proyecto rechazado</ActionPerformed>
-                                                    <UndoSpan onClick={() => undoReject(itemId, projectId)}>Deshacer</UndoSpan>
+                                                    <UndoSpan onClick={() => undoReject(itemIdStatus, projectIdStatus)}>Deshacer</UndoSpan>
                                                 </>
                                             )}
                                         </>
                                     )}
                                     {!status && (
                                         <>
-                                            {loading && (
+                                            {loadingNoti && (
                                                 <>
-                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} style={{ background: '#efecec' }} onClick={() => reject(itemId, projectId)} disabled>
+                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} style={{ background: '#efecec' }} onClick={() => reject(itemIdStatus, projectIdStatus)} disabled>
                                                         Rechazar
                                                     </Button>
                                                     <Button variant={VARIANTS_BUTTON.PRIMARY} style={{ marginLeft: '11px', background: 'rgb(156 221 212);' }} disabled>
@@ -205,19 +167,92 @@ const Notifications = (props) => {
                                                     </Button>
                                                 </>
                                             )}
-                                            {!loading && (
+                                            {!loadingNoti && (
                                                 <>
-                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} onClick={() => reject(itemId, projectId)}>
+                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} onClick={() => reject(itemIdStatus, projectIdStatus)}>
                                                         Rechazar
                                                     </Button>
-                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} onClick={() => accept(itemId, projectId)} style={{ marginLeft: '11px' }}>
+                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} onClick={() => accept(itemIdStatus, projectIdStatus)} style={{ marginLeft: '11px' }}>
                                                         Aceptar
                                                     </Button>
                                                 </>
                                             )}
                                         </>
                                     )}
-                                    {loading}
+                                </ContentActions>
+                            </ContainerNameUser>
+                        </ListItem>
+                         
+                    )}
+                    {watchedStatus === true && (
+                        <ListItem style={{ backgroundColor: 'none' }}>
+                            <ProfilePictureContainer>
+                                <IconUser
+                                    user={userData}
+                                    size={56}
+                                    fontSize={24} 
+                                />
+                            </ProfilePictureContainer>
+                            <ContainerNameUser>
+                                <InfoUserName gray>{date}</InfoUserName>
+                                <InfoUserName gray dangerouslySetInnerHTML={{__html:message}} />
+                                <ContentActions>
+                                    {accionStatus === 'Proyecto Aceptado' && (
+                                        <>
+                                            {loadingNoti && (
+                                                <>
+                                                    <ActionPerformed>Proyecto aceptado</ActionPerformed>
+                                                    <LinkSeeAll href={projectUrlStatus} style={{ color: 'rgb(156 221 212)', pointerEvents: 'none' }} disabled>Ir al proyecto</LinkSeeAll>
+                                                </>
+                                            )}
+                                            {!loadingNoti && (
+                                                <>
+                                                    <ActionPerformed>Proyecto aceptado</ActionPerformed>
+                                                    <LinkSeeAll href={projectUrlStatus}>Ir al proyecto</LinkSeeAll>
+                                                </>
+                                            )}
+                                        </>
+                                    )}
+                                    {accionStatus === 'Proyecto Rechazado' && (
+                                        <>
+                                            {loadingNoti && (
+                                                <>
+                                                    <ActionPerformed>Proyecto rechazado</ActionPerformed>
+                                                    <UndoSpan onClick={() => undoReject(itemIdStatus, projectIdStatus)} style={{ color: 'rgb(156 221 212)', pointerEvents: 'none' }} disabled>Deshacer</UndoSpan>
+                                                </>
+                                            )}
+                                            {!loadingNoti && (
+                                                <>
+                                                    <ActionPerformed>Proyecto rechazado</ActionPerformed>
+                                                    <UndoSpan onClick={() => undoReject(itemIdStatus, projectIdStatus)}>Deshacer</UndoSpan>
+                                                </>
+                                            )}
+                                        </>
+                                    )}
+                                    {!accionStatus && (
+                                        <>
+                                            {loadingNoti && (
+                                                <>
+                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} style={{ background: '#efecec' }} onClick={() => reject(itemIdStatus, projectIdStatus)} disabled>
+                                                        Rechazar
+                                                    </Button>
+                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} style={{ marginLeft: '11px', background: 'rgb(156 221 212);' }} disabled>
+                                                        Aceptar
+                                                    </Button>
+                                                </>
+                                            )}
+                                            {!loadingNoti && (
+                                                <>
+                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} onClick={() => reject(itemIdStatus, projectIdStatus)}>
+                                                        Rechazar
+                                                    </Button>
+                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} onClick={() => accept(itemIdStatus, projectIdStatus)} style={{ marginLeft: '11px' }}>
+                                                        Aceptar
+                                                    </Button>
+                                                </>
+                                            )}
+                                        </>
+                                    )}
                                 </ContentActions>
                             </ContainerNameUser>
                         </ListItem>
@@ -233,8 +268,8 @@ const Notifications = (props) => {
 
 Notifications.defaultProps = {
     itemType: '',
-    triggered: false,
-    watched: false,
+    triggeredStatus: false,
+    watchedStatus: false,
     date: '',
     message: '',
     status: '',
@@ -245,8 +280,8 @@ Notifications.defaultProps = {
 };
 Notifications.propTypes = {
     itemType: PropTypes.string,
-    triggered: PropTypes.bool,
-    watched: PropTypes.bool,
+    triggeredStatus: PropTypes.bool,
+    watchedStatus: PropTypes.bool,
     date: PropTypes.string,
     message: PropTypes.string,
     status: PropTypes.string,

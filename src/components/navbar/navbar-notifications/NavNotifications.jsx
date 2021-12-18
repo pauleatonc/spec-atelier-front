@@ -11,11 +11,15 @@ import {
 	TitleHeader,
 	LinkHeader,
 	CountNoti,
+	ContentPrimary
 
 } from './NavNotifications.styles';
 import IconNoti from '../../../assets/images/icons/spec-notifications.svg';
 import {
-	watchNotifications
+	watchNotifications,
+	getNotifications,
+	stopGetNotifications,
+	undoStopGetNotifications
 } from '../../../containers/spec-header/SpecHeader.actions';
 import ClickAwayListener from 'react-click-away-listener';
 import Notifications from '../../notifications/Notification';
@@ -37,17 +41,11 @@ const NavNotifications = () => {
 	);
 
 	const [totalNews, setTotalNews] = useState(0);
-	const [totalNoti, setTotalNoti] = useState(0);
 	const [updateClickAway, setUdateClickAway] = useState(false);
 	useEffect(() => {
 		setTotalNews(array_news.length);
 		setData(Object.values(notificationsList));
 	}, [notificationsList]);
-
-	useEffect(() => {
-		setTotalNoti(listlNews);
-	}, []);
-
 
 	const togglOptions = () => {
 		const ids2 = [];
@@ -59,6 +57,7 @@ const NavNotifications = () => {
 		setShowOtions(!showOptions);
 		setTotalNews(0);
 		updateNot ? setUdateNot(false) : setUdateNot(true);
+		updateNot ? dispatch(undoStopGetNotifications()) : dispatch(stopGetNotifications());
 		if (!updateNot && ids2.length > 0) {
 			const body = {
 				notifications: { ids: ids2 },
@@ -67,7 +66,10 @@ const NavNotifications = () => {
 			if(user.id){
 				dispatch(watchNotifications(body));
 			}
-			//setData(Object.values(notificationsList));
+		}
+		if (updateNot && ids2.length > 0) {
+			dispatch(getNotifications());
+			setData(Object.values(notificationsList));
 		}
 	};
 
@@ -100,20 +102,16 @@ const NavNotifications = () => {
 				</ProfilePictureContainer>
 			</NotificationsButton>
 			<ClickAwayListener onClickAway={handleClickAway}>
-			<>
-			{array_news.length+array_total.length === 1 &&(
-				<NotificationsOption show={showOptions} style={{height: 'auto'}}>
-					<OptionsContent style={{height: 'auto'}}>
-						<ListHeader>
-							<TitleHeader>Notificaciones</TitleHeader>
-							<LinkHeader>Ver todo</LinkHeader>
-						</ListHeader>
-
-						{data.map((column) =>
-							column.list.map((detail, d) => (
-								<>
-								{detail?.item &&(
-									<>
+				<ContentPrimary>
+					{array_news.length+array_total.length === 1 &&(
+						<NotificationsOption show={showOptions} style={{height: 'auto'}}>
+							<OptionsContent style={{height: 'auto'}}>
+								<ListHeader>
+									<TitleHeader>Notificaciones</TitleHeader>
+									<LinkHeader>Ver todo</LinkHeader>
+								</ListHeader>
+								{data.map((column) =>
+									column.list.map((detail, d) => (
 										<Notifications key={d}
 											itemType={detail?.item?.item_type}
 											triggered={detail?.triggered}
@@ -125,48 +123,47 @@ const NavNotifications = () => {
 											projectUrl={detail?.item?.actions}
 											projectId={detail?.item?.project_id}
 											userData={detail?.item?.permission?.user}
+											//newNoti={updateNot}
 										/>
-									</>
+									)
+									)
 								)}
-								</>
-							)
-							)
-						)}
 
-						<Separator />
-					</OptionsContent>
-				</NotificationsOption>
-			)}
-			{array_news.length+array_total.length > 1 &&(
-				<NotificationsOption show={showOptions} style={{height: '446px'}}>
-						<OptionsContent style={{height: '446px'}}>
-							<ListHeader>
-								<TitleHeader>Notificaciones</TitleHeader>
-								<LinkHeader>Ver todo</LinkHeader>
-							</ListHeader>
-							{data.map((column) =>
-								column.list.map((detail, d) => (
-									<Notifications key={d}
-										itemType={detail?.item?.item_type}
-										triggered={detail?.triggered}
-										watched={detail?.watched}
-										date={detail?.date}
-										message={detail?.item?.message}
-										status={detail?.item?.status}
-										itemId={detail?.item?.item_id}
-										projectUrl={detail?.item?.actions}
-										projectId={detail?.item?.project_id}
-										userData={detail?.item?.permission?.user}
-									/>
-								)
-								)
-							)}
+								<Separator />
+							</OptionsContent>
+						</NotificationsOption>
+					)}
+					{array_news.length+array_total.length > 1 &&(
+						<NotificationsOption show={showOptions} style={{height: '446px'}}>
+							<OptionsContent style={{height: '446px'}}>
+								<ListHeader>
+									<TitleHeader>Notificaciones</TitleHeader>
+									<LinkHeader>Ver todo</LinkHeader>
+								</ListHeader>
+								{data.map((column) =>
+									column.list.map((detail, d) => (
+										<Notifications key={d}
+											itemType={detail?.item?.item_type}
+											triggered={detail?.triggered}
+											watched={detail?.watched}
+											date={detail?.date}
+											message={detail?.item?.message}
+											status={detail?.item?.status}
+											itemId={detail?.item?.item_id}
+											projectUrl={detail?.item?.actions}
+											projectId={detail?.item?.project_id}
+											userData={detail?.item?.permission?.user}
+											newNoti={updateNot}
+										/>
+									)
+									)
+								)}
 
-							<Separator />
-						</OptionsContent>
-				</NotificationsOption>
-			)}
-			</>
+								<Separator />
+							</OptionsContent>
+						</NotificationsOption>
+					)}
+				</ContentPrimary>
 			</ClickAwayListener>
 		</>
 	);

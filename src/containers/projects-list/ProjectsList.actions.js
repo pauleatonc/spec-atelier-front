@@ -50,6 +50,7 @@ export const clearProjects = () => dispatch => dispatch(onActionCreator(CLEAR_PR
 
 export const accepthNotificationsAC = (body) => async (dispatch) => {
   acceptNotification(body).then((response) => {
+    const dataResp = response.resp;
     if(response.codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
@@ -66,9 +67,11 @@ export const accepthNotificationsAC = (body) => async (dispatch) => {
 			);
 		}
 		if(response.codeStatus === 200){
-			dispatch(
-        onShowAlertSuccess({ message: response.message }),
-      );
+      dataResp.then((data) => {
+        dispatch(
+          onShowAlertSuccess({ message: data.message }),
+        );
+      })
       dispatch(onActionCreator(ACCEPT_NOTIFICATION, response));
 		}
   }, (error) => {
@@ -81,8 +84,9 @@ export const accepthNotificationsAC = (body) => async (dispatch) => {
   })
 }
 
-export const rejectNotifications = (body) => async (dispatch) => {
+export const rejectNotificationsAC = (body) => async (dispatch) => {
   rejectNotification(body).then((response) => {
+    const dataResp = response.resp;
     if(response.codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
@@ -99,9 +103,11 @@ export const rejectNotifications = (body) => async (dispatch) => {
 			);
 		}
 		if(response.codeStatus === 200){
-			dispatch(
-        onShowAlertSuccess({ message: response.message }),
-      );
+      dataResp.then((data) => {
+        dispatch(
+          onShowAlertSuccess({ message: data.message }),
+        );
+      })
       dispatch(onActionCreator(REJECT_NOTIFICATION, response));
 		}
   }, (error) => {

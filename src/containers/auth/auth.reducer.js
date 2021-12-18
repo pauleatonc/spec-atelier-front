@@ -11,7 +11,7 @@ import {
 	NEW_PASSWORD,
 	NEW_PASSWORD_ERROR,
 	CLEAR_IMPERSONATED,
-	ACCEPT_NOTIFICATION,
+	ACCEPT_NOTIFICATION_GOOGLE,
 	ACCEPT_NOTIFICATION_ERROR,
 	REJECT_NOTIFICATION,
 	REJECT_NOTIFICATION_ERROR,
@@ -109,7 +109,7 @@ const authReducer = (state = initialState, action = {}) => {
 				status: false,
 				error: action.payload.error,
 			};
-		case ACCEPT_NOTIFICATION:
+		case ACCEPT_NOTIFICATION_GOOGLE:
 			return { ...state, acceptAction: true, };
 		case ACCEPT_NOTIFICATION_ERROR: {
 			return { ...state, error: 'Accept' };

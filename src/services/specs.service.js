@@ -169,12 +169,12 @@ export const sendQuote = factoryService((body) =>
 );
 
 export const getNotificationsList = factoryService((id) =>
-	getJsonRequest(`${API_BASE_URL}/users/${id}/notifications?permissions=true`),
+	getJsonRequest(`${API_BASE_URL}/users/${id}/notifications?permissions=true&limit=10`),
 );
 
 export const updateNotificationsWatch = factoryService((body) =>
 	patchJsonRequest(
-		`${API_BASE_URL}/users/${body.idUser}/notifications/mark_as_watched`, { notifications: body.notifications },
+		`${API_BASE_URL}/users/${body.idUser}/notifications/mark_as_watched?limit=10`, { notifications: body.notifications },
 	),
 );
 

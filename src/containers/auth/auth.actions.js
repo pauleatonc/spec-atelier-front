@@ -34,9 +34,9 @@ export const NEW_PASSWORD = 'NEW_PASSWORD';
 export const NEW_PASSWORD_ERROR = 'NEW_PASSWORD_ERROR';
 export const IMPERSONATE_USER_ERROR = 'IMPERSONATE_USER_ERROR';
 export const CLEAR_IMPERSONATED = 'CLEAR_IMPERSONATED';
-export const ACCEPT_NOTIFICATION = 'ACCEPT_NOTIFICATION';
+export const ACCEPT_NOTIFICATION_GOOGLE = 'ACCEPT_NOTIFICATION_GOOGLE';
 export const ACCEPT_NOTIFICATION_ERROR = 'ACCEPT_NOTIFICATION_ERROR';
-export const REJECT_NOTIFICATION = 'REJECT_NOTIFICATION';
+export const REJECT_NOTIFICATION_GOOGLE = 'REJECT_NOTIFICATION_GOOGLE';
 export const REJECT_NOTIFICATION_ERROR = 'REJECT_NOTIFICATION_ERROR';
 export const CLEAR_ACCEPT_ACTION = 'CLEAR_ACCEPT_ACTION';
 
@@ -56,10 +56,13 @@ export const loginAction = (data) => async (dispatch) => {
 				deleteLocalStorage('isAcceptStore');
 				deleteLocalStorage('messageAcceptStore');
 				acceptNotification(data.action).then((response) => {
+					const dataResp = response.resp;
 					if(response.codeStatus === 200){
-						setLocalStorage({ key: 'isAcceptStore', value: true });
-						setLocalStorage({ key: 'messageAcceptStore', value: response.message });
-						dispatch(onActionCreator(ACCEPT_NOTIFICATION, response));
+						setLocalStorage({ key: 'isAcceptStore', value: response.codeStatus });
+						dataResp.then((d) => {
+							setLocalStorage({ key: 'messageAcceptStore', value: d.message });
+							dispatch(onActionCreator(ACCEPT_NOTIFICATION_GOOGLE, d))
+						});
 					}else{
 						setLocalStorage({ key: 'isAcceptStore', value: response.codeStatus });
 					}
@@ -189,10 +192,13 @@ export const googleLoginAction = (data) => async (dispatch) => {
 				if (data.action.actionUrl === "accept_invitation") {
 					deleteLocalStorage('isAcceptStore');
 					acceptNotification(data.action).then((resp) => {
+						const dataResp = resp.resp;
 						if(resp.codeStatus === 200){
-							setLocalStorage({ key: 'isAcceptStore', value: true });
-							setLocalStorage({ key: 'messageAcceptStore', value: resp.message });
-							dispatch(onActionCreator(ACCEPT_NOTIFICATION, resp));
+							setLocalStorage({ key: 'isAcceptStore', value: resp.codeStatus });
+							dataResp.then((d) => {
+								setLocalStorage({ key: 'messageAcceptStore', value: d.message });
+								dispatch(onActionCreator(ACCEPT_NOTIFICATION_GOOGLE, d))
+							})
 						}else{
 							setLocalStorage({ key: 'isAcceptStore', value: resp.codeStatus });
 						}
@@ -280,6 +286,7 @@ export const clearImpersonated = () => (dispatch) =>
 
 export const rejectNotifications = (body) => async (dispatch) => {
 	rejectNotification(body).then((response) => {
+		const dataResp = response.resp;
 		if(response.codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
@@ -296,10 +303,12 @@ export const rejectNotifications = (body) => async (dispatch) => {
 			);
 		}
 		if(response.codeStatus === 200){
-			dispatch(
-				onShowAlertSuccess({ message: response.message }),
-			);
-			dispatch(onActionCreator(REJECT_NOTIFICATION, response));
+			dataResp.then((data) => {
+				dispatch(
+				  onShowAlertSuccess({ message: data.message }),
+				);
+			  })
+			dispatch(onActionCreator(REJECT_NOTIFICATION_GOOGLE, response));
 		}
 	}, (error) => {
 		dispatch(

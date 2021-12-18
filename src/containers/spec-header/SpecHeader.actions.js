@@ -22,6 +22,8 @@ export const REJECT_NOTIFICATION_ERROR = 'REJECT_NOTIFICATION_ERROR';
 export const UNDO_REJECT_NOTIFICATION = 'UNDO_REJECT_NOTIFICATION';
 export const UNDO_REJECT_NOTIFICATION_ERROR = 'UNDO_REJECT_NOTIFICATION_ERROR';
 export const NOTIFICATION_SUCCESS = 'NOTIFICATION_SUCCESS';
+export const STOP_NOTIFICATIONS = 'STOP_NOTIFICATIONS';
+export const UNDO_STOP_NOTIFICATIONS = 'UNDO_STOP_NOTIFICATIONS';
 
 const startDownload = (file, fileName) => {
 	const url = window.URL.createObjectURL(file);
@@ -77,7 +79,7 @@ export const getNotifications = () => async (dispatch, getState) => {
 	try {
 		const response = await getNotificationsList(auth.user?.id);
 		dispatch(onActionCreator(GET_NOTIFICATIONS, response));
-		return data;
+		return response;
 	} catch (error) {
 		return dispatch(onActionCreator(GET_NOTIFICATIONS_ERROR, {
 			error: true,
@@ -89,7 +91,6 @@ export const getNotifications = () => async (dispatch, getState) => {
 export const watchNotifications = (body) => async (dispatch) => {
 	updateNotificationsWatch(body).then((response) => {
 		dispatch(onActionCreator(WATCH_NOTIFICATIONS, response));
-		dispatch(getNotifications());
 	}, (error) => {
 		dispatch(onActionCreator(WATCH_NOTIFICATIONS_ERROR, {
 			error
@@ -98,12 +99,20 @@ export const watchNotifications = (body) => async (dispatch) => {
 }
 
 export const accepthNotificationsAC = (body) => async (dispatch) => {
-	dispatch(onActionCreator(ACCEPT_NOTIFICATION));
-	acceptNotification(body).then((response) => {
+	dispatch(onActionCreator(ACCEPT_NOTIFICATION));	
+	return acceptNotification(body).then((response) => {
+		const dataResp = response.resp;
 		if(response.codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
 			);
+		}
+		if(response.codeStatus === 403){
+			dataResp.then((data) => {
+				dispatch(
+					onShowAlertSuccess({ message: data.error}),
+				);
+			})
 		}
 		if(response.codeStatus === 404){
 			dispatch(
@@ -117,7 +126,7 @@ export const accepthNotificationsAC = (body) => async (dispatch) => {
 		}
 		if(response.codeStatus === 200){
 			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
-			dispatch(getNotifications());
+			return response;
 		}
 	}, (error) => {
 		dispatch(
@@ -131,11 +140,19 @@ export const accepthNotificationsAC = (body) => async (dispatch) => {
 
 export const rejectNotifications = (body) => async (dispatch) => {
 	dispatch(onActionCreator(REJECT_NOTIFICATION));
-	rejectNotification(body).then((response) => {
+	return rejectNotification(body).then((response) => {
+		const dataResp = response.resp;
 		if(response.codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
 			);
+		}
+		if(response.codeStatus === 403){
+			dataResp.then((data) => {
+				dispatch(
+					onShowAlertSuccess({ message: data.error}),
+				);
+			})
 		}
 		if(response.codeStatus === 404){
 			dispatch(
@@ -148,8 +165,8 @@ export const rejectNotifications = (body) => async (dispatch) => {
 			);
 		}
 		if(response.codeStatus === 200){
-			dispatch(getNotifications());
 			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+			return response;
 		}
 	}, (error) => {
 		dispatch(
@@ -158,16 +175,25 @@ export const rejectNotifications = (body) => async (dispatch) => {
 		dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
 			error
 		}))
+		return "ff";
 	})
 }
 
 export const undoRejectNotifications = (body) => async (dispatch) => {
 	dispatch(onActionCreator(UNDO_REJECT_NOTIFICATION));
-	undoRejectNotification(body).then((response) => {
+	return undoRejectNotification(body).then((response) => {
+		const dataResp = response.resp;
 		if(response.codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
 			);
+		}
+		if(response.codeStatus === 403){
+			dataResp.then((data) => {
+				dispatch(
+					onShowAlertSuccess({ message: data.error}),
+				);
+			})
 		}
 		if(response.codeStatus === 404){
 			dispatch(
@@ -180,8 +206,8 @@ export const undoRejectNotifications = (body) => async (dispatch) => {
 			);
 		}
 		if(response.codeStatus === 200){
-			dispatch(getNotifications());
 			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+			return response;
 		}
 	}, (error) => {
 		dispatch(
@@ -193,3 +219,83 @@ export const undoRejectNotifications = (body) => async (dispatch) => {
 	})
 }
 
+export const stopGetNotifications = () => async (dispatch) => {
+	dispatch(onActionCreator(STOP_NOTIFICATIONS));
+}
+
+export const undoStopGetNotifications = () => async (dispatch) => {
+	dispatch(onActionCreator(UNDO_STOP_NOTIFICATIONS));
+}
+
+
+export const accepthNotificationsAC2 = (body) => async (dispatch) => {
+	acceptNotification(body).then((response) => {
+		const dataResp = response.resp;
+		if(response.codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not session found' }),
+			);
+		}
+		if(response.codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not found' }),
+			);
+		}
+		if(response.codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Internal server' }),
+			);
+		}
+		if(response.codeStatus === 200){
+			dataResp.then((data) => {
+				dispatch(
+					onShowAlertSuccess({ message: data.message }),
+				);
+			})
+			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		}
+	}, (error) => {
+	  dispatch(
+		onShowAlertSuccess({ message: 'Error al aceptar proyecto.' }),
+	  );
+	  dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
+		error
+	  }))
+	})
+  }
+  
+  export const rejectNotificationsAC = (body) => async (dispatch) => {
+	rejectNotification(body).then((response) => {
+	  const dataResp = response.resp;
+	  if(response.codeStatus === 401){
+			  dispatch(
+				  onShowAlertSuccess({ message: 'Not session found' }),
+			  );
+		  }
+		  if(response.codeStatus === 404){
+			  dispatch(
+				  onShowAlertSuccess({ message: 'Not found' }),
+			  );
+		  }
+	  if(response.codeStatus === 500){
+			  dispatch(
+				  onShowAlertSuccess({ message: 'Internal server' }),
+			  );
+		  }
+		  if(response.codeStatus === 200){
+		dataResp.then((data) => {
+		  dispatch(
+			onShowAlertSuccess({ message: data.message }),
+		  );
+		})
+		dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		  }
+	}, (error) => {
+	  dispatch(
+		onShowAlertSuccess({ message: 'Error al rechazar proyecto.' }),
+	  );
+	  dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
+		error
+	  }))
+	})
+  }

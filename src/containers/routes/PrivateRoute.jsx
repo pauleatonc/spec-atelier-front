@@ -9,9 +9,10 @@ import { getUserProfile } from '../profile-header/ProfileHeader.actions';
 import { getNotifications } from '../spec-header/SpecHeader.actions';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+	const dispatch = useDispatch();
 	const { isLogin, isAutoLogout } = useSelector((state) => state.auth);
 	const { loaded } = useSelector((state) => state.app);
-	const dispatch = useDispatch();
+	const { actionGet } = useSelector((state) => state.specHeader);
 	const { pathname, search } = useLocation();
 	const getData = () => {
 		dispatch(getAppData());
@@ -34,10 +35,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			dispatch(getNotifications());
+			if(actionGet){
+				dispatch(getNotifications());
+			}
 	}, 30000);
 		return () => clearInterval(interval);
-	}, []);
+	}, [actionGet]);
 
 	return (
 		// Show the component only when the user is logged in

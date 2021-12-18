@@ -21,7 +21,7 @@ export const NotificationsButton = styled.div`
 export const NotificationsOption = styled.section`
 	width: 360px;
 	position: absolute;
-	right: 57px;
+	right: 75px;
 	display: ${({ show }) => !show && 'none'};
 	top: 69px;
 	z-index: 2;
@@ -37,6 +37,12 @@ export const NotificationsOption = styled.section`
 		right: 13px;
 		box-shadow: -5px -5px 2px -4px rgb(0 0 0 / 25%);
 		border-radius: 4px;
+	}
+	@media (max-width: 500px){
+		right: 52px !important;
+	}
+	@media (max-width: 1115px) and (min-width: 500px) {
+		right: 58px !important;
 	}
 `;
 

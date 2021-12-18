@@ -23,8 +23,7 @@ export const factoryService = (callback, isStatus) => {
 					}
 
 				}
-				if (!isStatus) {return response;}
-				if (isStatus) {return {resp:response,codeStatus:status};}
+				return isStatus ? { ...response, codeStatus: status, resp: response } : response;
 			})
 			.catch((error, status) => {
 			

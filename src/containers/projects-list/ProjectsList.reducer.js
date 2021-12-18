@@ -24,7 +24,7 @@ const sortFilters = [
 
 const initialProjectState = {
   projects: [],
-  loading: true,
+  loading: false,
   show: false,
   sortFilters,
   params: {

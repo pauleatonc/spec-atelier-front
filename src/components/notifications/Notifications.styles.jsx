@@ -155,7 +155,7 @@ export const LinkHeader = styled.a`
 export const ListItem = styled.div`
 	padding-top: 23px;
 	display: flex;
-	background-color: ${({ newItem }) => (newItem ? '#42bfad26' : 'none')};
+	
 `;
 
 export const ContentActions = styled.div`

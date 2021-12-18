@@ -17,12 +17,16 @@ import {
 	REJECT_NOTIFICATION,
 	REJECT_NOTIFICATION_ERROR,
 	UNDO_REJECT_NOTIFICATION,
-	UNDO_REJECT_NOTIFICATION_ERROR
+	UNDO_REJECT_NOTIFICATION_ERROR,
+	STOP_NOTIFICATIONS,
+	UNDO_STOP_NOTIFICATIONS
 } from './SpecHeader.actions';
 
 const specHeaderState = {
 	error: undefined,
 	loading: false,
+	loadingNoti: false,
+	actionGet: true,
 	url: '',
 	notificationsList: [],
 	initialNotifiId: [],
@@ -58,19 +62,23 @@ const specDocumentReducer = (state = specHeaderState, { payload, type }) => {
 		case WATCH_NOTIFICATIONS_ERROR:
 			return { ...state, error: 'watch', };
 		case ACCEPT_NOTIFICATION:
-			return { ...state, loading: true, };
+			return { ...state, loadingNoti: true, };
 		case NOTIFICATION_SUCCESS:
-			return { ...state, loading: false, };
+			return { ...state, loadingNoti: false, };
 		case ACCEPT_NOTIFICATION_ERROR:
 			return { ...state, error: 'accept' };
 		case REJECT_NOTIFICATION:
-			return { ...state, loading: true };
+			return { ...state, loadingNoti: true };
 		case REJECT_NOTIFICATION_ERROR:
-			return { ...state, error: 'reject', loading: false };
+			return { ...state, error: 'reject', loadingNoti: false };
 		case UNDO_REJECT_NOTIFICATION:
-			return { ...state, loading: true };
+			return { ...state, loadingNoti: true };
 		case UNDO_REJECT_NOTIFICATION_ERROR:
-			return { ...state, error: 'undo', loading: false };
+			return { ...state, error: 'undo', loadingNoti: false };
+		case STOP_NOTIFICATIONS:
+			return { ...state, actionGet: false };
+		case UNDO_STOP_NOTIFICATIONS:
+			return { ...state, actionGet: true };
 		default: {
 			return state;
 		}
