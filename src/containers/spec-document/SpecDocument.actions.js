@@ -13,9 +13,6 @@ import {
 	updateProduct,
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
-import { updateProductsWithProduct } from '../products-list/ProductsList.actions';
-import { closeModal } from '../spec-modal-product/SpecModalProduct.actions';
-import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 
 export const GET_SPEC_BLOCKS = 'GET_SPEC_BLOCKS';
 export const GET_SPEC_BLOCKS_ERROR = 'GET_SPEC_BLOCKS_ERROR';
@@ -51,7 +48,7 @@ export const onAddSpecBlock = ({
 	try {
 		const { auth } = getState();
 
-		const { blocks: updatedBlocks, product } = await addSpecBlock(
+		const { blocks: updatedBlocks } = await addSpecBlock(
 			{
 				params: { ...rest },
 				productID,
@@ -61,17 +58,15 @@ export const onAddSpecBlock = ({
 			},
 			ADD_SPEC_BLOCK,
 		);
-		dispatch(updateProductsWithProduct(product));
-		dispatch(
-			onActionCreator(ADD_SPEC_BLOCK_SUCCESS, { blocks: updatedBlocks }),
-		);
 		dispatch(
 			onShowAlertSuccess({ message: 'Añadiste producto a una sección' }),
 		);
-		if (window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches)
-			dispatch(closeModal());
+
+		return dispatch(
+			onActionCreator(ADD_SPEC_BLOCK_SUCCESS, { blocks: updatedBlocks }),
+		);
 	} catch (error) {
-		dispatch(
+		return dispatch(
 			onActionCreator(ADD_SPEC_BLOCK_ERROR, {
 				error: true,
 				nativeError: error,
@@ -93,32 +88,25 @@ export const onAttachSpecProduct = (payload) => (dispatch) =>
 export const REMOVE_SPEC_BLOCK = 'REMOVE_SPEC_BLOCK';
 export const REMOVE_SPEC_BLOCK_ERROR = 'REMOVE_SPEC_BLOCK_ERROR';
 export const REMOVE_SPEC_BLOCK_SUCCESS = 'REMOVE_SPEC_BLOCK_SUCCESS';
-export const onRemoveSpecBlock = ({ block, specID }) => async (
+export const onRemoveSpecBlock = ({ blockID, specID }) => async (
 	dispatch,
 	getState,
 ) => {
-	dispatch(onShowAlertSuccess({ message: 'Removiendo producto...' }));
 	dispatch(onActionCreator(REMOVE_SPEC_BLOCK));
 
 	try {
 		const { auth } = getState();
-		const { blocks: updatedBlocks, product } = await deleteSpecBlock({
-			block,
+		const { blocks: updatedBlocks } = await deleteSpecBlock({
+			blockID,
 			specID,
 			userID: auth.user?.id,
 		});
 
-		if (product) dispatch(updateProductsWithProduct(product));
-		dispatch(
+		return dispatch(
 			onActionCreator(REMOVE_SPEC_BLOCK_SUCCESS, { blocks: updatedBlocks }),
 		);
-		dispatch(
-			onShowAlertSuccess({ message: 'Removiste el producto de una sección' }),
-		);
-		if (window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches)
-			dispatch(closeModal());
 	} catch (error) {
-		dispatch(
+		return dispatch(
 			onActionCreator(REMOVE_SPEC_BLOCK_ERROR, {
 				error: true,
 				nativeError: error,
@@ -128,28 +116,15 @@ export const onRemoveSpecBlock = ({ block, specID }) => async (
 };
 
 export const DETACH_SPEC_PRODUCT = 'DETACH_SPEC_PRODUCT';
-export const onDetachSpecProduct = ({ product, specID, items }) => (
+export const onDetachSpecProduct = ({ productID, specID }) => (
 	dispatch,
 	getState,
 ) => {
-	const blocks = [];
 	const { specDocument } = getState();
-	if (items) {
-		items.forEach(({ id }) => {
-			specDocument.blocks
-				.filter(
-					(block) =>
-						block.item === id &&
-						block.element?.original_product_id === product.id,
-				)
-				.forEach((filterBlocks) => blocks.push(filterBlocks.id));
-		});
-	} else
-		specDocument.blocks
-			.filter((block) => block.element?.original_product_id === product.id)
-			.forEach((filterBlocks) => blocks.push(filterBlocks.id));
+	const selectedBlock =
+		specDocument.blocks.find((block) => block.element?.id === productID) || {};
 
-	return dispatch(onRemoveSpecBlock({ specID, block: blocks }));
+	return dispatch(onRemoveSpecBlock({ specID, blockID: selectedBlock?.id }));
 };
 
 export const ADD_SPEC_BLOCK_IMAGE = 'ADD_SPEC_BLOCK_IMAGE';

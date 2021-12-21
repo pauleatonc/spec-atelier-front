@@ -8,12 +8,11 @@ import {
 	HIDE_SPEC_PRODUCTS_ITEMS_SUCCESS,
 	onShowSpecProductsItems,
 } from '../spec-products-items/SpecProductsItems.actions';
-import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 
 export const UPDATE_SPEC_PRODUCTS_FILTERS = 'UPDATE_SPEC_PRODUCTS_FILTERS';
 export const UPDATE_SPEC_PRODUCTS_FILTER_ITEM =
 	'UPDATE_SPEC_PRODUCTS_FILTER_ITEM';
-export const UPDATE_SPEC_PRODUCTS_FILTER_SUBITEM =
+	export const UPDATE_SPEC_PRODUCTS_FILTER_SUBITEM =
 	'UPDATE_SPEC_PRODUCTS_FILTER_SUBITEM';
 export const UPDATE_SPEC_PRODUCTS_FILTER_SECTION =
 	'UPDATE_SPEC_PRODUCTS_FILTER_SECTION';
@@ -35,8 +34,7 @@ export const onGetSpecProductsByItem = (payload) => (dispatch) =>
 export const onGetSpecProductsBySection = (payload) => (dispatch) =>
 	batch(() => {
 		dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SECTION, payload));
-		if (!window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches)
-			dispatch(onShowSpecProductsItems({ section: payload.section }));
+		dispatch(onShowSpecProductsItems({ section: payload.section }));
 	});
 
 export const onHideSpecProducts = () => (dispatch) =>
@@ -59,8 +57,8 @@ export const onHideAttachModal = () => (dispatch) => {
 	dispatch(onActionCreator(HIDE_ATTACH_MODAL));
 };
 
-export const onUpdateFilterSubitem = (payload) => (dispatch) =>
-	dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SUBITEM, payload));
+export const onUpdateFilterSubitem = (payload) => dispatch => 
+	dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SUBITEM, payload))
 
-export const onUpdateFilterSection = (payload) => (dispatch) =>
+export const onUpdateFilterSection = (payload) => dispatch => 
 	dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SECTION, payload));

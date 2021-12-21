@@ -158,6 +158,7 @@ export const Text = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 0.63px;
+	text-align: right;
 	color: ${COLOR_PRIMARY};
 	margin: 12px 0;
 	cursor: pointer;
@@ -166,26 +167,13 @@ export const Text = styled.div`
 	}
 `;
 
-export const SubtitleContent = styled.p`
-	color: rgba(33, 33, 33, 0.44);
-	font-family: Lato;
-	font-size: 12px;
-	letter-spacing: 0.75px;
-	margin-bottom: 12px;
-	margin-left: 8px;
-`;
-
-export const ContainerHeaderContent = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-`;
-
 export const ImagesContainer = styled.section`
-	display: flex;
-	flex-wrap: wrap;
 	height: 260px;
 	border: dotted 1px ${COLOR_GREY};
+	display: flex;
+	flex: 1;
+	flex-wrap: wrap;
+	justify-content: space-around;
 `;
 
 export const DocContainer = styled.div`
@@ -203,7 +191,4 @@ export const DocContent = styled.div`
 	flex-direction: column;
 `;
 
-export const DraggableImageContainer = styled.div`
-	width: ${({ width }) => width};
-	height: ${({ height }) => height};
-`;
+export const DocText = styled.div``;

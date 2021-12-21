@@ -25,7 +25,7 @@ export const getProductsSections = factoryService(() =>
 export const getProductsItems = factoryService((sections) =>
 	getJsonRequest(
 		`${API_BASE_URL}/items${formatParams(cleanObjectsAndArrays(sections))}`,
-	),
+	)
 );
 
 /**
@@ -34,7 +34,8 @@ export const getProductsItems = factoryService((sections) =>
 export const getProductsSystems = factoryService((items) =>
 	getJsonRequest(
 		`${API_BASE_URL}/subitems${formatParams(cleanObjectsAndArrays(items))}`,
-	),
+	)
+
 );
 
 /**
@@ -65,7 +66,7 @@ export const createProduct = factoryService((data) => {
 			system: data.system,
 			short_desc: data.short_desc,
 			reference: data.reference,
-			unit: data.unit,
+			unit: data.unit
 		},
 	};
 
@@ -97,17 +98,6 @@ export const removeProductImages = factoryService(({ productID, images }) => {
 	const body = { images };
 	return deleteJsonRequest(
 		`${API_BASE_URL}/products/${productID}/remove_images`,
-		body,
-	);
-});
-
-/**
- * Update images to the given product.
- */
-export const updateProductImages = factoryService(({ productID, images }) => {
-	const body = { images };
-	return deleteJsonRequest(
-		`${API_BASE_URL}/products/${productID}/update_images`,
 		body,
 	);
 });
@@ -155,6 +145,10 @@ export const updateDownloadsProduct = factoryService(({ stat, productId }) =>
 /**
  * Delete product
  */
-export const deleteProduct = factoryService(({ productId }) => {
-	return deleteJsonRequest(`${API_BASE_URL}/products/${productId}`);
-});
+export const deleteProduct = factoryService(
+	({ productId }) => {
+		return deleteJsonRequest(
+			`${API_BASE_URL}/products/${productId}`
+		);
+	},
+);

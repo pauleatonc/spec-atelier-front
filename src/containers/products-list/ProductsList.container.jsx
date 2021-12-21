@@ -9,8 +9,6 @@ import {
 	BodyHeader,
 	Total,
 	Sort,
-	MobileFilters,
-	Filters,
 } from './ProductsList.styles';
 import {
 	setFilters,
@@ -34,9 +32,9 @@ import {
 const ProductList = ({
 	extraFilters,
 	withSearch = true,
-	withFilter = true,
-	filterOptionsKey,
-	withoutPadding,
+  withFilter = true,
+  filterOptionsKey,
+  withoutPadding,
 	canAdd,
 	canEdit,
 	canDelete,
@@ -45,8 +43,6 @@ const ProductList = ({
 	emptyListComponent: EmptyListComponent,
 	onActionCard,
 	onClickCreate,
-	isSpec,
-	viewKey,
 }) => {
 	const defaultFilters = {
 		page: 0,
@@ -66,7 +62,6 @@ const ProductList = ({
 		with_products: true,
 		most_used: false,
 		my_products: false,
-		view: viewKey,
 	};
 	const dispatch = useDispatch();
 	const {
@@ -88,7 +83,6 @@ const ProductList = ({
 		...defaultFilters,
 		...extraFilters,
 	};
-	const [showMobileFilters, setShowMobileFilter] = useState(false);
 
 	const onClickProduct = (selectedProduct) => (event) => {
 		event.stopPropagation();
@@ -111,10 +105,6 @@ const ProductList = ({
 	const onChangeParams = ({ target: { name, value } }) => {
 		setKeywords(value);
 		debouncedSave(name, value);
-	};
-
-	const onClickFilter = () => {
-		setShowMobileFilter((current) => !current);
 	};
 
 	const onFilterAll = () => {
@@ -157,8 +147,8 @@ const ProductList = ({
 			dispatch(setSelectedAll(true));
 		} else {
 			dispatch(setSelectedAll(false));
-		}
-		dispatch(onGetProducts(filters));
+    }
+    dispatch(onGetProducts(filters));
 	}, [filtersRef.current]);
 
 	useEffect(() => {
@@ -173,36 +163,23 @@ const ProductList = ({
 			{withSearch && (
 				<ProductsSearchContainer
 					keyword={keyword}
-					onChangeParams={onChangeParams}
-					onClickFilter={onClickFilter}
-					placeholder="Buscar producto"
+          onChangeParams={onChangeParams}
+          placeholder='Buscar producto'
 				/>
 			)}
 			{withFilter && (
 				<>
-					<Filters>
-						<ProductsFiltersContainer
-							filters={filters}
-							initialFilters={initialFilters}
-							onFilterAll={onFilterAll}
-							filterOptions={filterOptions}
-						/>
-					</Filters>
-					{showMobileFilters && (
-						<MobileFilters>
-							<ProductsFiltersContainer
-								filters={filters}
-								initialFilters={initialFilters}
-								onFilterAll={onFilterAll}
-								filterOptions={filterOptions}
-							/>
-						</MobileFilters>
-					)}
-
+					<ProductsFiltersContainer
+						filters={filters}
+						initialFilters={initialFilters}
+						onFilterAll={onFilterAll}
+						filterOptions={filterOptions}
+					/>
 					<Separator />
 				</>
 			)}
 			<BodyHeader>
+				{loading && 'Cargando...'}
 				{!!products.length && !loading && (
 					<>
 						<Sort>
@@ -253,25 +230,15 @@ const ProductList = ({
 							dwg={product?.dwg}
 							bim={product?.bim}
 							productId={product.id}
-							selected={
-								isSpec
-									? product?.project_spec_info?.items_full_used
-									: Boolean(selected)
-							}
+							selected={Boolean(selected)}
 							canAdd={canAdd}
 							canEdit={canEdit}
 							canDelete={canDelete}
-							specInfo={product?.project_spec_info}
-							itemsUsed={
-								product?.project_spec_info?.items_used.length > 0 &&
-								product?.project_spec_info?.items_used.length <
-									product.items.length
-							}
 						/>
 					);
 				})}
 			</ListContainer>
-			<ProductsListSeeMore filters={filters} />
+			<ProductsListSeeMore filters={filters} initialFilters={initialFilters} />
 		</Container>
 	);
 };

@@ -11,17 +11,14 @@ import {
 	Monetization,
 	SpecOptions,
 	PermissionsButtonContainer,
-	Logo,
-	MobileLogo,
 } from './SpecHeader.styles';
 import logoSource from '../../assets/images/logo-spec.png';
 import logo2xSource from '../../assets/images/logo-spec@2x.png';
 import logo3xSource from '../../assets/images/logo-spec@3x.png';
-import logoIcon from '../../assets/images/logo-icon.png';
 import {
 	cleanDownload,
 	downloadSpecDocument,
-	downloadBudgetDocument,
+	downloadBudgetDocument
 } from './SpecHeader.actions';
 import ItemsNavBar from '../../components/navbar/navbar-app/Components/ItemsNavBar';
 
@@ -33,7 +30,6 @@ const SpecHeader = () => {
 	const { id } = useParams();
 	const { project } = useSelector((state) => state.specDocument);
 	const { url } = useSelector((state) => state.specHeader);
-
 	const handleDownloadClick = () =>
 		dispatch(downloadSpecDocument({ specID: id }));
 	const handleDownloadBudgetClick = () =>
@@ -42,6 +38,10 @@ const SpecHeader = () => {
 	useEffect(() => {
 		return () => dispatch(cleanDownload());
 	}, []);
+
+
+
+	
 
 	useEffect(() => {
 		const downloadDoc = () => {
@@ -55,21 +55,18 @@ const SpecHeader = () => {
 		};
 		if (url) downloadDoc();
 	}, [url]);
+
+
 	return (
 		<Root>
 			<SpecOptions>
-				<Section>
+				<Section withoutPaddingLeft>
 					<Link to="/projects" data-view="projects">
-						<Logo>
-							<img
-								alt="Specatelier"
-								src={logoSource}
-								srcSet={`${logo2xSource} 2x, ${logo3xSource} 3x`}
-							/>
-						</Logo>
-						<MobileLogo>
-							<img alt="Specatelier" src={logoIcon} />
-						</MobileLogo>
+						<img
+							alt="Specatelier"
+							src={logoSource}
+							srcSet={`${logo2xSource} 2x, ${logo3xSource} 3x`}
+						/>
 					</Link>
 				</Section>
 				<Separator />

@@ -29,7 +29,6 @@ export const SET_SELECTED_ALL = 'SET_SELECTED_ALL';
 export const SET_FILTERS = 'SET_FILTERS';
 
 export const CLEAN_PRODUCT_LIST_STORE = 'CLEAN_PRODUCT_LIST_STORE';
-export const CLEAN_PRODUCT_LIST_DATA = 'CLEAN_PRODUCT_LIST_DATA';
 
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
@@ -37,9 +36,6 @@ export const DELETE_PRODUCT_ERROR = 'DELETE_PRODUCT_ERROR';
 
 export const cleanStoreProductList = () => (dispatch) =>
 	dispatch(onActionCreator(CLEAN_PRODUCT_LIST_STORE));
-
-export const cleanProductListData = () => (dispatch) =>
-	dispatch(onActionCreator(CLEAN_PRODUCT_LIST_DATA));
 
 export const getProduct = (clientId) => async (dispatch) => {
 	try {
@@ -58,15 +54,14 @@ export const getProduct = (clientId) => async (dispatch) => {
 	}
 };
 
-export const onGetProducts = (filters, extraPayload = {}, seeMore) => async (
+export const onGetProducts = (filters, extraPayload = {}) => async (
 	dispatch,
 ) => {
-	if (!seeMore) dispatch(cleanProductListData());
 	dispatch(onActionCreator(GET_PRODUCTS));
 	try {
 		const { products } = await getProducts(cleanObjectsAndArrays(filters));
 		return dispatch(
-			onActionCreator(seeMore ? GET_MORE_PRODUCTS : GET_PRODUCTS_SUCCESS, {
+			onActionCreator(GET_PRODUCTS_SUCCESS, {
 				nextPage: products?.next_page,
 				products: products?.list || products || [],
 				filterOptions: products?.filters || {},
@@ -128,7 +123,7 @@ export const setSelectedAll = (value) => (dispatch) => {
 	dispatch(onActionCreator(SET_SELECTED_ALL, value));
 };
 
-export const updateDownloads = (stat, productId) => {
+export const updateDownloads = (stat, productId) => (dispatch) => {
 	updateDownloadsProduct({ stat, productId }).then(
 		(response) => response,
 		(error) => console.error(error),
@@ -159,16 +154,4 @@ export const onDeleteProduct = (productId) => async (dispatch, getState) => {
 		dispatch(onActionCreator(DELETE_PRODUCT_ERROR));
 		dispatch(onShowAlertSuccess({ message: 'Error al eliminar el producto.' }));
 	}
-};
-
-export const UPDATE_PRODUCTS_WITH_PRODUCT = 'UPDATE_PRODUCTS_WITH_PRODUCT';
-export const updateProductsWithProduct = (product) => (dispatch, getState) => {
-	const { products } = getState().productsList;
-	const filteredProducst = products.filter((prd) => prd.id !== product.id);
-	const updatedProducts = [product, ...filteredProducst];
-	dispatch(
-		onActionCreator(UPDATE_PRODUCTS_WITH_PRODUCT, {
-			products: updatedProducts,
-		}),
-	);
 };

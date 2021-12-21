@@ -6,37 +6,27 @@ import arrowUpActiveSource from '../../assets/images/icons/arrow-up-active.svg';
 import {
 	onGetSpecProductsByItem,
 	onUpdateFilterSection,
-	onUpdateFilterSubitem,
+	onUpdateFilterSubitem
 } from '../spec-products/SpecProducts.actions';
 import { setFilters } from '../products-list/ProductsList.actions';
 import Breadcrumbs from '../../components/basics/Breadcrumbs';
 import Collapsible from '../../components/basics/Collapsible';
-import closeSource from '../../assets/images/icons/close.svg';
-import {
-	Header,
-	CloseIcon,
-} from '../spec-products-sections/SpecProductsSections.styles';
-import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 
 import { onHideSpecProductsItemsSuccess } from './SpecProductsItems.actions';
 import {
 	Root,
+	Header,
 	Body,
 	Loading,
 	Item,
 	ArrowIcon,
-	Divisor,
+	Divisor
 } from './SpecProductsItems.styles';
 
 /**
  * The SpecProductsItems' container.
  */
-const SpecProductsItems = ({
-	setShowFilters,
-	setSelectedItem,
-	selectedSection,
-	selectedItem,
-}) => {
+const SpecProductsItems = () => {
 	const { item: selectedItemID, subitem: selectedSubitemID } = useSelector(
 		(state) => state.specProducts.filters,
 	);
@@ -44,12 +34,6 @@ const SpecProductsItems = ({
 		(state) => state.specProductsItems,
 	);
 	const dispatch = useDispatch();
-
-	const handleCloseSpecItems = () => {
-		setShowFilters(false);
-		dispatch(onHideSpecProductsItemsSuccess());
-	};
-
 	const handleShowSections = () => {
 		dispatch(setFilters({ section: [], item: [], subitem: [] }));
 		dispatch(onUpdateFilterSection({ section: '', item: '', subitem: '' }));
@@ -57,26 +41,15 @@ const SpecProductsItems = ({
 	};
 	const handleItemClick = (item) => () => {
 		if (item) {
-			dispatch(setFilters({ item: [item.id], subitem: [] }));
-			dispatch(onGetSpecProductsByItem({ item: item.id, subitem: '' }));
-			if (
-				!item.subitems.length &&
-				window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches
-			) {
-				setSelectedItem(item.name);
-				handleCloseSpecItems();
-			}
+			dispatch(setFilters({ item: [item], subitem: [] }));
+			dispatch(onGetSpecProductsByItem({ item, subitem: '' }));
 		}
 	};
 
 	const handleSubitemClick = (subitem) => {
-		dispatch(onUpdateFilterSubitem({ subitem: subitem.id }));
-		dispatch(setFilters({ subitem: [subitem.id] }));
-		if (window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches) {
-			setSelectedItem(subitem.name);
-			handleCloseSpecItems();
-		}
-	};
+		dispatch(onUpdateFilterSubitem({ subitem }));
+		dispatch(setFilters({ subitem: [subitem] }));
+	}
 
 	if (!show) {
 		return null;
@@ -87,25 +60,9 @@ const SpecProductsItems = ({
 			<Header>
 				<Breadcrumbs
 					items={[
-						{
-							label:
-								(window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches &&
-									selectedSection) ||
-								'Secciones',
-							onClick: handleShowSections,
-						},
-						{
-							label:
-								(window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches &&
-									selectedItem) ||
-								'Partidas',
-						},
+						{ label: 'Secciones', onClick: handleShowSections },
+						{ label: 'Partidas' },
 					]}
-				/>
-				<CloseIcon
-					alt="Cerrar"
-					src={closeSource}
-					onClick={handleCloseSpecItems}
 				/>
 			</Header>
 			{items.length === 0 && <Loading>Cargando...</Loading>}
@@ -115,7 +72,7 @@ const SpecProductsItems = ({
 						<Fragment key={item.id}>
 							<Item
 								active={item.id === selectedItemID}
-								onClick={handleItemClick(item)}
+								onClick={handleItemClick(item.id)}
 							>
 								<span>
 									{item.code}. {item.name}
@@ -130,21 +87,21 @@ const SpecProductsItems = ({
 									/>
 								)}
 							</Item>
-							<Collapsible
-								show={selectedItemID === item.id && item.subitems.length}
-							>
-								{item.subitems.map((subitem) => (
-									<Item
-										active={subitem.id === selectedSubitemID}
-										key={subitem.id}
-										padding="0 0 0 25px"
-										onClick={() => handleSubitemClick(subitem)}
-									>
-										<span>{subitem.name}</span>
-									</Item>
-								))}
-								<Divisor />
-							</Collapsible>
+							<Collapsible show={selectedItemID === item.id && item.subitems.length}>
+                  {item.subitems.map(subitem => (
+                    <Item
+											active={subitem.id === selectedSubitemID}
+                      key={subitem.id}
+                      padding="0 0 0 25px"
+											onClick={() => handleSubitemClick(subitem.id)}
+                    >
+                      <span>
+                        {subitem.name}
+                      </span>
+                    </Item>
+                  ))}
+									<Divisor />
+                </Collapsible>
 						</Fragment>
 					))}
 				</Body>

@@ -1,35 +1,24 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
-  box-sizing: border-box;
-  height: 100%;
-  position: relative;
-  width: 587px;
-
-  ${MEDIA_QUERY_SMALL} {
-    width: 100%;
-  }
+	box-sizing: border-box;
+	height: 100%;
+	position: relative;
+	width: 587px;
 `;
 
 export const AddIcon = styled.img`
 	cursor: pointer;
-    margin: 8px 7px 0 0;
-    position: absolute;
-    top: 0;
-    right: 0;
+	float: right;
+	margin: 8px 7px 0 0;
+	position: sticky;
+	top: 8px;
 
-  &:active {
-    transform: scale(.95);
-  }
-
-  ${MEDIA_QUERY_SMALL} {
-	position: fixed;
-    bottom: 70px;
-    right: 10px;
-    top: unset;
-  }
+	&:active {
+		transform: scale(0.95);
+	}
 `;
 
 export const AddMenuItem = styled.section`
@@ -53,16 +42,12 @@ export const AddMenuItem = styled.section`
 `;
 
 export const Page = styled.section`
-  background-color: #FFF;
-  border: 1px solid #979797;
-  margin: 0 0 5px;
-  min-height: 710px;
-  padding: 40px 66px 40px 52px;
-  width: 100%;
-
-  ${MEDIA_QUERY_SMALL} {
-    padding: 29px 19px;
-  }
+	background-color: #fff;
+	border: 1px solid #979797;
+	margin: 0 0 5px;
+	min-height: 710px;
+	padding: 40px 66px 40px 52px;
+	width: 100%;
 `;
 
 export const Group = styled.section`

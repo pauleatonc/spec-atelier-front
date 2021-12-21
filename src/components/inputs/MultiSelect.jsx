@@ -39,7 +39,7 @@ const MultiSelect = (props) => {
 		onClean,
 		onSubmit,
 		optionAll,
-		changeOnClose,
+		changeOnCLose,
 		offsetY,
 	} = props;
 	const {
@@ -95,13 +95,13 @@ const MultiSelect = (props) => {
 	};
 
 	const handleCloseBehaviour = () => {
-		if (!changeOnClose) onChange(lastState);
-		if (changeOnClose) onSubmit(selectedOptions);
+		if (!changeOnCLose) onChange(lastState);
+		if (changeOnCLose) onSubmit(selectedOptions);
 		handleClose();
 	};
 
 	const onOpen = (e) => {
-		setLastState(changeOnClose ? options : []);
+		setLastState(changeOnCLose ? options : []);
 		handleOpen(e);
 	};
 
@@ -161,7 +161,7 @@ const MultiSelect = (props) => {
 							<OptionCheckboxIcon
 								src={selected ? checkboxOnSource : checkboxOffSource}
 							/>
-							<OptionText title={option.label}>{option.label}</OptionText>
+							<OptionText>{option.label}</OptionText>
 						</Option>
 					);
 				})}
@@ -189,7 +189,7 @@ MultiSelect.defaultProps = {
 	label: '',
 	placeholder: '',
 	type: 'default',
-	width: '275px',
+	width: '251px',
 	variant: 'primary',
 	showButtons: false,
 	optionAll: true,
@@ -197,7 +197,7 @@ MultiSelect.defaultProps = {
 	onClean: () => undefined,
 };
 MultiSelect.propTypes = {
-	changeOnClose: PropTypes.bool,
+	changeOnCLose: PropTypes.bool,
 	disabled: PropTypes.bool,
 	label: PropTypes.string,
 	variant: PropTypes.oneOf(['primary', 'secondary']),

@@ -4,7 +4,6 @@ import {
 	COLOR_WHITE,
 	COLOR_MINE_SHAFT,
 	COLOR_MERCURY,
-	MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -18,12 +17,6 @@ export const Root = styled.div`
 	top: 0;
 	width: calc(100vw - 69px);
 	z-index: 1;
-
-	${MEDIA_QUERY_SMALL} {
-		width: 100vw;
-		height: 100vh;
-		top: -35px;
-	}
 `;
 
 export const Overlay = styled.div`
@@ -47,9 +40,6 @@ export const ButtonClose = styled.div`
 	cursor: pointer;
 	padding: 0 23px;
 	outline: none;
-	${MEDIA_QUERY_SMALL} {
-		display: none;
-	}
 `;
 
 export const Header = styled.div`
@@ -63,21 +53,6 @@ export const Header = styled.div`
 	height: 46px;
 	padding: 0 23px;
 	width: 100%;
-	flex-wrap: wrap;
-	${MEDIA_QUERY_SMALL} {
-		justify-content: flex-start;
-		height: 104px;
-	}
-`;
-
-export const ButtonBack = styled.div`
-	display: none;
-	width: 27px;
-	heigth: 27px;
-	margin-right: 16px;
-	${MEDIA_QUERY_SMALL} {
-		display: flex;
-	}
 `;
 
 export const Title = styled.section`
@@ -86,9 +61,6 @@ export const Title = styled.section`
 	height: 46px;
 	letter-spacing: 1.08px;
 	padding: 0 23px;
-	${MEDIA_QUERY_SMALL} {
-		padding: 0;
-	}
 `;
 
 export const Panels = styled.section`
@@ -103,13 +75,4 @@ export const Filters = styled.section`
 	height: 100%;
 	position: relative;
 	width: 360px;
-
-	${MEDIA_QUERY_SMALL} {
-		display: ${({ showFilters }) => (showFilters ? 'flex' : 'none')};
-		position: absolute;
-		top: 50px;
-		height: 100vh;
-		width: 100vw;
-		z-index: 10;
-	}
 `;

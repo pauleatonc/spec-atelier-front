@@ -5,19 +5,15 @@ import {
 	getProductById,
 	editProduct,
 	getProductsSystems,
+	uploadProductImages,
 	uploadProductDocuments,
 	removeProductImages,
 	removeProductDocuments,
-	updateProductImages,
 } from '../../services/products.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS } from '../spec-products-sections/SpecProductsSections.actions';
 import { onHideSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
-import {
-	onGetProducts,
-	setFilters,
-	cleanProductListData,
-} from '../products-list/ProductsList.actions';
+import { onGetProducts, setFilters } from '../products-list/ProductsList.actions';
 import { cleanObject } from '../../modules/services';
 import { onGetSpecBlocks } from '../spec-document/SpecDocument.actions';
 
@@ -104,7 +100,7 @@ export const onEditSpecProduct = ({
 		const { filters: productFilters } = productsList;
 
 		if (images?.length)
-			patch.concat(updateProductImages({ productID: product.id, images }));
+			patch.concat(uploadProductImages({ productID: product.id, images }));
 		if (documents?.length)
 			patch.concat(
 				uploadProductDocuments({ productID: product.id, documents }),
@@ -126,8 +122,7 @@ export const onEditSpecProduct = ({
 		return batch(() => {
 			if (specID) dispatch(onGetSpecBlocks(specID));
 			dispatch(onActionCreator(EDIT_SPEC_PRODUCT_SUCCESS));
-			dispatch(cleanProductListData());
-			dispatch(onGetProducts(productsList.filters));
+			dispatch(onGetProducts(productsList.filters))
 			dispatch(
 				onShowAlertSuccess({ message: 'Producto editado exitosamente' }),
 			);

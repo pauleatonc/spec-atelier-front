@@ -1,8 +1,5 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {
-	MEDIA_QUERY_SMALL,
-} from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   align-items: center;
@@ -14,24 +11,10 @@ export const Root = styled.div`
   justify-content: center;
   width: 56px;
   z-index: 2;
-
-  ${MEDIA_QUERY_SMALL} {
-    grid-row: 2;
-    width: 100%;
-    height: 65px;
-    bottom: 0;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
-    position: fixed;
-  }
 `;
 
 export const Section = styled.section`
   width: 100%;
-
-  ${MEDIA_QUERY_SMALL} {
-    width: auto;
-  }
 `;
 
 export const NavIcon = styled.span`

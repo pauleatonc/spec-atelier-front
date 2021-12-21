@@ -14,7 +14,7 @@ const Products = () => {
 	return (
 		<AppLayout footer={<Footer />} header={<NavBar />}>
 			<ProductHeader />
-			<ProductsListContainer viewKey='products' />
+			<ProductsListContainer />
 			<AlertContainer />
 			<ModalProductContainer />
 			<ContactFormContainer type="product" />

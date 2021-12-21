@@ -1,15 +1,10 @@
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   display: flex;
   justify-content: center;
   padding: 8px 0 16px;
-
-  ${MEDIA_QUERY_SMALL} {
-    margin: 0 8px;
-    padding: 0;
-  }
 `;
 
 export const Content = styled.div`
@@ -19,10 +14,6 @@ export const Content = styled.div`
   grid-gap: 24px;
   grid-template-columns: repeat(7, max-content);
   justify-items: center;
-
-  ${MEDIA_QUERY_SMALL} {
-    overflow-x: scroll;
-  }
 `;
 
 export const Loading = styled.span`

@@ -4,11 +4,6 @@ import { useParams } from 'react-router-dom';
 
 import CheckBoxList from '../../components/inputs/CheckBoxList';
 import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
-import {
-	ButtonBack,
-	Overlay,
-} from '../../components/layouts/SpecProductsPanelLayout.styles';
-import arrowBack from '../../assets/images/icons/arrow_back.svg';
 
 import {
 	onSetLocalConfig,
@@ -16,6 +11,7 @@ import {
 	onUpdateProductConfig,
 	onHideSpecAdmin,
 } from './SpecAdmin.actions';
+import { Overlay } from '../../components/layouts/SpecProductsPanelLayout.styles';
 import {
 	Root,
 	PanelTitle,
@@ -95,12 +91,7 @@ const SpecAdmin = () => {
 		<>
 			{show && <Overlay onClick={() => dispatch(onHideSpecAdmin())} />}
 			<Root show={show}>
-				<PanelTitle>
-					<ButtonBack role="button" onClick={() => dispatch(onHideSpecAdmin())}>
-						<img alt="arrow back" src={arrowBack} />
-					</ButtonBack>
-					Administrar especificación
-				</PanelTitle>
+				<PanelTitle>Administrar especificación</PanelTitle>
 				<TextConfig>
 					<TextConfigTitle>Configurar textos</TextConfigTitle>
 					<TextConfigDesc>

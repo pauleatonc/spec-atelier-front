@@ -1,15 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	onGetSpecProductsBySection,
-	onUpdateFilterSection,
-} from '../spec-products/SpecProducts.actions';
+import { onGetSpecProductsBySection, onUpdateFilterSection } from '../spec-products/SpecProducts.actions';
 import { onHideSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
 import { setFilters } from '../products-list/ProductsList.actions';
 import useSpecProductsPanelLayout from '../../components/layouts/SpecProductsPanelLayout.hook';
 import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
 import Breadcrumbs from '../../components/basics/Breadcrumbs';
-import closeSource from '../../assets/images/icons/close.svg';
 import {
 	Root,
 	Body,
@@ -18,18 +14,12 @@ import {
 	ItemIcon,
 	ItemText,
 	Loading,
-	CloseIcon,
 } from './SpecProductsSections.styles';
-import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 
 /**
  * The SpecProductsSections' container.
  */
-const SpecProductsSections = ({
-	setShowFilters,
-	selectedSection,
-	setSelectedSection,
-}) => {
+const SpecProductsSections = () => {
 	const { section: selectedSectionID } = useSelector(
 		(state) => state.specProducts.filters,
 	);
@@ -39,19 +29,15 @@ const SpecProductsSections = ({
 	const { isSelectedAll } = useSelector((state) => state.productsList);
 
 	const dispatch = useDispatch();
-	const handleSectionClick = (section) => () => {
-		dispatch(setFilters({ section: [section.id] }));
-		dispatch(onGetSpecProductsBySection({ section: section.id }));
-		if (window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches) {
-			setSelectedSection(section.name);
-			setShowFilters(false);
-		}
+	const handleSectionClick = (sectionID) => () => {
+		dispatch(setFilters({ section: [sectionID] }));
+		dispatch(onGetSpecProductsBySection({ section: sectionID }));
 	};
 
 	useSpecProductsPanelLayout(show);
 	useDidUpdateEffect(() => {
 		if (isSelectedAll) {
-			dispatch(onUpdateFilterSection({ section: '', item: '', subitem: '' }));
+			dispatch(onUpdateFilterSection({ section: '', item: '', subitem: ''}))
 			dispatch(onHideSpecProductsItemsSuccess());
 		}
 	}, [isSelectedAll]);
@@ -59,29 +45,13 @@ const SpecProductsSections = ({
 	return (
 		<Root>
 			<Header>
-				<Breadcrumbs
-					items={[
-						{
-							label:
-								(window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches &&
-									selectedSection) ||
-								'Secciones',
-						},
-					]}
-				/>
-				<CloseIcon
-					alt="Cerrar"
-					src={closeSource}
-					onClick={() => {
-						setShowFilters(false);
-					}}
-				/>
+				<Breadcrumbs items={[{ label: 'Secciones' }]} />
 			</Header>
 			{sections.length === 0 && <Loading>Cargando...</Loading>}
 			{sections.length > 0 && (
 				<Body>
 					{sections.map((section) => (
-						<Item key={section.id} onClick={handleSectionClick(section)}>
+						<Item key={section.id} onClick={handleSectionClick(section.id)}>
 							<ItemIcon
 								active={section.id === selectedSectionID}
 								icon={section.eng_name}
