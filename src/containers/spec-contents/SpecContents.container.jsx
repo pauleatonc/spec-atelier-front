@@ -9,10 +9,16 @@ import {
 	ListItem,
 	ArrowIcon,
 } from './SpecContents.styles';
+import {
+	ButtonBack,
+	Overlay,
+} from '../../components/layouts/SpecProductsPanelLayout.styles';
 import arrowDownSource from '../../assets/images/icons/arrow-down.svg';
 import arrowUpSource from '../../assets/images/icons/arrow-up.svg';
-import { Overlay } from '../../components/layouts/SpecProductsPanelLayout.styles';
+import arrowBack from '../../assets/images/icons/arrow_back.svg';
 import { onHideSpecContents } from './SpecContents.actions';
+import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
+
 /**
  * The SpecContents' container.
  */
@@ -72,7 +78,15 @@ const SpecContents = () => {
 		<>
 			{show && <Overlay onClick={() => dispatch(onHideSpecContents())} />}
 			<Root show={show}>
-				<PanelTitle>Tabla de contenidos</PanelTitle>
+				<PanelTitle>
+					<ButtonBack
+						role="button"
+						onClick={() => dispatch(onHideSpecContents())}
+					>
+						<img alt="arrow back" src={arrowBack} />
+					</ButtonBack>
+					Tabla de contenidos
+				</PanelTitle>
 				<ListTitle>Indice de Partidas</ListTitle>
 				{sections.map((section) => (
 					<Fragment key={section.id}>
@@ -123,8 +137,14 @@ const SpecContents = () => {
 												padding="0 23px 0 77px"
 												title={product.element.title}
 												href={`${pathname}#${product.id}`}
+												onClick={() => {
+													if (
+														window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches
+													)
+														dispatch(onHideSpecContents());
+												}}
 											>
-												<span>{product.element.name}</span>
+												<span>{`${product.element.name}`}</span>
 												<span>&nbsp;</span>
 											</ListItem>
 										))}

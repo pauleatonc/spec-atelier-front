@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import {
-	NAVBAR_HEIGHT,
 	COLOR_MINE_SHAFT,
+	MEDIA_QUERY_SMALL,
+	NAVBAR_HEIGHT,
 } from '../../config/constants/styled-vars';
 import specDownloadSource from '../../assets/images/icons/spec-download.svg';
 import specDownloadActiveSource from '../../assets/images/icons/spec-download_active.svg';
@@ -17,19 +18,36 @@ export const Root = styled.div`
 	border-top-right-radius: 2px;
 	padding: 4px 20px 4px 36px;
 	align-items: flex-end;
+<<<<<<< HEAD
 	position: relative;
+=======
+
+	${MEDIA_QUERY_SMALL} {
+		padding: 0px;
+		width: 100%;
+		justify-content: space-around;
+	}
+>>>>>>> 4089aabb05c38d103e2a86b9629b3bc7cbf7e496
 `;
 
 export const Separator = styled.span`
 	background-color: rgba(151, 151, 151, 0.49);
 	height: 16px;
 	width: 2px;
+
+	${MEDIA_QUERY_SMALL} {
+		display: none;
+	}
 `;
 
 export const Section = styled.section`
 	padding: 0 23px;
 	padding-left: ${({ withoutPaddingLeft }) =>
 		withoutPaddingLeft ? '0' : '23px'};
+
+	${MEDIA_QUERY_SMALL} {
+		padding: 0 15px;
+	}
 `;
 
 export const ProjectName = styled(Section)`
@@ -39,6 +57,10 @@ export const ProjectName = styled(Section)`
 	font-weight: bold;
 	letter-spacing: 1px;
 	line-height: 1.58;
+
+	${MEDIA_QUERY_SMALL} {
+		font-size: 12px;
+	}
 `;
 
 const Span = styled.span`
@@ -66,6 +88,18 @@ export const Monetization = styled(Span)`
   }
 `;
 
+export const Logo = styled.div`
+	${MEDIA_QUERY_SMALL} {
+		display: none;
+	}
+`;
+
+export const MobileLogo = styled.div`
+	display: none;
+	${MEDIA_QUERY_SMALL} {
+		display: flex;
+	}
+`;
 export const SpecOptions = styled.div`
 	height: 100%;
 	display: flex;

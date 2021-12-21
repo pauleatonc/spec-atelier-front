@@ -1,8 +1,8 @@
 import React from 'react';
-import { Container, SearchContaienr } from './Search.styles';
+import { Container, SearchContaienr, ButtonFilter } from './Search.styles';
 import { SearchBar } from '../../components/SpecComponents';
 
-const Search = ({ keyword, onChangeParams, placeholder }) => {
+const Search = ({ keyword, onChangeParams, placeholder, onClickFilter }) => {
 	return (
 		<Container>
 			<SearchContaienr>
@@ -14,6 +14,9 @@ const Search = ({ keyword, onChangeParams, placeholder }) => {
 					value={keyword}
 					onChange={onChangeParams}
 				/>
+				<ButtonFilter rol="button" onClick={() => onClickFilter()}>
+					<i className="fas fa-filter" />
+				</ButtonFilter>
 			</SearchContaienr>
 		</Container>
 	);

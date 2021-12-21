@@ -11,7 +11,7 @@ import {
 	onShowAttachModal,
 	onHideAttachModal,
 } from './SpecProducts.actions';
-import ProductListContainer from '../products-list/ProductsList.container';
+import ProductsListContainer from '../products-list/ProductsList.container';
 
 import { Root, Body } from './SpecProducts.styles';
 import SpecModalAttachProduct from './SpecModalAttachProduct.container';
@@ -41,7 +41,7 @@ const SpecProductsList = () => {
 				section.push(section_id);
 			}
 		});
-		return dispatch(
+		dispatch(
 			onAttachSpecProduct({
 				productID: product.id,
 				specID,
@@ -52,21 +52,22 @@ const SpecProductsList = () => {
 		);
 	};
 
+	const handleDetachSpecProduct = (product, items) => {
+		dispatch(onHideAttachModal());
+		dispatch(onDetachSpecProduct({ product, specID, items }));
+	};
+
 	const handleCardClick = (product) => (event) => {
 		event.stopPropagation();
 		const { id: productID, items } = product;
 		const hasProduct = selectedProducts.find(
-			(selectedProduct) => selectedProduct?.element.id === productID,
+			(selectedProduct) =>
+				selectedProduct?.element.original_product_id === productID,
 		);
 
-		if (hasProduct) {
-			return dispatch(onDetachSpecProduct({ productID, specID }));
-		}
-
-		if (items.length > 1) {
-			return dispatch(onShowAttachModal({ product }));
-		}
-		return handleAttachSpecProduct(items, product);
+		if (items.length > 1) dispatch(onShowAttachModal({ product }));
+		else if (hasProduct) handleDetachSpecProduct(product, items);
+		else handleAttachSpecProduct(items, product);
 	};
 
 	const handleCreateProduct = () => {
@@ -85,8 +86,9 @@ const SpecProductsList = () => {
 			<Root>
 				<Body>
 					{show && (
-						<ProductListContainer
-							extraFilters={{ limit: 20 }}
+						<ProductsListContainer
+							isSpec
+							extraFilters={{ limit: 20, project_spec: specID }}
 							filterOptionsKey="spec"
 							canAdd
 							selectedProducts={selectedProducts}
@@ -95,6 +97,7 @@ const SpecProductsList = () => {
 							emptyListComponent={CreateProduct}
 							onActionCard={handleCardClick}
 							onClickCreate={handleCreateProduct}
+							viewKey="spec_products"
 						/>
 					)}
 				</Body>
@@ -103,7 +106,8 @@ const SpecProductsList = () => {
 				showAttachModal={showAttachModal}
 				product={productToAttach}
 				onClose={() => dispatch(onHideAttachModal())}
-				onSubmit={handleAttachSpecProduct}
+				onAttach={handleAttachSpecProduct}
+				onDetach={handleDetachSpecProduct}
 			/>
 		</>
 	);

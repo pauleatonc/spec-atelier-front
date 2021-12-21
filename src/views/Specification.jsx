@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AlertContainer from '../containers/alert/Alert.container';
 import SpecHeaderContainer from '../containers/spec-header/SpecHeader.container';
@@ -22,8 +22,8 @@ import ContactFormContainer from '../containers/modal-contact-form/ModalContactF
 import { changeOption } from '../containers/spec-contents-buttons/SpecContentsButtons.actions';
 import {
 	ESPEC_DOCUMENT,
-	SPEC_TABLE
-  } from '../config/constants/button-variants';
+	SPEC_TABLE,
+} from '../config/constants/button-variants';
 
 import { Root, Main, Navigation, Panels } from './Specification.styles';
 
@@ -32,8 +32,12 @@ import { Root, Main, Navigation, Panels } from './Specification.styles';
  */
 const Specification = () => {
 	const dispatch = useDispatch();
+	const [showFilters, setShowFilters] = useState(false);
+	const [selectedSection, setSelectedSection] = useState('');
+	const [selectedItem, setSelectedItem] = useState('');
 	const { dataSection } = useSelector((state) => state);
 	const { option } = dataSection;
+
 	useEffect(() => {
 		dispatch(changeOption(ESPEC_DOCUMENT));
 	}, []);
@@ -43,15 +47,34 @@ const Specification = () => {
 				<SpecHeaderContainer />
 				<SpecContentButtons />
 				<Main>
-					{option === SPEC_TABLE ? <SpecContentsTable /> : <SpecDocumentContainer />}
+					{option === SPEC_TABLE ? (
+						<SpecContentsTable />
+					) : (
+						<SpecDocumentContainer />
+					)}
 
 					<Navigation>
 						<SpecNavigatorContainer />
 						<Panels>
 							<SpecProductsPanelLayout
+								showFilters={showFilters}
+								selectedSection={selectedSection}
+								selectedItem={selectedItem}
+								setShowFilters={setShowFilters}
+								setSelectedSection={setSelectedSection}
+								setSelectedItem={setSelectedItem}
 								filtersPanels={[
-									<SpecProductsSectionsContainer />,
-									<SpecProductsItemsContainer />,
+									<SpecProductsSectionsContainer
+										setShowFilters={setShowFilters}
+										setSelectedSection={setSelectedSection}
+										selectedSection={selectedSection}
+									/>,
+									<SpecProductsItemsContainer
+										setShowFilters={setShowFilters}
+										setSelectedItem={setSelectedItem}
+										selectedSection={selectedSection}
+										selectedItem={selectedItem}
+									/>,
 								]}
 							>
 								<SpecProductsContainer />
