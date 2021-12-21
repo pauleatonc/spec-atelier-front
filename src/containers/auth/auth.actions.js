@@ -34,6 +34,7 @@ export const NEW_PASSWORD = 'NEW_PASSWORD';
 export const NEW_PASSWORD_ERROR = 'NEW_PASSWORD_ERROR';
 export const IMPERSONATE_USER_ERROR = 'IMPERSONATE_USER_ERROR';
 export const CLEAR_IMPERSONATED = 'CLEAR_IMPERSONATED';
+export const ACCEPT_NOTIFICATION_LOGIN = 'ACCEPT_NOTIFICATION_LOGIN';
 export const ACCEPT_NOTIFICATION_GOOGLE = 'ACCEPT_NOTIFICATION_GOOGLE';
 export const ACCEPT_NOTIFICATION_ERROR = 'ACCEPT_NOTIFICATION_ERROR';
 export const REJECT_NOTIFICATION_GOOGLE = 'REJECT_NOTIFICATION_GOOGLE';
@@ -61,7 +62,7 @@ export const loginAction = (data) => async (dispatch) => {
 						setLocalStorage({ key: 'isAcceptStore', value: response.codeStatus });
 						dataResp.then((d) => {
 							setLocalStorage({ key: 'messageAcceptStore', value: d.message });
-							dispatch(onActionCreator(ACCEPT_NOTIFICATION_GOOGLE, d))
+							dispatch(onActionCreator(ACCEPT_NOTIFICATION_LOGIN, d))
 						});
 					}else{
 						setLocalStorage({ key: 'isAcceptStore', value: response.codeStatus });
@@ -287,6 +288,11 @@ export const clearImpersonated = () => (dispatch) =>
 export const rejectNotifications = (body) => async (dispatch) => {
 	rejectNotification(body).then((response) => {
 		const dataResp = response.resp;
+		if(response.codeStatus === 304){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not Modified' }),
+			);
+		}
 		if(response.codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),

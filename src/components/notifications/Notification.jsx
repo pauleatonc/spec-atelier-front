@@ -39,13 +39,17 @@ const Notifications = (props) => {
         userData
     } = props;
     const dispatch = useDispatch();
-    const { loadingNoti } = useSelector((state) => state.specHeader);
+    const { loadingNoti, notificationsList } = useSelector((state) => state.specHeader);
     const [ accionStatus, setAccionStatus ] = useState(status);
     const [ itemIdStatus, setItemIdStatus ] = useState(itemId);
     const [ projectIdStatus, setProjectIdStatus] = useState(projectId);
     const [ watchedStatus, setWatchedStatus ] = useState(watched);
     const [ triggeredStatus, setTriggeredStatus ] = useState(triggered);
     const [ projectUrlStatus, setProjectUrlStatus] = useState();
+    useEffect(() => {
+        setWatchedStatus(watched);
+	}, [notificationsList]);
+
     useEffect(() => {
         if(status === "Proyecto Aceptado"){
             setProjectUrlStatus(projectUrl[0].url);
@@ -159,20 +163,20 @@ const Notifications = (props) => {
                                         <>
                                             {loadingNoti && (
                                                 <>
-                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} style={{ background: '#efecec' }} onClick={() => reject(itemIdStatus, projectIdStatus)} disabled>
+                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} style={{ background: '#efecec', marginTop: '8px' }} onClick={() => reject(itemIdStatus, projectIdStatus)} disabled>
                                                         Rechazar
                                                     </Button>
-                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} style={{ marginLeft: '11px', background: 'rgb(156 221 212);' }} disabled>
+                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} style={{ marginLeft: '11px', background: 'rgb(156 221 212);', marginTop: '8px' }} disabled>
                                                         Aceptar
                                                     </Button>
                                                 </>
                                             )}
                                             {!loadingNoti && (
                                                 <>
-                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} onClick={() => reject(itemIdStatus, projectIdStatus)}>
+                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} style={{ marginTop: '8px' }} onClick={() => reject(itemIdStatus, projectIdStatus)}>
                                                         Rechazar
                                                     </Button>
-                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} onClick={() => accept(itemIdStatus, projectIdStatus)} style={{ marginLeft: '11px' }}>
+                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} onClick={() => accept(itemIdStatus, projectIdStatus)} style={{ marginLeft: '11px',marginTop: '8px' }}>
                                                         Aceptar
                                                     </Button>
                                                 </>
@@ -233,20 +237,20 @@ const Notifications = (props) => {
                                         <>
                                             {loadingNoti && (
                                                 <>
-                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} style={{ background: '#efecec' }} onClick={() => reject(itemIdStatus, projectIdStatus)} disabled>
+                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} style={{ background: '#efecec' , marginTop: '8px' }} onClick={() => reject(itemIdStatus, projectIdStatus)} disabled>
                                                         Rechazar
                                                     </Button>
-                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} style={{ marginLeft: '11px', background: 'rgb(156 221 212);' }} disabled>
+                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} style={{ marginLeft: '11px', background: 'rgb(156 221 212);', marginTop: '8px' }} disabled>
                                                         Aceptar
                                                     </Button>
                                                 </>
                                             )}
                                             {!loadingNoti && (
                                                 <>
-                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} onClick={() => reject(itemIdStatus, projectIdStatus)}>
+                                                    <Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION} style={{marginTop: '8px' }} onClick={() => reject(itemIdStatus, projectIdStatus)}>
                                                         Rechazar
                                                     </Button>
-                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} onClick={() => accept(itemIdStatus, projectIdStatus)} style={{ marginLeft: '11px' }}>
+                                                    <Button variant={VARIANTS_BUTTON.PRIMARY} onClick={() => accept(itemIdStatus, projectIdStatus)} style={{ marginLeft: '11px', marginTop: '8px' }}>
                                                         Aceptar
                                                     </Button>
                                                 </>
@@ -268,8 +272,8 @@ const Notifications = (props) => {
 
 Notifications.defaultProps = {
     itemType: '',
-    triggeredStatus: false,
-    watchedStatus: false,
+    triggered: false,
+    watched: false,
     date: '',
     message: '',
     status: '',
@@ -280,8 +284,8 @@ Notifications.defaultProps = {
 };
 Notifications.propTypes = {
     itemType: PropTypes.string,
-    triggeredStatus: PropTypes.bool,
-    watchedStatus: PropTypes.bool,
+    triggered: PropTypes.bool,
+    watched: PropTypes.bool,
     date: PropTypes.string,
     message: PropTypes.string,
     status: PropTypes.string,

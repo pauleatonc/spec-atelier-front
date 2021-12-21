@@ -102,12 +102,10 @@ export const ProfileInfo = styled.div`
 `;
 
 export const ContainerNameUser = styled.div`
-	height: 60px;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin-top: 44px;
 	margin-right: 23px;
 `;
 
@@ -154,14 +152,13 @@ export const LinkHeader = styled.a`
 
 export const ListItem = styled.div`
 	padding-top: 23px;
+	padding-bottom: 25px;
 	display: flex;
 	
 `;
 
 export const ContentActions = styled.div`
-	margin-bottom: 64px;
 	display: flex;
-	margin-top: 5px;
 `;
 
 export const ContentPoint = styled.div`

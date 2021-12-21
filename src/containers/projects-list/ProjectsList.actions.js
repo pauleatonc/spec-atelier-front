@@ -51,6 +51,11 @@ export const clearProjects = () => dispatch => dispatch(onActionCreator(CLEAR_PR
 export const accepthNotificationsAC = (body) => async (dispatch) => {
   acceptNotification(body).then((response) => {
     const dataResp = response.resp;
+    if(response.codeStatus !== 401 && response.codeStatus !== 404 && response.codeStatus !== 500 && response.codeStatus !== 200){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not Modified' }),
+			);
+		}
     if(response.codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),

@@ -49,8 +49,11 @@ const ProjectsList = () => {
 
   useEffect(() => {
     if (token) {
+      if(token === '304'){
+        dispatch(onShowAlertSuccess({ message: 'Not Modified' }));
+      }
       if(token === '401'){
-        dispatch(onShowAlertSuccess({ message: 'session not found' }));
+        dispatch(onShowAlertSuccess({ message: 'Session not found' }));
       }
       if(token === '404'){
         dispatch(onShowAlertSuccess({ message: 'Not found' }));

@@ -123,7 +123,6 @@ const NavNotifications = () => {
 											projectUrl={detail?.item?.actions}
 											projectId={detail?.item?.project_id}
 											userData={detail?.item?.permission?.user}
-											//newNoti={updateNot}
 										/>
 									)
 									)

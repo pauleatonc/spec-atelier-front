@@ -37,6 +37,7 @@ export const NotificationsOption = styled.section`
 		right: 13px;
 		box-shadow: -5px -5px 2px -4px rgb(0 0 0 / 25%);
 		border-radius: 4px;
+		z-index: -100;
 	}
 	@media (max-width: 500px){
 		right: 52px !important;
@@ -155,7 +156,7 @@ export const InfoUserName2 = styled.label`
 export const ListHeader = styled.div`
     padding: 8%;
 	padding-left: 26px;
-	padding-bottom: 5px;
+	padding-bottom: 12px;
 `;
 
 export const TitleHeader = styled.label`

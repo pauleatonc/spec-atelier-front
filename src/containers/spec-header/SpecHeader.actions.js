@@ -102,6 +102,12 @@ export const accepthNotificationsAC = (body) => async (dispatch) => {
 	dispatch(onActionCreator(ACCEPT_NOTIFICATION));	
 	return acceptNotification(body).then((response) => {
 		const dataResp = response.resp;
+		console.log(response);
+		if(response.codeStatus !== 401 && response.codeStatus !== 404 && response.codeStatus !== 500 && response.codeStatus !== 200){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not Modified' }),
+			);
+		}
 		if(response.codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
@@ -142,6 +148,11 @@ export const rejectNotifications = (body) => async (dispatch) => {
 	dispatch(onActionCreator(REJECT_NOTIFICATION));
 	return rejectNotification(body).then((response) => {
 		const dataResp = response.resp;
+		if(response.codeStatus === 304){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not Modified' }),
+			);
+		}
 		if(response.codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
@@ -183,6 +194,11 @@ export const undoRejectNotifications = (body) => async (dispatch) => {
 	dispatch(onActionCreator(UNDO_REJECT_NOTIFICATION));
 	return undoRejectNotification(body).then((response) => {
 		const dataResp = response.resp;
+		if(response.codeStatus === 304){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not Modified' }),
+			);
+		}
 		if(response.codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
@@ -231,6 +247,11 @@ export const undoStopGetNotifications = () => async (dispatch) => {
 export const accepthNotificationsAC2 = (body) => async (dispatch) => {
 	acceptNotification(body).then((response) => {
 		const dataResp = response.resp;
+		if(response.codeStatus === 304){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not Modified' }),
+			);
+		}
 		if(response.codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
@@ -267,6 +288,11 @@ export const accepthNotificationsAC2 = (body) => async (dispatch) => {
   export const rejectNotificationsAC = (body) => async (dispatch) => {
 	rejectNotification(body).then((response) => {
 	  const dataResp = response.resp;
+	  	if(response.codeStatus === 304){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not Modified' }),
+			);
+		}
 	  if(response.codeStatus === 401){
 			  dispatch(
 				  onShowAlertSuccess({ message: 'Not session found' }),
