@@ -18,7 +18,6 @@ import {
 import logoSource from '../../assets/images/logo-spec.png';
 import logo2xSource from '../../assets/images/logo-spec@2x.png';
 import logo3xSource from '../../assets/images/logo-spec@3x.png';
-import logoIcon from '../../assets/images/logo-icon.png';
 import {
   cleanDownload,
   downloadSpecDocument,
@@ -34,6 +33,7 @@ const SpecHeader = () => {
   const { id } = useParams();
   const { project } = useSelector((state) => state.specDocument);
   const { url } = useSelector((state) => state.specHeader);
+
   const openModalTeam = () =>
     dispatch(
       onShowModal(
@@ -45,12 +45,11 @@ const SpecHeader = () => {
 
   const handleDownloadClick = () =>
     dispatch(downloadSpecDocument({ specID: id }));
+
   const handleDownloadBudgetClick = () =>
     dispatch(downloadBudgetDocument({ specID: id }));
 
-  useEffect(() => {
-    return () => dispatch(cleanDownload());
-  }, []);
+  useEffect(() => () => dispatch(cleanDownload()), []);
 
   useEffect(() => {
     const downloadDoc = () => {

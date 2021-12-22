@@ -6,6 +6,8 @@ import {
 	googleLogin,
 	recoveryPassword,
 	newPassword,
+	acceptNotification,
+	rejectNotification,
 } from '../../services/auth.service';
 import {
 	setLocalStorage,
@@ -32,6 +34,12 @@ export const NEW_PASSWORD = 'NEW_PASSWORD';
 export const NEW_PASSWORD_ERROR = 'NEW_PASSWORD_ERROR';
 export const IMPERSONATE_USER_ERROR = 'IMPERSONATE_USER_ERROR';
 export const CLEAR_IMPERSONATED = 'CLEAR_IMPERSONATED';
+export const ACCEPT_NOTIFICATION_LOGIN = 'ACCEPT_NOTIFICATION_LOGIN';
+export const ACCEPT_NOTIFICATION_GOOGLE = 'ACCEPT_NOTIFICATION_GOOGLE';
+export const ACCEPT_NOTIFICATION_ERROR = 'ACCEPT_NOTIFICATION_ERROR';
+export const REJECT_NOTIFICATION_GOOGLE = 'REJECT_NOTIFICATION_GOOGLE';
+export const REJECT_NOTIFICATION_ERROR = 'REJECT_NOTIFICATION_ERROR';
+export const CLEAR_ACCEPT_ACTION = 'CLEAR_ACCEPT_ACTION';
 
 /**
  * Login action
@@ -44,6 +52,28 @@ export const loginAction = (data) => async (dispatch) => {
 		if (error) throw error;
 		setLocalStorage({ key: 'token', value: user.jwt });
 		setLocalStorage({ key: 'userID', value: user.id });
+		if (data.action.idNoti !== undefined) {
+			if (data.action.actionUrl === "accept_invitation") {
+				deleteLocalStorage('isAcceptStore');
+				deleteLocalStorage('messageAcceptStore');
+				acceptNotification(data.action).then((response) => {
+					const dataResp = response.resp;
+					if(response.codeStatus === 200){
+						setLocalStorage({ key: 'isAcceptStore', value: response.codeStatus });
+						dataResp.then((d) => {
+							setLocalStorage({ key: 'messageAcceptStore', value: d.message });
+							dispatch(onActionCreator(ACCEPT_NOTIFICATION_LOGIN, d))
+						});
+					}else{
+						setLocalStorage({ key: 'isAcceptStore', value: response.codeStatus });
+					}
+				}, (e) => {
+					dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
+						e
+					}))
+				})
+			}
+		}
 		return dispatch(
 			onActionCreator(LOG_IN, {
 				isLogin: true,
@@ -159,6 +189,27 @@ export const googleLoginAction = (data) => async (dispatch) => {
 					user: response.user,
 				},
 			});
+			if (data.action.idNoti !== undefined) {
+				if (data.action.actionUrl === "accept_invitation") {
+					deleteLocalStorage('isAcceptStore');
+					acceptNotification(data.action).then((resp) => {
+						const dataResp = resp.resp;
+						if(resp.codeStatus === 200){
+							setLocalStorage({ key: 'isAcceptStore', value: resp.codeStatus });
+							dataResp.then((d) => {
+								setLocalStorage({ key: 'messageAcceptStore', value: d.message });
+								dispatch(onActionCreator(ACCEPT_NOTIFICATION_GOOGLE, d))
+							})
+						}else{
+							setLocalStorage({ key: 'isAcceptStore', value: resp.codeStatus });
+						}
+					}, (e) => {
+						dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
+							e
+						}))
+					})
+				}
+			}
 		},
 		(error) => {
 			dispatch({
@@ -233,3 +284,47 @@ export const becomeUser = (params) => async (dispatch) => {
 
 export const clearImpersonated = () => (dispatch) =>
 	dispatch(onActionCreator(CLEAR_IMPERSONATED));
+
+export const rejectNotifications = (body) => async (dispatch) => {
+	rejectNotification(body).then((response) => {
+		const dataResp = response.resp;
+		if(response.codeStatus === 304){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not Modified' }),
+			);
+		}
+		if(response.codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not session found' }),
+			);
+		}
+		if(response.codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Not found' }),
+			);
+		}
+		if(response.codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Internal server' }),
+			);
+		}
+		if(response.codeStatus === 200){
+			dataResp.then((data) => {
+				dispatch(
+				  onShowAlertSuccess({ message: data.message }),
+				);
+			  })
+			dispatch(onActionCreator(REJECT_NOTIFICATION_GOOGLE, response));
+		}
+	}, (error) => {
+		dispatch(
+			onShowAlertSuccess({ message: 'Error al rechazar proyecto.' }),
+		);
+		dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
+			error
+		}))
+	})
+}
+
+export const clearAccepAction = () => (dispatch) =>
+	dispatch(onActionCreator(CLEAR_ACCEPT_ACTION));

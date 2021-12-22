@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import ButtonGoogleLogin from '../../../components/buttons/ButtonGoogle';
 
@@ -22,10 +22,11 @@ const Login = () => {
 	const { state } = useLocation();
 	const [user, setUser] = useState({ password: '', email: state?.email || '' });
 	const dispatch = useDispatch();
+	const { action, id, project_id } = useParams();
 	const handleSubmit = () => {
 		deleteLocalStorage('responseStatus');
-		dispatch(loginAction({ user }));
-	} 
+		dispatch(loginAction({ user, action: { idNoti: id, Idproject: project_id, actionUrl: action } }));
+	}
 	const onChangeUser = ({ target: { name, value } }) =>
 		setUser({ ...user, [name]: value });
 
@@ -47,7 +48,7 @@ const Login = () => {
 			<LoginTitle>Inicia sesión</LoginTitle>
 
 			<ButtonGoogleContainer>
-				<ButtonGoogleLogin label="Iniciar con Google" />
+				<ButtonGoogleLogin label="Iniciar con Google" action={action} id={id} project_id={project_id} />
 			</ButtonGoogleContainer>
 
 			<TextInfo size={14}>O si prefieres inicia con tu cuenta Spec</TextInfo>

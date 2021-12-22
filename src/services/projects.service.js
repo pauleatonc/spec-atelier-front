@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '../config/constants/environment';
-import { getJsonRequest, postJsonRequest, deleteJsonRequest, putJsonRequest } from '../modules/requests';
+import { getJsonRequest, postJsonRequest, deleteJsonRequest, putJsonRequest, patchJsonRequest } from '../modules/requests';
 import { cleanObject, factoryService, formatParams } from '../modules/services';
 
 /**
@@ -38,3 +38,14 @@ export const deleteProject = factoryService(
   ({ userId, projectId }) => deleteJsonRequest(`${API_BASE_URL}/users/${userId}/projects/${projectId}`),
 );
 
+export const acceptNotification = factoryService((body) =>
+	patchJsonRequest(
+		`${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/accept`,
+	),true,
+);
+
+export const rejectNotification = factoryService((body) =>
+	patchJsonRequest(
+		`${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/refuse`,
+	),true,
+);

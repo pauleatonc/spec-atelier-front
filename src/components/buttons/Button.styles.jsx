@@ -87,3 +87,8 @@ export const CancelSecondaryButton = styled(BaseButton)`
   border: 1px solid transparent;
   color: ${SECONDARY};
 `;
+export const CancelNotificationButton = styled(BaseButton)`
+  background-color: transparent;
+  border: 2px solid #afafaf;
+  color: #afafaf;
+`;
