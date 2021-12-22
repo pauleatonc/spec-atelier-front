@@ -22,16 +22,13 @@ const BaseButton = styled.button`
   min-width: 107px;
   padding: ${({ padding = '0 19px'}) => padding };
   width: ${({ width = 'initial' }) => width};
-
   &:active {
     outline: 0;
     transform: scale(.98);
   }
-
   &:focus {
     outline: 0;
   }
-
   &:disabled, &[disabled] {
     cursor: not-allowed;
     opacity: 0.8;
@@ -86,4 +83,9 @@ export const CancelSecondaryButton = styled(BaseButton)`
   background-color: transparent;
   border: 1px solid transparent;
   color: ${COLOR_SECONDARY};
+`;
+export const CancelNotificationButton = styled(BaseButton)`
+  background-color: transparent;
+  border: 2px solid #afafaf;
+  color: #afafaf;
 `;

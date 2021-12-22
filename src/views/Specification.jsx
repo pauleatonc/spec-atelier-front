@@ -41,7 +41,6 @@ const Specification = () => {
 	useEffect(() => {
 		dispatch(changeOption(ESPEC_DOCUMENT));
 	}, []);
-
 	return (
 		<>
 			<Root>

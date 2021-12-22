@@ -6,7 +6,8 @@ import {
   DefaultButton,
   GrayButton,
   CancelButton,
-  CancelSecondaryButton
+  CancelSecondaryButton,
+  CancelNotificationButton,
 } from './Button.styles';
 
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
@@ -23,6 +24,7 @@ const Button = props => {
     [VARIANTS_BUTTON.GRAY]: <GrayButton {...buttonProps} />,
     [VARIANTS_BUTTON.CANCEL]: <CancelButton {...buttonProps} />,
     [VARIANTS_BUTTON.CANCEL_SECONDARY]: <CancelSecondaryButton {...buttonProps} />,
+    [VARIANTS_BUTTON.CANCEL_SECONDARY_NOTIFICATION]: <CancelNotificationButton {...buttonProps} />,
   }
 
   return BUTTONS[variant] || <DefaultButton {...buttonProps} />;
