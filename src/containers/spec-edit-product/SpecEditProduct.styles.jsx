@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	COLOR_MINE_SHAFT,
-	COLOR_WHITE,
-	COLOR_PRIMARY,
-	COLOR_GREY,
+	MINE_SHAFT,
+	WHITE,
+	PRIMARY,
+	SILVER_CHALICE,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -52,7 +52,7 @@ export const Label = styled.div`
 
 export const Loading = styled.div`
 	align-items: center;
-	color: ${COLOR_WHITE};
+	color: ${WHITE};
 	display: flex;
 	font-family: Lato;
 	font-size: 16px;
@@ -73,14 +73,14 @@ export const Header = styled.section`
 `;
 
 export const Title = styled.span`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
 	letter-spacing: 1px;
 `;
 
-export const CloseIcon = styled.img`
+export const CloseIcon = styled.i`
 	bottom: 0;
 	cursor: pointer;
 	margin: auto 0;
@@ -158,7 +158,7 @@ export const Text = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 0.63px;
-	color: ${COLOR_PRIMARY};
+	color: ${PRIMARY};
 	margin: 12px 0;
 	cursor: pointer;
 	&:first-child {
@@ -185,13 +185,13 @@ export const ImagesContainer = styled.section`
 	display: flex;
 	flex-wrap: wrap;
 	height: 260px;
-	border: dotted 1px ${COLOR_GREY};
+	border: dotted 1px ${SILVER_CHALICE};
 `;
 
 export const DocContainer = styled.div`
 	margin: 8px 0;
 	width: 100%;
-	border: dotted 1px ${COLOR_GREY};
+	border: dotted 1px ${SILVER_CHALICE};
 	height: 160px;
 	overflow-y: auto;
 `;

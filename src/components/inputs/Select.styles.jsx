@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import {
-	COLOR_BLACK,
-	COLOR_LIGHTGREY,
-	COLOR_MINE_SHAFT,
+	BLACK,
+	SILVER,
+	MINE_SHAFT,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -10,7 +10,7 @@ export const Root = styled.div`
 `;
 
 export const Label = styled.label`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	display: block;
 	font-family: Lato;
 	font-size: 16px;
@@ -30,7 +30,7 @@ export const Input = styled.input`
 	background-color: transparent;
 	border: 1px solid #d6d6d6;
 	border-radius: 9px;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	cursor: pointer;
 	display: inline-flex;
 	height: 38px;
@@ -65,11 +65,11 @@ export const InputUnderline = styled(Input)`
 	display: flex;
 	flex: 1;
 	justify-content: space-between;
-	border-bottom: 2px solid ${COLOR_LIGHTGREY};
+	border-bottom: 2px solid ${SILVER};
 	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 1px;
-	color: ${COLOR_BLACK};
+	color: ${BLACK};
 	border-radius: 0;
 `;
 
@@ -84,7 +84,7 @@ export const DropIcon = styled.img`
 
 export const Option = styled.section`
 	box-sizing: border-box;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	cursor: pointer;
 	font-family: Lato;
 	font-size: 12px;

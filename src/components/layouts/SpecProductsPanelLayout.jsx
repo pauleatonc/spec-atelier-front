@@ -58,10 +58,11 @@ const SpecProductsPanelLayout = ({
 					</ButtonBack>
 					<Title>Productos</Title>
 					<ButtonClose
+            className="fas fa-times"
 						role="button"
 						onClick={() => dispatch(onHideSpecProducts())}
 					>
-						<i className="fas fa-times" />
+						{/* <i className="fas fa-times" /> */}
 					</ButtonClose>
 					<Breadcrumbs
 						justifyCenter

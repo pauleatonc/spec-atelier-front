@@ -102,11 +102,7 @@ const SpecProductsItems = ({
 						},
 					]}
 				/>
-				<CloseIcon
-					alt="Cerrar"
-					src={closeSource}
-					onClick={handleCloseSpecItems}
-				/>
+				<CloseIcon alt="Cerrar"	className="fas fa-times" onClick={handleCloseSpecItems} />
 			</Header>
 			{items.length === 0 && <Loading>Cargando...</Loading>}
 			{items.length > 0 && (

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {
-	COLOR_MINE_SHAFT,
+	MINE_SHAFT,
 	MEDIA_QUERY_SMALL,
 	NAVBAR_HEIGHT,
 } from '../../config/constants/styled-vars';
@@ -47,7 +47,7 @@ export const Section = styled.section`
 `;
 
 export const ProjectName = styled(Section)`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;

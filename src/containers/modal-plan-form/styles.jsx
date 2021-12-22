@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {
-	COLOR_WHITE,
+	WHITE,
 	MEDIA_QUERY_SMALL,
 	CARIBBEAN_GREEN,
 	SILVER,
@@ -13,10 +13,11 @@ import {
 
 export const Container = styled.section`
 	width: 100%;
+  padding: 20px;
 	max-width: ${({ isModalSuccess }) => (isModalSuccess ? '380px' : '954px')};
 	display: flex;
 	flex-wrap: wrap;
-	background-color: ${COLOR_WHITE};
+	background-color: ${WHITE};
 	${MEDIA_QUERY_SMALL} {
 		max-width: ${({ isModalSuccess }) => (isModalSuccess ? '380px' : '100%')};
 	}

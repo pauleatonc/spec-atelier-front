@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { COLOR_GREEN_UNDERLINE } from '../../../../config/constants/styled-vars';
+import { JAVA } from '../../../../config/constants/styled-vars';
 
 import CurrencyInput from './CurrencyInput'
 
@@ -56,7 +56,7 @@ const CurrentInputTable = ({
 			typeInput="quantity"
 			value={currentValue}
 			onChange={onChangeCurrentValue}
-			colorUnderline={COLOR_GREEN_UNDERLINE}
+			colorUnderline={JAVA}
 			onBlur={handleBlur}
 			{...restProps}
 		/>
@@ -67,7 +67,7 @@ const CurrentInputTable = ({
 			typeInput="price"
 			value={currentValue}
 			onChange={onChangeCurrentValue}
-			colorUnderline={COLOR_GREEN_UNDERLINE}
+			colorUnderline={JAVA}
 			onBlur={handleBlur}
 			{...restProps} 
 		/>}

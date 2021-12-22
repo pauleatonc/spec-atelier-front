@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, COLOR_WHITE } from '../../config/constants/styled-vars';
+import { ALABASTER, ALTO, DUSTY_GRAY, MINE_SHAFT, WHITE } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
-  background-color: #FAFAFA;
+  background-color: ${ALABASTER};
   border-radius: 5px;
   box-shadow: ${({ shadow = true }) => shadow ? '0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.14)' : 'none'};
   display: grid;
@@ -21,7 +21,7 @@ Root.propTypes = {
 
 export const Loading = styled.div`
   align-items: center;
-  color: ${COLOR_MINE_SHAFT};
+  color: ${MINE_SHAFT};
   display: flex;
   font-family: Lato;
   font-size: 16px;
@@ -34,7 +34,7 @@ export const Loading = styled.div`
 
 export const Header = styled.section`
   align-items: center;
-  border-bottom: 1px solid rgba(151, 151, 151, 0.32);
+  border-bottom: 1px solid ${DUSTY_GRAY};
   display: flex;
   padding: 0 60px 0 40px;
   position: relative;
@@ -42,20 +42,20 @@ export const Header = styled.section`
 `;
 
 export const Title = styled.span`
-  color: ${COLOR_MINE_SHAFT};
+  color: ${MINE_SHAFT};
   font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1px;
 `;
 
-export const CloseIcon = styled.img`
+export const CloseIcon = styled.i`
   bottom: 0;
   cursor: pointer;
   margin: auto 0;
   position: absolute;
   right: 31px;
-  top: 0;
+  top: 31px;
 `;
 
 export const Body = styled.section`
@@ -110,16 +110,16 @@ export const ButtonSelectorContent = styled.div`
   flex: 1;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #979797;
+  border: 1px solid ${DUSTY_GRAY};
   border-radius: 9px;
   padding: 0 12px 0 18px;
-  background-color: ${({ disabled }) => disabled ? '#DDD' : COLOR_WHITE}
+  background-color: ${({ disabled }) => disabled ? ALTO : WHITE}
 `;
 
 export const InputButton = styled.input`
   align-items: center;
   background-color: transparent;
-  color: ${COLOR_MINE_SHAFT};
+  color: ${MINE_SHAFT};
   cursor: pointer;
   display: inline-flex;
   height: 38px;
@@ -138,11 +138,11 @@ export const InputButton = styled.input`
   }
 
   &::placeholder {
-    color: rgba(33, 33, 33, 0.46);
+    color: ${MINE_SHAFT};
   }
 
   &:disabled {
-    background-color: #DDD;
+    background-color: ${ALTO};
     cursor: not-allowed;
   }
 `;

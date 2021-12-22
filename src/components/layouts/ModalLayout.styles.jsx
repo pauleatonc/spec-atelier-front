@@ -14,6 +14,7 @@ const Root = styled.div`
   top: 0;
   width: 100%;
   overflow-y: auto;
+  padding: 20px;
 `;
 
 Root.propTypes = {

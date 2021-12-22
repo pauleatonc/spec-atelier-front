@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import {
-	COLOR_WHITE,
-	COLOR_BLACK,
-	COLOR_LIGHTERGREY,
+	WHITE,
+	BLACK,
+	GALLERY,
 	MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
@@ -12,7 +12,7 @@ const HEIGHT_CONTENT = '350px';
 export const Container = styled.div`
 	width: 400px;
 	padding: 30px;
-	background-color: ${COLOR_WHITE};
+	background-color: ${WHITE};
 	border-radius: 4px;
 	min-height: ${HEIGHT_CONTENT};
 	font-weight: normal;
@@ -29,7 +29,7 @@ export const Container = styled.div`
 	}
 `;
 
-export const ButtonClose = styled.img`
+export const ButtonClose = styled.i`
 	display: flex;
 	justify-content: flex-end;
 	cursor: pointer;
@@ -62,7 +62,7 @@ export const Title = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1.17px;
-	color: ${COLOR_BLACK};
+	color: ${BLACK};
 	${MEDIA_QUERY_SMALL} {
 		padding: 0px 20px 0px 0px;
 	}
@@ -94,7 +94,7 @@ export const SectionName = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1px;
-	color: ${COLOR_BLACK};
+	color: ${BLACK};
 	font-weight: bold;
 	margin-bottom: 20px;
 `;
@@ -102,7 +102,7 @@ export const SectionName = styled.div`
 export const Separator = styled.div`
 	height: 1px;
 	width: 100%;
-	background-color: ${COLOR_LIGHTERGREY};
+	background-color: ${GALLERY};
 `;
 
 export const Options = styled.div`

@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
 import {
-	COLOR_LIGHTERGREY,
-	COLOR_LIGHTGREY,
-	COLOR_PRIMARY,
-	COLOR_WHITE,
-	COLOR_ALABASTER,
+	GALLERY,
+	SILVER,
+	PRIMARY,
+	WHITE,
+	ALABASTER,
 } from '../../../../config/constants/styled-vars';
 
 export const ContainerTabs = styled.div`
 	display: flex;
-	border-bottom: solid 1px ${COLOR_LIGHTERGREY};
+	border-bottom: solid 1px ${GALLERY};
 	justify-content: center;
 	align-items: center;
 	padding: 10px;
@@ -18,7 +18,7 @@ export const ContainerTabs = styled.div`
 `;
 
 export const ButtonTab = styled.button`
-	color: ${({ isActive }) => (isActive ? COLOR_PRIMARY : COLOR_LIGHTGREY)};
+	color: ${({ isActive }) => (isActive ? PRIMARY : SILVER)};
 	margin: 0 24px;
 	font-family: Lato;
 	font-size: 14px;
@@ -39,7 +39,7 @@ export const ButtonTab = styled.button`
 		width: 100%;
 		left: 0;
 		bottom: -14px;
-		background-color: ${COLOR_PRIMARY};
+		background-color: ${PRIMARY};
 		display: ${({ isActive }) => (isActive ? 'block' : 'none')};
 	}
 `;
@@ -47,11 +47,11 @@ export const ButtonTab = styled.button`
 export const ProfileStatsTabs = styled.div`
 	display: flex;
 	padding: 15px;
-	background-color: ${COLOR_ALABASTER};
+	background-color: ${ALABASTER};
 `;
 
 export const ProfileStatsButtonTab = styled.div`
-	color: ${({ isActive }) => (isActive ? COLOR_WHITE : COLOR_PRIMARY)};
+	color: ${({ isActive }) => (isActive ? WHITE : PRIMARY)};
 	cursor: pointer;
 	margin: 0px 12px;
 	padding: 7px 20px;
@@ -64,5 +64,5 @@ export const ProfileStatsButtonTab = styled.div`
 	line-height: normal;
 	letter-spacing: normal;
 	background-color: ${({ isActive }) =>
-		isActive ? COLOR_PRIMARY : 'transparent'};
+		isActive ? PRIMARY : 'transparent'};
 `;

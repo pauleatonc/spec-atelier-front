@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import {
-  COLOR_WHITE,
-  COLOR_PRIMARY,
-  COLOR_SECONDARY,
+  WHITE,
+  PRIMARY,
+  SECONDARY,
   MEDIA_QUERY_SMALL,
-  COLOR_BLACK,
+  BLACK,
+  JAVA,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
@@ -51,7 +52,7 @@ export const RegisterText = styled.span`
 
 export const RegisterLink = styled(Link)`
   font-weight: bold;
-  color: ${COLOR_PRIMARY};
+  color: ${PRIMARY};
   text-decoration: none;
   margin-left: 5px;
   font-stretch: normal;
@@ -79,7 +80,7 @@ export const TextInfo = styled.p`
   letter-spacing: 1px;
   margin-bottom: 35px;
   font-family: Lato;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
 `;
 
 export const Form = styled.form`
@@ -87,8 +88,8 @@ export const Form = styled.form`
 `;
 
 export const ButtonLogin = styled.button`
-  background-color: ${COLOR_SECONDARY};
-  color: ${COLOR_WHITE};
+  background-color: ${SECONDARY};
+  color: ${WHITE};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -149,14 +150,14 @@ export const TermsText = styled.div`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
   display: flex;
 `;
 
 export const TermsLink = styled.a`
   text-decoration: none;
   font-weight: bold;
-  color: #17bea8;
+  color: ${JAVA};
   margin-left: 4px;
   clear: both;
   overflow: hidden;

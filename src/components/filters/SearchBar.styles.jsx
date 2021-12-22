@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	COLOR_MINE_SHAFT,
+	MINE_SHAFT,
 	MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
@@ -65,7 +65,7 @@ SearchIcon.propTypes = justifyContentPropTypes;
 
 export const Placeholder = styled.div`
 	align-items: center;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	display: flex;
 	font-family: Lato;
 	font-size: 12px;

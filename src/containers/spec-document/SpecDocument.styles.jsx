@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import { MINE_SHAFT, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   box-sizing: border-box;
@@ -35,7 +35,7 @@ export const AddIcon = styled.img`
 export const AddMenuItem = styled.section`
 	background-color: transparent;
 	border-bottom: 1px solid #b3b3b3;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	cursor: pointer;
 	font-family: Lato;
 	font-size: 14px;
@@ -100,7 +100,7 @@ export const BlockEditor = styled.section`
 export const BlockMenuItem = styled.section`
 	background-color: transparent;
 	border-bottom: 1px solid #b3b3b3;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	cursor: pointer;
 	font-family: Lato;
 	font-size: 12px;
@@ -259,7 +259,7 @@ export const ProductImage = styled.img`
 `;
 
 export const ProductTitle = styled.p`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 12px;
 	font-weight: bold;
@@ -279,7 +279,7 @@ export const ProductDescription = styled.p`
 `;
 
 export const ProductSystem = styled.p`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 11px;
 	font-weight: bold;
@@ -289,7 +289,7 @@ export const ProductSystem = styled.p`
 `;
 
 export const ProductReference = styled.p`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 11px;
 	letter-spacing: 1px;
@@ -297,7 +297,7 @@ export const ProductReference = styled.p`
 `;
 
 export const ProductBrand = styled.p`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 11px;
 	letter-spacing: 1px;

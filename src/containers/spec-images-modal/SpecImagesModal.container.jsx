@@ -48,7 +48,7 @@ const SpecImagesModal = () => {
       <Root>
         <Header>
           <Title>Selecciona una de las imágenes para la especificación:</Title>
-          <CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
+          <CloseIcon alt="Cerrar" className="fas fa-times" onClick={handleClose} />
         </Header>
         <Body>
           <Figures>

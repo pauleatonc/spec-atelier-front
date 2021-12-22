@@ -1,15 +1,16 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_WHITE, COLOR_MINE_SHAFT, COLOR_PRIMARY } from '../../config/constants/styled-vars';
+import { WHITE, MINE_SHAFT, PRIMARY } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
-  background-color: ${COLOR_WHITE};
+  background-color: ${WHITE};
   border-radius: 4px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
   display: grid;
   grid-template-rows: 76px auto 60px;
   height: 482px;
   width: 612px;
+  padding: 20px;
 `;
 
 export const Header = styled.section`
@@ -21,13 +22,13 @@ export const Header = styled.section`
 `;
 
 export const Title = styled.span`
-  color: ${COLOR_MINE_SHAFT};
+  color: ${MINE_SHAFT};
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
 `;
 
-export const CloseIcon = styled.img`
+export const CloseIcon = styled.i`
   bottom: 0;
   cursor: pointer;
   margin: auto 0;
@@ -56,7 +57,7 @@ export const Figures = styled.section`
 
 export const Figure = styled.article`
   background-color: rgba(216, 216, 216, 0.47);
-  border: ${({ selected = false }) => `2px solid ${selected ? COLOR_PRIMARY : 'transparent'}`};
+  border: ${({ selected = false }) => `2px solid ${selected ? PRIMARY : 'transparent'}`};
   cursor: pointer;
   height: 146px;
   position: relative;

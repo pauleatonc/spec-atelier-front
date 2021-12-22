@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {
-	COLOR_WHITE,
+	WHITE,
 	MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 import { TYPES } from './constants';
@@ -43,7 +43,7 @@ export const Descriptor = styled.div`
 	font-size: 14px;
 	border-radius: 18px;
 	padding: 10px 20px;
-	color: ${COLOR_WHITE};
+	color: ${WHITE};
 	background-color: ${({ type }) =>
 		type === TYPES.ARCHITECT ? '#ff6e37' : '#00bfa7'};
 	text-align: center;

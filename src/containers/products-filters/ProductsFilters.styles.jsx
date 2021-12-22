@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import { MINE_SHAFT, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   display: flex;
@@ -27,7 +27,7 @@ export const Content = styled.div`
 
 export const Loading = styled.span`
   align-items: center;
-  color: ${COLOR_MINE_SHAFT};
+  color: ${MINE_SHAFT};
   display: inline-flex;
   font-family: Lato;
   font-size: 16px;

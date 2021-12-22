@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, COLOR_GREY } from '../../config/constants/styled-vars';
+import { MINE_SHAFT, SILVER_CHALICE } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   position: relative;
@@ -8,7 +8,7 @@ export const Root = styled.div`
 `;
 
 export const Label = styled.label`
-  color: ${COLOR_MINE_SHAFT};
+  color: ${MINE_SHAFT};
   display: block;
   font-family: Lato;
   font-size: 16px;
@@ -90,7 +90,7 @@ export const List = styled.div`
 `;
 
 const border = `
-  border: 1px solid ${COLOR_GREY};
+  border: 1px solid ${SILVER_CHALICE};
   border-radius: 8px;
   margin: 2px;
 `;
@@ -121,7 +121,7 @@ export const ItemDetails = styled.div`
 `;
 
 export const ItemText = styled.p`
-  color: ${COLOR_MINE_SHAFT};
+  color: ${MINE_SHAFT};
   display: block;
   font-family: Lato;
   font-size: 12px;
@@ -164,16 +164,15 @@ export const DropContent = styled.div`
   box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.14);
   display: grid;
   height: 342px;
-  padding: 66px 32px 29px;
+  padding: 20px;
   position: relative;
   width: 668px;
 `;
 
-export const DropCloseIcon = styled.img`
+export const DropCloseIcon = styled.i`
   cursor: pointer;
-  position: absolute;
-  right: 11px;
-  top: 11px;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const DropZone = styled.div`

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_GREY, COLOR_BLACK, COLOR_DARKGREY } from '../../../config/constants/styled-vars';
+import { SILVER_CHALICE, BLACK, BOULDER } from '../../../config/constants/styled-vars';
 
 export const Container = styled.section`
   display: flex;
@@ -15,7 +15,7 @@ export const Title = styled.p`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
   margin: 16px 0 30px;
 `;
 
@@ -35,7 +35,7 @@ export const Label = styled.p`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${strong => strong ? COLOR_BLACK : COLOR_GREY};
+  color: ${strong => strong ? BLACK : SILVER_CHALICE};
 `;
 
 export const CodeNumber = styled.span`
@@ -44,7 +44,7 @@ export const CodeNumber = styled.span`
   display: flex;
   align-items: center;
   margin-right: 8px;
-  color: ${COLOR_DARKGREY};
+  color: ${BOULDER};
 `;
 
 export const CellPhone = styled.div`

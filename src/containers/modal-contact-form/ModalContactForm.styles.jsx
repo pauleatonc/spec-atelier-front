@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_WHITE } from '../../config/constants/styled-vars';
+import { WHITE } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
 	width: ${({ width }) => width || '100%'};
@@ -7,7 +7,7 @@ export const Container = styled.section`
 	display: flex;
 	flex-direction: column;
 	padding: 0 20px;
-	background-color: ${COLOR_WHITE};
+	background-color: ${WHITE};
 	padding: 18px;
 `;
 
@@ -17,7 +17,7 @@ export const BottonContainer = styled.div`
 	margin-top: 20px;
 `;
 
-export const ButtonClose = styled.span`
+export const ButtonClose = styled.i`
 	margin: 10px 12px 0 auto;
 	cursor: pointer;
 	outline: none;

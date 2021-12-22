@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import {
   BORDER_GREY,
-  COLOR_BLACK,
+  BLACK,
   MEDIA_QUERY_SMALL,
   MEDIA_QUERY_MEDIUM,
-  COLOR_WHITE,
-  COLOR_LIGHTERGREY,
-  COLOR_PRIMARY,
-  COLOR_DARKESTGREY,
-  COLOR_GREY,
-  COLOR_LIGHTGREY,
+  WHITE,
+  GALLERY,
+  PRIMARY,
+  DARKESTGREY,
+  SILVER_CHALICE,
+  SILVER,
 } from '../../config/constants/styled-vars';
 
 import {
@@ -113,7 +113,7 @@ export const Title = styled.section`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
 `;
 
 export const ButtonContainer = styled.div`
@@ -134,7 +134,7 @@ export const IconCheck = styled.span`
   height: 16px;
   left: 10%;
   top: -6px;
-  background-color: ${COLOR_WHITE};
+  background-color: ${WHITE};
   display: ${({ show }) => show ? 'initial' : 'none'}
 `;
 
@@ -154,7 +154,7 @@ export const SubHeader = styled.section`
   width: 100%;
   height: 62px;
   border-radius: 9px;
-  background-color: ${COLOR_GREY};
+  background-color: ${SILVER_CHALICE};
   font-family: Lato;
   font-size: 16px;
   font-weight: bold;
@@ -162,7 +162,7 @@ export const SubHeader = styled.section`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
   display: flex;
   align-items: center;
   padding-left: 104px;
@@ -180,7 +180,7 @@ export const Text = styled.div`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
   margin: 16px 0;
 `;
 
@@ -209,7 +209,7 @@ export const Label = styled.div`
   font-style: normal;
   line-height: 2.42;
   letter-spacing: 0.86px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
   margin: 10px 0;
 `;
 
@@ -226,8 +226,8 @@ export const PermissionOption = styled.section`
   min-height: 120px;
   min-width: 300px;
   border-radius: 4px;
-  border: solid 1px ${({ active }) => active ? COLOR_PRIMARY : BORDER_GREY};
-  background-color: ${({ active }) => active ? COLOR_LIGHTERGREY : COLOR_WHITE};
+  border: solid 1px ${({ active }) => active ? PRIMARY : BORDER_GREY};
+  background-color: ${({ active }) => active ? GALLERY : WHITE};
   padding: 24px 36px;
 `;
 
@@ -240,7 +240,7 @@ export const PermissionTitle = styled.p`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
 `;
 
 export const PermissionDescription = styled.p`
@@ -253,7 +253,7 @@ export const PermissionDescription = styled.p`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
 `;
 
 export const InputContent = styled.div`
@@ -271,7 +271,7 @@ export const Suffix = styled.span`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_DARKESTGREY};
+  color: ${DARKESTGREY};
 `;
 
 export const Section = styled.section`
@@ -282,11 +282,11 @@ export const SelectorDate = styled.div`
   opacity: 0.62;
   font-family: Lato;
   font-size: 12px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
   width: 100%;
   border: 0;
   outline: 0;
-  border-bottom: 2px solid ${COLOR_GREY};
+  border-bottom: 2px solid ${SILVER_CHALICE};
   align-items: center;
   background-color: transparent;
   display: inline-flex;
@@ -304,7 +304,7 @@ export const SelectorDate = styled.div`
   }
 
   &::placeholder {
-    color: ${COLOR_GREY};
+    color: ${SILVER_CHALICE};
   }
 
   &:disabled {
@@ -331,11 +331,11 @@ export const InputText = styled.div`
   flex: 1;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid ${COLOR_LIGHTGREY};
+  border-bottom: 2px solid ${SILVER};
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
   border-radius: 0;
   width: 240px;
 `

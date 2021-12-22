@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	COLOR_PRIMARY,
-	COLOR_MINE_SHAFT,
+	PRIMARY,
+	MINE_SHAFT,
 	MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
@@ -68,7 +68,7 @@ ItemIcon.propTypes = {
 };
 
 export const ItemText = styled.span`
-	color: ${({ active }) => (active ? COLOR_PRIMARY : COLOR_MINE_SHAFT)};
+	color: ${({ active }) => (active ? PRIMARY : MINE_SHAFT)};
 	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 0.86px;
@@ -84,7 +84,7 @@ ItemText.propTypes = {
 
 export const Loading = styled.section`
 	align-items: center;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	display: flex;
 	font-family: Lato;
 	font-size: 16px;
@@ -94,7 +94,7 @@ export const Loading = styled.section`
 	width: 100%;
 `;
 
-export const CloseIcon = styled.img`
+export const CloseIcon = styled.i`
 	display: none;
 	cursor: pointer;
 	width: 30px;

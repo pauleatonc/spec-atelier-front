@@ -168,7 +168,7 @@ const AttachedImages = (props) => {
 			)}
 			<ModalLayout show={show} onClose={handleClose}>
 				<DropContent>
-					<DropCloseIcon alt="" src={closeSource} onClick={handleClose} />
+					<DropCloseIcon alt="" className="fas fa-times" onClick={handleClose} />
 					<DropZone {...dropProps}>
 						<input {...getInputProps()} />
 						<DropZoneSection padding="33px 0 18px">

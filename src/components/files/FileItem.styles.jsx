@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_BLACK, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
+import { BLACK, SILVER } from '../../config/constants/styled-vars';
 
 // import dwgIcon from '../../assets/images/icons/dwg.svg';
 // import bimSource from '../../assets/images/icons/bim.svg';
@@ -30,13 +30,13 @@ export const Name = styled.div`
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
 `;
 
 export const Size = styled.div`
   font-size: 10px;
   letter-spacing: 0.83px;
-  color: ${COLOR_LIGHTGREY};
+  color: ${SILVER};
 `;
 
 export const Buttons = styled.div`

@@ -95,12 +95,13 @@ const SpecModalQuote = ({initialValues}) => {
       <Container>
         <Content>
           <ButtonClose
+            className="fas fa-times"
             role="button"
             tabIndex="0"
             onKeyDown={onCloseModal}
             onClick={onCloseModal}
           >
-            <i className="fas fa-times" />
+            {/* <i className="fas fa-times" /> */}
           </ButtonClose>
           
           <Section>

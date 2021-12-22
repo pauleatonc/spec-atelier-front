@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_BLACK, COLOR_LIGHTGREY, MEDIA_QUERY_MEDIUM, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import { BLACK, SILVER, MEDIA_QUERY_MEDIUM, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
 import ICON_CHILE from '../../assets/images/icons/countries/chile.svg'
 
 const icons = {
@@ -9,7 +9,7 @@ const icons = {
 
 export const ClientContainer = styled.div`
   border-radius: 5px;
-  border: 1px solid ${COLOR_LIGHTGREY};
+  border: 1px solid ${SILVER};
   padding: 28px 28px 12px 28px;
   width: 100%;
   ${MEDIA_QUERY_MEDIUM} {
@@ -56,7 +56,7 @@ export const CountryName = styled.div`
   font-style: normal;
   line-height: 1.71;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
   margin: 2px 4px;
 `;
 
@@ -66,7 +66,7 @@ export const Description = styled.div`
   font-size: 14px;
   line-height: 1.71;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
   padding: 40px 0 16px;
   max-height: 300px;
   overflow-y: scroll;

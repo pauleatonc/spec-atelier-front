@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
-	COLOR_BLACK,
-	COLOR_PRIMARY,
+	BLACK,
+	PRIMARY,
 	MEDIA_QUERY_SMALL,
 	MEDIA_QUERY_MEDIUM,
 } from '../../../../../config/constants/styled-vars';
@@ -20,7 +20,7 @@ export const ItemsContainer = styled.section`
 `;
 
 export const Item = styled.div`
-	color: ${({ active }) => (active ? COLOR_PRIMARY : COLOR_BLACK)};
+	color: ${({ active }) => (active ? PRIMARY : BLACK)};
 	height: 100%;
 	margin: 0 4px;
 	display: flex;
@@ -55,5 +55,5 @@ export const UnderLine = styled.span`
 	height: 3px;
 	margin: 8px 2px 4px 2px;
 	border-radius: 1.5px;
-	background-color: ${({ active }) => active && COLOR_PRIMARY};
+	background-color: ${({ active }) => active && PRIMARY};
 `;

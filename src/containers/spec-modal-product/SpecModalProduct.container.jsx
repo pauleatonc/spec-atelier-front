@@ -116,10 +116,11 @@ const SpecModalProduct = () => {
 					<Header>
 						<Title>{`${product.name} / ${product.short_desc}`}</Title>
 						<ButtonClose
+              className="fas fa-times"
 							role="button"
 							tabIndex="0"
 							alt="Cerrar"
-							src={closeSource}
+							// src={closeSource}
 							onKeyDown={onCloseModal}
 							onClick={onCloseModal}
 						/>

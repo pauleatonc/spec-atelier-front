@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_BLACK } from '../../config/constants/styled-vars';
+import { BLACK } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   min-height: 200px;
@@ -28,7 +28,7 @@ export const InfoContainer = styled.section`
   line-height: 1.71;
   letter-spacing: 1px;
   text-align: center;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
   margin: 16px 0;
 `
 

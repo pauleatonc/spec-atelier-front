@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import {
-  COLOR_BLACK,
-  COLOR_PRIMARY,
-  COLOR_SECONDARY,
-  COLOR_DARKESTGREY,
-  COLOR_TERTIARY,
-  COLOR_GREY,
+  BLACK,
+  PRIMARY,
+  SECONDARY,
+  DARKESTGREY,
+  TERTIARY,
+  SILVER_CHALICE,
 } from '../../config/constants/styled-vars';
 
 import ICON_FACEBOOK from '../../assets/images/icons/socialmedia/facebook.svg';
@@ -15,11 +15,11 @@ import ICON_CELLPHONE from '../../assets/images/icons/cellphone.svg';
 import ICON_WEB from '../../assets/images/icons/word.svg';
 
 const mapVariantsToColors = {
-  default: COLOR_BLACK,
-  primary: COLOR_PRIMARY,
-  secondary: COLOR_SECONDARY,
-  tertiary: COLOR_TERTIARY,
-  disabled: COLOR_DARKESTGREY,
+  default: BLACK,
+  primary: PRIMARY,
+  secondary: SECONDARY,
+  tertiary: TERTIARY,
+  disabled: DARKESTGREY,
 };
 
 const mapTypeToIcon = {
@@ -62,7 +62,7 @@ export const ButtonText = styled.span`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_GREY};
+  color: ${SILVER_CHALICE};
   :hover {
     color: ${({ disabled }) => disabled ?  mapVariantsToColors[disabled] :  mapVariantsToColors['primary']};
   }

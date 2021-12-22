@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
+import { ALABASTER, ALTO, BOULDER, CARIBBEAN_GREEN, DUSTY_GRAY, MINE_SHAFT, SILVER, WHITE } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
 	width: 100%;
 `;
 
 export const Label = styled.label`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	display: block;
 	font-family: Lato;
 	font-size: 16px;
@@ -18,7 +18,7 @@ export const Label = styled.label`
 `;
 
 export const Box = styled.div`
-	border: 2px dotted #e0e0e0;
+	border: 2px dotted ${ALTO};
 	border-radius: 4px;
 	height: 175px;
 	width: 100%;
@@ -57,7 +57,7 @@ export const EmptyBody = styled.section`
 `;
 
 export const EmptyAction = styled.span`
-	color: #00bfa8;
+	color: ${CARIBBEAN_GREEN};
 	cursor: pointer;
 	font-family: Lato;
 	font-size: 12px;
@@ -71,7 +71,7 @@ export const EmptyAction = styled.span`
 `;
 
 export const EmptyText = styled.p`
-	color: rgba(33, 33, 33, 0.44);
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 0.75px;
@@ -91,7 +91,7 @@ export const List = styled.div`
 `;
 
 export const Item = styled.section`
-  background-color: #CCC;
+  background-color: ${SILVER};
   background-image: url('${({ source = '' }) => source}');
   background-origin: center center;
   background-repeat: no-repeat;
@@ -107,7 +107,7 @@ Item.propTypes = {
 
 export const Square = styled.div`
 	align-items: center;
-	background-color: #fff;
+	background-color: ${WHITE};
 	border-radius: 3px;
 	bottom: 7px;
 	cursor: pointer;
@@ -120,7 +120,7 @@ export const Square = styled.div`
 `;
 
 export const Action = styled.div`
-	color: #00bfa8;
+	color: ${CARIBBEAN_GREEN};
 	cursor: pointer;
 	font-family: Lato;
 	font-size: 12px;
@@ -134,27 +134,26 @@ export const Action = styled.div`
 `;
 
 export const DropContent = styled.div`
-	background-color: #fafafa;
+	background-color: ${ALABASTER};
 	border-radius: 5px;
 	box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2),
 		0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.14);
 	display: grid;
 	height: 342px;
-	padding: 66px 32px 29px;
+	padding: 20px;
 	position: relative;
 	width: 668px;
 `;
 
-export const DropCloseIcon = styled.img`
+export const DropCloseIcon = styled.i`
 	cursor: pointer;
-	position: absolute;
-	right: 11px;
-	top: 11px;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const DropZone = styled.div`
-	background-color: #fafafa;
-	border: 1px dashed #979797;
+	background-color: ${ALABASTER};
+	border: 1px dashed ${DUSTY_GRAY};
 	height: 100%;
 	width: 100%;
 `;
@@ -174,7 +173,7 @@ DropZoneSection.propTypes = {
 };
 
 export const DropZoneText = styled.p`
-	color: #797979;
+	color: ${BOULDER};
 	font-family: Lato;
 	font-size: 16px;
 	letter-spacing: 0.57px;

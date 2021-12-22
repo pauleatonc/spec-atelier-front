@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 import {
-	COLOR_LIGHTGREY,
-	COLOR_MERCURY,
+	SILVER,
+	MERCURY,
 } from '../../../../config/constants/styled-vars';
 
 export const SelectPaginator = styled.select`
@@ -16,7 +16,7 @@ export const Paginator = styled.footer`
 	align-items: center;
 	width: 100%;
 	padding: 15px;
-	color: ${COLOR_LIGHTGREY};
+	color: ${SILVER};
 	font-family: Lato;
 	font-size: 12px;
 	font-weight: bold;
@@ -24,13 +24,13 @@ export const Paginator = styled.footer`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	border-top: 1px solid ${COLOR_MERCURY};
+	border-top: 1px solid ${MERCURY};
 	border-bottom: ${({ isSubRows }) =>
-		isSubRows ? `1px solid ${COLOR_MERCURY}` : ''};
+		isSubRows ? `1px solid ${MERCURY}` : ''};
 `;
 
 export const ArrowPaginator = styled.button`
-	color: ${COLOR_LIGHTGREY};
+	color: ${SILVER};
 	background: transparent;
 	border: none;
 	outline: none;

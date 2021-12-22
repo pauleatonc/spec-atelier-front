@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {
-    COLOR_BLACK,
+    BLACK,
 } from '../../config/constants/styled-vars';
 
 const HEADER_HEIGHT = '140px';
@@ -9,7 +9,7 @@ export const Container = styled.section`
   background-image: url('${({ background }) => background}');
   height: ${HEADER_HEIGHT};
   width: 100%;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
   font-family: 'Akzidenz Grotesk - bold condenced';
   background-repeat: no-repeat;
   background-size: cover;

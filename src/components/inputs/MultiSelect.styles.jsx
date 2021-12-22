@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
-	COLOR_BLACK,
-	COLOR_LIGHTGREY,
+	BLACK,
+	SILVER,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -64,11 +64,11 @@ export const InputUnderline = styled(Input)`
 	display: flex;
 	flex: 1;
 	justify-content: space-between;
-	border-bottom: 2px solid ${COLOR_LIGHTGREY};
+	border-bottom: 2px solid ${SILVER};
 	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 1px;
-	color: ${COLOR_BLACK};
+	color: ${BLACK};
 	border-radius: 0;
 `;
 

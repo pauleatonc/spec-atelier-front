@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_BLACK } from '../../config/constants/styled-vars';
+import { BLACK } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   padding: 16px;
@@ -23,7 +23,7 @@ export const TextContent = styled.div`
   font-size: 14px;
   letter-spacing: 1px;
   text-align: center;
-  color: ${COLOR_BLACK};
+  color: ${BLACK};
 `;
 
 export const Text = styled.span`

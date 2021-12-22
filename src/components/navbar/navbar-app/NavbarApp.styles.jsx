@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
 	NAVBAR_HEIGHT,
-	COLOR_BLACK,
-	COLOR_WHITE,
+	BLACK,
+	WHITE,
 	MEDIA_QUERY_SMALL,
 	Z_INDEX_NAVBAR,
 } from '../../../config/constants/styled-vars';
@@ -16,20 +16,20 @@ export const NavbarContainer = styled.nav`
 	left: 0;
 	align-items: center;
 	background-color: ${({ transparent }) =>
-		transparent ? 'transparent' : COLOR_WHITE};
+		transparent ? 'transparent' : WHITE};
 	display: flex;
 	font-family: 'Lato', sans-serif;
 	height: ${NAVBAR_HEIGHT};
 	width: 100%;
 	transition: all 0.2s ease-in-out;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.26);
-	color: ${({ transparent }) => (transparent ? COLOR_BLACK : COLOR_WHITE)};
+	color: ${({ transparent }) => (transparent ? BLACK : WHITE)};
 	z-index: ${Z_INDEX_NAVBAR};
 `;
 
 export const NavbarContent = styled.div`
 	align-items: flex-end;
-	color: ${COLOR_BLACK};
+	color: ${BLACK};
 	display: flex;
 	padding: 4px 20px 4px 36px;
 	height: 100%;

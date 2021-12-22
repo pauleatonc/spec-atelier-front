@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	COLOR_MINE_SHAFT,
+	MINE_SHAFT,
 	MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 import dwgSource from '../../assets/images/icons/dwg.svg';
@@ -99,7 +99,7 @@ const BaseDetails = styled.p`
 `;
 
 export const Title = styled(BaseDetails)`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-size: 11px;
 	letter-spacing: 0.92px;
 `;
@@ -112,7 +112,7 @@ export const Description = styled(BaseDetails)`
 `;
 
 export const Category = styled.p`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 10px;
 	letter-spacing: 0.83px;
@@ -123,7 +123,7 @@ export const Category = styled.p`
 `;
 
 export const Reference = styled.p`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 10px;
 	letter-spacing: 0.83px;
@@ -230,7 +230,7 @@ export const Check = styled(BaseStates)`
 export const ActionsMenuItem = styled.section`
 	background-color: transparent;
 	border-bottom: 1px solid #b3b3b3;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	cursor: pointer;
 	font-family: Lato;
 	font-size: 12px;

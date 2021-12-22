@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import {
-	COLOR_WHITE,
-	COLOR_MINE_SHAFT,
+	WHITE,
+	MINE_SHAFT,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.section`
-	background-color: ${COLOR_WHITE};
+	background-color: ${WHITE};
 	box-shadow: ${({ shadow = true }) =>
 		shadow
 			? '0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.14)'
@@ -26,14 +26,14 @@ export const Header = styled.header`
 `;
 
 export const Title = styled.span`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
 	letter-spacing: 1px;
 `;
 
-export const CloseIcon = styled.img`
+export const CloseIcon = styled.i`
 	cursor: pointer;
 `;
 

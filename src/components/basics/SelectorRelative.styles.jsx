@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_WHITE, SHADOW_GREY, COLOR_MINE_SHAFT, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
+import { WHITE, SHADOW_GREY, MINE_SHAFT, SILVER } from '../../config/constants/styled-vars';
 
 
 export const Container = styled.div`
@@ -12,7 +12,7 @@ export const Content = styled.div`
   margin-top: 8px;
   position: absolute;
   border: 1px solid #CCC;
-  background-color: ${COLOR_WHITE};
+  background-color: ${WHITE};
   min-width: 160px;
   min-height: 30px;
   width: ${({ width }) => width || '100%'};
@@ -34,7 +34,7 @@ export const Section = styled.div`
 
 export const Option = styled.section`
   box-sizing: border-box;
-  color: ${COLOR_MINE_SHAFT};
+  color: ${MINE_SHAFT};
   cursor: pointer;
   font-family: Lato;
   font-size: 12px;
@@ -60,5 +60,5 @@ export const NoOptions = styled.div`
   font-size: 12px;
   letter-spacing: 0.86px;
   padding: 10px 23px;
-  color: ${COLOR_LIGHTGREY};
+  color: ${SILVER};
 `

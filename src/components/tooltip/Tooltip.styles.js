@@ -1,7 +1,7 @@
 /* Custom properties */
 import styled from 'styled-components';
 
-import { COLOR_BLACK, COLOR_WHITE } from '../../config/constants/styled-vars';
+import { BLACK, WHITE } from '../../config/constants/styled-vars';
 
 const TOOLTIP_MARGIN = '30px';
 const TOOLTIP_ARROW_SIZE = '6px';
@@ -18,8 +18,8 @@ export const Content = styled.div`
   left: 50%;
   transform: translateX(-50%);
   padding: 8px 12px;
-  color: ${COLOR_WHITE};
-  background: ${COLOR_BLACK};
+  color: ${WHITE};
+  background: ${BLACK};
   line-height: 1;
   z-index: 100;
   font-family: Lato;
@@ -65,19 +65,19 @@ export const Content = styled.div`
 				case 'top':
 					return `
             top: 100%;
-            border-top-color: ${COLOR_BLACK};
+            border-top-color: ${BLACK};
           `;
 				case 'right':
 					return `
             left: calc(${TOOLTIP_ARROW_SIZE} * -1);
             top: 50%;
             transform: translateX(0) translateY(-50%);
-            border-right-color: ${COLOR_BLACK};
+            border-right-color: ${BLACK};
           `;
 				case 'bottom':
 					return `
             bottom: 100%;
-            border-bottom-color: ${COLOR_BLACK};
+            border-bottom-color: ${BLACK};
           `;
 				case 'left':
 					return `
@@ -85,7 +85,7 @@ export const Content = styled.div`
             right: calc(${TOOLTIP_ARROW_SIZE} * -2);
             top: 50%;
             transform: translateX(0) translateY(-50%);
-            border-left-color: ${COLOR_BLACK};
+            border-left-color: ${BLACK};
           `;
 			}
     }}

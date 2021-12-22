@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import {
-	COLOR_BLACK,
-	COLOR_PRIMARY,
+	BLACK,
+	PRIMARY,
 	NAVBAR_HEIGHT,
-	COLOR_WHITE,
-	COLOR_LIGHTERGREY,
-	COLOR_GREY,
+	WHITE,
+	GALLERY,
+	SILVER_CHALICE,
 } from '../../../config/constants/styled-vars';
 
 export const ProfileButton = styled.div`
-	color: ${({ isOpen }) => (!isOpen ? COLOR_BLACK : COLOR_PRIMARY)};
+	color: ${({ isOpen }) => (!isOpen ? BLACK : PRIMARY)};
 	display: flex;
 	height: 100%;
 	align-items: center;
@@ -34,14 +34,14 @@ export const Option = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1px;
-	background-color: ${COLOR_WHITE};
+	background-color: ${WHITE};
 	display: flex;
 	flex: 1;
 	align-items: center;
 	padding: 30px;
-	color: ${COLOR_BLACK};
+	color: ${BLACK};
 	:hover {
-		color: ${COLOR_PRIMARY};
+		color: ${PRIMARY};
 	}
 	cursor: pointer;
 	text-decoration: none;
@@ -49,13 +49,13 @@ export const Option = styled.div`
 
 export const OptionsContent = styled.section`
 	width: 260px;
-	background-color: ${COLOR_WHITE};
+	background-color: ${WHITE};
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12),
 		0 1px 1px 0 rgba(0, 0, 0, 0.14);
 `;
 
 export const Separator = styled.div`
-	background-color: ${COLOR_LIGHTERGREY};
+	background-color: ${GALLERY};
 	height: 1px;
 	width: 100%;
 `;
@@ -94,5 +94,5 @@ export const InfoUserName = styled.p`
 	font-family: Lato;
 	font-size: 14px;
 	margin-bottom: 2px;
-	color: ${({ gray }) => (gray ? COLOR_GREY : COLOR_BLACK)};
+	color: ${({ gray }) => (gray ? SILVER_CHALICE : BLACK)};
 `;

@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 import {
-	COLOR_WHITE,
-	COLOR_PRIMARY,
-	COLOR_SECONDARY,
+	WHITE,
+	PRIMARY,
+	SECONDARY,
 	MEDIA_QUERY_SMALL,
-	COLOR_BLACK,
+	BLACK,
 } from '../../config/constants/styled-vars';
 
 const HEIGHT_CONTENT = '350px';
 const PADDING_CONTENT = '8px 2px 8px 8px';
 
-export const ButtonClose = styled.img`
+export const ButtonClose = styled.i`
 	display: flex;
 	justify-content: flex-end;
 	cursor: pointer;
@@ -21,8 +21,8 @@ export const ButtonClose = styled.img`
 
 export const Container = styled.div`
 	width: 80%;
-	padding: 40px;
-	background-color: ${COLOR_WHITE};
+	padding: 20px;
+	background-color: ${WHITE};
 	border-radius: 4px;
 	min-height: ${HEIGHT_CONTENT};
 	${MEDIA_QUERY_SMALL} {
@@ -71,7 +71,7 @@ export const Title = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1.17px;
-	color: ${COLOR_BLACK};
+	color: ${BLACK};
 	${MEDIA_QUERY_SMALL} {
 		padding: 0px 20px 0px 0px;
 	}
@@ -107,7 +107,7 @@ export const ImagesContent = styled.div`
 	max-width: 100px;
 	border: 2px solid;
 	max-height: 120px;
-	border-color: ${({ active }) => (active ? COLOR_PRIMARY : 'transparent')};
+	border-color: ${({ active }) => (active ? PRIMARY : 'transparent')};
 	${MEDIA_QUERY_SMALL} {
 		display: none;
 	}
@@ -158,7 +158,7 @@ export const ProductName = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1px;
-	color: ${COLOR_BLACK};
+	color: ${BLACK};
 	font-weight: bold;
 `;
 
@@ -173,12 +173,12 @@ export const ProductDescription = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1px;
-	color: ${COLOR_BLACK};
+	color: ${BLACK};
 `;
 
 export const ProductBrand = styled.div`
 	margin: 8px 0px;
-	color: ${COLOR_BLACK};
+	color: ${BLACK};
 	font-family: Lato;
 	font-size: 10px;
 	font-weight: normal;
@@ -196,10 +196,10 @@ export const Actions = styled.section`
 export const ButtonContact = styled.input`
 	outline: none;
 	cursor: pointer;
-	color: ${COLOR_WHITE};
+	color: ${WHITE};
 	border-radius: 16px;
 	padding: 8px 28px;
-	background-color: ${COLOR_SECONDARY};
+	background-color: ${SECONDARY};
 	font-size: 16px;
 	font-weight: bold;
 	text-align: center;

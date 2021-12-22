@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {
-	COLOR_BLACK,
+	BLACK,
 	MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
@@ -14,7 +14,7 @@ export const Container = styled.section`
 	background: url(${PLANS_BACKGROUND});
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
-	color: ${COLOR_BLACK};
+	color: ${BLACK};
 	width: 100%;
 	padding-top: 83px;
 	padding-bottom: 200px;
