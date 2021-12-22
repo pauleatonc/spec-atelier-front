@@ -72,12 +72,13 @@ const ContactForm = ({ type }) => {
 				{isLogin ? (
 					<>
 						<ButtonClose
+              className="fas fa-times"
 							role="button"
 							tabIndex="0"
 							onKeyDown={onCloseModal}
 							onClick={onCloseModal}
 						>
-							<i className="fas fa-times" />
+							{/* <i className="fas fa-times" /> */}
 						</ButtonClose>
 						<Contact
 							contact={contactForm}

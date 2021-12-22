@@ -20,11 +20,7 @@ import SpecAdminContainer from '../containers/spec-admin/SpecAdmin.container';
 import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayout';
 import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
 import { changeOption } from '../containers/spec-contents-buttons/SpecContentsButtons.actions';
-import {
-	ESPEC_DOCUMENT,
-	SPEC_TABLE,
-} from '../config/constants/button-variants';
-
+import { ESPEC_DOCUMENT, SPEC_TABLE } from '../config/constants/button-variants';
 import { Root, Main, Navigation, Panels } from './Specification.styles';
 
 /**

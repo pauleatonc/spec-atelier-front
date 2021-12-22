@@ -74,7 +74,7 @@ const ProfileChangePicture = () => {
 			<Root>
 				<Header>
 					<Title>Cambia la foto</Title>
-					<CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
+					<CloseIcon alt="Cerrar" className="fas fa-times" onClick={handleClose} />
 				</Header>
 				<Body>
 					<ButtonUploadPicture>

@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { CORAL, DUSTY_GRAY, SEASHELL_PEACH, SILVER, WHITE } from '../../config/constants/styled-vars';
 
 const Button = styled.button`
-  background-color: ${({ selected = false }) => selected ? '#FFF6F2' : '#FFF'};
-  border: 1px solid ${({ selected = false }) => selected ? '#FF7E45' : '#CCC'};
+  background-color: ${({ selected = false }) => selected ? SEASHELL_PEACH : WHITE};
+  border: 1px solid ${({ selected = false }) => selected ? CORAL : SILVER};
   border-radius: 18px;
-  color: ${({ selected = false }) => selected ? '#FF7E45' : '#9C9C9C'};
+  color: ${({ selected = false }) => selected ? CORAL : DUSTY_GRAY};
   cursor: ${({ disabled = false }) => disabled ? 'not-allowed' : 'pointer'};
   display: inline-flex;
   font-family: Lato;

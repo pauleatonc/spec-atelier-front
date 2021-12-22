@@ -80,10 +80,11 @@ function SpecModalAttachProduct({
 				<Header>
 					<Title>¿Dónde quieres añadir la información?</Title>
 					<ButtonClose
+            className="fas fa-times"
 						role="button"
 						tabIndex="0"
 						alt="Cerrar"
-						src={closeSource}
+						// src={closeSource}
 						onKeyDown={onClose}
 						onClick={onClose}
 					/>

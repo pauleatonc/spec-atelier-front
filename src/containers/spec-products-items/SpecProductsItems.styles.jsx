@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	COLOR_PRIMARY,
-	COLOR_MINE_SHAFT,
+	PRIMARY,
+	MINE_SHAFT,
+  WHITE,
+  PUERTO_RICO,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
-	background-color: #fff;
+	background-color: ${WHITE};
 	height: 100%;
 	left: 0;
 	padding: 0 23px;
@@ -31,7 +33,7 @@ export const Body = styled.section`
 
 export const Loading = styled.div`
 	align-items: center;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	display: flex;
 	font-family: Lato;
 	font-size: 16px;
@@ -41,7 +43,7 @@ export const Loading = styled.div`
 `;
 
 export const Item = styled.p`
-	color: ${({ active }) => (active ? COLOR_PRIMARY : COLOR_MINE_SHAFT)};
+	color: ${({ active }) => (active ? PRIMARY : MINE_SHAFT)};
 	cursor: pointer;
 	font-family: Lato;
 	font-size: 12px;
@@ -53,7 +55,7 @@ export const Item = styled.p`
 	padding: ${({ padding = '0' }) => padding};
 
 	&:hover {
-		color: #3fbfad;
+		color: ${PUERTO_RICO};
 	}
 `;
 

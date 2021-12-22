@@ -77,7 +77,7 @@ const PlanForm = () => {
 		<ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
 			<Container>
 				<ButtonCloseContainer>
-					<CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
+					<CloseIcon alt="Cerrar" className="fas fa-times" onClick={handleClose} />
 				</ButtonCloseContainer>
 				<StepsContainer mBottom="70" mobileMBottom="48">
 					<Step activeStep>

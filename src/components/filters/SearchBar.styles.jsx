@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	COLOR_MINE_SHAFT,
+	MINE_SHAFT,
 	MEDIA_QUERY_SMALL,
+  GALLERY,
+  MINE_SHAFT_RGB,
 } from '../../config/constants/styled-vars';
 
 const justifyContentDefaultProps = {
@@ -13,7 +15,7 @@ const justifyContentPropTypes = {
 };
 
 export const Root = styled.div`
-	background-color: #eee;
+	background-color: ${GALLERY};
 	border-radius: 21.5px;
 	max-width: ${({ maxWidth = 'initial' }) => maxWidth};
 	position: relative;
@@ -32,7 +34,7 @@ Root.propTypes = {
 export const Input = styled.input`
 	background-color: transparent;
 	border: 0;
-	color: rgba(33, 33, 33, 0.45);
+	color: rgba(${MINE_SHAFT_RGB}, 0.45);
 	font-family: Lato;
 	font-size: 12px;
 	height: 100%;
@@ -65,7 +67,7 @@ SearchIcon.propTypes = justifyContentPropTypes;
 
 export const Placeholder = styled.div`
 	align-items: center;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	display: flex;
 	font-family: Lato;
 	font-size: 12px;

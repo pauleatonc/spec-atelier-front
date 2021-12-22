@@ -151,7 +151,7 @@ const SpecCreateProductStepTwo = () => {
 			<Root shadow={false}>
 				<Header>
 					<Title>Crear producto</Title>
-					<CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
+					<CloseIcon alt="Cerrar" className="fas fa-times" onClick={handleClose} />
 				</Header>
 				<Body>
 					<Section>

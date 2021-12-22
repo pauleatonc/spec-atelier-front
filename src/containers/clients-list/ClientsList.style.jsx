@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_BLACK, MEDIA_QUERY_MEDIUM, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import { MINE_SHAFT, MEDIA_QUERY_MEDIUM, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   padding: 16px 80px;
@@ -35,7 +35,7 @@ export const TextContent = styled.div`
   font-size: 14px;
   letter-spacing: 1px;
   text-align: center;
-  color: ${COLOR_BLACK};
+  color: ${MINE_SHAFT};
 `;
 
 export const Text = styled.span`

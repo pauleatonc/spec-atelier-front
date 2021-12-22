@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import {
-	COLOR_BLACK,
-	COLOR_GREY,
-	COLOR_LIGHTGREY,
-	COLOR_PRIMARY,
+	MINE_SHAFT,
+	SILVER_CHALICE,
+	SILVER,
+	PRIMARY,
 	VIEW_HEADER_HEIGHT,
-	COLOR_GREEN_UNDERLINE,
+	JAVA,
+  WHITE,
 } from '../../config/constants/styled-vars';
 
 const position_bottom = 30;
@@ -34,7 +35,7 @@ export const ProfilePhoto = styled.div`
 	width: 191px;
 	height: 190px;
 	padding: 1px 1px 2px 2px;
-	border: solid 5px #ffffff;
+	border: solid 5px ${WHITE};
 	position: absolute;
 	bottom: -${position_bottom}px;
 	left: 50%;
@@ -63,7 +64,7 @@ export const IconPhoto = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: ${COLOR_GREY};
+	background-color: ${SILVER_CHALICE};
 	cursor: pointer;
 `;
 export const ContentEdit = styled.section`
@@ -91,8 +92,8 @@ export const ProfileName = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1.25px;
-	color: ${COLOR_BLACK};
-	-webkit-text-stroke: 1px ${COLOR_BLACK};
+	color: ${MINE_SHAFT};
+	-webkit-text-stroke: 1px ${MINE_SHAFT};
 `;
 
 export const ProfileCompany = styled.div`
@@ -101,14 +102,14 @@ export const ProfileCompany = styled.div`
 	justify-content: center;
 	margin-bottom: 8px;
 	font-family: Lato;
-	-webkit-text-stroke: 1px ${COLOR_GREY};
+	-webkit-text-stroke: 1px ${SILVER_CHALICE};
 	font-size: 18px;
 	font-weight: normal;
 	font-stretch: normal;
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1.13px;
-	color: ${COLOR_LIGHTGREY};
+	color: ${SILVER};
 	white-space: nowrap;
 `;
 
@@ -117,19 +118,19 @@ export const ProfileCity = styled.div`
 	width: 100%;
 	justify-content: center;
 	font-family: Lato;
-	-webkit-text-stroke: 1px ${COLOR_GREY};
+	-webkit-text-stroke: 1px ${SILVER_CHALICE};
 	font-size: 18px;
 	font-weight: normal;
 	font-stretch: normal;
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1.13px;
-	color: ${COLOR_LIGHTGREY};
+	color: ${SILVER};
 	white-space: nowrap;
 `;
 
 export const Item = styled.div`
-	color: ${COLOR_PRIMARY};
+	color: ${PRIMARY};
 	height: 100%;
 	margin: 0;
 	display: flex;
@@ -166,7 +167,7 @@ export const UnderLine = styled.span`
 	height: 3px;
 	margin-bottom: 27px;
 	border-radius: 1.5px;
-	background-color: ${COLOR_PRIMARY};
+	background-color: ${PRIMARY};
 `;
 
 export const InputText = styled.div`
@@ -178,11 +179,11 @@ export const InputText = styled.div`
 	flex: 1;
 	justify-content: space-between;
 	align-items: center;
-	border-bottom: 1px solid ${COLOR_GREEN_UNDERLINE};
+	border-bottom: 1px solid ${JAVA};
 	font-family: Lato;
 	font-size: 18px;
 	letter-spacing: 1px;
-	color: ${COLOR_BLACK};
+	color: ${MINE_SHAFT};
 	border-radius: 0;
 	width: 100%;
 	justify-content: center;

@@ -1,8 +1,19 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	COLOR_MINE_SHAFT,
+	MINE_SHAFT,
 	MEDIA_QUERY_SMALL,
+  WHITE,
+  CONCRETE,
+  TURQUOISE,
+  ALTO,
+  JAVA,
+  NOBEL,
+  GALLERY,
+  BOULDER,
+  ALTO_OPACITY,
+  MINE_SHAFT_RGB,
+  BLACK,
 } from '../../config/constants/styled-vars';
 import dwgSource from '../../assets/images/icons/dwg.svg';
 import dwgActiveSource from '../../assets/images/icons/dwg_active.svg';
@@ -32,11 +43,10 @@ export const DotsIcon = styled.img`
 `;
 
 export const Root = styled.div`
-	background-color: ${({ selected = false }) =>
-		selected ? '#F2F2F2' : '#FFF'};
+	background-color: ${({ selected = false }) => selected ? CONCRETE : WHITE };
 	border: 1px solid
 		${({ hover = false, selected = false, isItemsUsed }) =>
-			(hover && !selected) || isItemsUsed ? '#31cbb7' : '#E0E0E0'};
+			(hover && !selected) || isItemsUsed ? TURQUOISE : ALTO};
 	border-radius: 9px;
 	cursor: pointer;
 	display: inline-grid;
@@ -49,7 +59,7 @@ export const Root = styled.div`
 	width: 100%;
 
 	&:hover {
-		box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 30px;
+		box-shadow: rgba(${BLACK}, 0.1) 1px 1px 30px;
 	}
 	&:hover ${DotsIcon} {
 		visibility: visible;
@@ -76,7 +86,7 @@ export const Content = styled.div`
 `;
 
 export const Photo = styled.section`
-	background-color: rgba(216, 216, 216, 0.47);
+	background-color: ${ALTO_OPACITY};
 	background-position: center center;
 	background-repeat: no-repeat;
 `;
@@ -99,20 +109,20 @@ const BaseDetails = styled.p`
 `;
 
 export const Title = styled(BaseDetails)`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-size: 11px;
 	letter-spacing: 0.92px;
 `;
 
 export const Description = styled(BaseDetails)`
-	color: rgba(33, 33, 33, 0.51);
+	color: rgba(${MINE_SHAFT_RGB}, 0.51);
 	font-size: 10px;
 	letter-spacing: 0.83px;
 	-webkit-line-clamp: 3;
 `;
 
 export const Category = styled.p`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 10px;
 	letter-spacing: 0.83px;
@@ -123,7 +133,7 @@ export const Category = styled.p`
 `;
 
 export const Reference = styled.p`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 10px;
 	letter-spacing: 0.83px;
@@ -134,7 +144,7 @@ export const Reference = styled.p`
 `;
 
 export const Footer = styled.section`
-	border-top: 1px solid #e0e0e0;
+	border-top: 1px solid ${ALTO};
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	padding: 0 22px 0 8px;
@@ -187,7 +197,7 @@ CertIcon.propTypes = hoverPropTypes;
 
 export const SeeMore = styled.section`
 	align-items: center;
-	color: ${({ hover = false }) => (hover ? '#18BEA8' : '#757575')};
+	color: ${({ hover = false }) => (hover ? JAVA : BOULDER)};
 	display: flex;
 	justify-content: flex-end;
 	font-family: Lato;
@@ -229,8 +239,8 @@ export const Check = styled(BaseStates)`
 
 export const ActionsMenuItem = styled.section`
 	background-color: transparent;
-	border-bottom: 1px solid #b3b3b3;
-	color: ${COLOR_MINE_SHAFT};
+	border-bottom: 1px solid ${NOBEL};
+	color: ${MINE_SHAFT};
 	cursor: pointer;
 	font-family: Lato;
 	font-size: 12px;
@@ -239,7 +249,7 @@ export const ActionsMenuItem = styled.section`
 	width: 187px;
 
 	&:hover {
-		background-color: #eee;
+		background-color: ${GALLERY};
 	}
 
 	&:last-child {

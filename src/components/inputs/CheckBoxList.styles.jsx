@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { GALLERY, MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Option = styled.section`
 	align-items: center;
 	box-sizing: border-box;
-	color: #212121;
+	color: ${MINE_SHAFT};
 	cursor: pointer;
 	display: flex;
 	font-family: Lato;
@@ -13,7 +14,7 @@ export const Option = styled.section`
 	width: 100%;
 
 	&:hover {
-		background-color: #eee;
+		background-color: ${GALLERY};
 	}
 
 	&:first-child {

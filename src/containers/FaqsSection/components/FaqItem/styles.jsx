@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MEDIA_QUERY_STANDAR_MEDIUM } from '../../../../config/constants/styled-vars';
+import { MEDIA_QUERY_STANDAR_MEDIUM, SILVER} from '../../../../config/constants/styled-vars';
 
 export const Container = styled.section`
 	display: flex;
@@ -11,7 +11,7 @@ export const Container = styled.section`
 	padding-bottom: 25px;
 	align-items: center;
 	border-radius: 15px;
-	border: solid 1px #c9c9c9;
+	border: solid 1px ${SILVER};
 	margin: 15px 0;
 	justify-content: space-between;
 	cursor: pointer;
@@ -33,7 +33,7 @@ export const Title = styled.p`
 `;
 
 export const IconExpan = styled.i`
-	color: #c9c9c9;
+	color: ${SILVER};
 `;
 
 export const ExpandableContent = styled.div`

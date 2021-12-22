@@ -32,7 +32,7 @@ const ModalSuccess = () => {
 		>
 			<Container isModalSuccess>
 				<ButtonCloseContainer isSuccessModal>
-					<CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
+					<CloseIcon alt="Cerrar" className="fas fa-times" onClick={handleClose} />
 				</ButtonCloseContainer>
 				<ContainerModalSuccess>
 					<IconSuccess src={iconSuccess} />

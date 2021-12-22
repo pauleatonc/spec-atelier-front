@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import { MEDIA_QUERY_SMALL, WHITE } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
-	background-color: #fff;
+	background-color: ${WHITE};
 	display: flex;
 	flex-direction: column;
 	height: 100%;

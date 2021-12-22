@@ -69,9 +69,8 @@ const SpecProductsSections = ({
 						},
 					]}
 				/>
-				<CloseIcon
-					alt="Cerrar"
-					src={closeSource}
+				<CloseIcon alt="Cerrar"
+					className="fas fa-times"
 					onClick={() => {
 						setShowFilters(false);
 					}}

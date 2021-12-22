@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import {
 	NAVBAR_HEIGHT,
-	COLOR_BLACK,
-	COLOR_WHITE,
-	COLOR_PRIMARY,
+	MINE_SHAFT,
+	WHITE,
+	PRIMARY,
 	MEDIA_QUERY_SMALL,
 	MEDIA_QUERY_MEDIUM,
 	Z_INDEX_NAVBAR,
-	COLOR_GREY,
+	SILVER_CHALICE,
+  BLACK,
 } from '../../../config/constants/styled-vars';
 
 import LOGO from '../../../assets/images/logo.png';
@@ -18,21 +19,21 @@ export const NavbarContainer = styled.nav`
 	left: 0;
 	align-items: center;
 	background-color: ${({ transparent }) =>
-		transparent ? 'transparent' : COLOR_WHITE};
+		transparent ? 'transparent' : WHITE};
 	display: flex;
 	font-family: 'Lato', sans-serif;
 	height: ${NAVBAR_HEIGHT};
 	position: ${({ fixed }) => fixed && 'fixed'};
 	width: 100%;
 	transition: all 0.2s ease-in-out;
-	color: ${({ transparent }) => (transparent ? COLOR_BLACK : COLOR_WHITE)};
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.26);
+	color: ${({ transparent }) => (transparent ? MINE_SHAFT : WHITE)};
+	box-shadow: 0 2px 4px 0 rgba(${BLACK}, 0.26);
 	z-index: ${Z_INDEX_NAVBAR};
 `;
 
 export const NavbarContent = styled.div`
 	align-items: center;
-	color: ${COLOR_BLACK};
+	color: ${MINE_SHAFT};
 	display: flex;
 	padding-left: 45px;
 	padding-right: 20px;
@@ -69,9 +70,9 @@ export const ItemsContainer = styled.section`
 
 export const Item = styled.div`
 	color: ${({ transparent, active }) => {
-		if (active) return COLOR_PRIMARY;
-		if (transparent) return COLOR_WHITE;
-		return COLOR_BLACK;
+		if (active) return PRIMARY;
+		if (transparent) return WHITE;
+		return MINE_SHAFT;
 	}};
 	height: 40px;
 	margin: 4px 32px;
@@ -100,7 +101,7 @@ export const LinksContainer = styled.section`
 
 export const LinkItem = styled.div`
 	align-items: center;
-	color: ${COLOR_WHITE};
+	color: ${WHITE};
 	display: flex;
 	font-size: 16px;
 	justify-content: center;
@@ -128,7 +129,7 @@ export const LinkItem = styled.div`
 
 export const LinkRegister = styled(LinkItem)`
 	border-radius: 20px;
-	background-color: ${COLOR_PRIMARY};
+	background-color: ${PRIMARY};
 	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
@@ -136,7 +137,7 @@ export const LinkRegister = styled(LinkItem)`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: ${COLOR_WHITE};
+	color: ${WHITE};
 	width: 130px;
 `;
 
@@ -144,11 +145,11 @@ export const LinkLogin = styled(LinkItem)`
 	margin-left: 16px;
 	border-radius: 20px;
 	border: 1px solid
-		${({ transparentize }) => (transparentize ? COLOR_WHITE : COLOR_GREY)};
+		${({ transparentize }) => (transparentize ? WHITE : SILVER_CHALICE)};
 	display: flex;
 	justify-content: space-between;
 	min-width: 150px;
 	background-color: ${({ transparentize }) =>
-		transparentize ? 'transparent' : COLOR_WHITE};
-	color: ${({ transparentize }) => (transparentize ? COLOR_WHITE : COLOR_GREY)};
+		transparentize ? 'transparent' : WHITE};
+	color: ${({ transparentize }) => (transparentize ? WHITE : SILVER_CHALICE)};
 `;

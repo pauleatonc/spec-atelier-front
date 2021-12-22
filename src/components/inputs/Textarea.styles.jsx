@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
+import { ALTO, MINE_SHAFT, MINE_SHAFT_RGB } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
 	width: 100%;
@@ -8,7 +8,7 @@ export const Root = styled.div`
 `;
 
 export const Label = styled.label`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	display: block;
 	font-family: Lato;
 	font-size: 16px;
@@ -20,9 +20,9 @@ export const Label = styled.label`
 
 export const Textarea = styled.textarea`
 	background-color: transparent;
-	border: 1px solid #d6d6d6;
+	border: 1px solid ${ALTO};
 	border-radius: 4px;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 1px;
@@ -37,7 +37,7 @@ export const Textarea = styled.textarea`
 	}
 
 	&::placeholder {
-		color: rgba(33, 33, 33, 0.46);
+		color: rgba(${MINE_SHAFT_RGB}, 0.46);
 	}
 `;
 
@@ -47,7 +47,7 @@ export const CountCharacter = styled.p`
 	right: 10px;
 	font-family: Lato;
 	font-size: 12px;
-	color: #d6d6d6;
+	color: ${ALTO};
 `;
 
 Textarea.propTypes = {

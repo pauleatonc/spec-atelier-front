@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 import {
-	COLOR_ALABASTER,
-	COLOR_MERCURY,
-	COLOR_BLACK_OPACITY,
-	COLOR_BLACK_OPACITY_DARK,
+	ALABASTER,
+	MERCURY,
+	BLACK_OPACITY,
+	BLACK_OPACITY_DARK,
 } from '../../config/constants/styled-vars';
 
 export const Table = styled.table`
@@ -13,12 +13,12 @@ export const Table = styled.table`
 `;
 
 export const TableHead = styled.thead`
-	color: ${COLOR_BLACK_OPACITY};
+	color: ${BLACK_OPACITY};
 	font-size: 12px;
 `;
 
 export const TableBody = styled.tbody`
-	color: ${COLOR_BLACK_OPACITY_DARK};
+	color: ${BLACK_OPACITY_DARK};
 	font-size: 13px;
 	tr:last-child {
 		border-bottom: none;
@@ -26,8 +26,8 @@ export const TableBody = styled.tbody`
 `;
 
 export const RowTable = styled.tr`
-	border-bottom: 1px solid ${COLOR_MERCURY};
-	background-color: ${({ isExpanded }) => (isExpanded ? COLOR_ALABASTER : '')};
+	border-bottom: 1px solid ${MERCURY};
+	background-color: ${({ isExpanded }) => (isExpanded ? ALABASTER : '')};
 `;
 
 export const TableTh = styled.th`

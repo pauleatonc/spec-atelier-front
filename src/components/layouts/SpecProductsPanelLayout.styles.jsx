@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	COLOR_WHITE,
-	COLOR_MINE_SHAFT,
-	COLOR_MERCURY,
+	WHITE,
+	MINE_SHAFT,
+	MERCURY,
 	MEDIA_QUERY_SMALL,
+	BLACK,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
-	background-color: ${COLOR_WHITE};
-	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12),
-		0 1px 1px 0 rgba(0, 0, 0, 0.14);
+	background-color: ${WHITE};
+	box-shadow: 0 1px 3px 0 rgba(${BLACK}, 0.2), 0 2px 1px -1px rgba(${BLACK}, 0.12), 0 1px 1px 0 rgba(${BLACK}, 0.14);
 	display: ${({ show = false }) => (show ? 'initial' : 'none')};
 	height: calc(100vh - 122px);
 	left: 0;
@@ -39,24 +39,11 @@ Root.propTypes = {
 	show: PropTypes.bool.isRequired,
 };
 
-export const ButtonClose = styled.div`
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	font-size: 20px;
-	cursor: pointer;
-	padding: 0 23px;
-	outline: none;
-	${MEDIA_QUERY_SMALL} {
-		display: none;
-	}
-`;
-
 export const Header = styled.div`
 	display: flex;
 	justify-content: space-between;
-	border-bottom: 1px solid ${COLOR_MERCURY};
-	color: ${COLOR_MINE_SHAFT};
+	border-bottom: 1px solid ${MERCURY};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 13px;
 	font-weight: bold;
@@ -98,7 +85,7 @@ export const Panels = styled.section`
 `;
 
 export const Filters = styled.section`
-	border-right: 1px solid ${COLOR_MERCURY};
+	border-right: 1px solid ${MERCURY};
 	display: flex;
 	height: 100%;
 	position: relative;

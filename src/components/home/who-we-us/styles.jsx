@@ -4,8 +4,8 @@ import {
 	MEDIA_QUERY_STANDAR_MEDIUM,
 	BOTTLE_GREEN,
 	ALABASTER,
-	COLOR_WHITE,
-	COLOR_GRAY_OPACITY,
+	WHITE,
+	GRAY_OPACITY,
 } from '../../../config/constants/styled-vars';
 
 export const Container = styled.section`
@@ -92,10 +92,10 @@ export const BannerSlider = styled.div`
 	width: 100%;
 	height: 160px;
 	border-radius: 12px;
-	box-shadow: 0 2px 4px 0 ${COLOR_GRAY_OPACITY};
+	box-shadow: 0 2px 4px 0 ${GRAY_OPACITY};
 	text-align: center;
 	overflow: hidden;
-	background-color: ${COLOR_WHITE};
+	background-color: ${WHITE};
 
 	img {
 		width: 230px;
