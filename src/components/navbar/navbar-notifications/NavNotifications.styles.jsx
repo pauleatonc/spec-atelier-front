@@ -4,6 +4,11 @@ import {
 	COLOR_PRIMARY,
 	COLOR_WHITE,
 	COLOR_GREY,
+	COLOR_SILVER,
+	COLOR_PUERTO_RICO,
+	COLOR_BOULDER,
+	COLOR_TURQUOISE,
+	COLOR_RED
 } from '../../../config/constants/styled-vars';
 
 export const ProfileButton = styled.div`
@@ -13,7 +18,7 @@ export const ProfileButton = styled.div`
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-    width: 5%;
+  width: 5%;
 `;
 
 export const ProfileOptions = styled.section`
@@ -32,9 +37,9 @@ export const NotificationsButton = styled.div`
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-    width: 5%;
+  width: 5%;
 	margin-left: auto; 
-    margin-right: 17px;
+  margin-right: 17px;
 `;
 
 export const NotificationsOption = styled.section`
@@ -59,10 +64,10 @@ export const NotificationsOption = styled.section`
 		z-index: -100;
 	}
 	@media (max-width: 500px){
-		right: 52px !important;
+		right: 52px;
 	}
 	@media (max-width: 1115px) and (min-width: 500px) {
-		right: 58px !important;
+		right: 58px;
 	}
 `;
 
@@ -108,7 +113,7 @@ export const OptionsContent = styled.section`
 `;
 
 export const Separator = styled.div`
-	background-color: #c8c8c8;
+	background-color: ${COLOR_SILVER};
 	height: 1px;
 	width: 100%;
 `;
@@ -191,7 +196,7 @@ export const LinkHeader = styled.a`
     font-size: 14px;
     margin-bottom: 2px;
     text-align: right;
-    color: #42bfad;
+    color: ${COLOR_PUERTO_RICO};
     text-decoration: none;
     margin-left: 155px;
 `;
@@ -216,7 +221,7 @@ export const NewPoint = styled.span`
 	width: 12px;
     height: 12px;
     border-radius: 10px;
-    background-color: #31cbb7;
+    background-color: ${COLOR_TURQUOISE};
     margin-left: 10px;
     margin-top: 10px;
     position: relative;
@@ -228,22 +233,22 @@ export const NewPoint = styled.span`
 export const ActionPerformed = styled.label`
 	margin-top: 16px;
 	font-family: Lato;
-    font-size: 14px;
+	font-size: 14px;
 	letter-spacing: 1px;
-    margin-bottom: 2px;
-    text-align: left;
-	color: #757575;
+	margin-bottom: 2px;
+	text-align: left;
+	color: ${COLOR_BOULDER};
 `;
 
 export const LinkSeeAll = styled.a`
 	margin-top: 16px;
 	font-family: Lato;
-    font-size: 14px;
-    margin-bottom: 2px;
-    text-align: right;
-    color: #42bfad;
-    text-decoration: none;
-    float: right;
+	font-size: 14px;
+	margin-bottom: 2px;
+	text-align: right;
+	color: ${COLOR_PUERTO_RICO};
+	text-decoration: none;
+	float: right;
 	margin-left: 10px;
 `;
 
@@ -253,7 +258,7 @@ export const UndoSpan = styled.span`
 	font-size: 14px;
 	margin-bottom: 2px;
 	text-align: right;
-	color: #42bfad;
+	color: ${COLOR_PUERTO_RICO};
 	text-decoration: none;
 	float: right;
 	margin-left: 10px;
@@ -263,8 +268,8 @@ export const UndoSpan = styled.span`
 export const CountNoti = styled.span`
 	width: 15px;
     height: 15px;
-    background-color: red;
-    color: #fff;
+    background-color: ${COLOR_RED};
+    color: ${COLOR_WHITE};
     position: absolute;
     z-index: 1;
     border-radius: 21px;
@@ -280,6 +285,6 @@ export const ContentPrimary = styled.div`
 `;
 
 export const LoadingNoti = styled.label`
-	color: #757575;
+	color: ${COLOR_BOULDER};
 	text-align:center;
 `;

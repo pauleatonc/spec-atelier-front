@@ -52,7 +52,7 @@ export const loginAction = (data) => async (dispatch) => {
 		if (error) throw error;
 		setLocalStorage({ key: 'token', value: user.jwt });
 		setLocalStorage({ key: 'userID', value: user.id });
-		if (data.action.idNoti !== undefined) {
+		if (data.action.idNoti) {
 			if (data.action.actionUrl === "accept_invitation") {
 				deleteLocalStorage('isAcceptStore');
 				deleteLocalStorage('messageAcceptStore');
@@ -189,7 +189,7 @@ export const googleLoginAction = (data) => async (dispatch) => {
 					user: response.user,
 				},
 			});
-			if (data.action.idNoti !== undefined) {
+			if (data.action.idNoti) {
 				if (data.action.actionUrl === "accept_invitation") {
 					deleteLocalStorage('isAcceptStore');
 					acceptNotification(data.action).then((resp) => {
@@ -287,29 +287,29 @@ export const clearImpersonated = () => (dispatch) =>
 
 export const rejectNotifications = (body) => async (dispatch) => {
 	rejectNotification(body).then((response) => {
-		const dataResp = response.resp;
-		if(response.codeStatus === 304){
+		const {resp, codeStatus} = response;
+		if(codeStatus === 304){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not Modified' }),
 			);
 		}
-		if(response.codeStatus === 401){
+		if(codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
 			);
 		}
-		if(response.codeStatus === 404){
+		if(codeStatus === 404){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not found' }),
 			);
 		}
-		if(response.codeStatus === 500){
+		if(codeStatus === 500){
 			dispatch(
 				onShowAlertSuccess({ message: 'Internal server' }),
 			);
 		}
-		if(response.codeStatus === 200){
-			dataResp.then((data) => {
+		if(codeStatus === 200){
+			resp.then((data) => {
 				dispatch(
 				  onShowAlertSuccess({ message: data.message }),
 				);

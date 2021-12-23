@@ -5,6 +5,12 @@ import {
     NAVBAR_HEIGHT,
     COLOR_WHITE,
     COLOR_GREY,
+		COLOR_SILVER,
+		COLOR_DOVE_GRAY,
+		COLOR_PUERTO_RICO,
+		COLOR_TURQUOISE,
+		COLOR_BOULDER,
+		COLOR_RED,
 } from '../../config/constants/styled-vars';
 
 export const ProfileButton = styled.div`
@@ -70,7 +76,7 @@ export const OptionsContent = styled.section`
 `;
 
 export const Separator = styled.div`
-	background-color: #c8c8c8;
+	background-color: ${COLOR_SILVER};
 	height: 1px;
 	width: 100%;
 `;
@@ -116,7 +122,7 @@ export const InfoUserName = styled.span`
 	color: ${({ gray }) => (gray ? COLOR_GREY : COLOR_BLACK)};
 	b{
 		font-weight: bold;
-		color: #656565;
+		color: ${COLOR_DOVE_GRAY};
 	}
 `;
 
@@ -145,7 +151,7 @@ export const LinkHeader = styled.a`
     font-size: 12px;
     margin-bottom: 2px;
     text-align: right;
-    color: #42bfad;
+    color: ${COLOR_PUERTO_RICO};
     text-decoration: none;
     float: right;
 `;
@@ -169,7 +175,7 @@ export const NewPoint = styled.span`
 	width: 12px;
     height: 12px;
     border-radius: 10px;
-    background-color: #31cbb7;
+    background-color: ${COLOR_TURQUOISE};
     margin-left: 10px;
     margin-top: 10px;
     position: relative;
@@ -181,22 +187,22 @@ export const NewPoint = styled.span`
 export const ActionPerformed = styled.label`
 	margin-top: 16px;
 	font-family: Lato;
-    font-size: 12px;
+	font-size: 12px;
 	letter-spacing: 1px;
-    margin-bottom: 2px;
-    text-align: left;
-	color: #757575;
+	margin-bottom: 2px;
+	text-align: left;
+	color: ${COLOR_BOULDER};
 `;
 
 export const LinkSeeAll = styled.a`
 	margin-top: 16px;
 	font-family: Lato;
-    font-size: 12px;
-    margin-bottom: 2px;
-    text-align: right;
-    color: #42bfad;
-    text-decoration: none;
-    float: right;
+	font-size: 12px;
+	margin-bottom: 2px;
+	text-align: right;
+	color: ${COLOR_PUERTO_RICO};
+	text-decoration: none;
+	float: right;
 	margin-left: 43px;
 `;
 
@@ -206,7 +212,7 @@ export const UndoSpan = styled.span`
 	font-size: 12px;
 	margin-bottom: 2px;
 	text-align: right;
-	color: #42bfad;
+	color: ${COLOR_PUERTO_RICO};
 	text-decoration: none;
 	float: right;
 	margin-left: 53px;
@@ -215,24 +221,24 @@ export const UndoSpan = styled.span`
 
 export const CountNoti = styled.span`
 	width: 15px;
-    height: 15px;
-    background-color: red;
-    color: #fff;
-    position: absolute;
-    z-index: 1;
-    border-radius: 21px;
-    font-size: 11px;
-    text-align: center;
-    margin-top: -14px;
-    margin-left: 16px;
-    padding-top: 2px;
-    font-weight: bold;
+	height: 15px;
+	background-color: ${COLOR_RED};
+	color: ${COLOR_WHITE};
+	position: absolute;
+	z-index: 1;
+	border-radius: 21px;
+	font-size: 11px;
+	text-align: center;
+	margin-top: -14px;
+	margin-left: 16px;
+	padding-top: 2px;
+	font-weight: bold;
 `;
 
 export const ContentPrimary = styled.div`
 `;
 
 export const LoadingNoti = styled.label`
-	color: #757575;
+	color: ${COLOR_BOULDER};
 	text-align:center;
 `;
