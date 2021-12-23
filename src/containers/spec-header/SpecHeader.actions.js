@@ -101,38 +101,38 @@ export const watchNotifications = (body) => async (dispatch) => {
 export const accepthNotificationsAC = (body) => async (dispatch) => {
 	dispatch(onActionCreator(ACCEPT_NOTIFICATION));	
 	return acceptNotification(body).then((response) => {
-		const dataResp = response.resp;
-		if(response.codeStatus !== 401 && response.codeStatus !== 404 && response.codeStatus !== 500 && response.codeStatus !== 200){
+		const {resp, codeStatus} = response;
+		if(codeStatus !== 401 && response.codeStatus !== 404 && response.codeStatus !== 500 && response.codeStatus !== 200){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not Modified' }),
 			);
 		}
-		if(response.codeStatus === 401){
+		if(codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
 			);
 		}
-		if(response.codeStatus === 403){
-			dataResp.then((data) => {
+		if(codeStatus === 403){
+			resp.then((data) => {
 				dispatch(
 					onShowAlertSuccess({ message: data.error}),
 				);
 			})
 		}
-		if(response.codeStatus === 404){
+		if(codeStatus === 404){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not found' }),
 			);
 		}
-		if(response.codeStatus === 500){
+		if(codeStatus === 500){
 			dispatch(
 				onShowAlertSuccess({ message: 'Internal server' }),
 			);
 		}
-		if(response.codeStatus === 200){
+		if(codeStatus === 200){
 			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
-			return response;
 		}
+		return response;
 	}, (error) => {
 		dispatch(
 			onShowAlertSuccess({ message: 'Error al aceptar proyecto.' }),
@@ -146,8 +146,8 @@ export const accepthNotificationsAC = (body) => async (dispatch) => {
 export const rejectNotifications = (body) => async (dispatch) => {
 	dispatch(onActionCreator(REJECT_NOTIFICATION));
 	return rejectNotification(body).then((response) => {
-		const dataResp = response.resp;
-		if(response.codeStatus === 304){
+		const {resp, codeStatus} = response;
+		if(codeStatus === 304){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not Modified' }),
 			);
@@ -157,27 +157,27 @@ export const rejectNotifications = (body) => async (dispatch) => {
 				onShowAlertSuccess({ message: 'Not session found' }),
 			);
 		}
-		if(response.codeStatus === 403){
-			dataResp.then((data) => {
+		if(codeStatus === 403){
+			resp.then((data) => {
 				dispatch(
 					onShowAlertSuccess({ message: data.error}),
 				);
 			})
 		}
-		if(response.codeStatus === 404){
+		if(codeStatus === 404){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not found' }),
 			);
 		}
-		if(response.codeStatus === 500){
+		if(codeStatus === 500){
 			dispatch(
 				onShowAlertSuccess({ message: 'Internal server' }),
 			);
 		}
-		if(response.codeStatus === 200){
+		if(codeStatus === 200){
 			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
-			return response;
 		}
+		return response;
 	}, (error) => {
 		dispatch(
 			onShowAlertSuccess({ message: 'Error al rechazar proyecto.' }),
@@ -185,45 +185,45 @@ export const rejectNotifications = (body) => async (dispatch) => {
 		dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
 			error
 		}))
-		return "ff";
 	})
 }
 
 export const undoRejectNotifications = (body) => async (dispatch) => {
 	dispatch(onActionCreator(UNDO_REJECT_NOTIFICATION));
 	return undoRejectNotification(body).then((response) => {
-		const dataResp = response.resp;
-		if(response.codeStatus === 304){
+		const {resp, codeStatus} = response;
+		if(codeStatus === 304){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not Modified' }),
 			);
 		}
-		if(response.codeStatus === 401){
+		if(codeStatus === 401){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
 			);
 		}
-		if(response.codeStatus === 403){
-			dataResp.then((data) => {
+		if(codeStatus === 403){
+			resp.then((data) => {
 				dispatch(
 					onShowAlertSuccess({ message: data.error}),
 				);
 			})
 		}
-		if(response.codeStatus === 404){
+		if(codeStatus === 404){
 			dispatch(
 				onShowAlertSuccess({ message: 'Not found' }),
 			);
 		}
-		if(response.codeStatus === 500){
+		if(codeStatus === 500){
 			dispatch(
 				onShowAlertSuccess({ message: 'Internal server' }),
 			);
 		}
-		if(response.codeStatus === 200){
+		if(codeStatus === 200){
 			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
-			return response;
 		}
+		return response;
+
 	}, (error) => {
 		dispatch(
 			onShowAlertSuccess({ message: 'Error al deshacer proyecto.' }),

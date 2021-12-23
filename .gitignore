@@ -3,6 +3,6 @@ dist/
 public/
 build/
 coverage/
-
+.vscode/
 .env
 **/*.DS_Store
