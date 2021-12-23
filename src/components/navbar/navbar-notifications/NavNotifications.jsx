@@ -88,9 +88,7 @@ const NavNotifications = () => {
 			togglOptions();
 		}
 	};
-
-	if (isLogin) 
-	return (
+	return isLogin && (
 		<>
 			<NotificationsButton
 				type="button"
