@@ -16,7 +16,6 @@ import {
 	OptionCheckboxIcon,
 	OptionText,
 } from './SpecModalAttachProduct.styles';
-import closeSource from '../../assets/images/icons/close.svg';
 
 function SpecModalAttachProduct({
 	showAttachModal,
@@ -84,7 +83,6 @@ function SpecModalAttachProduct({
 						role="button"
 						tabIndex="0"
 						alt="Cerrar"
-						// src={closeSource}
 						onKeyDown={onClose}
 						onClick={onClose}
 					/>

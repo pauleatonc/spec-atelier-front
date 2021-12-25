@@ -22,7 +22,6 @@ import {
 	Section,
 	Footer,
 } from './SpecCreateProduct.styles';
-import closeSource from '../../assets/images/icons/close.svg';
 import MultiSelect from '../../components/inputs/MultiSelect';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 

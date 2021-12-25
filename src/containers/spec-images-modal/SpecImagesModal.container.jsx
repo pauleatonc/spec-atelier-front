@@ -7,7 +7,6 @@ import useModal from '../../components/layouts/ModalLayout.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import Button from '../../components/buttons/Button';
 import { Root, Header, Title, CloseIcon, Body, Figures, Figure, Image, CheckIcon, Footer } from './SpecImagesModal.styles';
-import closeSource from '../../assets/images/icons/close.svg';
 import checkSource from '../../assets/images/icons/check.svg';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 

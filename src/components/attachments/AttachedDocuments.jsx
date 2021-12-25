@@ -22,7 +22,6 @@ import {
 	DropZoneText,
 } from './AttachedDocuments.styles';
 import documentsUploadSource from '../../assets/images/icons/documents-upload.svg';
-import closeSource from '../../assets/images/icons/close.svg';
 import DocumentItem from './DocumentItem';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 

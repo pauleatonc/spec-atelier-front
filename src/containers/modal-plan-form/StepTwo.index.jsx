@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import { Button } from '../../components/SpecComponents';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import useModal from '../../components/layouts/ModalLayout.hooks';
-import closeSource from '../../assets/images/icons/close.svg';
 import { CloseIcon } from '../profile-change-picture/ProfileChangePicture.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 

@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import useModal from '../../components/layouts/ModalLayout.hooks';
 import iconSuccess from '../../assets/images/businessPlan/icon_phone.svg';
-import closeSource from '../../assets/images/icons/close.svg';
 import { CloseIcon } from '../profile-change-picture/ProfileChangePicture.styles';
 
 import { onHideModal } from './actions';

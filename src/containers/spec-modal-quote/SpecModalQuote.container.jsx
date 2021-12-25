@@ -101,7 +101,6 @@ const SpecModalQuote = ({initialValues}) => {
             onKeyDown={onCloseModal}
             onClick={onCloseModal}
           >
-            {/* <i className="fas fa-times" /> */}
           </ButtonClose>
           
           <Section>

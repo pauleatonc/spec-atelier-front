@@ -1,15 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	onGetSpecProductsBySection,
-	onUpdateFilterSection,
-} from '../spec-products/SpecProducts.actions';
+import { onGetSpecProductsBySection, onUpdateFilterSection } from '../spec-products/SpecProducts.actions';
 import { onHideSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
 import { setFilters } from '../products-list/ProductsList.actions';
 import useSpecProductsPanelLayout from '../../components/layouts/SpecProductsPanelLayout.hook';
 import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
 import Breadcrumbs from '../../components/basics/Breadcrumbs';
-import closeSource from '../../assets/images/icons/close.svg';
+import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 import {
 	Root,
 	Body,
@@ -20,7 +17,7 @@ import {
 	Loading,
 	CloseIcon,
 } from './SpecProductsSections.styles';
-import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
+
 
 /**
  * The SpecProductsSections' container.

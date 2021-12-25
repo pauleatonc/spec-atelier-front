@@ -1,23 +1,13 @@
 import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import arrowDownSource from '../../assets/images/icons/arrow-down.svg';
 import arrowUpActiveSource from '../../assets/images/icons/arrow-up-active.svg';
-import {
-	onGetSpecProductsByItem,
-	onUpdateFilterSection,
-	onUpdateFilterSubitem,
-} from '../spec-products/SpecProducts.actions';
+import { onGetSpecProductsByItem,	onUpdateFilterSection, onUpdateFilterSubitem } from '../spec-products/SpecProducts.actions';
 import { setFilters } from '../products-list/ProductsList.actions';
 import Breadcrumbs from '../../components/basics/Breadcrumbs';
 import Collapsible from '../../components/basics/Collapsible';
-import closeSource from '../../assets/images/icons/close.svg';
-import {
-	Header,
-	CloseIcon,
-} from '../spec-products-sections/SpecProductsSections.styles';
+import { Header, CloseIcon } from '../spec-products-sections/SpecProductsSections.styles';
 import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
-
 import { onHideSpecProductsItemsSuccess } from './SpecProductsItems.actions';
 import {
 	Root,

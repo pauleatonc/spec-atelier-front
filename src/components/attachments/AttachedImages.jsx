@@ -26,7 +26,6 @@ import {
 } from './AttachedImages.styles';
 import imagesUploadSource from '../../assets/images/icons/images-upload.svg';
 import removeSource from '../../assets/images/icons/remove.svg';
-import closeSource from '../../assets/images/icons/close.svg';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 /**

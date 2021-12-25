@@ -5,7 +5,6 @@ import { Button } from '../../components/SpecComponents';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import useModal from '../../components/layouts/ModalLayout.hooks';
 import { useInput } from '../../components/inputs/Inputs.hooks';
-import closeSource from '../../assets/images/icons/close.svg';
 import { CloseIcon } from '../profile-change-picture/ProfileChangePicture.styles';
 import { BUSINESS_PLANS } from '../../config/constants/businessPlans';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';

@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AvatarEditor from 'react-avatar-editor';
-
 import { PROFILE_PHOTO_DEFAULT } from '../../assets/Images';
 import useModal from '../../components/layouts/ModalLayout.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
-import closeSource from '../../assets/images/icons/close.svg';
 import Button from '../../components/buttons/Button';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+import { DUSTY_GRAY } from '../../config/constants/styled-vars';
 
 import {
 	onHideEditProfilePicture,
@@ -114,7 +113,7 @@ const ProfileChangePicture = () => {
 							onClick={() => setZoomAvatar(zomAvatar - 0.1)}
 							disabled={zomAvatar === 1}
 						>
-							<i className="fa fa-minus" style={{ color: '#979797' }} />
+							<i className="fa fa-minus" style={{ color: DUSTY_GRAY }} />
 						</ButtonZoomPicture>
 						<input
 							type="range"
@@ -128,7 +127,7 @@ const ProfileChangePicture = () => {
 							onClick={() => setZoomAvatar(zomAvatar + 0.1)}
 							disabled={zomAvatar >= 2}
 						>
-							<i className="fa fa-plus" style={{ color: '#979797' }} />
+							<i className="fa fa-plus" style={{ color: {DUSTY_GRAY} }} />
 						</ButtonZoomPicture>
 					</EditorPicture>
 				</Body>

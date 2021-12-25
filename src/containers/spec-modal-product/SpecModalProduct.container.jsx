@@ -28,18 +28,10 @@ import {
 	AddButtonContainer,
 } from './SpecModalProduct.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-
 import { closeModal, getImageSizeData } from './SpecModalProduct.actions';
-import {
-	onAttachSpecProduct,
-	onDetachSpecProduct,
-} from '../spec-document/SpecDocument.actions';
-import {
-	onShowAttachModal,
-	onHideAttachModal,
-} from '../spec-products/SpecProducts.actions';
+import { onAttachSpecProduct,	onDetachSpecProduct } from '../spec-document/SpecDocument.actions';
+import { onShowAttachModal,	onHideAttachModal } from '../spec-products/SpecProducts.actions';
 import { openContactModal } from '../modal-contact-form/ModalContactForm.actions';
-import closeSource from '../../assets/images/icons/close.svg';
 
 const SpecModalProduct = () => {
 	const { id: specID } = useParams();
@@ -120,7 +112,6 @@ const SpecModalProduct = () => {
 							role="button"
 							tabIndex="0"
 							alt="Cerrar"
-							// src={closeSource}
 							onKeyDown={onCloseModal}
 							onClick={onCloseModal}
 						/>

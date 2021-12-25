@@ -23,7 +23,6 @@ import {
 	Footer,
 	Gap,
 } from './SpecCreateProduct.styles';
-import closeSource from '../../assets/images/icons/close.svg';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 import { reorderList } from '../../helpers/helpers';
 
