@@ -19,7 +19,9 @@ export const COLOR_MERCURY = '#E9E9E9';
 export const COLOR_GREEN_UNDERLINE = '#19BEA8';
 export const COLOR_ALABASTER = '#FAFAFA';
 export const COLOR_SILVER = '#C8C8C8';
-export const COLOR_PUERTO_RICO = '#42BFAD';
+export const COLOR_PUERTO_RICO = '#42bfad';
+export const COLOR_PUERTO_RICO_BACKGROUND = 'rgba(66, 191, 173, 0.15)';
+export const COLOR_MORNING_GLORY = '#9CDDD4';
 export const COLOR_BOULDER = '#757575';
 export const COLOR_TURQUOISE = '#31CBB7';
 export const COLOR_RED = '#FF0000';
@@ -35,7 +37,16 @@ export const GALLERY = '#EEEEEE';
 
 export const COLOR_BLACK_OPACITY = 'rgba(0, 0, 0, 0.54)';
 export const COLOR_BLACK_OPACITY_DARK = 'rgba(0, 0, 0, 0.87)';
+export const COLOR_BLACK_OPACITY_GRAY = 'rgba(0, 0, 0, 0.2)';
+export const COLOR_BLACK_OPACITY_TRANSPARENT = 'rgba(0, 0, 0, 0.12)';
+export const COLOR_BLACK_OPACITY_SECONDARY = 'rgba(0, 0, 0, 0.14)';
+export const COLOR_BLACK_OPACITY_GRAY_SECONDARY = 'rgba(117, 117, 117, 0.3)';
 export const COLOR_GRAY_OPACITY = 'rgba(201, 198, 198, 0.5)';
+export const COLOR_GRAY_OPACITY_SECONDARY = 'rgba(0, 0, 0, 0.25)';
+export const COLOR_GRAY_OPACITY_TRANSPARENT = 'rgb(0 0 0 / 25%)';
+export const COLOR_EBB = '#EFECEC';
+export const COLOR_LOADING_ACCEPT = 'rbg(156 221 212)';
+export const COLOR_SILVER_CHALICE = '#AFAFAF';
 
 export const SHADOW_GREY =
 	'0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.14);';
@@ -45,9 +56,8 @@ export const MAX_SCREEN_SMALL = 768;
 export const MAX_SCREEN_MEDIUM = 1080;
 export const STANDAR_MEDIUM = 992;
 export const MEDIA_QUERY_SMALL = `@media (max-width: ${MAX_SCREEN_SMALL}px)`;
-export const MEDIA_QUERY_MEDIUM = `@media (min-width: ${
-	MAX_SCREEN_SMALL + 1
-}px) and (max-width: ${MAX_SCREEN_MEDIUM}px)`;
+export const MEDIA_QUERY_MEDIUM = `@media (min-width: ${MAX_SCREEN_SMALL + 1
+	}px) and (max-width: ${MAX_SCREEN_MEDIUM}px)`;
 
 export const MEDIA_QUERY_STANDAR_MEDIUM = `@media (max-width: ${STANDAR_MEDIUM}px)`;
 export const MAX_SCREEN_SMALL_NAV_JS = `(max-width: ${MAX_SCREEN_SMALL}px)`;

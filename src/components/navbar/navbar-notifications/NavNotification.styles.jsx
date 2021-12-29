@@ -1,73 +1,52 @@
 import styled from 'styled-components';
 import {
-	COLOR_BLACK,
-	COLOR_PRIMARY,
-	COLOR_WHITE,
-	COLOR_GREY,
-	COLOR_SILVER,
-	COLOR_PUERTO_RICO,
-	COLOR_BOULDER,
-	COLOR_TURQUOISE,
-	COLOR_RED
+  COLOR_BLACK,
+  COLOR_PRIMARY,
+  COLOR_WHITE,
+  COLOR_GREY,
+  COLOR_SILVER,
+  COLOR_PUERTO_RICO,
+  COLOR_BOULDER,
+  COLOR_TURQUOISE,
+  COLOR_RED,
+  COLOR_BLACK_OPACITY_GRAY_SECONDARY,
+  COLOR_GRAY_OPACITY_SECONDARY,
+  COLOR_GRAY_OPACITY_TRANSPARENT
 } from '../../../config/constants/styled-vars';
-
-export const ProfileButton = styled.div`
-	color: ${({ isOpen }) => (!isOpen ? COLOR_BLACK : COLOR_PRIMARY)};
-	display: flex;
-	height: 100%;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-  width: 5%;
-`;
-
-export const ProfileOptions = styled.section`
-	height: 446px;
-	width: 360px;
-	position: absolute;
-	right: 82px;
-	display: ${({ show }) => !show && 'none'};
-	z-index: 2;
-`;
 
 export const NotificationsButton = styled.div`
 	color: ${({ isOpen }) => (!isOpen ? COLOR_BLACK : COLOR_PRIMARY)};
 	display: flex;
-	height: 100%;
+	height: 57px;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-  width: 5%;
+  width: 71px;
 	margin-left: auto; 
-  margin-right: 17px;
+  margin-right: 16px;
 `;
 
 export const NotificationsOption = styled.section`
 	width: 360px;
+	height: ${({ totalNotifications }) => (totalNotifications > 1 ? '446px' : 'auto')};
 	position: absolute;
 	right: 75px;
 	display: ${({ show }) => !show && 'none'};
 	top: 69px;
 	z-index: 2;
-	box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.25), 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+	box-shadow: 0 -1px 4px 0 ${COLOR_GRAY_OPACITY_SECONDARY}, 0 2px 4px 0 ${COLOR_GRAY_OPACITY_SECONDARY};
 	&:before {
 		content: '';
 		width: 25px;
 		height: 25px;
 		position: absolute;
 		top: -4px;
-		background: white;
+		background: ${COLOR_WHITE};
 		transform: rotate(45deg) skew(15deg, 15deg);
 		right: 13px;
-		box-shadow: -5px -5px 2px -4px rgb(0 0 0 / 25%);
+		box-shadow: -5px -5px 2px -4px ${COLOR_GRAY_OPACITY_TRANSPARENT};
 		border-radius: 4px;
 		z-index: -100;
-	}
-	@media (max-width: 500px){
-		right: 52px;
-	}
-	@media (max-width: 1115px) and (min-width: 500px) {
-		right: 58px;
 	}
 `;
 
@@ -75,10 +54,6 @@ export const Option = styled.div`
 	height: 60px;
 	font-family: Lato;
 	font-size: 14px;
-	font-weight: normal;
-	font-stretch: normal;
-	font-style: normal;
-	line-height: normal;
 	letter-spacing: 1px;
 	background-color: ${COLOR_WHITE};
 	display: flex;
@@ -95,19 +70,20 @@ export const Option = styled.div`
 
 export const OptionsContent = styled.section`
 	width: 360px;
+	height: ${({ totalNotifications }) => (totalNotifications > 1 ? '446px' : 'auto')};
 	overflow: overlay;
 	background-color: ${COLOR_WHITE};
 	&::-webkit-scrollbar {
 		width: 8px;
-  		height: 120px;
+  	height: 120px;
 	}
 	&::-webkit-scrollbar-track {
 		background: transparent;
 	}
 	&::-webkit-scrollbar-thumb {
 		border-radius: 3px;
-		border: 3px rgba(117, 117, 117, 0.3);
-		background: rgba(117, 117, 117, 0.3);
+		border: 3px ${COLOR_BLACK_OPACITY_GRAY_SECONDARY};
+		background: ${COLOR_BLACK_OPACITY_GRAY_SECONDARY};
 		border-right: 6px transparent solid;
 	} 
 `;
@@ -115,26 +91,11 @@ export const OptionsContent = styled.section`
 export const Separator = styled.div`
 	background-color: ${COLOR_SILVER};
 	height: 1px;
-	width: 100%;
 `;
 
-export const ProfilePictureContainer = styled.div`
+export const NotificationsIcon = styled.div`
 	width: 22px;
 	height: 30px;
-	border-radius: 50%;
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 30px;
-`;
-
-export const ProfilePictureContainer2 = styled.div`
-	padding: 36px;
-	padding-right: 4%;
-	padding-top: 30px;
-	height: 30px;
-	border-radius: 50%;
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
@@ -178,27 +139,27 @@ export const InfoUserName2 = styled.label`
 `;
 
 export const ListHeader = styled.div`
-    padding: 8%;
+  padding: 8%;
 	padding-left: 26px;
 	padding-bottom: 12px;
 `;
 
 export const TitleHeader = styled.label`
-    font-family: Lato;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 2px;
-    text-align: left;
+	font-family: Lato;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 2px;
+	text-align: left;
 `;
 
 export const LinkHeader = styled.a`
-    font-family: Lato;
-    font-size: 14px;
-    margin-bottom: 2px;
-    text-align: right;
-    color: ${COLOR_PUERTO_RICO};
-    text-decoration: none;
-    margin-left: 155px;
+	font-family: Lato;
+	font-size: 14px;
+	margin-bottom: 2px;
+	text-align: right;
+	color: ${COLOR_PUERTO_RICO};
+	text-decoration: none;
+	margin-left: 155px;
 `;
 
 export const ListItem = styled.div`
@@ -219,15 +180,15 @@ export const ContentPoint = styled.div`
 
 export const NewPoint = styled.span`
 	width: 12px;
-    height: 12px;
-    border-radius: 10px;
-    background-color: ${COLOR_TURQUOISE};
-    margin-left: 10px;
-    margin-top: 10px;
-    position: relative;
-    z-index: 2;
-    float: left;
-    margin-right: -22px;
+	height: 12px;
+	border-radius: 10px;
+	background-color: ${COLOR_TURQUOISE};
+	margin-left: 10px;
+	margin-top: 10px;
+	position: relative;
+	z-index: 2;
+	float: left;
+	margin-right: -22px;
 `;
 
 export const ActionPerformed = styled.label`
@@ -267,18 +228,18 @@ export const UndoSpan = styled.span`
 
 export const CountNoti = styled.span`
 	width: 15px;
-    height: 15px;
-    background-color: ${COLOR_RED};
-    color: ${COLOR_WHITE};
-    position: absolute;
-    z-index: 1;
-    border-radius: 21px;
-    font-size: 11px;
-    text-align: center;
-    margin-top: -14px;
-    margin-left: 16px;
-    padding-top: 2px;
-    font-weight: bold;
+	height: 15px;
+	background-color: ${COLOR_RED};
+	color: ${COLOR_WHITE};
+	position: absolute;
+	z-index: 1;
+	border-radius: 21px;
+	font-size: 11px;
+	text-align: center;
+	margin-top: -14px;
+	margin-left: 16px;
+	padding-top: 2px;
+	font-weight: bold;
 `;
 
 export const ContentPrimary = styled.div`

@@ -4,6 +4,7 @@ import {
   COLOR_WHITE,
   COLOR_PRIMARY,
   COLOR_SECONDARY,
+  COLOR_SILVER_CHALICE,
 } from '../../config/constants/styled-vars';
 
 const BaseButton = styled.button`
@@ -20,7 +21,7 @@ const BaseButton = styled.button`
   line-height: 1;
   margin: ${({ margin = 'initial' }) => margin};
   min-width: 107px;
-  padding: ${({ padding = '0 19px'}) => padding };
+  padding: ${({ padding = '0 19px' }) => padding};
   width: ${({ width = 'initial' }) => width};
   &:active {
     outline: 0;
@@ -86,6 +87,6 @@ export const CancelSecondaryButton = styled(BaseButton)`
 `;
 export const CancelNotificationButton = styled(BaseButton)`
   background-color: transparent;
-  border: 2px solid #afafaf;
-  color: #afafaf;
+  border: 2px solid ${COLOR_SILVER_CHALICE};
+  color: ${COLOR_SILVER_CHALICE};
 `;
