@@ -40,16 +40,6 @@ export const addSpecBlockText = factoryService(
 );
 
 /**
- * Delete a block from the spec.
- */
-export const deleteSpecBlock = factoryService(({ blockID, specID, userID }) =>
-  deleteJsonRequest(
-    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/remove_block`,
-    { block: blockID },
-  ),
-);
-
-/**
  * Delete the image of the given block.
  */
 export const deleteSpecBlockImage = factoryService(
@@ -59,6 +49,13 @@ export const deleteSpecBlockImage = factoryService(
       { block: blockID },
     ),
 );
+
+export const deleteSpecBlock = factoryService(({ block, specID, userID }) => {
+  return deleteJsonRequest(
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/remove_block`,
+    { block },
+  );
+});
 
 /**
  * Delete the given block's text.
@@ -81,12 +78,20 @@ export const getSpecBlocks = factoryService(({ specID, userID }) =>
 /**
  * Sort the spec blocks.
  */
+<<<<<<< HEAD
 export const sortSpecBlocks = factoryService(
   ({ blocks, block, specID, userID }) =>
     patchJsonRequest(
       `${API_BASE_URL}/users/${userID}/project_specs/${specID}/reorder_blocks`,
       { blocks, block },
     ),
+=======
+export const sortSpecBlocks = factoryService(({ blocks, specID, userID }) =>
+  patchJsonRequest(
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/reorder_blocks`,
+    { blocks },
+  ),
+>>>>>>> 9ee8096 (refactor: refactor to file specs service function)
 );
 
 /**
@@ -166,6 +171,7 @@ export const updateProduct = factoryService((body) =>
 
 export const sendQuote = factoryService((body) =>
   postJsonRequest(`${API_BASE_URL}/products/${body.id}/quote`, body.data),
+<<<<<<< HEAD
 );
 
 export const getChangeHistory = factoryService(({ specID, userID }) =>
@@ -178,10 +184,17 @@ export const getNotificationsList = factoryService((id) =>
   getJsonRequest(
     `${API_BASE_URL}/users/${id}/notifications?permissions=true&limit=10`,
   ),
+=======
+);
+
+export const getNotificationsList = factoryService((id) =>
+  getJsonRequest(`${API_BASE_URL}/users/${id}/notifications?permissions=true&limit=10`),
+>>>>>>> 9ee8096 (refactor: refactor to file specs service function)
 );
 
 export const updateNotificationsWatch = factoryService((body) =>
   patchJsonRequest(
+<<<<<<< HEAD
     `${API_BASE_URL}/users/${body.idUser}/notifications/mark_as_watched?limit=10`,
     { notifications: body.notifications },
   ),
@@ -209,4 +222,26 @@ export const undoRejectNotification = factoryService(
       `${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/refused_undo`,
     ),
   true,
+=======
+    `${API_BASE_URL}/users/${body.idUser}/notifications/mark_as_watched?limit=10`, { notifications: body.notifications },
+  ),
+);
+
+export const acceptNotification = factoryService((body) =>
+  patchJsonRequest(
+    `${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/accept`,
+  ), true,
+);
+
+export const rejectNotification = factoryService((body) =>
+  patchJsonRequest(
+    `${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/refuse`,
+  ), true,
+);
+
+export const undoRejectNotification = factoryService((body) =>
+  patchJsonRequest(
+    `${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/refused_undo`,
+  ), true,
+>>>>>>> 9ee8096 (refactor: refactor to file specs service function)
 );
