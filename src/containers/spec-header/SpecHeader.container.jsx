@@ -11,6 +11,12 @@ import {
 	Monetization,
 	SpecOptions,
 	PermissionsButtonContainer,
+<<<<<<< HEAD
+=======
+	Logo,
+	MobileLogo,
+	ContainerTeam,
+>>>>>>> 0dc57e0afc94cab2510e8170ce5d7b089362da7c
 } from './SpecHeader.styles';
 import logoSource from '../../assets/images/logo-spec.png';
 import logo2xSource from '../../assets/images/logo-spec@2x.png';
@@ -21,6 +27,8 @@ import {
 	downloadBudgetDocument
 } from './SpecHeader.actions';
 import ItemsNavBar from '../../components/navbar/navbar-app/Components/ItemsNavBar';
+import { onShowModal } from '../spec-modal-team/actions';
+import { TYPE_MODALS } from '../spec-modal-team/constants';
 
 /**
  * The SpecHeader's container.
@@ -30,6 +38,18 @@ const SpecHeader = () => {
 	const { id } = useParams();
 	const { project } = useSelector((state) => state.specDocument);
 	const { url } = useSelector((state) => state.specHeader);
+<<<<<<< HEAD
+=======
+	const openModalTeam = () =>
+		dispatch(
+			onShowModal(
+				project?.team.length
+					? TYPE_MODALS.TEAM_MODAL
+					: TYPE_MODALS.NEW_MEMBER_MODAL,
+			),
+		);
+
+>>>>>>> 0dc57e0afc94cab2510e8170ce5d7b089362da7c
 	const handleDownloadClick = () =>
 		dispatch(downloadSpecDocument({ specID: id }));
 	const handleDownloadBudgetClick = () =>
@@ -51,6 +71,7 @@ const SpecHeader = () => {
 		};
 		if (url) downloadDoc();
 	}, [url]);
+
 	return (
 		<Root>
 			<SpecOptions>
@@ -77,12 +98,25 @@ const SpecHeader = () => {
 					/>
 				</Section>
 				<Separator />
-				<PermissionsButtonContainer>
-					<Button variant="primary" onClick={() => console.log('permisos')}>
-						<i className="fas fa-share-alt" />
-						&emsp;Equipo
-					</Button>
-				</PermissionsButtonContainer>
+				{project?.team && (
+					<ContainerTeam>
+						<PermissionsButtonContainer>
+							<Button width="120px" variant="primary" onClick={openModalTeam}>
+								<i className="fas fa-share-alt" />
+								&emsp;Equipo
+							</Button>
+						</PermissionsButtonContainer>
+						{/*
+						TODO: validate in next hito
+						 {project?.team.map((member, index) => (
+							<IconUser
+								horizontalList
+								user={member.user}
+								zIndex={project?.team.length - index}
+							/>
+						))} */}
+					</ContainerTeam>
+				)}
 			</SpecOptions>
 			<ItemsNavBar />
 		</Root>

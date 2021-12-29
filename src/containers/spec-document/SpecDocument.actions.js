@@ -380,7 +380,7 @@ export const handleUpdateProduct = (data, tableInputType, item) => async (
 		(error) => {
 			// TODO: update
 			dispatch(onActionCreator(UPDATE_PRODUCT_ERROR));
-			console.log(error);
+			console.error(error);
 		},
 	);
 };

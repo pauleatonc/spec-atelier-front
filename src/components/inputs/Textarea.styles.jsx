@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { COLOR_MINE_SHAFT } from '../../config/constants/styled-vars';
+import { COLOR_MINE_SHAFT, ALTO } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
 	width: 100%;
@@ -20,7 +20,7 @@ export const Label = styled.label`
 
 export const Textarea = styled.textarea`
 	background-color: transparent;
-	border: 1px solid #d6d6d6;
+	border: 1px solid ${ALTO};
 	border-radius: 4px;
 	color: ${COLOR_MINE_SHAFT};
 	font-family: Lato;
@@ -47,7 +47,7 @@ export const CountCharacter = styled.p`
 	right: 10px;
 	font-family: Lato;
 	font-size: 12px;
-	color: #d6d6d6;
+	color: ${ALTO};
 `;
 
 Textarea.propTypes = {

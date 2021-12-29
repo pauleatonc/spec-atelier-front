@@ -79,12 +79,6 @@ export const ListItem = styled.a`
 	&:hover {
 		background-color: rgba(235, 234, 234, 0.5);
 	}
-
-	& span {
-		overflow-x: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
 `;
 
 ListItem.defaultProps = {
