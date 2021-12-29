@@ -57,15 +57,15 @@ export const loginAction = (data) => async (dispatch) => {
 				deleteLocalStorage('isAcceptStore');
 				deleteLocalStorage('messageAcceptStore');
 				acceptNotification(data.action).then((response) => {
-					const dataResp = response.resp;
-					if(response.codeStatus === 200){
-						setLocalStorage({ key: 'isAcceptStore', value: response.codeStatus });
-						dataResp.then((d) => {
+					const { resp, codeStatus } = response;
+					if (codeStatus === 200) {
+						setLocalStorage({ key: 'isAcceptStore', value: codeStatus });
+						resp.then((d) => {
 							setLocalStorage({ key: 'messageAcceptStore', value: d.message });
 							dispatch(onActionCreator(ACCEPT_NOTIFICATION_LOGIN, d))
 						});
-					}else{
-						setLocalStorage({ key: 'isAcceptStore', value: response.codeStatus });
+					} else {
+						setLocalStorage({ key: 'isAcceptStore', value: codeStatus });
 					}
 				}, (e) => {
 					dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
@@ -192,16 +192,16 @@ export const googleLoginAction = (data) => async (dispatch) => {
 			if (data.action.idNoti) {
 				if (data.action.actionUrl === "accept_invitation") {
 					deleteLocalStorage('isAcceptStore');
-					acceptNotification(data.action).then((resp) => {
-						const dataResp = resp.resp;
-						if(resp.codeStatus === 200){
-							setLocalStorage({ key: 'isAcceptStore', value: resp.codeStatus });
-							dataResp.then((d) => {
+					acceptNotification(data.action).then((responseNotification) => {
+						const { resp, codeStatus } = responseNotification;
+						if (codeStatus === 200) {
+							setLocalStorage({ key: 'isAcceptStore', value: codeStatus });
+							resp.then((d) => {
 								setLocalStorage({ key: 'messageAcceptStore', value: d.message });
 								dispatch(onActionCreator(ACCEPT_NOTIFICATION_GOOGLE, d))
 							})
-						}else{
-							setLocalStorage({ key: 'isAcceptStore', value: resp.codeStatus });
+						} else {
+							setLocalStorage({ key: 'isAcceptStore', value: codeStatus });
 						}
 					}, (e) => {
 						dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
@@ -287,33 +287,33 @@ export const clearImpersonated = () => (dispatch) =>
 
 export const rejectNotifications = (body) => async (dispatch) => {
 	rejectNotification(body).then((response) => {
-		const {resp, codeStatus} = response;
-		if(codeStatus === 304){
+		const { resp, codeStatus } = response;
+		if (codeStatus === 304) {
 			dispatch(
 				onShowAlertSuccess({ message: 'Not Modified' }),
 			);
 		}
-		if(codeStatus === 401){
+		if (codeStatus === 401) {
 			dispatch(
 				onShowAlertSuccess({ message: 'Not session found' }),
 			);
 		}
-		if(codeStatus === 404){
+		if (codeStatus === 404) {
 			dispatch(
 				onShowAlertSuccess({ message: 'Not found' }),
 			);
 		}
-		if(codeStatus === 500){
+		if (codeStatus === 500) {
 			dispatch(
 				onShowAlertSuccess({ message: 'Internal server' }),
 			);
 		}
-		if(codeStatus === 200){
+		if (codeStatus === 200) {
 			resp.then((data) => {
 				dispatch(
-				  onShowAlertSuccess({ message: data.message }),
+					onShowAlertSuccess({ message: data.message }),
 				);
-			  })
+			})
 			dispatch(onActionCreator(REJECT_NOTIFICATION_GOOGLE, response));
 		}
 	}, (error) => {
