@@ -1,6 +1,15 @@
 import onActionCreator from '../../config/store/helpers';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
+import { onGetSpecBlocks } from '../spec-document/SpecDocument.actions';
+import {
+	checkEmail,
+	inviteUserToProject,
+	deleteUser,
+	resendInvitation,
+	updatePermission,
+} from '../../services/users.service';
 
-import { checkEmail, inviteUserToProject } from '../../services/users.service';
+import { TYPE_MODALS } from './constants';
 
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
@@ -16,18 +25,27 @@ export const onHideModal = () => (dispatch) => {
 	dispatch(onActionCreator(HIDE_MODAL));
 };
 
-export const checkUserEmail = (email) => (dispatch) => {
-	checkEmail(email).then(
-		({ user }) => dispatch(onActionCreator(CHECK_EMAIL_EXIST, { user, email })),
+export const checkUserEmail = (emailList) => (dispatch) => {
+	checkEmail(emailList).then(
+		({ user }) => {
+			dispatch(onActionCreator(CHECK_EMAIL_EXIST, { user, emailList }));
+		},
 		(error) => console.error(error),
 	);
 };
 
 export const hideDisclaimer = () => onActionCreator(HIDE_DISCLAIMER);
 
-export const sendUserInvitation = (projectID, params) => {
+export const sendUserInvitation = (projectID, params) => (dispatch) => {
 	inviteUserToProject({ projectID, params }).then(
-		(response) => console.log(response),
+		({ message, errors }) => {
+			dispatch(onShowAlertSuccess({ message }));
+			if (!errors.length) {
+				dispatch(onGetSpecBlocks(projectID));
+				dispatch(onHideModal());
+				dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
+			}
+		},
 		(error) => console.error(error),
 	);
 };
@@ -35,3 +53,48 @@ export const sendUserInvitation = (projectID, params) => {
 export const setDetailMember = (member) => (dispatch) => {
 	dispatch(onActionCreator(SET_DETAIL_MEMBER, { member }));
 };
+
+export const onDeleteUser = (projectId, permissionId, permissionType) => (
+	dispatch,
+) =>
+	deleteUser({ projectId, permissionId, permissionType }).then(
+		({ message, error }) => {
+			if (error) dispatch(onShowAlertSuccess({ message: error }));
+			else {
+				dispatch(onGetSpecBlocks(projectId));
+				dispatch(onShowAlertSuccess({ message }));
+				dispatch(onHideModal());
+				dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
+			}
+		},
+		(error) => console.error(error),
+	);
+
+export const onResendInvitation = (projectId, invitationId) => (dispatch) => {
+	resendInvitation({ projectId, invitationId }).then(
+		({ message }) => {
+			dispatch(onShowAlertSuccess({ message }));
+		},
+		(error) => console.error(error),
+	);
+};
+
+export const onUpdatePermission = (
+	projectId,
+	permissionId,
+	permissionType,
+	invitation,
+	callback,
+) =>
+	updatePermission({
+		projectId,
+		permissionId,
+		permissionType,
+		invitation,
+	}).then(
+		(response) => {
+			console.log(response);
+			if (callback) callback();
+		},
+		(error) => console.error(error),
+	);
