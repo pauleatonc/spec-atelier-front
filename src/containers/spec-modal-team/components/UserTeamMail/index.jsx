@@ -1,21 +1,41 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import IconUser from '../../../../components/IconUser';
 import SelectorRelative from '../../../../components/basics/SelectorRelative';
 import dropArrowSource from '../../../../assets/images/icons/primary-arrow-down.svg';
 
 import { PermisionLabel, IconArrowDown } from '../../styles';
-import { OPTIONS_PERMISION } from '../../constants';
+import { OPTIONS_PERMISSIONS } from '../../constants';
+import { onUpdatePermission } from '../../actions';
 
 import { Container, ContainerMail, Email } from './styles';
 
 const UserTeamMail = ({ member, onClick }) => {
-	const { user, permission } = member;
-	const [permision, setPermision] = useState(
-		permission.ability === 'write'
-			? OPTIONS_PERMISION[0]
-			: OPTIONS_PERMISION[1],
+	const { id: specID } = useParams();
+	const dispatch = useDispatch();
+	const { user, permission: memberPermission } = member;
+	const [permission, setPermission] = useState(
+		OPTIONS_PERMISSIONS.find(
+			(option) => option.value === memberPermission.ability,
+		),
 	);
+	const updatePermission = (value) => {
+		const invitation = {
+			email: user.email,
+			ability: value.value,
+		};
+		dispatch(
+			onUpdatePermission(
+				specID,
+				memberPermission?.id,
+				memberPermission?.type,
+				invitation,
+				() => setPermission(value),
+			),
+		);
+	};
 	return (
 		<Container>
 			<ContainerMail onClick={() => onClick(member)}>
@@ -26,14 +46,15 @@ const UserTeamMail = ({ member, onClick }) => {
 				<SelectorRelative
 					name="sort"
 					hoverPrimaryColor
+					showIconInfo
 					maxHeight="180px"
-					options={OPTIONS_PERMISION}
+					options={OPTIONS_PERMISSIONS}
 					placeholder="HOLA"
-					value={permision.id}
-					onChange={setPermision}
+					value={permission.id}
+					onChange={updatePermission}
 					renderInput={
 						<>
-							<PermisionLabel>{permision.label}</PermisionLabel>
+							<PermisionLabel>{permission.label}</PermisionLabel>
 							<IconArrowDown alt="" src={dropArrowSource} />
 						</>
 					}

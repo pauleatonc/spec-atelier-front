@@ -12,9 +12,11 @@ import { CloseIcon } from '../profile-change-picture/ProfileChangePicture.styles
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 import { useTextarea, useInput } from '../../components/inputs/Inputs.hooks';
 
-import { OPTIONS_PERMISION, EMAIL_REGEX } from './constants';
+import { OPTIONS_PERMISSIONS, EMAIL_REGEX, TYPE_MODALS } from './constants';
 import ProjectInfoShare from './components/ProjectInfoShare';
+import { getCheckListData, getDataForService } from './utils';
 import {
+	onShowModal,
 	onHideModal,
 	checkUserEmail,
 	sendUserInvitation,
@@ -42,15 +44,16 @@ import {
 	ErrorInput,
 } from './styles';
 
-const SpecModalNewMember = () => {
+const SpecModalNewMember = ({ sections }) => {
 	const dispatch = useDispatch();
 	const { id: projectID } = useParams();
 	const [currentCheckMail, setCurrentCheckMail] = useState('');
+	const [listEmails, setListEmails] = useState([]);
 	const [inputMailInvalid, setInputMailInvalid] = useState(false);
-	const [permision, setPermision] = useState(OPTIONS_PERMISION[0]);
-	const [isAllProject, setIsAllProject] = useState(false);
-	const [selectedSections, setSelectedSections] = useState([]);
-	const [selectedItems, setSelectedItems] = useState([]);
+	const [permission, setPermission] = useState(OPTIONS_PERMISSIONS[0]);
+	const [checklistData, setChecklistData] = useState(
+		getCheckListData(sections),
+	);
 	const {
 		onChange: handleMailChange,
 		set: setMailValue,
@@ -64,20 +67,30 @@ const SpecModalNewMember = () => {
 	const { newMemberModal: show, showDisclaimer } = useSelector(
 		(state) => state.specModalTeam,
 	);
+
 	const { onClose: handleClose, onExiting: handleExiting } = useModal({
 		closeCallback: () => dispatch(onHideModal()),
 		exitingCallback: () => {
 			setMessageValue('');
 			setMailValue('');
+			setChecklistData(getCheckListData(sections));
 		},
 	});
 
+	const handleCancel = () => {
+		handleClose();
+		dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
+	};
+
 	const handleBlur = ({ target: { value } }) => {
-		if (value) {
-			if (EMAIL_REGEX.test(value)) {
+		const emailList = value.split(',');
+		if (emailList.length) {
+			if (emailList.every((email) => EMAIL_REGEX.test(email))) {
+				setListEmails(emailList);
 				setInputMailInvalid(false);
-				setCurrentCheckMail(value);
-				dispatch(checkUserEmail(value));
+				dispatch(checkUserEmail(emailList), (mailInvalid) =>
+					setCurrentCheckMail(mailInvalid),
+				);
 			} else {
 				setInputMailInvalid(true);
 			}
@@ -85,12 +98,17 @@ const SpecModalNewMember = () => {
 	};
 
 	const sendInvitation = () => {
+		const {
+			isAllSelected,
+			selectedSections,
+			selectedItems,
+		} = getDataForService(checklistData);
 		const invitation = {
-			recipients: [mailValue],
+			recipients: listEmails,
 			sections: selectedSections,
 			items: selectedItems,
-			all: isAllProject,
-			ability: permision.value,
+			all: isAllSelected,
+			ability: permission.value,
 			...(messageValue && { message: messageValue }),
 		};
 		dispatch(sendUserInvitation(projectID, invitation));
@@ -122,14 +140,15 @@ const SpecModalNewMember = () => {
 						<SelectorRelative
 							name="sort"
 							hoverPrimaryColor
+							showIconInfo
 							maxHeight="180px"
-							options={OPTIONS_PERMISION}
+							options={OPTIONS_PERMISSIONS}
 							placeholder="HOLA"
-							value={permision.id}
-							onChange={setPermision}
+							value={permission.id}
+							onChange={setPermission}
 							renderInput={
 								<>
-									<PermisionLabel>{permision.label}</PermisionLabel>
+									<PermisionLabel>{permission.label}</PermisionLabel>
 									<IconArrowDown alt="" src={dropArrowSource} />
 								</>
 							}
@@ -151,12 +170,8 @@ const SpecModalNewMember = () => {
 				</TitleConfigContainer>
 				<ProjectInfoShare
 					withChecks
-					isAllProject={isAllProject}
-					setIsAllProject={setIsAllProject}
-					selectedSections={selectedSections}
-					setSelectedSections={setSelectedSections}
-					selectedItems={selectedItems}
-					setSelectedItems={setSelectedItems}
+					checklistData={checklistData}
+					setChecklistData={setChecklistData}
 				/>
 				<Message
 					placeholder="Añade un mensaje (opcional)"
@@ -167,7 +182,7 @@ const SpecModalNewMember = () => {
 					<Button
 						variant={VARIANTS_BUTTON.CANCEL}
 						width="120px"
-						onClick={handleClose}
+						onClick={handleCancel}
 					>
 						Cancelar
 					</Button>
@@ -176,10 +191,8 @@ const SpecModalNewMember = () => {
 						width="120px"
 						onClick={sendInvitation}
 						disabled={
-							!mailValue ||
-							(!isAllProject &&
-								!selectedSections.length &&
-								!selectedItems.length) ||
+							!listEmails.length ||
+							/* (!isAllProject && !selectedSections.length) || */
 							inputMailInvalid
 						}
 					>

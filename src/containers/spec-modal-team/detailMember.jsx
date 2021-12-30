@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { Button } from '../../components/SpecComponents';
 import ModalLayout from '../../components/layouts/ModalLayout';
@@ -11,10 +12,19 @@ import closeSource from '../../assets/images/icons/close.svg';
 import dropArrowSource from '../../assets/images/icons/primary-arrow-down.svg';
 import { CloseIcon } from '../profile-change-picture/ProfileChangePicture.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-
+import { getCheckListData } from './utils';
 import ProjectInfoShare from './components/ProjectInfoShare';
-import { onHideModal } from './actions';
-import { OPTIONS_PERMISION } from './constants';
+import {
+	onHideModal,
+	onShowModal,
+	onDeleteUser,
+	onResendInvitation,
+} from './actions';
+import {
+	OPTIONS_PERMISSIONS,
+	TYPE_MODALS,
+	STATUS_INVITATIONS,
+} from './constants';
 import {
 	Container,
 	ButtonCloseContainer,
@@ -36,27 +46,45 @@ import {
 	ResendLabel,
 } from './styles';
 
-const DetailMemberModal = () => {
+const DetailMemberModal = ({ sections }) => {
 	const dispatch = useDispatch();
+	const { id: specID } = useParams();
+	const [checklistData, setChecklistData] = useState(
+		getCheckListData(sections),
+	);
 	const { detailMemberModal: show, detailMember } = useSelector(
 		(state) => state.specModalTeam,
 	);
+	const [permission, setPermission] = useState(OPTIONS_PERMISSIONS[0]);
 	const { onClose: handleClose, onExiting: handleExiting } = useModal({
 		closeCallback: () => dispatch(onHideModal()),
 	});
-	const [permision, setPermision] = useState(
-		detailMember?.permission.ability === 'write'
-			? OPTIONS_PERMISION[0]
-			: OPTIONS_PERMISION[1],
-	);
 
-	const [isAllProject, setIsAllProject] = useState(false);
-	const [selectedSections, setSelectedSections] = useState([]);
-	const [selectedItems, setSelectedItems] = useState([]);
+	const handleCancel = () => {
+		handleClose();
+		dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
+	};
+
+	const handleDeleteUSer = () =>
+		dispatch(
+			onDeleteUser(
+				specID,
+				detailMember?.permission?.id,
+				detailMember?.permission?.type,
+			),
+		);
+
+	const handleResendInvitation = () =>
+		dispatch(onResendInvitation(specID, detailMember?.permission?.id));
 
 	useEffect(() => {
-		if (detailMember) {
-			setIsAllProject(detailMember?.permission?.all);
+		if (detailMember && detailMember?.permission) {
+			setPermission(
+				OPTIONS_PERMISSIONS.find(
+					(option) => option.value === detailMember?.permission.ability,
+				),
+			);
+			setChecklistData(getCheckListData(sections, detailMember?.permission));
 		}
 	}, [detailMember]);
 
@@ -85,15 +113,16 @@ const DetailMemberModal = () => {
 							<SelectorRelative
 								name="sort"
 								hoverPrimaryColor
+								showIconInfo
 								maxHeight="180px"
-								options={OPTIONS_PERMISION}
+								options={OPTIONS_PERMISSIONS}
 								placeholder="HOLA"
-								value={permision.id}
-								onChange={setPermision}
+								value={permission.id}
+								onChange={setPermission}
 								renderInput={
 									<>
 										<PermisionLabel fontSize={14}>
-											{permision.label}
+											{permission.label}
 										</PermisionLabel>
 										<IconArrowDown alt="" src={dropArrowSource} />
 									</>
@@ -105,46 +134,44 @@ const DetailMemberModal = () => {
 
 				<TitleConfigContainer>
 					<TitleConfig>Partidas compartidas</TitleConfig>
-					<DeleteUser onClick={() => console.log('delete user')}>
+					<DeleteUser onClick={handleDeleteUSer}>
 						<LabelDelete>Eliminar usuario</LabelDelete>
 						<IconDelete className="fas fa-trash" />
 					</DeleteUser>
 				</TitleConfigContainer>
 				<ProjectInfoShare
 					withChecks
-					isAllProject={isAllProject}
-					setIsAllProject={setIsAllProject}
-					selectedSections={selectedSections}
-					setSelectedSections={setSelectedSections}
-					selectedItems={selectedItems}
-					setSelectedItems={setSelectedItems}
+					checklistData={checklistData}
+					setChecklistData={setChecklistData}
 				/>
-				{detailMember?.user && detailMember?.status === 'esperando' && (
-					<Disclaimer>
-						<IconInfo className="fas fa-info-circle" />
-						<DescDisclaimer>
-							<EmailDesc>{detailMember?.user?.email}</EmailDesc> no ha aceptado
-							aún la invitación a colaborar.{' '}
-							<ResendLabel onClick={() => console.log('reenviar')}>
-								(Reenviar)
-							</ResendLabel>
-						</DescDisclaimer>
-					</Disclaimer>
-				)}
-				{detailMember?.user && detailMember?.status !== 'esperando' && (
-					<Disclaimer>
-						<IconInfo className="fas fa-info-circle" />
-						<DescDisclaimer>
-							<EmailDesc>{detailMember?.user?.email}</EmailDesc> recibirá un
-							correo indicando los cambios realizados en los permisos.
-						</DescDisclaimer>
-					</Disclaimer>
-				)}
+				{detailMember?.user &&
+					detailMember?.status === STATUS_INVITATIONS.WAITING && (
+						<Disclaimer>
+							<IconInfo className="fas fa-info-circle" />
+							<DescDisclaimer>
+								<EmailDesc>{detailMember?.user?.email}</EmailDesc> no ha
+								aceptado aún la invitación a colaborar.{' '}
+								<ResendLabel onClick={handleResendInvitation}>
+									(Reenviar)
+								</ResendLabel>
+							</DescDisclaimer>
+						</Disclaimer>
+					)}
+				{detailMember?.user &&
+					detailMember?.status !== STATUS_INVITATIONS.WAITING && (
+						<Disclaimer>
+							<IconInfo className="fas fa-info-circle" />
+							<DescDisclaimer>
+								<EmailDesc>{detailMember?.user?.email}</EmailDesc> recibirá un
+								correo indicando los cambios realizados en los permisos.
+							</DescDisclaimer>
+						</Disclaimer>
+					)}
 				<ContainerButtons>
 					<Button
 						variant={VARIANTS_BUTTON.CANCEL}
 						width="120px"
-						onClick={handleClose}
+						onClick={handleCancel}
 					>
 						Cancelar
 					</Button>

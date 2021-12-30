@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Button } from '../../components/SpecComponents';
@@ -13,6 +13,7 @@ import ProjectInfoShare from './components/ProjectInfoShare';
 import UserTeamMail from './components/UserTeamMail';
 import { onHideModal, onShowModal, setDetailMember } from './actions';
 import { TYPE_MODALS } from './constants';
+import { getCheckListData } from './utils';
 import {
 	Container,
 	ButtonCloseContainer,
@@ -26,9 +27,12 @@ import {
 	ContainerTeam,
 } from './styles';
 
-const SpecModalTeam = () => {
+const SpecModalTeam = ({ sections }) => {
 	const dispatch = useDispatch();
 	const { teamModal: show } = useSelector((state) => state.specModalTeam);
+	const [checklistData, setChecklistData] = useState(
+		getCheckListData(sections),
+	);
 	const { onClose: handleClose, onExiting: handleExiting } = useModal({
 		closeCallback: () => dispatch(onHideModal()),
 	});
@@ -70,7 +74,10 @@ const SpecModalTeam = () => {
 				<TitleConfigContainer>
 					<TitleConfig>Partidas compartidas</TitleConfig>
 				</TitleConfigContainer>
-				<ProjectInfoShare />
+				<ProjectInfoShare
+					checklistData={checklistData}
+					setChecklistData={setChecklistData}
+				/>
 				<ContainerButtons>
 					<Button
 						variant={VARIANTS_BUTTON.PRIMARY}
