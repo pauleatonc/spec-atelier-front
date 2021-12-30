@@ -40,6 +40,7 @@ const Specification = () => {
 	const [selectedItem, setSelectedItem] = useState('');
 	const { dataSection } = useSelector((state) => state);
 	const { option } = dataSection;
+	const { sections } = useSelector((state) => state.specDocument);
 
 	useEffect(() => {
 		dispatch(changeOption(ESPEC_DOCUMENT));
@@ -96,9 +97,13 @@ const Specification = () => {
 			<SpecImagesModalContainer />
 			<AlertContainer />
 			<SpecModalProduct />
-			<SpecModalTeam />
-			<SpecModalTeamNewMember />
-			<DetailMemberModal />
+			{!!sections.length && (
+				<>
+					<SpecModalTeam sections={sections} />
+					<SpecModalTeamNewMember sections={sections} />
+					<DetailMemberModal sections={sections} />
+				</>
+			)}
 			<ContactFormContainer type="product" />
 		</>
 	);

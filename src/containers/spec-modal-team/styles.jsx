@@ -179,6 +179,7 @@ export const AddMemberLabel = styled.p`
 
 export const ContainerTeam = styled.div`
 	width: 100%;
+	max-height: 200px;
 `;
 
 export const InfoUserContainer = styled.div`
