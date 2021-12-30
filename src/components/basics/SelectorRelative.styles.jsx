@@ -24,6 +24,7 @@ export const Content = styled.div`
 	padding: 4px 4px;
 	z-index: 1;
 	overflow-y: auto;
+	${({ showIconInfo }) => showIconInfo && 'overflow: visible'};
 	display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
 	${({ isOpen }) => (isOpen ? `box-shadow: ${SHADOW_GREY}` : '')};
 	${({ right }) => (right ? 'right: 0' : 'left: 0')};
@@ -38,18 +39,20 @@ export const Section = styled.div`
 `;
 
 export const Option = styled.section`
+	display: flex;
+	justify-content: space-between;
 	box-sizing: border-box;
-	color: ${COLOR_MINE_SHAFT};
 	cursor: pointer;
-	font-family: Lato;
-	font-size: 12px;
-	letter-spacing: 0.86px;
 	padding: 10px 23px;
 	width: 100%;
 
 	&:hover {
 		background-color: #eee;
-		${({ hoverPrimaryColor }) => hoverPrimaryColor && `color: ${PUERTO_RICO}`};
+		p,
+		i {
+			${({ hoverPrimaryColor }) =>
+				hoverPrimaryColor && `color: ${PUERTO_RICO}`};
+		}
 	}
 
 	&:first-child {
@@ -59,6 +62,17 @@ export const Option = styled.section`
 	&:last-child {
 		margin: 0 0 6px;
 	}
+`;
+
+export const OptionLabel = styled.p`
+	color: ${COLOR_MINE_SHAFT};
+	letter-spacing: 0.86px;
+	font-family: Lato;
+	font-size: 12px;
+`;
+
+export const IconInfo = styled.i`
+	font-size: 13px;
 `;
 
 export const NoOptions = styled.div`
