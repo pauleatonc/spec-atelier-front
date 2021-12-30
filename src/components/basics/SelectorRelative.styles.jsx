@@ -6,6 +6,7 @@ import {
   GALLERY,
   PUERTO_RICO,
   PUERTO_RICO_BACKGROUND,
+  MINE_SHAFT,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.div`
@@ -82,4 +83,8 @@ export const NoOptions = styled.div`
   letter-spacing: 1px;
   padding: 10px 23px;
   color: ${SILVER};
+`;
+
+export const IconInfo = styled.i`
+  font-size: 13px;
 `;
