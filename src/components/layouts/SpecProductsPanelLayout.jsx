@@ -9,7 +9,6 @@ import {
 	Panels,
 	Title,
 	Header,
-	ButtonClose,
 	Overlay,
 	ButtonBack,
 } from './SpecProductsPanelLayout.styles';
@@ -25,6 +24,7 @@ import {
 	onHideSpecProductsItemsSuccess,
 } from '../../containers/spec-products-items/SpecProductsItems.actions';
 import { setFilters } from '../../containers/products-list/ProductsList.actions';
+import { CloseIcon } from './ModalLayout.styles';
 
 /**
  * The SpecProductsPanelLayout's component.
@@ -57,13 +57,14 @@ const SpecProductsPanelLayout = ({
 						<img alt="arrow back" src={arrowBack} />
 					</ButtonBack>
 					<Title>Productos</Title>
-					<ButtonClose
-            className="fas fa-times"
+					<CloseIcon
+            alt="Cerrar"
+						className="fas fa-times"
 						role="button"
 						onClick={() => dispatch(onHideSpecProducts())}
-					>
-						{/* <i className="fas fa-times" /> */}
-					</ButtonClose>
+						hideInMobile
+            widthChange
+					/>
 					<Breadcrumbs
 						justifyCenter
 						customWidth={100}

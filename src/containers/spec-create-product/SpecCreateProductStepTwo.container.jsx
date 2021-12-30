@@ -22,13 +22,13 @@ import {
 	Root,
 	Header,
 	Title,
-	CloseIcon,
 	Body,
 	Section,
 	Footer,
 	Gap,
 } from './SpecCreateProduct.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+import { CloseIcon } from '../../components/layouts/ModalLayout.styles';
 
 /**
  * The SpecCreateProductStepTwo's container.

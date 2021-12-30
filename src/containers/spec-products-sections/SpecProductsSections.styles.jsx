@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	PRIMARY,
-	MINE_SHAFT,
-	MEDIA_QUERY_SMALL,
+  PRIMARY,
+  MINE_SHAFT,
+  MEDIA_QUERY_SMALL,
+  WHITE,
 } from '../../config/constants/styled-vars';
+// import { CLOSE_ICON} from '../../assets/Images';
+import { CLOSE_ICON } from '../../assets/Images';
 
 export const Root = styled.div`
-	background-color: #fff;
+	background-color: ${WHITE};
 	height: 100%;
 	left: 0;
 	padding: 0 23px;
@@ -46,7 +49,7 @@ export const Item = styled.section`
 
 export const ItemIcon = styled.span`
   background-image: url('/images/${({ active, icon, iconHover }) =>
-		active ? iconHover : icon}.svg');
+    active ? iconHover : icon}.svg');
   background-position: center center;
   background-repeat: no-repeat;
   height: 34px;
@@ -59,12 +62,12 @@ export const ItemIcon = styled.span`
 `;
 
 ItemIcon.defaultProps = {
-	active: false,
+  active: false,
 };
 ItemIcon.propTypes = {
-	active: PropTypes.bool,
-	icon: PropTypes.string.isRequired,
-	iconHover: PropTypes.string.isRequired,
+  active: PropTypes.bool,
+  icon: PropTypes.string.isRequired,
+  iconHover: PropTypes.string.isRequired,
 };
 
 export const ItemText = styled.span`
@@ -76,10 +79,10 @@ export const ItemText = styled.span`
 `;
 
 ItemText.defaultProps = {
-	active: false,
+  active: false,
 };
 ItemText.propTypes = {
-	active: PropTypes.bool,
+  active: PropTypes.bool,
 };
 
 export const Loading = styled.section`
@@ -96,9 +99,12 @@ export const Loading = styled.section`
 
 export const CloseIcon = styled.i`
 	display: none;
+	justify-content: flex-end;
+	align-items: center;
+	font-size: 24px;
 	cursor: pointer;
-	width: 30px;
-	height: 30px;
+	outline: none;
+  content: url(${CLOSE_ICON});
 	${MEDIA_QUERY_SMALL} {
 		display: flex;
 	}

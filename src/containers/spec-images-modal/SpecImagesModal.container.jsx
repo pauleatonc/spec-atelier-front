@@ -6,9 +6,20 @@ import { onHideSpecImagesModalSuccess } from './SpecImagesModal.actions';
 import useModal from '../../components/layouts/ModalLayout.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import Button from '../../components/buttons/Button';
-import { Root, Header, Title, CloseIcon, Body, Figures, Figure, Image, CheckIcon, Footer } from './SpecImagesModal.styles';
+import {
+  Root,
+  Header,
+  Title,
+  Body,
+  Figures,
+  Figure,
+  Image,
+  CheckIcon,
+  Footer,
+} from './SpecImagesModal.styles';
 import checkSource from '../../assets/images/icons/check.svg';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+import CloseButton from '../../components/buttons/CloseButton';
 
 /**
  * The SpecImagesModal's container.
@@ -31,7 +42,7 @@ const SpecImagesModal = () => {
   const handleSubmit = (blockID, imageID) => event => {
     handleClose(event);
     dispatch(onAddSpecBlockImage({ blockID, imageID, specID }));
-  }
+  };
   const disableSubmit = (
     !selectedProductBlock?.element?.images?.length ||
     selectedProductBlock?.element?.images?.length === 0 ||
@@ -47,7 +58,7 @@ const SpecImagesModal = () => {
       <Root>
         <Header>
           <Title>Selecciona una de las imágenes para la especificación:</Title>
-          <CloseIcon alt="Cerrar" className="fas fa-times" onClick={handleClose} />
+          <CloseButton onClick={handleClose} />
         </Header>
         <Body>
           <Figures>

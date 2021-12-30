@@ -5,12 +5,12 @@ import { Button, Modal } from '../../components/SpecComponents';
 import {
 	Container,
 	BottonContainer,
-  ButtonClose,
-  ContentLogin,
+	ContentLogin,
 } from './ModalContactForm.styles';
 import { sendContactData, closeContactModal } from './ModalContactForm.actions';
 import { Contact } from '../../components/forms/Forms';
 import Login from '../auth/login/Login.container';
+import { CloseIcon } from '../../components/layouts/ModalLayout.styles';
 
 const propTypes = {
 	type: PropTypes.string,
@@ -66,20 +66,20 @@ const ContactForm = ({ type }) => {
 		}
 	}, [showContactModal]);
 
+<<<<<<< HEAD
 	return (
 		<Modal show={showContactModal} onClose={onCloseModal}>
 			<Container width="50%">
 				{isLogin ? (
 					<>
-						<ButtonClose
-              className="fas fa-times"
+						<CloseIcon
+              alt="Cerrar"
+							className="fas fa-times"
 							role="button"
 							tabIndex="0"
 							onKeyDown={onCloseModal}
 							onClick={onCloseModal}
-						>
-							{/* <i className="fas fa-times" /> */}
-						</ButtonClose>
+						/>
 						<Contact
 							contact={contactForm}
 							onChange={onChangeData}
@@ -93,13 +93,46 @@ const ContactForm = ({ type }) => {
 						</BottonContainer>
 					</>
 				) : (
-          <ContentLogin>
-					  <Login />
-          </ContentLogin>
+					<ContentLogin>
+						<Login />
+					</ContentLogin>
 				)}
 			</Container>
 		</Modal>
 	);
+=======
+  return (
+    <Modal show={showContactModal} onClose={onCloseModal}>
+      <Container width="50%">
+        {isLogin ? (
+          <>
+            <BottonContainer>
+              <CloseButton
+                onKeyDown={onCloseModal}
+                onClick={onCloseModal}
+              />
+            </BottonContainer>
+            <Contact
+              contact={contactForm}
+              onChange={onChangeData}
+              client={selectedClient.name}
+              contactType={selectedClient.contact_type}
+            />
+            <BottonContainer>
+              <Button variant="primary" onClick={sendForm}>
+                Enviar
+              </Button>
+            </BottonContainer>
+          </>
+        ) : (
+          <ContentLogin>
+            <Login />
+          </ContentLogin>
+        )}
+      </Container>
+    </Modal>
+  );
+>>>>>>> 4bd896a (fixup! style: Unify all the style components of the modal close icons into a single style component called CloseIcon, previously called DropCloseIcon, ButtonClose and CloseIcon, standardizing it for all modalities)
 };
 
 ContactForm.defaultProps = defaultProps;

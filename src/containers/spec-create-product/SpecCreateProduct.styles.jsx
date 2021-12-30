@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	ALABASTER,
-	ALTO,
-	DUSTY_GRAY,
-	MINE_SHAFT,
-	WHITE,
-	BLACK,
+  ALABASTER,
+  ALTO,
+  DUSTY_GRAY,
+  MINE_SHAFT,
+  WHITE,
+  BLACK,
   DUSTY_GRAY_OPACITY,
 } from '../../config/constants/styled-vars';
 
@@ -21,10 +21,10 @@ export const Root = styled.div`
 `;
 
 Root.defaultProps = {
-	shadow: true,
+  shadow: true,
 };
 Root.propTypes = {
-	shadow: PropTypes.bool,
+  shadow: PropTypes.bool,
 };
 
 export const Loading = styled.div`
@@ -44,7 +44,7 @@ export const Header = styled.section`
 	align-items: center;
 	border-bottom: 1px solid ${DUSTY_GRAY_OPACITY};
 	display: flex;
-	padding: 0 60px 0 40px;
+	padding: 25px 40px;
 	position: relative;
 	width: 100%;
 `;
@@ -74,20 +74,20 @@ export const Section = styled.section`
 `;
 
 Section.defaultProps = {
-	alignItems: 'initial',
-	display: 'block',
-	gridGap: '20px',
-	gridTemplateColumns: 'initial',
-	gridTemplateRows: 'initial',
-	padding: 'initial',
+  alignItems: 'initial',
+  display: 'block',
+  gridGap: '20px',
+  gridTemplateColumns: 'initial',
+  gridTemplateRows: 'initial',
+  padding: 'initial',
 };
 Section.propTypes = {
-	alignItems: PropTypes.string,
-	display: PropTypes.string,
-	gridGap: PropTypes.string,
-	gridTemplateColumns: PropTypes.string,
-	gridTemplateRows: PropTypes.string,
-	padding: PropTypes.string,
+  alignItems: PropTypes.string,
+  display: PropTypes.string,
+  gridGap: PropTypes.string,
+  gridTemplateColumns: PropTypes.string,
+  gridTemplateRows: PropTypes.string,
+  padding: PropTypes.string,
 };
 
 export const Footer = styled.section`

@@ -16,7 +16,6 @@ import {
 	List,
 	Action,
 	DropContent,
-	DropCloseIcon,
 	DropZone,
 	DropZoneSection,
 	DropZoneText,
@@ -24,6 +23,7 @@ import {
 import documentsUploadSource from '../../assets/images/icons/documents-upload.svg';
 import DocumentItem from './DocumentItem';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+import { CloseIcon } from '../layouts/ModalLayout.styles';
 
 /**
  * The AttachedFiles' component.
@@ -157,7 +157,7 @@ const AttachedFiles = (props) => {
 			)}
 			<ModalLayout show={show} onClose={handleClose}>
 				<DropContent>
-					<DropCloseIcon alt="" className="fas fa-times" onClick={handleClose} />
+					<CloseIcon alt="Cerrar" className="fas fa-times" onClick={handleClose} />
 					<DropZone {...dropProps}>
 						<input {...getInputProps()} />
 						<DropZoneSection padding="33px 0 18px">

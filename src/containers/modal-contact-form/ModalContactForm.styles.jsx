@@ -17,12 +17,6 @@ export const BottonContainer = styled.div`
 	margin-top: 20px;
 `;
 
-export const ButtonClose = styled.i`
-	margin: 10px 12px 0 auto;
-	cursor: pointer;
-	outline: none;
-`;
-
 export const ContentLogin = styled.span`
 	width: 100%;
 	height: 100%;

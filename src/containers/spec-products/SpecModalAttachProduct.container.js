@@ -4,7 +4,6 @@ import checkboxOffSource from '../../assets/images/icons/checkbox-off.svg';
 import checkboxOnSource from '../../assets/images/icons/checkbox-on.svg';
 import {
 	Container,
-	ButtonClose,
 	Header,
 	Title,
 	Section,
@@ -16,6 +15,7 @@ import {
 	OptionCheckboxIcon,
 	OptionText,
 } from './SpecModalAttachProduct.styles';
+import CloseButton from '../../components/buttons/CloseButton';
 
 function SpecModalAttachProduct({
 	showAttachModal,
@@ -78,11 +78,7 @@ function SpecModalAttachProduct({
 			<Container>
 				<Header>
 					<Title>¿Dónde quieres añadir la información?</Title>
-					<ButtonClose
-            className="fas fa-times"
-						role="button"
-						tabIndex="0"
-						alt="Cerrar"
+					<CloseButton
 						onKeyDown={onClose}
 						onClick={onClose}
 					/>

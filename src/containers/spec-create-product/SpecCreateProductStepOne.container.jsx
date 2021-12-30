@@ -17,13 +17,13 @@ import {
 	Root,
 	Header,
 	Title,
-	CloseIcon,
 	Body,
 	Section,
 	Footer,
 } from './SpecCreateProduct.styles';
 import MultiSelect from '../../components/inputs/MultiSelect';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+import { CloseIcon } from '../../components/layouts/ModalLayout.styles';
 
 /**
  * The SpecCreateProductStepOne's container.

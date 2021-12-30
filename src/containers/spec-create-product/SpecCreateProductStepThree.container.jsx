@@ -17,7 +17,6 @@ import {
 	Loading,
 	Header,
 	Title,
-	CloseIcon,
 	Body,
 	Section,
 	Footer,
@@ -25,6 +24,7 @@ import {
 } from './SpecCreateProduct.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 import { reorderList } from '../../helpers/helpers';
+import { CloseIcon } from '../../components/layouts/ModalLayout.styles';
 
 /**
  * The SpecCreateProductStepThree's container.
