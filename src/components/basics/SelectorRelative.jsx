@@ -6,7 +6,11 @@ import {
 	Option,
 	Section,
 	NoOptions,
+	OptionLabel,
+	IconInfo,
 } from './SelectorRelative.styles';
+
+import ToolTip from '../tooltip/Tooltip';
 
 const propTypes = {
 	options: PropTypes.arrayOf(
@@ -33,6 +37,7 @@ const SelectorRelative = ({
 	maxHeight,
 	right,
 	hoverPrimaryColor,
+	showIconInfo,
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const toggle = () => setIsOpen(!isOpen);
@@ -79,6 +84,7 @@ const SelectorRelative = ({
 				width={width}
 				maxHeight={maxHeight}
 				right={right}
+				showIconInfo={showIconInfo}
 			>
 				{options.map((option) => (
 					<Option
@@ -87,7 +93,12 @@ const SelectorRelative = ({
 						value={option.id}
 						hoverPrimaryColor={hoverPrimaryColor}
 					>
-						{option.label}
+						<OptionLabel>{option.label}</OptionLabel>
+						{showIconInfo && option?.tooltip && (
+							<ToolTip content={option.tooltip}>
+								<IconInfo className="fas fa-info-circle" />
+							</ToolTip>
+						)}
 					</Option>
 				))}
 				{!options.length && <NoOptions>No hay Opciones Disponibles</NoOptions>}

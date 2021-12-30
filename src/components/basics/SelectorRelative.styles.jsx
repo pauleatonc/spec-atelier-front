@@ -57,6 +57,17 @@ export const Option = styled.section`
   }
 `;
 
+export const OptionLabel = styled.p`
+  color: ${MINE_SHAFT};
+  letter-spacing: 0.86px;
+  font-family: Lato;
+  font-size: 12px;
+`;
+
+export const IconInfo = styled.i`
+  font-size: 13px;
+`;
+
 export const NoOptions = styled.div`
   font-family: Lato;
   font-size: 12px;
