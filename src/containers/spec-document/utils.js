@@ -138,6 +138,25 @@ export const getTotalExpandManual = (blocks) => {
 	const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
 	const itemsBlocks = blocks.filter((block) => block.type === 'Item');
 	const ProductBlocks = blocks.filter((block) => block.type === 'Product');
-	const array = [sectionsBlocks,itemsBlocks,ProductBlocks]
+	const array = [sectionsBlocks, itemsBlocks, ProductBlocks];
 	return array;
-}
+};
+
+export const getSections = (blocks) => {
+	const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
+	return sectionsBlocks.map((sectionBlock) => ({
+		...sectionBlock,
+		items: blocks
+			.filter(
+				(block) =>
+					block.type === 'Item' && block.section === sectionBlock.element.id,
+			)
+			.map((itemBlock) => ({
+				...itemBlock,
+				products: blocks.filter(
+					(block) =>
+						block.type === 'Product' && block.item === itemBlock.element.id,
+				),
+			})),
+	}));
+};

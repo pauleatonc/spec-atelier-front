@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useMemo, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Collapsible from '../../components/basics/Collapsible';
@@ -25,26 +25,8 @@ import {
 const SpecContents = () => {
   const dispatch = useDispatch();
   const { show } = useSelector((state) => state.specContents);
-  const { blocks } = useSelector((state) => state.specDocument);
+  const { sections } = useSelector((state) => state.specDocument);
   const { pathname } = useLocation();
-  const sections = useMemo(() => {
-    const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
-    return sectionsBlocks.map((sectionBlock) => ({
-      ...sectionBlock,
-      items: blocks
-        .filter(
-          (block) =>
-            block.type === 'Item' && block.section === sectionBlock.element.id,
-        )
-        .map((itemBlock) => ({
-          ...itemBlock,
-          products: blocks.filter(
-            (block) =>
-              block.type === 'Product' && block.item === itemBlock.element.id,
-          ),
-        })),
-    }));
-  }, [blocks]);
   const [selectedSection, setSelectedSection] = useState();
   const [selectedItem, setSelectedItem] = useState();
 
@@ -57,7 +39,6 @@ const SpecContents = () => {
       return sectionID;
     });
   };
-
   const handleItemClick = (itemID) => () => {
     setSelectedItem((currentSelectedItem) => {
       if (currentSelectedItem === itemID) {
