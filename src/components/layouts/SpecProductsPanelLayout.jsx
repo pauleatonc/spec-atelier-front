@@ -24,7 +24,7 @@ import {
   onHideSpecProductsItemsSuccess,
 } from '../../containers/spec-products-items/SpecProductsItems.actions';
 import { setFilters } from '../../containers/products-list/ProductsList.actions';
-import { CloseIcon } from './ModalLayout.styles';
+import CloseButton from '../buttons/CloseButton';
 
 /**
  * The SpecProductsPanelLayout's component.
@@ -57,10 +57,7 @@ const SpecProductsPanelLayout = ({
             <img alt="arrow back" src={arrowBack} />
           </ButtonBack>
           <Title>Productos</Title>
-          <CloseIcon
-            alt="Cerrar"
-            className="fas fa-times"
-            role="button"
+          <CloseButton
             onClick={() => dispatch(onHideSpecProducts())}
             hideInMobile
             widthChange

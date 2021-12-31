@@ -23,7 +23,7 @@ import {
 } from './SpecCreateProduct.styles';
 import MultiSelect from '../../components/inputs/MultiSelect';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import { CloseIcon } from '../../components/layouts/ModalLayout.styles';
+import CloseButton from '../../components/buttons/CloseButton';
 
 /**
  * The SpecCreateProductStepOne's container.
@@ -132,7 +132,7 @@ const SpecCreateProductStepOne = () => {
 			<Root>
 				<Header>
 					<Title>Crear producto</Title>
-					<CloseIcon alt="Cerrar" className="fas fa-times" onClick={handleClose} />
+					<CloseButton onClick={handleClose} />
 				</Header>
 				<Body>
 					<Section>

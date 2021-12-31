@@ -78,10 +78,7 @@ function SpecModalAttachProduct({
 			<Container>
 				<Header>
 					<Title>¿Dónde quieres añadir la información?</Title>
-					<CloseButton
-						onKeyDown={onClose}
-						onClick={onClose}
-					/>
+					<CloseButton onKeyDown={onClose} onClick={onClose} />
 				</Header>
 				<Section>
 					<OptionsList>

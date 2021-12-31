@@ -35,7 +35,7 @@ import {
 	StepText,
 	StepNumber,
 } from './styles';
-import { CloseIcon } from '../../components/layouts/ModalLayout.styles';
+import CloseButton from '../../components/buttons/CloseButton';
 
 const PlanForm = () => {
 	const {
@@ -76,7 +76,7 @@ const PlanForm = () => {
 		<ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
 			<Container>
 				<ButtonCloseContainer>
-					<CloseIcon alt="Cerrar" className="fas fa-times" onClick={handleClose} />
+					<CloseButton onClick={handleClose} />
 				</ButtonCloseContainer>
 				<StepsContainer mBottom="70" mobileMBottom="48">
 					<Step activeStep>

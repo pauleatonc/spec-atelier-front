@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
 
 const Root = styled.div`
   align-items: center;
@@ -16,19 +15,6 @@ const Root = styled.div`
   width: 100%;
   overflow-y: auto;
   padding: 20px;
-`;
-
-export const CloseIcon = styled.i`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  font-size: 24px;
-  cursor: pointer;
-  outline: none;
-  width: ${({ widthChange = false }) => (widthChange ? 'auto' : '100%')};
-  ${MEDIA_QUERY_SMALL} {
-    display: ${({ hideInMobile = false }) => (hideInMobile ? 'none' : 'flex')};
-  }
 `;
 
 Root.propTypes = {

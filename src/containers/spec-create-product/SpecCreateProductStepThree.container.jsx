@@ -24,8 +24,7 @@ import {
 } from './SpecCreateProduct.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 import { reorderList } from '../../helpers/helpers';
-import { CloseIcon } from '../../components/layouts/ModalLayout.styles';
-
+import CloseButton from '../../components/buttons/CloseButton';
 /**
  * The SpecCreateProductStepThree's container.
  */
@@ -96,7 +95,7 @@ const SpecCreateProductStepThree = () => {
 			<Root shadow={false}>
 				<Header>
 					<Title>Crear producto</Title>
-					<CloseIcon alt="Cerrar" className="fas fa-times" onClick={handleClose} />
+					<CloseButton onClick={handleClose} />
 				</Header>
 				<Body>
 					{loading && <Loading>Creando producto...</Loading>}

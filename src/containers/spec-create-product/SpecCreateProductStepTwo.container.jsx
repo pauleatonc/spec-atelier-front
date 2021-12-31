@@ -28,7 +28,7 @@ import {
 	Gap,
 } from './SpecCreateProduct.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import { CloseIcon } from '../../components/layouts/ModalLayout.styles';
+import CloseButton from '../../components/buttons/CloseButton';
 
 /**
  * The SpecCreateProductStepTwo's container.
@@ -150,7 +150,7 @@ const SpecCreateProductStepTwo = () => {
 			<Root shadow={false}>
 				<Header>
 					<Title>Crear producto</Title>
-					<CloseIcon alt="Cerrar" className="fas fa-times" onClick={handleClose} />
+					<CloseButton onClick={handleClose}/>
 				</Header>
 				<Body>
 					<Section>
