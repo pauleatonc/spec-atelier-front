@@ -25,7 +25,6 @@ export const CloseIcon = styled.i`
   font-size: 24px;
   cursor: pointer;
   outline: none;
-  // width: 100%;
   width: ${({ widthChange = false }) => (widthChange ? 'auto' : '100%')};
   ${MEDIA_QUERY_SMALL} {
     display: ${({ hideInMobile = false }) => (hideInMobile ? 'none' : 'flex')};
