@@ -1,7 +1,7 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Loading,
   Modal,
@@ -92,8 +92,7 @@ const SpecModalQuote = ({ initialValues }) => {
       {!product || !product.id ? <Loading /> :
         <Container>
           <Content>
-            <CloseButton onKeyDown={onCloseModal} onClick={onCloseModal}
-            />
+            <CloseButton onKeyDown={onCloseModal} onClick={onCloseModal} />
             <Section>
 
               <ProductSection>
