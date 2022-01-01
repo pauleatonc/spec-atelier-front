@@ -139,15 +139,8 @@ const SpecContentsTable = () => {
 				),
 				Cell: ({ row }) => {
 					switch (row?.original?.type) {
+            case 'Item':
 						case 'Section':
-							return (
-								<IconExpan
-									{...row.getToggleRowExpandedProps()}
-									className={`fas fa-chevron-${row.isExpanded ? 'up' : 'down'}`}
-								/>
-							);
-
-						case 'Item':
 							return (
 								<IconExpan
 									{...row.getToggleRowExpandedProps()}
