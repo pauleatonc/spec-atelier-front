@@ -31,13 +31,12 @@ import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
 import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
 import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
 import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
-import { changeOption } from '../spec-contents-buttons/SpecContentsButtons.actions';
 
 const SpecContentsTable = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const { project, quoteTable, totalExpandManual } = useSelector((state) => state.specDocument);
-	const { user, loading } = useSelector((state) => state.profile);
+	const { user } = useSelector((state) => state.profile);
 	const [expandAll, setExpandAll] = useState();
 	const [toggleExpanded, setToggleExpanded] = useState(false);
 	const simulateClick = (e) => {
@@ -50,12 +49,11 @@ const SpecContentsTable = () => {
 		email
 		} = useSelector((state) => state.profile.user);
 	const initialValues = {
-			name:first_name+' '+last_name, 
-			company: company ? company : '',
-			email: email? email : '',
-			description: '',
-		};
-
+    name: `${first_name} ${last_name}`,
+    company: company || '',
+    email: email || '',
+    description: '',
+  };
 
 	const allExpand = () => {
 		setToggleExpanded(!toggleExpanded);
@@ -65,7 +63,7 @@ const SpecContentsTable = () => {
 	const handleDownloadTableClick = () =>
 		dispatch(downloadBudgetDocument({ specID: id }));
 
-	const totalProducts = quoteTable.reduce((a, b) => (a += b.subtotal), 0);
+	const totalProducts = quoteTable.reduce((a, b) => a + b.subtotal, 0);
 
 	const handleOnBlurInput = (tableInputType, inputValue, row) => {
 		const body = {
@@ -191,10 +189,16 @@ const SpecContentsTable = () => {
 	const arrayExpandeJSON = Object.values(expandedJSON.expanded);
 	const lenghtArray = arrayExpandeJSON.length;
 	const totalExpander = totalExpandManual[0].length+totalExpandManual[1].length;
-	if(lenghtArray == totalExpander){ 
+	if(lenghtArray === totalExpander && lenghtArray!==0){
 		setToggleExpanded(!toggleExpanded);
 		expandAll.click();
 	}
+  const expandOrShrink = () => {
+    let text;
+    if (toggleExpanded){ text = 'Contraer' }
+    else { text = lenghtArray === totalExpander ? 'Contraer' : 'Expandir' }
+    return `${text} filas`
+  }
 
 	return (
 		<Root>
@@ -204,9 +208,7 @@ const SpecContentsTable = () => {
 						<Header colSpan="7">
 							<Title>Itemizado y presupuesto: {project.name}</Title>
 							<ButtonsHeader>
-								<Button onClick={allExpand}>{`${
-									 (toggleExpanded ? 'Contraer' : lenghtArray == totalExpander ? 'Contraer' : 'Expandir')
-								} filas`}</Button>
+								<Button onClick={allExpand}>{expandOrShrink()}</Button>
 								<Button
 									title="Descargar presupuesto"
 									onClick={handleDownloadTableClick}
