@@ -72,10 +72,7 @@ const ContactForm = ({ type }) => {
         {isLogin ? (
           <>
             <BottonContainer>
-              <CloseButton
-                onKeyDown={onCloseModal}
-                onClick={onCloseModal}
-              />
+              <CloseButton onKeyDown={onCloseModal} onClick={onCloseModal} />
             </BottonContainer>
             <Contact
               contact={contactForm}

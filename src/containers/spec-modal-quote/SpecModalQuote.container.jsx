@@ -35,6 +35,7 @@ import {
 import noPhoto from '../../assets/images/icons/no-photo.svg';
 import { closeModal, sendQuoteA } from './SpecModalQuote.actions';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
+import { BottonContainer } from '../modal-contact-form/ModalContactForm.styles';
 import CloseButton from '../../components/buttons/CloseButton';
 
 const SpecModalQuote = ({ initialValues }) => {
@@ -92,9 +93,10 @@ const SpecModalQuote = ({ initialValues }) => {
       {!product || !product.id ? <Loading /> :
         <Container>
           <Content>
-            <CloseButton onKeyDown={onCloseModal} onClick={onCloseModal} />
+            <BottonContainer>
+              <CloseButton onKeyDown={onCloseModal} onClick={onCloseModal} />
+            </BottonContainer>
             <Section>
-
               <ProductSection>
                 <GroupTitle>
                   <TitleProduct>Este es el producto que quieres cotizar:</TitleProduct>
