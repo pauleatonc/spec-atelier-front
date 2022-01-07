@@ -47,27 +47,27 @@ export const addProjectToList = project => dispatch => dispatch(onActionCreator(
 
 export const clearProjects = () => dispatch => dispatch(onActionCreator(CLEAR_PROJECTS));
 
-export const accepthNotificationsAC = (body) => async (dispatch) => {
+export const acceptNotificationsAC = (body) => async (dispatch) => {
   acceptNotification(body).then((response) => {
     const {resp, codeStatus} = response;
     if(codeStatus !== 401 && response.codeStatus !== 404 && response.codeStatus !== 500 && response.codeStatus !== 200){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not Modified' }),
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
 			);
 		}
     if(codeStatus === 401){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not session found' }),
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
 			);
 		}
 		if(codeStatus === 404){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not found' }),
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
 			);
 		}
     if(codeStatus === 500){
 			dispatch(
-				onShowAlertSuccess({ message: 'Internal server' }),
+				onShowAlertSuccess({ message: 'Error interno' }),
 			);
 		}
 		if(codeStatus === 200){
@@ -91,19 +91,24 @@ export const accepthNotificationsAC = (body) => async (dispatch) => {
 export const rejectNotificationsAC = (body) => async (dispatch) => {
   rejectNotification(body).then((response) => {
     const {resp, codeStatus} = response;
+    if (codeStatus === 304) {
+			dispatch(
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
+			);
+		}
     if(codeStatus === 401){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not session found' }),
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
 			);
 		}
 		if(codeStatus === 404){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not found' }),
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
 			);
 		}
     if(codeStatus === 500){
 			dispatch(
-				onShowAlertSuccess({ message: 'Internal server' }),
+				onShowAlertSuccess({ message: 'Error interno' }),
 			);
 		}
 		if(codeStatus === 200){

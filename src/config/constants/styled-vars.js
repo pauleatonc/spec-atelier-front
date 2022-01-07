@@ -48,7 +48,8 @@ export const COLOR_GRAY_OPACITY = 'rgba(201, 198, 198, 0.5)';
 export const COLOR_GRAY_OPACITY_SECONDARY = 'rgba(0, 0, 0, 0.25)';
 export const COLOR_GRAY_OPACITY_TRANSPARENT = 'rgb(0 0 0 / 25%)';
 export const COLOR_EBB = '#EFECEC';
-export const COLOR_LOADING_ACCEPT = 'rbg(156 221 212)';
+export const COLOR_LOADING_ACCEPT = 'rgb(156 221 212)';
+export const COLOR_LOADING_ACCEPT_INITIAL = 'rbg(156 221 212)';
 export const COLOR_SILVER_CHALICE = '#AFAFAF';
 
 export const SHADOW_GREY =

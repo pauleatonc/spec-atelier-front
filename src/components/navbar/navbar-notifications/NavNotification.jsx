@@ -87,9 +87,7 @@ const NavNotification = () => {
       togglOptions();
     }
   };
-
-  const totalNotifications = array_news.length + array_total.length;
-
+  
   return isLogin && (
     <>
       <NotificationsButton
@@ -112,8 +110,8 @@ const NavNotification = () => {
       </NotificationsButton>
       <ClickAwayListener onClickAway={handleClickAway}>
         <ContentPrimary>
-          <NotificationsOption show={showOptions} totalNotifications={totalNotifications}>
-            <OptionsContent totalNotifications={totalNotifications}>
+          <NotificationsOption show={showOptions} >
+            <OptionsContent>
               <ListHeader>
                 <TitleHeader>Notificaciones</TitleHeader>
                 <LinkHeader>Ver todo</LinkHeader>
