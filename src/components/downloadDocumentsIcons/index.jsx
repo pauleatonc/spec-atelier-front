@@ -17,7 +17,6 @@ const DownloadDocumentsIcons = ({
 	const dispatch = useDispatch();
 	const titleSpecPdf = pdfs?.map((s) => s.name).join(' - ') || '';
 	const handleIconClick = (documents, eventName) => (event) => {
-		dispatch(updateDownloads(eventName, productId));
 		event.stopPropagation();
 		documents.forEach(async (doc) => {
 			const link = document.createElement('a');
@@ -29,6 +28,7 @@ const DownloadDocumentsIcons = ({
 			link.click();
 			return setTimeout(() => document.body.removeChild(link), 2000);
 		});
+    dispatch(updateDownloads(eventName, productId));
 	};
 
 	return (

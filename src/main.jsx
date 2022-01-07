@@ -34,6 +34,7 @@ const Main = () => {
 		firebase.initializeApp(firebaseConfig);
 		firebase.analytics();
 	}
+  let hola = 'hola'
 
 	return (
 		<Provider store={store}>
