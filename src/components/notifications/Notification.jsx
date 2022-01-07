@@ -19,10 +19,11 @@ import Button from '../buttons/Button';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 import {
   COLOR_EBB,
-  COLOR_LOADING_ACCEPT
+  COLOR_LOADING_ACCEPT,
+  COLOR_LOADING_ACCEPT_INITIAL
 } from '../../config/constants/styled-vars';
 import {
-  accepthNotificationsAC,
+  acceptNotificationsAC,
   rejectNotifications,
   undoRejectNotifications
 } from '../../containers/spec-header/SpecHeader.actions';
@@ -50,7 +51,7 @@ const Notifications = (props) => {
   const [triggeredStatus, setTriggeredStatus] = useState(triggered);
   const [projectUrlStatus, setProjectUrlStatus] = useState();
   const [styleButtonReject, setStyleButtonReject] = useState({ marginTop: '8px' });
-  const [styleButtonAccept, setStyleButtonAccept] = useState({ marginLeft: '11px', background: 'rgb(156 221 212);', marginTop: '8px' });
+  const [styleButtonAccept, setStyleButtonAccept] = useState({ marginLeft: '11px', background: COLOR_LOADING_ACCEPT_INITIAL, marginTop: '8px' });
   useEffect(() => {
     setWatchedStatus(watched);
   }, [notificationsList]);
@@ -67,7 +68,7 @@ const Notifications = (props) => {
       setStyleButtonAccept({ backgroundColor: COLOR_LOADING_ACCEPT, marginLeft: '11px', marginTop: '8px', cursor: 'no-drop', pointerEvents: 'none' })
     } else {
       setStyleButtonReject({ marginTop: '8px' });
-      setStyleButtonAccept({ marginLeft: '11px', marginTop: '8px' })
+      setStyleButtonAccept({ marginLeft: '11px', background: COLOR_LOADING_ACCEPT_INITIAL ,marginTop: '8px' })
     }
 
   }, [loadingNoti]);
@@ -78,7 +79,7 @@ const Notifications = (props) => {
       idProject: pId,
       notifiId: id
     };
-    const resp = dispatch(accepthNotificationsAC(body));
+    const resp = dispatch(acceptNotificationsAC(body));
     resp.then((data) => {
       data.resp.then((r) => {
         setAccionStatus(r?.notification?.item?.status);

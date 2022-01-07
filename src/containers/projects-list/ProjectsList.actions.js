@@ -71,7 +71,7 @@ export const addProjectToList = (project) => (dispatch) =>
 export const clearProjects = () => (dispatch) =>
   dispatch(onActionCreator(CLEAR_PROJECTS));
 
-export const accepthNotificationsAC = (body) => async (dispatch) => {
+export const acceptNotificationsAC = (body) => async (dispatch) => {
   acceptNotification(body).then(
     (response) => {
       const { resp, codeStatus } = response;
@@ -81,16 +81,20 @@ export const accepthNotificationsAC = (body) => async (dispatch) => {
         response.codeStatus !== 500 &&
         response.codeStatus !== 200
       ) {
-        dispatch(onShowAlertSuccess({ message: 'Not Modified' }));
+        dispatch(
+          onShowAlertSuccess({
+            message: 'La invitación no pudo ser modificada',
+          }),
+        );
       }
       if (codeStatus === 401) {
-        dispatch(onShowAlertSuccess({ message: 'Not session found' }));
+        dispatch(onShowAlertSuccess({ message: 'Sesión no encontrada' }));
       }
       if (codeStatus === 404) {
-        dispatch(onShowAlertSuccess({ message: 'Not found' }));
+        dispatch(onShowAlertSuccess({ message: 'Función no encontrada' }));
       }
       if (codeStatus === 500) {
-        dispatch(onShowAlertSuccess({ message: 'Internal server' }));
+        dispatch(onShowAlertSuccess({ message: 'Error interno' }));
       }
       if (codeStatus === 200) {
         resp.then((data) => {
@@ -114,14 +118,21 @@ export const rejectNotificationsAC = (body) => async (dispatch) => {
   rejectNotification(body).then(
     (response) => {
       const { resp, codeStatus } = response;
+      if (codeStatus === 304) {
+        dispatch(
+          onShowAlertSuccess({
+            message: 'La invitación no pudo ser modificada',
+          }),
+        );
+      }
       if (codeStatus === 401) {
-        dispatch(onShowAlertSuccess({ message: 'Not session found' }));
+        dispatch(onShowAlertSuccess({ message: 'Sesión no encontrada' }));
       }
       if (codeStatus === 404) {
-        dispatch(onShowAlertSuccess({ message: 'Not found' }));
+        dispatch(onShowAlertSuccess({ message: 'Función no encontrada' }));
       }
       if (codeStatus === 500) {
-        dispatch(onShowAlertSuccess({ message: 'Internal server' }));
+        dispatch(onShowAlertSuccess({ message: 'Error interno' }));
       }
       if (codeStatus === 200) {
         resp.then((data) => {

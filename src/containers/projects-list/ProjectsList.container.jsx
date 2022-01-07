@@ -7,7 +7,7 @@ import {
 } from '@Helpers/localstorage.helper';
 import ProjectCard from '../../components/project/ProjectCard';
 import { getMyProjects, deleteProject } from './ProjectsList.actions';
-import { accepthNotificationsAC2, rejectNotificationsAC, undoStopGetNotifications } from '../spec-header/SpecHeader.actions';
+import { acceptNotificationsAC2, rejectNotificationsAC, undoStopGetNotifications } from '../spec-header/SpecHeader.actions';
 import { Loading, ErrorMessage } from '../../components/SpecComponents';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 
@@ -39,7 +39,7 @@ const ProjectsList = () => {
 
   useEffect(() => {
     if (action === "accept_invitation") {
-      dispatch(accepthNotificationsAC2(data));
+      dispatch(acceptNotificationsAC2(data));
     }
     if (action === "refuse_invitation") {
       dispatch(rejectNotificationsAC(data));

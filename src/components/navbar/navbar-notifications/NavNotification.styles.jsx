@@ -28,7 +28,7 @@ export const NotificationsButton = styled.div`
 
 export const NotificationsOption = styled.section`
 	width: 360px;
-	height: ${({ totalNotifications }) => (totalNotifications > 1 ? '446px' : 'auto')};
+	max-height: 446px;
 	position: absolute;
 	right: 75px;
 	display: ${({ show }) => !show && 'none'};
@@ -70,7 +70,7 @@ export const Option = styled.div`
 
 export const OptionsContent = styled.section`
 	width: 360px;
-	height: ${({ totalNotifications }) => (totalNotifications > 1 ? '446px' : 'auto')};
+	max-height: 446px;
 	overflow: overlay;
 	background-color: ${COLOR_WHITE};
 	&::-webkit-scrollbar {

@@ -35,9 +35,7 @@ const Specification = () => {
   const { dataSection } = useSelector((state) => state);
   const { option } = dataSection;
 
-  useEffect(() => {
-    dispatch(changeOption(SPEC_DOCUMENT));
-  }, []);
+  useEffect(() => dispatch(changeOption(SPEC_DOCUMENT)), []);
 
   const mainPage = () => {
     const content = {

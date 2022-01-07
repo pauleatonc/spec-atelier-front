@@ -290,22 +290,22 @@ export const rejectNotifications = (body) => async (dispatch) => {
 		const { resp, codeStatus } = response;
 		if (codeStatus === 304) {
 			dispatch(
-				onShowAlertSuccess({ message: 'Not Modified' }),
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
 			);
 		}
 		if (codeStatus === 401) {
 			dispatch(
-				onShowAlertSuccess({ message: 'Not session found' }),
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
 			);
 		}
 		if (codeStatus === 404) {
 			dispatch(
-				onShowAlertSuccess({ message: 'Not found' }),
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
 			);
 		}
 		if (codeStatus === 500) {
 			dispatch(
-				onShowAlertSuccess({ message: 'Internal server' }),
+				onShowAlertSuccess({ message: 'Error interno' }),
 			);
 		}
 		if (codeStatus === 200) {

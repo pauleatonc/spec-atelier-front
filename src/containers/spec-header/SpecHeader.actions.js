@@ -98,18 +98,18 @@ export const watchNotifications = (body) => async (dispatch) => {
 	})
 }
 
-export const accepthNotificationsAC = (body) => async (dispatch) => {
+export const acceptNotificationsAC = (body) => async (dispatch) => {
 	dispatch(onActionCreator(ACCEPT_NOTIFICATION));	
 	return acceptNotification(body).then((response) => {
 		const {resp, codeStatus} = response;
 		if(codeStatus !== 401 && response.codeStatus !== 404 && response.codeStatus !== 500 && response.codeStatus !== 200){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not Modified' }),
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
 			);
 		}
 		if(codeStatus === 401){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not session found' }),
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
 			);
 		}
 		if(codeStatus === 403){
@@ -121,12 +121,12 @@ export const accepthNotificationsAC = (body) => async (dispatch) => {
 		}
 		if(codeStatus === 404){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not found' }),
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
 			);
 		}
 		if(codeStatus === 500){
 			dispatch(
-				onShowAlertSuccess({ message: 'Internal server' }),
+				onShowAlertSuccess({ message: 'Error interno' }),
 			);
 		}
 		if(codeStatus === 200){
@@ -149,12 +149,12 @@ export const rejectNotifications = (body) => async (dispatch) => {
 		const {resp, codeStatus} = response;
 		if(codeStatus === 304){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not Modified' }),
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
 			);
 		}
 		if(response.codeStatus === 401){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not session found' }),
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
 			);
 		}
 		if(codeStatus === 403){
@@ -166,12 +166,12 @@ export const rejectNotifications = (body) => async (dispatch) => {
 		}
 		if(codeStatus === 404){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not found' }),
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
 			);
 		}
 		if(codeStatus === 500){
 			dispatch(
-				onShowAlertSuccess({ message: 'Internal server' }),
+				onShowAlertSuccess({ message: 'Error interno' }),
 			);
 		}
 		if(codeStatus === 200){
@@ -194,12 +194,12 @@ export const undoRejectNotifications = (body) => async (dispatch) => {
 		const {resp, codeStatus} = response;
 		if(codeStatus === 304){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not Modified' }),
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
 			);
 		}
 		if(codeStatus === 401){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not session found' }),
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
 			);
 		}
 		if(codeStatus === 403){
@@ -211,12 +211,12 @@ export const undoRejectNotifications = (body) => async (dispatch) => {
 		}
 		if(codeStatus === 404){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not found' }),
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
 			);
 		}
 		if(codeStatus === 500){
 			dispatch(
-				onShowAlertSuccess({ message: 'Internal server' }),
+				onShowAlertSuccess({ message: 'Error interno' }),
 			);
 		}
 		if(codeStatus === 200){
@@ -243,27 +243,27 @@ export const undoStopGetNotifications = () => async (dispatch) => {
 }
 
 
-export const accepthNotificationsAC2 = (body) => async (dispatch) => {
+export const acceptNotificationsAC2 = (body) => async (dispatch) => {
 	acceptNotification(body).then((response) => {
 		const {resp, codeStatus} = response;
 		if(codeStatus === 304){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not Modified' }),
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
 			);
 		}
 		if(codeStatus === 401){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not session found' }),
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
 			);
 		}
 		if(codeStatus === 404){
 			dispatch(
-				onShowAlertSuccess({ message: 'Not found' }),
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
 			);
 		}
 		if(codeStatus === 500){
 			dispatch(
-				onShowAlertSuccess({ message: 'Internal server' }),
+				onShowAlertSuccess({ message: 'Error interno' }),
 			);
 		}
 		if(codeStatus === 200){
@@ -282,39 +282,39 @@ export const accepthNotificationsAC2 = (body) => async (dispatch) => {
 		error
 	  }))
 	})
-  }
+}
   
-  export const rejectNotificationsAC = (body) => async (dispatch) => {
+export const rejectNotificationsAC = (body) => async (dispatch) => {
 	rejectNotification(body).then((response) => {
 	  const {resp, codeStatus} = response;
 	  	if(codeStatus === 304){
-				dispatch(
-					onShowAlertSuccess({ message: 'Not Modified' }),
-				);
-			}
+			dispatch(
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
+			);
+		}
 	  	if(codeStatus === 401){
-			  dispatch(
-				  onShowAlertSuccess({ message: 'Not session found' }),
-			  );
-		  }
-		  if(codeStatus === 404){
-			  dispatch(
-				  onShowAlertSuccess({ message: 'Not found' }),
-			  );
-		  }
+			dispatch(
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
+			);
+		}
+		if(codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
+			);
+		}
 	  	if(codeStatus === 500){
-			  dispatch(
-				  onShowAlertSuccess({ message: 'Internal server' }),
-			  );
-		  }
-		  if(codeStatus === 200){
-				resp.then((data) => {
-					dispatch(
-						onShowAlertSuccess({ message: data.message }),
-					);
-					})
-				dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
-		  }
+			dispatch(
+				onShowAlertSuccess({ message: 'Error interno' }),
+			);
+		}
+		if(codeStatus === 200){
+			resp.then((data) => {
+				dispatch(
+					onShowAlertSuccess({ message: data.message }),
+				);
+				})
+			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		}
 	}, (error) => {
 	  dispatch(
 		onShowAlertSuccess({ message: 'Error al rechazar proyecto.' }),
@@ -323,4 +323,4 @@ export const accepthNotificationsAC2 = (body) => async (dispatch) => {
 		error
 	  }))
 	})
-  }
+}
