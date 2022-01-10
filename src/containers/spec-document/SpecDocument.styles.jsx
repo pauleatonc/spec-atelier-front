@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import { MINE_SHAFT, MEDIA_QUERY_SMALL, NOBEL, GALLERY, WHITE, DUSTY_GRAY, CONCRETE, CONCRETE_OPACITY, MINE_SHAFT_RGB } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   box-sizing: border-box;
@@ -34,8 +34,8 @@ export const AddIcon = styled.img`
 
 export const AddMenuItem = styled.section`
 	background-color: transparent;
-	border-bottom: 1px solid #b3b3b3;
-	color: ${COLOR_MINE_SHAFT};
+	border-bottom: 1px solid ${NOBEL};
+	color: ${MINE_SHAFT};
 	cursor: pointer;
 	font-family: Lato;
 	font-size: 14px;
@@ -44,7 +44,7 @@ export const AddMenuItem = styled.section`
 	width: 256px;
 
 	&:hover {
-		background-color: #eee;
+		background-color: ${GALLERY};
 	}
 
 	&:last-child {
@@ -53,8 +53,8 @@ export const AddMenuItem = styled.section`
 `;
 
 export const Page = styled.section`
-  background-color: #FFF;
-  border: 1px solid #979797;
+  background-color: ${WHITE};
+  border: 1px solid ${DUSTY_GRAY};
   margin: 0 0 5px;
   min-height: 710px;
   padding: 40px 66px 40px 52px;
@@ -86,7 +86,7 @@ Block.propTypes = {
 };
 
 export const BlockEditor = styled.section`
-	background-color: #f2f2f2;
+	background-color: ${CONCRETE};
 	bottom: 0;
 	left: 0;
 	height: 202px;
@@ -99,8 +99,8 @@ export const BlockEditor = styled.section`
 
 export const BlockMenuItem = styled.section`
 	background-color: transparent;
-	border-bottom: 1px solid #b3b3b3;
-	color: ${COLOR_MINE_SHAFT};
+	border-bottom: 1px solid ${NOBEL};
+	color: ${MINE_SHAFT};
 	cursor: pointer;
 	font-family: Lato;
 	font-size: 12px;
@@ -109,7 +109,7 @@ export const BlockMenuItem = styled.section`
 	width: 187px;
 
 	&:hover {
-		background-color: #eee;
+		background-color: ${GALLERY};
 	}
 
 	&:last-child {
@@ -137,7 +137,7 @@ export const BlockContent = styled.section`
 `;
 
 export const BlockText = styled.section`
-	background-color: rgba(242, 242, 242, 0.54);
+	background-color: ${CONCRETE_OPACITY};
 	font-family: Lato;
 	font-size: 12px;
 	margin: 0 0 3px 0;
@@ -156,27 +156,27 @@ export const BlockTextContent = styled.section`
 	font-weight: initial;
 
 	& p {
-		color: rgba(33, 33, 33, 0.51);
+		color: ${MINE_SHAFT};
 		letter-spacing: 1px;
 		margin: 9px 0;
 	}
 
 	& h1 {
-		color: #212121;
+		color: ${MINE_SHAFT};
 		font-size: 18px;
 		font-weight: bold;
 		margin: 9px 0;
 	}
 
 	& h2 {
-		color: #212121;
+		color: ${MINE_SHAFT};
 		font-size: 14px;
 		font-weight: bold;
 		margin: 9px 0;
 	}
 
 	& h5 {
-		color: rgba(33, 33, 33, 0.51);
+		color: ${MINE_SHAFT};
 		font-size: 9px;
 		letter-spacing: 1px;
 		margin: 9px 0;
@@ -197,8 +197,8 @@ export const BlockTitle = styled.span`
 
 export const Section = styled.section`
 	align-items: center;
-	background-color: rgba(242, 242, 242, 0.54);
-	color: #212121;
+	background-color: ${CONCRETE_OPACITY};
+	color: ${MINE_SHAFT};
 	display: flex;
 	font-family: Lato;
 	font-size: 16px;
@@ -218,8 +218,8 @@ export const Section = styled.section`
 
 export const Item = styled.section`
 	align-items: center;
-	background-color: rgba(242, 242, 242, 0.54);
-	color: #212121;
+	background-color: ${CONCRETE_OPACITY};
+	color: ${MINE_SHAFT};
 	display: flex;
 	font-family: Lato;
 	font-size: 14px;
@@ -238,7 +238,7 @@ export const Item = styled.section`
 `;
 
 export const Product = styled.section`
-	background-color: rgba(242, 242, 242, 0.54);
+	background-color: ${CONCRETE_OPACITY};
 	display: flex;
 	margin: 0 0 3px 0;
 	min-height: 116px;
@@ -259,7 +259,7 @@ export const ProductImage = styled.img`
 `;
 
 export const ProductTitle = styled.p`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 12px;
 	font-weight: bold;
@@ -270,7 +270,7 @@ export const ProductTitle = styled.p`
 `;
 
 export const ProductDescription = styled.p`
-	color: rgba(33, 33, 33, 0.51);
+	color: rgba(${MINE_SHAFT_RGB}, 0.51);
 	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 1px;
@@ -279,7 +279,7 @@ export const ProductDescription = styled.p`
 `;
 
 export const ProductSystem = styled.p`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 11px;
 	font-weight: bold;
@@ -289,7 +289,7 @@ export const ProductSystem = styled.p`
 `;
 
 export const ProductReference = styled.p`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 11px;
 	letter-spacing: 1px;
@@ -297,7 +297,7 @@ export const ProductReference = styled.p`
 `;
 
 export const ProductBrand = styled.p`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 11px;
 	letter-spacing: 1px;

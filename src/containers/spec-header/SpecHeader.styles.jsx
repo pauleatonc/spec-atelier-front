@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import {
-	COLOR_MINE_SHAFT,
+	MINE_SHAFT,
 	MEDIA_QUERY_SMALL,
 	NAVBAR_HEIGHT,
+  WHITE,
+  DUSTY_GRAY_RGB,
 } from '../../config/constants/styled-vars';
 import specDownloadSource from '../../assets/images/icons/spec-download.svg';
 import specDownloadActiveSource from '../../assets/images/icons/spec-download_active.svg';
@@ -13,7 +15,7 @@ export const Root = styled.div`
 	display: flex;
 	width: 100%;
 	height: ${NAVBAR_HEIGHT};
-	background-color: #fff;
+	background-color: ${WHITE};
 	border-bottom-right-radius: 2px;
 	border-top-right-radius: 2px;
 	padding: 4px 20px 4px 36px;
@@ -27,7 +29,7 @@ export const Root = styled.div`
 `;
 
 export const Separator = styled.span`
-	background-color: rgba(151, 151, 151, 0.49);
+	background-color: rgba(${DUSTY_GRAY_RGB}, 0.49);
 	height: 16px;
 	width: 2px;
 
@@ -47,7 +49,7 @@ export const Section = styled.section`
 `;
 
 export const ProjectName = styled(Section)`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;

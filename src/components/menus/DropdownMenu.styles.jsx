@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { GALLERY, MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
@@ -13,7 +14,7 @@ export const Section = styled.div`
 
 export const Text = styled.span`
   align-items: center;
-  color: #212121;
+  color: ${MINE_SHAFT};
   cursor: pointer;
   display: inline-flex;
   font-family: Lato;
@@ -30,7 +31,7 @@ export const DropdownIcon = styled.img`
 
 export const Option = styled.section`
   box-sizing: border-box;
-  color: #212121;
+  color: ${MINE_SHAFT};
   cursor: pointer;
   font-family: Lato;
   font-size: 12px;
@@ -39,7 +40,7 @@ export const Option = styled.section`
   width: 100%;
 
   &:hover {
-    background-color: #EEE;
+    background-color: ${GALLERY};
   }
 
   &:first-child {

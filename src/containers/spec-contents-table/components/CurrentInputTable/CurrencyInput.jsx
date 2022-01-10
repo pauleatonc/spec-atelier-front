@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import MaskedInput from 'react-text-mask'
 import createNumberMask from 'text-mask-addons/dist/createNumberMask'
+import { BLACK, CARIBBEAN_GREEN } from '../../../../config/constants/styled-vars'
 
 const defaultMaskOptions = {
   prefix: '$',
@@ -33,15 +34,15 @@ const CurrentInputStyles = {
   'borderStyle': 'none',
 	'outline': 'none',
 	'width': '58px',
-	'borderBottom': 'solid 1px rgba(0, 0, 0, 0.28)',
+  'borderBottom': `solid 1px rgba(${BLACK}, 0.28)`,
 	'fontFamily': 'Lato',
 	'fontSize': '13px',
-	'caretColor': '#00c3ac',
+	'caretColor': `${CARIBBEAN_GREEN}`,
   '&:active': {
-    'borderBottom': '1px solid rgb(0, 195, 172) !important',
+    'borderBottom': `1px solid ${CARIBBEAN_GREEN} !important`,
   },
 	'&:focus': {
-		'borderBottom': '1px solid rgb(0, 195, 172) !important',
+		'borderBottom': `1px solid ${CARIBBEAN_GREEN} !important`,
 	}
 }
 

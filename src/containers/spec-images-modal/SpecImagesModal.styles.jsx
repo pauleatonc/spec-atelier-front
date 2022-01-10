@@ -1,73 +1,71 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_WHITE, COLOR_MINE_SHAFT, COLOR_PRIMARY } from '../../config/constants/styled-vars';
+import {
+	WHITE,
+	MINE_SHAFT,
+	PRIMARY,
+	BLACK,
+  ALTO_OPACITY,
+} from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
-  background-color: ${COLOR_WHITE};
-  border-radius: 4px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-  display: grid;
-  grid-template-rows: 76px auto 60px;
-  height: 482px;
-  width: 612px;
+	background-color: ${WHITE};
+	border-radius: 4px;
+	box-shadow: 0 2px 4px 0 rgba(${BLACK}, 0.3);
+	display: grid;
+	grid-template-rows: 76px auto 60px;
+	height: 482px;
+	width: 612px;
+	padding: 20px;
 `;
 
 export const Header = styled.section`
-  align-items: center;
-  display: flex;
-  padding: 0 60px 0 40px;
-  position: relative;
-  width: 100%;
+	align-items: center;
+	display: flex;
+	padding: 0 60px 0 40px;
+	position: relative;
+	width: 100%;
 `;
 
 export const Title = styled.span`
-  color: ${COLOR_MINE_SHAFT};
-  font-family: Lato;
-  font-size: 12px;
-  letter-spacing: 1px;
-`;
-
-export const CloseIcon = styled.img`
-  bottom: 0;
-  cursor: pointer;
-  margin: auto 0;
-  position: absolute;
-  right: 31px;
-  top: 0;
+	color: ${MINE_SHAFT};
+	font-family: Lato;
+	font-size: 12px;
+	letter-spacing: 1px;
 `;
 
 export const Body = styled.section`
-  overflow: hidden;
-  padding: 13px 35px 25px;
-  width: 100%;
+	overflow: hidden;
+	padding: 13px 35px 25px;
+	width: 100%;
 `;
 
 export const Figures = styled.section`
-  display: grid;
-  grid-column-gap: 18px;
-  grid-row-gap: 16px;
-  grid-template-columns: repeat(4, 119px);
-  grid-template-rows: 146px;
-  height: 100%;
-  overflow-y: auto;
-  padding: 5px;
-  width: 100%;
+	display: grid;
+	grid-column-gap: 18px;
+	grid-row-gap: 16px;
+	grid-template-columns: repeat(4, 119px);
+	grid-template-rows: 146px;
+	height: 100%;
+	overflow-y: auto;
+	padding: 5px;
+	width: 100%;
 `;
 
 export const Figure = styled.article`
-  background-color: rgba(216, 216, 216, 0.47);
-  border: ${({ selected = false }) => `2px solid ${selected ? COLOR_PRIMARY : 'transparent'}`};
-  cursor: pointer;
-  height: 146px;
-  position: relative;
-  width: 119px;
+	background-color: ${ALTO_OPACITY};
+	border: ${({ selected = false }) => `2px solid ${selected ? PRIMARY : 'transparent'}`};
+	cursor: pointer;
+	height: 146px;
+	position: relative;
+	width: 119px;
 `;
 
 Figure.defaultProps = {
-  selected: false,
+	selected: false,
 };
 Figure.propTypes = {
-  selected: PropTypes.bool,
+	selected: PropTypes.bool,
 };
 
 export const Image = styled.span`
@@ -85,23 +83,23 @@ export const Image = styled.span`
 `;
 
 Image.defaultProps = {
-  selected: false,
-  source: '#',
+	selected: false,
+	source: '#',
 };
 Image.propTypes = {
-  selected: PropTypes.bool,
-  source: PropTypes.string,
+	selected: PropTypes.bool,
+	source: PropTypes.string,
 };
 
 export const CheckIcon = styled.img`
-  position: absolute;
-  right: 4px;
-  top: 4px;
+	position: absolute;
+	right: 4px;
+	top: 4px;
 `;
 
 export const Footer = styled.section`
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 40px 25px;
-  width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 40px 25px;
+	width: 100%;
 `;

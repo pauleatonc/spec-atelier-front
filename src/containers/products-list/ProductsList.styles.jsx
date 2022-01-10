@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
-	COLOR_LIGHTERGREY,
-	COLOR_MINE_SHAFT,
+	GALLERY,
+	MINE_SHAFT,
 	MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
@@ -27,7 +27,7 @@ export const ListContainer = styled.section`
 export const Separator = styled.div`
 	height: 1px;
 	width: 100%;
-	background-color: ${COLOR_LIGHTERGREY};
+	background-color: ${GALLERY};
 
 	${MEDIA_QUERY_SMALL} {
 		display: none;
@@ -40,7 +40,7 @@ export const PaddingContainer = styled.div`
 
 export const BodyHeader = styled.section`
 	align-items: center;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	display: grid;
 	font-family: Lato;
 	font-size: 12px;

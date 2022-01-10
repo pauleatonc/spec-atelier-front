@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import {
-	COLOR_BLACK,
+	MINE_SHAFT,
 	MEDIA_QUERY_SMALL,
+  CHAMPAGNE,
 } from '../../config/constants/styled-vars';
 
 import PLANS_BACKGROUND from '../../assets/images/home/plans_background.png';
@@ -14,12 +15,12 @@ export const Container = styled.section`
 	background: url(${PLANS_BACKGROUND});
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
-	color: ${COLOR_BLACK};
+	color: ${MINE_SHAFT};
 	width: 100%;
 	padding-top: 83px;
 	padding-bottom: 200px;
 	${MEDIA_QUERY_SMALL} {
-		background: #fae5da;
+		background: ${CHAMPAGNE};
 		flex-direction: column;
 		padding-bottom: 57px;
 	}

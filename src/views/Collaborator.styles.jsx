@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_GREY, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../config/constants/styled-vars';
+import { SILVER_CHALICE, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../config/constants/styled-vars';
 
 export const Container = styled.section`
   padding: 16px 80px;
@@ -12,5 +12,5 @@ export const Container = styled.section`
 `;
 
 export const ClientContainer = styled.section`
-  border: 1px solid ${COLOR_GREY};
+  border: 1px solid ${SILVER_CHALICE};
 `;

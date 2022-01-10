@@ -16,15 +16,14 @@ import {
 	List,
 	Action,
 	DropContent,
-	DropCloseIcon,
 	DropZone,
 	DropZoneSection,
 	DropZoneText,
 } from './AttachedDocuments.styles';
 import documentsUploadSource from '../../assets/images/icons/documents-upload.svg';
-import closeSource from '../../assets/images/icons/close.svg';
 import DocumentItem from './DocumentItem';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+import CloseButton from '../buttons/CloseButton';
 
 /**
  * The AttachedFiles' component.
@@ -158,7 +157,7 @@ const AttachedFiles = (props) => {
 			)}
 			<ModalLayout show={show} onClose={handleClose}>
 				<DropContent>
-					<DropCloseIcon alt="" src={closeSource} onClick={handleClose} />
+					<CloseButton onClick={handleClose} />
 					<DropZone {...dropProps}>
 						<input {...getInputProps()} />
 						<DropZoneSection padding="33px 0 18px">

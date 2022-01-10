@@ -46,7 +46,7 @@ import { mapToSelector, reorderList } from '../../helpers/helpers';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import DocumentItem from '../../components/attachments/DocumentItem';
 import MultiSelect from '../../components/inputs/MultiSelect';
-import { COLOR_GREY } from '../../config/constants/styled-vars';
+import { SILVER_CHALICE } from '../../config/constants/styled-vars';
 
 function* KeyGen() {
 	let i = 1;
@@ -681,7 +681,7 @@ const SpecEditProduct = () => {
 							disabled={canEdit}
 							variant="cancel"
 							onClick={handleClose}
-							style={{ marginLeft: 12, color: COLOR_GREY }}
+							style={{ marginLeft: 12, color: SILVER_CHALICE }}
 						>
 							Descartar
 						</Button>

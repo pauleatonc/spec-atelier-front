@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_BLACK, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
+import { ALTO, DUSTY_GRAY, GALLERY, MINE_SHAFT, MINE_SHAFT_RGB, SILVER } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
 `;
 
 export const Label = styled.label`
-  color: #212121;
+  color: ${MINE_SHAFT};
   display: block;
   font-family: Lato;
   font-size: 16px;
@@ -25,9 +25,9 @@ export const Section = styled.div`
 export const Input = styled.input`
   align-items: center;
   background-color: transparent;
-  border: 1px solid #979797;
+  border: 1px solid ${DUSTY_GRAY};
   border-radius: 9px;
-  color: #212121;
+  color: ${MINE_SHAFT};
   cursor: pointer;
   display: inline-flex;
   height: 38px;
@@ -45,11 +45,11 @@ export const Input = styled.input`
   }
 
   &::placeholder {
-    color: rgba(33, 33, 33, 0.46);
+    color: rgba(${MINE_SHAFT_RGB}, 0.46);
   }
 
   &:disabled {
-    background-color: #DDD;
+    background-color: ${ALTO};
     cursor: not-allowed;
   }
 `;
@@ -61,17 +61,17 @@ export const InputUnderline = styled(Input)`
   display:flex;
   flex: 1;
   justify-content: space-between;
-  border-bottom: 2px solid ${COLOR_LIGHTGREY};
+  border-bottom: 2px solid ${SILVER};
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${MINE_SHAFT};
   border-radius: 0;
 `;
 
 export const Options = styled.section`
   background-color: transparent;
-  border: ${({ type = 'default' }) => type === 'default' ? '1px solid #979797' : 'none'};
+  border: ${({ type = 'default' }) => type === 'default' ? `1px solid ${DUSTY_GRAY}` : 'none'};
   border-radius: 9px;
   margin: 5px 0 0;
   max-height: 200px;
@@ -88,7 +88,7 @@ Options.propTypes = {
 export const Option = styled.section`
   align-items: center;
   box-sizing: border-box;
-  color: #212121;
+  color: ${MINE_SHAFT};
   cursor: pointer;
   display: flex;
   font-family: Lato;
@@ -98,7 +98,7 @@ export const Option = styled.section`
   width: 100%;
 
   &:hover {
-    background-color: #EEE;
+    background-color: ${GALLERY};
   }
 
   &:first-child {

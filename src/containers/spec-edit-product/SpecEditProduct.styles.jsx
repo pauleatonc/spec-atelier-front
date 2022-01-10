@@ -1,21 +1,26 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	COLOR_MINE_SHAFT,
-	COLOR_WHITE,
-	COLOR_PRIMARY,
-	COLOR_GREY,
+	MINE_SHAFT,
+	WHITE,
+	PRIMARY,
+	SILVER_CHALICE,
+	DUSTY_GRAY,
+	ALABASTER,
+	BLACK,
+  DUSTY_GRAY_OPACITY,
+  MINE_SHAFT_RGB,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
-	background-color: #fafafa;
+	background-color: ${ALABASTER};
 	border-radius: 5px;
 	box-shadow: ${({ shadow = true }) =>
 		shadow
-			? '0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.14)'
+			? `0 11px 15px -7px rgba(${BLACK}, 0.2), 0 9px 46px 8px rgba(${BLACK}, 0.12), 0 24px 38px 3px rgba(${BLACK}, 0.14)`
 			: 'none'};
 	width: 80%;
-	padding: 42px 32px 20px;
+	padding: 20px;
 	overflow-y: auto;
 `;
 
@@ -52,7 +57,7 @@ export const Label = styled.div`
 
 export const Loading = styled.div`
 	align-items: center;
-	color: ${COLOR_WHITE};
+	color: ${WHITE};
 	display: flex;
 	font-family: Lato;
 	font-size: 16px;
@@ -65,7 +70,7 @@ export const Loading = styled.div`
 
 export const Header = styled.section`
 	align-items: center;
-	border-bottom: 1px solid rgba(151, 151, 151, 0.32);
+	border-bottom: 1px solid ${DUSTY_GRAY_OPACITY};
 	display: flex;
 	padding: 0 60px 0 40px;
 	position: relative;
@@ -73,20 +78,11 @@ export const Header = styled.section`
 `;
 
 export const Title = styled.span`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
 	letter-spacing: 1px;
-`;
-
-export const CloseIcon = styled.img`
-	bottom: 0;
-	cursor: pointer;
-	margin: auto 0;
-	position: absolute;
-	right: 31px;
-	top: 0;
 `;
 
 export const Body = styled.section`
@@ -158,7 +154,7 @@ export const Text = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 0.63px;
-	color: ${COLOR_PRIMARY};
+	color: ${PRIMARY};
 	margin: 12px 0;
 	cursor: pointer;
 	&:first-child {
@@ -167,7 +163,7 @@ export const Text = styled.div`
 `;
 
 export const SubtitleContent = styled.p`
-	color: rgba(33, 33, 33, 0.44);
+	color: rgba(${MINE_SHAFT_RGB}, 0.44);
 	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 0.75px;
@@ -185,13 +181,13 @@ export const ImagesContainer = styled.section`
 	display: flex;
 	flex-wrap: wrap;
 	height: 260px;
-	border: dotted 1px ${COLOR_GREY};
+	border: dotted 1px ${SILVER_CHALICE};
 `;
 
 export const DocContainer = styled.div`
 	margin: 8px 0;
 	width: 100%;
-	border: dotted 1px ${COLOR_GREY};
+	border: dotted 1px ${SILVER_CHALICE};
 	height: 160px;
 	overflow-y: auto;
 `;

@@ -1,11 +1,12 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import { BLACK, GALLERY, GRAY, MINE_SHAFT, MINE_SHAFT_RGB, PUERTO_RICO, SWISS_COFFEE, WHITE } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
 `;
 
 export const Label = styled.label`
-  color: #212121;
+  color: ${MINE_SHAFT};
   display: block;
   font-family: Lato;
   font-size: 12px;
@@ -28,13 +29,13 @@ export const Actions = styled.section`
 export const EditorStyles = createGlobalStyle`
   .ck-toolbar-container {
     border: 0 !important;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14) !important;
+    box-shadow: 0 1px 1px 0 rgba(${BLACK}, 0.14) !important;
     transform: translateX(calc(100% + 70px)) translateY(-5px);
   }
 
   .ck-content, .ck-editor__editable {
-    background-color: #FFF;
-    border: 1px solid #D2CDCD !important;
+    background-color: ${WHITE};
+    border: 1px solid ${SWISS_COFFEE} !important;
     box-shadow: none !important;
     font-family: Lato;
     font-size: 12px;
@@ -45,31 +46,31 @@ export const EditorStyles = createGlobalStyle`
     padding: 0 11px !important;
 
     &:focus {
-      border: 1px solid #3AC0AD !important;
+      border: 1px solid ${PUERTO_RICO} !important;
     }
 
     & p {
-      color: rgba(33, 33, 33, 0.51);
+      color: rgba(${MINE_SHAFT_RGB}, 0.51);
       letter-spacing: 1px;
       margin: 9px 0;
     }
   
     & h1 {
-      color: #212121;
+      color: ${MINE_SHAFT};
       font-size: 18px;
       font-weight: bold;
       margin: 9px 0;
     }
   
     & h2 {
-      color: #212121;
+      color: ${MINE_SHAFT};
       font-size: 14px;
       font-weight: bold;
       margin: 9px 0;
     }
   
     & h5 {
-      color: rgba(33, 33, 33, 0.51);
+      color: rgba(${MINE_SHAFT_RGB}, 0.51);
       font-size: 9px;
       letter-spacing: 1px;
       margin: 9px 0;
@@ -89,38 +90,38 @@ export const EditorStyles = createGlobalStyle`
   }
 
   .ck.ck-toolbar .ck.ck-toolbar__separator {
-    background-color: rgba(144, 144, 144, 0.37) !important;
+    background-color: ${GRAY} !important;
     margin: 4px 0 !important;
   }
 
   .ck-dropdown__panel {
-    background-color: #FFF !important;
+    background-color: ${WHITE} !important;
     border: 0 !important;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.14) !important;
+    box-shadow: 0 1px 3px 0 rgba(${BLACK}, 0.2), 0 2px 1px -1px rgba(${BLACK}, 0.12), 0 1px 1px 0 rgba(${BLACK}, 0.14) !important;
   }
 
   .ck-dropdown__button > .ck-button__label {
-    color: #212121 !important;
+    color: ${MINE_SHAFT} !important;
     font-family: Lato !important;
     font-size: 10px !important;
   }
 
   .ck-list__item > .ck-button {
     &:hover {
-      background-color: #EEE !important;;
+      background-color: ${GALLERY} !important;;
     }
   }
 
   .ck.ck-list__item .ck-button.ck-on {
-    background-color: #EEE !important;;
+    background-color: ${GALLERY} !important;;
 
     &:hover {
-      background-color: #EEE !important;;
+      background-color: ${GALLERY} !important;;
     }
   }
 
   .ck-list__item > .ck-button > .ck-button__label {
-    color: #212121 !important;
+    color: ${MINE_SHAFT} !important;
     font-family: Lato !important;
     font-size: 12px !important;
   }

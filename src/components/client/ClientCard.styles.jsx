@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_PRIMARY, COLOR_DARKESTGREY, COLOR_BLACK } from '../../config/constants/styled-vars';
+import { PRIMARY, DARKESTGREY, MINE_SHAFT } from '../../config/constants/styled-vars';
 
 export const Name = styled.div`
   font-family: Lato;
@@ -28,7 +28,7 @@ export const Quantity = styled.div`
   font-weight: bold;
   line-height: 2.25;
   letter-spacing: 1px;
-  color: ${COLOR_PRIMARY};
+  color: ${PRIMARY};
 `;
 
 export const Description = styled.p`
@@ -37,7 +37,7 @@ export const Description = styled.p`
   font-size: 12px;
   line-height: 2.25;
   letter-spacing: 1px;
-  color: ${COLOR_DARKESTGREY};
+  color: ${DARKESTGREY};
 `;
 
 export const ButtonContainer = styled.section`
@@ -58,5 +58,5 @@ export const Country = styled.div`
   font-style: normal;
   line-height: 1.71;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${MINE_SHAFT};
 `;
