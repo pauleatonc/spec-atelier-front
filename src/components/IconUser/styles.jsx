@@ -14,7 +14,7 @@ export const Container = styled.section`
 
 	:nth-child(odd) {
 		background-color: ${({ horizontalList }) =>
-			horizontalList && `${PUERTO_RICO}`};
+    horizontalList && `${PUERTO_RICO}`};
 	}
 `;
 

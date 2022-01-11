@@ -3,7 +3,8 @@ export const VARIANTS_BUTTON = {
     SECONDARY: 'secondary',
     GRAY: 'gray',
     CANCEL: 'cancel',
-    CANCEL_SECONDARY: 'cancel-secondary'
+    CANCEL_SECONDARY: 'cancel-secondary',
+    CANCEL_SECONDARY_NOTIFICATION: 'cancel-secondary-notification',
 }
 
 export const SPEC_TABLE = 'SPEC_TABLE';

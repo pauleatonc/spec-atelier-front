@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import NavProfile from '../../../navbar-profile/NavProfile';
+import NavNotification from '../../../navbar-notifications/NavNotification';
 
 import { ItemsContainer, Item, ItemText, UnderLine } from './styles';
 
@@ -28,6 +29,7 @@ const ItemsNavBar = () => {
 					</React.Fragment>
 				))}
 			</ItemsContainer>
+			<NavNotification />
 			<NavProfile />
 		</>
 	);
