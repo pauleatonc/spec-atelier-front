@@ -50,13 +50,16 @@ const ProjectsList = () => {
   useEffect(() => {
     if (token) {
       if(token === '304'){
-        dispatch(onShowAlertSuccess({ message: 'Not Modified' }));
+        dispatch(onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }));
       }
       if(token === '401'){
-        dispatch(onShowAlertSuccess({ message: 'Session not found' }));
+        dispatch(onShowAlertSuccess({ message: 'Sesión no encontrada' }));
+      }
+      if(token === '403'){
+        dispatch(onShowAlertSuccess({ message: 'No autorizado'}));
       }
       if(token === '404'){
-        dispatch(onShowAlertSuccess({ message: 'Not found' }));
+        dispatch(onShowAlertSuccess({ message: 'Función no encontrada' }));
       }
       if(token === '200'){
         dispatch(onShowAlertSuccess({ message: resMessage }));
