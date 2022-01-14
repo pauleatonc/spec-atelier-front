@@ -18,7 +18,7 @@ import ContactFormContainer from '../containers/modal-contact-form/ModalContactF
 import SpecModalProduct from '../containers/spec-modal-product/SpecModalProduct.container';
 
 import ProfileStats from '../containers/profile-stats/ProfileStats.container';
-import { PRODUCTS, PROJECTS } from '../containers/profile-stats/uitls';
+import { PRODUCTS, PROJECTS } from '../containers/profile-stats/utils';
 
 import CustomTabs from '../components/customTabs';
 import Tab from '../components/customTabs/components/Tab';

@@ -13,7 +13,7 @@ import {
 	IconSort,
 } from './styles';
 import ProfileTablePaginator from '../profileTablePaginator';
-import { SORT_ORDER_OPTIONS } from '../../uitls';
+import { SORT_ORDER_OPTIONS } from '../../utils';
 
 const ProfileTableStats = ({
 	columns,

@@ -66,7 +66,7 @@ export const COLUMNS = {
 			canSort: true,
 		},
 		{
-			Header: 'Número de especifiaciones',
+			Header: 'Número de especificaciones',
 			accessor: 'projects_count',
 			canSort: true,
 		},

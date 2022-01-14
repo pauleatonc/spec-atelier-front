@@ -1,7 +1,7 @@
 import onActionCreator from '../../config/store/helpers';
 import { cleanObjectsAndArrays } from '../../modules/services';
 import { getStats } from '../../services/profile.service';
-import { formatTableData, STATS } from './uitls';
+import { formatTableData, STATS } from './utils';
 
 export const GET_PROFILE_STATS_PRODUCTS = 'GET_PROFILE_STATS_PRODUCTS';
 export const GET_PROFILE_STATS_PRODUCTS_SUCCESS =
