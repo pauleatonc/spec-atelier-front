@@ -8,6 +8,7 @@ const items = [
   { id: 'projects', label: 'Proyectos', to: '/projects' },
   { id: 'products', label: 'Productos', to: '/products' },
   { id: 'collaborators', label: 'Empresas', to: '/collaborators' },
+  { id: 'business_plan', label: 'Plan empresarial', to: '/business_plan' },
 ];
 
 const ItemsNavBar = () => {
