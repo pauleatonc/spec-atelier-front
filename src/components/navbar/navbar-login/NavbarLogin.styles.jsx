@@ -4,22 +4,17 @@ import {
   MINE_SHAFT,
   WHITE,
   PRIMARY,
-  MEDIA_QUERY_SMALL,
-  MEDIA_QUERY_MEDIUM,
   Z_INDEX_NAVBAR,
   SILVER_CHALICE,
   BLACK,
+  MEDIA_QUERY_STANDAR_MEDIUM,
 } from '../../../config/constants/styled-vars';
-
-import LOGO from '../../../assets/images/logo.png';
-import LOGO_MOBILE from '../../../assets/images/full_logo.png';
 
 export const NavbarContainer = styled.nav`
   top: 0;
   left: 0;
   align-items: center;
-  background-color: ${({ transparent }) =>
-    transparent ? 'transparent' : WHITE};
+  background-color: ${({ transparent }) => transparent ? 'transparent' : WHITE};
   display: flex;
   font-family: 'Lato', sans-serif;
   height: ${NAVBAR_HEIGHT};
@@ -46,13 +41,8 @@ export const LogoContent = styled.section`
   display: flex;
 `;
 
-export const ImgLogo = styled.div`
-  border: 0;
-  width: 150px;
-  height: 30px;
-  background-repeat: no-repeat;
-  background-image: ${({ transparent }) =>
-    `url('${transparent ? LOGO : LOGO_MOBILE}')`};
+export const ImgLogo = styled.img`
+  width: 100%;
 `;
 
 export const ItemsContainer = styled.section`
@@ -60,10 +50,8 @@ export const ItemsContainer = styled.section`
   align-items: center;
   flex: 1;
   justify-content: flex-end;
-  ${MEDIA_QUERY_SMALL} {
-    display: none;
-  }
-  ${MEDIA_QUERY_MEDIUM} {
+
+  ${MEDIA_QUERY_STANDAR_MEDIUM} {
     display: none;
   }
 `;
@@ -144,12 +132,19 @@ export const LinkRegister = styled(LinkItem)`
 export const LinkLogin = styled(LinkItem)`
   margin-left: 16px;
   border-radius: 20px;
-  border: 1px solid
-    ${({ transparentize }) => (transparentize ? WHITE : SILVER_CHALICE)};
+  border: 1px solid ${({ transparentize }) => (transparentize ? WHITE : SILVER_CHALICE)};
   display: flex;
   justify-content: space-between;
   min-width: 150px;
-  background-color: ${({ transparentize }) =>
-    transparentize ? 'transparent' : WHITE};
+  background-color: ${({ transparentize }) => transparentize ? 'transparent' : WHITE};
   color: ${({ transparentize }) => (transparentize ? WHITE : SILVER_CHALICE)};
+`;
+
+export const LoginRegisterBurgerMenuContent = styled.div`
+  display: none;
+  align-self: center;
+
+  ${MEDIA_QUERY_STANDAR_MEDIUM} {
+    display: flex;
+  }
 `;
