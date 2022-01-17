@@ -19,8 +19,6 @@ export const BurgerMenuContainer = styled.div`
 
 export const BurgerMenuContent = styled.section`
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
   background: ${WHITE};
   box-shadow: ${SHADOW_GREY};
   border: 1px solid ${SILVER};
@@ -34,13 +32,10 @@ export const BurgerMenuContent = styled.section`
 `;
 
 export const Item = styled.div`
-  display: flex;
-  align-items: center;  
+  display: flex; 
   height: 60px;
   width: 100%;
-  text-decoration: none;
   cursor: pointer;
-  display: flex;
   color: ${MINE_SHAFT};
   color: ${({ active }) => (active ? PRIMARY : MINE_SHAFT)};
   :hover {
@@ -49,7 +44,6 @@ export const Item = styled.div`
 `;
 
 export const BurgerMenuButton = styled.i`
-  border: none;
   font-size: 28px;
   color: ${DARKESTGREY};
   cursor: pointer;
@@ -61,19 +55,12 @@ export const BurgerMenuButton = styled.i`
 `;
 
 export const ItemText = styled.div`
-  height: 60px;
-  font-family: Lato;
+  display: flex;  
   font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  background-color: ${WHITE};
-  display: flex;
   flex: 1;
   align-items: center;
   padding: 30px;
   cursor: pointer;
-  text-decoration: none;
 `;
