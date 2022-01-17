@@ -4,10 +4,13 @@ const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const args = require('yargs').argv;
+
+const build = args.p;
 
 module.exports = env => {
   return {
-    devtool: 'inline-source-map',
+    devtool: build ? undefined : 'inline-source-map',
     entry: {
       main: ['babel-polyfill', path.resolve(__dirname, 'src', 'main.jsx')],
     },
