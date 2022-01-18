@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import {
   MINE_SHAFT,
   PRIMARY,
-  MEDIA_QUERY_SMALL,
-  MEDIA_QUERY_MEDIUM,
+  MEDIA_QUERY_STANDAR_MEDIUM,
 } from '../../../../../config/constants/styled-vars';
 
 export const ItemsContainer = styled.section`
@@ -11,10 +10,7 @@ export const ItemsContainer = styled.section`
   flex: 1;
   align-items: center;
   justify-content: flex-end;
-  ${MEDIA_QUERY_SMALL} {
-    display: none;
-  }
-  ${MEDIA_QUERY_MEDIUM} {
+  ${MEDIA_QUERY_STANDAR_MEDIUM} {
     display: none;
   }
 `;
@@ -56,4 +52,10 @@ export const UnderLine = styled.span`
   margin: 8px 2px 4px 2px;
   border-radius: 1.5px;
   background-color: ${({ active }) => active && PRIMARY};
+`;
+
+export const ProfileBurgerMenuContent = styled.div`
+  display: flex;
+  align-self: center;
+  flex-direction: row-reverse;
 `;
