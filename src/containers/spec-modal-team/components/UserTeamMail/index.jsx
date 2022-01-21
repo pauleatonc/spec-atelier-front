@@ -7,24 +7,32 @@ import SelectorRelative from '../../../../components/basics/SelectorRelative';
 import dropArrowSource from '../../../../assets/images/icons/primary-arrow-down.svg';
 
 import { PermisionLabel, IconArrowDown } from '../../styles';
-import { OPTIONS_PERMISSIONS } from '../../constants';
+import { OPTIONS_PERMISSIONS, STATUS_INVITATIONS } from '../../constants';
 import { onUpdatePermission } from '../../actions';
 
-import { Container, ContainerMail, Email } from './styles';
+import { Container, ContainerMail, Email, WaitingDisclaimer } from './styles';
 
 const UserTeamMail = ({ member, onClick }) => {
 	const { id: specID } = useParams();
 	const dispatch = useDispatch();
-	const { user, permission: memberPermission } = member;
+	const { user, permission: memberPermission, status } = member;
+	const isAwaiting = status === STATUS_INVITATIONS.WAITING;
 	const [permission, setPermission] = useState(
 		OPTIONS_PERMISSIONS.find(
 			(option) => option.value === memberPermission.ability,
 		),
 	);
 	const updatePermission = (value) => {
+		const items = [];
+		memberPermission.sections.forEach((section) => {
+			section.items.forEach((item) => items.push(item.id));
+		});
 		const invitation = {
 			email: user.email,
 			ability: value.value,
+			all: memberPermission.all,
+			sections: memberPermission.sections.map((section) => section.id),
+			items,
 		};
 		dispatch(
 			onUpdatePermission(
@@ -36,11 +44,17 @@ const UserTeamMail = ({ member, onClick }) => {
 			),
 		);
 	};
+
 	return (
 		<Container>
 			<ContainerMail onClick={() => onClick(member)}>
-				<IconUser user={user} />
+				<IconUser user={user} isAwaiting={isAwaiting} />
 				<Email>{user.email}</Email>
+				{isAwaiting && (
+					<WaitingDisclaimer>
+						(no ha aceptado aún la invitación a colaborar.)
+					</WaitingDisclaimer>
+				)}
 			</ContainerMail>
 			<div>
 				<SelectorRelative

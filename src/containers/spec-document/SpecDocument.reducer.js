@@ -10,6 +10,7 @@ import {
 	UPDATE_SPEC_BLOCK_TEXT_SUCCESS,
 	UPDATE_PRODUCT,
 	UPDATE_PRODUCT_SUCCESS,
+	UPDATE_TEAM_DATA,
 } from './SpecDocument.actions';
 import {
 	getFormatedTableData,
@@ -75,6 +76,15 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
 			return {
 				...state,
 				quoteTable: getFormatedTableData(newBlocks),
+			};
+		}
+		case UPDATE_TEAM_DATA: {
+			return {
+				...state,
+				project: {
+					...state.project,
+					team: payload.updatedTeamData,
+				},
 			};
 		}
 		default: {

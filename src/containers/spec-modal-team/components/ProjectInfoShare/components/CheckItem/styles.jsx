@@ -22,3 +22,7 @@ export const ListItem = styled.div`
 export const ArrowIcon = styled.img`
 	cursor: pointer;
 `;
+
+export const ContainerUsers = styled.div`
+	display: flex;
+`;

@@ -1,6 +1,9 @@
 import onActionCreator from '../../config/store/helpers';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
-import { onGetSpecBlocks } from '../spec-document/SpecDocument.actions';
+import {
+	onGetSpecBlocks,
+	handleUpdateTeamData,
+} from '../spec-document/SpecDocument.actions';
 import {
 	checkEmail,
 	inviteUserToProject,
@@ -8,6 +11,7 @@ import {
 	resendInvitation,
 	updatePermission,
 } from '../../services/users.service';
+import { cleanObjectsAndArrays, formatParams } from '../../modules/services';
 
 import { TYPE_MODALS } from './constants';
 
@@ -26,9 +30,10 @@ export const onHideModal = () => (dispatch) => {
 };
 
 export const checkUserEmail = (emailList) => (dispatch) => {
-	checkEmail(emailList).then(
-		({ user }) => {
-			dispatch(onActionCreator(CHECK_EMAIL_EXIST, { user, emailList }));
+	checkEmail(formatParams(cleanObjectsAndArrays({ emails: emailList }))).then(
+		({ non_existing_users }) => {
+			const emailsArray = non_existing_users.map((user) => user.email);
+			dispatch(onActionCreator(CHECK_EMAIL_EXIST, { emailsArray }));
 		},
 		(error) => console.error(error),
 	);
@@ -56,7 +61,13 @@ export const setDetailMember = (member) => (dispatch) => {
 
 export const onDeleteUser = (projectId, permissionId, permissionType) => (
 	dispatch,
-) =>
+	getState,
+) => {
+	const {
+		specDocument: {
+			project: { team },
+		},
+	} = getState();
 	deleteUser({ projectId, permissionId, permissionType }).then(
 		({ message, error }) => {
 			if (error) dispatch(onShowAlertSuccess({ message: error }));
@@ -64,11 +75,15 @@ export const onDeleteUser = (projectId, permissionId, permissionType) => (
 				dispatch(onGetSpecBlocks(projectId));
 				dispatch(onShowAlertSuccess({ message }));
 				dispatch(onHideModal());
-				dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
+
+				if (team.length === 1)
+					dispatch(onShowModal(TYPE_MODALS.NEW_MEMBER_MODAL));
+				else dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
 			}
 		},
 		(error) => console.error(error),
 	);
+};
 
 export const onResendInvitation = (projectId, invitationId) => (dispatch) => {
 	resendInvitation({ projectId, invitationId }).then(
@@ -85,7 +100,8 @@ export const onUpdatePermission = (
 	permissionType,
 	invitation,
 	callback,
-) =>
+	isDetailMember,
+) => (dispatch) => {
 	updatePermission({
 		projectId,
 		permissionId,
@@ -93,8 +109,11 @@ export const onUpdatePermission = (
 		invitation,
 	}).then(
 		(response) => {
-			console.log(response);
 			if (callback) callback();
+			if (isDetailMember) dispatch(setDetailMember(response.invitation));
+			dispatch(handleUpdateTeamData(response.invitation));
+			dispatch(onShowAlertSuccess({ message: 'Se actualizó la invitación' }));
 		},
 		(error) => console.error(error),
 	);
+};

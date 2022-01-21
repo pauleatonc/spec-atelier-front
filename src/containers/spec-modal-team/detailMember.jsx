@@ -12,13 +12,14 @@ import closeSource from '../../assets/images/icons/close.svg';
 import dropArrowSource from '../../assets/images/icons/primary-arrow-down.svg';
 import { CloseIcon } from '../profile-change-picture/ProfileChangePicture.styles';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import { getCheckListData } from './utils';
+import { getCheckListData, getDataForService } from './utils';
 import ProjectInfoShare from './components/ProjectInfoShare';
 import {
 	onHideModal,
 	onShowModal,
 	onDeleteUser,
 	onResendInvitation,
+	onUpdatePermission,
 } from './actions';
 import {
 	OPTIONS_PERMISSIONS,
@@ -49,6 +50,9 @@ import {
 const DetailMemberModal = ({ sections }) => {
 	const dispatch = useDispatch();
 	const { id: specID } = useParams();
+	const {
+		project: { team },
+	} = useSelector((state) => state.specDocument);
 	const [checklistData, setChecklistData] = useState(
 		getCheckListData(sections),
 	);
@@ -59,6 +63,30 @@ const DetailMemberModal = ({ sections }) => {
 	const { onClose: handleClose, onExiting: handleExiting } = useModal({
 		closeCallback: () => dispatch(onHideModal()),
 	});
+	const { isAllSelected, selectedSections, selectedItems } = getDataForService(
+		checklistData,
+	);
+
+	const isAwaiting = detailMember?.status === STATUS_INVITATIONS.WAITING;
+	const updatePermission = () => {
+		const invitation = {
+			email: detailMember?.user.email,
+			sections: selectedSections,
+			items: selectedItems,
+			all: isAllSelected,
+			ability: permission.value,
+		};
+		dispatch(
+			onUpdatePermission(
+				specID,
+				detailMember?.permission.id,
+				detailMember?.permission.type,
+				invitation,
+				null,
+				true,
+			),
+		);
+	};
 
 	const handleCancel = () => {
 		handleClose();
@@ -84,9 +112,11 @@ const DetailMemberModal = ({ sections }) => {
 					(option) => option.value === detailMember?.permission.ability,
 				),
 			);
-			setChecklistData(getCheckListData(sections, detailMember?.permission));
+			setChecklistData(
+				getCheckListData(sections, detailMember?.permission, team),
+			);
 		}
-	}, [detailMember]);
+	}, [detailMember, team]);
 
 	return (
 		<ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
@@ -97,7 +127,12 @@ const DetailMemberModal = ({ sections }) => {
 
 				{detailMember && (
 					<InfoUserContainer>
-						<IconUser user={detailMember?.user} size={100} fontSize={20} />
+						<IconUser
+							user={detailMember?.user}
+							size={100}
+							fontSize={20}
+							isAwaiting={isAwaiting}
+						/>
 						<InfoUser>
 							{detailMember?.user?.name && (
 								<ItemInfo>{detailMember?.user?.name}</ItemInfo>
@@ -144,29 +179,27 @@ const DetailMemberModal = ({ sections }) => {
 					checklistData={checklistData}
 					setChecklistData={setChecklistData}
 				/>
-				{detailMember?.user &&
-					detailMember?.status === STATUS_INVITATIONS.WAITING && (
-						<Disclaimer>
-							<IconInfo className="fas fa-info-circle" />
-							<DescDisclaimer>
-								<EmailDesc>{detailMember?.user?.email}</EmailDesc> no ha
-								aceptado aún la invitación a colaborar.{' '}
-								<ResendLabel onClick={handleResendInvitation}>
-									(Reenviar)
-								</ResendLabel>
-							</DescDisclaimer>
-						</Disclaimer>
-					)}
-				{detailMember?.user &&
-					detailMember?.status !== STATUS_INVITATIONS.WAITING && (
-						<Disclaimer>
-							<IconInfo className="fas fa-info-circle" />
-							<DescDisclaimer>
-								<EmailDesc>{detailMember?.user?.email}</EmailDesc> recibirá un
-								correo indicando los cambios realizados en los permisos.
-							</DescDisclaimer>
-						</Disclaimer>
-					)}
+				{detailMember?.user && isAwaiting && (
+					<Disclaimer>
+						<IconInfo className="fas fa-info-circle" />
+						<DescDisclaimer>
+							<EmailDesc>{detailMember?.user?.email}</EmailDesc> no ha aceptado
+							aún la invitación a colaborar.{' '}
+							<ResendLabel onClick={handleResendInvitation}>
+								(Reenviar)
+							</ResendLabel>
+						</DescDisclaimer>
+					</Disclaimer>
+				)}
+				{detailMember?.user && !isAwaiting && (
+					<Disclaimer>
+						<IconInfo className="fas fa-info-circle" />
+						<DescDisclaimer>
+							<EmailDesc>{detailMember?.user?.email}</EmailDesc> recibirá un
+							correo indicando los cambios realizados en los permisos.
+						</DescDisclaimer>
+					</Disclaimer>
+				)}
 				<ContainerButtons>
 					<Button
 						variant={VARIANTS_BUTTON.CANCEL}
@@ -178,7 +211,8 @@ const DetailMemberModal = ({ sections }) => {
 					<Button
 						variant={VARIANTS_BUTTON.PRIMARY}
 						width="120px"
-						onClick={() => console.log('guardar')}
+						onClick={updatePermission}
+						disabled={!selectedSections.length && !selectedItems.length}
 					>
 						Guardar
 					</Button>

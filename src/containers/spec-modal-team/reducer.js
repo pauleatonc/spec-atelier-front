@@ -12,8 +12,7 @@ const initialState = {
 	[TYPE_MODALS.NEW_MEMBER_MODAL]: false,
 	[TYPE_MODALS.TEAM_MODAL]: false,
 	[TYPE_MODALS.DETAIL_MEMBER_MODAL]: false,
-	showDisclaimer: false,
-	user: null,
+	nonExistentEmails: [],
 	detailMember: null,
 };
 
@@ -34,8 +33,7 @@ const reducer = (state = initialState, { payload, type }) => {
 		case CHECK_EMAIL_EXIST:
 			return {
 				...state,
-				showDisclaimer: !payload.user?.id,
-				user: payload.user,
+				nonExistentEmails: payload.emailsArray,
 			};
 		case SET_DETAIL_MEMBER:
 			return {
@@ -48,8 +46,7 @@ const reducer = (state = initialState, { payload, type }) => {
 		case HIDE_DISCLAIMER:
 			return {
 				...state,
-				showDisclaimer: false,
-				user: null,
+				nonExistentEmails: [],
 			};
 		default: {
 			return state;

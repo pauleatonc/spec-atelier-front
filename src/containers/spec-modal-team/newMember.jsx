@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 
@@ -47,12 +47,14 @@ import {
 const SpecModalNewMember = ({ sections }) => {
 	const dispatch = useDispatch();
 	const { id: projectID } = useParams();
-	const [currentCheckMail, setCurrentCheckMail] = useState('');
 	const [listEmails, setListEmails] = useState([]);
 	const [inputMailInvalid, setInputMailInvalid] = useState(false);
 	const [permission, setPermission] = useState(OPTIONS_PERMISSIONS[0]);
+	const {
+		project: { team },
+	} = useSelector((state) => state.specDocument);
 	const [checklistData, setChecklistData] = useState(
-		getCheckListData(sections),
+		getCheckListData(sections, null, team),
 	);
 	const {
 		onChange: handleMailChange,
@@ -64,9 +66,11 @@ const SpecModalNewMember = ({ sections }) => {
 		set: setMessageValue,
 		value: messageValue,
 	} = useTextarea('');
-	const { newMemberModal: show, showDisclaimer } = useSelector(
+	const { newMemberModal: show, nonExistentEmails } = useSelector(
 		(state) => state.specModalTeam,
 	);
+
+	const showDisclaimer = nonExistentEmails.length;
 
 	const { onClose: handleClose, onExiting: handleExiting } = useModal({
 		closeCallback: () => dispatch(onHideModal()),
@@ -77,20 +81,22 @@ const SpecModalNewMember = ({ sections }) => {
 		},
 	});
 
+	const { isAllSelected, selectedSections, selectedItems } = getDataForService(
+		checklistData,
+	);
+
 	const handleCancel = () => {
 		handleClose();
 		dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
 	};
 
 	const handleBlur = ({ target: { value } }) => {
-		const emailList = value.split(',');
-		if (emailList.length) {
+		const emailList = value.split(',').map((val) => val.trim());
+		if (emailList.length && value.length) {
 			if (emailList.every((email) => EMAIL_REGEX.test(email))) {
 				setListEmails(emailList);
 				setInputMailInvalid(false);
-				dispatch(checkUserEmail(emailList), (mailInvalid) =>
-					setCurrentCheckMail(mailInvalid),
-				);
+				dispatch(checkUserEmail(emailList));
 			} else {
 				setInputMailInvalid(true);
 			}
@@ -98,11 +104,6 @@ const SpecModalNewMember = ({ sections }) => {
 	};
 
 	const sendInvitation = () => {
-		const {
-			isAllSelected,
-			selectedSections,
-			selectedItems,
-		} = getDataForService(checklistData);
 		const invitation = {
 			recipients: listEmails,
 			sections: selectedSections,
@@ -114,6 +115,9 @@ const SpecModalNewMember = ({ sections }) => {
 		dispatch(sendUserInvitation(projectID, invitation));
 	};
 
+	useEffect(() => {
+		setChecklistData(getCheckListData(sections, null, team));
+	}, [team]);
 	return (
 		<ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
 			<Container>
@@ -133,7 +137,7 @@ const SpecModalNewMember = ({ sections }) => {
 							value={mailValue}
 						/>
 						{inputMailInvalid && (
-							<ErrorInput>Formato de email invalido</ErrorInput>
+							<ErrorInput>Formato de email inválido</ErrorInput>
 						)}
 					</InputMailContainer>
 					<PermissionSelectorContainer>
@@ -155,13 +159,15 @@ const SpecModalNewMember = ({ sections }) => {
 						/>
 					</PermissionSelectorContainer>
 				</SearcherContainer>
-				{showDisclaimer && (
+				{!!showDisclaimer && (
 					<Disclaimer>
 						<IconInfo className="fas fa-info-circle" />
 						<DescDisclaimer>
-							<EmailDesc>{currentCheckMail}</EmailDesc> no es parte de
-							SpecAtelier, se enviará un correo para unirse y tener acceso al
-							proyecto.
+							{showDisclaimer > 1 ? 'Los usuarios ' : 'El usuario '}{' '}
+							<EmailDesc>{nonExistentEmails.join(' y ')}</EmailDesc>
+							{showDisclaimer > 1 ? ' no son ' : ' no es '} parte de
+							SpecAtelier, se {showDisclaimer > 1 ? ' les ' : ' '} enviará un
+							correo para unirse y tener acceso al proyecto.
 						</DescDisclaimer>
 					</Disclaimer>
 				)}
@@ -192,8 +198,8 @@ const SpecModalNewMember = ({ sections }) => {
 						onClick={sendInvitation}
 						disabled={
 							!listEmails.length ||
-							/* (!isAllProject && !selectedSections.length) || */
-							inputMailInvalid
+							inputMailInvalid ||
+							(!selectedSections.length && !selectedItems.length)
 						}
 					>
 						Enviar
