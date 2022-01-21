@@ -10,7 +10,6 @@ import {
 } from './styles';
 
 const ProjectInfoShare = ({ withChecks, checklistData, setChecklistData }) => {
-	console.log(checklistData);
 	const getFlattedChildren = (node) => {
 		let flat = [node];
 		node.children.forEach((child) => {
@@ -81,6 +80,16 @@ const ProjectInfoShare = ({ withChecks, checklistData, setChecklistData }) => {
 		});
 	};
 
+	const toggleAllProject = () => {
+		setChecklistData((data) => {
+			const flat = getFlattedChildren(data);
+			flat.forEach((node) => {
+				node.isSelected = !allSelected;
+			});
+			return { ...data };
+		});
+	};
+
 	useEffect(() => {
 		const nodes = getFlattedChildren(checklistData);
 		const selected = [];
@@ -94,17 +103,7 @@ const ProjectInfoShare = ({ withChecks, checklistData, setChecklistData }) => {
 	return (
 		<Container>
 			{withChecks && (
-				<SelectAllProject
-					onClick={() => {
-						setChecklistData((data) => {
-							const flat = getFlattedChildren(data);
-							flat.forEach((node) => {
-								node.isSelected = !allSelected;
-							});
-							return { ...data };
-						});
-					}}
-				>
+				<SelectAllProject onClick={toggleAllProject}>
 					<IconCheck
 						className={allSelected ? 'fas fa-check-square' : 'far fa-square'}
 					/>

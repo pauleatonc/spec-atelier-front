@@ -43,7 +43,7 @@ export const SearcherContainer = styled.div`
 
 export const Disclaimer = styled.div`
 	display: flex;
-	justify-content: center;
+	padding-left: 10px;
 	align-items: center;
 	width: 100%;
 	height: 58px;

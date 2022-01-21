@@ -19,18 +19,19 @@ const NestedChecklist = ({
 	};
 	return (
 		<>
-			{data.map((node) => (
-				<CheckItem
-					key={node.value}
-					withChecks={withChecks}
-					node={node}
-					isAllSelected={isAllSelected}
-					toggleAllChildren={toggleAllChildren}
-					showSections={showSections}
-					handleShowSection={handleShowSection}
-					paddingItems={paddingItems}
-				/>
-			))}
+			{!!data.length &&
+				data.map((node) => (
+					<CheckItem
+						key={node.value}
+						withChecks={withChecks}
+						node={node}
+						isAllSelected={isAllSelected}
+						toggleAllChildren={toggleAllChildren}
+						showSections={showSections}
+						handleShowSection={handleShowSection}
+						paddingItems={paddingItems}
+					/>
+				))}
 		</>
 	);
 };

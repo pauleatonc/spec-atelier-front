@@ -23,3 +23,10 @@ export const Email = styled.p`
 		color: ${PUERTO_RICO};
 	}
 `;
+
+export const WaitingDisclaimer = styled.p`
+	font-family: Lato;
+	font-size: 10px;
+	margin-left: 10px;
+	opacity: 0.6;
+`;

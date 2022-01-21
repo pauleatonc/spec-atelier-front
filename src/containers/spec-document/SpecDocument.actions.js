@@ -20,6 +20,8 @@ import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 export const GET_SPEC_BLOCKS = 'GET_SPEC_BLOCKS';
 export const GET_SPEC_BLOCKS_ERROR = 'GET_SPEC_BLOCKS_ERROR';
 export const GET_SPEC_BLOCKS_SUCCESS = 'GET_SPEC_BLOCKS_SUCCESS';
+export const UPDATE_TEAM_DATA = 'UPDATE_TEAM_DATA';
+
 export const onGetSpecBlocks = (specID) => async (dispatch, getState) => {
 	dispatch(onActionCreator(GET_SPEC_BLOCKS));
 	try {
@@ -384,4 +386,17 @@ export const handleUpdateProduct = (data, tableInputType, item) => async (
 			console.error(error);
 		},
 	);
+};
+
+export const handleUpdateTeamData = (invitation) => (dispatch, getState) => {
+	const {
+		specDocument: {
+			project: { team },
+		},
+	} = getState();
+	const updatedTeamData = [
+		invitation,
+		...team.filter((member) => member.user.email !== invitation.user.email),
+	];
+	dispatch(onActionCreator(UPDATE_TEAM_DATA, { updatedTeamData }));
 };

@@ -3,11 +3,13 @@ import React from 'react';
 
 import NestedChecklist from '../NestedCheckList';
 import Collapsible from '../../../../../../components/basics/Collapsible';
+import IconUser from '../../../../../../components/IconUser';
 import arrowDownSource from '../../../../../../assets/images/icons/arrow-down.svg';
 import arrowUpSource from '../../../../../../assets/images/icons/arrow-up.svg';
 import { IconCheck } from '../../styles';
+import { STATUS_INVITATIONS } from '../../../../constants';
 
-import { ArrowIcon, ListItem } from './styles';
+import { ArrowIcon, ListItem, ContainerUsers } from './styles';
 
 const CheckItem = ({
 	withChecks,
@@ -35,19 +37,30 @@ const CheckItem = ({
 					/>
 				)}
 				<span>{node.label}</span>
-				{hasItems && (
-					<ArrowIcon
-						onClick={onHandleArrowIconClick}
-						src={isShowSection ? arrowUpSource : arrowDownSource}
-					/>
-				)}
+				<ContainerUsers>
+					{!!node?.users.length &&
+						node?.users.map((user, index) => (
+							<IconUser
+								horizontalList
+								user={user}
+								zIndex={node?.users.length - index}
+								isAwaiting={user?.status === STATUS_INVITATIONS.WAITING}
+							/>
+						))}
+					{hasItems && (
+						<ArrowIcon
+							onClick={onHandleArrowIconClick}
+							src={isShowSection ? arrowUpSource : arrowDownSource}
+						/>
+					)}
+				</ContainerUsers>
 			</ListItem>
 			{hasItems && (
 				<Collapsible show={isShowSection}>
 					<NestedChecklist
 						withChecks={withChecks}
 						data={node.children}
-						paddingItems="0 23px"
+						paddingItems="0 24px"
 						isAllSelected={isAllSelected}
 						toggleAllChildren={toggleAllChildren}
 					/>

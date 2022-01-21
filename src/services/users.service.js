@@ -17,8 +17,8 @@ export const impersonateUser = factoryService((data) =>
 	postJsonRequest(`${API_BASE_URL}/users/impersonate`, data),
 );
 
-export const checkEmail = factoryService((email) =>
-	getJsonRequest(`${API_BASE_URL}/users/check_email_exists?email=${email}`),
+export const checkEmail = factoryService((emails) =>
+	getJsonRequest(`${API_BASE_URL}/users/check_email_exists${emails}`),
 );
 
 export const inviteUserToProject = factoryService(({ projectID, params }) => {
@@ -33,13 +33,16 @@ export const inviteUserToProject = factoryService(({ projectID, params }) => {
 
 export const updatePermission = factoryService(
 	({ projectId, permissionId, permissionType, invitation }) => {
+		const body = {
+			invitation,
+		};
 		return patchJsonRequest(
 			`${API_BASE_URL}/projects/${projectId}/${
 				permissionType === PERMISSIONS_TYPE.INVITATION
 					? 'invitations'
 					: 'permissions'
 			}/${permissionId}`,
-			invitation,
+			body,
 		);
 	},
 );

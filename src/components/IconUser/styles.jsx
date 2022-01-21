@@ -1,21 +1,23 @@
 import styled from 'styled-components';
-import { PUERTO_RICO } from '../../config/constants/styled-vars';
+import {
+	COLOR_WHITE,
+	COLOR_DARKGREY,
+	COLOR_LIGHTGREY,
+} from '../../config/constants/styled-vars';
 
-export const Container = styled.section`
-	align-items: center;
-	background-color: #757575;
+export const Container = styled.div`
+	background-color: ${({ isAwaiting = false }) =>
+		isAwaiting ? COLOR_LIGHTGREY : COLOR_DARKGREY};
 	border-radius: ${({ size = 24 }) => `${size / 2}px`};
 	display: flex;
+	align-items: center;
 	justify-content: center;
 	height: ${({ size = 24 }) => `${size}px`};
 	width: ${({ size = 24 }) => `${size}px`};
 	z-index: ${({ zIndex = 1 }) => `${zIndex}`};
 	margin-left: ${({ horizontalList }) => (horizontalList ? `-5px` : `0`)};
-
-	:nth-child(odd) {
-		background-color: ${({ horizontalList }) =>
-			horizontalList && `${PUERTO_RICO}`};
-	}
+	opacity: 
+	border: 0.5px solid ${COLOR_WHITE};
 `;
 
 export const ImageProfile = styled.img`
@@ -24,8 +26,10 @@ export const ImageProfile = styled.img`
 	border-radius: ${({ size = 24 }) => `${size / 2}px`};
 `;
 
-export const LetterNameUser = styled.p`
+export const LetterNameUser = styled.span`
 	color: #ffffff;
-	font-family: Lato;
 	font-size: ${({ fontSize = 12 }) => `${fontSize}px`};
+	text-align: center;
+	margin-right: -1px;
+	line-height: 24px;
 `;

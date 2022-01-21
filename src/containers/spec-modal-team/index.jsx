@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Button } from '../../components/SpecComponents';
@@ -30,16 +30,15 @@ import {
 const SpecModalTeam = ({ sections }) => {
 	const dispatch = useDispatch();
 	const { teamModal: show } = useSelector((state) => state.specModalTeam);
+	const {
+		project: { team },
+	} = useSelector((state) => state.specDocument);
 	const [checklistData, setChecklistData] = useState(
-		getCheckListData(sections),
+		getCheckListData(sections, null, team),
 	);
 	const { onClose: handleClose, onExiting: handleExiting } = useModal({
 		closeCallback: () => dispatch(onHideModal()),
 	});
-	const {
-		project: { team },
-	} = useSelector((state) => state.specDocument);
-
 	const showNewMemberModal = () => {
 		dispatch(onHideModal());
 		dispatch(onShowModal(TYPE_MODALS.NEW_MEMBER_MODAL));
@@ -48,6 +47,10 @@ const SpecModalTeam = ({ sections }) => {
 	const handleClickMember = (member) => {
 		dispatch(setDetailMember(member));
 	};
+
+	useEffect(() => {
+		setChecklistData(getCheckListData(sections, null, team));
+	}, [team]);
 
 	return (
 		<ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>

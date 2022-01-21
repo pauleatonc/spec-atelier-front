@@ -2,13 +2,21 @@ import React from 'react';
 
 import { Container, ImageProfile, LetterNameUser } from './styles';
 
-const IconUser = ({ user, size, fontSize, zIndex, horizontalList }) => {
+const IconUser = ({
+	user,
+	size,
+	fontSize,
+	zIndex,
+	horizontalList,
+	isAwaiting,
+}) => {
 	return (
 		<Container
 			size={size}
 			fontSize={fontSize}
 			zIndex={zIndex}
 			horizontalList={horizontalList}
+			isAwaiting={isAwaiting}
 		>
 			{user.profile_image ? (
 				<ImageProfile
@@ -21,7 +29,9 @@ const IconUser = ({ user, size, fontSize, zIndex, horizontalList }) => {
 				/>
 			) : (
 				<LetterNameUser fontSize={fontSize}>
-					{user.name ? user.name.charAt(0) : user.email.charAt(0)}
+					{user.name
+						? user.name.charAt(0).toUpperCase()
+						: user.email.charAt(0).toUpperCase()}
 				</LetterNameUser>
 			)}
 		</Container>

@@ -7,15 +7,16 @@ export const TYPE_MODALS = {
 export const OPTIONS_PERMISSIONS = [
 	{
 		id: 'write',
-		label: 'Editar EETT',
+		label: 'Editar ET',
 		value: 'write',
-		tooltip: 'El usuario puede ver y editar la sección compartida.',
+		tooltip: 'El usuario puede ver y editar las secciónes compartidas.',
 	},
 	{
 		id: 'watch',
-		label: 'Ver EETT',
+		label: 'Ver ET',
 		value: 'watch',
-		tooltip: 'El usuario puede ver la sección compartida pero no editar.',
+		tooltip:
+			'El usuario puede ver las secciónes compartidas pero no editarlas.',
 	},
 ];
 
