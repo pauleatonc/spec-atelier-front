@@ -7,27 +7,29 @@ import cancellationSingleton from './cancellation';
 /**
  * Factory to create a wrapper to call services.
  */
-export const factoryService = (callback) => {
+export const factoryService = (callback, isStatus) => {
 	const cancellation = cancellationSingleton();
 
 	return (serviceArgs, actionType = null) => {
 		setTimeout(() => cancellation.register(actionType), 0);
 
 		return callback(serviceArgs)
-		.then(({ response, status }) => {
-			if(status === 401) {
-				const responseStatus = getLocalStorage('responseStatus');
-				if(!responseStatus) {
-					setLocalStorage({ key: 'responseStatus', value: '401' });
-					redirectToProjectsWhenIsLogin();
-				}
+			.then(({ response, status }) => {
+				if (status === 401) {
+					const responseStatus = getLocalStorage('responseStatus');
+					if (!responseStatus) {
+						setLocalStorage({ key: 'responseStatus', value: '401' });
+						redirectToProjectsWhenIsLogin();
+					}
 
-			} 
-			return response;
-		})
-		.catch((error) => {
-			throw error.toString();
-		});
+				}
+				return isStatus ? { ...response, codeStatus: status, resp: response } : response;
+			})
+			.catch((error, status) => {
+			
+				if (isStatus) {throw status}
+				if (!isStatus) {throw error.toString();}
+			});
 	};
 };
 
@@ -80,11 +82,11 @@ export const cleanObjectsAndArrays = (obj = {}) =>
 		if (Array.isArray(value))
 			return value.length
 				? {
-						...acc,
-						[`${key}[]`]: value
-							.map((data) => (data?.id ? data.id : data))
-							.join(`&${key}[]=`),
-				  }
+					...acc,
+					[`${key}[]`]: value
+						.map((data) => (data?.id ? data.id : data))
+						.join(`&${key}[]=`),
+				}
 				: acc;
 		return { ...acc, [key]: value };
 	}, {});

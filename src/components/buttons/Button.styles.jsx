@@ -4,6 +4,7 @@ import {
 	COLOR_WHITE,
 	COLOR_PRIMARY,
 	COLOR_SECONDARY,
+	COLOR_SILVER_CHALICE,
 } from '../../config/constants/styled-vars';
 
 const BaseButton = styled.button`
@@ -88,4 +89,9 @@ export const CancelSecondaryButton = styled(BaseButton)`
 	background-color: transparent;
 	border: 1px solid transparent;
 	color: ${COLOR_SECONDARY};
+`;
+export const CancelNotificationButton = styled(BaseButton)`
+	background-color: transparent;
+	border: 2px solid ${COLOR_SILVER_CHALICE};
+	color: ${COLOR_SILVER_CHALICE};
 `;

@@ -11,6 +11,12 @@ import {
 	NEW_PASSWORD,
 	NEW_PASSWORD_ERROR,
 	CLEAR_IMPERSONATED,
+	ACCEPT_NOTIFICATION_GOOGLE,
+	ACCEPT_NOTIFICATION_LOGIN,
+	ACCEPT_NOTIFICATION_ERROR,
+	REJECT_NOTIFICATION_GOOGLE,
+	REJECT_NOTIFICATION_ERROR,
+	CLEAR_ACCEPT_ACTION,
 } from './auth.actions';
 
 export const initialState = {
@@ -21,6 +27,8 @@ export const initialState = {
 	status: false,
 	isAutoLogout: false,
 	impersonated: false,
+	acceptAction: false,
+	isReject: false,
 };
 
 const authReducer = (state = initialState, action = {}) => {
@@ -102,6 +110,20 @@ const authReducer = (state = initialState, action = {}) => {
 				status: false,
 				error: action.payload.error,
 			};
+		case ACCEPT_NOTIFICATION_GOOGLE:
+			return { ...state, acceptAction: true, };
+		case ACCEPT_NOTIFICATION_LOGIN:
+			return { ...state };
+		case ACCEPT_NOTIFICATION_ERROR: {
+			return { ...state, error: 'Accept' };
+		}
+		case REJECT_NOTIFICATION_GOOGLE:
+			return { ...state, isReject: true, }
+		case REJECT_NOTIFICATION_ERROR: {
+			return { ...state, error: 'Reject' };
+		}
+		case CLEAR_ACCEPT_ACTION:
+			return { ...state, acceptAction: false }
 		default:
 			return state;
 	}

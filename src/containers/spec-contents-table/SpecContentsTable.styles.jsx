@@ -114,7 +114,6 @@ export const TableThead = styled.thead`
 `;
 export const TableTbody = styled.tbody`
 	width: 2px;
-	height: 46px;
 	text-align: left;
 `;
 

@@ -62,7 +62,7 @@ const SpecContentsTable = () => {
 	const handleDownloadTableClick = () =>
 		dispatch(downloadBudgetDocument({ specID: id }));
 
-	const totalProducts = quoteTable.reduce((a, b) => (a += b.subtotal), 0);
+	const totalProducts = quoteTable.reduce((a, b) => a + b.subtotal, 0);
 
 	const handleOnBlurInput = (tableInputType, inputValue, row) => {
 		const body = {
@@ -143,15 +143,8 @@ const SpecContentsTable = () => {
 				),
 				Cell: ({ row }) => {
 					switch (row?.original?.type) {
-						case 'Section':
-							return (
-								<IconExpan
-									{...row.getToggleRowExpandedProps()}
-									className={`fas fa-chevron-${row.isExpanded ? 'up' : 'down'}`}
-								/>
-							);
-
 						case 'Item':
+						case 'Section':
 							return (
 								<IconExpan
 									{...row.getToggleRowExpandedProps()}
@@ -190,16 +183,25 @@ const SpecContentsTable = () => {
 		},
 		useExpanded,
 	);
-	const dataExpanded = JSON.stringify({ expanded: expanded }, null, 2);
+	const dataExpanded = JSON.stringify({ expanded }, null, 2);
 	const expandedJSON = JSON.parse(dataExpanded);
 	const arrayExpandeJSON = Object.values(expandedJSON.expanded);
 	const lenghtArray = arrayExpandeJSON.length;
 	const totalExpander =
 		totalExpandManual[0].length + totalExpandManual[1].length;
-	if (lenghtArray == totalExpander) {
+	if (lenghtArray === totalExpander && lenghtArray !== 0) {
 		setToggleExpanded(!toggleExpanded);
 		expandAll.click();
 	}
+	const expandOrShrink = () => {
+		let text;
+		if (toggleExpanded) {
+			text = 'Contraer';
+		} else {
+			text = lenghtArray === totalExpander ? 'Contraer' : 'Expandir';
+		}
+		return `${text} filas`;
+	};
 
 	return (
 		<Root>
@@ -209,13 +211,7 @@ const SpecContentsTable = () => {
 						<Header colSpan="7">
 							<Title>Itemizado y presupuesto: {project.name}</Title>
 							<ButtonsHeader>
-								<Button onClick={allExpand}>{`${
-									toggleExpanded
-										? 'Contraer'
-										: lenghtArray == totalExpander
-										? 'Contraer'
-										: 'Expandir'
-								} filas`}</Button>
+								<Button onClick={allExpand}>{expandOrShrink()}</Button>
 								<Button
 									title="Descargar presupuesto"
 									onClick={handleDownloadTableClick}

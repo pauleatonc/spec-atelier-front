@@ -1,5 +1,5 @@
 import { API_BASE, API_BASE_URL } from '../config/constants/environment';
-import { postJsonRequest, putJsonRequest, getJsonRequest } from '../modules/requests';
+import { postJsonRequest, putJsonRequest, getJsonRequest, patchJsonRequest } from '../modules/requests';
 import { factoryService } from '../modules/services';
 
 /**
@@ -35,3 +35,15 @@ export const recoveryPassword = factoryService(email => getJsonRequest(`${API_BA
  *  */
 
 export const newPassword = factoryService(({ token, password }) => getJsonRequest(`${API_BASE_URL}/password_reset?token=${token}&password=${password}`));
+
+export const acceptNotification = factoryService((body) =>
+	patchJsonRequest(
+		`${API_BASE_URL}/projects/${body.Idproject}/invitations/${body.idNoti}/accept`,
+	),true,
+);
+
+export const rejectNotification = factoryService((body) =>
+	patchJsonRequest(
+		`${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/refuse`,
+	),true,
+);

@@ -12,6 +12,7 @@ import ProjectsNoneContainer from '../containers/projects-list/ProjectsNone.cont
 import HEADER_IMG from '../assets/images/project/project_background_header.png';
 
 import { Container, Content } from './Projects.styles';
+import AlertContainer from '../containers/alert/Alert.container';
 
 const Projects = () => {
   return (
@@ -30,6 +31,7 @@ const Projects = () => {
           <ProjectsSeeMoreButtonContainer />
         </Content>
       </Container>
+      <AlertContainer />
     </AppLayout>
   );
 };

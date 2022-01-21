@@ -16,7 +16,6 @@ export const Container = styled.div`
 	width: ${({ size = 24 }) => `${size}px`};
 	z-index: ${({ zIndex = 1 }) => `${zIndex}`};
 	margin-left: ${({ horizontalList }) => (horizontalList ? `-5px` : `0`)};
-	opacity: 
 	border: 0.5px solid ${COLOR_WHITE};
 `;
 

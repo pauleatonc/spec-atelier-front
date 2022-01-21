@@ -1,5 +1,6 @@
 import onActionCreator from '../../config/store/helpers';
-import { downloadSpec, downloadBudged } from '../../services/specs.service';
+import { downloadSpec, downloadBudged, getNotificationsList, updateNotificationsWatch, acceptNotification, rejectNotification, undoRejectNotification } from '../../services/specs.service';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 export const LOADING_SPEC_DOWNLOAD = 'LOADING_SPEC_DOWNLOAD';
 export const DOWNLOAD_URL_SUCCESS = 'DOWNLOAD_URL_SUCCESS';
@@ -8,6 +9,21 @@ export const CLEAN_DOWNLOAD = 'CLEAN_DOWNLOAD';
 export const LOADING_BUDGET_DOWNLOAD = 'LOADING_BUDGET_DOWNLOAD';
 export const DOWNLOAD_BUDGET_SUCCESS = 'DOWNLOAD_BUDGET_SUCCESS';
 export const DOWNLOAD_BUDGET_ERROR = 'DOWNLOAD_BUDGET_ERROR';
+export const GET_NOTIFICATIONS = 'GET_NOTIFICATIONS';
+export const GET_NOTIFICATIONS_ERROR = 'GET_NOTIFICATIONS_ERROR';
+export const INITIAL_NOTI = 'INITIAL_NOTI';
+export const INITIAL_NOTI_ERROR = 'INITIAL_NOTI_ERROR';
+export const WATCH_NOTIFICATIONS = 'WATCH_NOTIFICATIONS';
+export const WATCH_NOTIFICATIONS_ERROR = 'WATCH_NOTIFICATIONS_ERROR';
+export const ACCEPT_NOTIFICATION = 'ACCEPT_NOTIFICATION';
+export const ACCEPT_NOTIFICATION_ERROR = 'ACCEPT_NOTIFICATION_ERROR';
+export const REJECT_NOTIFICATION = 'REJECT_NOTIFICATION';
+export const REJECT_NOTIFICATION_ERROR = 'REJECT_NOTIFICATION_ERROR';
+export const UNDO_REJECT_NOTIFICATION = 'UNDO_REJECT_NOTIFICATION';
+export const UNDO_REJECT_NOTIFICATION_ERROR = 'UNDO_REJECT_NOTIFICATION_ERROR';
+export const NOTIFICATION_SUCCESS = 'NOTIFICATION_SUCCESS';
+export const STOP_NOTIFICATIONS = 'STOP_NOTIFICATIONS';
+export const UNDO_STOP_NOTIFICATIONS = 'UNDO_STOP_NOTIFICATIONS';
 
 const startDownload = (file, fileName) => {
 	const url = window.URL.createObjectURL(file);
@@ -57,3 +73,254 @@ export const downloadBudgetDocument = ({ specID }) => (dispatch, getState) => {
 		},
 	);
 };
+
+export const getNotifications = () => async (dispatch, getState) => {
+	const { auth } = getState();
+	try {
+		const response = await getNotificationsList(auth.user?.id);
+		dispatch(onActionCreator(GET_NOTIFICATIONS, response));
+		return response;
+	} catch (error) {
+		return dispatch(onActionCreator(GET_NOTIFICATIONS_ERROR, {
+			error: true,
+		}));
+	}
+}
+
+
+export const watchNotifications = (body) => async (dispatch) => {
+	updateNotificationsWatch(body).then((response) => {
+		dispatch(onActionCreator(WATCH_NOTIFICATIONS, response));
+	}, (error) => {
+		dispatch(onActionCreator(WATCH_NOTIFICATIONS_ERROR, {
+			error
+		}))
+	})
+}
+
+export const acceptNotificationsAC = (body) => async (dispatch) => {
+	dispatch(onActionCreator(ACCEPT_NOTIFICATION));	
+	return acceptNotification(body).then((response) => {
+		const {resp, codeStatus} = response;
+		if(codeStatus !== 401 && response.codeStatus !== 404 && response.codeStatus !== 500 && response.codeStatus !== 200){
+			dispatch(
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
+			);
+		}
+		if(codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
+			);
+		}
+		if(codeStatus === 403){
+			resp.then((data) => {
+				dispatch(
+					onShowAlertSuccess({ message: data.error}),
+				);
+			})
+		}
+		if(codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
+			);
+		}
+		if(codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Error interno' }),
+			);
+		}
+		if(codeStatus === 200){
+			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		}
+		return response;
+	}, (error) => {
+		dispatch(
+			onShowAlertSuccess({ message: 'Error al aceptar proyecto.' }),
+		);
+		dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
+			error
+		}))
+	})
+}
+
+export const rejectNotifications = (body) => async (dispatch) => {
+	dispatch(onActionCreator(REJECT_NOTIFICATION));
+	return rejectNotification(body).then((response) => {
+		const {resp, codeStatus} = response;
+		if(codeStatus === 304){
+			dispatch(
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
+			);
+		}
+		if(response.codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
+			);
+		}
+		if(codeStatus === 403){
+			resp.then((data) => {
+				dispatch(
+					onShowAlertSuccess({ message: data.error}),
+				);
+			})
+		}
+		if(codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
+			);
+		}
+		if(codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Error interno' }),
+			);
+		}
+		if(codeStatus === 200){
+			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		}
+		return response;
+	}, (error) => {
+		dispatch(
+			onShowAlertSuccess({ message: 'Error al rechazar proyecto.' }),
+		);
+		dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
+			error
+		}))
+	})
+}
+
+export const undoRejectNotifications = (body) => async (dispatch) => {
+	dispatch(onActionCreator(UNDO_REJECT_NOTIFICATION));
+	return undoRejectNotification(body).then((response) => {
+		const {resp, codeStatus} = response;
+		if(codeStatus === 304){
+			dispatch(
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
+			);
+		}
+		if(codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
+			);
+		}
+		if(codeStatus === 403){
+			resp.then((data) => {
+				dispatch(
+					onShowAlertSuccess({ message: data.error}),
+				);
+			})
+		}
+		if(codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
+			);
+		}
+		if(codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Error interno' }),
+			);
+		}
+		if(codeStatus === 200){
+			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		}
+		return response;
+
+	}, (error) => {
+		dispatch(
+			onShowAlertSuccess({ message: 'Error al deshacer proyecto.' }),
+		);
+		dispatch(onActionCreator(UNDO_REJECT_NOTIFICATION_ERROR, {
+			error
+		}))
+	})
+}
+
+export const stopGetNotifications = () => async (dispatch) => {
+	dispatch(onActionCreator(STOP_NOTIFICATIONS));
+}
+
+export const undoStopGetNotifications = () => async (dispatch) => {
+	dispatch(onActionCreator(UNDO_STOP_NOTIFICATIONS));
+}
+
+
+export const acceptNotificationsAC2 = (body) => async (dispatch) => {
+	acceptNotification(body).then((response) => {
+		const {resp, codeStatus} = response;
+		if(codeStatus === 304){
+			dispatch(
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
+			);
+		}
+		if(codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
+			);
+		}
+		if(codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
+			);
+		}
+		if(codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Error interno' }),
+			);
+		}
+		if(codeStatus === 200){
+			resp.then((data) => {
+				dispatch(
+					onShowAlertSuccess({ message: data.message }),
+				);
+			})
+			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		}
+	}, (error) => {
+	  dispatch(
+		onShowAlertSuccess({ message: 'Error al aceptar proyecto.' }),
+	  );
+	  dispatch(onActionCreator(ACCEPT_NOTIFICATION_ERROR, {
+		error
+	  }))
+	})
+}
+  
+export const rejectNotificationsAC = (body) => async (dispatch) => {
+	rejectNotification(body).then((response) => {
+	  const {resp, codeStatus} = response;
+	  	if(codeStatus === 304){
+			dispatch(
+				onShowAlertSuccess({ message: 'La invitación no pudo ser modificada' }),
+			);
+		}
+	  	if(codeStatus === 401){
+			dispatch(
+				onShowAlertSuccess({ message: 'Sesión no encontrada' }),
+			);
+		}
+		if(codeStatus === 404){
+			dispatch(
+				onShowAlertSuccess({ message: 'Función no encontrada' }),
+			);
+		}
+	  	if(codeStatus === 500){
+			dispatch(
+				onShowAlertSuccess({ message: 'Error interno' }),
+			);
+		}
+		if(codeStatus === 200){
+			resp.then((data) => {
+				dispatch(
+					onShowAlertSuccess({ message: data.message }),
+				);
+				})
+			dispatch(onActionCreator(NOTIFICATION_SUCCESS, response));
+		}
+	}, (error) => {
+	  dispatch(
+		onShowAlertSuccess({ message: 'Error al rechazar proyecto.' }),
+	  );
+	  dispatch(onActionCreator(REJECT_NOTIFICATION_ERROR, {
+		error
+	  }))
+	})
+}

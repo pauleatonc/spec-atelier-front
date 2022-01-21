@@ -40,7 +40,7 @@ export const addSpecBlockText = factoryService(
 );
 
 /**
- * Delete a block from the spec.
+ * Delete the image of the given block.
  */
 export const deleteSpecBlock = factoryService(({ block, specID, userID }) => {
 	return deleteJsonRequest(
@@ -48,17 +48,6 @@ export const deleteSpecBlock = factoryService(({ block, specID, userID }) => {
 		{ block },
 	);
 });
-
-/**
- * Delete the image of the given block.
- */
-export const deleteSpecBlockImage = factoryService(
-	({ blockID, specID, userID }) =>
-		patchJsonRequest(
-			`${API_BASE_URL}/users/${userID}/project_specs/${specID}/remove_product_image`,
-			{ block: blockID },
-		),
-);
 
 /**
  * Delete the given block's text.
@@ -165,4 +154,41 @@ export const updateProduct = factoryService((body) =>
 
 export const sendQuote = factoryService((body) =>
 	postJsonRequest(`${API_BASE_URL}/products/${body.id}/quote`, body.data),
+);
+
+export const getNotificationsList = factoryService((id) =>
+	getJsonRequest(
+		`${API_BASE_URL}/users/${id}/notifications?permissions=true&limit=10`,
+	),
+);
+
+export const updateNotificationsWatch = factoryService((body) =>
+	patchJsonRequest(
+		`${API_BASE_URL}/users/${body.idUser}/notifications/mark_as_watched?limit=10`,
+		{ notifications: body.notifications },
+	),
+);
+
+export const acceptNotification = factoryService(
+	(body) =>
+		patchJsonRequest(
+			`${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/accept`,
+		),
+	true,
+);
+
+export const rejectNotification = factoryService(
+	(body) =>
+		patchJsonRequest(
+			`${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/refuse`,
+		),
+	true,
+);
+
+export const undoRejectNotification = factoryService(
+	(body) =>
+		patchJsonRequest(
+			`${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/refused_undo`,
+		),
+	true,
 );

@@ -9,7 +9,7 @@ import { Button } from '../SpecComponents';
 import { Text } from './ButtonGoogle.styles';
 
 const ButtonGoogleLogin = (props) => {
-	const { label } = props;
+	const { label, action, id, project_id } = props;
 	const dispatch = useDispatch();
 	const responseSuccess = (googleResponse) => {
 		const user = {
@@ -20,6 +20,7 @@ const ButtonGoogleLogin = (props) => {
 				google_token: googleResponse?.accessToken,
 				profile_image: googleResponse?.profileObj?.imageUrl,
 			},
+			action: { idNoti: id, Idproject: project_id, actionUrl: action }
 		};
 		dispatch(googleLoginAction(user));
 	};
