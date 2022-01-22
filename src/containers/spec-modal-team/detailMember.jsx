@@ -151,7 +151,6 @@ const DetailMemberModal = ({ sections }) => {
 								showIconInfo
 								maxHeight="180px"
 								options={OPTIONS_PERMISSIONS}
-								placeholder="HOLA"
 								value={permission.id}
 								onChange={setPermission}
 								renderInput={
