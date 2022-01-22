@@ -4,6 +4,7 @@ import {
 	COLOR_WHITE,
 	COLOR_MINE_SHAFT,
 	MEDIA_QUERY_SMALL,
+	COLOR_WHITE_SMOKE,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -77,7 +78,7 @@ export const ListItem = styled.a`
 	margin-bottom: 5px;
 
 	&:hover {
-		background-color: rgba(235, 234, 234, 0.5);
+		background-color: ${COLOR_WHITE_SMOKE};
 	}
 `;
 

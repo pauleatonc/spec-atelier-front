@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR_WHITE_SMOKE } from '../../../../../../config/constants/styled-vars';
 
 export const ListItem = styled.div`
 	width: 100%;
@@ -11,7 +12,7 @@ export const ListItem = styled.div`
 	padding: ${({ padding }) => padding || '0'};
 
 	&:hover {
-		background-color: rgba(235, 234, 234, 0.5);
+		background-color: ${COLOR_WHITE_SMOKE};
 	}
 
 	& span {
