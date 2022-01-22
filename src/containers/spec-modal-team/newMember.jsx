@@ -87,7 +87,7 @@ const SpecModalNewMember = ({ sections }) => {
 
 	const handleCancel = () => {
 		handleClose();
-		dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
+		if (team.length) dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
 	};
 
 	const handleBlur = ({ target: { value } }) => {

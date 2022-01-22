@@ -13,7 +13,7 @@ import {
 } from '../../services/users.service';
 import { cleanObjectsAndArrays, formatParams } from '../../modules/services';
 
-import { TYPE_MODALS } from './constants';
+import { TYPE_MODALS, PERMISSIONS_TYPE } from './constants';
 
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
@@ -102,16 +102,21 @@ export const onUpdatePermission = (
 	callback,
 	isDetailMember,
 ) => (dispatch) => {
+	const type =
+		permissionType === PERMISSIONS_TYPE.INVITATION
+			? 'invitation'
+			: 'permission';
 	updatePermission({
 		projectId,
 		permissionId,
 		permissionType,
 		invitation,
+		type,
 	}).then(
 		(response) => {
 			if (callback) callback();
-			if (isDetailMember) dispatch(setDetailMember(response.invitation));
-			dispatch(handleUpdateTeamData(response.invitation));
+			if (isDetailMember) dispatch(setDetailMember(response[type]));
+			dispatch(handleUpdateTeamData(response[type]));
 			dispatch(onShowAlertSuccess({ message: 'Se actualizó la invitación' }));
 		},
 		(error) => console.error(error),
