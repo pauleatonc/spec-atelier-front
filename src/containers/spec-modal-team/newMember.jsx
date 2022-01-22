@@ -163,7 +163,7 @@ const SpecModalNewMember = ({ sections }) => {
 					<Disclaimer>
 						<IconInfo className="fas fa-info-circle" />
 						<DescDisclaimer>
-							{showDisclaimer > 1 ? 'Los usuarios ' : 'El usuario '}{' '}
+							{showDisclaimer > 1 ? 'Los usuarios ' : 'El usuario '}
 							<EmailDesc>{nonExistentEmails.join(' y ')}</EmailDesc>
 							{showDisclaimer > 1 ? ' no son ' : ' no es '} parte de
 							SpecAtelier, se {showDisclaimer > 1 ? ' les ' : ' '} enviará un
