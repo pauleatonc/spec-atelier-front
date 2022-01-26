@@ -109,7 +109,6 @@ export const onUpdatePermission = (
 	updatePermission({
 		projectId,
 		permissionId,
-		permissionType,
 		invitation,
 		type,
 	}).then(
