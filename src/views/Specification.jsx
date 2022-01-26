@@ -97,13 +97,13 @@ const Specification = () => {
 			<SpecImagesModalContainer />
 			<AlertContainer />
 			<SpecModalProduct />
-			{!!sections.length && (
+			{!!sections.length && 
 				<>
 					<SpecModalTeam sections={sections} />
 					<SpecModalTeamNewMember sections={sections} />
 					<DetailMemberModal sections={sections} />
 				</>
-			)}
+			}
 			<ContactFormContainer type="product" />
 		</>
 	);
