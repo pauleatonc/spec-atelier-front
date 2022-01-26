@@ -10,7 +10,7 @@ import { CloseIcon } from '../profile-change-picture/ProfileChangePicture.styles
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
 import ProjectInfoShare from './components/ProjectInfoShare';
-import UserTeamMail from './components/UserTeamMail';
+import UserTeamEmail from './components/UserTeamEmail';
 import { onHideModal, onShowModal, setDetailMember } from './actions';
 import { TYPE_MODALS } from './constants';
 import { getCheckListData } from './utils';
@@ -62,7 +62,7 @@ const SpecModalTeam = ({ sections }) => {
 				{team && (
 					<ContainerTeam>
 						{team.map((member) => (
-							<UserTeamMail
+							<UserTeamEmail
 								key={`${member?.permission?.id}-${member?.user?.email}-${member?.user?.id}`}
 								member={member}
 								onClick={handleClickMember}

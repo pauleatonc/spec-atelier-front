@@ -6,17 +6,17 @@ import IconUser from '../../../../components/IconUser';
 import SelectorRelative from '../../../../components/basics/SelectorRelative';
 import dropArrowSource from '../../../../assets/images/icons/primary-arrow-down.svg';
 
-import { PermisionLabel, IconArrowDown } from '../../styles';
+import { PermissionLabel, IconArrowDown } from '../../styles';
 import { OPTIONS_PERMISSIONS, STATUS_INVITATIONS } from '../../constants';
 import { onUpdatePermission } from '../../actions';
 
 import { Container, ContainerMail, Email, WaitingDisclaimer } from './styles';
 
-const UserTeamMail = ({ member, onClick }) => {
+const UserTeamEmail = ({ member, onClick }) => {
 	const { id: specID } = useParams();
 	const dispatch = useDispatch();
 	const { user, permission: memberPermission, status } = member;
-	const isAwaiting = status === STATUS_INVITATIONS.WAITING;
+	const waiting = status === STATUS_INVITATIONS.WAITING;
 	const [permission, setPermission] = useState(
 		OPTIONS_PERMISSIONS.find(
 			(option) => option.value === memberPermission.ability,
@@ -48,9 +48,9 @@ const UserTeamMail = ({ member, onClick }) => {
 	return (
 		<Container>
 			<ContainerMail onClick={() => onClick(member)}>
-				<IconUser user={user} isAwaiting={isAwaiting} />
+				<IconUser user={user} waiting={waiting} />
 				<Email>{user.email}</Email>
-				{isAwaiting && (
+				{waiting && (
 					<WaitingDisclaimer>
 						(no ha aceptado aún la invitación a colaborar.)
 					</WaitingDisclaimer>
@@ -59,17 +59,17 @@ const UserTeamMail = ({ member, onClick }) => {
 			<div>
 				<SelectorRelative
 					name="sort"
+					right
 					hoverPrimaryColor
 					showIconInfo
 					maxHeight="180px"
 					options={OPTIONS_PERMISSIONS}
-					placeholder="HOLA"
 					value={permission.id}
 					onChange={updatePermission}
 					renderInput={
 						<>
-							<PermisionLabel>{permission.label}</PermisionLabel>
-							<IconArrowDown alt="" src={dropArrowSource} />
+							<PermissionLabel>{permission.label}</PermissionLabel>
+							<IconArrowDown alt="icon arrow down" src={dropArrowSource} />
 						</>
 					}
 				/>
@@ -78,4 +78,4 @@ const UserTeamMail = ({ member, onClick }) => {
 	);
 };
 
-export default UserTeamMail;
+export default UserTeamEmail;

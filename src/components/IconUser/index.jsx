@@ -8,7 +8,7 @@ const IconUser = ({
 	fontSize,
 	zIndex,
 	horizontalList,
-	isAwaiting,
+	waiting,
 }) => {
 	return (
 		<Container
@@ -16,7 +16,7 @@ const IconUser = ({
 			fontSize={fontSize}
 			zIndex={zIndex}
 			horizontalList={horizontalList}
-			isAwaiting={isAwaiting}
+			waiting={waiting}
 		>
 			{user.profile_image ? (
 				<ImageProfile

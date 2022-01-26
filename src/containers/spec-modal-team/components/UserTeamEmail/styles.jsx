@@ -24,7 +24,7 @@ export const Email = styled.p`
 	}
 `;
 
-export const WaitingDisclaimer = styled.p`
+export const WaitingDisclaimer = styled.small`
 	font-family: Lato;
 	font-size: 10px;
 	margin-left: 10px;

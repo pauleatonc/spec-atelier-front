@@ -107,7 +107,7 @@ export const PermissionSelectorContainer = styled.div`
 	flex: 1;
 `;
 
-export const PermisionLabel = styled.p`
+export const PermissionLabel = styled.p`
 	font-family: Lato;
 	font-size: ${({ fontSize = 12 }) => `${fontSize}px`};
 	font-weight: bold;
