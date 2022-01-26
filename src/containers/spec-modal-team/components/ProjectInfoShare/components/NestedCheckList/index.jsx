@@ -22,7 +22,7 @@ const NestedChecklist = ({
 			{!!data.length &&
 				data.map((node) => (
 					<CheckItem
-						key={node.value}
+						key={`${node.label}-${node.value}`}
 						withChecks={withChecks}
 						node={node}
 						isAllSelected={isAllSelected}
