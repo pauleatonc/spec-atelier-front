@@ -25,32 +25,30 @@ const getUsersSection = (usersData, section, item) => {
 	return users;
 };
 
-export const getCheckListData = (sections, permission, usersData) => {
-	return {
-		label: 'root',
-		value: 'root',
-		isSelected: permission ? permission?.all : false,
-		children: sections.map((section) => ({
-			label: section.element.name,
-			value: section.element.id,
-			users: usersData ? getUsersSection(usersData, section) : [],
+export const getCheckListData = (sections, permission, usersData) => ({
+	label: 'root',
+	value: 'root',
+	isSelected: permission ? permission?.all : false,
+	children: sections.map((section) => ({
+		label: section.element.name,
+		value: section.element.id,
+		users: usersData ? getUsersSection(usersData, section) : [],
+		isSelected: permission?.sections.length
+			? permission.sections.some((sec) => sec.id === section.element.id)
+			: false,
+		children: section.items.map((item) => ({
+			label: item.element.name,
+			value: item.element.id,
+			users: usersData ? getUsersSection(usersData, section, item) : [],
 			isSelected: permission?.sections.length
-				? permission.sections.some((sec) => sec.id === section.element.id)
+				? permission.sections
+						.find((sec) => sec.id === section.element.id)
+						?.items.some((itm) => itm.id === item.element.id)
 				: false,
-			children: section.items.map((item) => ({
-				label: item.element.name,
-				value: item.element.id,
-				users: usersData ? getUsersSection(usersData, section, item) : [],
-				isSelected: permission?.sections.length
-					? permission.sections
-							.find((sec) => sec.id === section.element.id)
-							?.items.some((itm) => itm.id === item.element.id)
-					: false,
-				children: [],
-			})),
+			children: [],
 		})),
-	};
-};
+	})),
+});
 
 export const getDataForService = (data) => {
 	const isAllSelected = data?.isSelected;

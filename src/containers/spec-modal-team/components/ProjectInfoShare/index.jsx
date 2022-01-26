@@ -22,9 +22,7 @@ const ProjectInfoShare = ({ withChecks, checklistData, setChecklistData }) => {
 		let allSelected = true;
 		const flat = getFlattedChildren(node);
 		flat.forEach((child) => {
-			if (!child.isSelected) {
-				allSelected = false;
-			}
+			if (!child.isSelected) allSelected = false;
 		});
 		return allSelected;
 	};
@@ -44,9 +42,7 @@ const ProjectInfoShare = ({ withChecks, checklistData, setChecklistData }) => {
 			if (node.value === value) {
 				toggled = true;
 				let newValue = true;
-				if (isAllSelected(node)) {
-					newValue = false;
-				}
+				if (isAllSelected(node)) newValue = false;
 				node.isSelected = newValue;
 				setAllChildren(node, newValue);
 			}
@@ -60,9 +56,7 @@ const ProjectInfoShare = ({ withChecks, checklistData, setChecklistData }) => {
 					toggled: toggledTwo,
 				} = traverseAndToggleNodeChildren(node.children, value);
 				node.children = newChildren;
-				if (toggledTwo) {
-					break;
-				}
+				if (toggledTwo) break;
 			}
 		}
 
@@ -94,9 +88,7 @@ const ProjectInfoShare = ({ withChecks, checklistData, setChecklistData }) => {
 		const nodes = getFlattedChildren(checklistData);
 		const selected = [];
 		nodes.forEach((node) => {
-			if (node.isSelected) {
-				selected.push(node.value);
-			}
+			if (node.isSelected) selected.push(node.value);
 		});
 	}, [checklistData]);
 
