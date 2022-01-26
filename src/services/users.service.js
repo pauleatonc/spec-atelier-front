@@ -32,16 +32,12 @@ export const inviteUserToProject = factoryService(({ projectID, params }) => {
 });
 
 export const updatePermission = factoryService(
-	({ projectId, permissionId, permissionType, invitation, type }) => {
+	({ projectId, permissionId, invitation, type }) => {
 		const body = {
 			[type]: invitation,
 		};
 		return patchJsonRequest(
-			`${API_BASE_URL}/projects/${projectId}/${
-				permissionType === PERMISSIONS_TYPE.INVITATION
-					? 'invitations'
-					: 'permissions'
-			}/${permissionId}`,
+			`${API_BASE_URL}/projects/${projectId}/${type}s/${permissionId}`,
 			body,
 		);
 	},
