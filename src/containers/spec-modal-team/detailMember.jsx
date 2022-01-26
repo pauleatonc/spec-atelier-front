@@ -35,7 +35,7 @@ import {
 	InfoUserContainer,
 	InfoUser,
 	ItemInfo,
-	PermisionLabel,
+	PermissionLabel,
 	IconArrowDown,
 	DeleteUser,
 	LabelDelete,
@@ -67,7 +67,7 @@ const DetailMemberModal = ({ sections }) => {
 		checklistData,
 	);
 
-	const isAwaiting = detailMember?.status === STATUS_INVITATIONS.WAITING;
+	const waiting = detailMember?.status === STATUS_INVITATIONS.WAITING;
 	const updatePermission = () => {
 		const invitation = {
 			email: detailMember?.user.email,
@@ -131,7 +131,7 @@ const DetailMemberModal = ({ sections }) => {
 							user={detailMember?.user}
 							size={100}
 							fontSize={20}
-							isAwaiting={isAwaiting}
+							waiting={waiting}
 						/>
 						<InfoUser>
 							{detailMember?.user?.name && (
@@ -147,6 +147,7 @@ const DetailMemberModal = ({ sections }) => {
 						<div>
 							<SelectorRelative
 								name="sort"
+								right
 								hoverPrimaryColor
 								showIconInfo
 								maxHeight="180px"
@@ -155,9 +156,9 @@ const DetailMemberModal = ({ sections }) => {
 								onChange={setPermission}
 								renderInput={
 									<>
-										<PermisionLabel fontSize={14}>
+										<PermissionLabel fontSize={14}>
 											{permission.label}
-										</PermisionLabel>
+										</PermissionLabel>
 										<IconArrowDown alt="" src={dropArrowSource} />
 									</>
 								}
@@ -178,7 +179,7 @@ const DetailMemberModal = ({ sections }) => {
 					checklistData={checklistData}
 					setChecklistData={setChecklistData}
 				/>
-				{detailMember?.user && isAwaiting && (
+				{detailMember?.user && waiting && (
 					<Disclaimer>
 						<IconInfo className="fas fa-info-circle" />
 						<DescDisclaimer>
@@ -190,7 +191,7 @@ const DetailMemberModal = ({ sections }) => {
 						</DescDisclaimer>
 					</Disclaimer>
 				)}
-				{detailMember?.user && !isAwaiting && (
+				{detailMember?.user && !waiting && (
 					<Disclaimer>
 						<IconInfo className="fas fa-info-circle" />
 						<DescDisclaimer>

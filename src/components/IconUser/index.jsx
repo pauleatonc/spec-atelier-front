@@ -1,13 +1,21 @@
 import React from 'react';
 import { Container, ImageProfile, LetterNameUser } from './styles';
 
-const IconUser = ({ user, size, fontSize, zIndex, horizontalList }) => {
+const IconUser = ({
+  user,
+  size,
+  fontSize,
+  zIndex,
+  horizontalList,
+  waiting,
+}) => {
   return (
     <Container
       size={size}
       fontSize={fontSize}
       zIndex={zIndex}
       horizontalList={horizontalList}
+      waiting={waiting}
     >
       {user.profile_image ? (
         <ImageProfile

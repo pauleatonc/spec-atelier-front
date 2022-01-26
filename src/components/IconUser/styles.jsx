@@ -6,8 +6,8 @@ import {
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.div`
-  background-color: ${({ isAwaiting = false }) =>
-    isAwaiting ? COLOR_LIGHTGREY : COLOR_DARKGREY};
+  background-color: ${({ waiting = false }) =>
+    waiting ? COLOR_LIGHTGREY : COLOR_DARKGREY};
   border-radius: ${({ size = 24 }) => `${size / 2}px`};
   display: flex;
   align-items: center;

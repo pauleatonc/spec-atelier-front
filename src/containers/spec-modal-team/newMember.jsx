@@ -35,7 +35,7 @@ import {
 	InputMailContainer,
 	Searcher,
 	PermissionSelectorContainer,
-	PermisionLabel,
+	PermissionLabel,
 	IconArrowDown,
 	TitleConfigContainer,
 	TitleConfig,
@@ -58,8 +58,8 @@ const SpecModalNewMember = ({ sections }) => {
 	);
 	const {
 		onChange: handleMailChange,
-		set: setMailValue,
-		value: mailValue,
+		set: setEmailValue,
+		value: emailValue,
 	} = useInput('');
 	const {
 		onChange: handleMessageChange,
@@ -76,7 +76,7 @@ const SpecModalNewMember = ({ sections }) => {
 		closeCallback: () => dispatch(onHideModal()),
 		exitingCallback: () => {
 			setMessageValue('');
-			setMailValue('');
+			setEmailValue('');
 			setChecklistData(getCheckListData(sections));
 		},
 	});
@@ -134,7 +134,7 @@ const SpecModalNewMember = ({ sections }) => {
 							placeholder="Añade a un miembro del equipo"
 							onBlur={handleBlur}
 							onChange={handleMailChange}
-							value={mailValue}
+							value={emailValue}
 						/>
 						{inputMailInvalid && (
 							<ErrorInput>Formato de email inválido</ErrorInput>
@@ -152,7 +152,7 @@ const SpecModalNewMember = ({ sections }) => {
 							onChange={setPermission}
 							renderInput={
 								<>
-									<PermisionLabel>{permission.label}</PermisionLabel>
+									<PermissionLabel>{permission.label}</PermissionLabel>
 									<IconArrowDown alt="" src={dropArrowSource} />
 								</>
 							}
