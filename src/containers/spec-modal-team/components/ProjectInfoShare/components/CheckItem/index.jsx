@@ -9,7 +9,7 @@ import arrowUpSource from '../../../../../../assets/images/icons/arrow-up.svg';
 import { IconCheck } from '../../styles';
 import { STATUS_INVITATIONS } from '../../../../constants';
 
-import { ArrowIcon, ListItem, ContainerUsers } from './styles';
+import { ListItem, ContainerUsers } from './styles';
 
 const CheckItem = ({
 	withChecks,
@@ -36,24 +36,27 @@ const CheckItem = ({
 						onClick={onHandleIconCheckClick}
 					/>
 				)}
-				<span>{node.label}</span>
-				<ContainerUsers>
-					{!!node?.users.length &&
-						node?.users.map((user, index) => (
-							<IconUser
-								horizontalList
-								user={user}
-								zIndex={node?.users.length - index}
-								isAwaiting={user?.status === STATUS_INVITATIONS.WAITING}
+				<ListItem pointer onClick={onHandleArrowIconClick}>
+					<span>{node.label}</span>
+					<ContainerUsers>
+						{!!node?.users.length &&
+							node?.users.map((user, index) => (
+								<IconUser
+									key={`${index}-${user.email}`}
+									horizontalList
+									user={user}
+									zIndex={node?.users.length - index}
+									waiting={user?.status === STATUS_INVITATIONS.WAITING}
+								/>
+							))}
+						{hasItems && (
+							<img
+								alt="arrow-icon"
+								src={isShowSection ? arrowUpSource : arrowDownSource}
 							/>
-						))}
-					{hasItems && (
-						<ArrowIcon
-							onClick={onHandleArrowIconClick}
-							src={isShowSection ? arrowUpSource : arrowDownSource}
-						/>
-					)}
-				</ContainerUsers>
+						)}
+					</ContainerUsers>
+				</ListItem>
 			</ListItem>
 			{hasItems && (
 				<Collapsible show={isShowSection}>
