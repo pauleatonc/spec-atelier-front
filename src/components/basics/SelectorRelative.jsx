@@ -101,7 +101,7 @@ const SelectorRelative = ({
 						)}
 					</Option>
 				))}
-				{!options.length && <NoOptions>No hay Opciones Disponibles</NoOptions>}
+				{!options.length && <NoOptions>No hay opciones disponibles</NoOptions>}
 			</Content>
 		</Container>
 	);
