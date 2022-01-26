@@ -5,6 +5,7 @@ import {
   MINE_SHAFT,
   SILVER,
   GALLERY,
+  PUERTO_RICO,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.div`
@@ -37,17 +38,20 @@ export const Section = styled.div`
   align-items: center;
 `;
 
-export const Option = styled.section`
+export const Option = styled.div`
+  display: flex;
+  justify-content: space-between;
   box-sizing: border-box;
-  color: ${MINE_SHAFT};
   cursor: pointer;
-  font-family: Lato;
-  font-size: 12px;
-  letter-spacing: 0.86px;
   padding: 10px 23px;
   width: 100%;
   &:hover {
     background-color: ${GALLERY};
+    p,
+    i {
+      ${({ hoverPrimaryColor }) =>
+        hoverPrimaryColor && `color: ${PUERTO_RICO}`};
+    }
   }
   &:first-child {
     margin: 6px 0 0;
