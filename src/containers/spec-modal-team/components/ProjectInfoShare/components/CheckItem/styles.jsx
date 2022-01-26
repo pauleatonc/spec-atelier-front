@@ -10,6 +10,7 @@ export const ListItem = styled.div`
 	height: 30px;
 	letter-spacing: 1.08px;
 	padding: ${({ padding }) => padding || '0'};
+	cursor: ${({ pointer }) => (pointer ? 'pointer' : 'initial')};
 
 	&:hover {
 		background-color: ${COLOR_WHITE_SMOKE};
@@ -18,10 +19,6 @@ export const ListItem = styled.div`
 	& span {
 		flex: 1;
 	}
-`;
-
-export const ArrowIcon = styled.img`
-	cursor: pointer;
 `;
 
 export const ContainerUsers = styled.div`
