@@ -56,11 +56,12 @@ export const OptionsContent = styled.section`
 
 export const Separator = styled.div`
   background-color: ${GALLERY};
-  height: 1px;
+  height: 1.2px;
   width: 100%;
 `;
 
 export const ProfilePictureContainer = styled.div`
+  margin: 12px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
