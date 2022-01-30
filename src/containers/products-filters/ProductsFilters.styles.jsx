@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import { MINE_SHAFT, MEDIA_QUERY_SMALL, ALABASTER, BLACK } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   display: flex;
@@ -27,7 +27,7 @@ export const Content = styled.div`
 
 export const Loading = styled.span`
   align-items: center;
-  color: ${COLOR_MINE_SHAFT};
+  color: ${MINE_SHAFT};
   display: inline-flex;
   font-family: Lato;
   font-size: 16px;
@@ -56,9 +56,9 @@ export const Dropdown = styled.div`
 export const DropdownContent = styled.section`
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: ${ALABASTER};
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(${BLACK}, 0.2);
   padding: 12px 16px;
   z-index: 1;
   &:hover {

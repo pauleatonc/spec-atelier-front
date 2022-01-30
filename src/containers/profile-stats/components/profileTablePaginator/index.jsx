@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Paginator, ArrowPaginator, SelectPaginator } from './styles';
 
-import { LIMIT_OPTIONS, PAGINATOR_OPTIONS } from '../../uitls';
+import { LIMIT_OPTIONS, PAGINATOR_OPTIONS } from '../../utils';
 
 const ProfileTablePaginator = ({
 	total,

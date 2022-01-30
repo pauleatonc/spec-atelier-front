@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import arrowLeftSource from '../../assets/images/icons/arrow-left.svg';
-import { MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import { BOULDER, MEDIA_QUERY_SMALL, PUERTO_RICO } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
 	align-items: center;
@@ -15,7 +15,7 @@ export const Root = styled.div`
 
 export const Item = styled.section`
 	align-items: center;
-	color: ${({ selected = false }) => (selected ? '#3FBFAD' : '#757575')};
+	color: ${({ selected = false }) => (selected ? PUERTO_RICO : BOULDER)};
 	cursor: ${({ isLink = false }) => (isLink ? 'pointer' : 'default')};
 	display: inline-flex;
 	height: 100%;
@@ -57,7 +57,7 @@ Item.propTypes = {
 };
 
 export const Underline = styled.div`
-	background-color: #3fbfad;
+	background-color: ${PUERTO_RICO};
 	bottom: -1px;
 	height: 2px;
 	left: 0;

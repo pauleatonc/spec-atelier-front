@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_WHITE, SHADOW_GREY } from '../../config/constants/styled-vars';
+import { WHITE, SHADOW_GREY, SILVER } from '../../config/constants/styled-vars';
 
 export const Container = styled.div`
   position: relative;
@@ -9,8 +9,8 @@ export const Container = styled.div`
 export const Content = styled.div`
   margin-top: 12px;
   position: absolute;
-  border: 1px solid #CCC;
-  background-color: ${COLOR_WHITE};
+  border: 1px solid ${SILVER};
+  background-color: ${WHITE};
   min-width: 160px;
   max-width: 300px;
   padding: 12px 16px;

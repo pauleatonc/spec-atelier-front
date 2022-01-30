@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { COLOR_TERTIARY, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import { TERTIARY, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
 
 export const Container = styled.footer`
   font-family: 'Lato', sans-serif;
-  background-color: ${COLOR_TERTIARY};
+  background-color: ${TERTIARY};
   min-height: 300px;
   display: flex;
 `

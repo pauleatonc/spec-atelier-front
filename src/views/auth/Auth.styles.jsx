@@ -2,17 +2,16 @@ import styled from 'styled-components';
 import IMAGE_LOGIN from '../../assets/images/auth/login.png';
 
 import LOGO from '../../assets/images/logo.png';
-import FULL_LOGO from '../../assets/images/full_logo.png';
 
 import {
-  COLOR_WHITE,
+  WHITE,
   MEDIA_QUERY_SMALL,
-  COLOR_MINE_SHAFT,
+  MINE_SHAFT,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
-  background-color: ${COLOR_WHITE};
-  color: ${COLOR_MINE_SHAFT};
+  background-color: ${WHITE};
+  color: ${MINE_SHAFT};
   font-family: 'Lato', sans-serif;
   height: 100vh;
   width: 100vw;

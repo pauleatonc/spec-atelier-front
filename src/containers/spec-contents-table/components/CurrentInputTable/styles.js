@@ -1,15 +1,16 @@
 import styled from 'styled-components';
+import { BLACK, CARIBBEAN_GREEN } from '../../../../config/constants/styled-vars';
 
 export const TableInput = styled.input`
 	border-style: none;
 	outline: none;
 	width: 58px;
-	border-bottom: solid 1px rgba(0, 0, 0, 0.28);
+	border-bottom: solid 1px rgba(${BLACK}, 0.28);
 	font-family: Lato;
 	font-size: 13px;
-	caret-color: #00c3ac;
+	caret-color: ${CARIBBEAN_GREEN};
 	&:active,
 	&:focus {
-		border-bottom: solid 1px #00c3ac;
+		border-bottom: solid 1px ${CARIBBEAN_GREEN};
 	}
 `;

@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	MEDIA_QUERY_SMALL,
+  BLACK,
+	MEDIA_QUERY_SMALL, WHITE,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   align-items: center;
-  background-color: #FFF;
+  background-color: ${WHITE};
   border-radius: 4px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.27);
+  box-shadow: 0 2px 5px 0 rgba(${BLACK}, 0.27);
   display: grid;
   height: 201px;
   justify-content: center;

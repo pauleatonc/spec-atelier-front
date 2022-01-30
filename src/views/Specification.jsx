@@ -23,11 +23,7 @@ import SpecModalTeam from '../containers/spec-modal-team';
 import SpecModalTeamNewMember from '../containers/spec-modal-team/newMember';
 import DetailMemberModal from '../containers/spec-modal-team/detailMember';
 import { changeOption } from '../containers/spec-contents-buttons/SpecContentsButtons.actions';
-import {
-	ESPEC_DOCUMENT,
-	SPEC_TABLE,
-} from '../config/constants/button-variants';
-
+import { ESPEC_DOCUMENT, SPEC_TABLE } from '../config/constants/button-variants';
 import { Root, Main, Navigation, Panels } from './Specification.styles';
 
 /**

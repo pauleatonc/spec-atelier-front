@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR_MINE_SHAFT, ALTO } from '../../config/constants/styled-vars';
+import { ALTO, CARIBBEAN_GREEN, GALLERY, MINE_SHAFT, MINE_SHAFT_RGB } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
 	width: 100%;
 `;
 
 export const Label = styled.label`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	display: block;
 	font-family: Lato;
 	font-size: 16px;
@@ -32,7 +32,7 @@ export const Input = styled.input`
 	background-color: transparent;
 	border: 1px solid ${ALTO};
 	border-radius: 9px;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	cursor: pointer;
 	display: inline-flex;
 	height: 38px;
@@ -51,18 +51,18 @@ export const Input = styled.input`
 	}
 
 	&::placeholder {
-		color: rgba(33, 33, 33, 0.46);
+		color: rgba(${MINE_SHAFT_RGB}, 0.46);
 	}
 
 	&:disabled {
-		background-color: #ddd;
+		background-color: ${ALTO};
 		cursor: not-allowed;
 	}
 `;
 
 export const Option = styled.section`
 	box-sizing: border-box;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	cursor: pointer;
 	font-family: Lato;
 	font-size: 12px;
@@ -71,7 +71,7 @@ export const Option = styled.section`
 	width: 100%;
 
 	&:hover {
-		background-color: #eee;
+		background-color: ${GALLERY};
 	}
 
 	&:first-child {
@@ -97,7 +97,7 @@ export const AddOption = styled.section`
 `;
 
 export const AddAction = styled.span`
-	color: #00c1aa;
+	color: ${CARIBBEAN_GREEN};
 	cursor: pointer;
 	font-family: Lato;
 	font-weight: bold;
@@ -111,7 +111,7 @@ export const AddAction = styled.span`
 `;
 
 export const AddText = styled.span`
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 0.86px;

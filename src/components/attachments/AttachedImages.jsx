@@ -19,15 +19,14 @@ import {
 	Square,
 	Action,
 	DropContent,
-	DropCloseIcon,
 	DropZone,
 	DropZoneSection,
 	DropZoneText,
 } from './AttachedImages.styles';
 import imagesUploadSource from '../../assets/images/icons/images-upload.svg';
 import removeSource from '../../assets/images/icons/remove.svg';
-import closeSource from '../../assets/images/icons/close.svg';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+import CloseButton from '../buttons/CloseButton';
 
 /**
  * The AttachedImages' component.
@@ -168,7 +167,7 @@ const AttachedImages = (props) => {
 			)}
 			<ModalLayout show={show} onClose={handleClose}>
 				<DropContent>
-					<DropCloseIcon alt="" src={closeSource} onClick={handleClose} />
+					<CloseButton onClick={handleClose}/>
 					<DropZone {...dropProps}>
 						<input {...getInputProps()} />
 						<DropZoneSection padding="33px 0 18px">

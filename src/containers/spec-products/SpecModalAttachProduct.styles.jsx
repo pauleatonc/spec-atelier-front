@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import {
-	COLOR_WHITE,
-	COLOR_BLACK,
-	COLOR_LIGHTERGREY,
+	WHITE,
+	MINE_SHAFT,
+	GALLERY,
 	MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
@@ -12,7 +12,7 @@ const HEIGHT_CONTENT = '350px';
 export const Container = styled.div`
 	width: 400px;
 	padding: 30px;
-	background-color: ${COLOR_WHITE};
+	background-color: ${WHITE};
 	border-radius: 4px;
 	min-height: ${HEIGHT_CONTENT};
 	font-weight: normal;
@@ -27,15 +27,6 @@ export const Container = styled.div`
 		height: 100vh;
 		padding: 16px;
 	}
-`;
-
-export const ButtonClose = styled.img`
-	display: flex;
-	justify-content: flex-end;
-	cursor: pointer;
-	outline: none;
-	width: 30px;
-	height: 30px;
 `;
 
 export const Header = styled.section`
@@ -62,7 +53,7 @@ export const Title = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1.17px;
-	color: ${COLOR_BLACK};
+	color: ${MINE_SHAFT};
 	${MEDIA_QUERY_SMALL} {
 		padding: 0px 20px 0px 0px;
 	}
@@ -94,7 +85,7 @@ export const SectionName = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1px;
-	color: ${COLOR_BLACK};
+	color: ${MINE_SHAFT};
 	font-weight: bold;
 	margin-bottom: 20px;
 `;
@@ -102,7 +93,7 @@ export const SectionName = styled.div`
 export const Separator = styled.div`
 	height: 1px;
 	width: 100%;
-	background-color: ${COLOR_LIGHTERGREY};
+	background-color: ${GALLERY};
 `;
 
 export const Options = styled.div`
@@ -112,7 +103,7 @@ export const Options = styled.div`
 export const Option = styled.section`
 	align-items: center;
 	box-sizing: border-box;
-	color: #212121;
+	color: ${MINE_SHAFT};
 	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 	display: flex;
 	font-family: Lato;
@@ -120,10 +111,10 @@ export const Option = styled.section`
 	letter-spacing: 0.86px;
 	padding: 10px 16px;
 	width: 100%;
-	background-color: ${({ disabled }) => (disabled ? '#eee' : 'none')};
+	background-color: ${({ disabled }) => (disabled ? GALLERY : 'none')};
 
 	&:hover {
-		background-color: #eee;
+		background-color: ${GALLERY};
 	}
 
 	&:first-child {

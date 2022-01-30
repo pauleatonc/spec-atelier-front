@@ -17,14 +17,13 @@ import {
 	Root,
 	Header,
 	Title,
-	CloseIcon,
 	Body,
 	Section,
 	Footer,
 } from './SpecCreateProduct.styles';
-import closeSource from '../../assets/images/icons/close.svg';
 import MultiSelect from '../../components/inputs/MultiSelect';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+import CloseButton from '../../components/buttons/CloseButton';
 
 /**
  * The SpecCreateProductStepOne's container.
@@ -133,7 +132,7 @@ const SpecCreateProductStepOne = () => {
 			<Root>
 				<Header>
 					<Title>Crear producto</Title>
-					<CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
+					<CloseButton onClick={handleClose} />
 				</Header>
 				<Body>
 					<Section>

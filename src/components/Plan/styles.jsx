@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import {
-	COLOR_WHITE,
+	WHITE,
 	MEDIA_QUERY_SMALL,
+	CARIBBEAN_GREEN,
+	BURNING_ORANGE,
+	ALABASTER,
+	TIARA,
 } from '../../config/constants/styled-vars';
 import { TYPES } from './constants';
 
@@ -14,8 +18,8 @@ export const Container = styled.div`
 	width: 360px;
 	border-radius: 24px;
 	border: solid 3px
-		${({ type }) => (type === TYPES.ARCHITECT ? '#ff6e37' : '#00bfa7')};
-	background-color: #f9f9f9;
+		${({ type }) => (type === TYPES.ARCHITECT ? BURNING_ORANGE : CARIBBEAN_GREEN)};
+	background-color: ${ALABASTER};
 	padding: 45px 30px 60px;
 	margin: 20px 10px;
 	height: 595px;
@@ -23,7 +27,7 @@ export const Container = styled.div`
 		content: '';
 		width: 140px;
 		height: 120px;
-		background-color: #cad7d6;
+		background-color: ${TIARA};
 		opacity: 0.16;
 		position: absolute;
 		top: 0px;
@@ -43,9 +47,8 @@ export const Descriptor = styled.div`
 	font-size: 14px;
 	border-radius: 18px;
 	padding: 10px 20px;
-	color: ${COLOR_WHITE};
-	background-color: ${({ type }) =>
-		type === TYPES.ARCHITECT ? '#ff6e37' : '#00bfa7'};
+	color: ${WHITE};
+	background-color: ${({ type }) =>	(type === TYPES.ARCHITECT ? BURNING_ORANGE : CARIBBEAN_GREEN)};
 	text-align: center;
 	position: absolute;
 	top: -20px;
@@ -80,7 +83,7 @@ export const TitleInfo = styled.h1`
 
 export const IconCheck = styled.i`
 	font-size: 16px;
-	color: ${({ type }) => (type === TYPES.ARCHITECT ? '#ff6e37' : '#00bfa7')};
+	color: ${({ type }) => (type === TYPES.ARCHITECT ? BURNING_ORANGE : CARIBBEAN_GREEN)};
 	margin-right: 9px;
 `;
 

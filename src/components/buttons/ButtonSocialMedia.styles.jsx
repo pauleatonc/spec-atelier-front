@@ -1,22 +1,21 @@
 import styled from 'styled-components';
 import {
-  COLOR_BLACK,
-  COLOR_PRIMARY,
-  COLOR_SECONDARY,
-  COLOR_DARKESTGREY,
-  COLOR_TERTIARY,
-  COLOR_GREY,
+  MINE_SHAFT,
+  PRIMARY,
+  SECONDARY,
+  DARKESTGREY,
+  TERTIARY,
 } from '../../config/constants/styled-vars';
 
 import ICON_FACEBOOK from '../../assets/images/icons/socialmedia/facebook.svg';
 import ICON_TWITTER from '../../assets/images/icons/socialmedia/twitter.svg';
 
 const mapVariantsToColors = {
-  default: COLOR_BLACK,
-  primary: COLOR_PRIMARY,
-  secondary: COLOR_SECONDARY,
-  tertiary: COLOR_TERTIARY,
-  disabled: COLOR_DARKESTGREY,
+  default: MINE_SHAFT,
+  primary: PRIMARY,
+  secondary: SECONDARY,
+  tertiary: TERTIARY,
+  disabled: DARKESTGREY,
 };
 
 const mapTypeToIcon = {
@@ -41,6 +40,6 @@ export const ButtonIcon = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   :hover {
-    color: ${({ disabled }) => disabled ? mapVariantsToColors.disabled :  mapVariantsToColors['primary']};
+    color: ${({ disabled }) => disabled ? mapVariantsToColors.disabled :  mapVariantsToColors.primary};
   }
 `;
