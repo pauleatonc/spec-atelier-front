@@ -120,7 +120,8 @@
 		"stubby": "stubby -w -d mocks/stubby.json",
 		"test": "jest",
 		"test:coverage": "jest --coverage",
-		"test:watch": "jest --watchAll"
+		"test:watch": "jest --watchAll",
+		"lint": "eslint --ext .jsx,.js src"
 	},
 	"version": "1.0.0"
 }
