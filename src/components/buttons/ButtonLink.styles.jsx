@@ -47,7 +47,7 @@ export const ButtonIcon = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   :hover {
-    color: ${({ disabled }) => disabled ? mapVariantsToColors.disabled :  mapVariantsToColors['primary']};
+    color: ${({ disabled }) => disabled ? mapVariantsToColors.disabled :  mapVariantsToColors.primary};
   }
 `;
 
@@ -64,7 +64,7 @@ export const ButtonText = styled.span`
   letter-spacing: 1px;
   color: ${SILVER_CHALICE};
   :hover {
-    color: ${({ disabled }) => disabled ?  mapVariantsToColors[disabled] :  mapVariantsToColors['primary']};
+    color: ${({ disabled }) => disabled ?  mapVariantsToColors[disabled] :  mapVariantsToColors.primary};
   }
   margin-right: 2px;
   height: ${({ show }) => show ? '12px' : '0'};

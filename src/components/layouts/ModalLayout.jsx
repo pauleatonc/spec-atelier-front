@@ -17,18 +17,27 @@ const transitionStyles = {
 /**
  * The ModalLayout's component.
  */
-const ModalLayout = props => {
-  const { children, overlay, show, transition, onClose, onExited, onEntering, onExiting } = props;
+const ModalLayout = (props) => {
+  const {
+    children,
+    overlay,
+    show,
+    transition,
+    onClose,
+    onExited,
+    onEntering,
+    onExiting,
+  } = props;
   const rootRef = useRef(undefined);
-  const handleClick = event => onClose(event);
-  const handleKey = event => {
+  const handleClick = (event) => onClose(event);
+  const handleKey = (event) => {
     if (event.key !== 'Escape' && event.keyCode !== 27) {
       return;
     }
 
     onClose(event);
   };
-  const handleEscape = event => event.stopPropagation();
+  const handleEscape = (event) => event.stopPropagation();
   const content = (
     <Transition
       mountOnEnter
@@ -39,11 +48,15 @@ const ModalLayout = props => {
       onExited={onExited}
       onExiting={onExiting}
     >
-      {state => (
+      {(state) => (
         <Root
           overlay={overlay}
           ref={rootRef}
-          style={transition ? { ...defaultStyle, ...transitionStyles[state] } : undefined}
+          style={
+            transition
+              ? { ...defaultStyle, ...transitionStyles[state] }
+              : undefined
+          }
           tabIndex={-1}
           onClick={handleClick}
           onKeyDown={handleKey}
@@ -56,8 +69,10 @@ const ModalLayout = props => {
   const modalElement = document.getElementById('__modals');
 
   useEffect(() => {
-    return () => document.body.style.overflow = 'auto';
-  },[]);
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   useEffect(() => {
     if (!show) {

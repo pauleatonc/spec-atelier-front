@@ -5,7 +5,6 @@ import {
   SECONDARY,
   DARKESTGREY,
   TERTIARY,
-  SILVER_CHALICE,
 } from '../../config/constants/styled-vars';
 
 import ICON_FACEBOOK from '../../assets/images/icons/socialmedia/facebook.svg';
@@ -41,6 +40,6 @@ export const ButtonIcon = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   :hover {
-    color: ${({ disabled }) => disabled ? mapVariantsToColors.disabled :  mapVariantsToColors['primary']};
+    color: ${({ disabled }) => disabled ? mapVariantsToColors.disabled :  mapVariantsToColors.primary};
   }
 `;

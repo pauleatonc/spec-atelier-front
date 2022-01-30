@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import IMAGE_LOGIN from '../../assets/images/auth/login.png';
 
 import LOGO from '../../assets/images/logo.png';
-import FULL_LOGO from '../../assets/images/full_logo.png';
 
 import {
   WHITE,

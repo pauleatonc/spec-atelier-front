@@ -8,7 +8,7 @@ import {
 	Text,
 	ButtonContainer,
 	IconContainer,
-} from './CreateProduct.styles.jsx';
+} from './CreateProduct.styles';
 import { Button, Image } from '../SpecComponents';
 import { ICON_CREATE_PRODUCT } from '../../assets/Images';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';

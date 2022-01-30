@@ -3,7 +3,6 @@ import React from 'react';
 import {
   ClientContainer,
   Header,
-  Icon,
   Country,
   CountryIcon,
   CountryName,

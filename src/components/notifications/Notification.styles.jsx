@@ -1,21 +1,18 @@
 import styled from 'styled-components';
 import {
-  COLOR_BLACK,
-  COLOR_BLACK_OPACITY_GRAY,
-  COLOR_BLACK_OPACITY_GRAY_SECONDARY,
-  COLOR_BLACK_OPACITY_TRANSPARENT,
-  COLOR_BLACK_OPACITY_SECONDARY,
-  COLOR_PRIMARY,
-  COLOR_WHITE,
-  COLOR_GREY,
-  COLOR_SILVER,
+  HEX_BLACK,
+  BLACK_OPACITY,
+  BOULDER,
+  PRIMARY,
+  WHITE,
+  SILVER_CHALICE,
+  SILVER,
   DOVE_GRAY,
-  COLOR_PUERTO_RICO,
-  COLOR_TURQUOISE,
-  COLOR_BOULDER,
-  COLOR_RED,
-  COLOR_MORNING_GLORY,
-  COLOR_PUERTO_RICO_BACKGROUND
+  PUERTO_RICO,
+  TURQUOISE,
+  RED,
+  MORNING_GLORY,
+  PUERTO_RICO_BACKGROUND
 } from '../../config/constants/styled-vars';
 
 export const Option = styled.div`
@@ -27,14 +24,14 @@ export const Option = styled.div`
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1px;
-	background-color: ${COLOR_WHITE};
+	background-color: ${WHITE};
 	display: flex;
 	flex: 1;
 	align-items: center;
 	padding: 30px;
-	color: ${COLOR_BLACK};
+	color: ${HEX_BLACK};
 	:hover {
-		color: ${COLOR_PRIMARY};
+		color: ${PRIMARY};
 	}
 	cursor: pointer;
 	text-decoration: none;
@@ -43,9 +40,9 @@ export const Option = styled.div`
 export const OptionsContent = styled.section`
 	height: 327px;
 	overflow: overlay;
-	background-color: ${COLOR_WHITE};
-	box-shadow: 0 1px 3px 0 ${COLOR_BLACK_OPACITY_GRAY}, 0 2px 1px -1px ${COLOR_BLACK_OPACITY_TRANSPARENT},
-		0 1px 1px 0 ${COLOR_BLACK_OPACITY_SECONDARY};
+	background-color: ${WHITE};
+	box-shadow: 0 1px 3px 0 ${BLACK_OPACITY}, 0 2px 1px -1px ${BLACK_OPACITY},
+		0 1px 1px 0 ${BLACK_OPACITY};
 	&::-webkit-scrollbar {
 		width: 13px;
 		height: 120px;
@@ -55,14 +52,14 @@ export const OptionsContent = styled.section`
 	}
 	&::-webkit-scrollbar-thumb {
 		border-radius: 3px;
-		border: 3px ${COLOR_BLACK_OPACITY_GRAY_SECONDARY};
-		background: ${COLOR_BLACK_OPACITY_GRAY_SECONDARY};
+		border: 3px ${BOULDER};
+		background: ${BOULDER};
 		border-right: 6px transparent solid;
 	}
 `;
 
 export const Separator = styled.div`
-	background-color: ${COLOR_SILVER};
+	background-color: ${SILVER};
 	height: 1px;
 `;
 
@@ -103,7 +100,7 @@ export const InfoUserName = styled.span`
 	font-family: Lato;
 	font-size: 12px;
 	margin-bottom: 2px;
-	color: ${({ gray }) => (gray ? COLOR_GREY : COLOR_BLACK)};
+	color: ${({ gray }) => (gray ? SILVER_CHALICE : HEX_BLACK)};
 	b{
 		font-weight: bold;
 		color: ${DOVE_GRAY};
@@ -123,7 +120,7 @@ export const LinkHeader = styled.a`
 	font-size: 12px;
 	margin-bottom: 2px;
 	text-align: right;
-	color: ${COLOR_PUERTO_RICO};
+	color: ${PUERTO_RICO};
 	text-decoration: none;
 	float: right;
 `;
@@ -132,7 +129,7 @@ export const ListItem = styled.div`
 	padding-top: 23px;
 	padding-bottom: 25px;
 	display: flex;
-	background-color: ${({ watchedStatus }) => (watchedStatus ? 'none' : COLOR_PUERTO_RICO_BACKGROUND)};
+	background-color: ${({ watchedStatus }) => (watchedStatus ? 'none' : PUERTO_RICO_BACKGROUND)};
 `;
 
 export const ContentActions = styled.div`
@@ -147,7 +144,7 @@ export const NewPoint = styled.span`
 	width: 12px;
 	height: 12px;
 	border-radius: 10px;
-	background-color: ${COLOR_TURQUOISE};
+	background-color: ${TURQUOISE};
 	margin-left: 10px;
 	margin-top: 10px;
 	position: relative;
@@ -163,7 +160,7 @@ export const ActionPerformed = styled.label`
 	letter-spacing: 1px;
 	margin-bottom: 2px;
 	text-align: left;
-	color: ${COLOR_BOULDER};
+	color: ${BOULDER};
 `;
 
 export const LinkSeeAll = styled.a`
@@ -175,7 +172,7 @@ export const LinkSeeAll = styled.a`
 	text-decoration: none;
 	float: right;
 	margin-left: 43px;
-	color: ${({ loadingNoti }) => (loadingNoti ? COLOR_MORNING_GLORY : COLOR_PUERTO_RICO)};
+	color: ${({ loadingNoti }) => (loadingNoti ? MORNING_GLORY : PUERTO_RICO)};
 	pointer-events: ${({ loadingNoti }) => (loadingNoti ? 'none' : 'initial')};
 	font-weight: bold;
 `;
@@ -190,15 +187,15 @@ export const UndoSpan = styled.span`
 	float: right;
 	margin-left: 53px;
 	cursor: pointer;
-	color: ${({ loadingNoti }) => (loadingNoti ? COLOR_MORNING_GLORY : COLOR_PUERTO_RICO)};
+	color: ${({ loadingNoti }) => (loadingNoti ? MORNING_GLORY : PUERTO_RICO)};
 	pointer-events: ${({ loadingNoti }) => (loadingNoti ? 'none' : 'initial')};
 `;
 
 export const CountNoti = styled.span`
 	width: 15px;
 	height: 15px;
-	background-color: ${COLOR_RED};
-	color: ${COLOR_WHITE};
+	background-color: ${RED};
+	color: ${WHITE};
 	position: absolute;
 	z-index: 1;
 	border-radius: 21px;
@@ -214,6 +211,6 @@ export const ContentPrimary = styled.div`
 `;
 
 export const LoadingNoti = styled.label`
-	color: ${COLOR_BOULDER};
+	color: ${BOULDER};
 	text-align:center;
 `;
