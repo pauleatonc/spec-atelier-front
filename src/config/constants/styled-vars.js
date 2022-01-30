@@ -2,6 +2,7 @@
 export const BORDER_GREY = 'rgb(201, 201, 201)';
 
 // Colors
+export const HEX_BLACK = '#000000';
 export const PRIMARY = 'rgb(49, 203, 183)';
 export const SECONDARY = 'rgb(244, 130, 80)';
 export const TERTIARY = 'rgb(8, 38, 44)';
@@ -46,6 +47,13 @@ export const CHAMPAGNE = '#fae5da';
 export const WILD_SAND = '#f6f6f6';
 export const SHADOW_GREY =
   '0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.14);';
+export const PUERTO_RICO_BACKGROUND = 'rgba(66, 191, 173, 0.15)';
+export const MORNING_GLORY = '#9CDDD4';
+export const RED = '#FF0000';
+export const EBB = '#EFECEC';
+export const LOADING_ACCEPT = 'rgb(156 221 212)';
+export const LOADING_ACCEPT_INITIAL = 'rbg(156 221 212)';
+export const TORCH_RED = '#FD0E35';
 
 // Media Queries
 export const MAX_SCREEN_SMALL = 768;

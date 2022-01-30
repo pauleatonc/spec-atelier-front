@@ -39,6 +39,6 @@ export const ButtonIcon = styled.div`
   background-size: cover;
   :hover {
     color: ${({ disabled }) =>
-      disabled ? mapVariantsToColors.disabled : mapVariantsToColors['primary']};
+      disabled ? mapVariantsToColors.disabled : mapVariantsToColors.primary};
   }
 `;

@@ -26,7 +26,8 @@ const ButtonGoogleLogin = (props) => {
 	};
 
 	const responseError = (googleResponse) => {
-		//TODO: Handle and create Snackbar to this error
+		// TODO: Handle and create Snackbar to this error
+		console.error(googleResponse)
 	};
 
 	return (

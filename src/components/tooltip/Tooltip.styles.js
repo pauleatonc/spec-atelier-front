@@ -49,8 +49,8 @@ export const Content = styled.div`
         return `top: calc(${TOOLTIP_MARGIN} * -1);`;
     }
   }};
-  ::before{
-    content: " ";
+  ::before {
+    content: ' ';
     left: 50%;
     border: solid transparent;
     height: 0;
@@ -87,6 +87,8 @@ export const Content = styled.div`
             transform: translateX(0) translateY(-50%);
             border-left-color: ${MINE_SHAFT};
           `;
+        default:
+          return ``;
       }
     }}
   }
