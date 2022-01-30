@@ -9,7 +9,7 @@ import {
   COLOR_WHITE,
   COLOR_GREY,
   COLOR_SILVER,
-  COLOR_DOVE_GRAY,
+  DOVE_GRAY,
   COLOR_PUERTO_RICO,
   COLOR_TURQUOISE,
   COLOR_BOULDER,
@@ -106,7 +106,7 @@ export const InfoUserName = styled.span`
 	color: ${({ gray }) => (gray ? COLOR_GREY : COLOR_BLACK)};
 	b{
 		font-weight: bold;
-		color: ${COLOR_DOVE_GRAY};
+		color: ${DOVE_GRAY};
 	}
 `;
 

@@ -31,7 +31,7 @@ import {
 	onShowEditProfilePicture,
 } from './ProfileHeader.actions';
 import SelectorRelative from '../../components/basics/SelectorRelative';
-import { COLOR_GREEN_UNDERLINE } from '../../config/constants/styled-vars';
+import { GALLERY, JAVA } from '../../config/constants/styled-vars';
 
 const ProfileHeader = () => {
 	const [isEditting, setIsEditing] = useState(false);
@@ -96,7 +96,7 @@ const ProfileHeader = () => {
 					<Button
 						variant="default"
 						inverse
-						style={{ backgroundColor: '#eeeeee' }}
+						style={{ backgroundColor: GALLERY }}
 						onClick={onClickEdit}
 					>
 						{isEditting ? (
@@ -120,7 +120,7 @@ const ProfileHeader = () => {
 									fontSize={20}
 									onChange={onChangeFirstName}
 									value={currentUser.first_name || ''}
-									colorUnderline={COLOR_GREEN_UNDERLINE}
+									colorUnderline={JAVA}
 									placeholder="Nombre"
 									textAlign="right"
 								/>
@@ -131,7 +131,7 @@ const ProfileHeader = () => {
 									fontSize={20}
 									onChange={onChangeLastName}
 									value={currentUser.last_name || ''}
-									colorUnderline={COLOR_GREEN_UNDERLINE}
+									colorUnderline={JAVA}
 									placeholder="Apellido"
 									textAlign="left"
 								/>
@@ -150,7 +150,7 @@ const ProfileHeader = () => {
 							fontSize={18}
 							onChange={onChangeCompany}
 							value={currentUser.company || ''}
-							colorUnderline={COLOR_GREEN_UNDERLINE}
+							colorUnderline={JAVA}
 							placeholder="Empresa"
 							textAlign="center"
 						/>

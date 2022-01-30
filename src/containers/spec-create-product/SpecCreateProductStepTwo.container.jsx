@@ -22,14 +22,13 @@ import {
 	Root,
 	Header,
 	Title,
-	CloseIcon,
 	Body,
 	Section,
 	Footer,
 	Gap,
 } from './SpecCreateProduct.styles';
-import closeSource from '../../assets/images/icons/close.svg';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+import CloseButton from '../../components/buttons/CloseButton';
 
 /**
  * The SpecCreateProductStepTwo's container.
@@ -151,7 +150,7 @@ const SpecCreateProductStepTwo = () => {
 			<Root shadow={false}>
 				<Header>
 					<Title>Crear producto</Title>
-					<CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
+					<CloseButton onClick={handleClose}/>
 				</Header>
 				<Body>
 					<Section>

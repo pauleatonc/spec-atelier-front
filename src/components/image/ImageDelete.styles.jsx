@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_LIGHTERGREY, COLOR_GREY, COLOR_DARKGREY } from '../../config/constants/styled-vars';
+import { GALLERY, SILVER_CHALICE, BOULDER } from '../../config/constants/styled-vars';
 
 export const Img = styled.img`
   background-image: url('${({ src = '' }) => src}');
@@ -27,12 +27,12 @@ export const Button = styled.button`
   padding: 8px 10px;
   margin: 4px 4px;
   font-size: 16px;
-  background-color: ${COLOR_LIGHTERGREY};
+  background-color: ${GALLERY};
   outline: none;
   border: none;
-  color: ${COLOR_DARKGREY};
+  color: ${BOULDER};
   &:hover {
-    background-color: ${COLOR_GREY};
+    background-color: ${SILVER_CHALICE};
   }
   cursor: pointer;
   border-radius: 2px;

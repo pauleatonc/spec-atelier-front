@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Z_INDEX_ALERT } from '../../config/constants/styled-vars';
+import { BLACK, WHITE, Z_INDEX_ALERT } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   position: relative;
@@ -7,10 +7,10 @@ export const Root = styled.div`
 `;
 
 export const Content = styled.div`
-  background-color: rgba(0, 0, 0, 0.87);
+  background-color: rgba(${BLACK}, 0.87);
   border-radius: 4px;
-  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
-  color: #FFF;
+  box-shadow: 0 3px 5px -1px rgba(${BLACK}, 0.2), 0 1px 18px 0 rgba(${BLACK}, 0.12), 0 6px 10px 0 rgba(${BLACK}, 0.14);
+  color: ${WHITE};
   cursor: pointer;
   font-family: Lato;
   font-size: 14px;

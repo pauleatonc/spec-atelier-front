@@ -34,7 +34,6 @@ const Main = () => {
 		firebase.initializeApp(firebaseConfig);
 		firebase.analytics();
 	}
-  let hola = 'hola'
 
 	return (
 		<Provider store={store}>
@@ -42,7 +41,7 @@ const Main = () => {
 			<PersistGate loading={null} persistor={persistor}>
 				<Router>
 					<Switch>
-						<PublicRoute exact restricted component={Home} path="/" />
+						<PublicRoute exact component={Home} path="/" />
 						<PublicRoute exact restricted component={Home} path="/projects/:action/:id/:project_id" />
 						<PublicRoute exact restricted component={Login} path="/login" />
 						<PublicRoute exact restricted component={Login} path="/login/:action/:id/:project_id" />

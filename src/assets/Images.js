@@ -52,6 +52,7 @@ import PRODUCT_HEADER_2X from './images/products/product-header-src@2x.jpg';
 import PRODUCT_HEADER_3X from './images/products/product-header-src@3x.jpg';
 
 import ICON_ARROW_DOWN from './images/icons/drop-arrow.svg';
+import CLOSE_ICON from './images/icons/close-icon.svg';
 
 export {
 	LOGO_CCHC,
@@ -99,4 +100,5 @@ export {
 	PRODUCT_HEADER,
 	PRODUCT_HEADER_2X,
 	PRODUCT_HEADER_3X,
+  CLOSE_ICON
 };

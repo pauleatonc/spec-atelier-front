@@ -1,5 +1,5 @@
 import onActionCreator from '../../config/store/helpers';
-import { getProjects, acceptNotification, rejectNotification } from '../../services/projects.service';
+import { getProjects, acceptNotification, rejectNotification, deleteProject as deleteProjectService } from '../../services/projects.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 export const GET_PROJECTS = 'GET_ALL_PROJECTS';
@@ -34,8 +34,10 @@ export const getMoreProjects = params => async (dispatch, getState) => {
   }
 };
 
-export const deleteProject = ({ id }) => async (dispatch) => {
+export const deleteProject = ({ id }) => async (dispatch, getState) => {
   try {
+    const { user } = getState().auth;
+    deleteProjectService({ userId: user.id, projectId: id })
     dispatch(onActionCreator(DELETE_PROJECT, { projectId: id }));
   } catch (error) {
     dispatch(onShowAlertSuccess({ message: "Error al eliminar el proyecto" }))

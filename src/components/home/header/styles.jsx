@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import BACKGROUND_HEADER_HOME from '../../../assets/images/home/bg-header-home.png';
-import { MEDIA_QUERY_STANDAR_MEDIUM } from '../../../config/constants/styled-vars';
+import { MEDIA_QUERY_STANDAR_MEDIUM, SILVER_OPACITY, WHITE } from '../../../config/constants/styled-vars';
 
 export const Container = styled.section`
 	display: flex;
@@ -21,7 +21,7 @@ export const Container = styled.section`
 
 export const VideoBanner = styled.iframe`
 	border-radius: 10px;
-	box-shadow: 0 2px 4px 0 rgba(201, 198, 198, 0.5);
+	box-shadow: 0 2px 4px 0 ${SILVER_OPACITY};
 	${MEDIA_QUERY_STANDAR_MEDIUM} {
 		z-index: 1;
 		width: 90%;
@@ -47,7 +47,7 @@ export const TextBanner = styled.p`
 	font-style: normal;
 	line-height: 1.58;
 	letter-spacing: 1px;
-	color: #ffffff;
+	color:${WHITE};
 	margin-bottom: ${({ mBottom = '0' }) => mBottom};
 `;
 

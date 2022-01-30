@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR_DARKESTGREY, COLOR_BLACK, COLOR_MINE_SHAFT, COLOR_LIGHTGREY } from '../../config/constants/styled-vars';
+import { DARKESTGREY, MINE_SHAFT, SILVER, GALLERY } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   width: 100%;
@@ -29,7 +29,7 @@ export const SortContainer = styled.section`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${MINE_SHAFT};
   display: flex;
   align-items: center;
 `
@@ -43,7 +43,7 @@ export const Filters = styled.div`
 
 export const FilterSelect = styled.select`
   border-radius: 22px;
-  background-color: #eeeeee;
+  background-color: ${GALLERY};
   border: none;
   height: 36px;
   padding-left: 40px;
@@ -57,7 +57,7 @@ export const FilterSelect = styled.select`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_MINE_SHAFT};
+  color: ${MINE_SHAFT};
 
   &:focus {
     outline: none;
@@ -75,7 +75,7 @@ export const FilterOption = styled.option`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_MINE_SHAFT};
+  color: ${MINE_SHAFT};
 `;
 
 export const Selector = styled.select`
@@ -86,7 +86,7 @@ export const Selector = styled.select`
   flex: 1;
   justify-content: space-between;
   padding: 8px 0;
-  border-bottom: 2px solid ${COLOR_DARKESTGREY};
+  border-bottom: 2px solid ${DARKESTGREY};
   font-family: Lato;
   font-size: 12px;
   font-weight: normal;
@@ -94,7 +94,7 @@ export const Selector = styled.select`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${MINE_SHAFT};
 `;
 
 export const FilterSortText = styled.div`
@@ -105,11 +105,11 @@ export const FilterSortText = styled.div`
   display: flex;
   flex: 1;
   justify-content: space-between;
-  border-bottom: 2px solid ${COLOR_LIGHTGREY};
+  border-bottom: 2px solid ${SILVER};
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${MINE_SHAFT};
   border-radius: 0;
   width: 240px;
   align-items: center;

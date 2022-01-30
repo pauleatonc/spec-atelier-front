@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { CARIBBEAN_GREEN, DUSTY_GRAY, DUSTY_GRAY_OPACITY, WHITE } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
 	height: 30px;
@@ -12,7 +13,7 @@ Root.propTypes = {
 };
 
 export const Line = styled.div`
-	background-color: rgba(151, 151, 151, 0.32);
+	background-color: ${DUSTY_GRAY_OPACITY};
 	bottom: 0;
 	height: 4px;
 	left: 0;
@@ -34,9 +35,9 @@ export const Bubbles = styled.div`
 `;
 
 export const Bubble = styled.div`
-	background-color: ${({ active }) => (active ? '#00BFA8' : '#FFFFFF')};
+	background-color: ${({ active }) => (active ? CARIBBEAN_GREEN : WHITE)};
 	border: 1px solid
-		${({ active }) => (active ? 'none' : 'rgba(151, 151, 151, 0.32)')};
+		${({ active }) => (active ? 'none' : DUSTY_GRAY)};
 	cursor: ${({ onClick = undefined }) => (onClick ? 'pointer' : 'default')};
 	display: inline-flex;
 	justify-content: center;
@@ -59,7 +60,7 @@ Bubble.propTypes = {
 };
 
 export const BubbleText = styled.span`
-	color: ${({ active }) => (active ? '#FFFFFF' : '#00BFA8')};
+	color: ${({ active }) => (active ? WHITE : CARIBBEAN_GREEN)};
 	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;

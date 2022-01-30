@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { COLOR_BLACK, COLOR_LIGHTERGREY, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../../config/constants/styled-vars';
+import { MINE_SHAFT, GALLERY, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../../config/constants/styled-vars';
 
 export const SubHeader = styled.section`
   width: 100%;
   min-height: 62px;
   border-radius: 9px;
-  background-color: ${COLOR_LIGHTERGREY};
+  background-color: ${GALLERY};
   font-family: Lato;
   font-size: 16px;
   font-weight: bold;
@@ -13,7 +13,7 @@ export const SubHeader = styled.section`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${MINE_SHAFT};
   display: flex;
   align-items: center;
   padding-left: 104px;
@@ -45,7 +45,7 @@ export const Label = styled.section`
   line-height: normal;
   letter-spacing: 1px;
   margin-right: 8px;
-  color: ${COLOR_BLACK};
+  color: ${MINE_SHAFT};
   text-transform: capitalize;
 `;
 
@@ -58,5 +58,5 @@ export const Text = styled.section`
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${COLOR_BLACK};
+  color: ${MINE_SHAFT};
 `;

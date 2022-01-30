@@ -1,15 +1,17 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	COLOR_WHITE,
-	COLOR_MINE_SHAFT,
+	WHITE,
+	MINE_SHAFT,
 	MEDIA_QUERY_SMALL,
+  MERCURY,
+  BLACK,
+  GALLERY_OPACITY,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
-	background-color: ${COLOR_WHITE};
-	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12),
-		0 1px 1px 0 rgba(0, 0, 0, 0.14);
+	background-color: ${WHITE};
+	box-shadow: 0 1px 3px 0 rgba(${BLACK}, 0.2), 0 2px 1px -1px rgba(${BLACK}, 0.12),	0 1px 1px 0 rgba(${BLACK}, 0.14);
 	display: ${({ show = false }) => (show ? 'initial' : 'none')};
 	height: calc(100vh - 122px);
 	left: 0;
@@ -36,7 +38,7 @@ Root.propTypes = {
 export const PanelTitle = styled.section`
 	align-items: center;
 	display: flex;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	font-family: Lato;
 	font-size: 13px;
 	font-weight: bold;
@@ -46,13 +48,13 @@ export const PanelTitle = styled.section`
 	width: 100%;
 
 	${MEDIA_QUERY_SMALL} {
-		border-bottom: solid 1px #e5e5e5;
+		border-bottom: solid 1px ${MERCURY};
 	}
 `;
 
 export const ListTitle = styled.section`
 	align-items: center;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	display: flex;
 	font-family: Lato;
 	font-size: 13px;
@@ -65,7 +67,7 @@ export const ListTitle = styled.section`
 export const ListItem = styled.a`
 	text-decoration: none;
 	align-items: center;
-	color: ${COLOR_MINE_SHAFT};
+	color: ${MINE_SHAFT};
 	cursor: pointer;
 	display: grid;
 	font-family: Lato;
@@ -77,7 +79,7 @@ export const ListItem = styled.a`
 	margin-bottom: 5px;
 
 	&:hover {
-		background-color: rgba(235, 234, 234, 0.5);
+		background-color: ${GALLERY_OPACITY};
 	}
 `;
 

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { MEDIA_QUERY_SMALL } from '../config/constants/styled-vars';
+import { MEDIA_QUERY_SMALL, WILD_SAND } from '../config/constants/styled-vars';
 
 export const Root = styled.div`
-	background-color: #f6f6f6;
+	background-color: ${WILD_SAND};
 	display: grid;
 	grid-template-rows: 115px auto;
 	height: 100%;

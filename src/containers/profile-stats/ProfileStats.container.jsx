@@ -13,7 +13,7 @@ import {
 	COLUMNS,
 	PRODUCTS,
 	SORT_ORDER_OPTIONS,
-} from './uitls';
+} from './utils';
 
 const ProfileStatsContainer = ({ stat }) => {
 	const dispatch = useDispatch();
