@@ -161,9 +161,15 @@ export const updateProjectConfig = factoryService(
 );
 
 export const updateProduct = factoryService((body) =>
-	patchJsonRequest(`${API_BASE_URL}/products/`+body.id, body.data),
+	patchJsonRequest(`${API_BASE_URL}/products/${body.id}`, body.data),
 );
 
 export const sendQuote = factoryService((body) =>
-	postJsonRequest(`${API_BASE_URL}/products/`+body.id+`/quote`,body.data),
+	postJsonRequest(`${API_BASE_URL}/products/${body.id}/quote`,body.data),
+);
+export const getChangeHistory = factoryService(
+	({ specID, userID }) =>
+		getJsonRequest(
+			`${API_BASE_URL}/users/${userID}/project_specs/${specID}/changes`,
+		),
 );

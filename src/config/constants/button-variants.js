@@ -7,5 +7,5 @@ export const VARIANTS_BUTTON = {
 }
 
 export const SPEC_TABLE = 'SPEC_TABLE';
-
-export const ESPEC_DOCUMENT = 'ESPEC_DOCUMENT';
+export const SPEC_HISTORY = 'SPEC_HISTORY';
+export const SPEC_DOCUMENT = 'SPEC_DOCUMENT';

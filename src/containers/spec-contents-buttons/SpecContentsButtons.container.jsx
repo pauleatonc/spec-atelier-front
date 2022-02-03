@@ -6,9 +6,12 @@ import specAddSource from '../../assets/images/icons/ic-page.svg';
 import specAddSourceW from '../../assets/images/icons/ic-table.svg';
 import specAddSourceSelected from '../../assets/images/icons/ic-page-selected.svg';
 import specAddSourceWSelected from '../../assets/images/icons/ic-table-selected.svg';
+import { CHANGE_HISTORY_SELECTED, CHANGE_HISTORY_UNSELECTED   } from '../../assets/Images';
+
 import {
-	ESPEC_DOCUMENT,
-	SPEC_TABLE
+	SPEC_DOCUMENT,
+	SPEC_TABLE,
+  SPEC_HISTORY
   } from '../../config/constants/button-variants';
 
 const SpecContentButtons = () => {
@@ -21,13 +24,18 @@ const SpecContentButtons = () => {
 		<ContentButton isTypeTable={option === 'T'}>
 			<AddIcon
 				alt="Listar archivo"
-				src={option === ESPEC_DOCUMENT ? specAddSourceSelected : specAddSource}
-				onClick={() => handdleShowTable(ESPEC_DOCUMENT)}
+				src={option === SPEC_DOCUMENT ? specAddSourceSelected : specAddSource}
+				onClick={() => handdleShowTable(SPEC_DOCUMENT)}
 			/>
 			<AddIcon
 				alt="Listar tabla"
 				src={option === SPEC_TABLE ? specAddSourceWSelected : specAddSourceW}
 				onClick={() => handdleShowTable(SPEC_TABLE)}
+			/>
+      <AddIcon
+				alt="Listar historial de cambios"
+				src={option === SPEC_HISTORY ? CHANGE_HISTORY_SELECTED : CHANGE_HISTORY_UNSELECTED}
+				onClick={() => handdleShowTable(SPEC_HISTORY)}
 			/>
 		</ContentButton>
 	);

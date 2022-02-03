@@ -4,6 +4,7 @@ import AlertContainer from '../containers/alert/Alert.container';
 import SpecHeaderContainer from '../containers/spec-header/SpecHeader.container';
 import SpecContentButtons from '../containers/spec-contents-buttons/SpecContentsButtons.container';
 import SpecDocumentContainer from '../containers/spec-document/SpecDocument.container';
+import SpecHistoryContainer from '../containers/spec-history/SpecHistory.container';
 import SpecContentsTable from '../containers/spec-contents-table/SpecContentsTable';
 import SpecNavigatorContainer from '../containers/spec-navigator/SpecNavigator.container';
 import SpecProductsSectionsContainer from '../containers/spec-products-sections/SpecProductsSections.container';
@@ -20,7 +21,7 @@ import SpecAdminContainer from '../containers/spec-admin/SpecAdmin.container';
 import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayout';
 import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
 import { changeOption } from '../containers/spec-contents-buttons/SpecContentsButtons.actions';
-import { ESPEC_DOCUMENT, SPEC_TABLE } from '../config/constants/button-variants';
+import { SPEC_DOCUMENT } from '../config/constants/button-variants';
 import { Root, Main, Navigation, Panels } from './Specification.styles';
 
 /**
@@ -35,8 +36,17 @@ const Specification = () => {
 	const { option } = dataSection;
 
 	useEffect(() => {
-		dispatch(changeOption(ESPEC_DOCUMENT));
+		dispatch(changeOption(SPEC_DOCUMENT));
 	}, []);
+
+  const mainPage = () => {
+    const content = {
+      SPEC_TABLE: <SpecContentsTable/>,
+      SPEC_DOCUMENT: <SpecDocumentContainer/>,
+      SPEC_HISTORY: <SpecHistoryContainer/>,
+    }
+    return content[option];
+  }
 
 	return (
 		<>
@@ -44,12 +54,7 @@ const Specification = () => {
 				<SpecHeaderContainer />
 				<SpecContentButtons />
 				<Main>
-					{option === SPEC_TABLE ? (
-						<SpecContentsTable />
-					) : (
-						<SpecDocumentContainer />
-					)}
-
+					{mainPage()}
 					<Navigation>
 						<SpecNavigatorContainer />
 						<Panels>
