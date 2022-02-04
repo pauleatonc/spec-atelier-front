@@ -184,3 +184,11 @@ export const undoRejectNotification = factoryService((body) =>
     `${API_BASE_URL}/projects/${body.projectId}/invitations/${body.notifiId}/refused_undo`,
   ), true,
 );
+
+export const deleteSpecBlockImage = factoryService(
+	({ blockID, specID, userID }) =>
+		patchJsonRequest(
+			`${API_BASE_URL}/users/${userID}/project_specs/${specID}/remove_product_image`,
+			{ block: blockID },
+		),
+);
