@@ -202,8 +202,18 @@ export const undoRejectNotification = factoryService(
   true,
 );
 
-export const getChangeHistory = factoryService(({ specID, userID }) =>
+export const getChangeHistory = factoryService(({ specID, userID, params }) =>
   getJsonRequest(
-    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/changes`,
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/changes${formatParams(
+      params,
+    )}`,
+  ),
+);
+
+export const getChangesAuthor = factoryService(({ specID, userID, params }) =>
+  getJsonRequest(
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/changes/authors${formatParams(
+      params,
+    )}`,
   ),
 );
