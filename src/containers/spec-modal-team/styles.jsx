@@ -7,6 +7,8 @@ import {
   BOULDER,
   MERCURY,
   CORAL,
+  BLACK_LIGHT_OPACITY,
+  PRIMARY_OPACITY,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
@@ -43,11 +45,11 @@ export const SearcherContainer = styled.div`
 
 export const Disclaimer = styled.div`
   display: flex;
-  justify-content: center;
+  padding-left: 10px;
   align-items: center;
   width: 100%;
   height: 58px;
-  background-color: rgba(58, 192, 172, 0.08);
+  background-color: ${PRIMARY_OPACITY};
   border-radius: 2px;
   margin-bottom: 25px;
 `;
@@ -107,7 +109,7 @@ export const PermissionSelectorContainer = styled.div`
   flex: 1;
 `;
 
-export const PermisionLabel = styled.p`
+export const PermissionLabel = styled.p`
   font-family: Lato;
   font-size: ${({ fontSize = 12 }) => `${fontSize}px`};
   font-weight: bold;
@@ -138,7 +140,7 @@ export const Message = styled.textarea`
   width: 100%;
   resize: none;
   min-height: 160px;
-  background-color: rgba(0, 0, 0, 0.06);
+  background-color: ${BLACK_LIGHT_OPACITY};
   border: none;
   padding: 22px;
   font-family: Lato;
@@ -179,6 +181,7 @@ export const AddMemberLabel = styled.p`
 
 export const ContainerTeam = styled.div`
   width: 100%;
+  max-height: 200px;
 `;
 
 export const InfoUserContainer = styled.div`

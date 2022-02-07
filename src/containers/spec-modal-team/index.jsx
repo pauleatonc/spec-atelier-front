@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Button } from '../../components/SpecComponents';
@@ -9,9 +9,10 @@ import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 import CloseButton from '../../components/buttons/CloseButton';
 
 import ProjectInfoShare from './components/ProjectInfoShare';
-import UserTeamMail from './components/UserTeamMail';
+import UserTeamEmail from './components/UserTeamEmail';
 import { onHideModal, onShowModal, setDetailMember } from './actions';
 import { TYPE_MODALS } from './constants';
+import { getCheckListData } from './utils';
 import {
   Container,
   ButtonCloseContainer,
@@ -25,16 +26,18 @@ import {
   ContainerTeam,
 } from './styles';
 
-const SpecModalTeam = () => {
+const SpecModalTeam = ({ sections }) => {
   const dispatch = useDispatch();
   const { teamModal: show } = useSelector((state) => state.specModalTeam);
-  const { onClose: handleClose, onExiting: handleExiting } = useModal({
-    closeCallback: () => dispatch(onHideModal()),
-  });
   const {
     project: { team },
   } = useSelector((state) => state.specDocument);
-
+  const [checklistData, setChecklistData] = useState(
+    getCheckListData(sections, null, team),
+  );
+  const { onClose: handleClose, onExiting: handleExiting } = useModal({
+    closeCallback: () => dispatch(onHideModal()),
+  });
   const showNewMemberModal = () => {
     dispatch(onHideModal());
     dispatch(onShowModal(TYPE_MODALS.NEW_MEMBER_MODAL));
@@ -43,6 +46,10 @@ const SpecModalTeam = () => {
   const handleClickMember = (member) => {
     dispatch(setDetailMember(member));
   };
+
+  useEffect(() => {
+    setChecklistData(getCheckListData(sections, null, team));
+  }, [team, sections]);
 
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
@@ -54,7 +61,7 @@ const SpecModalTeam = () => {
         {team && (
           <ContainerTeam>
             {team.map((member) => (
-              <UserTeamMail
+              <UserTeamEmail
                 key={`${member?.permission?.id}-${member?.user?.email}-${member?.user?.id}`}
                 member={member}
                 onClick={handleClickMember}
@@ -69,7 +76,10 @@ const SpecModalTeam = () => {
         <TitleConfigContainer>
           <TitleConfig>Partidas compartidas</TitleConfig>
         </TitleConfigContainer>
-        <ProjectInfoShare />
+        <ProjectInfoShare
+          checklistData={checklistData}
+          setChecklistData={setChecklistData}
+        />
         <ContainerButtons>
           <Button
             variant={VARIANTS_BUTTON.PRIMARY}

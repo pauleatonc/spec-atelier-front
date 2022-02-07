@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { Button } from '../../components/SpecComponents';
 import ModalLayout from '../../components/layouts/ModalLayout';
@@ -10,10 +11,20 @@ import CloseButton from '../../components/buttons/CloseButton';
 
 import dropArrowSource from '../../assets/images/icons/primary-arrow-down.svg';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-
+import { getCheckListData, getDataForService } from './utils';
 import ProjectInfoShare from './components/ProjectInfoShare';
-import { onHideModal } from './actions';
-import { OPTIONS_PERMISION } from './constants';
+import {
+  onHideModal,
+  onShowModal,
+  onDeleteUser,
+  onResendInvitation,
+  onUpdatePermission,
+} from './actions';
+import {
+  OPTIONS_PERMISSIONS,
+  TYPE_MODALS,
+  STATUS_INVITATIONS,
+} from './constants';
 import {
   Container,
   ButtonCloseContainer,
@@ -23,7 +34,7 @@ import {
   InfoUserContainer,
   InfoUser,
   ItemInfo,
-  PermisionLabel,
+  PermissionLabel,
   IconArrowDown,
   DeleteUser,
   LabelDelete,
@@ -35,29 +46,77 @@ import {
   ResendLabel,
 } from './styles';
 
-const DetailMemberModal = () => {
+const DetailMemberModal = ({ sections }) => {
   const dispatch = useDispatch();
+  const { id: specID } = useParams();
+  const {
+    project: { team },
+  } = useSelector((state) => state.specDocument);
+  const [checklistData, setChecklistData] = useState(
+    getCheckListData(sections),
+  );
   const { detailMemberModal: show, detailMember } = useSelector(
     (state) => state.specModalTeam,
   );
+  const [permission, setPermission] = useState(OPTIONS_PERMISSIONS[0]);
   const { onClose: handleClose, onExiting: handleExiting } = useModal({
     closeCallback: () => dispatch(onHideModal()),
   });
-  const [permision, setPermision] = useState(
-    detailMember?.permission.ability === 'write'
-      ? OPTIONS_PERMISION[0]
-      : OPTIONS_PERMISION[1],
+  const { isAllSelected, selectedSections, selectedItems } = getDataForService(
+    checklistData,
   );
 
-  const [isAllProject, setIsAllProject] = useState(false);
-  const [selectedSections, setSelectedSections] = useState([]);
-  const [selectedItems, setSelectedItems] = useState([]);
+  const waiting = detailMember?.status === STATUS_INVITATIONS.WAITING;
+
+  const updatePermission = () => {
+    const invitation = {
+      email: detailMember?.user.email,
+      sections: selectedSections,
+      items: selectedItems,
+      all: isAllSelected,
+      ability: permission.value,
+    };
+    dispatch(
+      onUpdatePermission(
+        specID,
+        detailMember?.permission.id,
+        detailMember?.permission.type,
+        invitation,
+        null,
+        true,
+      ),
+    );
+  };
+
+  const handleCancel = () => {
+    handleClose();
+    dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
+  };
+
+  const handleDeleteUSer = () =>
+    dispatch(
+      onDeleteUser(
+        specID,
+        detailMember?.permission?.id,
+        detailMember?.permission?.type,
+      ),
+    );
+
+  const handleResendInvitation = () =>
+    dispatch(onResendInvitation(specID, detailMember?.permission?.id));
 
   useEffect(() => {
-    if (detailMember) {
-      setIsAllProject(detailMember?.permission?.all);
+    if (detailMember && detailMember?.permission) {
+      setPermission(
+        OPTIONS_PERMISSIONS.find(
+          (option) => option.value === detailMember?.permission.ability,
+        ),
+      );
+      setChecklistData(
+        getCheckListData(sections, detailMember?.permission, team),
+      );
     }
-  }, [detailMember]);
+  }, [detailMember, team, sections]);
 
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
@@ -68,7 +127,12 @@ const DetailMemberModal = () => {
 
         {detailMember && (
           <InfoUserContainer>
-            <IconUser user={detailMember?.user} size={100} fontSize={20} />
+            <IconUser
+              user={detailMember?.user}
+              size={100}
+              fontSize={20}
+              waiting={waiting}
+            />
             <InfoUser>
               {detailMember?.user?.name && (
                 <ItemInfo>{detailMember?.user?.name}</ItemInfo>
@@ -82,18 +146,20 @@ const DetailMemberModal = () => {
             </InfoUser>
             <div>
               <SelectorRelative
+                width="80px"
                 name="sort"
+                right
                 hoverPrimaryColor
+                showIconInfo
                 maxHeight="180px"
-                options={OPTIONS_PERMISION}
-                placeholder="HOLA"
-                value={permision.id}
-                onChange={setPermision}
+                options={OPTIONS_PERMISSIONS}
+                value={permission.id}
+                onChange={setPermission}
                 renderInput={
                   <>
-                    <PermisionLabel fontSize={14}>
-                      {permision.label}
-                    </PermisionLabel>
+                    <PermissionLabel fontSize={14}>
+                      {permission.label}
+                    </PermissionLabel>
                     <IconArrowDown alt="" src={dropArrowSource} />
                   </>
                 }
@@ -104,33 +170,29 @@ const DetailMemberModal = () => {
 
         <TitleConfigContainer>
           <TitleConfig>Partidas compartidas</TitleConfig>
-          <DeleteUser onClick={() => console.log('delete user')}>
+          <DeleteUser onClick={handleDeleteUSer}>
             <LabelDelete>Eliminar usuario</LabelDelete>
             <IconDelete className="fas fa-trash" />
           </DeleteUser>
         </TitleConfigContainer>
         <ProjectInfoShare
           withChecks
-          isAllProject={isAllProject}
-          setIsAllProject={setIsAllProject}
-          selectedSections={selectedSections}
-          setSelectedSections={setSelectedSections}
-          selectedItems={selectedItems}
-          setSelectedItems={setSelectedItems}
+          checklistData={checklistData}
+          setChecklistData={setChecklistData}
         />
-        {detailMember?.user && detailMember?.status === 'esperando' && (
+        {detailMember?.user && waiting && (
           <Disclaimer>
             <IconInfo className="fas fa-info-circle" />
             <DescDisclaimer>
               <EmailDesc>{detailMember?.user?.email}</EmailDesc> no ha aceptado
               aún la invitación a colaborar.{' '}
-              <ResendLabel onClick={() => console.log('reenviar')}>
+              <ResendLabel onClick={handleResendInvitation}>
                 (Reenviar)
               </ResendLabel>
             </DescDisclaimer>
           </Disclaimer>
         )}
-        {detailMember?.user && detailMember?.status !== 'esperando' && (
+        {detailMember?.user && !waiting && (
           <Disclaimer>
             <IconInfo className="fas fa-info-circle" />
             <DescDisclaimer>
@@ -143,14 +205,30 @@ const DetailMemberModal = () => {
           <Button
             variant={VARIANTS_BUTTON.CANCEL}
             width="120px"
-            onClick={handleClose}
+            onClick={handleCancel}
           >
             Cancelar
           </Button>
           <Button
             variant={VARIANTS_BUTTON.PRIMARY}
             width="120px"
-            onClick={() => console.log('guardar')}
+            onClick={updatePermission}
+            disabled={
+              (detailMember?.permission.ability === permission.value &&
+                detailMember?.permission.all === isAllSelected &&
+                JSON.stringify(
+                  detailMember?.permission?.sections
+                    .map((sec) => sec.id)
+                    .sort(),
+                ) === JSON.stringify(selectedSections.sort()) &&
+                JSON.stringify(
+                  detailMember?.permission?.sections
+                    .map((sec) => sec.items.map((itm) => itm.id))
+                    .flat()
+                    .sort(),
+                ) === JSON.stringify(selectedItems.sort())) ||
+              (!selectedSections.length && !selectedItems.length)
+            }
           >
             Guardar
           </Button>

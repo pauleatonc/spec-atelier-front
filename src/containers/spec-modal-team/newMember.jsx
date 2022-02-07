@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 
@@ -11,9 +11,11 @@ import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 import { useTextarea, useInput } from '../../components/inputs/Inputs.hooks';
 import CloseButton from '../../components/buttons/CloseButton';
 
-import { OPTIONS_PERMISION, EMAIL_REGEX } from './constants';
+import { OPTIONS_PERMISSIONS, EMAIL_REGEX, TYPE_MODALS } from './constants';
 import ProjectInfoShare from './components/ProjectInfoShare';
+import { getCheckListData, getDataForService } from './utils';
 import {
+  onShowModal,
   onHideModal,
   checkUserEmail,
   sendUserInvitation,
@@ -32,7 +34,7 @@ import {
   InputMailContainer,
   Searcher,
   PermissionSelectorContainer,
-  PermisionLabel,
+  PermissionLabel,
   IconArrowDown,
   TitleConfigContainer,
   TitleConfig,
@@ -41,42 +43,61 @@ import {
   ErrorInput,
 } from './styles';
 
-const SpecModalNewMember = () => {
+const SpecModalNewMember = ({ sections }) => {
   const dispatch = useDispatch();
   const { id: projectID } = useParams();
-  const [currentCheckMail, setCurrentCheckMail] = useState('');
+  const [listEmails, setListEmails] = useState([]);
   const [inputMailInvalid, setInputMailInvalid] = useState(false);
-  const [permision, setPermision] = useState(OPTIONS_PERMISION[0]);
-  const [isAllProject, setIsAllProject] = useState(false);
-  const [selectedSections, setSelectedSections] = useState([]);
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [permission, setPermission] = useState(OPTIONS_PERMISSIONS[0]);
+  const [tempEmailValue, setTempEmailVaue] = useState();
+  const {
+    project: { team },
+  } = useSelector((state) => state.specDocument);
+  const [checklistData, setChecklistData] = useState(
+    getCheckListData(sections, null, team),
+  );
   const {
     onChange: handleMailChange,
-    set: setMailValue,
-    value: mailValue,
+    set: setEmailValue,
+    value: emailValue,
   } = useInput('');
   const {
     onChange: handleMessageChange,
     set: setMessageValue,
     value: messageValue,
   } = useTextarea('');
-  const { newMemberModal: show, showDisclaimer } = useSelector(
+  const { newMemberModal: show, nonExistentEmails } = useSelector(
     (state) => state.specModalTeam,
   );
+
+  const showDisclaimer = nonExistentEmails.length;
+
   const { onClose: handleClose, onExiting: handleExiting } = useModal({
     closeCallback: () => dispatch(onHideModal()),
     exitingCallback: () => {
       setMessageValue('');
-      setMailValue('');
+      setEmailValue('');
+      setChecklistData(getCheckListData(sections));
     },
   });
 
+  const { isAllSelected, selectedSections, selectedItems } = getDataForService(
+    checklistData,
+  );
+
+  const handleCancel = () => {
+    handleClose();
+    if (team.length) dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
+  };
+
   const handleBlur = ({ target: { value } }) => {
-    if (value) {
-      if (EMAIL_REGEX.test(value)) {
+    const emailList = value.split(',').map((val) => val.trim());
+    if (emailList.length && value.length && value !== tempEmailValue) {
+      if (emailList.every((email) => EMAIL_REGEX.test(email))) {
+        setTempEmailVaue(value);
+        setListEmails(emailList);
         setInputMailInvalid(false);
-        setCurrentCheckMail(value);
-        dispatch(checkUserEmail(value));
+        dispatch(checkUserEmail(emailList));
       } else {
         setInputMailInvalid(true);
       }
@@ -85,16 +106,19 @@ const SpecModalNewMember = () => {
 
   const sendInvitation = () => {
     const invitation = {
-      recipients: [mailValue],
+      recipients: listEmails,
       sections: selectedSections,
       items: selectedItems,
-      all: isAllProject,
-      ability: permision.value,
+      all: isAllSelected,
+      ability: permission.value,
       ...(messageValue && { message: messageValue }),
     };
     dispatch(sendUserInvitation(projectID, invitation));
   };
 
+  useEffect(() => {
+    setChecklistData(getCheckListData(sections, null, team));
+  }, [team, sections]);
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
       <Container>
@@ -111,37 +135,41 @@ const SpecModalNewMember = () => {
               placeholder="Añade a un miembro del equipo"
               onBlur={handleBlur}
               onChange={handleMailChange}
-              value={mailValue}
+              value={emailValue}
             />
             {inputMailInvalid && (
-              <ErrorInput>Formato de email invalido</ErrorInput>
+              <ErrorInput>Formato de email inválido</ErrorInput>
             )}
           </InputMailContainer>
           <PermissionSelectorContainer>
             <SelectorRelative
+              right
               name="sort"
               hoverPrimaryColor
+              showIconInfo
               maxHeight="180px"
-              options={OPTIONS_PERMISION}
+              options={OPTIONS_PERMISSIONS}
               placeholder="HOLA"
-              value={permision.id}
-              onChange={setPermision}
+              value={permission.id}
+              onChange={setPermission}
               renderInput={
                 <>
-                  <PermisionLabel>{permision.label}</PermisionLabel>
+                  <PermissionLabel>{permission.label}</PermissionLabel>
                   <IconArrowDown alt="" src={dropArrowSource} />
                 </>
               }
             />
           </PermissionSelectorContainer>
         </SearcherContainer>
-        {showDisclaimer && (
+        {!!showDisclaimer && (
           <Disclaimer>
             <IconInfo className="fas fa-info-circle" />
             <DescDisclaimer>
-              <EmailDesc>{currentCheckMail}</EmailDesc> no es parte de
-              SpecAtelier, se enviará un correo para unirse y tener acceso al
-              proyecto.
+              {showDisclaimer > 1 ? 'Los usuarios ' : 'El usuario '}
+              <EmailDesc>{nonExistentEmails.join(' y ')}</EmailDesc>
+              {showDisclaimer > 1 ? ' no son ' : ' no es '} parte de
+              SpecAtelier, se {showDisclaimer > 1 ? ' les ' : ' '} enviará un
+              correo para unirse y tener acceso al proyecto.
             </DescDisclaimer>
           </Disclaimer>
         )}
@@ -150,12 +178,8 @@ const SpecModalNewMember = () => {
         </TitleConfigContainer>
         <ProjectInfoShare
           withChecks
-          isAllProject={isAllProject}
-          setIsAllProject={setIsAllProject}
-          selectedSections={selectedSections}
-          setSelectedSections={setSelectedSections}
-          selectedItems={selectedItems}
-          setSelectedItems={setSelectedItems}
+          checklistData={checklistData}
+          setChecklistData={setChecklistData}
         />
         <Message
           placeholder="Añade un mensaje (opcional)"
@@ -166,7 +190,7 @@ const SpecModalNewMember = () => {
           <Button
             variant={VARIANTS_BUTTON.CANCEL}
             width="120px"
-            onClick={handleClose}
+            onClick={handleCancel}
           >
             Cancelar
           </Button>
@@ -175,11 +199,9 @@ const SpecModalNewMember = () => {
             width="120px"
             onClick={sendInvitation}
             disabled={
-              !mailValue ||
-              (!isAllProject &&
-                !selectedSections.length &&
-                !selectedItems.length) ||
-              inputMailInvalid
+              !listEmails.length ||
+              inputMailInvalid ||
+              (!selectedSections.length && !selectedItems.length)
             }
           >
             Enviar

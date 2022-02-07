@@ -3,8 +3,11 @@ import {
 	getJsonRequest,
 	postJsonRequest,
 	patchJsonRequest,
+	deleteJsonRequest,
 } from '../modules/requests';
 import { factoryService, formatParams } from '../modules/services';
+
+import { PERMISSIONS_TYPE } from '../containers/spec-modal-team/constants';
 
 export const getUsers = factoryService((params) =>
 	getJsonRequest(`${API_BASE_URL}/users${formatParams(params || {})}`),
@@ -14,8 +17,8 @@ export const impersonateUser = factoryService((data) =>
 	postJsonRequest(`${API_BASE_URL}/users/impersonate`, data),
 );
 
-export const checkEmail = factoryService((email) =>
-	getJsonRequest(`${API_BASE_URL}/users/check_email_exists?email=${email}`),
+export const checkEmail = factoryService((emails) =>
+	getJsonRequest(`${API_BASE_URL}/users/check_email_exists${emails}`),
 );
 
 export const inviteUserToProject = factoryService(({ projectID, params }) => {
@@ -28,19 +31,37 @@ export const inviteUserToProject = factoryService(({ projectID, params }) => {
 	);
 });
 
-export const updatePermissions = factoryService(({ id, params }) => {
-	return patchJsonRequest(
-		`${API_BASE_URL}/project_configs/${id}/update`,
-		params,
-	);
-});
-
-export const unShareUserToProject = factoryService(({ id, email }) =>
-	postJsonRequest(`${API_BASE_URL}project_configs/${id}/unshare`, { email }),
+export const updatePermission = factoryService(
+	({ projectId, permissionId, invitation, type }) => {
+		const body = {
+			[type]: invitation,
+		};
+		return patchJsonRequest(
+			`${API_BASE_URL}/projects/${projectId}/${type}s/${permissionId}`,
+			body,
+		);
+	},
 );
 
 export const getUserPermissions = factoryService(({ id, email }) =>
 	getJsonRequest(
 		`${API_BASE_URL}/project_configs/${id}/permissions?email=${email}`,
+	),
+);
+
+export const deleteUser = factoryService(
+	({ projectId, permissionId, permissionType }) =>
+		deleteJsonRequest(
+			`${API_BASE_URL}/projects/${projectId}/${
+				permissionType === PERMISSIONS_TYPE.INVITATION
+					? 'invitations'
+					: 'permissions'
+			}/${permissionId}`,
+		),
+);
+
+export const resendInvitation = factoryService(({ projectId, invitationId }) =>
+	patchJsonRequest(
+		`${API_BASE_URL}/projects/${projectId}/invitations/${invitationId}/resend`,
 	),
 );

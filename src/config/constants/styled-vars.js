@@ -10,6 +10,7 @@ export const BLACK = '0,0,0';
 export const WHITE = 'rgb(255, 255, 255)';
 export const BLACK_OPACITY = 'rgba(0, 0, 0, 0.54)';
 export const BLACK_OPACITY_DARK = 'rgba(0, 0, 0, 0.87)';
+export const BLACK_LIGHT_OPACITY = 'rgba(0, 0, 0, 0.06)';
 export const GRAY_OPACITY = 'rgba(201, 198, 198, 0.5)';
 export const SWISS_COFFEE = 'rgba(207, 200, 200, 0.5)';
 export const SILVER_CHALICE = '#AFAFAF';
@@ -55,6 +56,8 @@ export const EBB = '#EFECEC';
 export const LOADING_ACCEPT = 'rgb(156 221 212)';
 export const LOADING_ACCEPT_INITIAL = 'rbg(156 221 212)';
 export const TORCH_RED = '#FD0E35';
+export const WHITE_SMOKE = 'rgba(235, 234, 234, 0.5)';
+export const PRIMARY_OPACITY = 'rgba(58, 192, 172, 0.08)';
 
 // Media Queries
 export const MAX_SCREEN_SMALL = 768;
