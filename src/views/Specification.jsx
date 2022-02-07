@@ -92,8 +92,9 @@ const Specification = () => {
       <SpecImagesModalContainer />
       <AlertContainer />
       <SpecModalProduct />
-      <SpecModalTeam />
-      <SpecModalTeamNewMember />
+      <SpecModalTeam sections={sections} />
+      <SpecModalTeamNewMember sections={sections} />
+      <DetailMemberModal sections={sections} />
       <ContactFormContainer type="product" />
     </>
   );

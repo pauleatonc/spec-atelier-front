@@ -66,6 +66,7 @@ const DetailMemberModal = ({ sections }) => {
   );
 
   const waiting = detailMember?.status === STATUS_INVITATIONS.WAITING;
+
   const updatePermission = () => {
     const invitation = {
       email: detailMember?.user.email,
@@ -114,7 +115,7 @@ const DetailMemberModal = ({ sections }) => {
         getCheckListData(sections, detailMember?.permission, team),
       );
     }
-  }, [detailMember, team]);
+  }, [detailMember, team, sections]);
 
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
@@ -144,6 +145,7 @@ const DetailMemberModal = ({ sections }) => {
             </InfoUser>
             <div>
               <SelectorRelative
+                width="80px"
                 name="sort"
                 right
                 hoverPrimaryColor
@@ -210,7 +212,22 @@ const DetailMemberModal = ({ sections }) => {
             variant={VARIANTS_BUTTON.PRIMARY}
             width="120px"
             onClick={updatePermission}
-            disabled={!selectedSections.length && !selectedItems.length}
+            disabled={
+              (detailMember?.permission.ability === permission.value &&
+                detailMember?.permission.all === isAllSelected &&
+                JSON.stringify(
+                  detailMember?.permission?.sections
+                    .map((sec) => sec.id)
+                    .sort(),
+                ) === JSON.stringify(selectedSections.sort()) &&
+                JSON.stringify(
+                  detailMember?.permission?.sections
+                    .map((sec) => sec.items.map((itm) => itm.id))
+                    .flat()
+                    .sort(),
+                ) === JSON.stringify(selectedItems.sort())) ||
+              (!selectedSections.length && !selectedItems.length)
+            }
           >
             Guardar
           </Button>

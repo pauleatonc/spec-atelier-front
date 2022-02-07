@@ -1,15 +1,16 @@
 import onActionCreator from '../../config/store/helpers';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import {
-	onGetSpecBlocks,
-	handleUpdateTeamData,
+  handleUpdateTeamData,
+  handleSaveTeamMembers,
+  handleDeleteMemberTeam,
 } from '../spec-document/SpecDocument.actions';
 import {
-	checkEmail,
-	inviteUserToProject,
-	deleteUser,
-	resendInvitation,
-	updatePermission,
+  checkEmail,
+  inviteUserToProject,
+  deleteUser,
+  resendInvitation,
+  updatePermission,
 } from '../../services/users.service';
 import { cleanObjectsAndArrays, formatParams } from '../../modules/services';
 
@@ -22,102 +23,102 @@ export const SET_DETAIL_MEMBER = 'SET_DETAIL_MEMBER';
 export const HIDE_DISCLAIMER = 'HIDE_DISCLAIMER';
 
 export const onShowModal = (type) => (dispatch) => {
-	dispatch(onActionCreator(SHOW_MODAL, { type }));
+  dispatch(onActionCreator(SHOW_MODAL, { type }));
 };
 
 export const onHideModal = () => (dispatch) => {
-	dispatch(onActionCreator(HIDE_MODAL));
+  dispatch(onActionCreator(HIDE_MODAL));
 };
 
 export const checkUserEmail = (emailList) => (dispatch) => {
-	checkEmail(formatParams(cleanObjectsAndArrays({ emails: emailList }))).then(
-		({ non_existing_users }) => {
-			const emailsArray = non_existing_users.map((user) => user.email);
-			dispatch(onActionCreator(CHECK_EMAIL_EXIST, { emailsArray }));
-		},
-		(error) => console.error(error),
-	);
+  checkEmail(formatParams(cleanObjectsAndArrays({ emails: emailList }))).then(
+    ({ non_existing_users }) => {
+      const emailsArray = non_existing_users.map((user) => user.email);
+      dispatch(onActionCreator(CHECK_EMAIL_EXIST, { emailsArray }));
+    },
+    (error) => console.error(error),
+  );
 };
 
 export const hideDisclaimer = () => onActionCreator(HIDE_DISCLAIMER);
 
 export const sendUserInvitation = (projectID, params) => (dispatch) => {
-	inviteUserToProject({ projectID, params }).then(
-		({ message, errors }) => {
-			dispatch(onShowAlertSuccess({ message }));
-			if (!errors.length) {
-				dispatch(onGetSpecBlocks(projectID));
-				dispatch(onHideModal());
-				dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
-			}
-		},
-		(error) => console.error(error),
-	);
+  inviteUserToProject({ projectID, params }).then(
+    ({ message, errors, invitations }) => {
+      dispatch(onShowAlertSuccess({ message }));
+      if (!errors.length) {
+        dispatch(handleSaveTeamMembers(invitations));
+        dispatch(onHideModal());
+        dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
+      }
+    },
+    (error) => console.error(error),
+  );
 };
 
 export const setDetailMember = (member) => (dispatch) => {
-	dispatch(onActionCreator(SET_DETAIL_MEMBER, { member }));
+  dispatch(onActionCreator(SET_DETAIL_MEMBER, { member }));
 };
 
 export const onDeleteUser = (projectId, permissionId, permissionType) => (
-	dispatch,
-	getState,
+  dispatch,
+  getState,
 ) => {
-	const {
-		specDocument: {
-			project: { team },
-		},
-	} = getState();
-	deleteUser({ projectId, permissionId, permissionType }).then(
-		({ message, error }) => {
-			if (error) dispatch(onShowAlertSuccess({ message: error }));
-			else {
-				dispatch(onGetSpecBlocks(projectId));
-				dispatch(onShowAlertSuccess({ message }));
-				dispatch(onHideModal());
+  const {
+    specDocument: {
+      project: { team },
+    },
+  } = getState();
+  deleteUser({ projectId, permissionId, permissionType }).then(
+    ({ message, error }) => {
+      if (error) dispatch(onShowAlertSuccess({ message: error }));
+      else {
+        dispatch(handleDeleteMemberTeam(permissionId));
+        dispatch(onShowAlertSuccess({ message }));
+        dispatch(onHideModal());
 
-				if (team.length === 1)
-					dispatch(onShowModal(TYPE_MODALS.NEW_MEMBER_MODAL));
-				else dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
-			}
-		},
-		(error) => console.error(error),
-	);
+        if (team.length === 1)
+          dispatch(onShowModal(TYPE_MODALS.NEW_MEMBER_MODAL));
+        else dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
+      }
+    },
+    (error) => console.error(error),
+  );
 };
 
 export const onResendInvitation = (projectId, invitationId) => (dispatch) => {
-	resendInvitation({ projectId, invitationId }).then(
-		({ message }) => {
-			dispatch(onShowAlertSuccess({ message }));
-		},
-		(error) => console.error(error),
-	);
+  resendInvitation({ projectId, invitationId }).then(
+    ({ message }) => {
+      dispatch(onShowAlertSuccess({ message }));
+    },
+    (error) => console.error(error),
+  );
 };
 
 export const onUpdatePermission = (
-	projectId,
-	permissionId,
-	permissionType,
-	invitation,
-	callback,
-	isDetailMember,
+  projectId,
+  permissionId,
+  permissionType,
+  invitation,
+  callback,
+  isDetailMember,
 ) => (dispatch) => {
-	const type =
-		permissionType === PERMISSIONS_TYPE.INVITATION
-			? 'invitation'
-			: 'permission';
-	updatePermission({
-		projectId,
-		permissionId,
-		invitation,
-		type,
-	}).then(
-		(response) => {
-			if (callback) callback();
-			if (isDetailMember) dispatch(setDetailMember(response[type]));
-			dispatch(handleUpdateTeamData(response[type]));
-			dispatch(onShowAlertSuccess({ message: 'Se actualizó la invitación' }));
-		},
-		(error) => console.error(error),
-	);
+  const type =
+    permissionType === PERMISSIONS_TYPE.INVITATION
+      ? 'invitation'
+      : 'permission';
+  updatePermission({
+    projectId,
+    permissionId,
+    invitation,
+    type,
+  }).then(
+    (response) => {
+      if (callback) callback();
+      if (isDetailMember) dispatch(setDetailMember(response[type]));
+      dispatch(handleUpdateTeamData(response[type]));
+      dispatch(onShowAlertSuccess({ message: 'Se actualizó la invitación' }));
+    },
+    (error) => console.error(error),
+  );
 };

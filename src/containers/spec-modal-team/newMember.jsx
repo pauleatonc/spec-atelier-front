@@ -49,6 +49,7 @@ const SpecModalNewMember = ({ sections }) => {
   const [listEmails, setListEmails] = useState([]);
   const [inputMailInvalid, setInputMailInvalid] = useState(false);
   const [permission, setPermission] = useState(OPTIONS_PERMISSIONS[0]);
+  const [tempEmailValue, setTempEmailVaue] = useState();
   const {
     project: { team },
   } = useSelector((state) => state.specDocument);
@@ -91,8 +92,9 @@ const SpecModalNewMember = ({ sections }) => {
 
   const handleBlur = ({ target: { value } }) => {
     const emailList = value.split(',').map((val) => val.trim());
-    if (emailList.length && value.length) {
+    if (emailList.length && value.length && value !== tempEmailValue) {
       if (emailList.every((email) => EMAIL_REGEX.test(email))) {
+        setTempEmailVaue(value);
         setListEmails(emailList);
         setInputMailInvalid(false);
         dispatch(checkUserEmail(emailList));
@@ -116,7 +118,7 @@ const SpecModalNewMember = ({ sections }) => {
 
   useEffect(() => {
     setChecklistData(getCheckListData(sections, null, team));
-  }, [team]);
+  }, [team, sections]);
 
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
@@ -141,6 +143,7 @@ const SpecModalNewMember = ({ sections }) => {
           </InputMailContainer>
           <PermissionSelectorContainer>
             <SelectorRelative
+              right
               name="sort"
               hoverPrimaryColor
               showIconInfo
