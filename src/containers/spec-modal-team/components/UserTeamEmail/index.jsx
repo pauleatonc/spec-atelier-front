@@ -23,26 +23,27 @@ const UserTeamEmail = ({ member, onClick }) => {
 		),
 	);
 	const updatePermission = (value) => {
-		const items = [];
-		memberPermission.sections.forEach((section) => {
-			section.items.forEach((item) => items.push(item.id));
-		});
-		const invitation = {
-			email: user.email,
-			ability: value.value,
-			all: memberPermission.all,
-			sections: memberPermission.sections.map((section) => section.id),
-			items,
-		};
-		dispatch(
-			onUpdatePermission(
-				specID,
-				memberPermission?.id,
-				memberPermission?.type,
-				invitation,
-				() => setPermission(value),
-			),
-		);
+    const items = [];
+    memberPermission.sections.forEach((section) => {
+      section.items.forEach((item) => items.push(item.id));
+    });
+    const invitation = {
+      email: user.email,
+      ability: value.value,
+      all: memberPermission.all,
+      sections: memberPermission.sections.map((section) => section.id),
+      items,
+    };
+    if (memberPermission.ability !== value.value)
+      dispatch(
+        onUpdatePermission(
+          specID,
+          memberPermission?.id,
+          memberPermission?.type,
+          invitation,
+          () => setPermission(value),
+        ),
+      );
 	};
 
 	return (
