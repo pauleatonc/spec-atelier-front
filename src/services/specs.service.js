@@ -81,10 +81,10 @@ export const getSpecBlocks = factoryService(({ specID, userID }) =>
 /**
  * Sort the spec blocks.
  */
-export const sortSpecBlocks = factoryService(({ blocks, specID, userID }) =>
+export const sortSpecBlocks = factoryService(({ blocks, block, specID, userID }) =>
 	patchJsonRequest(
 		`${API_BASE_URL}/users/${userID}/project_specs/${specID}/reorder_blocks`,
-		{ blocks },
+		{ blocks, block },
 	),
 );
 

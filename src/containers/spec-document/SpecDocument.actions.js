@@ -318,7 +318,7 @@ export const onUpdateSpecBlockText = ({
 export const SORT_SPEC_BLOCKS = 'SORT_SPEC_BLOCKS';
 export const SORT_SPEC_BLOCKS_ERROR = 'SORT_SPEC_BLOCKS_ERROR';
 export const SORT_SPEC_BLOCKS_SUCCESS = 'SORT_SPEC_BLOCKS_SUCCESS';
-export const onSortSpecBlocks = ({ blocksIDs, specID }) => async (
+export const onSortSpecBlocks = ({ blocksIDs, blockId, specID }) => async (
 	dispatch,
 	getState,
 ) => {
@@ -342,6 +342,7 @@ export const onSortSpecBlocks = ({ blocksIDs, specID }) => async (
 		const { blocks: updatedBlocks } = await sortSpecBlocks({
 			specID,
 			blocks: sortedSpecBlocks,
+      block: blockId,
 			userID: auth.user?.id,
 		});
 

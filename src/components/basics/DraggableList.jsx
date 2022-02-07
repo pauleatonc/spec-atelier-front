@@ -35,7 +35,7 @@ const DraggableList = (props) => {
 		updatedElements.splice(event.destination.index, 0, removedElement);
 
 		setElements(updatedElements);
-		onChange(updatedElements.map((element) => element.props.id));
+		onChange(updatedElements.map((element) => element.props.id), selectedProduct[0].id);
 	};
 
 	useEffect(() => {
