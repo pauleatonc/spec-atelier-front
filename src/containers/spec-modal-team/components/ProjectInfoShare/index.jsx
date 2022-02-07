@@ -93,25 +93,25 @@ const ProjectInfoShare = ({ withChecks, checklistData, setChecklistData }) => {
 	}, [checklistData]);
 
 	return (
-		<Container>
-			{withChecks && (
-				<SelectAllProject onClick={toggleAllProject}>
-					<IconCheck
-						className={allSelected ? 'fas fa-check-square' : 'far fa-square'}
-					/>
-					<AllProjectLabel>Todo el Proyecto</AllProjectLabel>
-				</SelectAllProject>
-			)}
-			{checklistData.children.length && (
-				<NestedChecklist
-					withChecks={withChecks}
-					data={checklistData.children}
-					isAllSelected={isAllSelected}
-					toggleAllChildren={toggleAllChildren}
-				/>
-			)}
-		</Container>
-	);
+    <Container>
+      {withChecks && (
+        <SelectAllProject onClick={toggleAllProject}>
+          <IconCheck
+            className={allSelected ? 'fas fa-check-square' : 'far fa-square'}
+          />
+          <AllProjectLabel>Todo el Proyecto</AllProjectLabel>
+        </SelectAllProject>
+      )}
+      {!!checklistData.children.length && (
+        <NestedChecklist
+          withChecks={withChecks}
+          data={checklistData.children}
+          isAllSelected={isAllSelected}
+          toggleAllChildren={toggleAllChildren}
+        />
+      )}
+    </Container>
+  );
 };
 
 export default ProjectInfoShare;

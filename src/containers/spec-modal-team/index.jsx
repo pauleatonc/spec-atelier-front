@@ -49,7 +49,7 @@ const SpecModalTeam = ({ sections }) => {
 
   useEffect(() => {
     setChecklistData(getCheckListData(sections, null, team));
-  }, [team]);
+  }, [team, sections]);
 
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
