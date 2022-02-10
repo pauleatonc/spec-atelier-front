@@ -14,6 +14,7 @@ export const SearchContaienr = styled.div`
 	min-width: 490px;
 	padding: 16px;
 	display: flex;
+  justify-content: center;
 
 	${MEDIA_QUERY_SMALL} {
 		justify-content: start;
