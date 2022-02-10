@@ -55,10 +55,10 @@ import PRODUCT_HEADER_3X from './images/products/product-header-src@3x.jpg';
 
 import ICON_ARROW_DOWN from './images/icons/drop-arrow.svg';
 import CLOSE_ICON from './images/icons/close-icon.svg';
-import CHANGE_HISTORY_SELECTED from './images/icons/change-history-selected.svg';
-import CHANGE_HISTORY_UNSELECTED from './images/icons/change-history-unselected.svg';
 import SEARCH_ICON from './images/icons/ic_search.svg';
 import SEARCH_COLOR_ICON from './images/icons/ic_search_color.svg';
+import CHANGE_HISTORY_UNSELECTED from './images/icons/change_history_unselected.svg';
+import CHANGE_HISTORY_SELECTED from './images/icons/change_history_selected.svg';
 
 import IMAGES_UPLOAD_SOURCE from './images/icons/images-upload.svg';
 import REMOVE_SOURCE from './images/icons/remove.svg';
