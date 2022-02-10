@@ -53,6 +53,8 @@ import PRODUCT_HEADER_3X from './images/products/product-header-src@3x.jpg';
 
 import ICON_ARROW_DOWN from './images/icons/drop-arrow.svg';
 import CLOSE_ICON from './images/icons/close-icon.svg';
+import SEARCH_ICON from './images/icons/ic_search.svg';
+import SEARCH_COLOR_ICON from './images/icons/ic_search_color.svg';
 
 export {
 	LOGO_CCHC,
@@ -100,5 +102,7 @@ export {
 	PRODUCT_HEADER,
 	PRODUCT_HEADER_2X,
 	PRODUCT_HEADER_3X,
-  CLOSE_ICON
+  CLOSE_ICON,
+  SEARCH_ICON,
+  SEARCH_COLOR_ICON
 };
