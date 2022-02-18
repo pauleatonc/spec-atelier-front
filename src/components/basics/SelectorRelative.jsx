@@ -1,110 +1,117 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+import IconUser from '../IconUser';
 import {
-	Container,
-	Content,
-	Option,
-	Section,
-	NoOptions,
-	OptionLabel,
-	IconInfo,
+  Container,
+  Content,
+  Option,
+  Section,
+  NoOptions,
+  ContentUser,
+  NameSection,
+  ContentOption,
+  Label1,
+  OptionNameSection,
 } from './SelectorRelative.styles';
 
-import ToolTip from '../tooltip/Tooltip';
-
 const propTypes = {
-	options: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-			name: PropTypes.string,
-		}),
-	),
-	onChange: PropTypes.func,
-	right: PropTypes.bool,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      name: PropTypes.string,
+    }),
+  ),
+  onChange: PropTypes.func,
+  right: PropTypes.bool,
 };
 
 const defaultProps = {
-	options: [],
-	onChange: () => {},
-	right: false,
+  options: [],
+  onChange: () => { },
+  right: false,
 };
 
 const SelectorRelative = ({
-	options,
-	onChange,
-	renderInput,
-	width,
-	maxHeight,
-	right,
-	hoverPrimaryColor,
-	showIconInfo,
+  options,
+  onChange,
+  renderInput,
+  width,
+  maxHeight,
+  right,
+  hoverPrimaryColor,
+  backgroundPuertoRico
 }) => {
-	const [isOpen, setIsOpen] = useState(false);
-	const toggle = () => setIsOpen(!isOpen);
 
-	const onChangeOption = (value) => () => {
-		onChange(value);
-		toggle();
-	};
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
 
-	const onClickOusite = (callback) => {
-		const innerRef = useRef();
-		const callbackRef = useRef();
+  const onChangeOption = (value) => () => {
+    onChange(value);
+    toggle();
+  };
 
-		useEffect(() => {
-			callbackRef.current = callback;
-		});
+  const onClickOusite = (callback) => {
+    const innerRef = useRef();
+    const callbackRef = useRef();
 
-		useEffect(() => {
-			const handleClick = (e) => {
-				if (
-					innerRef.current &&
-					callbackRef.current &&
-					!innerRef.current.contains(e.target)
-				) {
-					callbackRef.current(e);
-				}
-			};
-			document.addEventListener('click', handleClick);
-			return () => document.removeEventListener('click', handleClick);
-		}, []);
-		return innerRef;
-	};
+    useEffect(() => {
+      callbackRef.current = callback;
+    });
 
-	const innerRef = onClickOusite(() => {
-		if (!isOpen) return;
-		setIsOpen(false);
-	});
+    useEffect(() => {
+      const handleClick = (e) => {
+        if (
+          innerRef.current &&
+          callbackRef.current &&
+          !innerRef.current.contains(e.target)
+        ) {
+          callbackRef.current(e);
+        }
+      };
+      document.addEventListener('click', handleClick);
+      return () => document.removeEventListener('click', handleClick);
+    }, []);
 
-	return (
-		<Container isOpen={isOpen} ref={innerRef} width={width}>
-			<Section onClick={toggle}>{renderInput}</Section>
-			<Content
-				isOpen={isOpen}
-				width={width}
-				maxHeight={maxHeight}
-				right={right}
-				showIconInfo={showIconInfo}
-			>
-				{options.map((option) => (
-					<Option
-						key={option.id}
-						onClick={onChangeOption(option)}
-						value={option.id}
-						hoverPrimaryColor={hoverPrimaryColor}
-					>
-						<OptionLabel>{option.label}</OptionLabel>
-						{showIconInfo && option?.tooltip && (
-							<ToolTip content={option.tooltip}>
-								<IconInfo className="fas fa-info-circle" />
-							</ToolTip>
-						)}
-					</Option>
-				))}
-				{!options.length && <NoOptions>No hay opciones disponibles</NoOptions>}
-			</Content>
-		</Container>
-	);
+    return innerRef;
+  };
+
+  const innerRef = onClickOusite(() => {
+    if (!isOpen) return;
+    setIsOpen(false);
+  });
+
+  return (
+    <Container isOpen={isOpen} ref={innerRef} width={width}>
+      <Section onClick={toggle}>{renderInput}</Section>
+      <Content
+        isOpen={isOpen}
+        width={width}
+        maxHeight={maxHeight}
+        right={right}
+      >
+        {
+          (options.map(option => (
+            <ContentOption key={option.id} backgroundPuertoRico={backgroundPuertoRico}>
+              <Option value={option.id} onClick={onChangeOption(option)} hoverPrimaryColor={hoverPrimaryColor}>
+                {Object.keys(option).includes('profile_image')
+                  ?
+                  <ContentUser>
+                    <IconUser user={option} size='28' />
+                    <NameSection>{option.name}</NameSection>
+                  </ContentUser>
+                  :
+                  <OptionNameSection>
+                    {option.label || option.name}
+                  </OptionNameSection>
+                }
+              </Option>
+            </ContentOption>
+          )))
+        }
+        {!options.length && <NoOptions>No hay Opciones Disponibles</NoOptions>}
+      </Content>
+    </Container>
+  );
 };
 
 SelectorRelative.propTypes = propTypes;

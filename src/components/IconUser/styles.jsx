@@ -15,9 +15,9 @@ export const Container = styled.div`
 `;
 
 export const ImageProfile = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: ${({ size = 24 }) => `${size / 2}px`};
+	width: 100%;
+	height: 100%;
+  border-radius: 50%;
 `;
 
 export const LetterNameUser = styled.span`

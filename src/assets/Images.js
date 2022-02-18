@@ -130,6 +130,9 @@ import ITEMS_ACTIVE_SOURCE from './images/icons/spec-items_active.svg';
 import SETTING_LINES from './images/icons/setting-lines.svg';
 import SETTING_LINES_ACTIVE from './images/icons/setting-lines_active.svg';
 import ARROW_UP_ACIVE_SOURCE from './images/icons/arrow-up-active.svg';
+import ADD_ICON from './images/icons/ic_add.svg';
+import EDIT_ICON from './images/icons/ic_edit.svg';
+import DELETE_ICON from './images/icons/ic_delete.svg';
 
 export {
   LOGO_CCHC,
@@ -251,4 +254,7 @@ export {
   SETTING_LINES,
   SETTING_LINES_ACTIVE,
   ARROW_UP_ACIVE_SOURCE,
+  ADD_ICON,
+  DELETE_ICON,
+  EDIT_ICON,
 };

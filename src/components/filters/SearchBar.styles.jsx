@@ -24,7 +24,6 @@ export const Root = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0px 10px;
-  max-width: 237px;
   height: 38px;
   box-shadow: 0 0 4px 0 rgba(${BLACK}, 0.25);
   border-radius: 5px;

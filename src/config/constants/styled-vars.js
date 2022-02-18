@@ -37,6 +37,7 @@ export const DUSTY_GRAY = '#979797';
 export const DUSTY_GRAY_OPACITY = 'rgba(151, 151, 151, 0.32)';
 export const DUSTY_GRAY_RGB = '151, 151, 151';
 export const PUERTO_RICO = '#3FBFAD';
+export const PUERTO_RICO_OPACITY = 'rgba(66, 191, 173, 0.5)';
 export const NOBEL = '#B3B3B3';
 export const CONCRETE = '#f2f2f2';
 export const CONCRETE_OPACITY = 'rgba(242, 242, 242, 0.54)';
@@ -48,9 +49,8 @@ export const BURNING_ORANGE = '#ff6e37';
 export const TIARA = '#cad7d6';
 export const CHAMPAGNE = '#fae5da';
 export const WILD_SAND = '#f6f6f6';
-export const SHADOW_GREY =
-  '0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.14);';
-export const PUERTO_RICO_BACKGROUND = 'rgba(66, 191, 173, 0.15)';
+export const SHADOW_GREY = '0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.14);';
+export const PUERTO_RICO_BACKGROUND = 'rgba(66, 191, 173, 0.2)';
 export const MORNING_GLORY = '#9CDDD4';
 export const RED = '#FF0000';
 export const EBB = '#EFECEC';
@@ -65,9 +65,7 @@ export const MAX_SCREEN_SMALL = 768;
 export const MAX_SCREEN_MEDIUM = 1080;
 export const STANDAR_MEDIUM = 992;
 export const MEDIA_QUERY_SMALL = `@media (max-width: ${MAX_SCREEN_SMALL}px)`;
-export const MEDIA_QUERY_MEDIUM = `@media (min-width: ${
-  MAX_SCREEN_SMALL + 1
-}px) and (max-width: ${MAX_SCREEN_MEDIUM}px)`;
+export const MEDIA_QUERY_MEDIUM = `@media (min-width: ${MAX_SCREEN_SMALL + 1}px) and (max-width: ${MAX_SCREEN_MEDIUM}px)`;
 export const MEDIA_QUERY_STANDAR_MEDIUM = `@media (max-width: ${STANDAR_MEDIUM}px)`;
 export const MEDIA_QUERY_MAX = `@media (min-width: ${STANDAR_MEDIUM}px)`;
 export const MAX_SCREEN_SMALL_NAV_JS = `(max-width: ${MAX_SCREEN_SMALL}px)`;

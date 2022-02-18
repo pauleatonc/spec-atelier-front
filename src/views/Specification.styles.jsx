@@ -5,7 +5,6 @@ export const Root = styled.div`
   background-color: ${WILD_SAND};
   display: grid;
   grid-template-rows: 115px auto;
-  height: 100%;
   margin: 0;
   overflow: auto;
   padding: 0;
@@ -46,7 +45,6 @@ export const Navigation = styled.div`
   top: 115px;
 
   ${MEDIA_QUERY_SMALL} {
-    grid-template-rows: auto 62px;
     width: 100%;
     grid-template-columns: unset;
     top: unset;

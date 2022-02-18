@@ -1,7 +1,5 @@
 import { CHANGE_OPTION } from './SpecContentsButtons.actions';
-import {
-	SPEC_DOCUMENT,
-  } from '../../config/constants/button-variants';
+import { SPEC_DOCUMENT } from '../../config/constants/button-variants';
 
 const dataSectionState = {
 	option: SPEC_DOCUMENT,

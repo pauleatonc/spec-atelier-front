@@ -31,6 +31,7 @@ import ProfileStatsReducer from '../../containers/profile-stats/ProfileStats.red
 import ModalPlanFormReducer from '../../containers/modal-plan-form/reducer';
 import dataSectionsReducer from '../../containers/spec-contents-buttons/SpecContentsButtons.reducer';
 import specModalTeamReducer from '../../containers/spec-modal-team/reducer';
+import specHistoryReducer from '../../containers/spec-history/SpecHistory.reducer'
 
 export default combineReducers({
 	auth: authReducer,
@@ -65,4 +66,5 @@ export default combineReducers({
 	modalPlanForm: ModalPlanFormReducer,
 	dataSection: dataSectionsReducer,
 	specModalTeam: specModalTeamReducer,
+  specHistory: specHistoryReducer
 });
