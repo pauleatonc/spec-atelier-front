@@ -13,6 +13,7 @@ import {
   PermissionsButtonContainer,
   Logo,
   MobileLogo,
+  TextButton,
   ContainerTeam,
 } from './SpecHeader.styles';
 import logoSource from '../../assets/images/logo-spec.png';
@@ -100,7 +101,7 @@ const SpecHeader = () => {
             <PermissionsButtonContainer>
               <Button width="120px" variant="primary" onClick={openModalTeam}>
                 <i className="fas fa-share-alt" />
-                &emsp;Equipo
+                <TextButton>Equipo</TextButton>
               </Button>
             </PermissionsButtonContainer>
             {/*

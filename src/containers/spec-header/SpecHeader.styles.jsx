@@ -114,3 +114,7 @@ export const PermissionsButtonContainer = styled.div`
   padding: 0 23px;
   margin-rigth: 25px;
 `;
+
+export const TextButton = styled.div`
+  padding-left: 8px;
+`;
