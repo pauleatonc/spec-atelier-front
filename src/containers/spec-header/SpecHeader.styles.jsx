@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import {
-	MINE_SHAFT,
-	MEDIA_QUERY_SMALL,
-	NAVBAR_HEIGHT,
+  MINE_SHAFT,
+  MEDIA_QUERY_SMALL,
+  NAVBAR_HEIGHT,
   WHITE,
   DUSTY_GRAY_RGB,
 } from '../../config/constants/styled-vars';
@@ -36,7 +36,7 @@ export const Separator = styled.span`
 export const Section = styled.section`
 	padding: 0 23px;
 	padding-left: ${({ withoutPaddingLeft }) =>
-		withoutPaddingLeft ? '0' : '23px'};
+    withoutPaddingLeft ? '0' : '23px'};
 
 	${MEDIA_QUERY_SMALL} {
 		padding: 0 15px;
@@ -109,4 +109,8 @@ export const PermissionsButtonContainer = styled.div`
 	align-items: center;
 	height: 100%;
 	margin: 0 23px;
+`;
+
+export const TextButton = styled.div`
+  padding-left: 8px; 
 `;

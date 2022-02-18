@@ -11,23 +11,18 @@ import {
   Monetization,
   SpecOptions,
   PermissionsButtonContainer,
+  TextButton,
   ContainerTeam,
 } from './SpecHeader.styles';
 import logoSource from '../../assets/images/logo-spec.png';
 import logo2xSource from '../../assets/images/logo-spec@2x.png';
 import logo3xSource from '../../assets/images/logo-spec@3x.png';
-import {
-  cleanDownload,
-  downloadSpecDocument,
-  downloadBudgetDocument
-} from './SpecHeader.actions';
+import { cleanDownload, downloadSpecDocument, downloadBudgetDocument } from './SpecHeader.actions';
 import ItemsNavBar from '../../components/navbar/navbar-app/Components/ItemsNavBar';
 import { onShowModal } from '../spec-modal-team/actions';
 import { TYPE_MODALS } from '../spec-modal-team/constants';
 
-/**
- * The SpecHeader's container.
- */
+/** The SpecHeader's container. */
 const SpecHeader = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -95,7 +90,7 @@ const SpecHeader = () => {
             <PermissionsButtonContainer>
               <Button width="120px" variant="primary" onClick={openModalTeam}>
                 <i className="fas fa-share-alt" />
-                &emsp;Equipo
+                <TextButton>Equipo</TextButton>
               </Button>
             </PermissionsButtonContainer>
             {/*
