@@ -17,14 +17,13 @@ const ProjectsFilters = () => {
     (state) => state.projectsList,
   );
   const [keyword, setKeywords] = useState(params.keywords || '');
-  const minLengthSearch = 3;
 
   const onChangeParams = ({ target: { name, value } }) => {
     setKeywords(value);
     dispatch(
       getMyProjects({
         ...params,
-        [name]: value.length >= minLengthSearch ? value : '',
+        [name]: value,
       }),
     );
   };
