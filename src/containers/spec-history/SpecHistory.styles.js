@@ -1,17 +1,17 @@
 import styled from 'styled-components'
-import { 
+import {
   BLACK,
-  BLACK_OPACITY_DARK, 
-  BOULDER, 
-  CONCRETE, 
-  CONCRETE_OPACITY, 
-  DUSTY_GRAY_RGB, 
-  MEDIA_QUERY_SMALL, 
-  MINE_SHAFT, 
-  PUERTO_RICO, 
-  PUERTO_RICO_OPACITY, 
-  SILVER, 
-  WHITE 
+  BLACK_OPACITY_DARK,
+  BOULDER,
+  CONCRETE,
+  CONCRETE_OPACITY,
+  DUSTY_GRAY_RGB,
+  MEDIA_QUERY_SMALL,
+  MINE_SHAFT,
+  PUERTO_RICO,
+  PUERTO_RICO_OPACITY,
+  SILVER,
+  WHITE
 } from '../../config/constants/styled-vars';
 
 export const ContainerTable = styled.div`

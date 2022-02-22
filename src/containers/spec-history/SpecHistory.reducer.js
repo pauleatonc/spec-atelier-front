@@ -2,7 +2,7 @@ import {
   GET_CHANGE_HISTORY_SUCCESS,
   GET_CHANGES_AUTHOR,
   CHANGE_OPTION_CHANGES_MANAGEMENT,
-  GET_OPTION_ALL_AUTHORS
+  SET_AUTHOR
 } from './SpecHistory.actions';
 import { SPEC_HISTORY_TABLE } from '../../config/constants/button-variants';
 
@@ -31,7 +31,7 @@ const specHistoryReducer = (state = specHistoryState, { payload, type }) => {
         page: payload.changes.page,
         loading: false,
 			};
-    case GET_CHANGES_AUTHOR: 
+    case GET_CHANGES_AUTHOR:
       return {
         ...state,
         params: payload.params,
@@ -44,11 +44,10 @@ const specHistoryReducer = (state = specHistoryState, { payload, type }) => {
 				option_changes_management: payload.option_changes_management,
         loading: false,
 			};
-    case GET_OPTION_ALL_AUTHORS:
+    case SET_AUTHOR:
       return {
         ...state,
         author: payload.author,
-        loading: false,
       }
 		default: {
 			return state;

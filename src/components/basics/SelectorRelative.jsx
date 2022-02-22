@@ -10,7 +10,6 @@ import {
   ContentUser,
   NameSection,
   ContentOption,
-  Label1,
   OptionNameSection,
 } from './SelectorRelative.styles';
 
