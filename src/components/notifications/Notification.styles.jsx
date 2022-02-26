@@ -176,6 +176,7 @@ export const LinkSeeAll = styled.a`
   color: ${({ loadingNoti }) => (loadingNoti ? MORNING_GLORY : PUERTO_RICO)};
   pointer-events: ${({ loadingNoti }) => (loadingNoti ? 'none' : 'initial')};
   font-weight: bold;
+  cursor: pointer;
 `;
 
 export const UndoSpan = styled.span`
