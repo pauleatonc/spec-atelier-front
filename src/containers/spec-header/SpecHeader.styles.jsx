@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import {
+  SPEC_DOWNLOAD_ACTIVE,
+  SPEC_DOWNLOAD_SOURCE,
+  SPEC_MONETIZATION_ACTIVE,
+  SPEC_MONETIZATION,
+} from '../../assets/Images';
+import {
   MINE_SHAFT,
   MEDIA_QUERY_SMALL,
   NAVBAR_HEIGHT,
   WHITE,
   DUSTY_GRAY_RGB,
 } from '../../config/constants/styled-vars';
-import {
-  SPEC_DOWNLOAD,
-  SPEC_DOWNLOAD_ACTIVE,
-  SPEC_MONETIZATION,
-  SPEC_MONETIZATION_ACTIVE,
-} from '../../assets/Images';
 
 export const Root = styled.div`
   display: flex;
@@ -20,13 +20,9 @@ export const Root = styled.div`
   background-color: ${WHITE};
   border-bottom-right-radius: 2px;
   border-top-right-radius: 2px;
-  padding: 4px 20px 4px 36px;
+  padding: 5px;
   align-items: flex-end;
-  ${MEDIA_QUERY_SMALL} {
-    padding: 0px;
-    width: 100%;
-    justify-content: space-around;
-  }
+  position: relative;
 `;
 
 export const Separator = styled.span`
@@ -69,7 +65,7 @@ const Span = styled.span`
 `;
 
 export const Download = styled(Span)`
-  background-image: url('${SPEC_DOWNLOAD}');
+  background-image: url('${SPEC_DOWNLOAD_SOURCE}');
   &:hover {
     background-image: url('${SPEC_DOWNLOAD_ACTIVE}');
   }
