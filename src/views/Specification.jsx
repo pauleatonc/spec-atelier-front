@@ -31,79 +31,79 @@ import { Root, Main, Navigation, Panels } from './Specification.styles';
  * The Specification's view.
  */
 const Specification = () => {
-	const dispatch = useDispatch();
-	const [showFilters, setShowFilters] = useState(false);
-	const [selectedSection, setSelectedSection] = useState('');
-	const [selectedItem, setSelectedItem] = useState('');
-	const { dataSection } = useSelector((state) => state);
-	const { option } = dataSection;
-	const { sections } = useSelector((state) => state.specDocument);
+  const dispatch = useDispatch();
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedSection, setSelectedSection] = useState('');
+  const [selectedItem, setSelectedItem] = useState('');
+  const { dataSection } = useSelector((state) => state);
+  const { option } = dataSection;
+  const { sections } = useSelector((state) => state.specDocument);
 
-	useEffect(() => {
-		dispatch(changeOption(SPEC_DOCUMENT));
-	}, []);
+  useEffect(() => {
+    dispatch(changeOption(SPEC_DOCUMENT));
+  }, []);
 
   const mainPage = () => {
     const content = {
-      SPEC_TABLE: <SpecContentsTable/>,
-      SPEC_DOCUMENT: <SpecDocumentContainer/>,
-      SPEC_HISTORY: <SpecHistoryContainer/>,
-    }
+      SPEC_TABLE: <SpecContentsTable />,
+      SPEC_DOCUMENT: <SpecDocumentContainer />,
+      SPEC_HISTORY: <SpecHistoryContainer />,
+    };
     return content[option];
-  }
+  };
 
-	return (
-		<>
-			<Root>
-				<SpecHeaderContainer />
-				<SpecContentButtons />
-				<Main>
-					{mainPage()}
-					<Navigation>
-						<SpecNavigatorContainer />
-						<Panels>
-							<SpecProductsPanelLayout
-								showFilters={showFilters}
-								selectedSection={selectedSection}
-								selectedItem={selectedItem}
-								setShowFilters={setShowFilters}
-								setSelectedSection={setSelectedSection}
-								setSelectedItem={setSelectedItem}
-								filtersPanels={[
-									<SpecProductsSectionsContainer
-										setShowFilters={setShowFilters}
-										setSelectedSection={setSelectedSection}
-										selectedSection={selectedSection}
-									/>,
-									<SpecProductsItemsContainer
-										setShowFilters={setShowFilters}
-										setSelectedItem={setSelectedItem}
-										selectedSection={selectedSection}
-										selectedItem={selectedItem}
-									/>,
-								]}
-							>
-								<SpecProductsContainer />
-							</SpecProductsPanelLayout>
-							<SpecContentsContainer />
-							<SpecAdminContainer />
-						</Panels>
-					</Navigation>
-				</Main>
-			</Root>
-			<SpecCreateProductOneContainer />
-			<SpecCreateProductTwoContainer />
-			<SpecCreateProductThreeContainer />
-			<SpecEditProductContainer />
-			<SpecImagesModalContainer />
-			<AlertContainer />
-			<SpecModalProduct />
+  return (
+    <>
+      <Root>
+        <SpecHeaderContainer />
+        <SpecContentButtons />
+        <Main>
+          {mainPage()}
+          <Navigation>
+            <SpecNavigatorContainer />
+            <Panels>
+              <SpecProductsPanelLayout
+                showFilters={showFilters}
+                selectedSection={selectedSection}
+                selectedItem={selectedItem}
+                setShowFilters={setShowFilters}
+                setSelectedSection={setSelectedSection}
+                setSelectedItem={setSelectedItem}
+                filtersPanels={[
+                  <SpecProductsSectionsContainer
+                    setShowFilters={setShowFilters}
+                    setSelectedSection={setSelectedSection}
+                    selectedSection={selectedSection}
+                  />,
+                  <SpecProductsItemsContainer
+                    setShowFilters={setShowFilters}
+                    setSelectedItem={setSelectedItem}
+                    selectedSection={selectedSection}
+                    selectedItem={selectedItem}
+                  />,
+                ]}
+              >
+                <SpecProductsContainer />
+              </SpecProductsPanelLayout>
+              <SpecContentsContainer />
+              <SpecAdminContainer />
+            </Panels>
+          </Navigation>
+        </Main>
+      </Root>
+      <SpecCreateProductOneContainer />
+      <SpecCreateProductTwoContainer />
+      <SpecCreateProductThreeContainer />
+      <SpecEditProductContainer />
+      <SpecImagesModalContainer />
+      <AlertContainer />
+      <SpecModalProduct />
       <SpecModalTeam sections={sections} />
       <SpecModalTeamNewMember sections={sections} />
       <DetailMemberModal sections={sections} />
-			<ContactFormContainer type="product" />
-		</>
-	);
+      <ContactFormContainer type="product" />
+    </>
+  );
 };
 
 export default Specification;

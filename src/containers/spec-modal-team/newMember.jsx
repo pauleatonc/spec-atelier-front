@@ -201,7 +201,9 @@ const SpecModalNewMember = ({ sections }) => {
             disabled={
               !listEmails.length ||
               inputMailInvalid ||
-              (!selectedSections.length && !selectedItems.length)
+              (!isAllSelected &&
+                !selectedSections.length &&
+                !selectedItems.length)
             }
           >
             Enviar
