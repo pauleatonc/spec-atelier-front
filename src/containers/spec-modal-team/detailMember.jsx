@@ -15,7 +15,6 @@ import { getCheckListData, getDataForService } from './utils';
 import ProjectInfoShare from './components/ProjectInfoShare';
 import {
   onHideModal,
-  onShowModal,
   onDeleteUser,
   onResendInvitation,
   onUpdatePermission,
@@ -60,7 +59,7 @@ const DetailMemberModal = ({ sections }) => {
   );
   const [permission, setPermission] = useState(OPTIONS_PERMISSIONS[0]);
   const { onClose: handleClose, onExiting: handleExiting } = useModal({
-    closeCallback: () => dispatch(onHideModal()),
+    closeCallback: () => dispatch(onHideModal(TYPE_MODALS.DETAIL_MEMBER_MODAL)),
   });
   const { isAllSelected, selectedSections, selectedItems } = getDataForService(
     checklistData,
@@ -90,7 +89,6 @@ const DetailMemberModal = ({ sections }) => {
 
   const handleCancel = () => {
     handleClose();
-    dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
   };
 
   const handleDeleteUSer = () =>

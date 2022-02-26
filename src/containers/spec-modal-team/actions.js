@@ -26,8 +26,8 @@ export const onShowModal = (type) => (dispatch) => {
   dispatch(onActionCreator(SHOW_MODAL, { type }));
 };
 
-export const onHideModal = () => (dispatch) => {
-  dispatch(onActionCreator(HIDE_MODAL));
+export const onHideModal = (type) => (dispatch) => {
+  dispatch(onActionCreator(HIDE_MODAL, { type }));
 };
 
 export const checkUserEmail = (emailList) => (dispatch) => {
@@ -48,7 +48,7 @@ export const sendUserInvitation = (projectID, params) => (dispatch) => {
       dispatch(onShowAlertSuccess({ message }));
       if (!errors.length) {
         dispatch(handleSaveTeamMembers(invitations));
-        dispatch(onHideModal());
+        dispatch(onHideModal(TYPE_MODALS.NEW_MEMBER_MODAL));
         dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
       }
     },
@@ -75,11 +75,12 @@ export const onDeleteUser = (projectId, permissionId, permissionType) => (
       else {
         dispatch(handleDeleteMemberTeam(permissionId));
         dispatch(onShowAlertSuccess({ message }));
-        dispatch(onHideModal());
+        dispatch(onHideModal(TYPE_MODALS.DETAIL_MEMBER_MODAL));
 
-        if (team.length === 1)
+        if (team.length === 1) {
+          dispatch(onHideModal(TYPE_MODALS.TEAM_MODAL));
           dispatch(onShowModal(TYPE_MODALS.NEW_MEMBER_MODAL));
-        else dispatch(onShowModal(TYPE_MODALS.TEAM_MODAL));
+        }
       }
     },
     (error) => console.error(error),
