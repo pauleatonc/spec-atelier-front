@@ -6,6 +6,7 @@ export const Container = styled.footer`
   background-color: ${TERTIARY};
   min-height: 300px;
   display: flex;
+  justify-content: center;
 `
 
 export const Content = styled.section`
@@ -43,7 +44,7 @@ export const Menu = styled.div`
     align-items: flex-start;
   }
 `;
-export const ImageConainer = styled.div`
+export const ImageContainer = styled.div`
   padding-right: 80px;
   height: 100%;
   display: flex;

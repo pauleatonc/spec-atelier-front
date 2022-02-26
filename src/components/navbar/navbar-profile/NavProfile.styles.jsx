@@ -61,7 +61,7 @@ export const Separator = styled.div`
 `;
 
 export const ProfilePictureContainer = styled.div`
-  margin: 12px;
+  margin: 9px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
