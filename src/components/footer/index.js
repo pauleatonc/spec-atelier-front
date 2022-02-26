@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LOGO_SPEC_SMALL, LOGO_CCHC, LOGO_CENTRO_INNOVACION, LOGO_CORFO } from '../../assets/Images';
 import { Image } from '../SpecComponents';
-import { Container, Content, ImageConainer, LeftContent, RightContent, Menu } from './Footer.styles';
+import { LOGO_SMALL_WHITE, LOGO_CCHC, LOGO_CENTRO_INNOVACION, LOGO_CORFO } from '../../assets/Images';
+import { Container, Content, LeftContent, RightContent, Menu, ImageContainer } from './Footer.styles';
 
 const Footer = () => (
   <Container>
@@ -13,7 +13,7 @@ const Footer = () => (
             <img
               alt=""
               className="footer__inner__menu__container__logo__content"
-              src={LOGO_SPEC_SMALL}
+              src={LOGO_SMALL_WHITE}
             />
           </div>
           {/* <Link className="footer__inner__menu__container__link" to="/us">
@@ -26,11 +26,11 @@ const Footer = () => (
             Marcas
           </Link>
         </Menu>
-        <ImageConainer>
+        <ImageContainer>
           <Image src={LOGO_CCHC} width="120px" height="64px" />
           <Image src={LOGO_CENTRO_INNOVACION} width="164px" height="56px" />
           <Image src={LOGO_CORFO} width="168px" height="64px" />
-        </ImageConainer>
+        </ImageContainer>
       </LeftContent>
       <RightContent>
         <div className="footer__inner__info__container">

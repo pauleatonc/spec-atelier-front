@@ -1,7 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import {
+  cleanDownload,
+  downloadSpecDocument,
+  downloadBudgetDocument,
+} from './SpecHeader.actions';
+import { onShowModal } from '../spec-modal-team/actions';
+import { TYPE_MODALS } from '../spec-modal-team/constants';
+import ItemsNavBar from '../../components/navbar/navbar-app/Components/ItemsNavBar';
 import { Button } from '../../components/SpecComponents';
+import { MAX_SCREEN_MEDIUM_WIDTH } from '../../config/constants/styled-vars';
+import { LOGO_MOBILE, LOGO_SMALL_COLOR } from '../../assets/Images';
 import {
   Root,
   Separator,
@@ -11,22 +21,9 @@ import {
   Monetization,
   SpecOptions,
   PermissionsButtonContainer,
-  Logo,
-  MobileLogo,
   TextButton,
   ContainerTeam,
 } from './SpecHeader.styles';
-import logoSource from '../../assets/images/logo-spec.png';
-import logo2xSource from '../../assets/images/logo-spec@2x.png';
-import logo3xSource from '../../assets/images/logo-spec@3x.png';
-import {
-  cleanDownload,
-  downloadSpecDocument,
-  downloadBudgetDocument,
-} from './SpecHeader.actions';
-import ItemsNavBar from '../../components/navbar/navbar-app/Components/ItemsNavBar';
-import { onShowModal } from '../spec-modal-team/actions';
-import { TYPE_MODALS } from '../spec-modal-team/constants';
 
 /** The SpecHeader's container */
 const SpecHeader = () => {
@@ -46,7 +43,6 @@ const SpecHeader = () => {
 
   const handleDownloadClick = () =>
     dispatch(downloadSpecDocument({ specID: id }));
-
   const handleDownloadBudgetClick = () =>
     dispatch(downloadBudgetDocument({ specID: id }));
 
@@ -65,21 +61,22 @@ const SpecHeader = () => {
     if (url) downloadDoc();
   }, [url]);
 
+  const imgLogo = () => {
+    let src;
+    if (window.matchMedia(MAX_SCREEN_MEDIUM_WIDTH).matches) {
+      src = LOGO_SMALL_COLOR;
+    } else {
+      src = LOGO_MOBILE;
+    }
+    return <img src={src} alt="Logotipo de SpecAtelier" />;
+  };
+
   return (
     <Root>
       <SpecOptions>
         <Section>
           <Link to="/projects" data-view="projects">
-            <Logo>
-              <img
-                alt="Specatelier"
-                src={logoSource}
-                srcSet={`${logo2xSource} 2x, ${logo3xSource} 3x`}
-              />
-            </Logo>
-            <MobileLogo>
-              <img alt="Specatelier" src={logoIcon} />
-            </MobileLogo>
+            {imgLogo()}
           </Link>
         </Section>
         <Separator />

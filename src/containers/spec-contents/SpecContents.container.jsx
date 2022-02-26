@@ -78,7 +78,7 @@ const SpecContents = () => {
               href={
                 selectedSection === section.id
                   ? `${pathname}#${section.id}`
-                  : 'javascript:;'
+                  : undefined
               }
             >
               <span>{section.element.name}</span>
@@ -100,7 +100,7 @@ const SpecContents = () => {
                     href={
                       selectedItem === item.id
                         ? `${pathname}#${item.id}`
-                        : 'javascript:;'
+                        : undefined
                     }
                   >
                     <span>{item.element.name}</span>

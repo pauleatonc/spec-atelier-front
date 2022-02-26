@@ -8,6 +8,7 @@ export const SECONDARY = 'rgb(244, 130, 80)';
 export const TERTIARY = 'rgb(8, 38, 44)';
 export const BLACK = '0,0,0';
 export const WHITE = 'rgb(255, 255, 255)';
+export const WHITE_RGB = '255, 255, 255';
 export const BLACK_OPACITY = 'rgba(0, 0, 0, 0.54)';
 export const BLACK_OPACITY_DARK = 'rgba(0, 0, 0, 0.87)';
 export const GRAY_OPACITY = 'rgba(201, 198, 198, 0.5)';
@@ -67,6 +68,7 @@ export const MEDIA_QUERY_STANDAR_MEDIUM = `@media (max-width: ${STANDAR_MEDIUM}p
 export const MEDIA_QUERY_MAX = `@media (min-width: ${STANDAR_MEDIUM}px)`;
 export const MAX_SCREEN_SMALL_NAV_JS = `(max-width: ${MAX_SCREEN_SMALL}px)`;
 export const MAX_SCREEN_STANDAR_MEDIUM = `(max-width: ${STANDAR_MEDIUM}px)`;
+export const MAX_SCREEN_MEDIUM_WIDTH = `(max-width: ${MAX_SCREEN_MEDIUM}px)`;
 
 // Navbar
 export const NAVBAR_HEIGHT = '64px';
