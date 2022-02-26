@@ -322,44 +322,45 @@ export const onUpdateSpecBlockText = ({
 export const SORT_SPEC_BLOCKS = 'SORT_SPEC_BLOCKS';
 export const SORT_SPEC_BLOCKS_ERROR = 'SORT_SPEC_BLOCKS_ERROR';
 export const SORT_SPEC_BLOCKS_SUCCESS = 'SORT_SPEC_BLOCKS_SUCCESS';
-export const onSortSpecBlocks = ({ blocksIDs, specID }) => async (
-  dispatch,
-  getState,
+export const onSortSpecBlocks = ({ blocksIDs, blockId, specID }) => async (
+	dispatch,
+	getState,
 ) => {
-  onActionCreator(SORT_SPEC_BLOCKS);
+	onActionCreator(SORT_SPEC_BLOCKS);
 
-  try {
-    const { auth, specDocument } = getState();
-    const sortedSpecBlocks = blocksIDs.reduce((blocks, blockID) => {
-      const found = specDocument.blocks.find((block) => block.id === blockID);
+	try {
+		const { auth, specDocument } = getState();
+		const sortedSpecBlocks = blocksIDs.reduce((blocks, blockID) => {
+			const found = specDocument.blocks.find((block) => block.id === blockID);
 
-      if (!found) {
-        return blocks;
-      }
+			if (!found) {
+				return blocks;
+			}
 
-      return blocks.concat({
-        block: found.id,
-        product_item: found.type === 'Product' ? found.item : null,
-        type: found.type,
-      });
-    }, []);
-    const { blocks: updatedBlocks } = await sortSpecBlocks({
-      specID,
-      blocks: sortedSpecBlocks,
-      userID: auth.user?.id,
-    });
+			return blocks.concat({
+				block: found.id,
+				product_item: found.type === 'Product' ? found.item : null,
+				type: found.type,
+			});
+		}, []);
+		const { blocks: updatedBlocks } = await sortSpecBlocks({
+			specID,
+			blocks: sortedSpecBlocks,
+      block: blockId,
+			userID: auth.user?.id,
+		});
 
-    return dispatch(
-      onActionCreator(SORT_SPEC_BLOCKS_SUCCESS, { blocks: updatedBlocks }),
-    );
-  } catch (error) {
-    return dispatch(
-      onActionCreator(SORT_SPEC_BLOCKS_ERROR, {
-        error: true,
-        nativeError: error,
-      }),
-    );
-  }
+		return dispatch(
+			onActionCreator(SORT_SPEC_BLOCKS_SUCCESS, { blocks: updatedBlocks }),
+		);
+	} catch (error) {
+		return dispatch(
+			onActionCreator(SORT_SPEC_BLOCKS_ERROR, {
+				error: true,
+				nativeError: error,
+			}),
+		);
+	}
 };
 
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';

@@ -86,8 +86,10 @@ const SpecDocument = () => {
 		dispatch(onShowSpecEditProduct({ id: block.element.id || 1 }));
 	};
 
-	const handleBlocksSortChange = (blocksIDs) =>
-		dispatch(onSortSpecBlocks({ blocksIDs, specID }));
+	const handleBlocksSortChange = (blocksIDs, blockId) => {
+    return dispatch(onSortSpecBlocks({ blocksIDs, blockId, specID }));
+  }
+
 	const handleShowBlockMenu = (blockID) => (event) => {
 		handleBlockMenuOpen(event);
 		setSelectedBlockID(blockID);
@@ -267,7 +269,7 @@ const SpecDocument = () => {
 														)?.urls?.small ||
 														block?.element?.images.find(
 															(image) => image.id === block.product_block_image,
-														)?.urls?.original 
+														)?.urls?.original
 													}
 												/>
 											</BlockImage>
