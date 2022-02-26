@@ -9,7 +9,7 @@ const items = [
   { id: 'projects', label: 'Proyectos', to: '/projects' },
   { id: 'products', label: 'Productos', to: '/products' },
   { id: 'collaborators', label: 'Empresas', to: '/collaborators' },
-  { id: 'business_plan', label: 'Plan empresarial', to: '/business_plan' },
+  { id: 'business_plan', label: 'Plan Empresarial', to: '/business_plan' },
 ];
 
 const ItemsNavBar = () => {
@@ -22,18 +22,16 @@ const ItemsNavBar = () => {
     <>
       <ItemsContainer>
         {items.map((item) => (
-          <React.Fragment key={item.id}>
-            <Item active={item.id === currentLocation} onClick={goTo(item.to)}>
-              <ItemText>{item.label}</ItemText>
-              <UnderLine active={item.id === currentLocation} />
-            </Item>
-          </React.Fragment>
+          <Item key={item.id} active={item.id === currentLocation} onClick={goTo(item.to)}>
+            <ItemText>{item.label}</ItemText>
+            <UnderLine active={item.id === currentLocation} />
+          </Item>
         ))}
       </ItemsContainer>
-      <NavNotification />
       <ProfileBurgerMenuContent>
         <NavProfile />
         <BurgerMenu items={items} />
+        <NavNotification />
       </ProfileBurgerMenuContent>
     </>
   );
