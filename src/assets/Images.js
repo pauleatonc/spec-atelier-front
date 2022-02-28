@@ -59,6 +59,10 @@ import SEARCH_ICON from './images/icons/ic_search.svg';
 import SEARCH_COLOR_ICON from './images/icons/ic_search_color.svg';
 import CHANGE_HISTORY_UNSELECTED from './images/icons/change_history_unselected.svg';
 import CHANGE_HISTORY_SELECTED from './images/icons/change_history_selected.svg';
+import SPEC_DOCUMENT_UNSELECTED from './images/icons/ic-page.svg';
+import SPEC_DOCUMENT_SELECTED from './images/icons/ic-page-selected.svg';
+import SPEC_TABLE_UNSELECTED from './images/icons/ic-table.svg';
+import SPEC_TABLE_SELECTED from './images/icons/ic-table-selected.svg';
 
 import IMAGES_UPLOAD_SOURCE from './images/icons/images-upload.svg';
 import REMOVE_SOURCE from './images/icons/remove.svg';
@@ -113,10 +117,6 @@ import INDUSTRIAL_ACTIVE from './images/project/project_type/ic-industrial_green
 
 import ARROW_DOWN_SOURCE from './images/icons/arrow-down.svg';
 import ARROW_UP_SOURCE from './images/icons/arrow-up.svg';
-import SPEC_PAGE_SOURCE from './images/icons/ic-page.svg';
-import SPEC_ADD_SOURCE_W from './images/icons/ic-table.svg';
-import SPEC_PAGE_SOURCE_SELECTED from './images/icons/ic-page-selected.svg';
-import SPEC_ADD_SOURCE_W_SELECTED from './images/icons/ic-table-selected.svg';
 import SPEC_DOWNLOAD_SOURCE from './images/icons/ic-download.svg';
 import SPEC_ADD_SOURCE from './images/icons/spec-add.svg';
 import SPEC_DOWNLOAD from './images/icons/spec-download.svg';
@@ -237,10 +237,6 @@ export {
   INDUSTRIAL_ACTIVE,
   ARROW_DOWN_SOURCE,
   ARROW_UP_SOURCE,
-  SPEC_PAGE_SOURCE,
-  SPEC_ADD_SOURCE_W,
-  SPEC_PAGE_SOURCE_SELECTED,
-  SPEC_ADD_SOURCE_W_SELECTED,
   SPEC_DOWNLOAD_SOURCE,
   SPEC_ADD_SOURCE,
   SPEC_DOWNLOAD,
@@ -257,4 +253,8 @@ export {
   ADD_ICON,
   DELETE_ICON,
   EDIT_ICON,
+  SPEC_DOCUMENT_UNSELECTED,
+  SPEC_DOCUMENT_SELECTED,
+  SPEC_TABLE_UNSELECTED,
+  SPEC_TABLE_SELECTED,
 };

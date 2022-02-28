@@ -10,10 +10,10 @@ import {
 import {
   CHANGE_HISTORY_SELECTED,
   CHANGE_HISTORY_UNSELECTED,
-  SPEC_ADD_SOURCE_W,
-  SPEC_ADD_SOURCE_W_SELECTED,
-  SPEC_PAGE_SOURCE,
-  SPEC_PAGE_SOURCE_SELECTED,
+  SPEC_DOCUMENT_SELECTED,
+  SPEC_DOCUMENT_UNSELECTED,
+  SPEC_TABLE_SELECTED,
+  SPEC_TABLE_UNSELECTED,
 } from '../../assets/Images';
 
 const SpecContentButtons = () => {
@@ -28,17 +28,10 @@ const SpecContentButtons = () => {
         alt="Listar archivo"
         src={
           option === SPEC_DOCUMENT
-            ? SPEC_PAGE_SOURCE_SELECTED
-            : SPEC_PAGE_SOURCE
+            ? SPEC_DOCUMENT_SELECTED
+            : SPEC_DOCUMENT_UNSELECTED
         }
         onClick={() => handdleShowTable(SPEC_DOCUMENT)}
-      />
-      <AddIcon
-        alt="Listar tabla"
-        src={
-          option === SPEC_TABLE ? SPEC_ADD_SOURCE_W_SELECTED : SPEC_ADD_SOURCE_W
-        }
-        onClick={() => handdleShowTable(SPEC_TABLE)}
       />
       <AddIcon
         alt="Listar historial de cambios"
@@ -48,6 +41,13 @@ const SpecContentButtons = () => {
             : CHANGE_HISTORY_UNSELECTED
         }
         onClick={() => handdleShowTable(SPEC_HISTORY)}
+      />
+      <AddIcon
+        alt="Listar tabla"
+        src={
+          option === SPEC_TABLE ? SPEC_TABLE_SELECTED : SPEC_TABLE_UNSELECTED
+        }
+        onClick={() => handdleShowTable(SPEC_TABLE)}
       />
     </ContentButton>
   );

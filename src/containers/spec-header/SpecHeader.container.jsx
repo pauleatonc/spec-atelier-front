@@ -23,7 +23,6 @@ import {
   PermissionsButtonContainer,
   TextButton,
   ContainerTeam,
-  TextButton,
 } from './SpecHeader.styles';
 
 /** The SpecHeader's container */
