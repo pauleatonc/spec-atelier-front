@@ -212,18 +212,15 @@ const SpecContentsTable = () => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <TableTd
-                        {...cell.getCellProps()}
-                        isTypeUnity={cell?.row?.original?.type === 'Product'}
-                        isDesc={cell.column.id === 'desc'}
-                        width={cell.column.width}
-                      >
-                        {cell.render('Cell')}
-                      </TableTd>
-                    );
-                  })}
+                  {row.cells.map((cell) => (
+                    <TableTd
+                      {...cell.getCellProps()}
+                      isTypeUnity={cell?.row?.original?.type === 'Product'}
+                      isDesc={cell.column.id === 'desc'}
+                    >
+                      {cell.render('Cell')}
+                    </TableTd>
+                  ))}
                 </tr>
               );
             })}

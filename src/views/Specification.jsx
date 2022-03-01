@@ -34,6 +34,7 @@ const Specification = () => {
   const [selectedItem, setSelectedItem] = useState('');
   const { dataSection } = useSelector((state) => state);
   const { option } = dataSection;
+  const { sections } = useSelector((state) => state.specDocument);
 
   useEffect(() => dispatch(changeOption(SPEC_DOCUMENT)), []);
 

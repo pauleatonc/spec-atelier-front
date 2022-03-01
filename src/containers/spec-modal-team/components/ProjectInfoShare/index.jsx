@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import React, { useEffect } from 'react';
-
 import NestedChecklist from './components/NestedCheckList';
 import {
   Container,
@@ -60,7 +59,6 @@ const ProjectInfoShare = ({ withChecks, checklistData, setChecklistData }) => {
         node.children.forEach((child) => {
           if (!child.isSelected) isAllChildSelect = false;
         });
-
         if (
           isAllChildSelect &&
           !node.isSelected &&
