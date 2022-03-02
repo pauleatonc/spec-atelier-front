@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	WHITE,
-	MINE_SHAFT,
-	PRIMARY,
-	BLACK,
+  WHITE,
+  MINE_SHAFT,
+  PRIMARY,
+  BLACK,
   ALTO_OPACITY,
 } from '../../config/constants/styled-vars';
 
@@ -20,9 +20,10 @@ export const Root = styled.div`
 `;
 
 export const Header = styled.section`
+  display: flex;
+  justify-content: space-between;
 	align-items: center;
-	display: flex;
-	padding: 0 60px 0 40px;
+	padding: 0 40px 0 40px;
 	position: relative;
 	width: 100%;
 `;
@@ -62,10 +63,10 @@ export const Figure = styled.article`
 `;
 
 Figure.defaultProps = {
-	selected: false,
+  selected: false,
 };
 Figure.propTypes = {
-	selected: PropTypes.bool,
+  selected: PropTypes.bool,
 };
 
 export const Image = styled.span`
@@ -83,12 +84,12 @@ export const Image = styled.span`
 `;
 
 Image.defaultProps = {
-	selected: false,
-	source: '#',
+  selected: false,
+  source: '#',
 };
 Image.propTypes = {
-	selected: PropTypes.bool,
-	source: PropTypes.string,
+  selected: PropTypes.bool,
+  source: PropTypes.string,
 };
 
 export const CheckIcon = styled.img`

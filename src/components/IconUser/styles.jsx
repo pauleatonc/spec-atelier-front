@@ -8,7 +8,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: ${({ size = 24 }) => `${size}px`};
-  width: ${({ size = 24 }) => `${size}px`};
+  min-width: ${({ size = 24 }) => `${size}px`};
   z-index: ${({ zIndex = 1 }) => `${zIndex}`};
   margin-left: ${({ horizontalList }) => (horizontalList ? `-5px` : `0`)};
   border: 0.5px solid ${WHITE};

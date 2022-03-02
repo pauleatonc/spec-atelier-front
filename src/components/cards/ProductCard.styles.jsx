@@ -103,7 +103,6 @@ export const Details = styled.section`
 const BaseDetails = styled.p`
   -webkit-box-orient: vertical;
   display: -webkit-box;
-  font-family: Lato;
   -webkit-line-clamp: 2;
   margin: 0 0 10px;
   overflow: hidden;
@@ -125,7 +124,6 @@ export const Description = styled(BaseDetails)`
 
 export const Category = styled.p`
   color: ${MINE_SHAFT};
-  font-family: Lato;
   font-size: 10px;
   letter-spacing: 0.83px;
   margin: auto 0 7px;
@@ -136,7 +134,6 @@ export const Category = styled.p`
 
 export const Reference = styled.p`
   color: ${MINE_SHAFT};
-  font-family: Lato;
   font-size: 10px;
   letter-spacing: 0.83px;
   margin: 0;
@@ -202,7 +199,6 @@ export const SeeMore = styled.section`
   color: ${({ hover = false }) => (hover ? JAVA : BOULDER)};
   display: flex;
   justify-content: flex-end;
-  font-family: Lato;
   font-size: 12px;
   font-weight: bold;
   visibility: ${({ show = false }) => (show ? 'visible' : 'hidden')};
@@ -244,7 +240,6 @@ export const ActionsMenuItem = styled.section`
   border-bottom: 1px solid ${NOBEL};
   color: ${MINE_SHAFT};
   cursor: pointer;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   padding: 14px 0px 16px 35px;

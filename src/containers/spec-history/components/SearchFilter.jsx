@@ -47,7 +47,7 @@ const SearchFilter = ({
           />
         </SearchContainer>
         <FilterContainer>
-          <Label>Filtras por autor</Label>
+          <Label>Filtrar por autor</Label>
           <SelectorRelative
             name='author'
             maxWidth='237px'

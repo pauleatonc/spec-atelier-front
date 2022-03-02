@@ -46,12 +46,10 @@ export const Input = styled.input`
   background-color: transparent;
   border: 0;
   color: rgba(${MINE_SHAFT_RGB}, 0.45);
-  font-family: Lato;
   font-size: 12px;
   height: 100%;
   letter-spacing: 1px;
   width: 100%;
-  font-family: Lato;
   font-size: 12px;
   height: 100%;
   letter-spacing: 1px;

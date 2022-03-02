@@ -79,7 +79,6 @@ export const OptionNameSection = styled.option`
 `;
 
 export const NoOptions = styled.div`
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   padding: 10px 23px;

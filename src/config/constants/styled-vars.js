@@ -66,6 +66,7 @@ export const MAX_SCREEN_MEDIUM = 1080;
 export const STANDAR_MEDIUM = 992;
 export const MEDIA_QUERY_SMALL = `@media (max-width: ${MAX_SCREEN_SMALL}px)`;
 export const MEDIA_QUERY_MEDIUM = `@media (min-width: ${MAX_SCREEN_SMALL + 1}px) and (max-width: ${MAX_SCREEN_MEDIUM}px)`;
+export const MEDIA_QUERY_MEDIUM_MAX = `@media (min-width: ${STANDAR_MEDIUM + 1}px) and (max-width: ${MAX_SCREEN_MEDIUM}px)`;
 export const MEDIA_QUERY_STANDAR_MEDIUM = `@media (max-width: ${STANDAR_MEDIUM}px)`;
 export const MEDIA_QUERY_MAX = `@media (min-width: ${STANDAR_MEDIUM}px)`;
 export const MAX_SCREEN_SMALL_NAV_JS = `(max-width: ${MAX_SCREEN_SMALL}px)`;

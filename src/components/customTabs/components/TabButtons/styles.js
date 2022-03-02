@@ -20,7 +20,6 @@ export const ContainerTabs = styled.div`
 export const ButtonTab = styled.button`
   color: ${({ isActive }) => (isActive ? PRIMARY : SILVER)};
   margin: 0 24px;
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   font-stretch: normal;
@@ -56,7 +55,6 @@ export const ProfileStatsButtonTab = styled.div`
   margin: 0px 12px;
   padding: 7px 20px;
   border-radius: 50px;
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   font-stretch: normal;

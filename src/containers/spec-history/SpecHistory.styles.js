@@ -6,7 +6,10 @@ import {
   CONCRETE,
   CONCRETE_OPACITY,
   DUSTY_GRAY_RGB,
+  MEDIA_QUERY_MEDIUM,
+  MEDIA_QUERY_MEDIUM_MAX,
   MEDIA_QUERY_SMALL,
+  MERCURY,
   MINE_SHAFT,
   PUERTO_RICO,
   PUERTO_RICO_OPACITY,
@@ -15,7 +18,7 @@ import {
 } from '../../config/constants/styled-vars';
 
 export const ContainerTable = styled.div`
-  border: solid 1px ${BOULDER};
+  border: solid 1px ${MERCURY};
   background-color: ${WHITE};
   height: fit-content;
   width: 64%;
@@ -40,7 +43,6 @@ export const HistoryChangeManagementContent = styled.div`
 export const Item = styled.div`
   color: ${({ active }) => (active ? PUERTO_RICO : BOULDER)};
   height: 100%;
-  margin: 0 4px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -49,17 +51,10 @@ export const Item = styled.div`
 
 export const ItemText = styled.span`
   height: 17px;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
-  line-height: normal;
-`;
-
-export const UnderLine = styled.span`
-  width: 100%;
-  height: 2px;
-  border-radius: 1.5px;
-  background-color: ${({ active }) => active && PUERTO_RICO};
+  line-height: 0.9;
+  border-bottom: ${({ active }) => active && `solid 2px ${PUERTO_RICO}`};
 `;
 
 export const Separator = styled.section`
@@ -74,7 +69,6 @@ export const SearchFiltersContainer = styled.div`
   flex-wrap: nowrap;
   justify-content: center;
   width: 100%;
-  heigth: 60px;
 `;
 
 export const SearchFiltersContent = styled.div`
@@ -99,7 +93,6 @@ export const FilterContainer = styled.section`
   letter-spacing: 1px;
   color: ${MINE_SHAFT};
   width: 237px;
-  font-family: Lato;
   font-size: 12px;
   ${MEDIA_QUERY_SMALL} {
     margin-top: 8px;
@@ -124,6 +117,13 @@ export const Content = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-wrap: nowrap;
+  max-height: 43px;
+`;
+
+export const ContentDate = styled.div`
+  display: block;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 export const FilterSelectBox = styled.div`
@@ -150,7 +150,6 @@ export const ContentTable = styled.div`
   display: flex;
   justify-content: center;
 	position: relative;
-  font-family: Lato;
 	font-size: 12px;
 	width: 100%;
   box-sizing: border-box;
@@ -159,7 +158,6 @@ export const ContentTable = styled.div`
 
 export const Table = styled.table`
 	width: 95%;
-	border-radius: 2px;
 	background-color: ${WHITE};
   margin: 33px 0 57px 0;
   text-align: left;
@@ -169,9 +167,9 @@ export const Thead = styled.thead`
   font-weight: 900;
   font-size: 14px;
 	height: 32px;
-	border-radius: 2px;
   background-color: ${CONCRETE};
   tr{
+    border-bottom: solid 4.5px ${WHITE};
     th:first-child {
       padding-left: 36px;
     }
@@ -179,7 +177,9 @@ export const Thead = styled.thead`
 
 export const Tbody = styled.tbody`
   tr{
-    border: solid 3px ${WHITE};
+    border-color: ${WHITE};
+    border-width: 2.5px 0;
+    border-style: solid;
     :hover {
       background-color: ${PUERTO_RICO_OPACITY};
     }
@@ -187,23 +187,39 @@ export const Tbody = styled.tbody`
 `;
 
 export const Th = styled.th`
-	padding: 0 8px;
+	padding-left: 8px;
   vertical-align: middle;
 `;
 
 export const Td = styled.td`
+  color: ${BOULDER};
   height: 43px;
   vertical-align: middle;
   padding: 0 8px;
   background-color: ${CONCRETE_OPACITY};
 `;
 
-export const ActionText = styled.section`
+export const ActionText = styled.div`
+  max-height: 43px;
   padding-left: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 450px;
+  ${MEDIA_QUERY_SMALL} {
+    width: 150px;
+  }
+  ${MEDIA_QUERY_MEDIUM} {
+    width: 250px;
+  }
+  ${MEDIA_QUERY_MEDIUM_MAX}{
+    width: 350px;
+  }
 `;
 
 export const IconAction = styled.img`
   width: 16px;
+  height: 16px;
 `;
 
 export const PaginationContent = styled.div`
@@ -223,7 +239,7 @@ export const GoBackFollowingButton = styled.i`
 
 export const UlPagination = styled.ul`
   list-style: none;
-  font-family: 'Lato';
+  color: ${BOULDER}
 `;
 
 export const LiPagination = styled.div`

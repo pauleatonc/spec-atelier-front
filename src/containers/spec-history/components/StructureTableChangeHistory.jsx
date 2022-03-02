@@ -61,13 +61,17 @@ const StructureTableChangeHistory = ({
   const goToPreviousPage = () => {
     previousPage();
     const queryParams = { limit: 7, page: pageIndex - 1, keyword };
-    dispatch(onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)));
+    if (pageIndex > 0) {
+      dispatch(onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)));
+    };
   };
 
   const goToNextPage = () => {
     nextPage();
     const queryParams = { limit: 7, page: pageIndex + 1, keyword };
-    dispatch(onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)));
+    if (pageIndex < controlledPageCount - 1) {
+      dispatch(onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)));
+    };
   };
 
   const handleGoToPage = (goToPage) => () => {

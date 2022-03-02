@@ -9,7 +9,7 @@ export const Root = styled.div`
 `;
 
 Root.propTypes = {
-	width: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
 };
 
 export const Line = styled.div`
@@ -53,15 +53,14 @@ export const Bubble = styled.div`
 `;
 
 Bubble.defaultProps = {
-	onClick: undefined,
+  onClick: undefined,
 };
 Bubble.propTypes = {
-	onClick: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export const BubbleText = styled.span`
 	color: ${({ active }) => (active ? WHITE : CARIBBEAN_GREEN)};
-	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
 	line-height: 1.75;

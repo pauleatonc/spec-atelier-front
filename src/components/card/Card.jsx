@@ -11,26 +11,12 @@ export const Card = styled.section`
   }
 `;
 
-export const CardImg = styled.div`
-  height: 144px;
-  margin: 18px auto;
-  padding: 8px;
-  cursor: pointer;
-`;
-
 export const TitleContainer = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex: 1;
   margin: 8px 0;
-`;
-
-export const Title = styled.div`
-  font-family: Lato;
-  font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 1px;
 `;
 
 export const Line = styled.div`

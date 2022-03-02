@@ -54,7 +54,6 @@ export const CountryIcon = styled.div`
 `;
 
 export const CountryName = styled.div`
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   font-stretch: normal;
@@ -67,7 +66,6 @@ export const CountryName = styled.div`
 
 export const Description = styled.div`
   min-height: 260px;
-  font-family: Lato;
   font-size: 14px;
   line-height: 1.71;
   letter-spacing: 1px;

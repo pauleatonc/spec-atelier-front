@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	ALABASTER,
-	ALTO,
-	BLACK,
-	BOULDER,
-	CARIBBEAN_GREEN,
-	DUSTY_GRAY,
-	GALLERY,
-	MINE_SHAFT,
-	MINE_SHAFT_RGB,
-	SILVER_CHALICE,
+  ALABASTER,
+  ALTO,
+  BLACK,
+  BOULDER,
+  CARIBBEAN_GREEN,
+  DUSTY_GRAY,
+  GALLERY,
+  MINE_SHAFT,
+  MINE_SHAFT_RGB,
+  SILVER_CHALICE,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -21,7 +21,6 @@ export const Root = styled.div`
 export const Label = styled.label`
 	color: ${MINE_SHAFT};
 	display: block;
-	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
 	letter-spacing: 1px;
@@ -43,10 +42,10 @@ export const DropIcon = styled.img`
 `;
 
 DropIcon.propTypes = {
-	margin: '0',
+  margin: '0',
 };
 DropIcon.propTypes = {
-	margin: PropTypes.string,
+  margin: PropTypes.string,
 };
 
 export const Empty = styled.div`
@@ -71,7 +70,6 @@ export const EmptyBody = styled.section`
 export const EmptyAction = styled.span`
 	color: ${CARIBBEAN_GREEN};
 	cursor: pointer;
-	font-family: Lato;
 	font-size: 12px;
 	font-weight: bold;
 	letter-spacing: 0.75px;
@@ -84,7 +82,6 @@ export const EmptyAction = styled.span`
 
 export const EmptyText = styled.span`
 	color: rgba(${MINE_SHAFT_RGB}, 0.44);
-	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 0.75px;
 	pointer-event: none;
@@ -116,7 +113,7 @@ export const Item = styled.section`
 	position: relative;
 	width: 100%;
 	min-width: 0;
-	${({ bordered }) => bordered ? border : '' }
+	${({ bordered }) => bordered ? border : ''}
 
 	&:hover {
 		background-color: ${GALLERY};
@@ -134,7 +131,6 @@ export const ItemDetails = styled.div`
 export const ItemText = styled.p`
 	color: ${MINE_SHAFT};
 	display: block;
-	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 1px;
 	margin: 0 0 3px;
@@ -158,7 +154,6 @@ export const RemoveIcon = styled.img`
 export const Action = styled.div`
 	color: ${CARIBBEAN_GREEN};
 	cursor: pointer;
-	font-family: Lato;
 	font-size: 12px;
 	font-weight: bold;
 	letter-spacing: 0.75px;
@@ -195,15 +190,14 @@ export const DropZoneSection = styled.div`
 `;
 
 DropZoneSection.defaultProps = {
-	padding: 'initial',
+  padding: 'initial',
 };
 DropZoneSection.propTypes = {
-	padding: PropTypes.string,
+  padding: PropTypes.string,
 };
 
 export const DropZoneText = styled.p`
 	color: ${BOULDER};
-	font-family: Lato;
 	font-size: 16px;
 	letter-spacing: 0.57px;
 	line-height: 1.69;

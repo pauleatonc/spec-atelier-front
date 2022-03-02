@@ -12,7 +12,6 @@ export const Content = styled.div`
   box-shadow: 0 3px 5px -1px rgba(${BLACK}, 0.2), 0 1px 18px 0 rgba(${BLACK}, 0.12), 0 6px 10px 0 rgba(${BLACK}, 0.14);
   color: ${WHITE};
   cursor: pointer;
-  font-family: Lato;
   font-size: 14px;
   left: 0;
   letter-spacing: 0.25px;

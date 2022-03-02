@@ -20,7 +20,6 @@ export const ImageSection = styled.img`
 `;
 
 export const TitleSection = styled.h1`
-	font-family: Lato;
 	font-size: 25px;
 	line-height: 30px;
 	font-weight: bold;

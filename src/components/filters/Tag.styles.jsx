@@ -9,7 +9,6 @@ const Button = styled.button`
   color: ${({ selected = false }) => selected ? CORAL : DUSTY_GRAY};
   cursor: ${({ disabled = false }) => disabled ? 'not-allowed' : 'pointer'};
   display: inline-flex;
-  font-family: Lato;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;

@@ -57,7 +57,6 @@ export const ButtonText = styled.span`
   align-items: center;
   display: flex;
   text-decoration: none;
-  font-family: Lato;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;

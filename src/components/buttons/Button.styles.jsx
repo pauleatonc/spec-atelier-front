@@ -15,7 +15,6 @@ const BaseButton = styled.button`
   cursor: pointer;
   border-radius: 18px;
   display: inline-flex;
-  font-family: Lato;
   font-size: ${({ size = 'md' }) => (size === 'md' ? '16px' : '12px')};
   font-weight: bold;
   height: ${({ size = 'md' }) => (size === 'md' ? '34px' : '21px')};

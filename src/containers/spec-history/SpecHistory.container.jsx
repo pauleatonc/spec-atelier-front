@@ -7,7 +7,7 @@ import StructureTableChangeHistory from './components/StructureTableChangeHistor
 import ButtonsHistoryChangesManagement from './components/ButtonsHistoryChangesManagement';
 import IconUser from '../../components/IconUser';
 import { ADD_ICON, DELETE_ICON, EDIT_ICON } from '../../assets/Images';
-import { ActionText, ContainerTable, Content, IconAction, NameSection } from './SpecHistory.styles';
+import { ActionText, ContainerTable, Content, ContentDate, IconAction, NameSection } from './SpecHistory.styles';
 
 const ChangeHistoryContainer = () => {
   const {
@@ -58,6 +58,7 @@ const ChangeHistoryContainer = () => {
     'add': ADD_ICON,
     'remove': DELETE_ICON,
     'edit_text': EDIT_ICON,
+    'move': EDIT_ICON,
   };
 
   const columns = useMemo(
@@ -66,23 +67,33 @@ const ChangeHistoryContainer = () => {
         Header: 'Acción',
         Cell: ({ row }) => {
           const icon = actionsIcons[row?.original?.action];
+          const actionTextHTML = () => {
+            return { __html: row?.original?.description };
+          }
           return (
             <Content>
               <IconAction src={icon} alt='icon_action' row={row} />
-              <ActionText>{row?.original?.description}</ActionText>
+              <ActionText dangerouslySetInnerHTML={actionTextHTML()} />
             </Content>
           )
         },
       },
       {
         Header: 'Fecha',
-        accessor: 'date'
+        Cell: ({ row }) => {
+          return (
+            <ContentDate>
+              <div>{(row?.original?.date.split(" "))[0]}</div>
+              <div>{(row?.original?.date.split(" "))[1]}</div>
+            </ContentDate>
+          )
+        },
       },
       {
         Header: 'Autor',
         Cell: ({ row }) => (
           <Content>
-            <IconUser user={row?.original?.user} size='28' />
+            <IconUser user={row?.original?.user} size='28' zIndex='0' />
             <NameSection>{row?.original?.user.name}</NameSection>
           </Content>
         ),
