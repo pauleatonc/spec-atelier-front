@@ -18,7 +18,7 @@ const mapApiUrls = {
 export const mapFrontUrls = {
   development: 'http://localhost:8080',
   integration: 'http://localhost:8080',
-  production: 'https://spec-atelier-front.herokuapp.com',
+  production: 'https://www.specatelier.com',
 };
 
 export const firebaseConfig = {
