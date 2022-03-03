@@ -2,7 +2,7 @@
 import { mapFrontUrls, handleGetEnvironment } from '@Configurations/config';
 
 export const redirectToProjectsWhenIsLogin = () => {
-  window.location.href = `${mapFrontUrls[handleGetEnvironment()]}/projects`;
+  window.location.href = `${window.location.origin}/projects`;
 };
 
 export const redirectToHomesWhenIsLogout = () => {
