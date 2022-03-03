@@ -12,14 +12,14 @@ import {
   TitleHeader,
   LinkHeader,
   CountNoti,
-  ContentPrimary
+  ContentPrimary,
 } from './NavNotification.styles';
 import IconNoti from '../../../assets/images/icons/spec-notifications.svg';
 import {
   watchNotifications,
   getNotifications,
   stopGetNotifications,
-  undoStopGetNotifications
+  undoStopGetNotifications,
 } from '../../../containers/spec-header/SpecHeader.actions';
 import Notification from '../../notifications/Notification';
 
@@ -35,8 +35,10 @@ const NavNotification = () => {
   const array_total = [];
   Object.values(notificationsList).forEach((item) =>
     item.list.forEach((detail) =>
-      !detail.watched ? array_news.push(detail.watched) : array_total.push(detail.watched)
-    )
+      !detail.watched
+        ? array_news.push(detail.watched)
+        : array_total.push(detail.watched),
+    ),
   );
 
   const [totalNews, setTotalNews] = useState(0);
@@ -50,14 +52,14 @@ const NavNotification = () => {
     const arrayNotificationsId = [];
     data.forEach((item) =>
       item.list.forEach((detail) =>
-        !detail?.watched ? arrayNotificationsId.push(detail.id) : ''
+        !detail?.watched ? arrayNotificationsId.push(detail.id) : '',
       ),
     );
     setShowOtions(!showOptions);
     setTotalNews(0);
     if (updateNotification) {
       setUpdateNotification(false);
-      dispatch(undoStopGetNotifications())
+      dispatch(undoStopGetNotifications());
     } else {
       setUpdateNotification(true);
       dispatch(stopGetNotifications());
@@ -65,8 +67,8 @@ const NavNotification = () => {
     if (!updateNotification && arrayNotificationsId.length > 0) {
       const body = {
         notifications: { ids: arrayNotificationsId },
-        idUser: user.id
-      }
+        idUser: user.id,
+      };
       if (user.id) {
         dispatch(watchNotifications(body));
       }
@@ -87,60 +89,54 @@ const NavNotification = () => {
       togglOptions();
     }
   };
-  
-  return isLogin && (
-    <>
-      <NotificationsButton
-        type="button"
-        onClick={togglOptions}
-        onKeyPress={togglOptions}
-        isOpen={showOptions}
-      >
-        <NotificationsIcon>
-          <ProfilePictureImage
-            src={IconNoti}
-            alt="notifications icon"
-          />
-          {totalNews > 0 && (
-            <CountNoti>
-              {totalNews}
-            </CountNoti>
-          )}
-        </NotificationsIcon>
-      </NotificationsButton>
-      <ClickAwayListener onClickAway={handleClickAway}>
-        <ContentPrimary>
-          <NotificationsOption show={showOptions} >
-            <OptionsContent>
-              <ListHeader>
-                <TitleHeader>Notificaciones</TitleHeader>
-                <LinkHeader>Ver todo</LinkHeader>
-              </ListHeader>
-              {data.map((notification) =>
-                notification.list.map((detail) => (
-                  <Notification key={detail?.item?.item_id}
-                    itemType={detail?.item?.item_type}
-                    triggered={detail?.triggered}
-                    watched={detail?.watched}
-                    date={detail?.date}
-                    message={detail?.item?.message}
-                    status={detail?.item?.status}
-                    itemId={detail?.item?.item_id}
-                    projectUrl={detail?.item?.actions}
-                    projectId={detail?.item?.project_id}
-                    userData={detail?.item?.permission?.user}
-                    newNoti={updateNotification}
-                  />
-                )
-                )
-              )}
-              <Separator />
-            </OptionsContent>
-          </NotificationsOption>
 
-        </ContentPrimary>
-      </ClickAwayListener>
-    </>
+  return (
+    isLogin && (
+      <>
+        <NotificationsButton
+          type="button"
+          onClick={togglOptions}
+          onKeyPress={togglOptions}
+          isOpen={showOptions}
+        >
+          <NotificationsIcon>
+            <ProfilePictureImage src={IconNoti} alt="notifications icon" />
+            {totalNews > 0 && <CountNoti>{totalNews}</CountNoti>}
+          </NotificationsIcon>
+        </NotificationsButton>
+        <ClickAwayListener onClickAway={handleClickAway}>
+          <ContentPrimary>
+            <NotificationsOption show={showOptions}>
+              <OptionsContent>
+                <ListHeader>
+                  <TitleHeader>Notificaciones</TitleHeader>
+                  <LinkHeader>Ver todo</LinkHeader>
+                </ListHeader>
+                {data.map((notification) =>
+                  notification.list.map((detail) => (
+                    <Notification
+                      key={detail?.item?.item_id}
+                      itemType={detail?.item?.item_type}
+                      triggered={detail?.triggered}
+                      watched={detail?.watched}
+                      date={detail?.date}
+                      message={detail?.item?.message}
+                      status={detail?.item?.status}
+                      itemId={detail?.item?.item_id}
+                      projectUrl={detail?.item?.actions}
+                      projectId={detail?.item?.project_id}
+                      userData={detail?.item?.permission?.user}
+                      newNoti={updateNotification}
+                    />
+                  )),
+                )}
+                <Separator />
+              </OptionsContent>
+            </NotificationsOption>
+          </ContentPrimary>
+        </ClickAwayListener>
+      </>
+    )
   );
 };
 
