@@ -2,13 +2,13 @@
 import { mapFrontUrls, handleGetEnvironment } from '@Configurations/config';
 
 export const redirectToProjectsWhenIsLogin = () => {
-	window.location.href = `${mapFrontUrls[handleGetEnvironment()]}/projects`;
+  window.location.href = `${mapFrontUrls[handleGetEnvironment()]}/projects`;
 };
 
 export const redirectToHomesWhenIsLogout = () => {
-	window.location.href = `${mapFrontUrls[handleGetEnvironment()]}/`;
+  window.location.href = `${mapFrontUrls[handleGetEnvironment()]}/`;
 };
 
 export const redirectToLoginWhenIsLogout = () => {
-	window.location.href = `${mapFrontUrls[handleGetEnvironment()]}/login`;
+  window.location.href = `${mapFrontUrls[handleGetEnvironment()]}/login`;
 };
