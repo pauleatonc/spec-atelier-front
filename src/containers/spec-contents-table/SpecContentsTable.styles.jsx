@@ -14,13 +14,11 @@ export const Root = styled.div`
   box-sizing: border-box;
   display: -webkit-box;
   height: 100%;
-  position: relative;
   width: 100%;
   margin-bottom: 1%;
 `;
 
 export const ContentTable = styled.div`
-  position: relative;
   margin-left: auto;
   margin-right: auto;
   width: 970px;
@@ -98,6 +96,9 @@ export const Button = styled.div`
   color: ${CARIBBEAN_GREEN};
   height: 20px;
   display: flex;
+  position: ${({ isExpandButton }) => isExpandButton && 'absolute'};
+  top: ${({ isExpandButton }) => isExpandButton && '20px'};
+  right: ${({ isExpandButton }) => isExpandButton && '150px'};
 `;
 export const ImgButton = styled.img`
   margin: 0px 5px 0px 39px;
@@ -105,15 +106,12 @@ export const ImgButton = styled.img`
 
 export const ImgSubtotal = styled.img``;
 
-export const ImgExpanderAll = styled.img`
-  display: none;
-`;
-
 export const Table = styled.table`
   width: 100%;
   border-radius: 2px;
   border: solid 1px ${MERCURY};
   background-color: ${WHITE};
+  position: relative;
 `;
 export const TableThead = styled.thead`
   padding: 8px;
@@ -138,6 +136,11 @@ export const TableTd = styled.td`
   letter-spacing: normal;
   color: rgba(${BLACK}, 0.87);
   text-align: ${({ isDesc }) => (isDesc ? 'left' : 'center')};
+  width: ${({ width }) => width};
+  max-width: ${({ width }) => width};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const TableTh = styled.th`

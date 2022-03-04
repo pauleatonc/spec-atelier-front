@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useTable, useExpanded } from 'react-table';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { RotatingLines } from 'react-loader-spinner';
 import {
   Root,
   ContentTable,
@@ -20,12 +21,9 @@ import {
   ContentFooter,
   TableElements,
   TableTotal,
-  ImgExpanderAll,
   ContainerTotalTable,
 } from './SpecContentsTable.styles';
 import specDownloadSource from '../../assets/images/icons/ic-download.svg';
-import iconArrowDown from '../../assets/images/icons/blue-arrow-down.svg';
-import iconArrowUp from '../../assets/images/icons/blue-arrow-up.svg';
 import CurrentInputTable from './components/CurrentInputTable';
 import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
 import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
@@ -39,11 +37,6 @@ const SpecContentsTable = () => {
     (state) => state.specDocument,
   );
   const { user } = useSelector((state) => state.profile);
-  const [expandAll, setExpandAll] = useState();
-  const [toggleExpanded, setToggleExpanded] = useState(false);
-  const simulateClick = (e) => {
-    setExpandAll(e);
-  };
   const { first_name, last_name, company, email } = useSelector(
     (state) => state.profile.user,
   );
@@ -52,11 +45,6 @@ const SpecContentsTable = () => {
     company: company || '',
     email: email || '',
     description: '',
-  };
-
-  const allExpand = () => {
-    setToggleExpanded(!toggleExpanded);
-    expandAll.click();
   };
 
   const handleDownloadTableClick = () =>
@@ -86,14 +74,17 @@ const SpecContentsTable = () => {
       {
         Header: 'Ítem',
         accessor: 'item_id',
+        width: 'auto',
       },
       {
         Header: 'Descripción',
         accessor: 'desc',
+        width: '350px',
       },
-      { Header: 'Unidad', accessor: 'unit' },
+      { Header: 'Unidad', accessor: 'unit', width: 'auto' },
       {
         Header: 'Cantidad',
+        width: '95px',
         Cell: ({ row }) =>
           row?.original?.type === 'Product' && (
             <CurrentInputTable
@@ -106,6 +97,7 @@ const SpecContentsTable = () => {
       },
       {
         Header: 'Precio',
+        width: '95px',
         Cell: ({ row }) => {
           if (row?.original?.type === 'Product') {
             if (row?.original?.price) {
@@ -127,6 +119,7 @@ const SpecContentsTable = () => {
       },
       {
         Header: 'Subtotal',
+        width: '95px',
         Cell: ({ row }) =>
           `$${row?.original?.subtotal
             .toString()
@@ -134,12 +127,11 @@ const SpecContentsTable = () => {
       },
       {
         id: 'expander',
+        width: '130px',
         Header: ({ getToggleAllRowsExpandedProps, isAllRowsExpanded }) => (
-          <ImgExpanderAll
-            {...getToggleAllRowsExpandedProps()}
-            src={isAllRowsExpanded ? iconArrowUp : iconArrowDown}
-            ref={simulateClick}
-          />
+          <Button isExpandButton {...getToggleAllRowsExpandedProps()}>
+            {isAllRowsExpanded ? 'Contraer filas' : 'Expandir filas'}
+          </Button>
         ),
         Cell: ({ row }) => {
           switch (row?.original?.type) {
@@ -174,7 +166,6 @@ const SpecContentsTable = () => {
     headerGroups,
     rows,
     prepareRow,
-    state: { expanded },
   } = useTable(
     {
       columns,
@@ -183,35 +174,15 @@ const SpecContentsTable = () => {
     },
     useExpanded,
   );
-  const dataExpanded = JSON.stringify({ expanded }, null, 2);
-  const expandedJSON = JSON.parse(dataExpanded);
-  const arrayExpandeJSON = Object.values(expandedJSON.expanded);
-  const lenghtArray = arrayExpandeJSON.length;
-  const totalExpander =
-    totalExpandManual[0].length + totalExpandManual[1].length;
-  if (lenghtArray === totalExpander && lenghtArray !== 0) {
-    setToggleExpanded(!toggleExpanded);
-    expandAll.click();
-  }
-  const expandOrShrink = () => {
-    let text;
-    if (toggleExpanded) {
-      text = 'Contraer';
-    } else {
-      text = lenghtArray === totalExpander ? 'Contraer' : 'Expandir';
-    }
-    return `${text} filas`;
-  };
 
-  return (
+  return !!project && !!quoteTable && !!totalExpandManual ? (
     <Root>
       <ContentTable>
         <Table {...getTableProps()}>
           <TableThead>
             <Header colSpan="7">
-              <Title>Itemizado y presupuesto: {project.name}</Title>
+              <Title>Itemizado y presupuesto: {project?.name}</Title>
               <ButtonsHeader>
-                <Button onClick={allExpand}>{expandOrShrink()}</Button>
                 <Button
                   title="Descargar presupuesto"
                   onClick={handleDownloadTableClick}
@@ -241,15 +212,18 @@ const SpecContentsTable = () => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => (
-                    <TableTd
-                      {...cell.getCellProps()}
-                      isTypeUnity={cell?.row?.original?.type === 'Product'}
-                      isDesc={cell.column.id === 'desc'}
-                    >
-                      {cell.render('Cell')}
-                    </TableTd>
-                  ))}
+                  {row.cells.map((cell) => {
+                    return (
+                      <TableTd
+                        {...cell.getCellProps()}
+                        isTypeUnity={cell?.row?.original?.type === 'Product'}
+                        isDesc={cell.column.id === 'desc'}
+                        width={cell.column.width}
+                      >
+                        {cell.render('Cell')}
+                      </TableTd>
+                    );
+                  })}
                 </tr>
               );
             })}
@@ -278,6 +252,8 @@ const SpecContentsTable = () => {
       </ContentTable>
       <SpecModalQuote initialValues={initialValues} />
     </Root>
+  ) : (
+    <RotatingLines width="50" />
   );
 };
 
