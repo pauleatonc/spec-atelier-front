@@ -20,7 +20,6 @@ Root.propTypes = {
 export const Label = styled.label`
   color: ${MINE_SHAFT};
   display: block;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -32,7 +31,6 @@ export const Input = styled.input`
   background-color: ${GALLERY};
   border: 0;
   border-radius: 21.5px;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   padding: 11px 23px;
@@ -57,7 +55,6 @@ export const InputUnderline = styled.input`
     10px ${({ textAlign }) => (textAlign === 'right' ? '10px' : '0px')};
   flex: 1;
   border-bottom: 1px solid ${({ colorUnderline }) => colorUnderline || SILVER};
-  font-family: Lato;
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '14px')};
   font-weight: normal;
   font-stretch: normal;
@@ -83,7 +80,6 @@ export const InputForm = styled.input`
   min-width: 100px;
   width: 100%;
   padding: 0 31px 0 21px;
-  font-family: Lato;
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '12px')};
   letter-spacing: 1.17px;
   border-radius: 9px;

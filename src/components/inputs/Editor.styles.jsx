@@ -1,5 +1,14 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { BLACK, GALLERY, GRAY, MINE_SHAFT, MINE_SHAFT_RGB, PUERTO_RICO, SWISS_COFFEE, WHITE } from '../../config/constants/styled-vars';
+import {
+  BLACK,
+  GALLERY,
+  GRAY,
+  MINE_SHAFT,
+  MINE_SHAFT_RGB,
+  PUERTO_RICO,
+  SWISS_COFFEE,
+  WHITE
+} from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
@@ -8,7 +17,6 @@ export const Root = styled.div`
 export const Label = styled.label`
   color: ${MINE_SHAFT};
   display: block;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 0.86px;
   padding: 0 0 23px;
@@ -37,7 +45,6 @@ export const EditorStyles = createGlobalStyle`
     background-color: ${WHITE};
     border: 1px solid ${SWISS_COFFEE} !important;
     box-shadow: none !important;
-    font-family: Lato;
     font-size: 12px;
     font-weight: initial;
     height: 95px;

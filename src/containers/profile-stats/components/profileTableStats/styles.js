@@ -31,7 +31,6 @@ const types = {
 
 export const Table = styled.table`
   width: 100%;
-  font-family: Lato;
 `;
 
 export const TableHead = styled.thead`

@@ -5,12 +5,12 @@ import {
   MINE_SHAFT,
   MERCURY,
   MEDIA_QUERY_SMALL,
-  BLACK,
+  SHADOW_GREY,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   background-color: ${WHITE};
-  box-shadow: 0 1px 3px 0 rgba(${BLACK}, 0.2), 0 2px 1px -1px rgba(${BLACK}, 0.12), 0 1px 1px 0 rgba(${BLACK}, 0.14);
+  box-shadow: ${SHADOW_GREY}
   display: ${({ show = false }) => (show ? 'initial' : 'none')};
   height: calc(100vh - 122px);
   left: 0;
@@ -44,7 +44,6 @@ export const Header = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid ${MERCURY};
   color: ${MINE_SHAFT};
-  font-family: Lato;
   font-size: 13px;
   font-weight: bold;
   height: 46px;

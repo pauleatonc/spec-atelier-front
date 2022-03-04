@@ -14,7 +14,6 @@ export const Root = styled.div`
 export const Label = styled.label`
   color: ${MINE_SHAFT};
   display: block;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -36,7 +35,6 @@ export const Input = styled.input`
   cursor: pointer;
   display: inline-flex;
   height: 38px;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   overflow: hidden;
@@ -65,7 +63,6 @@ export const InputUnderline = styled(Input)`
   flex: 1;
   justify-content: space-between;
   border-bottom: 2px solid ${SILVER};
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   color: ${MINE_SHAFT};
@@ -83,11 +80,9 @@ export const DropIcon = styled.img`
 
 export const Option = styled.section`
   align-items: center;
-  box-sizing: border-box;
   color: ${MINE_SHAFT};
   cursor: pointer;
   display: flex;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 0.86px;
   padding: 10px 16px;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
-	MINE_SHAFT,
-	MEDIA_QUERY_SMALL,
+  MINE_SHAFT,
+  MEDIA_QUERY_SMALL,
   CHAMPAGNE,
 } from '../../config/constants/styled-vars';
 
@@ -28,7 +28,6 @@ export const Container = styled.section`
 
 export const Title = styled.h1`
 	width: 100%;
-	font-family: Lato;
 	font-size: 25px;
 	text-align: center;
 	margin-bottom: 80px;

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import {
 	SILVER,
 	MERCURY,
@@ -17,11 +16,8 @@ export const Paginator = styled.footer`
 	width: 100%;
 	padding: 15px;
 	color: ${SILVER};
-	font-family: Lato;
 	font-size: 12px;
 	font-weight: bold;
-	font-stretch: normal;
-	font-style: normal;
 	line-height: normal;
 	letter-spacing: normal;
 	border-top: 1px solid ${MERCURY};

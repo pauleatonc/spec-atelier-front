@@ -11,7 +11,6 @@ const StyledInput = styled.input`
   width: 100%;
   margin-bottom: 23px;
   opacity: .5;
-  font-family: "Lato";
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;

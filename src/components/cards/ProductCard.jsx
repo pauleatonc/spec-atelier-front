@@ -49,13 +49,16 @@ const ProductCard = (props) => {
   const [hover, setHover] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const dispatch = useDispatch();
+
   const {
     anchor: actionsAnchor,
     onClose: handleActionsMenuClose,
     onOpen: handleActionsMenuOpen,
   } = useDropdown();
+
   const handleCardMouseEnter = () => setHover(true);
   const handleCardMouseLeave = () => setHover(false);
+
   const handleShowActions = (event) => {
     event.stopPropagation();
     handleActionsMenuOpen(event);
@@ -88,6 +91,7 @@ const ProductCard = (props) => {
     backgroundImage: `url('${photo || NO_PHOTO}')`,
     backgroundSize: photo ? 'cover' : 'initial',
   };
+
   const showSeeMore = Boolean(onClickSeeMore);
 
   return (
@@ -107,9 +111,9 @@ const ProductCard = (props) => {
             <Category title={category}>
               {category ? `Sistema constructivo: ${category}` : ''}
             </Category>
-            <Reference>{`Referencia ${
-              reference || 'sin especificar'
-            }`}</Reference>
+            <Reference>
+              {`Referencia ${reference || 'sin especificar'}`}
+            </Reference>
           </Details>
         </Content>
         <Footer>

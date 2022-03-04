@@ -6,7 +6,6 @@ export const TableInput = styled.input`
 	outline: none;
 	width: 58px;
 	border-bottom: solid 1px rgba(${BLACK}, 0.28);
-	font-family: Lato;
 	font-size: 13px;
 	caret-color: ${CARIBBEAN_GREEN};
 	&:active,

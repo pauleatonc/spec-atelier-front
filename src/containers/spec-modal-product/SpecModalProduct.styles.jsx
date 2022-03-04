@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import {
-	WHITE,
-	PRIMARY,
-	SECONDARY,
-	MEDIA_QUERY_SMALL,
-	MINE_SHAFT,
+  WHITE,
+  PRIMARY,
+  SECONDARY,
+  MEDIA_QUERY_SMALL,
+  MINE_SHAFT,
 } from '../../config/constants/styled-vars';
 
 const HEIGHT_CONTENT = '350px';
@@ -32,7 +32,6 @@ export const Content = styled.section`
 	line-height: normal;
 	flex-direction: column;
 	letter-spacing: 1px;
-	font-family: Lato;
 	${MEDIA_QUERY_SMALL} {
 		height: 100vh;
 	}
@@ -55,7 +54,6 @@ export const Title = styled.div`
 	width: 318px;
 	height: 17px;
 	height: 17px;
-	font-family: Lato;
 	font-size: 14px;
 	font-weight: bold;
 	font-stretch: normal;
@@ -143,7 +141,6 @@ export const InfoContent = styled.section`
 `;
 
 export const ProductName = styled.div`
-	font-family: Lato;
 	font-size: 12px;
 	font-stretch: normal;
 	font-style: normal;
@@ -170,7 +167,6 @@ export const ProductDescription = styled.div`
 export const ProductBrand = styled.div`
 	margin: 8px 0px;
 	color: ${MINE_SHAFT};
-	font-family: Lato;
 	font-size: 10px;
 	font-weight: normal;
 	font-stretch: normal;

@@ -9,19 +9,8 @@ export const Root = styled.div`
   overflow: auto;
   padding: 0;
   width: 100%;
-
   ${MEDIA_QUERY_SMALL} {
     grid-template-rows: 85px auto;
-  }
-`;
-
-export const Header = styled.header`
-  box-sizing: border-box;
-  padding: 10px 0 0;
-  width: 100%;
-
-  ${MEDIA_QUERY_SMALL} {
-    padding: 0px;
   }
 `;
 
@@ -43,7 +32,6 @@ export const Navigation = styled.div`
   max-height: calc(100vh - 115px);
   position: fixed;
   top: 115px;
-
   ${MEDIA_QUERY_SMALL} {
     width: 100%;
     grid-template-columns: unset;

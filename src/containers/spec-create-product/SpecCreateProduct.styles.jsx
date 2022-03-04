@@ -31,7 +31,6 @@ export const Loading = styled.div`
 	align-items: center;
 	color: ${MINE_SHAFT};
 	display: flex;
-	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
 	height: 100%;
@@ -51,7 +50,6 @@ export const Header = styled.section`
 
 export const Title = styled.span`
 	color: ${MINE_SHAFT};
-	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
 	letter-spacing: 1px;
@@ -123,7 +121,6 @@ export const InputButton = styled.input`
   cursor: pointer;
   display: inline-flex;
   height: 38px;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   overflow: hidden;

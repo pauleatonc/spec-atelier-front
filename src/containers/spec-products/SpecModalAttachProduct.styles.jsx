@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import {
-	WHITE,
-	MINE_SHAFT,
-	GALLERY,
-	MEDIA_QUERY_SMALL,
+  WHITE,
+  MINE_SHAFT,
+  GALLERY,
+  MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
 const PADDING_CONTENT = '8px 2px 8px 8px';
@@ -15,13 +15,8 @@ export const Container = styled.div`
 	background-color: ${WHITE};
 	border-radius: 4px;
 	min-height: ${HEIGHT_CONTENT};
-	font-weight: normal;
-	font-stretch: normal;
-	font-style: normal;
-	line-height: normal;
 	flex-direction: column;
 	letter-spacing: 1px;
-	font-family: Lato;
 	${MEDIA_QUERY_SMALL} {
 		border-radius: 0;
 		height: 100vh;
@@ -46,11 +41,8 @@ export const Title = styled.div`
 	width: 318px;
 	height: 17px;
 	height: 17px;
-	font-family: Lato;
 	font-size: 14px;
 	font-weight: bold;
-	font-stretch: normal;
-	font-style: normal;
 	line-height: normal;
 	letter-spacing: 1.17px;
 	color: ${MINE_SHAFT};
@@ -79,7 +71,6 @@ export const OptionsList = styled.section`
 `;
 
 export const SectionName = styled.div`
-	font-family: Lato;
 	font-size: 12px;
 	font-stretch: normal;
 	font-style: normal;
@@ -102,11 +93,9 @@ export const Options = styled.div`
 
 export const Option = styled.section`
 	align-items: center;
-	box-sizing: border-box;
 	color: ${MINE_SHAFT};
 	cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 	display: flex;
-	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 0.86px;
 	padding: 10px 16px;

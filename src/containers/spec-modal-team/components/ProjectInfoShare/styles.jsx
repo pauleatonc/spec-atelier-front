@@ -13,7 +13,6 @@ export const SelectAllProject = styled.div`
 `;
 
 export const AllProjectLabel = styled.p`
-	font-family: Lato;
 	font-size: 13px;
 	letter-spacing: 1.08px;
 `;

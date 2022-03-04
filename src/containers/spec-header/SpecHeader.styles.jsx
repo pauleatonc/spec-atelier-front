@@ -45,7 +45,6 @@ export const Section = styled.section`
 
 export const ProjectName = styled(Section)`
   color: ${MINE_SHAFT};
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1px;

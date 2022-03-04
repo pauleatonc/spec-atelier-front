@@ -8,7 +8,6 @@ export const Container = styled.section`
 `;
 
 export const Title = styled.p`
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -28,7 +27,6 @@ export const InputContainer = styled.div`
 `;
 
 export const Label = styled.p`
-  font-family: Lato;
   font-size: 12px;
   font-weight: ${strong => strong ? 'bold' : 'normal'};
   font-stretch: normal;
@@ -40,7 +38,6 @@ export const Label = styled.p`
 
 export const CodeNumber = styled.span`
   font-size: 14px;
-  font-family: Lato;
   display: flex;
   align-items: center;
   margin-right: 8px;

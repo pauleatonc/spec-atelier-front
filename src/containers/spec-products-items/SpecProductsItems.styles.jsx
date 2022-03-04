@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	PRIMARY,
-	MINE_SHAFT,
+  PRIMARY,
+  MINE_SHAFT,
   WHITE,
   PUERTO_RICO,
 } from '../../config/constants/styled-vars';
@@ -35,7 +35,6 @@ export const Loading = styled.div`
 	align-items: center;
 	color: ${MINE_SHAFT};
 	display: flex;
-	font-family: Lato;
 	font-size: 16px;
 	height: calc(100% - 46px);
 	justify-content: center;
@@ -45,7 +44,6 @@ export const Loading = styled.div`
 export const Item = styled.p`
 	color: ${({ active }) => (active ? PRIMARY : MINE_SHAFT)};
 	cursor: pointer;
-	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 1px;
 	margin: 0 0 15px;
@@ -60,11 +58,11 @@ export const Item = styled.p`
 `;
 
 Item.defaultProps = {
-	active: false,
+  active: false,
 };
 
 Item.propTypes = {
-	active: PropTypes.bool,
+  active: PropTypes.bool,
 };
 
 export const ArrowIcon = styled.img`

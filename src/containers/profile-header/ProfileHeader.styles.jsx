@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import {
-	MINE_SHAFT,
-	SILVER_CHALICE,
-	SILVER,
-	PRIMARY,
-	VIEW_HEADER_HEIGHT,
-	JAVA,
+  MINE_SHAFT,
+  SILVER_CHALICE,
+  SILVER,
+  PRIMARY,
+  VIEW_HEADER_HEIGHT,
+  JAVA,
   WHITE,
 } from '../../config/constants/styled-vars';
 
@@ -67,6 +67,7 @@ export const IconPhoto = styled.div`
 	background-color: ${SILVER_CHALICE};
 	cursor: pointer;
 `;
+
 export const ContentEdit = styled.section`
 	display: flex;
 	flex-direction: column;
@@ -82,10 +83,8 @@ export const Row = styled.div`
 export const ProfileName = styled.div`
 	display: flex;
 	width: 100%;
-	justify-content: ${({ isEditting }) =>
-		isEditting ? 'space-between' : 'center'};
-	margin-bottom: ${({ isEditting }) => (isEditting ? '4px' : '12px')};
-	font-family: Lato;
+	justify-content: ${({ isEditting }) => isEditting ? 'space-between' : 'center'};
+	margin-bottom: ${({ isEditting }) => isEditting ? '4px' : '12px'};
 	font-size: 20px;
 	font-weight: bold;
 	font-stretch: normal;
@@ -101,7 +100,6 @@ export const ProfileCompany = styled.div`
 	width: 100%;
 	justify-content: center;
 	margin-bottom: 8px;
-	font-family: Lato;
 	-webkit-text-stroke: 1px ${SILVER_CHALICE};
 	font-size: 18px;
 	font-weight: normal;
@@ -117,7 +115,6 @@ export const ProfileCity = styled.div`
 	display: flex;
 	width: 100%;
 	justify-content: center;
-	font-family: Lato;
 	-webkit-text-stroke: 1px ${SILVER_CHALICE};
 	font-size: 18px;
 	font-weight: normal;
@@ -152,7 +149,6 @@ export const Item = styled.div`
 
 export const ItemText = styled.span`
 	height: 18px;
-	font-family: Lato;
 	font-size: 14px;
 	font-weight: bold;
 	font-stretch: normal;
@@ -180,7 +176,6 @@ export const InputText = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid ${JAVA};
-	font-family: Lato;
 	font-size: 18px;
 	letter-spacing: 1px;
 	color: ${MINE_SHAFT};
@@ -188,6 +183,7 @@ export const InputText = styled.div`
 	width: 100%;
 	justify-content: center;
 `;
+
 export const DropIcon = styled.img`
 	cursor: pointer;
 `;

@@ -18,7 +18,6 @@ export const NavbarContainer = styled.nav`
   align-items: center;
   background-color: ${({ transparent }) => transparent ? 'transparent' : WHITE};
   display: flex;
-  font-family: 'Lato', sans-serif;
   height: ${NAVBAR_HEIGHT};
   position: ${({ fixed }) => fixed && 'fixed'};
   width: 100%;
@@ -73,7 +72,6 @@ export const Item = styled.div`
 
 export const ItemText = styled.span`
   height: 18px;
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   font-stretch: normal;
@@ -97,7 +95,6 @@ export const LinkItem = styled.div`
   justify-content: center;
   margin: 8px 0px;
   padding: 4px 8px;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -120,7 +117,6 @@ export const LinkItem = styled.div`
 export const LinkRegister = styled(LinkItem)`
   border-radius: 20px;
   background-color: ${PRIMARY};
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;

@@ -1,17 +1,16 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import {
-	WHITE,
-	PRIMARY,
-	SECONDARY,
-	MEDIA_QUERY_SMALL,
-	MINE_SHAFT,
-	JAVA,
-	ALTO,
-	CARIBBEAN_GREEN,
-	BLACK,
-	MINE_SHAFT_RGB,
-	ALTO_OPACITY,
+  WHITE,
+  PRIMARY,
+  SECONDARY,
+  MEDIA_QUERY_SMALL,
+  MINE_SHAFT,
+  JAVA,
+  ALTO,
+  CARIBBEAN_GREEN,
+  BLACK,
+  MINE_SHAFT_RGB,
+  ALTO_OPACITY,
 } from '../../config/constants/styled-vars';
 
 const HEIGHT_CONTENT = '350px';
@@ -38,7 +37,6 @@ export const Content = styled.section`
 	line-height: normal;
 	flex-direction: column;
 	letter-spacing: 1px;
-	font-family: Lato;
 `;
 
 export const HeaderProduct = styled.section`
@@ -57,7 +55,6 @@ export const Title = styled.div`
 	width: 318px;
 	height: 17px;
 	height: 17px;
-	font-family: Lato;
 	font-size: 14px;
 	font-weight: bold;
 	font-stretch: normal;
@@ -138,7 +135,6 @@ export const InfoContent = styled.section`
 `;
 
 export const ProductName = styled.div`
-	font-family: Lato;
 	font-size: 12px;
 	font-stretch: normal;
 	font-style: normal;
@@ -164,7 +160,6 @@ export const ProductDescription = styled.div`
 export const ProductBrand = styled.div`
 	margin: 8px 0px;
 	color: ${MINE_SHAFT};
-	font-family: Lato;
 	font-size: 10px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -220,7 +215,6 @@ export const ContactSection = styled.div`
 export const TitleContact = styled.span`
 	width: 561px;
 	height: 29px;
-	font-family: Lato;
 	font-size: 17px;
 	font-weight: bold;
 	font-stretch: normal;
@@ -233,7 +227,6 @@ export const TitleContact = styled.span`
 export const TitleProduct = styled.span`
 	width: 100%;
 	height: 29px;
-	font-family: Lato;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -246,7 +239,6 @@ export const TitleGroup = styled.label`
 	width: 50px;
 	height: 15px;
 	opacity: 0.49;
-	font-family: Lato;
 	font-size: 12px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -285,7 +277,6 @@ export const ButtonQuote = styled.button`
 export const TitleButton = styled.span`
 	width: 141px;
 	height: 19px;
-	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
 	font-stretch: normal;
@@ -327,7 +318,6 @@ export const ContentDataProduct = styled.div`
 
 export const TitleProductName = styled.span`
 	width: 268px;
-	font-family: Lato;
 	font-size: 11px;
 	font-weight: bold;
 	font-stretch: normal;
@@ -343,7 +333,6 @@ export const TitleProductName = styled.span`
 
 export const ProductDesc = styled.span`
 	width: 292px;
-	font-family: Lato;
 	font-size: 10px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -358,7 +347,6 @@ export const ProductDesc = styled.span`
 `;
 
 export const ProductSpan = styled.span`
-	font-family: Lato;
 	font-size: 10px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -378,7 +366,6 @@ export const TextAreaForm = styled.textarea`
 	padding-left: 2px;
 	padding-top: 9px;
 	flex: 1;
-	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 1px;
 	resize: none;
@@ -399,7 +386,6 @@ export const TableInput = styled.input`
 	width: 98%;
 	border-bottom: solid 1px rgba(${BLACK}, 0.28);
 	padding: 10.6px 13px 5.4px 0px;
-	font-family: Lato;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -466,7 +452,6 @@ export const Details = styled.section`
 const BaseDetails = styled.p`
 	-webkit-box-orient: vertical;
 	display: -webkit-box;
-	font-family: Lato;
 	-webkit-line-clamp: 2;
 	margin: 0 0 10px;
 	overflow: hidden;
@@ -488,7 +473,6 @@ export const Description = styled(BaseDetails)`
 
 export const Category = styled.p`
 	color: ${MINE_SHAFT};
-	font-family: Lato;
 	font-size: 10px;
 	letter-spacing: 0.83px;
 	margin: auto 0 7px;
@@ -499,7 +483,6 @@ export const Category = styled.p`
 
 export const Reference = styled.p`
 	color: ${MINE_SHAFT};
-	font-family: Lato;
 	font-size: 10px;
 	letter-spacing: 0.83px;
 	margin: 0;

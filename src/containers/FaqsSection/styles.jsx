@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import { MEDIA_QUERY_STANDAR_MEDIUM } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
@@ -25,7 +24,6 @@ export const ContainerTitle = styled.div`
 `;
 
 export const Title = styled.h1`
-	font-family: Lato;
 	font-size: 30px;
 	font-weight: bold;
 	letter-spacing: 1.8px;

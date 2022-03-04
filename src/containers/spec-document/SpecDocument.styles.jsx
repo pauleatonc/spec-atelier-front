@@ -1,9 +1,18 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { MINE_SHAFT, MEDIA_QUERY_SMALL, NOBEL, GALLERY, WHITE, DUSTY_GRAY, CONCRETE, CONCRETE_OPACITY, MINE_SHAFT_RGB } from '../../config/constants/styled-vars';
+import {
+  MINE_SHAFT,
+  MEDIA_QUERY_SMALL,
+  NOBEL,
+  GALLERY,
+  WHITE,
+  DUSTY_GRAY,
+  CONCRETE,
+  CONCRETE_OPACITY,
+  MINE_SHAFT_RGB
+} from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
-  box-sizing: border-box;
   height: 100%;
   position: relative;
   width: 587px;
@@ -37,7 +46,6 @@ export const AddMenuItem = styled.section`
 	border-bottom: 1px solid ${NOBEL};
 	color: ${MINE_SHAFT};
 	cursor: pointer;
-	font-family: Lato;
 	font-size: 14px;
 	letter-spacing: 1px;
 	padding: 26px 0 26px 55px;
@@ -79,10 +87,10 @@ export const Block = styled.section`
 `;
 
 Block.defaultProps = {
-	margin: 'initial',
+  margin: 'initial',
 };
 Block.propTypes = {
-	margin: PropTypes.string,
+  margin: PropTypes.string,
 };
 
 export const BlockEditor = styled.section`
@@ -102,7 +110,6 @@ export const BlockMenuItem = styled.section`
 	border-bottom: 1px solid ${NOBEL};
 	color: ${MINE_SHAFT};
 	cursor: pointer;
-	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 0.86px;
 	padding: 15px 0 15px 35px;
@@ -138,7 +145,6 @@ export const BlockContent = styled.section`
 
 export const BlockText = styled.section`
 	background-color: ${CONCRETE_OPACITY};
-	font-family: Lato;
 	font-size: 12px;
 	margin: 0 0 3px 0;
 	padding: 4px 30px 4px 9px;
@@ -151,44 +157,35 @@ export const BlockText = styled.section`
 `;
 
 export const BlockTextContent = styled.section`
-	font-family: Lato;
-	font-size: 12px;
-	font-weight: initial;
-
 	& p {
 		color: ${MINE_SHAFT};
 		letter-spacing: 1px;
 		margin: 9px 0;
-	}
-
+	};
 	& h1 {
 		color: ${MINE_SHAFT};
 		font-size: 18px;
 		font-weight: bold;
 		margin: 9px 0;
-	}
-
+	};
 	& h2 {
 		color: ${MINE_SHAFT};
 		font-size: 14px;
 		font-weight: bold;
 		margin: 9px 0;
-	}
-
+	};
 	& h5 {
 		color: ${MINE_SHAFT};
 		font-size: 9px;
 		letter-spacing: 1px;
 		margin: 9px 0;
-	}
-
+	};
 	& strong {
 		font-weight: bold;
-	}
-
+	};
 	& i {
 		font-style: italic;
-	}
+	};
 `;
 
 export const BlockTitle = styled.span`
@@ -200,7 +197,6 @@ export const Section = styled.section`
 	background-color: ${CONCRETE_OPACITY};
 	color: ${MINE_SHAFT};
 	display: flex;
-	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
 	height: 36px;
@@ -221,7 +217,6 @@ export const Item = styled.section`
 	background-color: ${CONCRETE_OPACITY};
 	color: ${MINE_SHAFT};
 	display: flex;
-	font-family: Lato;
 	font-size: 14px;
 	font-weight: bold;
 	height: 36px;
@@ -260,7 +255,6 @@ export const ProductImage = styled.img`
 
 export const ProductTitle = styled.p`
 	color: ${MINE_SHAFT};
-	font-family: Lato;
 	font-size: 12px;
 	font-weight: bold;
 	letter-spacing: 1px;
@@ -271,7 +265,6 @@ export const ProductTitle = styled.p`
 
 export const ProductDescription = styled.p`
 	color: rgba(${MINE_SHAFT_RGB}, 0.51);
-	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 1px;
 	line-height: 1.6;
@@ -280,7 +273,6 @@ export const ProductDescription = styled.p`
 
 export const ProductSystem = styled.p`
 	color: ${MINE_SHAFT};
-	font-family: Lato;
 	font-size: 11px;
 	font-weight: bold;
 	letter-spacing: 1px;
@@ -290,7 +282,6 @@ export const ProductSystem = styled.p`
 
 export const ProductReference = styled.p`
 	color: ${MINE_SHAFT};
-	font-family: Lato;
 	font-size: 11px;
 	letter-spacing: 1px;
 	line-height: 1.6;
@@ -298,7 +289,6 @@ export const ProductReference = styled.p`
 
 export const ProductBrand = styled.p`
 	color: ${MINE_SHAFT};
-	font-family: Lato;
 	font-size: 11px;
 	letter-spacing: 1px;
 	line-height: 1.6;

@@ -1,6 +1,5 @@
 /* Custom properties */
 import styled from 'styled-components';
-
 import { MINE_SHAFT, WHITE } from '../../config/constants/styled-vars';
 
 const TOOLTIP_MARGIN = '30px';
@@ -22,7 +21,6 @@ export const Content = styled.div`
   background: ${MINE_SHAFT};
   line-height: 1;
   z-index: 100;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   white-space: nowrap;

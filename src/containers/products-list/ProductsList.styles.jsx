@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import {
-	GALLERY,
-	MINE_SHAFT,
-	MEDIA_QUERY_SMALL,
+  GALLERY,
+  MINE_SHAFT,
+  MEDIA_QUERY_SMALL,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
@@ -42,7 +42,6 @@ export const BodyHeader = styled.section`
 	align-items: center;
 	color: ${MINE_SHAFT};
 	display: grid;
-	font-family: Lato;
 	font-size: 12px;
 	grid-template-columns: 50% 50%;
 	height: 24px;

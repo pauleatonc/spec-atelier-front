@@ -29,7 +29,6 @@ export const Header = styled.section`
 `;
 
 export const Body = styled.section`
-  box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(auto-fit, 50%);
   padding: 32px 12px 15px;
@@ -70,7 +69,6 @@ ItemIcon.propTypes = {
 
 export const ItemText = styled.span`
   color: ${({ active }) => (active ? PRIMARY : MINE_SHAFT)};
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 0.86px;
   text-align: center;
@@ -87,7 +85,6 @@ export const Loading = styled.section`
   align-items: center;
   color: ${MINE_SHAFT};
   display: flex;
-  font-family: Lato;
   font-size: 16px;
   height: calc(100% - 46px);
   justify-content: center;

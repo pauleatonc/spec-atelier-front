@@ -90,7 +90,6 @@ export const EmptyText = styled.span`
 `;
 
 export const List = styled.div`
-	box-sizing: border-box;
 	height: 100%;
 	overflow-y: auto;
 	padding: 8px 0;
@@ -121,7 +120,6 @@ export const Item = styled.section`
 `;
 
 export const ItemDetails = styled.div`
-	box-sizing: border-box;
 	display: block;
 	overflow: hidden;
 	padding: 0 10px;

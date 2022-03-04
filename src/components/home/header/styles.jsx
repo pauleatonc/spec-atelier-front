@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import BACKGROUND_HEADER_HOME from '../../../assets/images/home/bg-header-home.png';
 import { MEDIA_QUERY_STANDAR_MEDIUM, SILVER_OPACITY, WHITE } from '../../../config/constants/styled-vars';
 
@@ -40,11 +39,7 @@ export const InfoContainer = styled.div`
 `;
 
 export const TextBanner = styled.p`
-	font-family: 'lato';
 	font-size: 16px;
-	font-weight: normal;
-	font-stretch: normal;
-	font-style: normal;
 	line-height: 1.58;
 	letter-spacing: 1px;
 	color:${WHITE};

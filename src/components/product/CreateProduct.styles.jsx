@@ -20,7 +20,6 @@ export const IconContainer = styled.div`
 `;
 
 export const InfoContainer = styled.section`
-  font-family: Lato;
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;

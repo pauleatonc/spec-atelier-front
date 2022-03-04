@@ -31,7 +31,6 @@ export const Icon = styled.img`
 export const TextContent = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: Lato;
   font-size: 14px;
   letter-spacing: 1px;
   text-align: center;

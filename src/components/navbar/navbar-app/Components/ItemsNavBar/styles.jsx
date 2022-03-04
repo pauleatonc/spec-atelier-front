@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-import {
-  MINE_SHAFT,
-  PRIMARY,
-  MEDIA_QUERY_STANDAR_MEDIUM,
-} from '../../../../../config/constants/styled-vars';
+import { MINE_SHAFT, PRIMARY, MEDIA_QUERY_STANDAR_MEDIUM } from '../../../../../config/constants/styled-vars';
 
 export const ItemsContainer = styled.section`
   display: flex;
@@ -41,7 +37,7 @@ export const Item = styled.div`
 `;
 
 export const ItemText = styled.span`
-  font-family: Lato;
+  height: 18px;
   font-size: 14px;
   font-weight: bold;
   text-align: center;

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import {
-	WHITE,
-	MEDIA_QUERY_SMALL,
-	CARIBBEAN_GREEN,
-	BURNING_ORANGE,
-	ALABASTER,
-	TIARA,
+  WHITE,
+  MEDIA_QUERY_SMALL,
+  CARIBBEAN_GREEN,
+  BURNING_ORANGE,
+  ALABASTER,
+  TIARA,
 } from '../../config/constants/styled-vars';
 import { TYPES } from './constants';
 
@@ -17,8 +17,7 @@ export const Container = styled.div`
 	position: relative;
 	width: 360px;
 	border-radius: 24px;
-	border: solid 3px
-		${({ type }) => (type === TYPES.ARCHITECT ? BURNING_ORANGE : CARIBBEAN_GREEN)};
+	border: solid 3px ${({ type }) => (type === TYPES.ARCHITECT ? BURNING_ORANGE : CARIBBEAN_GREEN)};
 	background-color: ${ALABASTER};
 	padding: 45px 30px 60px;
 	margin: 20px 10px;
@@ -43,12 +42,11 @@ export const Container = styled.div`
 export const Descriptor = styled.div`
 	height: 36px;
 	width: 190px;
-	font-family: Lato;
 	font-size: 14px;
 	border-radius: 18px;
 	padding: 10px 20px;
 	color: ${WHITE};
-	background-color: ${({ type }) =>	(type === TYPES.ARCHITECT ? BURNING_ORANGE : CARIBBEAN_GREEN)};
+	background-color: ${({ type }) => (type === TYPES.ARCHITECT ? BURNING_ORANGE : CARIBBEAN_GREEN)};
 	text-align: center;
 	position: absolute;
 	top: -20px;
@@ -58,7 +56,6 @@ export const Descriptor = styled.div`
 export const Title = styled.h1`
 	width: 100%;
 	max-width: 200px;
-	font-family: Lato;
 	font-weight: bold;
 	font-size: 30px;
 	text-align: center;
@@ -66,7 +63,6 @@ export const Title = styled.h1`
 `;
 
 export const Subtitle = styled.p`
-	font-family: Lato;
 	font-size: 16px;
 	text-align: center;
 	line-height: 19px;
@@ -74,7 +70,6 @@ export const Subtitle = styled.p`
 `;
 
 export const TitleInfo = styled.h1`
-	font-family: Lato;
 	font-size: 18px;
 	font-weight: bold;
 	width: 100%;
@@ -94,7 +89,6 @@ export const ItemInfo = styled.div`
 `;
 
 export const ItemDesc = styled.p`
-	font-family: Lato;
 	font-size: 16px;
 `;
 
@@ -104,14 +98,13 @@ export const ContainerCreateButton = styled.div`
 
 export const ContainerIWantItButton = styled.div`
 	margin-top: ${({ containFooterInfo }) =>
-		containFooterInfo ? '0px' : '100px'};
+    containFooterInfo ? '0px' : '100px'};
 `;
 
 export const FooterInfo = styled.p`
 	text-align: center;
 	margin-top: 28px;
 	margin-bottom: 36px;
-	font-family: Lato;
 	font-size: 12px;
 	max-width: 280px;
 `;

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import {
-	MEDIA_QUERY_SMALL,
-	MEDIA_QUERY_STANDAR_MEDIUM,
-	BOTTLE_GREEN,
-	ALABASTER,
-	WHITE,
-	GRAY_OPACITY,
+  MEDIA_QUERY_SMALL,
+  MEDIA_QUERY_STANDAR_MEDIUM,
+  BOTTLE_GREEN,
+  ALABASTER,
+  WHITE,
+  GRAY_OPACITY,
 } from '../../../config/constants/styled-vars';
 
 export const Container = styled.section`
@@ -59,9 +59,7 @@ export const Title = styled.h1`
 `;
 
 export const TextDescription = styled.p`
-	font-family: 'Lato', sans-serif;
 	font-size: 16px;
-	font-family: 'Lato';
 	letter-spacing: 1px;
 	padding-right: 20px;
 	line-height: 20px;
@@ -114,10 +112,8 @@ export const BannerSlider = styled.div`
 `;
 
 export const TextSlider = styled.div`
-	font-family: Lato;
 	font-size: 18px;
 	font-weight: bold;
-	box-sizing: border-box;
 	padding: 0px 33px;
 	flex: 1;
 	justify-content: center;

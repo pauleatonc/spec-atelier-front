@@ -29,17 +29,13 @@ export const Loading = styled.span`
   align-items: center;
   color: ${MINE_SHAFT};
   display: inline-flex;
-  font-family: Lato;
   font-size: 16px;
   height: 34px;
 `;
 
 export const Text = styled.span`
-  font-family: Lato;
   font-size: 14px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.71;
   letter-spacing: 1px;
   white-space: nowrap;

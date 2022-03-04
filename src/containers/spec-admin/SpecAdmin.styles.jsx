@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	WHITE,
-	MINE_SHAFT,
-	BOULDER,
-	MEDIA_QUERY_SMALL,
+  WHITE,
+  MINE_SHAFT,
+  BOULDER,
+  MEDIA_QUERY_SMALL,
   MERCURY,
   BLACK
 } from '../../config/constants/styled-vars';
@@ -18,7 +18,6 @@ export const Root = styled.div`
 	position: absolute;
 	top: 0;
 	width: 360px;
-	font-family: Lato;
 	z-index: 1;
 
 	${MEDIA_QUERY_SMALL} {
@@ -29,17 +28,16 @@ export const Root = styled.div`
 `;
 
 Root.defaultProps = {
-	show: false,
+  show: false,
 };
 Root.propTypes = {
-	show: PropTypes.bool,
+  show: PropTypes.bool,
 };
 
 export const PanelTitle = styled.section`
 	align-items: center;
 	display: flex;
 	color: ${MINE_SHAFT};
-	font-family: Lato;
 	font-size: 13px;
 	font-weight: bold;
 	height: 46px;

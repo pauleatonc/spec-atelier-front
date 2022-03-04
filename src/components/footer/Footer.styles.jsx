@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { TERTIARY, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
 
 export const Container = styled.footer`
-  font-family: 'Lato', sans-serif;
   background-color: ${TERTIARY};
   min-height: 300px;
   display: flex;

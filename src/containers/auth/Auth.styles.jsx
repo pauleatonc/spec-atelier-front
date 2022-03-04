@@ -12,7 +12,6 @@ import {
 export const Container = styled.section`
   height: 100%;
   width: 100%;
-  font-family: 'Lato', sans-serif;
 `;
 
 export const Content = styled.div`
@@ -71,15 +70,11 @@ export const TextContent = styled.div`
 `;
 
 export const TextInfo = styled.p`
-  font-family: 'Lato', sans-serif;
   font-size: ${({ size = 14 }) => size}px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
   margin-bottom: 35px;
-  font-family: Lato;
   color: ${MINE_SHAFT};
 `;
 
@@ -96,7 +91,6 @@ export const ButtonLogin = styled.button`
   text-transform: uppercase;
   height: 34px;
   font-size: 16px;
-  font-family: 'Lato';
   font-stretch: normal;
   font-weight: bold;
   text-align: center;
@@ -122,7 +116,7 @@ export const KeepSessionContainer = styled.section`
   justify-content: flex-end;
   margin-top: 12px;
   margin-bottom: 22px;
-`; 
+`;
 
 export const ButtonText = styled.div`
   white-space: nowrap;
@@ -130,8 +124,6 @@ export const ButtonText = styled.div`
   text-overflow: ellipsis;
   font-size: 16px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
   line-height: normal;
   letter-spacing: normal;
   text-align: center;
@@ -143,11 +135,8 @@ export const ButtonContainer = styled.div`
 
 export const TermsText = styled.div`
   margin: 16px 0;
-  font-family: Lato;
   font-size: 12px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
   color: ${MINE_SHAFT};

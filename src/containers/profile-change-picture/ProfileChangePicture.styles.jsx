@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import { 
-  WHITE, 
-  MINE_SHAFT, 
-  BLACK 
+import {
+  WHITE,
+  MINE_SHAFT,
+  BLACK
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.section`
 	background-color: ${WHITE};
 	box-shadow: ${({ shadow = true }) =>
-		shadow
-			? `0 11px 15px -7px rgba(${BLACK}, 0.2), 0 9px 46px 8px rgba(${BLACK}, 0.12), 0 24px 38px 3px rgba(${BLACK}, 0.14)`
-			: 'none'};
+    shadow
+      ? `0 11px 15px -7px rgba(${BLACK}, 0.2), 0 9px 46px 8px rgba(${BLACK}, 0.12), 0 24px 38px 3px rgba(${BLACK}, 0.14)`
+      : 'none'};
 	display: flex;
 	flex-wrap: wrap;
 	max-height: 488px;
@@ -28,7 +28,6 @@ export const Header = styled.header`
 
 export const Title = styled.span`
 	color: ${MINE_SHAFT};
-	font-family: Lato;
 	font-size: 16px;
 	font-weight: bold;
 	letter-spacing: 1px;

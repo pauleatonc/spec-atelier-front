@@ -1,13 +1,10 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-	MINE_SHAFT,
-	WHITE,
-	PRIMARY,
-	SILVER_CHALICE,
-	DUSTY_GRAY,
-	ALABASTER,
-	BLACK,
+  PRIMARY,
+  SILVER_CHALICE,
+  ALABASTER,
+  BLACK,
   DUSTY_GRAY_OPACITY,
   MINE_SHAFT_RGB,
 } from '../../config/constants/styled-vars';
@@ -16,9 +13,9 @@ export const Root = styled.div`
 	background-color: ${ALABASTER};
 	border-radius: 5px;
 	box-shadow: ${({ shadow = true }) =>
-		shadow
-			? `0 11px 15px -7px rgba(${BLACK}, 0.2), 0 9px 46px 8px rgba(${BLACK}, 0.12), 0 24px 38px 3px rgba(${BLACK}, 0.14)`
-			: 'none'};
+    shadow
+      ? `0 11px 15px -7px rgba(${BLACK}, 0.2), 0 9px 46px 8px rgba(${BLACK}, 0.12), 0 24px 38px 3px rgba(${BLACK}, 0.14)`
+      : 'none'};
 	width: 80%;
 	padding: 20px;
 	overflow-y: auto;
@@ -40,32 +37,18 @@ export const ProductContent = styled.section`
 `;
 
 Root.defaultProps = {
-	shadow: true,
+  shadow: true,
 };
 Root.propTypes = {
-	shadow: PropTypes.bool,
+  shadow: PropTypes.bool,
 };
 
 export const Label = styled.div`
 	width: 100%;
-	font-family: Lato;
 	font-size: 12px;
 	font-weight: bold;
 	letter-spacing: 1px;
 	padding: 4px 0 12px;
-`;
-
-export const Loading = styled.div`
-	align-items: center;
-	color: ${WHITE};
-	display: flex;
-	font-family: Lato;
-	font-size: 16px;
-	font-weight: bold;
-	height: 100%;
-	justify-content: center;
-	letter-spacing: 1px;
-	width: 100%;
 `;
 
 export const Header = styled.section`
@@ -75,14 +58,6 @@ export const Header = styled.section`
 	padding: 0 60px 0 40px;
 	position: relative;
 	width: 100%;
-`;
-
-export const Title = styled.span`
-	color: ${MINE_SHAFT};
-	font-family: Lato;
-	font-size: 16px;
-	font-weight: bold;
-	letter-spacing: 1px;
 `;
 
 export const Body = styled.section`
@@ -101,35 +76,34 @@ export const Section = styled.section`
 	width: ${({ width }) => width};
 	height: ${({ height }) => height};
 	justify-content: ${({ justifyContent }) => justifyContent};
-	${({ flexDirection }) =>
-		flexDirection ? `flex-direction: ${flexDirection}` : ''};
+	${({ flexDirection }) => flexDirection ? `flex-direction: ${flexDirection}` : ''};
 `;
 
 Section.defaultProps = {
-	alignItems: 'initial',
-	justifyItems: 'initial',
-	display: 'block',
-	gridGap: '12px',
-	gridTemplateColumns: 'initial',
-	gridTemplateRows: 'initial',
-	padding: 'initial',
-	width: '100%',
-	height: 'auto',
-	justifyContent: 'initial',
-	flexDirection: undefined,
+  alignItems: 'initial',
+  justifyItems: 'initial',
+  display: 'block',
+  gridGap: '12px',
+  gridTemplateColumns: 'initial',
+  gridTemplateRows: 'initial',
+  padding: 'initial',
+  width: '100%',
+  height: 'auto',
+  justifyContent: 'initial',
+  flexDirection: undefined,
 };
 Section.propTypes = {
-	alignItems: PropTypes.string,
-	justifyItems: PropTypes.string,
-	display: PropTypes.string,
-	gridGap: PropTypes.string,
-	gridTemplateColumns: PropTypes.string,
-	gridTemplateRows: PropTypes.string,
-	padding: PropTypes.string,
-	width: PropTypes.string,
-	height: PropTypes.string,
-	justifyContent: PropTypes.string,
-	flexDirection: PropTypes.string,
+  alignItems: PropTypes.string,
+  justifyItems: PropTypes.string,
+  display: PropTypes.string,
+  gridGap: PropTypes.string,
+  gridTemplateColumns: PropTypes.string,
+  gridTemplateRows: PropTypes.string,
+  padding: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  justifyContent: PropTypes.string,
+  flexDirection: PropTypes.string,
 };
 
 export const Footer = styled.section`
@@ -147,11 +121,8 @@ export const Gap = styled.div`
 
 export const Text = styled.div`
 	white-space: nowrap;
-	font-family: Lato;
 	font-size: 14px;
 	font-weight: bold;
-	font-stretch: normal;
-	font-style: normal;
 	line-height: normal;
 	letter-spacing: 0.63px;
 	color: ${PRIMARY};
@@ -164,7 +135,6 @@ export const Text = styled.div`
 
 export const SubtitleContent = styled.p`
 	color: rgba(${MINE_SHAFT_RGB}, 0.44);
-	font-family: Lato;
 	font-size: 12px;
 	letter-spacing: 0.75px;
 	margin-bottom: 12px;

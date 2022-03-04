@@ -1,12 +1,16 @@
 import styled from 'styled-components';
-import { MINE_SHAFT, GALLERY, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../../config/constants/styled-vars';
+import {
+  MINE_SHAFT,
+  GALLERY,
+  MEDIA_QUERY_SMALL,
+  MEDIA_QUERY_MEDIUM
+} from '../../config/constants/styled-vars';
 
 export const SubHeader = styled.section`
   width: 100%;
   min-height: 62px;
   border-radius: 9px;
   background-color: ${GALLERY};
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -37,7 +41,6 @@ export const Col = styled.div`
 `;
 
 export const Label = styled.section`
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -51,7 +54,6 @@ export const Label = styled.section`
 
 export const Text = styled.section`
   text-transform: capitalize;
-  font-family: Lato;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;

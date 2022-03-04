@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MEDIA_QUERY_STANDAR_MEDIUM, SILVER} from '../../../../config/constants/styled-vars';
+import { MEDIA_QUERY_STANDAR_MEDIUM, SILVER } from '../../../../config/constants/styled-vars';
 
 export const Container = styled.section`
   display: flex;
@@ -22,7 +22,6 @@ export const Container = styled.section`
 `;
 
 export const Title = styled.p`
-  font-family: Lato;
   font-size: 20px;
   font-weight: bold;
   letter-spacing: 1.2px;
@@ -39,7 +38,6 @@ export const IconExpan = styled.i`
 export const ExpandableContent = styled.div`
   width: 90%;
   margin-top: 20px;
-  font-family: Lato;
   font-size: 16px;
   letter-spacing: 0.96px;
   ${MEDIA_QUERY_STANDAR_MEDIUM} {

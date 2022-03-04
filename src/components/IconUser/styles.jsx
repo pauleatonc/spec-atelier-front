@@ -21,7 +21,7 @@ export const ImageProfile = styled.img`
 `;
 
 export const LetterNameUser = styled.span`
-  color: #ffffff;
+  color: ${WHITE};
   font-size: ${({ fontSize = 12 }) => `${fontSize}px`};
   text-align: center;
   margin-right: -1px;

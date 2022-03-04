@@ -16,7 +16,6 @@ export const ContainerMail = styled.div`
 `;
 
 export const Email = styled.p`
-	font-family: Lato;
 	font-size: 12px;
 	margin-left: 14px;
 	&:hover {
@@ -25,7 +24,6 @@ export const Email = styled.p`
 `;
 
 export const WaitingDisclaimer = styled.small`
-	font-family: Lato;
 	font-size: 10px;
 	margin-left: 10px;
 	opacity: 0.6;

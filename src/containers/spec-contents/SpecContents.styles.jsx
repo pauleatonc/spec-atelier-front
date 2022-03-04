@@ -11,8 +11,7 @@ import {
 
 export const Root = styled.div`
   background-color: ${WHITE};
-  box-shadow: 0 1px 3px 0 rgba(${BLACK}, 0.2),
-    0 2px 1px -1px rgba(${BLACK}, 0.12), 0 1px 1px 0 rgba(${BLACK}, 0.14);
+  box-shadow: 0 1px 3px 0 rgba(${BLACK}, 0.2), 0 2px 1px -1px rgba(${BLACK}, 0.12), 0 1px 1px 0 rgba(${BLACK}, 0.14);
   display: ${({ show = false }) => (show ? 'initial' : 'none')};
   height: calc(100vh - 122px);
   left: 0;
@@ -40,7 +39,6 @@ export const PanelTitle = styled.section`
   align-items: center;
   display: flex;
   color: ${MINE_SHAFT};
-  font-family: Lato;
   font-size: 13px;
   font-weight: bold;
   height: 46px;
@@ -57,7 +55,6 @@ export const ListTitle = styled.section`
   align-items: center;
   color: ${MINE_SHAFT};
   display: flex;
-  font-family: Lato;
   font-size: 13px;
   height: 30px;
   letter-spacing: 1.08px;
@@ -71,7 +68,6 @@ export const ListItem = styled.a`
   color: ${MINE_SHAFT};
   cursor: pointer;
   display: grid;
-  font-family: Lato;
   font-size: 13px;
   grid-template-columns: auto 24px;
   height: 30px;

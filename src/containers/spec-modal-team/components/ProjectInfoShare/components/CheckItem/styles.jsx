@@ -5,7 +5,6 @@ export const ListItem = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  font-family: Lato;
   font-size: 13px;
   height: 30px;
   letter-spacing: 1.08px;
