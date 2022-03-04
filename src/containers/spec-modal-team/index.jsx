@@ -36,10 +36,9 @@ const SpecModalTeam = ({ sections }) => {
     getCheckListData(sections, null, team),
   );
   const { onClose: handleClose, onExiting: handleExiting } = useModal({
-    closeCallback: () => dispatch(onHideModal()),
+    closeCallback: () => dispatch(onHideModal(TYPE_MODALS.TEAM_MODAL)),
   });
   const showNewMemberModal = () => {
-    dispatch(onHideModal());
     dispatch(onShowModal(TYPE_MODALS.NEW_MEMBER_MODAL));
   };
 

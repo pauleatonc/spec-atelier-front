@@ -73,11 +73,11 @@ const SpecModalNewMember = ({ sections }) => {
   const showDisclaimer = nonExistentEmails.length;
 
   const { onClose: handleClose, onExiting: handleExiting } = useModal({
-    closeCallback: () => dispatch(onHideModal()),
+    closeCallback: () => dispatch(onHideModal(TYPE_MODALS.NEW_MEMBER_MODAL)),
     exitingCallback: () => {
       setMessageValue('');
       setEmailValue('');
-      setChecklistData(getCheckListData(sections));
+      setChecklistData(getCheckListData(sections, null, team));
     },
   });
 
@@ -201,7 +201,9 @@ const SpecModalNewMember = ({ sections }) => {
             disabled={
               !listEmails.length ||
               inputMailInvalid ||
-              (!selectedSections.length && !selectedItems.length)
+              (!isAllSelected &&
+                !selectedSections.length &&
+                !selectedItems.length)
             }
           >
             Enviar

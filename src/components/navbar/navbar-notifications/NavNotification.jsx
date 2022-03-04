@@ -123,8 +123,8 @@ const NavNotification = () => {
                       message={detail?.item?.message}
                       status={detail?.item?.status}
                       itemId={detail?.item?.item_id}
-                      projectUrl={detail?.item?.actions}
                       projectId={detail?.item?.project_id}
+                      projectSpecId={detail?.item?.project_spec_id}
                       userData={detail?.item?.permission?.user}
                       newNoti={updateNotification}
                     />

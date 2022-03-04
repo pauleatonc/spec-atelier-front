@@ -50,12 +50,24 @@ const ProjectInfoShare = ({ withChecks, checklistData, setChecklistData }) => {
 
     if (!toggled) {
       for (let i = 0; i < data.length; i += 1) {
+        let isAllChildSelect = true;
         const node = data[i];
         const {
           data: newChildren,
           toggled: toggledTwo,
         } = traverseAndToggleNodeChildren(node.children, value);
         node.children = newChildren;
+        node.children.forEach((child) => {
+          if (!child.isSelected) isAllChildSelect = false;
+        });
+
+        if (
+          isAllChildSelect &&
+          !node.isSelected &&
+          node.children.some((child) => child.value === value)
+        ) {
+          node.isSelected = true;
+        }
         if (toggledTwo) break;
       }
     }
@@ -90,6 +102,14 @@ const ProjectInfoShare = ({ withChecks, checklistData, setChecklistData }) => {
     nodes.forEach((node) => {
       if (node.isSelected) selected.push(node.value);
     });
+    if (
+      checklistData.children.every((child) => child.isSelected) &&
+      !checklistData.isSelected
+    )
+      setChecklistData((data) => {
+        data.isSelected = true;
+        return { ...data };
+      });
   }, [checklistData]);
 
   return (

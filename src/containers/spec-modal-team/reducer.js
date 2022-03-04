@@ -28,7 +28,8 @@ const reducer = (state = initialState, { payload, type }) => {
       };
     case HIDE_MODAL:
       return {
-        ...initialState,
+        ...state,
+        [payload.type]: false,
       };
     case CHECK_EMAIL_EXIST:
       return {
@@ -39,8 +40,6 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         detailMember: payload.member,
-        [TYPE_MODALS.NEW_MEMBER_MODAL]: false,
-        [TYPE_MODALS.TEAM_MODAL]: false,
         [TYPE_MODALS.DETAIL_MEMBER_MODAL]: true,
       };
     case HIDE_DISCLAIMER:

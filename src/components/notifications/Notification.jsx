@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import {
   Separator,
@@ -38,11 +39,12 @@ const Notifications = (props) => {
     message,
     status,
     itemId,
-    projectUrl,
     projectId,
     userData,
+    projectSpecId,
   } = props;
   const dispatch = useDispatch();
+  const history = useHistory();
   const { loadingNoti, notificationsList } = useSelector(
     (state) => state.specHeader,
   );
@@ -51,7 +53,6 @@ const Notifications = (props) => {
   const [projectIdStatus, setProjectIdStatus] = useState(projectId);
   const [watchedStatus, setWatchedStatus] = useState(watched);
   const [triggeredStatus, setTriggeredStatus] = useState(triggered);
-  const [projectUrlStatus, setProjectUrlStatus] = useState();
   const [styleButtonReject, setStyleButtonReject] = useState({
     marginTop: '8px',
   });
@@ -63,12 +64,6 @@ const Notifications = (props) => {
   useEffect(() => {
     setWatchedStatus(watched);
   }, [notificationsList]);
-
-  useEffect(() => {
-    if (status === 'Proyecto Aceptado') {
-      setProjectUrlStatus(projectUrl[0].url);
-    }
-  }, []);
 
   useEffect(() => {
     if (loadingNoti) {
@@ -105,7 +100,6 @@ const Notifications = (props) => {
     resp.then((data) => {
       data.resp.then((r) => {
         setAccionStatus(r?.notification?.item?.status);
-        setProjectUrlStatus(r?.notification?.item?.actions[0]?.url);
         setWatchedStatus(r?.notification?.watched);
         setTriggeredStatus(r?.notification?.triggered);
       });
@@ -167,8 +161,8 @@ const Notifications = (props) => {
                   <>
                     <ActionPerformed>Proyecto aceptado</ActionPerformed>
                     <LinkSeeAll
-                      href={projectUrlStatus}
                       loadingNoti={loadingNoti}
+                      onClick={() => history.push(`/specs/${projectSpecId}`)}
                     >
                       Ir al proyecto
                     </LinkSeeAll>
@@ -222,7 +216,6 @@ Notifications.defaultProps = {
   message: '',
   status: '',
   itemId: 0,
-  projectUrl: [],
   projectId: 0,
   userData: [],
 };
@@ -234,7 +227,6 @@ Notifications.propTypes = {
   message: PropTypes.string,
   status: PropTypes.string,
   itemId: PropTypes.number,
-  projectUrl: PropTypes.arrayOf(PropTypes.object),
   projectId: PropTypes.number,
   userData: PropTypes.arrayOf(PropTypes.object),
 };
