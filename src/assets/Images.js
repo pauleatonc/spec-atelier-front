@@ -55,6 +55,8 @@ import ICON_ARROW_DOWN from './images/icons/drop-arrow.svg';
 import CLOSE_ICON from './images/icons/close-icon.svg';
 import CHANGE_HISTORY_SELECTED from './images/icons/change-history-selected.svg';
 import CHANGE_HISTORY_UNSELECTED from './images/icons/change-history-unselected.svg';
+import SEARCH_ICON from './images/icons/ic_search.svg';
+import SEARCH_COLOR_ICON from './images/icons/ic_search_color.svg';
 
 export {
 	LOGO_CCHC,
@@ -104,5 +106,7 @@ export {
 	PRODUCT_HEADER_3X,
   CLOSE_ICON,
   CHANGE_HISTORY_SELECTED,
-  CHANGE_HISTORY_UNSELECTED
+  CHANGE_HISTORY_UNSELECTED,
+  SEARCH_ICON,
+  SEARCH_COLOR_ICON
 };
