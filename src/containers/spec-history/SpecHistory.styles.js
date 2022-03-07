@@ -6,9 +6,9 @@ import {
   CONCRETE,
   CONCRETE_OPACITY,
   DUSTY_GRAY_RGB,
-  MEDIA_QUERY_MEDIUM,
   MEDIA_QUERY_MEDIUM_MAX,
   MEDIA_QUERY_SMALL,
+  MEDIA_QUERY_SMALL_MAX,
   MERCURY,
   MINE_SHAFT,
   PUERTO_RICO,
@@ -21,11 +21,12 @@ export const ContainerTable = styled.div`
   border: solid 1px ${MERCURY};
   background-color: ${WHITE};
   height: fit-content;
-  width: 64%;
+  width: 65%;
+  height: 630px;
 `;
 
 export const HistoryChangeManagementContent = styled.div`
-  display:flex;
+  display: flex;
   flex-wrap: nowrap;
   justify-content: center;
   margin: 20px;
@@ -36,7 +37,7 @@ export const HistoryChangeManagementContent = styled.div`
     text-align: left;
   }
   section:last-child {
-    display: 'none'};
+    display: none;
   }
 `;
 
@@ -64,14 +65,14 @@ export const Separator = styled.section`
   border: solid 1px rgba(${DUSTY_GRAY_RGB}, 0.32);
 `;
 
-export const SearchFiltersContainer = styled.div`
+export const SearchFilterContainer = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
   width: 100%;
 `;
 
-export const SearchFiltersContent = styled.div`
+export const SearchFilterContent = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -152,7 +153,6 @@ export const ContentTable = styled.div`
 	position: relative;
 	font-size: 12px;
 	width: 100%;
-  box-sizing: border-box;
   color: ${BLACK_OPACITY_DARK};
 `;
 
@@ -187,7 +187,7 @@ export const Tbody = styled.tbody`
 `;
 
 export const Th = styled.th`
-	padding-left: 8px;
+  padding-left: 8px;
   vertical-align: middle;
 `;
 
@@ -205,19 +205,19 @@ export const ActionText = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 450px;
+  width: 530px;
   ${MEDIA_QUERY_SMALL} {
-    width: 150px;
+    width: 200px;
   }
-  ${MEDIA_QUERY_MEDIUM} {
-    width: 250px;
+  ${MEDIA_QUERY_SMALL_MAX} {
+    width: 280px;
   }
   ${MEDIA_QUERY_MEDIUM_MAX}{
-    width: 350px;
+    width: 480px;
   }
 `;
 
-export const IconAction = styled.img`
+export const ActionIcon = styled.img`
   width: 16px;
   height: 16px;
 `;
@@ -225,9 +225,12 @@ export const IconAction = styled.img`
 export const PaginationContent = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  bottom: 70px;
+  position: absolute;
+  width: 65%;
   margin-bottom: 49px;
   align-items: center;
+  justify-content: center;
 `;
 
 export const GoBackFollowingButton = styled.i`
@@ -243,9 +246,11 @@ export const UlPagination = styled.ul`
 `;
 
 export const LiPagination = styled.div`
-  display: inline-block;
-  padding: 5px;
-  margin: 3px;
+  display: inline-flex;
+  width: 20px;
+  height: 22px;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   text-align: center;
   font-size: 12px;
@@ -255,6 +260,6 @@ export const LiPagination = styled.div`
   };
 `;
 
-export const NameSection = styled.section`
+export const SectionName = styled.section`
   padding-left: 11px;
 `;

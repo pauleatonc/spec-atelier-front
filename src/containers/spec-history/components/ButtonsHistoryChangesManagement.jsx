@@ -12,7 +12,7 @@ const ButtonsHistoryChangesManagement = () => {
   return (
     <HistoryChangeManagementContent>
       <Item active={option_changes_management === SPEC_CHANGE_MANAGEMENT} onClick={handleShowTable(SPEC_CHANGE_MANAGEMENT)}>
-        <ItemText active={option_changes_management === SPEC_CHANGE_MANAGEMENT}>Gestión de Cambios</ItemText>
+        <ItemText active={option_changes_management === SPEC_CHANGE_MANAGEMENT}>Gestión de cambios</ItemText>
       </Item>
       <Separator />
       <Item active={option_changes_management === SPEC_HISTORY_TABLE} onClick={handleShowTable(SPEC_HISTORY_TABLE)}>

@@ -7,7 +7,7 @@ import StructureTableChangeHistory from './components/StructureTableChangeHistor
 import ButtonsHistoryChangesManagement from './components/ButtonsHistoryChangesManagement';
 import IconUser from '../../components/IconUser';
 import { ADD_ICON, DELETE_ICON, EDIT_ICON } from '../../assets/Images';
-import { ActionText, ContainerTable, Content, ContentDate, IconAction, NameSection } from './SpecHistory.styles';
+import { ActionText, ContainerTable, Content, ContentDate, ActionIcon, SectionName } from './SpecHistory.styles';
 
 const ChangeHistoryContainer = () => {
   const {
@@ -37,8 +37,7 @@ const ChangeHistoryContainer = () => {
 
   const queryParamsBuilder = (selectedAuthor, queryParams) => {
     const param = queryParams;
-    if (selectedAuthor.id !== 'allAuthors')
-      param.author = selectedAuthor;
+    if (selectedAuthor.id !== 'allAuthors') param.author = selectedAuthor;
     return param;
   };
 
@@ -67,36 +66,32 @@ const ChangeHistoryContainer = () => {
         Header: 'Acción',
         Cell: ({ row }) => {
           const icon = actionsIcons[row?.original?.action];
-          const actionTextHTML = () => {
-            return { __html: row?.original?.description };
-          }
+          const actionTextHTML = () => { return { __html: row?.original?.description } };
           return (
             <Content>
-              <IconAction src={icon} alt='icon_action' row={row} />
+              <ActionIcon src={icon} alt='icon_action' row={row} />
               <ActionText dangerouslySetInnerHTML={actionTextHTML()} />
             </Content>
           )
-        },
+        }
       },
       {
         Header: 'Fecha',
-        Cell: ({ row }) => {
-          return (
-            <ContentDate>
-              <div>{(row?.original?.date.split(" "))[0]}</div>
-              <div>{(row?.original?.date.split(" "))[1]}</div>
-            </ContentDate>
-          )
-        },
+        Cell: ({ row }) => (
+          <ContentDate>
+            <div>{(row?.original?.date.split(" "))[0]}</div>
+            <div>{(row?.original?.date.split(" "))[1]}</div>
+          </ContentDate>
+        )
       },
       {
         Header: 'Autor',
         Cell: ({ row }) => (
           <Content>
             <IconUser user={row?.original?.user} size='28' zIndex='0' />
-            <NameSection>{row?.original?.user.name}</NameSection>
+            <SectionName>{row?.original?.user.name}</SectionName>
           </Content>
-        ),
+        )
       },
     ], [],
   );
@@ -104,8 +99,8 @@ const ChangeHistoryContainer = () => {
   return (
     <ContainerTable>
       <ButtonsHistoryChangesManagement />
-      {option_changes_management === SPEC_HISTORY_TABLE ?
-        !loading && (
+      {option_changes_management === SPEC_HISTORY_TABLE
+        ? !loading && (
           <StructureTableChangeHistory
             columns={columns}
             changes={changes}

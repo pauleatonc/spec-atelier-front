@@ -16,6 +16,7 @@ import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { updateProductsWithProduct } from '../products-list/ProductsList.actions';
 import { closeModal } from '../spec-modal-product/SpecModalProduct.actions';
 import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
+import { onGetChangeHistory } from '../spec-history/SpecHistory.actions';
 
 export const GET_SPEC_BLOCKS = 'GET_SPEC_BLOCKS';
 export const GET_SPEC_BLOCKS_ERROR = 'GET_SPEC_BLOCKS_ERROR';
@@ -74,6 +75,7 @@ export const onAddSpecBlock = ({
     );
     if (window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches)
       dispatch(closeModal());
+    dispatch(onGetChangeHistory(specID, { limit: 7, page: 0 })) 
   } catch (error) {
     dispatch(
       onActionCreator(ADD_SPEC_BLOCK_ERROR, {

@@ -10,8 +10,8 @@ import {
   Label,
   NameOption,
   SearchContainer,
-  SearchFiltersContainer,
-  SearchFiltersContent
+  SearchFilterContainer,
+  SearchFilterContent
 } from '../SpecHistory.styles';
 
 const SearchFilter = ({
@@ -21,21 +21,20 @@ const SearchFilter = ({
   onChangeAuthor,
   author
 }) => {
+  const filterText = 'Filtrar por autor';
   const getOptionRenderInput = () => {
-    if (author.id === 'allAuthors')
-      return <NameOption>{author.name}</NameOption>
-
+    if (author.id === 'allAuthors') return <NameOption>{author.name}</NameOption>
     return (
       <ContentUser>
-        <IconUser user={author} size='28' />
+        <IconUser user={author} size='28' zIndex='0' />
         <NameSection>{author.name}</NameSection>
       </ContentUser>
     )
   };
 
   return (
-    <SearchFiltersContainer>
-      <SearchFiltersContent>
+    <SearchFilterContainer>
+      <SearchFilterContent>
         <SearchContainer>
           <SearchBar
             name='keyword'
@@ -47,7 +46,7 @@ const SearchFilter = ({
           />
         </SearchContainer>
         <FilterContainer>
-          <Label>Filtrar por autor</Label>
+          <Label>{filterText}</Label>
           <SelectorRelative
             name='author'
             maxWidth='237px'
@@ -59,13 +58,13 @@ const SearchFilter = ({
             renderInput={
               <FilterSelectBox>
                 {getOptionRenderInput()}
-                <img alt='Filtrar por autor' src={ICON_ARROW_DOWN} />
+                <img alt={filterText} src={ICON_ARROW_DOWN} />
               </FilterSelectBox>
             }
           />
         </FilterContainer>
-      </SearchFiltersContent>
-    </SearchFiltersContainer>
+      </SearchFilterContent>
+    </SearchFilterContainer>
   );
 };
 
