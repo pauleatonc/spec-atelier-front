@@ -19,9 +19,6 @@ export const NotificationsButton = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  width: 71px;
-  margin-left: auto;
-  margin-right: 16px;
 `;
 
 export const NotificationsOption = styled.section`
@@ -99,6 +96,7 @@ export const NotificationsIcon = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 30px;
+  margin: 9px;
 `;
 
 export const ProfilePictureImage = styled.img`

@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 import {
-	MINE_SHAFT,
-	MEDIA_QUERY_SMALL,
-	NAVBAR_HEIGHT,
+  SPEC_DOWNLOAD_ACTIVE_SOURCE,
+  SPEC_DOWNLOAD_SOURCE,
+  SPEC_MONETIZATION_ACTIVE_SOURCE,
+  SPEC_MONETIZATION_SOURCE
+} from '../../assets/Images';
+import {
+  MINE_SHAFT,
+  MEDIA_QUERY_SMALL,
+  NAVBAR_HEIGHT,
   WHITE,
   DUSTY_GRAY_RGB,
 } from '../../config/constants/styled-vars';
-import specDownloadSource from '../../assets/images/icons/spec-download.svg';
-import specDownloadActiveSource from '../../assets/images/icons/spec-download_active.svg';
-import specMonetizationSource from '../../assets/images/icons/spec-monetization.svg';
-import specMonetizationActiveSource from '../../assets/images/icons/spec-monetization_active.svg';
 
 export const Root = styled.div`
 	display: flex;
@@ -18,7 +20,7 @@ export const Root = styled.div`
 	background-color: ${WHITE};
 	border-bottom-right-radius: 2px;
 	border-top-right-radius: 2px;
-	padding: 4px 20px 4px 36px;
+	padding: 5px;
 	align-items: flex-end;
 	position: relative;
 `;
@@ -36,7 +38,7 @@ export const Separator = styled.span`
 export const Section = styled.section`
 	padding: 0 23px;
 	padding-left: ${({ withoutPaddingLeft }) =>
-		withoutPaddingLeft ? '0' : '23px'};
+    withoutPaddingLeft ? '0' : '23px'};
 
 	${MEDIA_QUERY_SMALL} {
 		padding: 0 15px;
@@ -66,16 +68,16 @@ const Span = styled.span`
 `;
 
 export const Download = styled(Span)`
-  background-image: url('${specDownloadSource}');
+  background-image: url('${SPEC_DOWNLOAD_SOURCE}');
   &:hover {
-    background-image: url('${specDownloadActiveSource}');
+    background-image: url('${SPEC_DOWNLOAD_ACTIVE_SOURCE}');
   }
 `;
 
 export const Monetization = styled(Span)`
-  background-image: url('${specMonetizationSource}');
+  background-image: url('${SPEC_MONETIZATION_SOURCE}');
   &:hover {
-    background-image: url('${specMonetizationActiveSource}');
+    background-image: url('${SPEC_MONETIZATION_ACTIVE_SOURCE}');
   }
 `;
 
@@ -108,5 +110,9 @@ export const PermissionsButtonContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	height: 100%;
-	margin: 0 23px;
+	margin: 0 15px;
+`;
+
+export const TextButton = styled.div`
+  padding-left: 8px; 
 `;

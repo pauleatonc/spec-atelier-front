@@ -6,11 +6,9 @@ import { BOULDER, MEDIA_QUERY_SMALL, PUERTO_RICO } from '../../config/constants/
 export const Root = styled.div`
 	align-items: center;
 	display: flex;
-	height: ${({ customHeight }) =>
-		customHeight ? `${customHeight}px` : '100%'};
+	height: ${({ customHeight }) => customHeight ? `${customHeight}px` : '100%'};
 	width: ${({ customWidth }) => (customWidth ? `${customWidth}%` : 'auto')};
-	justify-content: ${({ justifyCenter }) =>
-		justifyCenter ? 'center' : 'start'};
+	justify-content: ${({ justifyCenter }) => justifyCenter ? 'center' : 'start'};
 `;
 
 export const Item = styled.section`
@@ -23,8 +21,7 @@ export const Item = styled.section`
 	position: relative;
 
 	&:hover {
-		text-decoration: ${({ isLink = false }) =>
-			isLink ? 'underline' : 'initial'};
+		text-decoration: ${({ isLink = false }) => isLink ? 'underline' : 'initial'};
 	}
 
 	${MEDIA_QUERY_SMALL} {
@@ -48,15 +45,15 @@ export const ItemText = styled.p`
 `;
 
 Item.defaultProps = {
-	isLink: false,
-	selected: false,
+  isLink: false,
+  selected: false,
 };
 Item.propTypes = {
-	isLink: PropTypes.bool,
-	selected: PropTypes.bool,
+  isLink: PropTypes.bool,
+  selected: PropTypes.bool,
 };
 
-export const Underline = styled.div`
+export const Underline = styled.span`
 	background-color: ${PUERTO_RICO};
 	bottom: -1px;
 	height: 2px;

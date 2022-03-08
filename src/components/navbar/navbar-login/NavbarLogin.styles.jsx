@@ -8,6 +8,8 @@ import {
   SILVER_CHALICE,
   BLACK,
   MEDIA_QUERY_STANDAR_MEDIUM,
+  WHITE_RGB,
+  DOVE_GRAY,
 } from '../../../config/constants/styled-vars';
 
 export const NavbarContainer = styled.nav`
@@ -127,6 +129,13 @@ export const LinkRegister = styled(LinkItem)`
   letter-spacing: normal;
   color: ${WHITE};
   width: 130px;
+  :hover {
+    border: 1px solid;
+    box-shadow: inset 0 0 20px rgba(${WHITE_RGB}, .5), 0 0 20px rgba(${WHITE_RGB}, .2);
+    outline-color: red;
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px ${DOVE_GRAY}; 
+  }
 `;
 
 export const LinkLogin = styled(LinkItem)`

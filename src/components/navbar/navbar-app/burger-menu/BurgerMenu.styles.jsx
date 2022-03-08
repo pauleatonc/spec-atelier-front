@@ -11,13 +11,17 @@ import {
 } from "../../../../config/constants/styled-vars";
 
 export const BurgerMenuContainer = styled.div`
-  margin: 12px;
+  margin: 9px;
   heigt: ${NAVBAR_HEIGHT};
-  display: flex;
   align-self: center;
+  display:none;
+  ${MEDIA_QUERY_STANDAR_MEDIUM} {
+    display: flex;
+  }
 `;
 
 export const BurgerMenuContent = styled.section`
+  font-family: Lato;
   flex-direction: column;
   background: ${WHITE};
   box-shadow: ${SHADOW_GREY};
@@ -48,7 +52,6 @@ export const BurgerMenuButton = styled.i`
   color: ${DARKESTGREY};
   cursor: pointer;
   display:none;
-
   ${MEDIA_QUERY_STANDAR_MEDIUM} {
     display: flex;
   }

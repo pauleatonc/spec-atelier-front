@@ -1,7 +1,10 @@
 import LOGO_CCHC from './images/cchc_logo.svg';
 import LOGO_CENTRO_INNOVACION from './images/centro_innovavcion_logo.svg';
 import LOGO_CORFO from './images/corfo_logo.svg';
-import LOGO_SPEC_SMALL from './images/logo_footer.png';
+import LOGO from './images/logo.png';
+import LOGO_MOBILE from './images/full_logo.png';
+import LOGO_SMALL_WHITE from './images/logo_footer.png';
+import LOGO_SMALL_COLOR from './images/logo-icon.png';
 
 import IMAGE_COMMERCIAL_COLOR from './images/project/project_type_image/comercial/comercial-color.jpg';
 import IMAGE_EDUCATIONAL_COLOR from './images/project/project_type_image/educational/educational-color.jpg';
@@ -56,11 +59,17 @@ import CLOSE_ICON from './images/icons/close-icon.svg';
 import CHANGE_HISTORY_SELECTED from './images/icons/change-history-selected.svg';
 import CHANGE_HISTORY_UNSELECTED from './images/icons/change-history-unselected.svg';
 
+import SPEC_DOWNLOAD_SOURCE from './images/icons/spec-download.svg';
+import SPEC_DOWNLOAD_ACTIVE_SOURCE from './images/icons/spec-download_active.svg';
+import SPEC_MONETIZATION_SOURCE from './images/icons/spec-monetization.svg';
+import SPEC_MONETIZATION_ACTIVE_SOURCE from './images/icons/spec-monetization_active.svg';
+
+import NO_PHOTO from './images/icons/no-photo.svg';
+
 export {
 	LOGO_CCHC,
 	LOGO_CENTRO_INNOVACION,
 	LOGO_CORFO,
-	LOGO_SPEC_SMALL,
 	ICON_ARROW_DOWN,
 	ICON_CREATE_PRODUCT,
 	ICON_CAMERA,
@@ -104,5 +113,14 @@ export {
 	PRODUCT_HEADER_3X,
   CLOSE_ICON,
   CHANGE_HISTORY_SELECTED,
-  CHANGE_HISTORY_UNSELECTED
+  CHANGE_HISTORY_UNSELECTED,
+  LOGO,
+  LOGO_MOBILE,
+  LOGO_SMALL_WHITE,
+  LOGO_SMALL_COLOR,
+  SPEC_DOWNLOAD_SOURCE,
+  SPEC_DOWNLOAD_ACTIVE_SOURCE,
+  SPEC_MONETIZATION_SOURCE,
+  SPEC_MONETIZATION_ACTIVE_SOURCE,
+  NO_PHOTO
 };
