@@ -73,7 +73,7 @@ const StructureTableChangeHistory = ({
   const handleGoToPage = (goToPage) => () => {
     gotoPage(goToPage);
     const queryParams = { limit: 7, page: goToPage, keyword };
-    dispatch(onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)));
+    if (goToPage !== actualPage) dispatch(onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)));
   };
 
   const pagination = () => {
