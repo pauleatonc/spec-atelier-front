@@ -9,12 +9,14 @@ export const TERTIARY = 'rgb(8, 38, 44)';
 export const BLACK = '0,0,0';
 export const WHITE = 'rgb(255, 255, 255)';
 export const WHITE_RGB = '255, 255, 255';
+export const WHITE_OPACITY = 'rgba(255, 255, 255, 0.8)';
 export const BLACK_OPACITY = 'rgba(0, 0, 0, 0.54)';
 export const BLACK_OPACITY_DARK = 'rgba(0, 0, 0, 0.87)';
 export const BLACK_LIGHT_OPACITY = 'rgba(0, 0, 0, 0.06)';
 export const GRAY_OPACITY = 'rgba(201, 198, 198, 0.5)';
 export const SWISS_COFFEE = 'rgba(207, 200, 200, 0.5)';
 export const SILVER_CHALICE = '#AFAFAF';
+export const SILVER_CHALICE_OPACITY = 'rgba(175, 175, 175, 0.2)';
 export const BOULDER = '#757575';
 export const DARKESTGREY = 'rgba(128, 128, 128, 1)';
 export const MINE_SHAFT = '#212121';
@@ -60,6 +62,8 @@ export const LOADING_ACCEPT_INITIAL = 'rbg(156 221 212)';
 export const TORCH_RED = '#FD0E35';
 export const WHITE_SMOKE = 'rgba(235, 234, 234, 0.5)';
 export const PRIMARY_OPACITY = 'rgba(58, 192, 172, 0.08)';
+export const SUPERNOVA = '#FFC700';
+export const BURNT_SIENNA = '#E97756';
 
 // Media Queries
 export const MAX_SCREEN_SMALL = 768;

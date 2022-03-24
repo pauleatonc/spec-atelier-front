@@ -1,4 +1,9 @@
 import {
+  getFormatedTableData,
+  getTotalExpandManual,
+  getSections,
+} from './utils';
+import {
   ADD_SPEC_BLOCK_SUCCESS,
   ADD_SPEC_BLOCK_IMAGE_SUCCESS,
   ADD_SPEC_BLOCK_TEXT_SUCCESS,
@@ -13,25 +18,21 @@ import {
   UPDATE_TEAM_DATA,
   SAVE_TEAM_MEMBERS,
   DELETE_MEMBER_TEAM,
+  SEND_CHANGED_BLOCKS_SUCCESS,
 } from './SpecDocument.actions';
-import {
-  getFormatedTableData,
-  getTotalExpandManual,
-  getSections,
-} from './utils';
 
 const specDocumentState = {
   blocks: [],
+  ownerBlocks: [],
   loading: false,
   project: {},
   quoteTable: [],
   totalExpandManual: 0,
   sections: [],
+  changedBlocks: [],
 };
 
-/**
- * The spec document' reducer.
- */
+/** The spec document' reducer */
 const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
   switch (type) {
     case ADD_SPEC_BLOCK_SUCCESS:
@@ -41,10 +42,16 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
       return {
         ...state,
         blocks: payload.blocks,
+        ownerBlocks: payload.blocks.filter(
+          (block) =>
+            block.status === 'accepted' ||
+            (block.status === 'accepted' && block.change.action === 'remove'),
+        ),
         project: { ...state.project, ...payload.project },
         quoteTable: getFormatedTableData(payload.blocks),
         totalExpandManual: getTotalExpandManual(payload.blocks),
         sections: getSections(payload.blocks),
+        changedBlocks: payload.changedBlocks,
       };
     case REMOVE_SPEC_BLOCK_SUCCESS:
     case REMOVE_SPEC_BLOCK_IMAGE_SUCCESS:
@@ -54,6 +61,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         ...state,
         blocks: payload.blocks,
         sections: getSections(payload.blocks),
+        changedBlocks: payload.changedBlocks,
       };
     }
     case SORT_SPEC_BLOCKS_SUCCESS: {
@@ -111,6 +119,13 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
             (member) => member.permission.id !== payload.permissionId,
           ),
         },
+      };
+    }
+    case SEND_CHANGED_BLOCKS_SUCCESS: {
+      return {
+        ...state,
+        changedBlocks: [],
+        blocks: payload.blocks,
       };
     }
     default: {
