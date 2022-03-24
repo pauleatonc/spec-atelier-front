@@ -65,6 +65,9 @@ export const deleteSpecBlockText = factoryService(
 export const getSpecBlocks = factoryService(({ specID, userID }) =>
   getJsonRequest(`${API_BASE_URL}/users/${userID}/project_specs/${specID}`),
 );
+// export const getSpecBlocks = factoryService(()=>
+// 	getJsonRequest(`http://demo2875701.mockable.io/`),
+// );
 
 /** Sort the spec blocks */
 export const sortSpecBlocks = factoryService(
@@ -194,7 +197,6 @@ export const getChangesAuthor = factoryService(({ specID, userID, params }) =>
 
 /** Send block changes */
 export const submitChanges = factoryService(({ blocks, specID, userID }) => {
-  console.log(blocks);
   return patchJsonRequest(
     `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/submit_changes`,
     { blocks },
