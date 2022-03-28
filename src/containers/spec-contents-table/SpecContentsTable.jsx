@@ -3,6 +3,11 @@ import { useTable, useExpanded } from 'react-table';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
+import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
+import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
+import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
+import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
+import CurrentInputTable from './components/CurrentInputTable';
 import {
   Root,
   ContentTable,
@@ -23,23 +28,14 @@ import {
   TableTotal,
   ContainerTotalTable,
 } from './SpecContentsTable.styles';
-import specDownloadSource from '../../assets/images/icons/ic-download.svg';
-import CurrentInputTable from './components/CurrentInputTable';
-import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
-import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
-import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
-import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
+import { SPEC_DOWNLOAD_SOURCE } from '../../assets/Images';
 
 const SpecContentsTable = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { project, quoteTable, totalExpandManual } = useSelector(
-    (state) => state.specDocument,
-  );
+  const { project, quoteTable, totalExpandManual } = useSelector(state => state.specDocument);
   const { user } = useSelector((state) => state.profile);
-  const { first_name, last_name, company, email } = useSelector(
-    (state) => state.profile.user,
-  );
+  const { first_name, last_name, company, email } = useSelector(state => state.profile.user);
   const initialValues = {
     name: `${first_name} ${last_name}`,
     company: company || '',
@@ -47,8 +43,7 @@ const SpecContentsTable = () => {
     description: '',
   };
 
-  const handleDownloadTableClick = () =>
-    dispatch(downloadBudgetDocument({ specID: id }));
+  const handleDownloadTableClick = () => dispatch(downloadBudgetDocument({ specID: id }));
 
   const totalProducts = quoteTable.reduce((a, b) => a + b.subtotal, 0);
 
@@ -64,7 +59,7 @@ const SpecContentsTable = () => {
     dispatch(handleUpdateProduct(body, tableInputType, row.original.item));
   };
 
-  const onClickProduct = (selectedProduct) => (event) => {
+  const onClickProduct = selectedProduct => event => {
     event.stopPropagation();
     dispatch(getProduct(selectedProduct, user));
   };
@@ -88,7 +83,7 @@ const SpecContentsTable = () => {
         Cell: ({ row }) =>
           row?.original?.type === 'Product' && (
             <CurrentInputTable
-              tableInputType="quantity"
+              tableInputType='quantity'
               value={row?.original?.cnt}
               onBlurInput={handleOnBlurInput}
               row={row}
@@ -107,7 +102,7 @@ const SpecContentsTable = () => {
             }
             return (
               <CurrentInputTable
-                tableInputType="price_user"
+                tableInputType='price_user'
                 value={row?.original?.price_user}
                 onBlurInput={handleOnBlurInput}
                 row={row}
@@ -180,23 +175,20 @@ const SpecContentsTable = () => {
       <ContentTable>
         <Table {...getTableProps()}>
           <TableThead>
-            <Header colSpan="7">
+            <Header colSpan='7'>
               <Title>Itemizado y presupuesto: {project?.name}</Title>
               <ButtonsHeader>
-                <Button
-                  title="Descargar presupuesto"
-                  onClick={handleDownloadTableClick}
-                >
-                  <ImgButton src={specDownloadSource} />
+                <Button title='Descargar presupuesto' onClick={handleDownloadTableClick}>
+                  <ImgButton src={SPEC_DOWNLOAD_SOURCE} />
                   Descargar
                 </Button>
               </ButtonsHeader>
             </Header>
           </TableThead>
           <TableThead>
-            {headerGroups.map((headerGroup) => (
+            {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
+                {headerGroup.headers.map(column => (
                   <TableTh
                     {...column.getHeaderProps()}
                     isDesc={column.id === 'desc'}
@@ -208,11 +200,11 @@ const SpecContentsTable = () => {
             ))}
           </TableThead>
           <TableTbody {...getTableBodyProps()}>
-            {rows.map((row) => {
+            {rows.map(row => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
+                  {row.cells.map(cell => {
                     return (
                       <TableTd
                         {...cell.getCellProps()}
@@ -230,13 +222,13 @@ const SpecContentsTable = () => {
           </TableTbody>
           <tfoot>
             <tr>
-              <td colSpan="7">
+              <td colSpan='7'>
                 <ContentFooter>
                   <TableElements>
                     {totalExpandManual[2].length} elementos especificados
                   </TableElements>
                   <ContainerTotalTable>
-                    <TableTotal mRight="36">Total:</TableTotal>
+                    <TableTotal mRight='36'>Total:</TableTotal>
                     <TableTotal>
                       $
                       {totalProducts
@@ -253,7 +245,7 @@ const SpecContentsTable = () => {
       <SpecModalQuote initialValues={initialValues} />
     </Root>
   ) : (
-    <RotatingLines width="50" />
+    <RotatingLines width='50' />
   );
 };
 

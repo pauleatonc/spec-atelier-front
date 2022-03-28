@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useDropdown from '../basics/Dropdown.hooks';
 import Dropdown from '../basics/Dropdown';
+import Button from '../buttons/Button';
 import {
 	Root,
 	Label,
@@ -14,17 +15,11 @@ import {
 	OptionText,
 	Actions,
 } from './MultiSelect.styles';
-import checkboxOffSource from '../../assets/images/icons/checkbox-off.svg';
-import checkboxOnSource from '../../assets/images/icons/checkbox-on.svg';
-import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
-import checkboxOnSecondarySource from '../../assets/images/icons/checkbox-on-secondary.svg';
-import Button from '../buttons/Button';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+import { CHECKBOX_OFF_SOURCE, CHECKBOX_ON_SECONDARY, CHECKBOX_ON_SOURCE, ICON_ARROW_DOWN } from '../../assets/Images';
 
-/**
- * The MultiSelect' component.
- */
-const MultiSelect = (props) => {
+/** The MultiSelect' component */
+const MultiSelect = props => {
 	const {
 		disabled,
 		label,
@@ -52,34 +47,18 @@ const MultiSelect = (props) => {
 		closeOnClick: false,
 		clickCallback: (option, selected) => {
 			const updatedOptions = selected
-				? selectedOptions.filter(
-						(selectOption) => selectOption.value !== option.value,
-				  )
+				? selectedOptions.filter(selectOption => selectOption.value !== option.value)
 				: selectedOptions.concat(option);
-
 			onChange(updatedOptions);
 		},
 	});
 	const formatInputValue = () => {
-		const optionsLabels = selectedOptions.map(
-			(selectedOption) => selectedOption.label,
-		);
-
-		if (optionsLabels.length === 0) {
-			return '';
-		}
-
-		if (optionsLabels.length === 1) {
-			return optionsLabels.shift();
-		}
-
-		if (optionsLabels.length === 2) {
-			return optionsLabels.join(', ');
-		}
-
-		return `${optionsLabels.shift()}, ${optionsLabels.shift()}, (+${
-			optionsLabels.length
-		})`;
+		const optionsLabels = selectedOptions.map(selectedOption => selectedOption.label);
+		if (optionsLabels.length === 0) return '';
+		if (optionsLabels.length === 1) return optionsLabels.shift();
+		if (optionsLabels.length === 2) return optionsLabels.join(', ');
+		
+		return `${optionsLabels.shift()}, ${optionsLabels.shift()}, (+${optionsLabels.length})`;
 	};
 
 	const [lastState, setLastState] = useState([]);
@@ -100,18 +79,19 @@ const MultiSelect = (props) => {
 		handleClose();
 	};
 
-	const onOpen = (e) => {
+	const onOpen = e => {
 		setLastState(changeOnClose ? options : []);
 		handleOpen(e);
 	};
 
-	const handleClickOptionAll = (selected) => () => {
+	const handleClickOptionAll = selected => () => {
 		const updatedOptions = selected ? [] : options;
 		onChange(updatedOptions);
 	};
+
 	const allSelected = options.length === selectedOptions.length;
-	const checkboxIconOn =
-		variant === 'primary' ? checkboxOnSource : checkboxOnSecondarySource;
+
+	const checkboxIconOn = variant === 'primary' ? CHECKBOX_ON_SOURCE : CHECKBOX_ON_SECONDARY;
 
 	return (
 		<Root>
@@ -133,11 +113,11 @@ const MultiSelect = (props) => {
 						value={formatInputValue()}
 					/>
 				)}
-				<DropIcon alt="" src={dropArrowSource} />
+				<DropIcon alt='arrow down' src={ICON_ARROW_DOWN} />
 			</Section>
 			<Dropdown
 				anchorRef={anchor}
-				maxHeight="212px"
+				maxHeight='212px'
 				offset={{ x: 0, y: offsetY || 14 }}
 				open={Boolean(anchor)}
 				width={width || anchorWidth}
@@ -145,32 +125,23 @@ const MultiSelect = (props) => {
 			>
 				{optionAll && (
 					<Option onClick={handleClickOptionAll(allSelected)}>
-						<OptionCheckboxIcon
-							src={allSelected ? checkboxIconOn : checkboxOffSource}
-						/>
+						<OptionCheckboxIcon src={allSelected ? checkboxIconOn : CHECKBOX_OFF_SOURCE} />
 						<OptionText>Todas</OptionText>
 					</Option>
 				)}
-				{options.map((option) => {
-					const selected = selectedOptions.find(
-						(selectedOption) => selectedOption.value === option.value,
-					);
+				{options.map(option => {
+					const selected = selectedOptions.find(selectedOption => selectedOption.value === option.value);
 
 					return (
 						<Option key={option.value} onClick={handleClick(option, selected)}>
-							<OptionCheckboxIcon
-								src={selected ? checkboxOnSource : checkboxOffSource}
-							/>
+							<OptionCheckboxIcon	src={selected ? CHECKBOX_ON_SOURCE : CHECKBOX_OFF_SOURCE} />
 							<OptionText title={option.label}>{option.label}</OptionText>
 						</Option>
 					);
 				})}
 				{showButtons && (
 					<Actions>
-						<Button
-							variant={VARIANTS_BUTTON.CANCEL_SECONDARY}
-							onClick={handleClickClean}
-						>
+						<Button	variant={VARIANTS_BUTTON.CANCEL_SECONDARY} onClick={handleClickClean}>
 							Borrar
 						</Button>
 						<Button variant={variant} onClick={handleClickSubmit}>

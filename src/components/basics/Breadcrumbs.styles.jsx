@@ -1,16 +1,14 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import arrowLeftSource from '../../assets/images/icons/arrow-left.svg';
+import { ARROW_LEFT_SOURCE } from '../../assets/Images';
 import { BOULDER, MEDIA_QUERY_SMALL, PUERTO_RICO } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
 	align-items: center;
 	display: flex;
-	height: ${({ customHeight }) =>
-		customHeight ? `${customHeight}px` : '100%'};
-	width: ${({ customWidth }) => (customWidth ? `${customWidth}%` : 'auto')};
-	justify-content: ${({ justifyCenter }) =>
-		justifyCenter ? 'center' : 'start'};
+	height: ${({ customHeight }) => customHeight ? `${customHeight}px` : '100%'};
+	width: ${({ customWidth }) => customWidth ? `${customWidth}%` : 'auto'};
+	justify-content: ${({ justifyCenter }) => justifyCenter ? 'center' : 'start'};
 `;
 
 export const Item = styled.section`
@@ -21,18 +19,12 @@ export const Item = styled.section`
 	height: 100%;
 	padding: 0 4px;
 	position: relative;
-
 	&:hover {
-		text-decoration: ${({ isLink = false }) =>
-			isLink ? 'underline' : 'initial'};
+		text-decoration: ${({ isLink = false }) => isLink ? 'underline' : 'initial'}
 	}
-
 	${MEDIA_QUERY_SMALL} {
 		margin: 0 5px;
-
-		&:hover {
-			text-decoration: none;
-		}
+		&:hover { text-decoration: none }
 	}
 `;
 
@@ -66,7 +58,7 @@ export const Underline = styled.div`
 `;
 
 export const ArrowLeft = styled.span`
-  background-image: url('${arrowLeftSource}');
+  background-image: url('${ARROW_LEFT_SOURCE}');
   background-position: center center;
   background-repeat: no-repeat;
   display: inline-block;

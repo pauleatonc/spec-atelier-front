@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ICON_CELLPHONE, ICON_FACEBOOK, ICON_LOCATION, ICON_TWITTER, ICON_WEB } from '../../assets/Images';
 import {
   MINE_SHAFT,
   PRIMARY,
@@ -7,12 +8,6 @@ import {
   TERTIARY,
   SILVER_CHALICE,
 } from '../../config/constants/styled-vars';
-
-import ICON_FACEBOOK from '../../assets/images/icons/socialmedia/facebook.svg';
-import ICON_TWITTER from '../../assets/images/icons/socialmedia/twitter.svg';
-import ICON_LOCATION from '../../assets/images/icons/location.svg';
-import ICON_CELLPHONE from '../../assets/images/icons/cellphone.svg';
-import ICON_WEB from '../../assets/images/icons/word.svg';
 
 const mapVariantsToColors = {
   default: MINE_SHAFT,
@@ -47,7 +42,7 @@ export const ButtonIcon = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   :hover {
-    color: ${({ disabled }) => disabled ? mapVariantsToColors.disabled :  mapVariantsToColors['primary']};
+    color: ${({ disabled }) => disabled ? mapVariantsToColors.disabled :  mapVariantsToColors.primary};
   }
 `;
 
@@ -64,7 +59,7 @@ export const ButtonText = styled.span`
   letter-spacing: 1px;
   color: ${SILVER_CHALICE};
   :hover {
-    color: ${({ disabled }) => disabled ?  mapVariantsToColors[disabled] :  mapVariantsToColors['primary']};
+    color: ${({ disabled }) => disabled ?  mapVariantsToColors[disabled] :  mapVariantsToColors.primary};
   }
   margin-right: 2px;
   height: ${({ show }) => show ? '12px' : '0'};

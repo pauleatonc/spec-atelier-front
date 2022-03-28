@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import useDropdown from '../basics/Dropdown.hooks';
 import Dropdown from '../basics/Dropdown';
 import { Root, Section, DropdownIcon, Option, Text } from './DropdownMenu.styles';
-import dropdownArrowSource from '../../assets/images/icons/dropdown-arrow.svg';
+import { DROPDOWN_ARROW } from '../../assets/Images';
 
-/**
- * The DropdownMenu's component.
- */
+/** The DropdownMenu's component */
 const DropdownMenu = props => {
   const { options, placeholder, value: selectedOption, width, onChange } = props;
   const {
@@ -22,11 +20,11 @@ const DropdownMenu = props => {
     <Root>
       <Section onClick={handleOpen}>
         <Text>{selectedOption.label || placeholder}</Text>
-        <DropdownIcon alt="" src={dropdownArrowSource} />
+        <DropdownIcon alt='dropdown arrow' src={DROPDOWN_ARROW} />
       </Section>
       <Dropdown 
         anchorRef={anchor}
-        maxHeight="212px"
+        maxHeight='212px'
         open={Boolean(anchor)}
         width={width || anchorWidth}
         onClose={handleClose}

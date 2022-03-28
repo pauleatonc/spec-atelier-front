@@ -1,6 +1,17 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
+  BIM_ACTIVE_SOURCE,
+  BIM_SOURCE,
+  CERT_ACTIVE_SOURCE,
+  CERT_SOURCE,
+  CHECK_SOURCE,
+  DWG_ACTIVE_SOURCE,
+  DWG_ICON, PLUS_SOURCE,
+  TECH_ACTIVE_SOURCE,
+  TECH_ICON
+} from '../../assets/Images';
+import {
   MINE_SHAFT,
   MEDIA_QUERY_SMALL,
   WHITE,
@@ -15,20 +26,11 @@ import {
   MINE_SHAFT_RGB,
   BLACK,
 } from '../../config/constants/styled-vars';
-import dwgSource from '../../assets/images/icons/dwg.svg';
-import dwgActiveSource from '../../assets/images/icons/dwg_active.svg';
-import bimSource from '../../assets/images/icons/bim.svg';
-import bimActiveSource from '../../assets/images/icons/bim_active.svg';
-import techSource from '../../assets/images/icons/tech.svg';
-import techActiveSource from '../../assets/images/icons/tech_active.svg';
-import certSource from '../../assets/images/icons/cert.svg';
-import certActiveSource from '../../assets/images/icons/cert_active.svg';
-import plusSource from '../../assets/images/icons/plus.svg';
-import checkSource from '../../assets/images/icons/check.svg';
 
 const hoverDefaultProps = {
   hover: false,
 };
+
 const hoverPropTypes = {
   hover: PropTypes.bool,
 };
@@ -57,14 +59,12 @@ export const Root = styled.div`
   overflow: visible;
   position: relative;
   width: 100%;
-
   &:hover {
     box-shadow: rgba(${BLACK}, 0.1) 1px 1px 30px;
   }
   &:hover ${DotsIcon} {
     visibility: visible;
   }
-
   ${MEDIA_QUERY_SMALL} {
     margin-bottom: 13px;
   }
@@ -74,6 +74,7 @@ Root.defaultProps = {
   ...hoverDefaultProps,
   selected: false,
 };
+
 Root.propTypes = {
   ...hoverPropTypes,
   selected: PropTypes.bool,
@@ -164,32 +165,28 @@ const BaseIcon = styled.span`
 `;
 
 export const DwgIcon = styled(BaseIcon)`
-  background-image: url('${({ hover = false }) =>
-    hover ? dwgActiveSource : dwgSource}');
+  background-image: url('${({ hover = false }) => hover ? DWG_ACTIVE_SOURCE : DWG_ICON}');
 `;
 
 DwgIcon.defaultProps = hoverDefaultProps;
 DwgIcon.propTypes = hoverPropTypes;
 
 export const BimIcon = styled(BaseIcon)`
-  background-image: url('${({ hover = false }) =>
-    hover ? bimActiveSource : bimSource}');
+  background-image: url('${({ hover = false }) => hover ? BIM_ACTIVE_SOURCE : BIM_SOURCE}');
 `;
 
 BimIcon.defaultProps = hoverDefaultProps;
 BimIcon.propTypes = hoverPropTypes;
 
 export const TechIcon = styled(BaseIcon)`
-  background-image: url('${({ hover = false }) =>
-    hover ? techActiveSource : techSource}');
+  background-image: url('${({ hover = false }) => hover ? TECH_ACTIVE_SOURCE : TECH_ICON}');
 `;
 
 TechIcon.defaultProps = hoverDefaultProps;
 TechIcon.propTypes = hoverPropTypes;
 
 export const CertIcon = styled(BaseIcon)`
-  background-image: url('${({ hover = false }) =>
-    hover ? certActiveSource : certSource}');
+  background-image: url('${({ hover = false }) => hover ? CERT_ACTIVE_SOURCE : CERT_SOURCE}');
 `;
 
 CertIcon.defaultProps = hoverDefaultProps;
@@ -204,7 +201,6 @@ export const SeeMore = styled.section`
   font-size: 12px;
   font-weight: bold;
   visibility: ${({ show = false }) => (show ? 'visible' : 'hidden')};
-
   &:hover {
     text-decoration: ${({ show = false }) => (show ? 'underline' : 'none')};
   }
@@ -214,6 +210,7 @@ SeeMore.defaultTypes = {
   ...hoverDefaultProps,
   show: false,
 };
+
 SeeMore.propTypes = {
   ...hoverPropTypes,
   show: PropTypes.bool,
@@ -230,11 +227,11 @@ const BaseStates = styled.section`
 `;
 
 export const Add = styled(BaseStates)`
-  background-image: url('${plusSource}');
+  background-image: url('${PLUS_SOURCE}');
 `;
 
 export const Check = styled(BaseStates)`
-  background-image: url('${checkSource}');
+  background-image: url('${CHECK_SOURCE}');
 `;
 
 export const ActionsMenuItem = styled.section`
@@ -247,11 +244,9 @@ export const ActionsMenuItem = styled.section`
   letter-spacing: 1px;
   padding: 14px 0px 16px 35px;
   width: 187px;
-
   &:hover {
     background-color: ${GALLERY};
   }
-
   &:last-child {
     border-bottom: 0;
   }

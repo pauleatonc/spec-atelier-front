@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
 import ModalLayout from '../layouts/ModalLayout';
 import Button from '../buttons/Button';
+import DocumentItem from './DocumentItem';
+import CloseButton from '../buttons/CloseButton';
 import {
 	Root,
 	Label,
@@ -20,15 +22,11 @@ import {
 	DropZoneSection,
 	DropZoneText,
 } from './AttachedDocuments.styles';
-import documentsUploadSource from '../../assets/images/icons/documents-upload.svg';
-import DocumentItem from './DocumentItem';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import CloseButton from '../buttons/CloseButton';
+import { DOCUMENTS_UPLOAD_SOURCE } from '../../assets/Images';
 
-/**
- * The AttachedFiles' component.
- */
-const AttachedFiles = (props) => {
+/** The AttachedFiles' component */
+const AttachedFiles = props => {
 	const {
 		documents,
 		label,
@@ -122,9 +120,9 @@ const AttachedFiles = (props) => {
 							<Empty>
 								<EmptyHeader>
 									<DropIcon
-										alt=""
-										margin="0 0 15px"
-										src={documentsUploadSource}
+										alt=''
+										margin='0 0 15px'
+										src={DOCUMENTS_UPLOAD_SOURCE}
 									/>
 								</EmptyHeader>
 								<EmptyBody>
@@ -160,8 +158,8 @@ const AttachedFiles = (props) => {
 					<CloseButton onClick={handleClose} />
 					<DropZone {...dropProps}>
 						<input {...getInputProps()} />
-						<DropZoneSection padding="33px 0 18px">
-							<DropIcon alt="" src={documentsUploadSource} />
+						<DropZoneSection padding='33px 0 18px'>
+							<DropIcon alt='upload source' src={DOCUMENTS_UPLOAD_SOURCE} />
 						</DropZoneSection>
 						<DropZoneSection>
 							<DropZoneText>
@@ -171,7 +169,7 @@ const AttachedFiles = (props) => {
 						<DropZoneSection>
 							<DropZoneText>O también puedes</DropZoneText>
 						</DropZoneSection>
-						<DropZoneSection padding="13px 0 0">
+						<DropZoneSection padding='13px 0 0'>
 							<Button variant={VARIANTS_BUTTON.PRIMARY} onClick={handleAttach}>
 								Cargar documentos desde la computadora
 							</Button>

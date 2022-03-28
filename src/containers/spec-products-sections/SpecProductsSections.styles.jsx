@@ -1,12 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {
-  PRIMARY,
-  MINE_SHAFT,
-  MEDIA_QUERY_SMALL,
-  WHITE,
-} from '../../config/constants/styled-vars';
-// import { CLOSE_ICON} from '../../assets/Images';
+import { PRIMARY, MINE_SHAFT, MEDIA_QUERY_SMALL, WHITE } from '../../config/constants/styled-vars';
 import { CLOSE_ICON } from '../../assets/Images';
 
 export const Root = styled.div`
@@ -48,14 +42,12 @@ export const Item = styled.section`
 `;
 
 export const ItemIcon = styled.span`
-  background-image: url('/images/${({ active, icon, iconHover }) =>
-    active ? iconHover : icon}.svg');
+  background-image: url('/images/${({ active, icon, iconHover }) => active ? iconHover : icon}.svg');
   background-position: center center;
   background-repeat: no-repeat;
   height: 34px;
   margin: 0 0 9px;
   width: 34px;
-
   &:hover {
     background-image: url('/images/${({ iconHover }) => iconHover}.svg');
   }
@@ -104,7 +96,7 @@ export const CloseIcon = styled.i`
 	font-size: 24px;
 	cursor: pointer;
 	outline: none;
-  content: url(${CLOSE_ICON});
+	content: url(${CLOSE_ICON});
 	${MEDIA_QUERY_SMALL} {
 		display: flex;
 	}

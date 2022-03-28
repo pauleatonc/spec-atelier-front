@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-
+import { onDeleteProduct } from '../../containers/products-list/ProductsList.actions';
+import { onShowSpecEditProduct } from '../../containers/spec-edit-product/SpecEditProduct.actions';
+import { DownloadDocumentsIcons } from '../SpecComponents';
+import useDropdown from '../basics/Dropdown.hooks';
+import Dropdown from '../basics/Dropdown';
+import Confirm from '../confirm/Confirm';
 import {
 	Root,
 	Content,
@@ -19,19 +24,10 @@ import {
 	DotsIcon,
 	ActionsMenuItem,
 } from './ProductCard.styles';
-import noPhoto from '../../assets/images/icons/no-photo.svg';
-import threeDotsVerticalSource from '../../assets/images/icons/three-dots-vertical.svg';
-import { onShowSpecEditProduct } from '../../containers/spec-edit-product/SpecEditProduct.actions';
-import { DownloadDocumentsIcons } from '../SpecComponents';
-import { onDeleteProduct } from '../../containers/products-list/ProductsList.actions';
-import useDropdown from '../basics/Dropdown.hooks';
-import Dropdown from '../basics/Dropdown';
-import Confirm from '../confirm/Confirm';
+import { NO_PHOTO, THREE_DOTS_VERTICAL_SOURCE } from '../../assets/Images';
 
-/**
- * The ProductCard's component.
- */
-const ProductCard = (props) => {
+/** The ProductCard's component */
+const ProductCard = props => {
 	const {
 		pdfs,
 		dwg,
@@ -89,7 +85,7 @@ const ProductCard = (props) => {
 	};
 
 	const photoStyles = {
-		backgroundImage: `url('${photo || noPhoto}')`,
+		backgroundImage: `url('${photo || NO_PHOTO}')`,
 		backgroundSize: photo ? 'cover' : 'initial',
 	};
 	const showSeeMore = Boolean(onClickSeeMore);
@@ -139,7 +135,7 @@ const ProductCard = (props) => {
 				)}
 				{selected && <Check onClick={onClickCard} />}
 				{(canEdit || canDelete) && (
-					<DotsIcon src={threeDotsVerticalSource} onClick={handleShowActions} />
+					<DotsIcon src={THREE_DOTS_VERTICAL_SOURCE} onClick={handleShowActions} />
 				)}
 				<Dropdown
 					anchorRef={actionsAnchor}

@@ -2,10 +2,10 @@ import React from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  Loading,
-  Modal,
-} from '../../components/SpecComponents';
+import { closeModal, sendQuoteA } from './SpecModalQuote.actions';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
+import { Loading, Modal } from '../../components/SpecComponents';
+import CloseButton from '../../components/buttons/CloseButton';
 import {
   Container,
   Content,
@@ -32,11 +32,8 @@ import {
   Category,
   Reference,
 } from './SpecModalQuote.styles';
-import noPhoto from '../../assets/images/icons/no-photo.svg';
-import { closeModal, sendQuoteA } from './SpecModalQuote.actions';
-import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { BottonContainer } from '../modal-contact-form/ModalContactForm.styles';
-import CloseButton from '../../components/buttons/CloseButton';
+import { NO_PHOTO } from '../../assets/Images';
 
 const SpecModalQuote = ({ initialValues }) => {
   const dispatch = useDispatch();
@@ -72,22 +69,21 @@ const SpecModalQuote = ({ initialValues }) => {
         data: body
       }
       dispatch(sendQuoteA(params));
-      dispatch(
-        onShowAlertSuccess({ message: 'Hemos enviado la solicitud de la cotización.' }),
-      );
+      dispatch(onShowAlertSuccess({ message: 'Hemos enviado la solicitud de la cotización.' }));
       dispatch(closeModal(resetForm));
-
     },
     validationSchema: FormContactSchema,
   });
   const photoStyles = {
-    backgroundImage: `url('${product?.images[0].urls.original || noPhoto}')`,
+    backgroundImage: `url('${product?.images[0].urls.original || NO_PHOTO}')`,
     backgroundSize: product?.images[0].urls.original ? 'cover' : 'initial',
   };
+
   const onCloseModal = () => dispatch(closeModal(resetForm));
 
   const errorsLength = Object.keys(errors).length;
   if (!showModalQuote) return null;
+  
   return (
     <Modal show={showModalQuote} onClose={onCloseModal}>
       {!product || !product.id ? <Loading /> :
@@ -111,21 +107,21 @@ const SpecModalQuote = ({ initialValues }) => {
                         <Category>
                           {product.system?.name ? `Sistema constructivo: ${product.system?.name}` : ''}
                         </Category>
-                        <Reference>{`Referencia ${product.reference || 'sin especificar'
-                          }`}</Reference>
+                        <Reference>
+                          {`Referencia ${product.reference || 'sin especificar'}`}
+                        </Reference>
                       </Details>
                     </Content2>
                   </Root>
                 </ContentProduct>
               </ProductSection>
-
               <ContactSection>
                 <form>
                   <TitleContact>Datos de contacto:</TitleContact>
                   <GroupInput>
                     <TitleGroup>Nombre</TitleGroup>
                     <TableInput
-                      name="name"
+                      name='name'
                       onChange={handleChange}
                       value={values.name}
                       isRequired={errors.name}
@@ -135,7 +131,7 @@ const SpecModalQuote = ({ initialValues }) => {
                   <GroupInput>
                     <TitleGroup>Empresa</TitleGroup>
                     <TableInput
-                      name="company"
+                      name='company'
                       onChange={handleChange}
                       value={values.company}
                       isRequired={errors.company}
@@ -145,7 +141,7 @@ const SpecModalQuote = ({ initialValues }) => {
                   <GroupInput>
                     <TitleGroup>Correo</TitleGroup>
                     <TableInput
-                      name="email"
+                      name='email'
                       onChange={handleChange}
                       value={values.email}
                       isRequired={errors.email}
@@ -155,14 +151,14 @@ const SpecModalQuote = ({ initialValues }) => {
                   <GroupInput>
                     <TitleGroup>Mensaje</TitleGroup>
                     <TextAreaForm
-                      name="description"
+                      name='description'
                       onChange={handleChange}
                       value={values.description}
                       isRequired={errors.description}
                     />
                     <MessageRequired>{errors.description ? errors.description : ''}</MessageRequired>
                   </GroupInput>
-                  <ButtonQuote onClick={handleSubmit} style={{ "cursor": errorsLength > 0 ? "not-allowed" : 'pointer' }} disabled={errorsLength > 0 ? 'true' : ''}>
+                  <ButtonQuote onClick={handleSubmit} style={{ 'cursor': errorsLength > 0 ? 'not-allowed' : 'pointer' }} disabled={errorsLength > 0 ? 'true' : ''}>
                     <TitleButton>Solicitar cotización</TitleButton>
                   </ButtonQuote>
                 </form>

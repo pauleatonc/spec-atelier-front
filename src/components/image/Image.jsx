@@ -1,7 +1,7 @@
 import React, { useEffect , useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Img, Content } from './Image.styles';
-import noPhoto from '../../assets/images/icons/no-photo.svg';
+import { NO_PHOTO } from '../../assets/Images';
 
 const Image = props => {
   const { 
@@ -16,14 +16,10 @@ const Image = props => {
     containerHeight,
     containerWidth,
   } = props;
-  const [displayedImg, setDisplayedImg] = useState(src || noPhoto);
+  const [displayedImg, setDisplayedImg] = useState(src || NO_PHOTO);
   const imgRef = useRef(null);
-  const onError = () => {
-    imgRef.current.src = noPhoto;
-  };
-  useEffect(() => {
-    setDisplayedImg(src);
-  }, [src]);
+  const onError = () => { imgRef.current.src = NO_PHOTO };
+  useEffect(() => { setDisplayedImg(src) }, [src]);
   return (
     <Container width={containerWidth || width} height={containerHeight || height}>
       <Img 

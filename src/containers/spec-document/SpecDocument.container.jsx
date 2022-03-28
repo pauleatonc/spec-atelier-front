@@ -42,17 +42,14 @@ import {
 	ProductReference,
 	ProductBrand,
 } from './SpecDocument.styles';
-import specAddSource from '../../assets/images/icons/spec-add.svg';
-import threeDotsVerticalSource from '../../assets/images/icons/three-dots-vertical.svg';
 import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
+import { SPEC_ADD_SOURCE, THREE_DOTS_VERTICAL_SOURCE } from '../../assets/Images';
 
-/**
- * The SpecDocument's container.
- */
+/** The SpecDocument's container */
 const SpecDocument = () => {
 	const { id: specID } = useParams();
-	const { blocks } = useSelector((state) => state.specDocument);
-	const { localConfig } = useSelector((state) => state.specAdmin);
+	const { blocks } = useSelector(state => state.specDocument);
+	const { localConfig } = useSelector(state => state.specAdmin);
 	const dispatch = useDispatch();
 	const [selectedBlockID, setSelectedBlockID] = useState('');
 	const [selectedBlockTextID, setSelectedBlockTextID] = useState('');
@@ -87,8 +84,8 @@ const SpecDocument = () => {
 	};
 
 	const handleBlocksSortChange = (blocksIDs, blockId) => {
-    return dispatch(onSortSpecBlocks({ blocksIDs, blockId, specID }));
-  }
+		return dispatch(onSortSpecBlocks({ blocksIDs, blockId, specID }));
+	}
 
 	const handleShowBlockMenu = (blockID) => (event) => {
 		handleBlockMenuOpen(event);
@@ -257,7 +254,7 @@ const SpecDocument = () => {
 											</BlockEditor>
 										)}
 										<BlockDotsIcon
-											src={threeDotsVerticalSource}
+											src={THREE_DOTS_VERTICAL_SOURCE}
 											onClick={handleShowBlockMenu(block.id)}
 										/>
 										{block.type === 'Product' && block?.product_block_image && (
@@ -327,7 +324,7 @@ const SpecDocument = () => {
 											</BlockEditor>
 										)}
 										<BlockDotsIcon
-											src={threeDotsVerticalSource}
+											src={THREE_DOTS_VERTICAL_SOURCE}
 											onClick={handleShowBlockTextMenu(block?.text?.id)}
 										/>
 									</BlockText>
@@ -339,7 +336,7 @@ const SpecDocument = () => {
 			</Page>
 			<AddIcon
 				alt="Agregar sección"
-				src={specAddSource}
+				src={SPEC_ADD_SOURCE}
 				onClick={
 					window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches
 						? handleShowProducts

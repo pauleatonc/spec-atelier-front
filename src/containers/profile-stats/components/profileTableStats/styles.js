@@ -1,21 +1,16 @@
 import styled from 'styled-components';
-
+import { ALABASTER, MERCURY, BLACK_OPACITY,	BLACK_OPACITY_DARK } from '../../../../config/constants/styled-vars';
 import {
-	ALABASTER,
-	MERCURY,
-	BLACK_OPACITY,
-	BLACK_OPACITY_DARK,
-} from '../../../../config/constants/styled-vars';
-
-import INSTITUTIONAL from '../../../../assets/images/project/project_type/ic-institutional_grey.svg';
-import HOSPITAL from '../../../../assets/images/project/project_type/ic-hospitaler_grey.svg';
-import REAL_STATE from '../../../../assets/images/project/project_type/ic-real_state_grey.svg';
-import RESIDENTIAL from '../../../../assets/images/project/project_type/ic-residential_grey.svg';
-import HOTEL from '../../../../assets/images/project/project_type/ic-hotel_grey.svg';
-import EDUCATIONAL from '../../../../assets/images/project/project_type/ic-educational_grey.svg';
-import COMMERCIAL from '../../../../assets/images/project/project_type/ic-commercial_grey.svg';
-import OFFICE from '../../../../assets/images/project/project_type/ic-office_grey.svg';
-import INDUSTRIAL from '../../../../assets/images/project/project_type/ic-industrial_grey.svg';
+	INSTITUTIONAL,
+	HOSPITAL,
+	REAL_STATE,
+	RESIDENTIAL,
+	HOTEL,
+	EDUCATIONAL,
+	COMMERCIAL,
+	OFFICE,
+	INDUSTRIAL
+} from '../../../../assets/Images';
 
 const types = {
 	INSTITUTIONAL,
@@ -42,9 +37,7 @@ export const TableHead = styled.thead`
 export const TableBody = styled.tbody`
 	color: ${BLACK_OPACITY_DARK};
 	font-size: 13px;
-	tr:last-child {
-		border-bottom: none;
-	}
+	tr:last-child { border-bottom: none	}
 `;
 
 export const RowTable = styled.tr`

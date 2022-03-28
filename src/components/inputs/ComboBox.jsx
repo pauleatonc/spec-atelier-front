@@ -13,14 +13,10 @@ import {
 	OptionText,
 	Actions,
 } from './ComboBox.styles';
-import checkboxOffSource from '../../assets/images/icons/checkbox-off.svg';
-import checkboxOnSource from '../../assets/images/icons/checkbox-on.svg';
-import checkboxOnSecondarySource from '../../assets/images/icons/checkbox-on-secondary.svg';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
+import { CHECKBOX_OFF_SOURCE, CHECKBOX_ON_SECONDARY, CHECKBOX_ON_SOURCE } from '../../assets/Images';
 
-/**
- * The ComboBox's component.
- */
+/** The ComboBox's component */
 const ComboBox = (props) => {
 	const {
 		disabled,
@@ -41,59 +37,36 @@ const ComboBox = (props) => {
 	const handleClickOptionAll = (selected) => () => {
 		const updatedOptions = selected ? [] : options;
 		setSelectedOptions(updatedOptions);
-		if (!submit || onChangeSubmit) {
-			onChange(updatedOptions);
-		}
+		if (!submit || onChangeSubmit) { onChange(updatedOptions) };
 	};
 
 	const handleClickOption = (option, selected) => () => {
 		const updatedOptions = selected
-			? selectedOptions.filter(
-					(selectOption) => selectOption.value !== option.value,
-			  )
+			? selectedOptions.filter(selectOption => selectOption.value !== option.value)
 			: selectedOptions.concat(option);
 		setSelectedOptions(updatedOptions);
-		if (!submit || onChangeSubmit) {
-			onChange(updatedOptions);
-		}
+		if (!submit || onChangeSubmit) { onChange(updatedOptions) }
 	};
 
 	const handleClickClean = () => {
 		setSelectedOptions([]);
-		if (!submit || onChangeSubmit) {
-			onChange([]);
-		}
+		if (!submit || onChangeSubmit) { onChange([]) }
 	};
 
 	const handleClickSubmit = () => onSubmit(selectedOptions);
 
 	const formatInputValue = () => {
-		const optionsLabels = selectedOptions.map(
-			(selectedOption) => selectedOption.label,
-		);
-		if (optionsLabels.length === 0) {
-			return '';
-		}
-		if (optionsLabels.length === 1) {
-			return optionsLabels.shift();
-		}
-		if (optionsLabels.length === 2) {
-			return optionsLabels.join(', ');
-		}
-		return `${optionsLabels.shift()}, ${optionsLabels.shift()}, (+${
-			optionsLabels.length
-		})`;
+		const optionsLabels = selectedOptions.map(selectedOption => selectedOption.label);
+		if (optionsLabels.length === 0) { return '' };
+		if (optionsLabels.length === 1) { return optionsLabels.shift() };
+		if (optionsLabels.length === 2) { return optionsLabels.join(', ') };
+		return `${optionsLabels.shift()}, ${optionsLabels.shift()}, (+${optionsLabels.length})`;
 	};
 
 	const allSelected = options.length === selectedOptions.length;
-	const checkboxIconOn =
-		variant === VARIANTS_BUTTON.PRIMARY
-			? checkboxOnSource
-			: checkboxOnSecondarySource;
+	const checkboxIconOn = variant === VARIANTS_BUTTON.PRIMARY ? CHECKBOX_ON_SOURCE : CHECKBOX_ON_SECONDARY;
 
-	useEffect(() => {
-		setSelectedOptions(values);
-	}, [values]);
+	useEffect(() => { setSelectedOptions(values) }, [values]);
 
 	return (
 		<Root>
@@ -121,25 +94,17 @@ const ComboBox = (props) => {
 			<Options type={type}>
 				{optionAll && (
 					<Option onClick={handleClickOptionAll(allSelected)}>
-						<OptionCheckboxIcon
-							src={allSelected ? checkboxIconOn : checkboxOffSource}
-						/>
+						<OptionCheckboxIcon	src={allSelected ? checkboxIconOn : CHECKBOX_OFF_SOURCE} />
 						<OptionText>Todas</OptionText>
 					</Option>
 				)}
-				{options.map((option) => {
-					const selected = selectedOptions.find(
-						(selectedOption) => selectedOption.value === option.value,
+				{options.map(option => {
+					const selected = selectedOptions.find(selectedOption => selectedOption.value === option.value,
 					);
 
 					return (
-						<Option
-							key={option.value}
-							onClick={handleClickOption(option, selected)}
-						>
-							<OptionCheckboxIcon
-								src={selected ? checkboxIconOn : checkboxOffSource}
-							/>
+						<Option key={option.value} onClick={handleClickOption(option, selected)}>
+							<OptionCheckboxIcon src={selected ? checkboxIconOn : CHECKBOX_OFF_SOURCE} />
 							<OptionText>{option.label}</OptionText>
 						</Option>
 					);
@@ -147,10 +112,7 @@ const ComboBox = (props) => {
 			</Options>
 			{submit && (
 				<Actions>
-					<Button
-						variant={VARIANTS_BUTTON.CANCEL_SECONDARY}
-						onClick={handleClickClean}
-					>
+					<Button variant={VARIANTS_BUTTON.CANCEL_SECONDARY} onClick={handleClickClean}>
 						Borrar
 					</Button>
 					<Button variant={variant} onClick={handleClickSubmit}>
@@ -179,8 +141,7 @@ ComboBox.propTypes = {
 	options: PropTypes.arrayOf(
 		PropTypes.shape({
 			label: PropTypes.string.isRequired,
-			value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-				.isRequired,
+			value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 		}),
 	).isRequired,
 	optionAll: PropTypes.bool,

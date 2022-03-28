@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import useDropdown from '../basics/Dropdown.hooks';
 import Dropdown from '../basics/Dropdown';
 import { Root, Label, Section, Input, InputUnderline, DropIcon, Option } from './Select.styles';
-import dropArrowSource from '../../assets/images/icons/drop-arrow.svg';
+import { ICON_ARROW_DOWN } from '../../assets/Images';
 
-/**
- * The Select' component.
- */
+/** The Select' component */
 const Select = props => {
   const { disabled, label, options, placeholder, value: selectedOption, onChange, type, name } = props;
   const {
@@ -22,20 +20,24 @@ const Select = props => {
     <Root>
       {label && <Label>{label}</Label>}
       <Section onClick={disabled ? undefined : handleOpen}>
-        {type === 'default' && <Input readOnly disabled={disabled} placeholder={placeholder} value={selectedOption.label || ''} />}
-        {type === 'underline' && <InputUnderline readOnly disabled={disabled} placeholder={placeholder} value={selectedOption.label || ''} /> }
-        <DropIcon alt="" src={dropArrowSource} />
+        {type === 'default' &&
+        <Input readOnly disabled={disabled} placeholder={placeholder} value={selectedOption.label || ''} />}
+        {type === 'underline' &&
+        <InputUnderline readOnly disabled={disabled} placeholder={placeholder} value={selectedOption.label || ''} /> }
+        <DropIcon alt='arrow down' src={ICON_ARROW_DOWN} />
       </Section>
       <Dropdown 
         anchorRef={anchor}
-        maxHeight="212px"
+        maxHeight='212px'
         offset={{ x: 9, y: 0 }}
         open={Boolean(anchor)}
         width={width}
         onClose={handleClose}
       >
         {options.map(option => (
-          <Option key={option.value} onClick={handleClick(option)}>{option.label}</Option>
+          <Option key={option.value} onClick={handleClick(option)}>
+            {option.label}
+          </Option>
         ))}
       </Dropdown>
     </Root>

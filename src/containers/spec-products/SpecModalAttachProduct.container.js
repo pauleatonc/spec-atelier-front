@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button } from '../../components/SpecComponents';
-import checkboxOffSource from '../../assets/images/icons/checkbox-off.svg';
-import checkboxOnSource from '../../assets/images/icons/checkbox-on.svg';
+import CloseButton from '../../components/buttons/CloseButton';
 import {
 	Container,
 	Header,
@@ -15,7 +14,7 @@ import {
 	OptionCheckboxIcon,
 	OptionText,
 } from './SpecModalAttachProduct.styles';
-import CloseButton from '../../components/buttons/CloseButton';
+import { CHECKBOX_OFF_SOURCE, CHECKBOX_ON_SOURCE } from '../../assets/Images';
 
 function SpecModalAttachProduct({
 	showAttachModal,
@@ -35,9 +34,7 @@ function SpecModalAttachProduct({
 		const updatedDeselectedOptions =
 			isUsed && selected
 				? deselectedOptions.concat(option)
-				: deselectedOptions.filter(
-						(selectOption) => selectOption.id !== option.id,
-				  );
+				: deselectedOptions.filter(selectOption => selectOption.id !== option.id);
 
 		setDeselectedOptions(updatedDeselectedOptions);
 
@@ -49,11 +46,8 @@ function SpecModalAttachProduct({
 
 		if (!isUsed) {
 			toAttachtUpdatedOptions = selected
-				? toAttachOptions.filter(
-						(selectOption) => selectOption.id !== option.id,
-				  )
+				? toAttachOptions.filter(selectOption => selectOption.id !== option.id)
 				: toAttachOptions.concat(option);
-
 			setToAttachOptions(toAttachtUpdatedOptions);
 		}
 	};
@@ -88,23 +82,21 @@ function SpecModalAttachProduct({
 								<SectionName>{name}</SectionName>
 								{items
 									.filter(({ section_id }) => section_id === id)
-									.map((item) => {
+									.map(item => {
 										const { id: itemId, name: itemName } = item;
 										const selected = selectedOptions.find(
-											(selectedOption) => selectedOption.id === itemId,
+											selectedOption => selectedOption.id === itemId,
 										);
 										const isUsed = project_spec_info?.items_used.find(
-											(usedOption) => usedOption.id === itemId,
+											usedOption => usedOption.id === itemId,
 										);
 										return (
 											<Option
 												key={itemId}
-												onClick={() =>
-													handleClickOption(item, selected, isUsed)
-												}
+												onClick={() => handleClickOption(item, selected, isUsed)}
 											>
 												<OptionCheckboxIcon
-													src={selected ? checkboxOnSource : checkboxOffSource}
+													src={selected ? CHECKBOX_ON_SOURCE : CHECKBOX_OFF_SOURCE}
 												/>
 												<OptionText>{itemName}</OptionText>
 											</Option>
@@ -113,13 +105,13 @@ function SpecModalAttachProduct({
 							</Options>
 						))}
 					</OptionsList>
-					<Button variant="primary" onClick={handleOnSubmit}>
+					<Button variant='primary' onClick={handleOnSubmit}>
 						Guardar
 					</Button>
 				</Section>
 			</Container>
 		</Modal>
 	);
-}
+};
 
 export default SpecModalAttachProduct;

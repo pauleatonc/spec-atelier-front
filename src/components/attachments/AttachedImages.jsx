@@ -4,6 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ModalLayout from '../layouts/ModalLayout';
 import Button from '../buttons/Button';
+import CloseButton from '../buttons/CloseButton';
 import {
 	Root,
 	Label,
@@ -23,15 +24,11 @@ import {
 	DropZoneSection,
 	DropZoneText,
 } from './AttachedImages.styles';
-import imagesUploadSource from '../../assets/images/icons/images-upload.svg';
-import removeSource from '../../assets/images/icons/remove.svg';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import CloseButton from '../buttons/CloseButton';
+import { IMAGES_UPLOAD_SOURCE, REMOVE_SOURCE } from '../../assets/Images';
 
-/**
- * The AttachedImages' component.
- */
-const AttachedImages = (props) => {
+/** The AttachedImages' component */
+const AttachedImages = props => {
 	const {
 		images,
 		label,
@@ -99,8 +96,8 @@ const AttachedImages = (props) => {
 					{label && <Label>{label}</Label>}
 					<DragDropContext onDragEnd={onDragEnd}>
 						<Droppable
-							droppableId="droppable-images-list"
-							direction="horizontal"
+							droppableId='droppable-images-list'
+							direction='horizontal'
 						>
 							{(dropProvided) => (
 								<Box
@@ -110,7 +107,7 @@ const AttachedImages = (props) => {
 									{images.length === 0 && (
 										<Empty>
 											<EmptyHeader>
-												<DropIcon alt="" src={imagesUploadSource} />
+												<DropIcon alt='upload source' src={IMAGES_UPLOAD_SOURCE} />
 											</EmptyHeader>
 											<EmptyBody>
 												<EmptyAction onClick={handleOpen}>
@@ -140,7 +137,7 @@ const AttachedImages = (props) => {
 															source={URL.createObjectURL(image)}
 														>
 															<Square onClick={handleRemove(image, index)}>
-																<img alt="" src={removeSource} />
+																<img alt='remove spurce' src={REMOVE_SOURCE} />
 															</Square>
 														</Item>
 													)}
@@ -170,8 +167,8 @@ const AttachedImages = (props) => {
 					<CloseButton onClick={handleClose}/>
 					<DropZone {...dropProps}>
 						<input {...getInputProps()} />
-						<DropZoneSection padding="33px 0 18px">
-							<DropIcon alt="" src={imagesUploadSource} />
+						<DropZoneSection padding='33px 0 18px'>
+							<DropIcon alt='upload source' src={IMAGES_UPLOAD_SOURCE} />
 						</DropZoneSection>
 						<DropZoneSection>
 							<DropZoneText>
@@ -181,7 +178,7 @@ const AttachedImages = (props) => {
 						<DropZoneSection>
 							<DropZoneText>O también puedes</DropZoneText>
 						</DropZoneSection>
-						<DropZoneSection padding="13px 0 0">
+						<DropZoneSection padding='13px 0 0'>
 							<Button variant={VARIANTS_BUTTON.PRIMARY} onClick={handleAttach}>
 								Cargar imágenes desde la computadora
 							</Button>

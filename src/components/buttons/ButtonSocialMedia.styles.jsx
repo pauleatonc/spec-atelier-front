@@ -1,15 +1,12 @@
 import styled from 'styled-components';
+import { ICON_FACEBOOK, ICON_TWITTER } from '../../assets/Images';
 import {
   MINE_SHAFT,
   PRIMARY,
   SECONDARY,
   DARKESTGREY,
-  TERTIARY,
-  SILVER_CHALICE,
+  TERTIARY
 } from '../../config/constants/styled-vars';
-
-import ICON_FACEBOOK from '../../assets/images/icons/socialmedia/facebook.svg';
-import ICON_TWITTER from '../../assets/images/icons/socialmedia/twitter.svg';
 
 const mapVariantsToColors = {
   default: MINE_SHAFT,
