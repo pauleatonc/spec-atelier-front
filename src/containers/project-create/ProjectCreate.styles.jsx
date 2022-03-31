@@ -283,7 +283,7 @@ export const SelectorDate = styled.div`
   white-space: nowrap;
   width: 100%;
   min-width: 140px;
-  &:active,
+  <<<<<<< HEAD =======>>>>>>>890587f (fix: format prettier) &:active,
   &:focus {
     outline: 0;
   }
@@ -320,7 +320,6 @@ export const InputText = styled.div`
   border-radius: 0;
   width: 240px;
 `;
-
 export const DropIcon = styled.img`
   cursor: pointer;
 `;

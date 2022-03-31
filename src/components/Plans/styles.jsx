@@ -4,43 +4,42 @@ import {
   MEDIA_QUERY_SMALL,
   CHAMPAGNE,
 } from '../../config/constants/styled-vars';
-
 import PLANS_BACKGROUND from '../../assets/images/home/plans_background.png';
 
 export const Container = styled.section`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
-	background: url(${PLANS_BACKGROUND});
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	color: ${MINE_SHAFT};
-	width: 100%;
-	padding-top: 83px;
-	padding-bottom: 200px;
-	${MEDIA_QUERY_SMALL} {
-		background: ${CHAMPAGNE};
-		flex-direction: column;
-		padding-bottom: 57px;
-	}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: url(${PLANS_BACKGROUND});
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: ${MINE_SHAFT};
+  width: 100%;
+  padding-top: 83px;
+  padding-bottom: 200px;
+  ${MEDIA_QUERY_SMALL} {
+    background: ${CHAMPAGNE};
+    flex-direction: column;
+    padding-bottom: 57px;
+  }
 `;
 
 export const Title = styled.h1`
-	width: 100%;
-	font-size: 25px;
-	text-align: center;
-	margin-bottom: 80px;
+  width: 100%;
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 80px;
 `;
 
 export const ButtonContainer = styled.div`
-	width: 30%;
-	padding: 16px 0 0 0;
-	flex: 1;
-	${MEDIA_QUERY_SMALL} {
-		width: 80%;
-		display: flex;
-		margin-bottom: 30px;
-		justify-content: center;
-	}
+  width: 30%;
+  padding: 16px 0 0 0;
+  flex: 1;
+  ${MEDIA_QUERY_SMALL} {
+    width: 80%;
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: center;
+  }
 `;

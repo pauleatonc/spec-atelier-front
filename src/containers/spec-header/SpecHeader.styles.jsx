@@ -89,6 +89,7 @@ export const MobileLogo = styled.div`
     display: flex;
   }
 `;
+
 export const SpecOptions = styled.div`
   height: 100%;
   display: flex;
@@ -107,7 +108,6 @@ export const PermissionsButtonContainer = styled.div`
   align-items: center;
   height: 100%;
   padding: 0 23px;
-  margin-rigth: 25px;
 `;
 
 export const TextButton = styled.div`

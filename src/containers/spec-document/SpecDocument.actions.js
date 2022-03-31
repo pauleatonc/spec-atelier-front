@@ -75,7 +75,7 @@ export const onAddSpecBlock = ({
     );
     if (window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches)
       dispatch(closeModal());
-    dispatch(onGetChangeHistory(specID, { limit: 7, page: 0 })) 
+    dispatch(onGetChangeHistory(specID, { limit: 7, page: 0 }));
   } catch (error) {
     dispatch(
       onActionCreator(ADD_SPEC_BLOCK_ERROR, {

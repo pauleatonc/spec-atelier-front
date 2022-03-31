@@ -28,7 +28,7 @@ const StructureTableChangeHistory = ({
   onChangeAuthor,
   authors,
   queryParamsBuilder,
-  actualPage
+  actualPage,
 }) => {
   const {
     getTableProps,
@@ -43,13 +43,16 @@ const StructureTableChangeHistory = ({
     previousPage,
     setPageSize,
     state: { pageIndex, pageSize },
-  } = useTable({
-    columns,
-    data: changes,
-    initialState: { pageIndex: 0 },
-    manualPagination: true,
-    pageCount: controlledPageCount,
-  }, usePagination);
+  } = useTable(
+    {
+      columns,
+      data: changes,
+      initialState: { pageIndex: 0 },
+      manualPagination: true,
+      pageCount: controlledPageCount,
+    },
+    usePagination,
+  );
 
   const dispatch = useDispatch();
   const { id: specID } = useParams();
@@ -60,20 +63,28 @@ const StructureTableChangeHistory = ({
   const goToPreviousPage = () => {
     previousPage();
     const queryParams = { limit: 7, page: pageIndex - 1, keyword };
-    if (pageIndex > 0) dispatch(onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)));
+    if (pageIndex > 0)
+      dispatch(
+        onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)),
+      );
   };
 
   const goToNextPage = () => {
     nextPage();
     const queryParams = { limit: 7, page: pageIndex + 1, keyword };
     if (pageIndex < controlledPageCount - 1)
-      dispatch(onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)));
+      dispatch(
+        onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)),
+      );
   };
 
   const handleGoToPage = (goToPage) => () => {
     gotoPage(goToPage);
     const queryParams = { limit: 7, page: goToPage, keyword };
-    if (goToPage !== actualPage) dispatch(onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)));
+    if (goToPage !== actualPage)
+      dispatch(
+        onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)),
+      );
   };
 
   const pagination = () => {
@@ -84,11 +95,11 @@ const StructureTableChangeHistory = ({
     let firstPage = 0;
     let lastPage = 0;
 
-    if ((currentPage + medianPage) >= controlledPageCount) {
+    if (currentPage + medianPage >= controlledPageCount) {
       firstPage = Math.max(controlledPageCount - maxPageShow + 1, 1);
     } else {
-      firstPage = ((currentPage - medianPage) > 0) ? currentPage - medianPage : 1;
-    };
+      firstPage = currentPage - medianPage > 0 ? currentPage - medianPage : 1;
+    }
 
     lastPage = Math.min(firstPage + maxPageShow - 1, controlledPageCount);
 
@@ -102,10 +113,9 @@ const StructureTableChangeHistory = ({
             active={currentPage - 1 === actualPage}
           >
             {currentPage}
-          </LiPagination>
-        )
-      }
-      else {
+          </LiPagination>,
+        );
+      } else {
         paginatedArray.push(
           <LiPagination
             key={i}
@@ -113,10 +123,10 @@ const StructureTableChangeHistory = ({
             active={i - 1 === actualPage}
           >
             {i}
-          </LiPagination>
-        )
+          </LiPagination>,
+        );
       }
-    };
+    }
 
     return paginatedArray;
   };
@@ -139,32 +149,42 @@ const StructureTableChangeHistory = ({
       <ContentTable>
         <Table {...getTableProps()}>
           <Thead>
-            {headerGroups.map(headerGroup => (
+            {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map(headerRow =>
-                  <Th {...headerRow.getHeaderProps()}> {headerRow.render('Header')} </Th>)
-                }
+                {headerGroup.headers.map((headerRow) => (
+                  <Th {...headerRow.getHeaderProps()}>
+                    {headerRow.render('Header')}
+                  </Th>
+                ))}
               </tr>
             ))}
           </Thead>
           <Tbody {...getTableBodyProps()}>
-            {page.map(row => {
+            {page.map((row) => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()}>
-                  {row.cells.map(cell => <Td {...cell.getCellProps()}> {cell.render('Cell')} </Td>)}
+                  {row.cells.map((cell) => (
+                    <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
+                  ))}
                 </tr>
-              )
+              );
             })}
           </Tbody>
         </Table>
       </ContentTable>
       <PaginationContent>
-        <GoBackFollowingButton className='fas fa-chevron-left' onClick={goToPreviousPage} disabled={!canPreviousPage} />
-        <UlPagination>
-          {pagination()}
-        </UlPagination>
-        <GoBackFollowingButton className='fas fa-chevron-right' onClick={goToNextPage} disabled={!canNextPage} />
+        <GoBackFollowingButton
+          className="fas fa-chevron-left"
+          onClick={goToPreviousPage}
+          disabled={!canPreviousPage}
+        />
+        <UlPagination>{pagination()}</UlPagination>
+        <GoBackFollowingButton
+          className="fas fa-chevron-right"
+          onClick={goToNextPage}
+          disabled={!canNextPage}
+        />
       </PaginationContent>
     </>
   );

@@ -5,7 +5,7 @@ export const Card = styled.section`
   border: solid 1px ${SILVER};
   border-radius: 16px;
   padding: 24px 40px;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   &:hover {
     box-shadow: 7px 11px 22px -5px rgba(${BLACK}, 0.75);
   }

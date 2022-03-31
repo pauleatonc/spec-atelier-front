@@ -11,7 +11,8 @@ import {
 
 export const Root = styled.div`
   background-color: ${WHITE};
-  box-shadow: 0 1px 3px 0 rgba(${BLACK}, 0.2), 0 2px 1px -1px rgba(${BLACK}, 0.12), 0 1px 1px 0 rgba(${BLACK}, 0.14);
+  box-shadow: 0 1px 3px 0 rgba(${BLACK}, 0.2),
+    0 2px 1px -1px rgba(${BLACK}, 0.12), 0 1px 1px 0 rgba(${BLACK}, 0.14);
   display: ${({ show = false }) => (show ? 'initial' : 'none')};
   height: calc(100vh - 122px);
   left: 0;
@@ -20,7 +21,6 @@ export const Root = styled.div`
   width: 360px;
   overflow-x: scroll;
   z-index: 1;
-
   ${MEDIA_QUERY_SMALL} {
     width: 100vw;
     height: 100vh;
@@ -45,7 +45,6 @@ export const PanelTitle = styled.section`
   letter-spacing: 1.08px;
   padding: 0 23px;
   width: 100%;
-
   ${MEDIA_QUERY_SMALL} {
     border-bottom: solid 1px ${MERCURY};
   }

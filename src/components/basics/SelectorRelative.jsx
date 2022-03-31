@@ -26,7 +26,7 @@ const propTypes = {
 
 const defaultProps = {
   options: [],
-  onChange: () => { },
+  onChange: () => {},
   right: false,
 };
 
@@ -38,9 +38,8 @@ const SelectorRelative = ({
   maxHeight,
   right,
   hoverPrimaryColor,
-  backgroundPuertoRico
+  backgroundPuertoRico,
 }) => {
-
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -88,25 +87,29 @@ const SelectorRelative = ({
         maxHeight={maxHeight}
         right={right}
       >
-        {
-          (options.map(option => (
-            <ContentOption key={option.id} backgroundPuertoRico={backgroundPuertoRico}>
-              <Option value={option.id} onClick={onChangeOption(option)} hoverPrimaryColor={hoverPrimaryColor}>
-                {Object.keys(option).includes('profile_image')
-                  ?
-                  <ContentUser>
-                    <IconUser user={option} size='28' />
-                    <NameSection>{option.name}</NameSection>
-                  </ContentUser>
-                  :
-                  <OptionNameSection>
-                    {option.label || option.name}
-                  </OptionNameSection>
-                }
-              </Option>
-            </ContentOption>
-          )))
-        }
+        {options.map((option) => (
+          <ContentOption
+            key={option.id}
+            backgroundPuertoRico={backgroundPuertoRico}
+          >
+            <Option
+              value={option.id}
+              onClick={onChangeOption(option)}
+              hoverPrimaryColor={hoverPrimaryColor}
+            >
+              {Object.keys(option).includes('profile_image') ? (
+                <ContentUser>
+                  <IconUser user={option} size="28" />
+                  <NameSection>{option.name}</NameSection>
+                </ContentUser>
+              ) : (
+                <OptionNameSection>
+                  {option.label || option.name}
+                </OptionNameSection>
+              )}
+            </Option>
+          </ContentOption>
+        ))}
         {!options.length && <NoOptions>No hay Opciones Disponibles</NoOptions>}
       </Content>
     </Container>

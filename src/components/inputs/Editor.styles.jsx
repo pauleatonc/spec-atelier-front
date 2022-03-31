@@ -7,7 +7,7 @@ import {
   MINE_SHAFT_RGB,
   PUERTO_RICO,
   SWISS_COFFEE,
-  WHITE
+  WHITE,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`

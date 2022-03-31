@@ -26,7 +26,8 @@ export const ButtonCloseContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: ${({ mBottom = 35 }) => `${mBottom}px`};
-  justify-content: ${({ flexEnd = false }) => flexEnd ? `flex-end` : `space-between`};
+  justify-content: ${({ flexEnd = false }) =>
+    flexEnd ? `flex-end` : `space-between`};
 `;
 
 export const Title = styled.h1`
@@ -85,7 +86,9 @@ export const InputMailContainer = styled.div`
 export const Searcher = styled.input`
   width: 100%;
   border-radius: 4px;
-  border: solid 1px ${({ inputMailInvalid = false }) => inputMailInvalid ? `${TORCH_RED}` : `${ALTO}`};
+  border: solid 1px
+    ${({ inputMailInvalid = false }) =>
+      inputMailInvalid ? `${TORCH_RED}` : `${ALTO}`};
   font-size: 12px;
   height: 34px;
   padding-left: 15px;

@@ -25,7 +25,7 @@ const defaultProps = {
   options: [],
   currentOptions: [],
   children: null,
-  onChange: () => { },
+  onChange: () => {},
   onChangeSubmit: false,
 };
 
@@ -93,7 +93,8 @@ const ButtonComboBox = ({
   const innerRef = onClickOusite(() => {
     if (!isOpen) return;
     set(values);
-    if (onChangeSubmit && !isArraysEquals(values, tempValues)) submitCallback(tempValues);
+    if (onChangeSubmit && !isArraysEquals(values, tempValues))
+      submitCallback(tempValues);
     else setIsOpen(false);
   });
 

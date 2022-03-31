@@ -295,7 +295,8 @@ export const ContainerInputs = styled.div`
     align-items: center;
     justify-content: center;
     padding: 0 36px;
-    height: ${({ textAreaContainer }) => textAreaContainer ? '150px' : 'auto'};
+    height: ${({ textAreaContainer }) =>
+      textAreaContainer ? '150px' : 'auto'};
     max-width: 100%;
   }
 `;
@@ -306,7 +307,8 @@ export const InputForm = styled.input`
   border-radius: 21.5px;
   border: solid 1px ${GALLERY};
   padding-left: 27px;
-  margin-bottom: ${({ withoutMarginBottom }) => withoutMarginBottom ? '0px' : '25px'};
+  margin-bottom: ${({ withoutMarginBottom }) =>
+    withoutMarginBottom ? '0px' : '25px'};
   font-size: 12px;
   letter-spacing: 1px;
 

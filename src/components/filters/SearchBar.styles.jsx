@@ -30,7 +30,6 @@ export const Root = styled.div`
   :hover {
     background-color: ${CONCRETE};
   }
-
   ${MEDIA_QUERY_SMALL} {
     flex: 1;
     max-width: 100%;
@@ -58,7 +57,7 @@ export const Input = styled.input`
     color: transparent;
   }
   :placeholder {
-    color: ${SILVER}
+    color: ${SILVER};
   }
 `;
 

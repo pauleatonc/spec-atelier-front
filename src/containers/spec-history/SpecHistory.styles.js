@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import {
   BLACK,
   BLACK_OPACITY_DARK,
@@ -14,7 +14,7 @@ import {
   PUERTO_RICO,
   PUERTO_RICO_OPACITY,
   SILVER,
-  WHITE
+  WHITE,
 } from '../../config/constants/styled-vars';
 
 export const ContainerTable = styled.div`
@@ -101,9 +101,9 @@ export const FilterContainer = styled.section`
 `;
 
 export const Label = styled.div`
-	width: 100%;
-	font-weight: bold;
-	padding: 4px 0 12px;
+  width: 100%;
+  font-weight: bold;
+  padding: 4px 0 12px;
 `;
 
 export const NameOption = styled.option`
@@ -150,15 +150,15 @@ export const FilterSelectBox = styled.div`
 export const ContentTable = styled.div`
   display: flex;
   justify-content: center;
-	position: relative;
-	font-size: 12px;
-	width: 100%;
+  position: relative;
+  font-size: 12px;
+  width: 100%;
   color: ${BLACK_OPACITY_DARK};
 `;
 
 export const Table = styled.table`
-	width: 95%;
-	background-color: ${WHITE};
+  width: 95%;
+  background-color: ${WHITE};
   margin: 33px 0 57px 0;
   text-align: left;
 `;
@@ -176,7 +176,7 @@ export const Thead = styled.thead`
 `;
 
 export const Tbody = styled.tbody`
-  tr{
+  tr {
     border-color: ${WHITE};
     border-width: 2.5px 0;
     border-style: solid;
@@ -212,7 +212,7 @@ export const ActionText = styled.div`
   ${MEDIA_QUERY_SMALL_MAX} {
     width: 280px;
   }
-  ${MEDIA_QUERY_MEDIUM_MAX}{
+  ${MEDIA_QUERY_MEDIUM_MAX} {
     width: 480px;
   }
 `;
@@ -234,7 +234,7 @@ export const PaginationContent = styled.div`
 `;
 
 export const GoBackFollowingButton = styled.i`
-  color: ${({ disabled }) => disabled ? SILVER : PUERTO_RICO};
+  color: ${({ disabled }) => (disabled ? SILVER : PUERTO_RICO)};
   font-size: 12px;
   cursor: pointer;
   margin: 0 8px;
@@ -242,7 +242,7 @@ export const GoBackFollowingButton = styled.i`
 
 export const UlPagination = styled.ul`
   list-style: none;
-  color: ${BOULDER}
+  color: ${BOULDER};
 `;
 
 export const LiPagination = styled.div`
@@ -257,7 +257,7 @@ export const LiPagination = styled.div`
   background-color: ${({ active }) => (active ? PUERTO_RICO_OPACITY : WHITE)};
   :hover {
     background-color: ${PUERTO_RICO_OPACITY};
-  };
+  }
 `;
 
 export const SectionName = styled.section`

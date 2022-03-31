@@ -46,7 +46,7 @@ const Specification = () => {
       SPEC_TABLE: <SpecContentsTable />,
       SPEC_DOCUMENT: <SpecDocumentContainer />,
       SPEC_HISTORY: <SpecHistoryContainer />,
-    }
+    };
     return content[option];
   };
 

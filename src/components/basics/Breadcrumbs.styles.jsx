@@ -57,7 +57,7 @@ Item.propTypes = {
   selected: PropTypes.bool,
 };
 
-export const Underline = styled.div`
+export const Underline = styled.span`
   background-color: ${PUERTO_RICO};
   bottom: -1px;
   height: 2px;

@@ -17,15 +17,20 @@ const IconUser = ({
       horizontalList={horizontalList}
       waiting={waiting}
     >
-      {user.profile_image
-        ? <ImageProfile
-          src={user.profile_image?.urls?.small || user.profile_image?.urls?.original}
+      {user.profile_image ? (
+        <ImageProfile
+          src={
+            user.profile_image?.urls?.small ||
+            user.profile_image?.urls?.original
+          }
           alt="Profile image"
         />
-        : <LetterNameUser fontSize={fontSize}>
-          {user.name.charAt(0).toUpperCase() || user.email.charAt(0).toUpperCase()}
+      ) : (
+        <LetterNameUser fontSize={fontSize}>
+          {user.name.charAt(0).toUpperCase() ||
+            user.email.charAt(0).toUpperCase()}
         </LetterNameUser>
-      }
+      )}
     </Container>
   );
 };

@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { MINE_SHAFT, PRIMARY, MEDIA_QUERY_STANDAR_MEDIUM } from '../../../../../config/constants/styled-vars';
+import {
+  MINE_SHAFT,
+  PRIMARY,
+  MEDIA_QUERY_STANDAR_MEDIUM,
+} from '../../../../../config/constants/styled-vars';
 
 export const ItemsContainer = styled.section`
   display: flex;
@@ -20,7 +24,7 @@ export const Item = styled.div`
   display: flex;
   min-width: 90px;
   align-items: center;
-  justify-content: center;;
+  justify-content: center;
   flex-direction: column;
   cursor: pointer;
   text-decoration: none;

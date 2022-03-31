@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { MEDIA_QUERY_STANDAR_MEDIUM, SILVER } from '../../../../config/constants/styled-vars';
+import {
+  MEDIA_QUERY_STANDAR_MEDIUM,
+  SILVER,
+} from '../../../../config/constants/styled-vars';
 
 export const Container = styled.section`
   display: flex;

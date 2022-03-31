@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
 import SelectorRelative from '../../../components/basics/SelectorRelative';
 import { SearchBar } from '../../../components/SpecComponents';
 import IconUser from '../../../components/IconUser';
 import { ICON_ARROW_DOWN } from '../../../assets/Images';
-import { ContentUser, NameSection } from '../../../components/basics/SelectorRelative.styles';
+import {
+  ContentUser,
+  NameSection,
+} from '../../../components/basics/SelectorRelative.styles';
 import {
   FilterContainer,
   FilterSelectBox,
@@ -11,7 +14,7 @@ import {
   NameOption,
   SearchContainer,
   SearchFilterContainer,
-  SearchFilterContent
+  SearchFilterContent,
 } from '../SpecHistory.styles';
 
 const SearchFilter = ({
@@ -19,17 +22,18 @@ const SearchFilter = ({
   onChangeParams,
   authors,
   onChangeAuthor,
-  author
+  author,
 }) => {
   const filterText = 'Filtrar por autor';
   const getOptionRenderInput = () => {
-    if (author.id === 'allAuthors') return <NameOption>{author.name}</NameOption>
+    if (author.id === 'allAuthors')
+      return <NameOption>{author.name}</NameOption>;
     return (
       <ContentUser>
-        <IconUser user={author} size='28' zIndex='0' />
+        <IconUser user={author} size="28" zIndex="0" />
         <NameSection>{author.name}</NameSection>
       </ContentUser>
-    )
+    );
   };
 
   return (
@@ -37,10 +41,10 @@ const SearchFilter = ({
       <SearchFilterContent>
         <SearchContainer>
           <SearchBar
-            name='keyword'
-            justifyContent='flex-start'
-            maxWidth='237px'
-            placeholder='Buscar'
+            name="keyword"
+            justifyContent="flex-start"
+            maxWidth="237px"
+            placeholder="Buscar"
             value={keyword}
             onChange={onChangeParams}
           />
@@ -48,9 +52,9 @@ const SearchFilter = ({
         <FilterContainer>
           <Label>{filterText}</Label>
           <SelectorRelative
-            name='author'
-            maxWidth='237px'
-            maxHeight='152px'
+            name="author"
+            maxWidth="237px"
+            maxHeight="152px"
             options={authors}
             onChange={onChangeAuthor}
             author={author}

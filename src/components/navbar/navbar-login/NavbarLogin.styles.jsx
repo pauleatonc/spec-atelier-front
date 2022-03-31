@@ -16,7 +16,8 @@ export const NavbarContainer = styled.nav`
   top: 0;
   left: 0;
   align-items: center;
-  background-color: ${({ transparent }) => transparent ? 'transparent' : WHITE};
+  background-color: ${({ transparent }) =>
+    transparent ? 'transparent' : WHITE};
   display: flex;
   height: ${NAVBAR_HEIGHT};
   position: ${({ fixed }) => fixed && 'fixed'};
@@ -127,21 +128,24 @@ export const LinkRegister = styled(LinkItem)`
   width: 130px;
   :hover {
     border: 1px solid;
-    box-shadow: inset 0 0 20px rgba(${WHITE_RGB}, .5), 0 0 20px rgba(${WHITE_RGB}, .2);
+    box-shadow: inset 0 0 20px rgba(${WHITE_RGB}, 0.5),
+      0 0 20px rgba(${WHITE_RGB}, 0.2);
     outline-color: red;
     outline-offset: 15px;
-    text-shadow: 1px 1px 2px ${DOVE_GRAY}; 
+    text-shadow: 1px 1px 2px ${DOVE_GRAY};
   }
 `;
 
 export const LinkLogin = styled(LinkItem)`
   margin-left: 16px;
   border-radius: 20px;
-  border: 1px solid ${({ transparentize }) => (transparentize ? WHITE : SILVER_CHALICE)};
+  border: 1px solid
+    ${({ transparentize }) => (transparentize ? WHITE : SILVER_CHALICE)};
   display: flex;
   justify-content: space-between;
   min-width: 150px;
-  background-color: ${({ transparentize }) => transparentize ? 'transparent' : WHITE};
+  background-color: ${({ transparentize }) =>
+    transparentize ? 'transparent' : WHITE};
   color: ${({ transparentize }) => (transparentize ? WHITE : SILVER_CHALICE)};
 `;
 

@@ -6,7 +6,7 @@ import {
   GALLERY,
   MINE_SHAFT,
   MINE_SHAFT_RGB,
-  SILVER
+  SILVER,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -44,7 +44,8 @@ export const Input = styled.input`
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
-  &:active, &:focus {
+  &:active,
+  &:focus {
     outline: 0;
   }
   &::placeholder {
@@ -57,10 +58,10 @@ export const Input = styled.input`
 `;
 
 export const InputUnderline = styled(Input)`
-  border: 0; 
+  border: 0;
   outline: 0;
   min-width: 140px;
-  display:flex;
+  display: flex;
   flex: 1;
   justify-content: space-between;
   border-bottom: 2px solid ${SILVER};
@@ -71,7 +72,8 @@ export const InputUnderline = styled(Input)`
 
 export const Options = styled.section`
   background-color: transparent;
-  border: ${({ type = 'default' }) => type === 'default' ? `1px solid ${DUSTY_GRAY}` : 'none'};
+  border: ${({ type = 'default' }) =>
+    type === 'default' ? `1px solid ${DUSTY_GRAY}` : 'none'};
   border-radius: 9px;
   margin: 5px 0 0;
   max-height: 200px;

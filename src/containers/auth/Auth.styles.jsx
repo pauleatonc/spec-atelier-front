@@ -105,7 +105,11 @@ export const ButtonLogin = styled.button`
   padding-right: 20px;
   text-decoration: none;
   outilne: none;
-  &:focus, &:hover, &:visited, &:link, &:active {
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
     text-decoration: none;
     outline: none;
   }

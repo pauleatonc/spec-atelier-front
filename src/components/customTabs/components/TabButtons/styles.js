@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import {
   GALLERY,
   SILVER,
@@ -61,6 +60,5 @@ export const ProfileStatsButtonTab = styled.div`
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  background-color: ${({ isActive }) =>
-    isActive ? PRIMARY : 'transparent'};
+  background-color: ${({ isActive }) => (isActive ? PRIMARY : 'transparent')};
 `;

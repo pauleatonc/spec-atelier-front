@@ -2,8 +2,15 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useEscapeKey } from '../../modules/hooks';
-import { onAttachSpecProduct, onDetachSpecProduct } from '../spec-document/SpecDocument.actions';
-import { onHideSpecProducts, onShowAttachModal, onHideAttachModal } from './SpecProducts.actions';
+import {
+  onAttachSpecProduct,
+  onDetachSpecProduct,
+} from '../spec-document/SpecDocument.actions';
+import {
+  onHideSpecProducts,
+  onShowAttachModal,
+  onHideAttachModal,
+} from './SpecProducts.actions';
 import { onShowSpecCreateProductFromItemSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import ProductsListContainer from '../products-list/ProductsList.container';
 import SpecModalAttachProduct from './SpecModalAttachProduct.container';

@@ -1,6 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilters, cleanStoreProductList } from '../products-list/ProductsList.actions';
+import {
+  setFilters,
+  cleanStoreProductList,
+} from '../products-list/ProductsList.actions';
 import { Button } from '../../components/SpecComponents';
 import { Container, Content, Text } from './ProductsFilters.styles';
 import ButtonComboBox from './ButtonComboBox';
@@ -15,7 +18,7 @@ const ProductsFilters = ({
   onFilterAll,
   filterOptions,
 }) => {
-  const { isSelectedAll } = useSelector(state => state.productsList);
+  const { isSelectedAll } = useSelector((state) => state.productsList);
 
   const dispatch = useDispatch();
 
@@ -27,7 +30,7 @@ const ProductsFilters = ({
   const handleFilterAll = () => {
     dispatch(cleanStoreProductList());
     onFilterAll();
-  }
+  };
 
   return (
     <Container>

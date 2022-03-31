@@ -3,7 +3,7 @@ import {
   MINE_SHAFT,
   GALLERY,
   MEDIA_QUERY_SMALL,
-  MEDIA_QUERY_MEDIUM
+  MEDIA_QUERY_MEDIUM,
 } from '../../config/constants/styled-vars';
 
 export const SubHeader = styled.section`

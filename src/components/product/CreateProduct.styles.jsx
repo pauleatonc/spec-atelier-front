@@ -29,7 +29,7 @@ export const InfoContainer = styled.section`
   text-align: center;
   color: ${MINE_SHAFT};
   margin: 16px 0;
-`
+`;
 
 export const Title = styled.div`
   font-weight: bold;

@@ -244,7 +244,10 @@ const ProductList = ({
               key={product.id}
               category={product.system?.name || ''}
               description={product.short_desc || product.long_desc}
-              photo={product.images[0]?.urls?.small || product.images[0]?.urls?.original}
+              photo={
+                product.images[0]?.urls?.small ||
+                product.images[0]?.urls?.original
+              }
               reference={product.reference}
               title={product.name}
               onClickCard={onActionCard?.(product) || onClickProduct(product)}
@@ -265,7 +268,7 @@ const ProductList = ({
               itemsUsed={
                 product?.project_spec_info?.items_used.length > 0 &&
                 product?.project_spec_info?.items_used.length <
-                product.items.length
+                  product.items.length
               }
             />
           );

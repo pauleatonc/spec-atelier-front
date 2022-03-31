@@ -72,6 +72,7 @@ export const ButtonsHeader = styled.div`
   display: flex;
   float: right;
 `;
+
 export const Button = styled.div`
   cursor: pointer;
   font-size: 14px;
