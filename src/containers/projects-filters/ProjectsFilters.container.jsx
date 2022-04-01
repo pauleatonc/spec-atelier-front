@@ -13,47 +13,52 @@ import { ICON_ARROW_DOWN } from '../../assets/Images';
 
 const ProjectsFilters = () => {
   const dispatch = useDispatch();
-  const { sortFilters, params, projects } = useSelector(state => state.projectsList);
+  const { sortFilters, params, projects } = useSelector(
+    (state) => state.projectsList,
+  );
   const [keyword, setKeywords] = useState(params.keywords || '');
   const minLengthSearch = 3;
 
   const onChangeParams = ({ target: { name, value } }) => {
     setKeywords(value);
-    dispatch(getMyProjects({
-      ...params,
-      [name]: value.length >= minLengthSearch ? value : '',
-    }));
+    dispatch(
+      getMyProjects({
+        ...params,
+        [name]: value.length >= minLengthSearch ? value : '',
+      }),
+    );
   };
 
-  const onChangeSort = value => dispatch(getMyProjects({ ...params, sort: value }));
+  const onChangeSort = (value) =>
+    dispatch(getMyProjects({ ...params, sort: value }));
   if (!projects.length && !params.keyword) return null;
 
   return (
     <Container>
       <SearchBar
-        name='keyword'
-        justifyContent='flex-start'
-        maxWidth='432px'
-        placeholder='Buscar'
+        name="keyword"
+        justifyContent="flex-start"
+        maxWidth="432px"
+        placeholder="Buscar"
         value={keyword}
         onChange={onChangeParams}
       />
       <SortContainer>
         <SelectorRelative
-          name='sort'
-          type='underline'
-          maxHeight='180px'
+          name="sort"
+          type="underline"
+          maxHeight="180px"
           options={sortFilters}
-          placeholder=''
+          placeholder=""
           value={params.sort.id}
           onChange={onChangeSort}
-          renderInput={(
+          renderInput={
             <FilterSortText>
               <div>Ver por:</div>
               <div>{params.sort.label}</div>
-              <DropIcon alt='arrow down' src={ICON_ARROW_DOWN} />
+              <DropIcon alt="arrow down" src={ICON_ARROW_DOWN} />
             </FilterSortText>
-          )}
+          }
         />
       </SortContainer>
     </Container>

@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Item, ItemDetails, ItemText, RemoveIcon } from './AttachedDocuments.styles';
-import { DOCUMENT_UPLOAD_SOURCE, DWG_ICON, REMOVE_SOURCE, TECH_ICON } from '../../assets/Images';
+import {
+  Item,
+  ItemDetails,
+  ItemText,
+  RemoveIcon,
+} from './AttachedDocuments.styles';
+import {
+  DOCUMENT_UPLOAD_SOURCE,
+  DWG_ICON,
+  REMOVE_SOURCE,
+  TECH_ICON,
+} from '../../assets/Images';
 
 /** The DocumentItem' component */
 const DocumentItem = ({ onClickRemove, document, bordered, onClick }) => {
-
   const getType = () => {
     if (!document?.name) return DOCUMENT_UPLOAD_SOURCE;
     if (document.name.includes('.pdf')) return TECH_ICON;
     if (document.name.includes('.dwg')) return DWG_ICON;
     if (document.name.includes('.rvt')) return TECH_ICON;
     return TECH_ICON;
-  }
+  };
   const [imgType, setImgType] = useState(getType());
 
   useEffect(() => {
@@ -27,12 +36,18 @@ const DocumentItem = ({ onClickRemove, document, bordered, onClick }) => {
 
   return (
     <Item bordered={bordered} onClick={onClick}>
-      <img alt='type' src={imgType} />
+      <img alt="type" src={imgType} />
       <ItemDetails>
         <ItemText>{document.name || document.src}</ItemText>
-        <ItemText>{document.size ? `${Math.round(document.size / 1024)} Kb` : ''}</ItemText>
+        <ItemText>
+          {document.size ? `${Math.round(document.size / 1024)} Kb` : ''}
+        </ItemText>
       </ItemDetails>
-      <RemoveIcon alt='remove source' src={REMOVE_SOURCE} onClick={onClickRemove} />
+      <RemoveIcon
+        alt="remove source"
+        src={REMOVE_SOURCE}
+        onClick={onClickRemove}
+      />
     </Item>
   );
 };

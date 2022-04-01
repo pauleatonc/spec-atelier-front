@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { ICON_CHILE } from '../../assets/Images';
-import { MINE_SHAFT, SILVER, MEDIA_QUERY_MEDIUM, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import {
+  MINE_SHAFT,
+  SILVER,
+  MEDIA_QUERY_MEDIUM,
+  MEDIA_QUERY_SMALL,
+} from '../../config/constants/styled-vars';
 
 const icons = {
   Chile: ICON_CHILE,

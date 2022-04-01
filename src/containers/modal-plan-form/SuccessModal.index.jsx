@@ -15,7 +15,7 @@ import {
 import { SUCCESS_ICON } from '../../assets/Images';
 
 const ModalSuccess = () => {
-  const { showSuccessModal } = useSelector(state => state.modalPlanForm);
+  const { showSuccessModal } = useSelector((state) => state.modalPlanForm);
   const dispatch = useDispatch();
   const { onClose: handleClose, onExiting: handleExiting } = useModal({
     closeCallback: () => dispatch(onHideModal()),

@@ -7,9 +7,10 @@ import {
   CERT_SOURCE,
   CHECK_SOURCE,
   DWG_ACTIVE_SOURCE,
-  DWG_ICON, PLUS_SOURCE,
+  DWG_ICON,
+  PLUS_SOURCE,
   TECH_ACTIVE_SOURCE,
-  TECH_ICON
+  TECH_ICON,
 } from '../../assets/Images';
 import {
   MINE_SHAFT,
@@ -45,7 +46,7 @@ export const DotsIcon = styled.img`
 `;
 
 export const Root = styled.div`
-  background-color: ${({ selected = false }) => selected ? CONCRETE : WHITE };
+  background-color: ${({ selected = false }) => (selected ? CONCRETE : WHITE)};
   border: 1px solid
     ${({ hover = false, selected = false, isItemsUsed }) =>
       (hover && !selected) || isItemsUsed ? TURQUOISE : ALTO};
@@ -165,28 +166,32 @@ const BaseIcon = styled.span`
 `;
 
 export const DwgIcon = styled(BaseIcon)`
-  background-image: url('${({ hover = false }) => hover ? DWG_ACTIVE_SOURCE : DWG_ICON}');
+  background-image: url('${({ hover = false }) =>
+    hover ? DWG_ACTIVE_SOURCE : DWG_ICON}');
 `;
 
 DwgIcon.defaultProps = hoverDefaultProps;
 DwgIcon.propTypes = hoverPropTypes;
 
 export const BimIcon = styled(BaseIcon)`
-  background-image: url('${({ hover = false }) => hover ? BIM_ACTIVE_SOURCE : BIM_SOURCE}');
+  background-image: url('${({ hover = false }) =>
+    hover ? BIM_ACTIVE_SOURCE : BIM_SOURCE}');
 `;
 
 BimIcon.defaultProps = hoverDefaultProps;
 BimIcon.propTypes = hoverPropTypes;
 
 export const TechIcon = styled(BaseIcon)`
-  background-image: url('${({ hover = false }) => hover ? TECH_ACTIVE_SOURCE : TECH_ICON}');
+  background-image: url('${({ hover = false }) =>
+    hover ? TECH_ACTIVE_SOURCE : TECH_ICON}');
 `;
 
 TechIcon.defaultProps = hoverDefaultProps;
 TechIcon.propTypes = hoverPropTypes;
 
 export const CertIcon = styled(BaseIcon)`
-  background-image: url('${({ hover = false }) => hover ? CERT_ACTIVE_SOURCE : CERT_SOURCE}');
+  background-image: url('${({ hover = false }) =>
+    hover ? CERT_ACTIVE_SOURCE : CERT_SOURCE}');
 `;
 
 CertIcon.defaultProps = hoverDefaultProps;

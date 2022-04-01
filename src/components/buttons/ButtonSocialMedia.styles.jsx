@@ -5,7 +5,7 @@ import {
   PRIMARY,
   SECONDARY,
   DARKESTGREY,
-  TERTIARY
+  TERTIARY,
 } from '../../config/constants/styled-vars';
 
 const mapVariantsToColors = {
@@ -34,10 +34,11 @@ export const ButtonIcon = styled.div`
   height: 18px;
   width: 18px;
   margin: 2px 8px;
-  background: url(${({ type }) => type ? mapTypeToIcon[type] : ''});
+  background: url(${({ type }) => (type ? mapTypeToIcon[type] : '')});
   background-repeat: no-repeat;
   background-size: cover;
   :hover {
-    color: ${({ disabled }) => disabled ? mapVariantsToColors.disabled :  mapVariantsToColors['primary']};
+    color: ${({ disabled }) =>
+      disabled ? mapVariantsToColors.disabled : mapVariantsToColors['primary']};
   }
 `;

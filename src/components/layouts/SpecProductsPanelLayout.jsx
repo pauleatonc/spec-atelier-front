@@ -1,8 +1,14 @@
 import React, { Children, cloneElement, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { onHideSpecProducts, onUpdateFilterSection } from '../../containers/spec-products/SpecProducts.actions';
-import { onShowSpecProductsItems, onHideSpecProductsItemsSuccess } from '../../containers/spec-products-items/SpecProductsItems.actions';
+import {
+  onHideSpecProducts,
+  onUpdateFilterSection,
+} from '../../containers/spec-products/SpecProducts.actions';
+import {
+  onShowSpecProductsItems,
+  onHideSpecProductsItemsSuccess,
+} from '../../containers/spec-products-items/SpecProductsItems.actions';
 import { onShowAlertSuccess } from '../../containers/alert/Alert.actions';
 import { setFilters } from '../../containers/products-list/ProductsList.actions';
 import Context from './SpecProductsPanelLayout.context';
@@ -41,8 +47,11 @@ const SpecProductsPanelLayout = ({
       {show && <Overlay onClick={() => dispatch(onHideSpecProducts())} />}
       <Root show={show}>
         <Header>
-          <ButtonBack role='button' onClick={() => dispatch(onHideSpecProducts())}>
-            <img alt='arrow back' src={ARROW_BACK} />
+          <ButtonBack
+            role="button"
+            onClick={() => dispatch(onHideSpecProducts())}
+          >
+            <img alt="arrow back" src={ARROW_BACK} />
           </ButtonBack>
           <Title>Productos</Title>
           <CloseButton
@@ -59,7 +68,9 @@ const SpecProductsPanelLayout = ({
                 label: selectedSection || 'Secciones',
                 onClick: () => {
                   if (section) {
-                    dispatch(setFilters({ section: [], item: [], subitem: [] }));
+                    dispatch(
+                      setFilters({ section: [], item: [], subitem: [] }),
+                    );
                     dispatch(
                       onUpdateFilterSection({
                         section: '',
@@ -83,7 +94,8 @@ const SpecProductsPanelLayout = ({
                   } else
                     dispatch(
                       onShowAlertSuccess({
-                        message: 'Debes seleccionar una sección antes de seleccionar una partida',
+                        message:
+                          'Debes seleccionar una sección antes de seleccionar una partida',
                       }),
                     );
                 },
@@ -105,6 +117,6 @@ const SpecProductsPanelLayout = ({
   );
 };
 
-SpecProductsPanelLayout.propTypes = {children: PropTypes.node.isRequired};
+SpecProductsPanelLayout.propTypes = { children: PropTypes.node.isRequired };
 
 export default SpecProductsPanelLayout;

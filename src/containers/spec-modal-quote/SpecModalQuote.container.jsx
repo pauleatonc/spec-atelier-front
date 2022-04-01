@@ -37,22 +37,20 @@ import { NO_PHOTO } from '../../assets/Images';
 
 const SpecModalQuote = ({ initialValues }) => {
   const dispatch = useDispatch();
-  const { product, showModalQuote } = useSelector(state => state.specModalQuote);
+  const { product, showModalQuote } = useSelector(
+    (state) => state.specModalQuote,
+  );
   const { project } = useSelector((state) => state.specDocument);
 
   const FormContactSchema = Yup.object().shape({
     name: Yup.string().required('El nombre es requerido'),
-    email: Yup.string().email('Email inválido').required('El correo es requerido'),
+    email: Yup.string()
+      .email('Email inválido')
+      .required('El correo es requerido'),
     description: Yup.string().required('El mensaje es requerido'),
   });
 
-  const {
-    handleChange,
-    handleSubmit,
-    errors,
-    values,
-    resetForm,
-  } = useFormik({
+  const { handleChange, handleSubmit, errors, values, resetForm } = useFormik({
     initialValues,
     onSubmit: (vals) => {
       const body = {
@@ -61,15 +59,19 @@ const SpecModalQuote = ({ initialValues }) => {
           contact_email: vals.email,
           contact_company: vals.company,
           contact_name: vals.name,
-          project_spec_id: project.id
-        }
+          project_spec_id: project.id,
+        },
       };
       const params = {
         id: product.id,
-        data: body
-      }
+        data: body,
+      };
       dispatch(sendQuoteA(params));
-      dispatch(onShowAlertSuccess({ message: 'Hemos enviado la solicitud de la cotización.' }));
+      dispatch(
+        onShowAlertSuccess({
+          message: 'Hemos enviado la solicitud de la cotización.',
+        }),
+      );
       dispatch(closeModal(resetForm));
     },
     validationSchema: FormContactSchema,
@@ -83,10 +85,12 @@ const SpecModalQuote = ({ initialValues }) => {
 
   const errorsLength = Object.keys(errors).length;
   if (!showModalQuote) return null;
-  
+
   return (
     <Modal show={showModalQuote} onClose={onCloseModal}>
-      {!product || !product.id ? <Loading /> :
+      {!product || !product.id ? (
+        <Loading />
+      ) : (
         <Container>
           <Content>
             <BottonContainer>
@@ -95,7 +99,9 @@ const SpecModalQuote = ({ initialValues }) => {
             <Section>
               <ProductSection>
                 <GroupTitle>
-                  <TitleProduct>Este es el producto que quieres cotizar:</TitleProduct>
+                  <TitleProduct>
+                    Este es el producto que quieres cotizar:
+                  </TitleProduct>
                 </GroupTitle>
                 <ContentProduct>
                   <Root>
@@ -103,12 +109,18 @@ const SpecModalQuote = ({ initialValues }) => {
                       <Photo style={photoStyles} />
                       <Details>
                         <Title2>{product.name}</Title2>
-                        <Description>{product.short_desc || product.long_desc}</Description>
+                        <Description>
+                          {product.short_desc || product.long_desc}
+                        </Description>
                         <Category>
-                          {product.system?.name ? `Sistema constructivo: ${product.system?.name}` : ''}
+                          {product.system?.name
+                            ? `Sistema constructivo: ${product.system?.name}`
+                            : ''}
                         </Category>
                         <Reference>
-                          {`Referencia ${product.reference || 'sin especificar'}`}
+                          {`Referencia ${
+                            product.reference || 'sin especificar'
+                          }`}
                         </Reference>
                       </Details>
                     </Content2>
@@ -121,51 +133,66 @@ const SpecModalQuote = ({ initialValues }) => {
                   <GroupInput>
                     <TitleGroup>Nombre</TitleGroup>
                     <TableInput
-                      name='name'
+                      name="name"
                       onChange={handleChange}
                       value={values.name}
                       isRequired={errors.name}
                     />
-                    <MessageRequired>{errors.name ? errors.name : ''}</MessageRequired>
+                    <MessageRequired>
+                      {errors.name ? errors.name : ''}
+                    </MessageRequired>
                   </GroupInput>
                   <GroupInput>
                     <TitleGroup>Empresa</TitleGroup>
                     <TableInput
-                      name='company'
+                      name="company"
                       onChange={handleChange}
                       value={values.company}
                       isRequired={errors.company}
                     />
-                    <MessageRequired>{errors.company ? errors.company : ''}</MessageRequired>
+                    <MessageRequired>
+                      {errors.company ? errors.company : ''}
+                    </MessageRequired>
                   </GroupInput>
                   <GroupInput>
                     <TitleGroup>Correo</TitleGroup>
                     <TableInput
-                      name='email'
+                      name="email"
                       onChange={handleChange}
                       value={values.email}
                       isRequired={errors.email}
                     />
-                    <MessageRequired>{errors.email ? errors.email : ''}</MessageRequired>
+                    <MessageRequired>
+                      {errors.email ? errors.email : ''}
+                    </MessageRequired>
                   </GroupInput>
                   <GroupInput>
                     <TitleGroup>Mensaje</TitleGroup>
                     <TextAreaForm
-                      name='description'
+                      name="description"
                       onChange={handleChange}
                       value={values.description}
                       isRequired={errors.description}
                     />
-                    <MessageRequired>{errors.description ? errors.description : ''}</MessageRequired>
+                    <MessageRequired>
+                      {errors.description ? errors.description : ''}
+                    </MessageRequired>
                   </GroupInput>
-                  <ButtonQuote onClick={handleSubmit} style={{ 'cursor': errorsLength > 0 ? 'not-allowed' : 'pointer' }} disabled={errorsLength > 0 ? 'true' : ''}>
+                  <ButtonQuote
+                    onClick={handleSubmit}
+                    style={{
+                      cursor: errorsLength > 0 ? 'not-allowed' : 'pointer',
+                    }}
+                    disabled={errorsLength > 0 ? 'true' : ''}
+                  >
                     <TitleButton>Solicitar cotización</TitleButton>
                   </ButtonQuote>
                 </form>
               </ContactSection>
             </Section>
           </Content>
-        </Container>}
+        </Container>
+      )}
     </Modal>
   );
 };

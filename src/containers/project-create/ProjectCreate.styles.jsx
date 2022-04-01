@@ -32,7 +32,7 @@ import {
   COMMERCIAL_ACTIVE,
   OFFICE_ACTIVE,
   INDUSTRIAL_ACTIVE,
-  CHECK_SOURCE
+  CHECK_SOURCE,
 } from '../../assets/Images';
 
 const types = {
@@ -129,13 +129,14 @@ export const IconCheck = styled.span`
   left: 10%;
   top: -6px;
   background-color: ${WHITE};
-  display: ${({ show }) => show ? 'initial' : 'none'}
+  display: ${({ show }) => (show ? 'initial' : 'none')}
 `;
 
 export const ButtonIcon = styled.div`
   font-family: Lato;
   font-size: 12px;
-  background-image: url('${({ type, active }) => active ? activeTypes[type] : types[type] }');
+  background-image: url('${({ type, active }) =>
+    active ? activeTypes[type] : types[type]}');
   background-repeat: no-repeat;
   background-size: cover;
   width: 20px;
@@ -220,8 +221,8 @@ export const PermissionOption = styled.section`
   min-height: 120px;
   min-width: 300px;
   border-radius: 4px;
-  border: solid 1px ${({ active }) => active ? PRIMARY : BORDER_GREY};
-  background-color: ${({ active }) => active ? GALLERY : WHITE};
+  border: solid 1px ${({ active }) => (active ? PRIMARY : BORDER_GREY)};
+  background-color: ${({ active }) => (active ? GALLERY : WHITE)};
   padding: 24px 36px;
 `;
 
@@ -269,7 +270,7 @@ export const Suffix = styled.span`
 `;
 
 export const Section = styled.section`
-  width: ${({ width }) => width ? width : '100%'};
+  width: ${({ width }) => (width ? width : '100%')};
 `;
 
 export const SelectorDate = styled.div`
@@ -292,15 +293,22 @@ export const SelectorDate = styled.div`
   white-space: nowrap;
   width: 100%;
   min-width: 140px;
-  &:active, &:focus { outline: 0 }
-  &::placeholder { color: ${SILVER_CHALICE} }
-  &:disabled { background-color: ${ALTO} }
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+  &::placeholder {
+    color: ${SILVER_CHALICE};
+  }
+  &:disabled {
+    background-color: ${ALTO};
+  }
 `;
 
 export const SelectorDateContainer = styled.div`
   min-width: 140px;
   width: 100%;
-  display:flex;
+  display: flex;
   flex: 1;
   justify-content: space-between;
   padding: 4px 0;
@@ -309,7 +317,7 @@ export const SelectorDateContainer = styled.div`
 export const InputText = styled.div`
   white-space: nowrap;
   padding: 4px 16px 8px 16px;
-  border: 0; 
+  border: 0;
   outline: 0;
   display: flex;
   flex: 1;
