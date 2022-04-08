@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button as ButtonItem } from '../../components/SpecComponents';
 import {
   BORDER_GREY,
   MINE_SHAFT,
@@ -12,33 +13,27 @@ import {
   SILVER,
   ALTO,
 } from '../../config/constants/styled-vars';
-
 import {
-  Button as ButtonItem,
-} from '../../components/SpecComponents';
-
-import INSTITUTIONAL from '../../assets/images/project/project_type/ic-institutional_grey.svg';
-import HOSPITAL from '../../assets/images/project/project_type/ic-hospitaler_grey.svg';
-import REAL_STATE from '../../assets/images/project/project_type/ic-real_state_grey.svg';
-import RESIDENTIAL from '../../assets/images/project/project_type/ic-residential_grey.svg';
-import HOTEL from '../../assets/images/project/project_type/ic-hotel_grey.svg';
-import EDUCATIONAL from '../../assets/images/project/project_type/ic-educational_grey.svg';
-import COMMERCIAL from '../../assets/images/project/project_type/ic-commercial_grey.svg';
-import OFFICE from '../../assets/images/project/project_type/ic-office_grey.svg';
-import INDUSTRIAL from '../../assets/images/project/project_type/ic-industrial_grey.svg';
-
-import INSTITUTIONAL_ACTIVE from '../../assets/images/project/project_type/ic-institutional_green.svg';
-import HOSPITAL_ACTIVE from '../../assets/images/project/project_type/ic-hospitaler_green.svg';
-import REAL_STATE_ACTIVE from '../../assets/images/project/project_type/ic-real_state_green.svg';
-import RESIDENTIAL_ACTIVE from '../../assets/images/project/project_type/ic-residential_green.svg';
-import HOTEL_ACTIVE from '../../assets/images/project/project_type/ic-hotel_green.svg';
-import EDUCATIONAL_ACTIVE from '../../assets/images/project/project_type/ic-educational_green.svg';
-import COMMERCIAL_ACTIVE from '../../assets/images/project/project_type/ic-commercial_green.svg';
-import OFFICE_ACTIVE from '../../assets/images/project/project_type/ic-office_green.svg';
-import INDUSTRIAL_ACTIVE from '../../assets/images/project/project_type/ic-industrial_green.svg';
-
-
-import ICON_CHECK from '../../assets/images/icons/check.svg';
+  INSTITUTIONAL,
+  HOSPITAL,
+  REAL_STATE,
+  RESIDENTIAL,
+  HOTEL,
+  EDUCATIONAL,
+  COMMERCIAL,
+  OFFICE,
+  INDUSTRIAL,
+  INSTITUTIONAL_ACTIVE,
+  HOSPITAL_ACTIVE,
+  REAL_STATE_ACTIVE,
+  RESIDENTIAL_ACTIVE,
+  HOTEL_ACTIVE,
+  EDUCATIONAL_ACTIVE,
+  COMMERCIAL_ACTIVE,
+  OFFICE_ACTIVE,
+  INDUSTRIAL_ACTIVE,
+  CHECK_SOURCE,
+} from '../../assets/Images';
 
 const types = {
   INSTITUTIONAL,
@@ -52,7 +47,6 @@ const types = {
   INDUSTRIAL,
 };
 
-
 const activeTypes = {
   INSTITUTIONAL: INSTITUTIONAL_ACTIVE,
   HOSPITAL: HOSPITAL_ACTIVE,
@@ -64,7 +58,6 @@ const activeTypes = {
   OFFICE: OFFICE_ACTIVE,
   INDUSTRIAL: INDUSTRIAL_ACTIVE,
 };
-
 
 export const Container = styled.section`
   padding: 24px 0;
@@ -128,7 +121,7 @@ export const Button = styled(ButtonItem)`
 
 export const IconCheck = styled.span`
   position: absolute;
-  background-image: url('${ICON_CHECK}');
+  background-image: url('${CHECK_SOURCE}');
   background-repeat: no-repeat;
   background-size: cover;
   width: 16px;
@@ -136,13 +129,14 @@ export const IconCheck = styled.span`
   left: 10%;
   top: -6px;
   background-color: ${WHITE};
-  display: ${({ show }) => show ? 'initial' : 'none'}
+  display: ${({ show }) => (show ? 'initial' : 'none')}
 `;
 
 export const ButtonIcon = styled.div`
   font-family: Lato;
   font-size: 12px;
-  background-image: url('${({ type, active }) => active ? activeTypes[type] : types[type] }');
+  background-image: url('${({ type, active }) =>
+    active ? activeTypes[type] : types[type]}');
   background-repeat: no-repeat;
   background-size: cover;
   width: 20px;
@@ -221,14 +215,14 @@ export const PermissionOptions = styled.section`
   flex: 1;
   grid-template-columns: repeat(2, 1fr);
 `;
-  
+
 export const PermissionOption = styled.section`
   cursor: pointer;
   min-height: 120px;
   min-width: 300px;
   border-radius: 4px;
-  border: solid 1px ${({ active }) => active ? PRIMARY : BORDER_GREY};
-  background-color: ${({ active }) => active ? GALLERY : WHITE};
+  border: solid 1px ${({ active }) => (active ? PRIMARY : BORDER_GREY)};
+  background-color: ${({ active }) => (active ? GALLERY : WHITE)};
   padding: 24px 36px;
 `;
 
@@ -276,7 +270,7 @@ export const Suffix = styled.span`
 `;
 
 export const Section = styled.section`
-  width: ${({ width }) => width ? width : '100%'};
+  width: ${({ width }) => (width ? width : '100%')};
 `;
 
 export const SelectorDate = styled.div`
@@ -299,15 +293,13 @@ export const SelectorDate = styled.div`
   white-space: nowrap;
   width: 100%;
   min-width: 140px;
-
-  &:active, &:focus {
+  &:active,
+  &:focus {
     outline: 0;
   }
-
   &::placeholder {
     color: ${SILVER_CHALICE};
   }
-
   &:disabled {
     background-color: ${ALTO};
   }
@@ -316,17 +308,16 @@ export const SelectorDate = styled.div`
 export const SelectorDateContainer = styled.div`
   min-width: 140px;
   width: 100%;
-  display:flex;
+  display: flex;
   flex: 1;
   justify-content: space-between;
   padding: 4px 0;
-
 `;
 
 export const InputText = styled.div`
   white-space: nowrap;
   padding: 4px 16px 8px 16px;
-  border: 0; 
+  border: 0;
   outline: 0;
   display: flex;
   flex: 1;
@@ -339,7 +330,8 @@ export const InputText = styled.div`
   color: ${MINE_SHAFT};
   border-radius: 0;
   width: 240px;
-`
+`;
+
 export const DropIcon = styled.img`
   cursor: pointer;
 `;
@@ -348,4 +340,4 @@ export const TextValue = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-`
+`;

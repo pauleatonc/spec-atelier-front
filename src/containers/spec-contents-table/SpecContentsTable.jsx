@@ -3,6 +3,11 @@ import { useTable, useExpanded } from 'react-table';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
+import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
+import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
+import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
+import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
+import CurrentInputTable from './components/CurrentInputTable';
 import {
   Root,
   ContentTable,
@@ -23,12 +28,7 @@ import {
   TableTotal,
   ContainerTotalTable,
 } from './SpecContentsTable.styles';
-import specDownloadSource from '../../assets/images/icons/ic-download.svg';
-import CurrentInputTable from './components/CurrentInputTable';
-import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
-import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
-import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
-import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
+import { SPEC_DOWNLOAD_SOURCE } from '../../assets/Images';
 
 const SpecContentsTable = () => {
   const { id } = useParams();
@@ -187,7 +187,7 @@ const SpecContentsTable = () => {
                   title="Descargar presupuesto"
                   onClick={handleDownloadTableClick}
                 >
-                  <ImgButton src={specDownloadSource} />
+                  <ImgButton src={SPEC_DOWNLOAD_SOURCE} />
                   Descargar
                 </Button>
               </ButtonsHeader>
