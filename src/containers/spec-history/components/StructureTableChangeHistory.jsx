@@ -78,10 +78,10 @@ const StructureTableChangeHistory = ({
       );
   };
 
-  const handleGoToPage = (goToPage) => () => {
-    gotoPage(goToPage);
-    const queryParams = { limit: 7, page: goToPage, keyword };
-    if (goToPage !== actualPage)
+  const handleGoToPage = (currentPage) => () => {
+    gotoPage(currentPage);
+    const queryParams = { limit: 7, page: currentPage, keyword };
+    if (currentPage !== actualPage)
       dispatch(
         onGetChangeHistory(specID, queryParamsBuilder(author, queryParams)),
       );
@@ -132,9 +132,9 @@ const StructureTableChangeHistory = ({
   };
 
   useEffect(() => {
-    const limitPage = 7;
+    const pageLimit = 7;
     pagesCounter({ pageSize });
-    setPageSize(limitPage);
+    setPageSize(pageLimit);
   }, [pagesCounter, pageSize]);
 
   return (

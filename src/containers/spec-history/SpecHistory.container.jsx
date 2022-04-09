@@ -138,7 +138,7 @@ const ChangeHistoryContainer = () => {
         )
       ) : (
         <h2 style={{ textAlign: 'center', margin: '40px' }}>
-          Gestion de Cambios
+          Gestión de Cambios
         </h2>
       )}
     </ContainerTable>
