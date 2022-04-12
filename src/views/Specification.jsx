@@ -20,10 +20,11 @@ import SpecContentsContainer from '../containers/spec-contents/SpecContents.cont
 import SpecAdminContainer from '../containers/spec-admin/SpecAdmin.container';
 import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayout';
 import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
-import { changeOption } from '../containers/spec-contents-buttons/SpecContentsButtons.actions';
-import { SPEC_DOCUMENT } from '../config/constants/button-variants';
 import SpecModalTeam from '../containers/spec-modal-team';
 import SpecModalTeamNewMember from '../containers/spec-modal-team/newMember';
+import DetailMemberModal from '../containers/spec-modal-team/detailMember';
+import { changeOption } from '../containers/spec-contents-buttons/SpecContentsButtons.actions';
+import { SPEC_DOCUMENT } from '../config/constants/button-variants';
 import { Root, Main, Navigation, Panels } from './Specification.styles';
 
 /** The Specification's view */
@@ -36,7 +37,9 @@ const Specification = () => {
   const { option } = dataSection;
   const { sections } = useSelector((state) => state.specDocument);
 
-  useEffect(() => dispatch(changeOption(SPEC_DOCUMENT)), []);
+  useEffect(() => {
+    dispatch(changeOption(SPEC_DOCUMENT));
+  }, []);
 
   const mainPage = () => {
     const content = {

@@ -6,6 +6,7 @@ import {
   SECONDARY,
   MINE_SHAFT_RGB,
   TURQUOISE,
+  SILVER_CHALICE,
 } from '../../config/constants/styled-vars';
 
 const BaseButton = styled.button`
@@ -34,7 +35,7 @@ const BaseButton = styled.button`
   &:disabled,
   &[disabled] {
     cursor: not-allowed;
-    opacity: 0.5;
+    opacity: 0.8;
     user-select: none;
   }
 `;

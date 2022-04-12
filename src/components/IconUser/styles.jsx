@@ -1,13 +1,8 @@
 import styled from 'styled-components';
-import {
-  COLOR_WHITE,
-  COLOR_DARKGREY,
-  COLOR_LIGHTGREY,
-} from '../../config/constants/styled-vars';
+import { WHITE, BOULDER, SILVER } from '../../config/constants/styled-vars';
 
 export const Container = styled.div`
-  background-color: ${({ waiting = false }) =>
-    waiting ? COLOR_LIGHTGREY : COLOR_DARKGREY};
+  background-color: ${({ waiting = false }) => (waiting ? SILVER : BOULDER)};
   border-radius: ${({ size = 24 }) => `${size / 2}px`};
   display: flex;
   align-items: center;
@@ -16,7 +11,7 @@ export const Container = styled.div`
   width: ${({ size = 24 }) => `${size}px`};
   z-index: ${({ zIndex = 1 }) => `${zIndex}`};
   margin-left: ${({ horizontalList }) => (horizontalList ? `-5px` : `0`)};
-  border: 0.5px solid ${COLOR_WHITE};
+  border: 0.5px solid ${WHITE};
 `;
 
 export const ImageProfile = styled.img`

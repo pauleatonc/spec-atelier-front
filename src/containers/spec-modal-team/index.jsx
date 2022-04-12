@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { Button } from '../../components/SpecComponents';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import useModal from '../../components/layouts/ModalLayout.hooks';
 import addIconSource from '../../assets/images/icons/add-circle-outline-primary.svg';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 import CloseButton from '../../components/buttons/CloseButton';
+
 import ProjectInfoShare from './components/ProjectInfoShare';
 import UserTeamEmail from './components/UserTeamEmail';
 import { onHideModal, onShowModal, setDetailMember } from './actions';
@@ -53,7 +55,7 @@ const SpecModalTeam = ({ sections }) => {
       <Container>
         <ButtonCloseContainer mBottom={23}>
           <Title>Tu equipo</Title>
-          <CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
+          <CloseButton onClick={handleClose} />
         </ButtonCloseContainer>
         {team && (
           <ContainerTeam>

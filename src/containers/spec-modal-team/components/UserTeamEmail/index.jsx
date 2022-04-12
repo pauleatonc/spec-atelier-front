@@ -13,16 +13,16 @@ import { onUpdatePermission } from '../../actions';
 import { Container, ContainerMail, Email, WaitingDisclaimer } from './styles';
 
 const UserTeamEmail = ({ member, onClick }) => {
-	const { id: specID } = useParams();
-	const dispatch = useDispatch();
-	const { user, permission: memberPermission, status } = member;
-	const waiting = status === STATUS_INVITATIONS.WAITING;
-	const [permission, setPermission] = useState(
-		OPTIONS_PERMISSIONS.find(
-			(option) => option.value === memberPermission.ability,
-		),
-	);
-	const updatePermission = (value) => {
+  const { id: specID } = useParams();
+  const dispatch = useDispatch();
+  const { user, permission: memberPermission, status } = member;
+  const waiting = status === STATUS_INVITATIONS.WAITING;
+  const [permission, setPermission] = useState(
+    OPTIONS_PERMISSIONS.find(
+      (option) => option.value === memberPermission.ability,
+    ),
+  );
+  const updatePermission = (value) => {
     const items = [];
     memberPermission.sections.forEach((section) => {
       section.items.forEach((item) => items.push(item.id));
@@ -44,39 +44,39 @@ const UserTeamEmail = ({ member, onClick }) => {
           () => setPermission(value),
         ),
       );
-	};
+  };
 
-	return (
-		<Container>
-			<ContainerMail onClick={() => onClick(member)}>
-				<IconUser user={user} waiting={waiting} />
-				<Email>{user.email}</Email>
-				{waiting && (
-					<WaitingDisclaimer>
-						(no ha aceptado aún la invitación a colaborar.)
-					</WaitingDisclaimer>
-				)}
-			</ContainerMail>
-			<div>
-				<SelectorRelative
-					name="sort"
-					right
-					hoverPrimaryColor
-					showIconInfo
-					maxHeight="180px"
-					options={OPTIONS_PERMISSIONS}
-					value={permission.id}
-					onChange={updatePermission}
-					renderInput={
-						<>
-							<PermissionLabel>{permission.label}</PermissionLabel>
-							<IconArrowDown alt="icon arrow down" src={dropArrowSource} />
-						</>
-					}
-				/>
-			</div>
-		</Container>
-	);
+  return (
+    <Container>
+      <ContainerMail onClick={() => onClick(member)}>
+        <IconUser user={user} waiting={waiting} />
+        <Email>{user.email}</Email>
+        {waiting && (
+          <WaitingDisclaimer>
+            (no ha aceptado aún la invitación a colaborar.)
+          </WaitingDisclaimer>
+        )}
+      </ContainerMail>
+      <div>
+        <SelectorRelative
+          name="sort"
+          right
+          hoverPrimaryColor
+          showIconInfo
+          maxHeight="180px"
+          options={OPTIONS_PERMISSIONS}
+          value={permission.id}
+          onChange={updatePermission}
+          renderInput={
+            <>
+              <PermissionLabel>{permission.label}</PermissionLabel>
+              <IconArrowDown alt="icon arrow down" src={dropArrowSource} />
+            </>
+          }
+        />
+      </div>
+    </Container>
+  );
 };
 
 export default UserTeamEmail;

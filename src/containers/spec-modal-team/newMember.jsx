@@ -119,13 +119,12 @@ const SpecModalNewMember = ({ sections }) => {
   useEffect(() => {
     setChecklistData(getCheckListData(sections, null, team));
   }, [team, sections]);
-
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
       <Container>
         <ButtonCloseContainer>
           <Title>Invita a tu equipo al proyecto</Title>
-          <CloseIcon alt="Cerrar" src={closeSource} onClick={handleClose} />
+          <CloseButton onClick={handleClose} />
         </ButtonCloseContainer>
         <SearcherContainer>
           <Label>Compartir con:</Label>
