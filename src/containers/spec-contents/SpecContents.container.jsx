@@ -39,6 +39,7 @@ const SpecContents = () => {
       return sectionID;
     });
   };
+
   const handleItemClick = (itemID) => () => {
     setSelectedItem((currentSelectedItem) => {
       if (currentSelectedItem === itemID) {

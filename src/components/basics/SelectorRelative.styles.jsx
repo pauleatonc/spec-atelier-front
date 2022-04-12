@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import {
   WHITE,
   SHADOW_GREY,
-  MINE_SHAFT,
   SILVER,
   GALLERY,
   PUERTO_RICO,
+  MINE_SHAFT,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.div`
@@ -25,6 +25,7 @@ export const Content = styled.div`
   padding: 4px 4px;
   z-index: 1;
   overflow-y: auto;
+  ${({ showIconInfo }) => showIconInfo && 'overflow: visible'};
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   ${({ isOpen }) => (isOpen ? `box-shadow: ${SHADOW_GREY}` : '')};
   ${({ right }) => (right ? 'right: 0' : 'left: 0')};

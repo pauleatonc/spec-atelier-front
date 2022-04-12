@@ -74,7 +74,7 @@ const SpecHeader = () => {
   return (
     <Root>
       <SpecOptions>
-        <Section>
+        <Section withoutPaddingLeft>
           <Link to="/projects" data-view="projects">
             {imgLogo()}
           </Link>
