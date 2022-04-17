@@ -24,7 +24,7 @@ export const Item = styled.div`
   display: flex;
   min-width: 90px;
   align-items: center;
-  justify-content: center;;
+  justify-content: center;
   flex-direction: column;
   cursor: pointer;
   text-decoration: none;
@@ -41,7 +41,7 @@ export const Item = styled.div`
 `;
 
 export const ItemText = styled.span`
-  font-family: Lato;
+  height: 18px;
   font-size: 14px;
   font-weight: bold;
   text-align: center;

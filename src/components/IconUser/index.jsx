@@ -24,13 +24,11 @@ const IconUser = ({
             user.profile_image?.urls?.original
           }
           alt="Profile image"
-          size={size}
         />
       ) : (
         <LetterNameUser fontSize={fontSize}>
-          {user.name
-            ? user.name.charAt(0).toUpperCase()
-            : user.email.charAt(0).toUpperCase()}
+          {user.name.charAt(0).toUpperCase() ||
+            user.email.charAt(0).toUpperCase()}
         </LetterNameUser>
       )}
     </Container>

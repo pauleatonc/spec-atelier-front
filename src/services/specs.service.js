@@ -40,6 +40,16 @@ export const addSpecBlockText = factoryService(
 );
 
 /**
+ * Delete a block from the spec.
+ */
+export const deleteSpecBlock = factoryService(({ block, specID, userID }) => {
+  return deleteJsonRequest(
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/remove_block`,
+    { block },
+  );
+});
+
+/**
  * Delete the image of the given block.
  */
 export const deleteSpecBlockImage = factoryService(
@@ -49,13 +59,6 @@ export const deleteSpecBlockImage = factoryService(
       { block: blockID },
     ),
 );
-
-export const deleteSpecBlock = factoryService(({ block, specID, userID }) => {
-  return deleteJsonRequest(
-    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/remove_block`,
-    { block },
-  );
-});
 
 /**
  * Delete the given block's text.
@@ -202,8 +205,18 @@ export const undoRejectNotification = factoryService(
   true,
 );
 
-export const getChangeHistory = factoryService(({ specID, userID }) =>
+export const getChangeHistory = factoryService(({ specID, userID, params }) =>
   getJsonRequest(
-    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/changes`,
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/changes${formatParams(
+      params,
+    )}`,
+  ),
+);
+
+export const getChangesAuthor = factoryService(({ specID, userID, params }) =>
+  getJsonRequest(
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/changes/authors${formatParams(
+      params,
+    )}`,
   ),
 );

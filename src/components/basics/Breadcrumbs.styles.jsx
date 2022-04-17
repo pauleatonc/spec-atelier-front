@@ -29,6 +29,7 @@ export const Item = styled.section`
     text-decoration: ${({ isLink = false }) =>
       isLink ? 'underline' : 'initial'};
   }
+
   ${MEDIA_QUERY_SMALL} {
     margin: 0 5px;
     &:hover {
@@ -38,7 +39,6 @@ export const Item = styled.section`
 `;
 
 export const ItemText = styled.p`
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   font-weight: normal;
@@ -57,7 +57,7 @@ Item.propTypes = {
   selected: PropTypes.bool,
 };
 
-export const Underline = styled.div`
+export const Underline = styled.span`
   background-color: ${PUERTO_RICO};
   bottom: -1px;
   height: 2px;

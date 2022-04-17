@@ -217,6 +217,7 @@ const SpecContentsTable = () => {
                       {...cell.getCellProps()}
                       isTypeUnity={cell?.row?.original?.type === 'Product'}
                       isDesc={cell.column.id === 'desc'}
+                      width={cell.column.width}
                     >
                       {cell.render('Cell')}
                     </TableTd>

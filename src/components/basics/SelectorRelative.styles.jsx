@@ -5,7 +5,7 @@ import {
   SILVER,
   GALLERY,
   PUERTO_RICO,
-  MINE_SHAFT,
+  PUERTO_RICO_BACKGROUND,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.div`
@@ -14,19 +14,17 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  max-height: ${({ maxHeight }) => maxHeight || '100%'};
-  margin-top: 8px;
   position: absolute;
   border: 1px solid ${SILVER};
   background-color: ${WHITE};
   min-width: 160px;
   min-height: 30px;
-  width: ${({ width }) => width || '100%'};
-  padding: 4px 4px;
-  z-index: 1;
+  z-index: 3;
   overflow-y: auto;
-  ${({ showIconInfo }) => showIconInfo && 'overflow: visible'};
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  width: ${({ width }) => width || '100%'};
+  max-height: ${({ maxHeight }) => maxHeight || '100%'};
+  ${({ showIconInfo }) => showIconInfo && 'overflow: visible'};
   ${({ isOpen }) => (isOpen ? `box-shadow: ${SHADOW_GREY}` : '')};
   ${({ right }) => (right ? 'right: 0' : 'left: 0')};
 `;
@@ -39,44 +37,49 @@ export const Section = styled.div`
   align-items: center;
 `;
 
-export const Option = styled.div`
-  display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
+export const ContentOption = styled.div`
+  display: block;
+  padding-left: 9px;
   cursor: pointer;
-  padding: 10px 23px;
-  width: 100%;
   &:hover {
-    background-color: ${GALLERY};
-    p,
-    i {
-      ${({ hoverPrimaryColor }) =>
-        hoverPrimaryColor && `color: ${PUERTO_RICO}`};
-    }
-  }
-  &:first-child {
-    margin: 6px 0 0;
-  }
-  &:last-child {
-    margin: 0 0 6px;
+    background-color: ${({ backgroundPuertoRico }) =>
+      backgroundPuertoRico ? PUERTO_RICO_BACKGROUND : GALLERY};
   }
 `;
 
-export const OptionLabel = styled.p`
-  color: ${MINE_SHAFT};
-  letter-spacing: 0.86px;
-  font-family: Lato;
-  font-size: 12px;
+export const Option = styled.div`
+  width: 100%;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  &:hover {
+    ${({ hoverPrimaryColor }) => hoverPrimaryColor && `color: ${PUERTO_RICO}`};
+  }
 `;
 
-export const IconInfo = styled.i`
-  font-size: 13px;
+export const ContentUser = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+`;
+
+export const NameSection = styled.option`
+  padding-left: 6px;
+  display: flex;
+  align-items: center;
+`;
+
+export const OptionNameSection = styled.option`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;
 
 export const NoOptions = styled.div`
-  font-family: Lato;
   font-size: 12px;
-  letter-spacing: 0.86px;
+  letter-spacing: 1px;
   padding: 10px 23px;
   color: ${SILVER};
 `;

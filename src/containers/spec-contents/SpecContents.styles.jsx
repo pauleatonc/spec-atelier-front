@@ -21,7 +21,6 @@ export const Root = styled.div`
   width: 360px;
   overflow-x: scroll;
   z-index: 1;
-
   ${MEDIA_QUERY_SMALL} {
     width: 100vw;
     height: 100vh;
@@ -40,14 +39,12 @@ export const PanelTitle = styled.section`
   align-items: center;
   display: flex;
   color: ${MINE_SHAFT};
-  font-family: Lato;
   font-size: 13px;
   font-weight: bold;
   height: 46px;
   letter-spacing: 1.08px;
   padding: 0 23px;
   width: 100%;
-
   ${MEDIA_QUERY_SMALL} {
     border-bottom: solid 1px ${MERCURY};
   }
@@ -57,7 +54,6 @@ export const ListTitle = styled.section`
   align-items: center;
   color: ${MINE_SHAFT};
   display: flex;
-  font-family: Lato;
   font-size: 13px;
   height: 30px;
   letter-spacing: 1.08px;
@@ -71,7 +67,6 @@ export const ListItem = styled.a`
   color: ${MINE_SHAFT};
   cursor: pointer;
   display: grid;
-  font-family: Lato;
   font-size: 13px;
   grid-template-columns: auto 24px;
   height: 30px;

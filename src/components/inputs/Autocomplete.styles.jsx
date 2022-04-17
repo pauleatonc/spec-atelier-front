@@ -15,7 +15,6 @@ export const Root = styled.div`
 export const Label = styled.label`
   color: ${MINE_SHAFT};
   display: block;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -42,7 +41,6 @@ export const Input = styled.input`
   cursor: pointer;
   display: inline-flex;
   height: 38px;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   overflow: hidden;
@@ -64,10 +62,8 @@ export const Input = styled.input`
 `;
 
 export const Option = styled.section`
-  box-sizing: border-box;
   color: ${MINE_SHAFT};
   cursor: pointer;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 0.86px;
   padding: 10px 23px;
@@ -98,7 +94,6 @@ export const AddOption = styled.section`
 export const AddAction = styled.span`
   color: ${CARIBBEAN_GREEN};
   cursor: pointer;
-  font-family: Lato;
   font-weight: bold;
   font-size: 12px;
   letter-spacing: 0.86px;
@@ -110,7 +105,6 @@ export const AddAction = styled.span`
 
 export const AddText = styled.span`
   color: ${MINE_SHAFT};
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 0.86px;
   overflow: hidden;

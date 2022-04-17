@@ -24,14 +24,12 @@ export const Root = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0px 10px;
-  max-width: 237px;
   height: 38px;
   box-shadow: 0 0 4px 0 rgba(${BLACK}, 0.25);
   border-radius: 5px;
   :hover {
     background-color: ${CONCRETE};
   }
-
   ${MEDIA_QUERY_SMALL} {
     flex: 1;
     max-width: 100%;
@@ -47,12 +45,10 @@ export const Input = styled.input`
   background-color: transparent;
   border: 0;
   color: rgba(${MINE_SHAFT_RGB}, 0.45);
-  font-family: Lato;
   font-size: 12px;
   height: 100%;
   letter-spacing: 1px;
   width: 100%;
-  font-family: Lato;
   font-size: 12px;
   height: 100%;
   letter-spacing: 1px;
@@ -61,7 +57,7 @@ export const Input = styled.input`
     color: transparent;
   }
   :placeholder {
-    color: ${SILVER}
+    color: ${SILVER};
   }
 `;
 

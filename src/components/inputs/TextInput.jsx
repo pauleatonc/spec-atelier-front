@@ -10,8 +10,7 @@ const StyledInput = styled.input`
   padding-left: 25px;
   width: 100%;
   margin-bottom: 23px;
-  opacity: .5;
-  font-family: "Lato";
+  opacity: 0.5;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -19,12 +18,11 @@ const StyledInput = styled.input`
   line-height: normal;
   letter-spacing: 1px;
   color: ${MINE_SHAFT};
-
   &:focus {
     outline: none;
   }
 `;
 
-const TextInput = props => <StyledInput {...props} />
+const TextInput = (props) => <StyledInput {...props} />;
 
 export default TextInput;

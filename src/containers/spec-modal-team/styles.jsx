@@ -31,7 +31,6 @@ export const ButtonCloseContainer = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
 `;
@@ -60,7 +59,6 @@ export const IconInfo = styled.i`
 `;
 
 export const DescDisclaimer = styled.p`
-  font-family: Lato;
   font-size: 12px;
   max-width: 480px;
 `;
@@ -70,7 +68,6 @@ export const EmailDesc = styled.span`
 `;
 
 export const Label = styled.h3`
-  font-family: Lato;
   font-size: 12px;
   font-weight: bold;
   flex: 1;
@@ -92,7 +89,6 @@ export const Searcher = styled.input`
   border: solid 1px
     ${({ inputMailInvalid = false }) =>
       inputMailInvalid ? `${TORCH_RED}` : `${ALTO}`};
-  font-family: Lato;
   font-size: 12px;
   height: 34px;
   padding-left: 15px;
@@ -110,7 +106,6 @@ export const PermissionSelectorContainer = styled.div`
 `;
 
 export const PermissionLabel = styled.p`
-  font-family: Lato;
   font-size: ${({ fontSize = 12 }) => `${fontSize}px`};
   font-weight: bold;
   color: ${PUERTO_RICO};
@@ -131,7 +126,6 @@ export const TitleConfigContainer = styled.div`
 `;
 
 export const TitleConfig = styled.h1`
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
 `;
@@ -143,7 +137,6 @@ export const Message = styled.textarea`
   background-color: ${BLACK_LIGHT_OPACITY};
   border: none;
   padding: 22px;
-  font-family: Lato;
   font-size: 14px;
   margin-bottom: 30px;
   &:active,
@@ -174,7 +167,6 @@ export const AddIcon = styled.img`
 
 export const AddMemberLabel = styled.p`
   color: ${PUERTO_RICO};
-  font-family: Lato;
   font-size: 12px;
   font-weight: bold;
 `;
@@ -200,7 +192,6 @@ export const InfoUser = styled.div`
 `;
 
 export const ItemInfo = styled.p`
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
 `;
@@ -212,7 +203,6 @@ export const DeleteUser = styled.div`
 
 export const LabelDelete = styled.i`
   margin-right: 8px;
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   color: ${BOULDER};
@@ -224,14 +214,12 @@ export const IconDelete = styled.i`
 
 export const ResendLabel = styled.span`
   cursor: pointer;
-  font-family: Lato;
   font-size: 12px;
   color: ${CORAL};
 `;
 
 export const ErrorInput = styled.p`
   position: absolute;
-  font-family: Lato;
   font-size: 12px;
   color: ${TORCH_RED};
   bottom: -15px;

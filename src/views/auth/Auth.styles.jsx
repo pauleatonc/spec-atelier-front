@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import IMAGE_LOGIN from '../../assets/images/auth/login.png';
-
 import LOGO from '../../assets/images/logo.png';
-
 import {
   WHITE,
   MEDIA_QUERY_SMALL,
@@ -12,7 +10,6 @@ import {
 export const Container = styled.section`
   background-color: ${WHITE};
   color: ${MINE_SHAFT};
-  font-family: 'Lato', sans-serif;
   height: 100vh;
   width: 100vw;
   display: flex;

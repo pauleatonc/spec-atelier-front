@@ -55,10 +55,14 @@ import PRODUCT_HEADER_3X from './images/products/product-header-src@3x.jpg';
 
 import ICON_ARROW_DOWN from './images/icons/drop-arrow.svg';
 import CLOSE_ICON from './images/icons/close-icon.svg';
-import CHANGE_HISTORY_SELECTED from './images/icons/change-history-selected.svg';
-import CHANGE_HISTORY_UNSELECTED from './images/icons/change-history-unselected.svg';
 import SEARCH_ICON from './images/icons/ic_search.svg';
 import SEARCH_COLOR_ICON from './images/icons/ic_search_color.svg';
+import CHANGE_HISTORY_UNSELECTED from './images/icons/change_history_unselected.svg';
+import CHANGE_HISTORY_SELECTED from './images/icons/change_history_selected.svg';
+import SPEC_DOCUMENT_UNSELECTED from './images/icons/ic-page.svg';
+import SPEC_DOCUMENT_SELECTED from './images/icons/ic-page-selected.svg';
+import SPEC_TABLE_UNSELECTED from './images/icons/ic-table.svg';
+import SPEC_TABLE_SELECTED from './images/icons/ic-table-selected.svg';
 
 import IMAGES_UPLOAD_SOURCE from './images/icons/images-upload.svg';
 import REMOVE_SOURCE from './images/icons/remove.svg';
@@ -113,10 +117,6 @@ import INDUSTRIAL_ACTIVE from './images/project/project_type/ic-industrial_green
 
 import ARROW_DOWN_SOURCE from './images/icons/arrow-down.svg';
 import ARROW_UP_SOURCE from './images/icons/arrow-up.svg';
-import SPEC_PAGE_SOURCE from './images/icons/ic-page.svg';
-import SPEC_ADD_SOURCE_W from './images/icons/ic-table.svg';
-import SPEC_PAGE_SOURCE_SELECTED from './images/icons/ic-page-selected.svg';
-import SPEC_ADD_SOURCE_W_SELECTED from './images/icons/ic-table-selected.svg';
 import SPEC_DOWNLOAD_SOURCE from './images/icons/ic-download.svg';
 import SPEC_ADD_SOURCE from './images/icons/spec-add.svg';
 import SPEC_DOWNLOAD from './images/icons/spec-download.svg';
@@ -130,6 +130,9 @@ import ITEMS_ACTIVE_SOURCE from './images/icons/spec-items_active.svg';
 import SETTING_LINES from './images/icons/setting-lines.svg';
 import SETTING_LINES_ACTIVE from './images/icons/setting-lines_active.svg';
 import ARROW_UP_ACIVE_SOURCE from './images/icons/arrow-up-active.svg';
+import ADD_ICON from './images/icons/ic_add.svg';
+import EDIT_ICON from './images/icons/ic_edit.svg';
+import DELETE_ICON from './images/icons/ic_delete.svg';
 
 export {
   LOGO_CCHC,
@@ -234,10 +237,6 @@ export {
   INDUSTRIAL_ACTIVE,
   ARROW_DOWN_SOURCE,
   ARROW_UP_SOURCE,
-  SPEC_PAGE_SOURCE,
-  SPEC_ADD_SOURCE_W,
-  SPEC_PAGE_SOURCE_SELECTED,
-  SPEC_ADD_SOURCE_W_SELECTED,
   SPEC_DOWNLOAD_SOURCE,
   SPEC_ADD_SOURCE,
   SPEC_DOWNLOAD,
@@ -251,4 +250,11 @@ export {
   SETTING_LINES,
   SETTING_LINES_ACTIVE,
   ARROW_UP_ACIVE_SOURCE,
+  ADD_ICON,
+  DELETE_ICON,
+  EDIT_ICON,
+  SPEC_DOCUMENT_UNSELECTED,
+  SPEC_DOCUMENT_SELECTED,
+  SPEC_TABLE_UNSELECTED,
+  SPEC_TABLE_SELECTED,
 };

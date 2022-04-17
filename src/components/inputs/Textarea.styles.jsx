@@ -14,7 +14,6 @@ export const Root = styled.div`
 export const Label = styled.label`
   color: ${MINE_SHAFT};
   display: block;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -27,7 +26,6 @@ export const Textarea = styled.textarea`
   border: 1px solid ${ALTO};
   border-radius: 4px;
   color: ${MINE_SHAFT};
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   min-height: ${({ minHeightTextArea }) => minHeightTextArea};
@@ -47,7 +45,6 @@ export const CountCharacter = styled.p`
   position: absolute;
   bottom: 12px;
   right: 10px;
-  font-family: Lato;
   font-size: 12px;
   color: ${ALTO};
 `;

@@ -4,17 +4,23 @@ import { Root, Input, SearchIcon } from './SearchBar.styles';
 import { SEARCH_COLOR_ICON, SEARCH_ICON } from '../../assets/Images';
 import { useFocus } from '../../helpers/custom-hooks.helper';
 
-
 /** The SearchBar's component */
-const SearchBar = props => {
-  const { justifyContent, maxWidth, placeholder, value, onChange, name } = props;
+const SearchBar = (props) => {
+  const {
+    justifyContent,
+    maxWidth,
+    placeholder,
+    value,
+    onChange,
+    name,
+  } = props;
   const ref = useRef();
   const focused = useFocus(ref);
 
   return (
-    <Root maxWidth={maxWidth} >
+    <Root maxWidth={maxWidth}>
       <Input
-        type='search'
+        type="search"
         placeholder={placeholder}
         name={name}
         justifyContent={justifyContent}

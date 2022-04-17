@@ -47,7 +47,6 @@ export const NotificationsOption = styled.section`
 
 export const Option = styled.div`
   height: 60px;
-  font-family: Lato;
   font-size: 14px;
   letter-spacing: 1px;
   background-color: ${WHITE};
@@ -120,14 +119,12 @@ export const ContainerNameUser = styled.div`
 `;
 
 export const InfoUserName = styled.p`
-  font-family: Lato;
   font-size: 14px;
   margin-bottom: 2px;
   color: ${({ gray }) => (gray ? SILVER_CHALICE : HEX_BLACK)};
 `;
 
 export const InfoUserName2 = styled.label`
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   margin-bottom: 2px;
@@ -141,7 +138,6 @@ export const ListHeader = styled.div`
 `;
 
 export const TitleHeader = styled.label`
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   margin-bottom: 2px;
@@ -149,7 +145,6 @@ export const TitleHeader = styled.label`
 `;
 
 export const LinkHeader = styled.a`
-  font-family: Lato;
   font-size: 14px;
   margin-bottom: 2px;
   text-align: right;
@@ -189,7 +184,6 @@ export const NewPoint = styled.span`
 
 export const ActionPerformed = styled.label`
   margin-top: 16px;
-  font-family: Lato;
   font-size: 14px;
   letter-spacing: 1px;
   margin-bottom: 2px;
@@ -199,7 +193,6 @@ export const ActionPerformed = styled.label`
 
 export const LinkSeeAll = styled.a`
   margin-top: 16px;
-  font-family: Lato;
   font-size: 14px;
   margin-bottom: 2px;
   text-align: right;
@@ -211,7 +204,6 @@ export const LinkSeeAll = styled.a`
 
 export const UndoSpan = styled.span`
   margin-top: 16px;
-  font-family: Lato;
   font-size: 14px;
   margin-bottom: 2px;
   text-align: right;

@@ -19,7 +19,6 @@ export const NavbarContainer = styled.nav`
   background-color: ${({ transparent }) =>
     transparent ? 'transparent' : WHITE};
   display: flex;
-  font-family: 'Lato', sans-serif;
   height: ${NAVBAR_HEIGHT};
   width: 100%;
   transition: all 0.2s ease-in-out;

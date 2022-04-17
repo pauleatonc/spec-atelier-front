@@ -1,13 +1,15 @@
 import styled from 'styled-components';
-import { TERTIARY, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import {
+  TERTIARY,
+  MEDIA_QUERY_SMALL,
+} from '../../config/constants/styled-vars';
 
 export const Container = styled.footer`
-  font-family: 'Lato', sans-serif;
   background-color: ${TERTIARY};
   min-height: 300px;
   display: flex;
   justify-content: center;
-`
+`;
 
 export const Content = styled.section`
   padding: 60px 0;
@@ -32,7 +34,6 @@ export const LeftContent = styled.div`
     flex: 1;
     flex-direction: row;
   }
-
 `;
 
 export const Menu = styled.div`
@@ -64,4 +65,3 @@ export const RightContent = styled.div`
   justify-content: space-between;
   flex: 1;
 `;
-

@@ -45,7 +45,6 @@ export const Section = styled.section`
 
 export const ProjectName = styled(Section)`
   color: ${MINE_SHAFT};
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -90,6 +89,7 @@ export const MobileLogo = styled.div`
     display: flex;
   }
 `;
+
 export const SpecOptions = styled.div`
   height: 100%;
   display: flex;
@@ -108,7 +108,6 @@ export const PermissionsButtonContainer = styled.div`
   align-items: center;
   height: 100%;
   padding: 0 23px;
-  margin-rigth: 25px;
 `;
 
 export const TextButton = styled.div`

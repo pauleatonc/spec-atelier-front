@@ -91,9 +91,7 @@ const ComboBox = (props) => {
       ? CHECKBOX_ON_SOURCE
       : CHECKBOX_ON_SECONDARY;
 
-  useEffect(() => {
-    setSelectedOptions(values);
-  }, [values]);
+  useEffect(() => setSelectedOptions(values), [values]);
 
   return (
     <Root>
@@ -131,7 +129,6 @@ const ComboBox = (props) => {
           const selected = selectedOptions.find(
             (selectedOption) => selectedOption.value === option.value,
           );
-
           return (
             <Option
               key={option.value}

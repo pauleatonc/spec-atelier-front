@@ -28,7 +28,6 @@ export const ProfileOptions = styled.section`
 
 export const Option = styled.div`
   height: 60px;
-  font-family: Lato;
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -93,7 +92,6 @@ export const ContainerNameUser = styled.div`
 `;
 
 export const InfoUserName = styled.p`
-  font-family: Lato;
   font-size: 14px;
   margin-bottom: 2px;
   color: ${({ gray }) => (gray ? SILVER_CHALICE : MINE_SHAFT)};
