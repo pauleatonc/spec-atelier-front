@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { PRIMARY } from '../../config/constants/styled-vars';
+import { PRIMARY, WHITE_OPACITY } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
@@ -12,11 +12,9 @@ export const GlobalDraggableItemStyles = createGlobalStyle`
       outline: 0;
     }
   }
-
   .DraggableList__DraggableItem--dragging {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: ${WHITE_OPACITY};
     outline: 2px dashed ${PRIMARY};
-
     & * {
       background-color: transparent !important;
     }
