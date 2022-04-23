@@ -15,6 +15,7 @@ const CurrentInputTable = ({
   const [currentValue, setCurrentValue] = useState(value);
   const [prevValueP, setPrevValueP] = useState(value);
   const [prevValueQ, setPrevValueQ] = useState(value);
+
   const onChangeCurrentValue = ({
     target: {
       value: inputValue,
@@ -47,6 +48,7 @@ const CurrentInputTable = ({
       }
     }
   };
+
   return (
     <>
       {tableInputType === 'quantity' ? (

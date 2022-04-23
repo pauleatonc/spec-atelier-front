@@ -1,18 +1,19 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import CheckBoxList from '../../components/inputs/CheckBoxList';
-import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
+import { useDidUpdateEffect } from 'helpers/custom-hooks.helper';
+import CheckBoxList from 'components/inputs/CheckBoxList';
+import {
+  ButtonBack,
+  Overlay,
+} from 'components/layouts/SpecProductsPanelLayout.styles';
+import { ARROW_BACK } from 'assets/Images';
 import {
   onSetLocalConfig,
   onEditConfig,
   onUpdateProductConfig,
   onHideSpecAdmin,
 } from './SpecAdmin.actions';
-import {
-  ButtonBack,
-  Overlay,
-} from '../../components/layouts/SpecProductsPanelLayout.styles';
 import {
   Root,
   PanelTitle,
@@ -21,15 +22,16 @@ import {
   TextConfigDesc,
   TextConfigList,
 } from './SpecAdmin.styles';
-import { ARROW_BACK } from '../../assets/Images';
 
 /** The SpecAdmin' container */
 const SpecAdmin = () => {
   const { show, initialConfig, localConfig } = useSelector(
     (state) => state.specAdmin,
   );
+
   const { config } = useSelector((state) => state.specDocument.project);
   const { id: specID } = useParams();
+
   const options = [
     { key: 'default', text: 'Predeterminado' },
     { key: 'short_desc', text: 'Descripción corta' },

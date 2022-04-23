@@ -3,7 +3,7 @@ import {
   MINE_SHAFT,
   PRIMARY,
   MEDIA_QUERY_STANDAR_MEDIUM,
-} from '../../../../../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 export const ItemsContainer = styled.section`
   display: flex;

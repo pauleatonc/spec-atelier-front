@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import useDropdown from '../basics/Dropdown.hooks';
-import Dropdown from '../basics/Dropdown';
-import Button from '../buttons/Button';
+import Dropdown from 'components/basics/Dropdown';
+import Button from 'components/buttons/Button';
+import useDropdown from 'components/basics/Dropdown.hooks';
+import {
+  CHECKBOX_OFF_SOURCE,
+  CHECKBOX_ON_SECONDARY,
+  CHECKBOX_ON_SOURCE,
+  ICON_ARROW_DOWN,
+} from 'assets/Images';
+import { VARIANTS_BUTTON } from 'config/constants/button-variants';
 import {
   Root,
   Label,
@@ -15,13 +22,6 @@ import {
   OptionText,
   Actions,
 } from './MultiSelect.styles';
-import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import {
-  CHECKBOX_OFF_SOURCE,
-  CHECKBOX_ON_SECONDARY,
-  CHECKBOX_ON_SOURCE,
-  ICON_ARROW_DOWN,
-} from '../../assets/Images';
 
 /** The MultiSelect' component */
 const MultiSelect = (props) => {
@@ -59,6 +59,7 @@ const MultiSelect = (props) => {
       onChange(updatedOptions);
     },
   });
+
   const formatInputValue = () => {
     const optionsLabels = selectedOptions.map(
       (selectedOption) => selectedOption.label,
@@ -147,7 +148,6 @@ const MultiSelect = (props) => {
           const selected = selectedOptions.find(
             (selectedOption) => selectedOption.value === option.value,
           );
-
           return (
             <Option key={option.value} onClick={handleClick(option, selected)}>
               <OptionCheckboxIcon

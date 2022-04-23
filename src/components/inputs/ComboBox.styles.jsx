@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ALTO, DUSTY_GRAY, GALLERY, MINE_SHAFT, MINE_SHAFT_RGB, SILVER } from '../../config/constants/styled-vars';
+import {
+  ALTO,
+  DUSTY_GRAY,
+  GALLERY,
+  MINE_SHAFT,
+  MINE_SHAFT_RGB,
+  SILVER,
+} from 'config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
@@ -39,15 +46,13 @@ export const Input = styled.input`
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
-
-  &:active, &:focus {
+  &:active,
+  &:focus {
     outline: 0;
   }
-
   &::placeholder {
     color: rgba(${MINE_SHAFT_RGB}, 0.46);
   }
-
   &:disabled {
     background-color: ${ALTO};
     cursor: not-allowed;
@@ -55,10 +60,10 @@ export const Input = styled.input`
 `;
 
 export const InputUnderline = styled(Input)`
-  border: 0; 
+  border: 0;
   outline: 0;
   min-width: 140px;
-  display:flex;
+  display: flex;
   flex: 1;
   justify-content: space-between;
   border-bottom: 2px solid ${SILVER};
@@ -71,7 +76,8 @@ export const InputUnderline = styled(Input)`
 
 export const Options = styled.section`
   background-color: transparent;
-  border: ${({ type = 'default' }) => type === 'default' ? `1px solid ${DUSTY_GRAY}` : 'none'};
+  border: ${({ type = 'default' }) =>
+    type === 'default' ? `1px solid ${DUSTY_GRAY}` : 'none'};
   border-radius: 9px;
   margin: 5px 0 0;
   max-height: 200px;
@@ -96,15 +102,12 @@ export const Option = styled.section`
   letter-spacing: 0.86px;
   padding: 10px 16px;
   width: 100%;
-
   &:hover {
     background-color: ${GALLERY};
   }
-
   &:first-child {
     margin: 6px 0 0;
   }
-
   &:last-child {
     margin: 0 0 6px;
   }

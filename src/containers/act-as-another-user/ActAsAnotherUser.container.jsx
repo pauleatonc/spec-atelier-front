@@ -1,26 +1,21 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
+import { becomeUser, clearImpersonated } from 'containers/auth/auth.actions';
+import { clearProjects } from 'containers/projects-list/ProjectsList.actions';
+import ReactTable from 'components/table/Table';
+import Button from 'components/buttons/Button';
+import ProductHeader from 'components/product/ProductsHeader';
+import { VARIANTS_BUTTON } from 'config/constants/button-variants';
 import { getUsers } from './ActAsAnotherUser.actions';
-import { becomeUser, clearImpersonated} from '../auth/auth.actions';
-import { clearProjects } from '../projects-list/ProjectsList.actions';
-import ReactTable from '../../components/table/Table';
 import UsersSearchContainer from '../search/Search.container';
-import { Button } from '../../components/SpecComponents';
-import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import ProductHeader from '../../components/product/ProductsHeader';
-
-
-import {
-	EXPANDED,
-	COLUMNS,
-} from './utils';
+import { EXPANDED, COLUMNS } from './utils';
 
 const ActAsAnotherUserContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { params, users } = useSelector(state => state.actAsAnotherUserList);
-  const { impersonated } = useSelector(state => state.auth);
+  const { params, users } = useSelector((state) => state.actAsAnotherUserList);
+  const { impersonated } = useSelector((state) => state.auth);
   const [keyword, setKeyword] = useState(params.keyword || '');
 
   useEffect(() => {
@@ -35,20 +30,20 @@ const ActAsAnotherUserContainer = () => {
   const onChangeParams = ({ target: { name, value } }) => {
     setKeyword(value);
     dispatch(getUsers({ ...params, [name]: value }));
-  }
+  };
 
   const listFormatter = (list) => {
     const newList = list.map((user_item) => {
-      const {client_role, ...UserWithoutClientRole} = user_item
+      const { client_role, ...UserWithoutClientRole } = user_item;
       const clientRole = client_role ? 'Sí' : 'No';
-      return {...UserWithoutClientRole, client_role: clientRole}
+      return { ...UserWithoutClientRole, client_role: clientRole };
     });
     return newList;
-  }
+  };
 
   const becomeUserHandler = (id) => {
-    dispatch(becomeUser({ user_id: id }))
-  }
+    dispatch(becomeUser({ user_id: id }));
+  };
 
   const columns = useMemo(
     () => [
@@ -57,25 +52,25 @@ const ActAsAnotherUserContainer = () => {
         id: 'expander',
         Header: () => null,
         Cell: ({ row }) => (
-            <Button
-              variant={VARIANTS_BUTTON.CANCEL}
-              onClick={() => becomeUserHandler(row.original.id)}
-            >
-              {EXPANDED.ACT_AS}
-            </Button>
-        )
-      }
+          <Button
+            variant={VARIANTS_BUTTON.CANCEL}
+            onClick={() => becomeUserHandler(row.original.id)}
+          >
+            {EXPANDED.ACT_AS}
+          </Button>
+        ),
+      },
     ],
     [],
   );
 
   return (
-    <div>
+    <>
       <ProductHeader />
       <UsersSearchContainer
         keyword={keyword}
         onChangeParams={onChangeParams}
-        placeholder='Buscar usuario'
+        placeholder="Buscar usuario"
       />
       {users?.list?.length > 0 && (
         <ReactTable
@@ -88,8 +83,8 @@ const ActAsAnotherUserContainer = () => {
           nextPage={users.next_page || 0}
         />
       )}
-    </div>
-  )
+    </>
+  );
 };
 
 export default ActAsAnotherUserContainer;

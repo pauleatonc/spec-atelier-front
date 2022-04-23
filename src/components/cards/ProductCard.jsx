@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { onDeleteProduct } from '../../containers/products-list/ProductsList.actions';
-import { onShowSpecEditProduct } from '../../containers/spec-edit-product/SpecEditProduct.actions';
-import { DownloadDocumentsIcons } from '../SpecComponents';
-import useDropdown from '../basics/Dropdown.hooks';
-import Dropdown from '../basics/Dropdown';
-import Confirm from '../confirm/Confirm';
+import { onDeleteProduct } from 'containers/products-list/ProductsList.actions';
+import { onShowSpecEditProduct } from 'containers/spec-edit-product/SpecEditProduct.actions';
+import DownloadDocumentsIcons from 'components/downloadDocumentsIcons/index';
+import useDropdown from 'components/basics/Dropdown.hooks';
+import Dropdown from 'components/basics/Dropdown';
+import Confirm from 'components/confirm/Confirm';
+import { NO_PHOTO, THREE_DOTS_VERTICAL_SOURCE } from 'assets/Images';
 import {
   Root,
   Content,
@@ -24,7 +25,6 @@ import {
   DotsIcon,
   ActionsMenuItem,
 } from './ProductCard.styles';
-import { NO_PHOTO, THREE_DOTS_VERTICAL_SOURCE } from '../../assets/Images';
 
 /** The ProductCard's component */
 const ProductCard = (props) => {
@@ -49,17 +49,21 @@ const ProductCard = (props) => {
   const [hover, setHover] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const dispatch = useDispatch();
+
   const {
     anchor: actionsAnchor,
     onClose: handleActionsMenuClose,
     onOpen: handleActionsMenuOpen,
   } = useDropdown();
+
   const handleCardMouseEnter = () => setHover(true);
   const handleCardMouseLeave = () => setHover(false);
+
   const handleShowActions = (event) => {
     event.stopPropagation();
     handleActionsMenuOpen(event);
   };
+
   const handleHideActions = (event) => {
     event.stopPropagation();
     handleActionsMenuClose(event);
@@ -75,9 +79,7 @@ const ProductCard = (props) => {
     setShowDelete(true);
   };
 
-  const handleCloseDelete = () => {
-    setShowDelete(false);
-  };
+  const handleCloseDelete = () => setShowDelete(false);
 
   const handleConfirm = async () => {
     handleCloseDelete();
@@ -88,6 +90,7 @@ const ProductCard = (props) => {
     backgroundImage: `url('${photo || NO_PHOTO}')`,
     backgroundSize: photo ? 'cover' : 'initial',
   };
+
   const showSeeMore = Boolean(onClickSeeMore);
 
   return (
@@ -107,9 +110,9 @@ const ProductCard = (props) => {
             <Category title={category}>
               {category ? `Sistema constructivo: ${category}` : ''}
             </Category>
-            <Reference>{`Referencia ${
-              reference || 'sin especificar'
-            }`}</Reference>
+            <Reference>
+              {`Referencia ${reference || 'sin especificar'}`}
+            </Reference>
           </Details>
         </Content>
         <Footer>

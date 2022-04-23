@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import RegisterContainer from '../../containers/auth/register/Register.container';
-
+import RegisterContainer from 'containers/auth/register/Register.container';
+import Alert from 'containers/alert/Alert.container';
 import {
   Content,
   Container,
@@ -10,7 +10,6 @@ import {
   Image,
   Logo,
 } from './Auth.styles';
-import Alert from '../../containers/alert/Alert.container';
 
 const Registration = () => {
   return (
@@ -31,6 +30,5 @@ const Registration = () => {
     </Container>
   );
 };
-
 
 export default Registration;

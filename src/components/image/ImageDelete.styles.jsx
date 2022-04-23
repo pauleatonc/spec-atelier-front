@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GALLERY, SILVER_CHALICE, BOULDER } from '../../config/constants/styled-vars';
+import { GALLERY, SILVER_CHALICE, BOULDER } from 'config/constants/styled-vars';
 
 export const Img = styled.img`
   background-image: url('${({ src = '' }) => src}');
@@ -8,7 +8,8 @@ export const Img = styled.img`
   object-fit: fill;
   ${({ type }) => {
     if (type === 'cover') return 'height: 100%; width: 100%;';
-    if (type === 'responsive') return 'max-height: 100%; max-width: 100%; display: flex; align-items: center';
+    if (type === 'responsive')
+      return 'max-height: 100%; max-width: 100%; display: flex; align-items: center';
     return 'height: 100%; width: 100%;';
   }}
 `;
@@ -31,9 +32,9 @@ export const Button = styled.button`
   outline: none;
   border: none;
   color: ${BOULDER};
+  cursor: pointer;
+  border-radius: 2px;
   &:hover {
     background-color: ${SILVER_CHALICE};
   }
-  cursor: pointer;
-  border-radius: 2px;
 `;

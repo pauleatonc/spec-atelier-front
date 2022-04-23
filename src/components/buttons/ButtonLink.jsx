@@ -1,32 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { ButtonContainer, ButtonIcon, ButtonText, TextContainer } from './ButtonLink.styles';
-import { useState } from 'react';
+import {
+  ButtonContainer,
+  ButtonIcon,
+  ButtonText,
+  TextContainer,
+} from './ButtonLink.styles';
 
 const mapTypesToName = {
   address: 'Dirección',
-  web: 'Website', 
+  web: 'Website',
   phone: 'Teléfono',
   default: '',
 };
 
-/**
- * The ButtonLink's component.
- */
-const ButtonLink = props => {
+/** The ButtonLink's component */
+const ButtonLink = (props) => {
   const { variant, type, children, to, target, ...buttonProps } = props;
   const [showAsInfo, setShowAsInfo] = useState(false);
   const toggle = () => setShowAsInfo(!showAsInfo);
   const showInfo = () => setShowAsInfo(true);
-  
+
   return (
-    <ButtonContainer variant={variant} {...buttonProps} >
-      <ButtonIcon
-        type="button"
-        type={type}
-        onClick={toggle}
-      >
-      </ButtonIcon>
+    <ButtonContainer variant={variant} {...buttonProps}>
+      <ButtonIcon type={type} onClick={toggle} />
       <TextContainer>
         <ButtonText
           type="button"
@@ -67,8 +64,21 @@ ButtonLink.defaultProps = {
 ButtonLink.propTypes = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
-  type: PropTypes.oneOf(['address', 'web', 'phone', 'none', 'twitter', 'facebook']),
-  variant: PropTypes.oneOf(['primary', 'secondary', 'default', 'gray', 'disabled']),
+  type: PropTypes.oneOf([
+    'address',
+    'web',
+    'phone',
+    'none',
+    'twitter',
+    'facebook',
+  ]),
+  variant: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'default',
+    'gray',
+    'disabled',
+  ]),
   width: PropTypes.string,
   target: PropTypes.string,
   to: PropTypes.string,

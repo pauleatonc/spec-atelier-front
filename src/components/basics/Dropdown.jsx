@@ -1,23 +1,37 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { BLACK } from 'config/constants/styled-vars';
 import { Root, Content } from './Dropdown.styles';
-import { BLACK } from '../../config/constants/styled-vars';
 
-/**
- * The Dropdown' component.
- */
-const Dropdown = props => {
-  const { anchorRef, boxShadow, children, maxHeight, offset, open, origin, width, onClick, onClose } = props;
+/** The Dropdown' component */
+const Dropdown = (props) => {
+  const {
+    anchorRef,
+    boxShadow,
+    children,
+    maxHeight,
+    offset,
+    open,
+    origin,
+    width,
+    onClick,
+    onClose,
+  } = props;
   const contentRef = useRef(undefined);
   const [translateX, setTranslateX] = useState(0);
   const [translateY, setTranslateY] = useState(0);
   const [showContent, setShowContent] = useState(false);
   const calcPosition = useCallback((anchorBounds, contentBounds) => {
     let positionX = (anchorBounds?.x || 0) + offset.x;
-    let positionY = (anchorBounds?.y || 0) + (anchorBounds?.height || 0) + offset.y;
-        
+    let positionY =
+      (anchorBounds?.y || 0) + (anchorBounds?.height || 0) + offset.y;
+
     if (origin.x === 'right') {
-      positionX = (anchorBounds?.x || 0) + (anchorBounds?.height || 0) - (contentBounds?.width || 0) - offset.x;
+      positionX =
+        (anchorBounds?.x || 0) +
+        (anchorBounds?.height || 0) -
+        (contentBounds?.width || 0) -
+        offset.x;
     }
 
     if (origin.y === 'top') {
@@ -26,7 +40,7 @@ const Dropdown = props => {
 
     return { x: positionX, y: positionY };
   }, []);
-  const handleContentClick = event => {
+  const handleContentClick = (event) => {
     event.stopPropagation();
 
     onClick(event);

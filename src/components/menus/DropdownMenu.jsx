@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useDropdown from '../basics/Dropdown.hooks';
-import Dropdown from '../basics/Dropdown';
+import useDropdown from 'components/basics/Dropdown.hooks';
+import Dropdown from 'components/basics/Dropdown';
+import { DROPDOWN_ARROW } from 'assets/Images';
 import {
   Root,
   Section,
@@ -9,7 +10,6 @@ import {
   Option,
   Text,
 } from './DropdownMenu.styles';
-import { DROPDOWN_ARROW } from '../../assets/Images';
 
 /** The DropdownMenu's component */
 const DropdownMenu = (props) => {

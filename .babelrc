@@ -1,7 +1,23 @@
 {
-  "plugins": ["babel-plugin-styled-components"],
-  "presets": [
-    "@babel/preset-env",
-    "@babel/preset-react"
-  ]
+  "plugins": [
+    "babel-plugin-styled-components",
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "actions": ["./src/actions"],
+          "assets": ["./src/assets"],
+          "components": ["./src/components"],
+          "config": ["./src/config"],
+          "containers": ["./src/containers"],
+          "helpers": ["./src/helpers"],
+          "modules": ["./src/modules"],
+          "reducers": ["./src/reducers"],
+          "services": ["./src/services"],
+          "views": ["./src/views"]
+        }
+      }
+    ]
+  ],
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
 }

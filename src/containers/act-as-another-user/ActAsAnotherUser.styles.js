@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { VIEW_HEADER_HEIGHT } from '../../config/constants/styled-vars';
+import { VIEW_HEADER_HEIGHT } from 'config/constants/styled-vars';
 
 const position_bottom = 430;
 

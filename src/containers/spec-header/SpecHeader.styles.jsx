@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import {
+  SPEC_DOWNLOAD,
+  SPEC_DOWNLOAD_ACTIVE,
+  SPEC_MONETIZATION,
+  SPEC_MONETIZATION_ACTIVE,
+} from 'assets/Images';
+import {
   MINE_SHAFT,
   MEDIA_QUERY_SMALL,
   NAVBAR_HEIGHT,
   WHITE,
   DUSTY_GRAY_RGB,
-} from '../../config/constants/styled-vars';
-import {
-  SPEC_DOWNLOAD,
-  SPEC_DOWNLOAD_ACTIVE,
-  SPEC_MONETIZATION,
-  SPEC_MONETIZATION_ACTIVE,
-} from '../../assets/Images';
+} from 'config/constants/styled-vars';
 
 export const Root = styled.div`
   display: flex;
@@ -94,6 +94,7 @@ export const MobileLogo = styled.div`
     display: flex;
   }
 `;
+
 export const SpecOptions = styled.div`
   height: 100%;
   display: flex;

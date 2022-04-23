@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { MEDIA_QUERY_MEDIUM, MEDIA_QUERY_SMALL } from '../config/constants/styled-vars';
+import {
+  MEDIA_QUERY_MEDIUM,
+  MEDIA_QUERY_SMALL,
+} from 'config/constants/styled-vars';
 
 export const Container = styled.section`
   width: 100vw;
@@ -20,5 +23,5 @@ export const ButtonSection = styled.section`
   margin: 16px 0 38px;
   display: flex;
   flex: 1;
-  justify-content: ${({ justify }) => justify || 'flex-star' };
+  justify-content: ${({ justify }) => justify || 'flex-star'};
 `;

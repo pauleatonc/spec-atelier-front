@@ -1,16 +1,14 @@
 import React from 'react';
-import AppLayout from '../components/layouts/AppLayout';
-import { NavbarApp } from '../components/SpecComponents';
-import Footer from '../components/footer';
-
-import ProjectsHeader from '../containers/projects-header/ProjectsHeader';
-import ProjectsListContainer from '../containers/projects-list/ProjectsList.container';
-import ProjectFilterContainer from '../containers/projects-filters/ProjectsFilters.container';
-import ProjectsCreateButtonContainer from '../containers/projects-buttons/ProjectsCreateButton';
-import ProjectsSeeMoreButtonContainer from '../containers/projects-buttons/ProjectsSeeMoreButton';
-import ProjectsNoneContainer from '../containers/projects-list/ProjectsNone.container';
-import HEADER_IMG from '../assets/images/project/project_background_header.png';
-
+import AppLayout from 'components/layouts/AppLayout';
+import Footer from 'components/footer';
+import NavbarApp from 'components/navbar/navbar-app/NavbarApp';
+import ProjectsHeader from 'containers/projects-header/ProjectsHeader';
+import ProjectsListContainer from 'containers/projects-list/ProjectsList.container';
+import ProjectFilterContainer from 'containers/projects-filters/ProjectsFilters.container';
+import ProjectsCreateButtonContainer from 'containers/projects-buttons/ProjectsCreateButton';
+import ProjectsSeeMoreButtonContainer from 'containers/projects-buttons/ProjectsSeeMoreButton';
+import ProjectsNoneContainer from 'containers/projects-list/ProjectsNone.container';
+import HEADER_IMG from 'assets/images/project/project_background_header.png';
 import { Container, Content } from './Projects.styles';
 
 const Projects = () => {

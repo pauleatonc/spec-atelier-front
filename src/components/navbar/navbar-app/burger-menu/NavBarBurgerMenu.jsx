@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import { Separator } from '../../navbar-profile/NavProfile.styles';
-import { BurgerMenuContent, Item, ItemText } from './BurgerMenu.styles'
-
+import { Separator } from 'components/navbar/navbar-profile/NavProfile.styles';
+import { BurgerMenuContent, Item, ItemText } from './BurgerMenu.styles';
 
 export const NavBarBurgerMenu = ({ open, items }) => {
-
   const location = useLocation();
   const history = useHistory();
   const [, currentLocation] = location?.pathname.split('/');
@@ -22,5 +20,5 @@ export const NavBarBurgerMenu = ({ open, items }) => {
         </React.Fragment>
       ))}
     </BurgerMenuContent>
-  )
-}
+  );
+};

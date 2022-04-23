@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import Input from 'components/inputs/Input';
+import Textarea from 'components/inputs/Textarea';
 import {
   Container,
   InputContainer,
@@ -10,27 +11,38 @@ import {
   CellPhone,
 } from './Contact.styles';
 
-import {
-  Input,
-  TextArea,
-} from '../../SpecComponents';
-
 const Contact = ({ client, contactType, contact, onChange }) => (
   <Container>
-    <Title>
-      Contactar
-    </Title>
+    <Title>Contactar</Title>
     <InputContainer>
-      <Input name="client" type="underline" onChange={onChange} value={client} disabled />
+      <Input
+        name="client"
+        type="underline"
+        onChange={onChange}
+        value={client}
+        disabled
+      />
     </InputContainer>
     {contactType && (
       <InputContainer>
-        <Input name="user" type="underline" onChange={onChange} value={contactType} disabled />
+        <Input
+          name="user"
+          type="underline"
+          onChange={onChange}
+          value={contactType}
+          disabled
+        />
       </InputContainer>
     )}
     <InputContainer>
       <Label strong>Cargo del contacto</Label>
-      <Input name="user" type="underline" onChange={onChange} value="Distribuidor" disabled />
+      <Input
+        name="user"
+        type="underline"
+        onChange={onChange}
+        value="Distribuidor"
+        disabled
+      />
     </InputContainer>
     <InputContainer>
       <Label>Teléfono</Label>
@@ -46,8 +58,15 @@ const Contact = ({ client, contactType, contact, onChange }) => (
       </CellPhone>
     </InputContainer>
     <InputContainer>
-      <Label style={{ marginBottom: 12 }} strong>Deja un mensaje para el colaborador</Label>
-      <TextArea name="message" onChange={onChange} value={contact.message} minHeightTextArea="88px" />
+      <Label style={{ marginBottom: 12 }} strong>
+        Deja un mensaje para el colaborador
+      </Label>
+      <Textarea
+        name="message"
+        onChange={onChange}
+        value={contact.message}
+        minHeightTextArea="88px"
+      />
     </InputContainer>
   </Container>
 );
@@ -66,8 +85,7 @@ Contact.defaultProps = {
   client: '',
   contactType: '',
   contact: {},
-  onChange: () => { },
+  onChange: () => {},
 };
 
 export default Contact;
-

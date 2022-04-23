@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useDropdown from '../basics/Dropdown.hooks';
-import Dropdown from '../basics/Dropdown';
+import useDropdown from 'components/basics/Dropdown.hooks';
+import Dropdown from 'components/basics/Dropdown';
 import { Section, Block } from './ToggleMenu.styles';
 
-/**
- * The ToggleMenu's component.
- */
-const ToggleMenu = props => {
+/** The ToggleMenu's component */
+const ToggleMenu = (props) => {
   const { anchor, children, width } = props;
   const {
     anchor: anchorRef,
@@ -17,10 +15,8 @@ const ToggleMenu = props => {
 
   return (
     <>
-      <Section onClick={handleOpen}>
-        {anchor}
-      </Section>
-      <Dropdown 
+      <Section onClick={handleOpen}>{anchor}</Section>
+      <Dropdown
         anchorRef={anchorRef}
         maxHeight="initial"
         open={Boolean(anchorRef)}

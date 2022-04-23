@@ -1,5 +1,3 @@
-import { formatDate } from  '../../helpers/helpers';
-import moment from 'moment';
 import {
   SET_PROJECT,
   CHANGE_VIEW,
@@ -8,9 +6,7 @@ import {
   CREATE_PROJECT_ERROR,
   CLEAN_STORE,
   GET_PROJECT,
-  GET_PROJECT_ERROR,
 } from './ProjectCreate.actions';
-
 
 const delivery_date = new Date();
 delivery_date.setFullYear(delivery_date.getFullYear() + 1);
@@ -42,9 +38,7 @@ const initialProject = {
   message: undefined,
 };
 
-/**
- * New project reducer.
- */
+/** New project reducer */
 const newProjectReducer = (state = initialProject, { payload, type }) => {
   switch (type) {
     case SET_PROJECT:
@@ -81,12 +75,6 @@ const newProjectReducer = (state = initialProject, { payload, type }) => {
         ...state,
         loading: false,
         newProject: payload.project,
-      };
-    case CREATE_PROJECT_ERROR:
-      return {
-        ...state,
-        loading: false,
-        error: payload.error,
       };
     case CLEAN_STORE:
       return { ...initialProject };

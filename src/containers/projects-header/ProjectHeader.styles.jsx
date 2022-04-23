@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import {
-    MINE_SHAFT,
-} from '../../config/constants/styled-vars';
+import { MINE_SHAFT } from 'config/constants/styled-vars';
 
 const HEADER_HEIGHT = '140px';
 

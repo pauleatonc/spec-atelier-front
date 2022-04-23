@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {
   MEDIA_QUERY_MEDIUM,
   MEDIA_QUERY_SMALL,
-} from '../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 const HEADER_HEIGHT = '108px';
 

@@ -1,53 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Loading } from '../../components/SpecComponents';
+import Loading from 'components/basics/loading';
+import Button from 'components/buttons/Button';
 import { ButtonSection, LoadingContainer } from './ProductsListSeeMore.styles';
 import { onGetProducts } from './ProductsList.actions';
 
 const ProductsListSeeMore = ({ filters }) => {
-	const { products, total, nextPage } = useSelector(
-		(state) => state.productsList,
-	);
-	const [showButton, setShowButton] = useState(true);
-	const [loading, setLoading] = useState(false);
+  const { products, total, nextPage } = useSelector(
+    (state) => state.productsList,
+  );
+  const [showButton, setShowButton] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	const onClickSeeMore = () => {
-		setLoading(true);
-		dispatch(
-			onGetProducts(
-				{
-					...filters,
-					page: nextPage,
-				},
-				{},
-				true,
-			),
-		);
-	};
+  const onClickSeeMore = () => {
+    setLoading(true);
+    dispatch(
+      onGetProducts(
+        {
+          ...filters,
+          page: nextPage,
+        },
+        {},
+        true,
+      ),
+    );
+  };
 
-	useEffect(() => {
-		setShowButton(!!total && products.length < total);
-		setLoading(false);
-	}, [products]);
+  useEffect(() => {
+    setShowButton(!!total && products.length < total);
+    setLoading(false);
+  }, [products]);
 
-	if (!products.length) return null;
+  if (!products.length) return null;
 
-	return (
-		<>
-			<LoadingContainer>{loading && <Loading />}</LoadingContainer>
-			<ButtonSection justify="center">
-				<Button
-					variant={showButton ? 'primary' : 'gray'}
-					onClick={onClickSeeMore}
-					disabled={loading || !showButton}
-				>
-					{showButton ? 'Ver más' : 'No hay más Productos'}
-				</Button>
-			</ButtonSection>
-		</>
-	);
+  return (
+    <>
+      <LoadingContainer>{loading && <Loading />}</LoadingContainer>
+      <ButtonSection justify="center">
+        <Button
+          variant={showButton ? 'primary' : 'gray'}
+          onClick={onClickSeeMore}
+          disabled={loading || !showButton}
+        >
+          {showButton ? 'Ver más' : 'No hay más Productos'}
+        </Button>
+      </ButtonSection>
+    </>
+  );
 };
 
 export default ProductsListSeeMore;

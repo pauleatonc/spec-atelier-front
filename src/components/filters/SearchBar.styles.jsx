@@ -6,7 +6,7 @@ import {
   CONCRETE,
   SILVER,
   MINE_SHAFT_RGB,
-} from '../../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 const justifyContentDefaultProps = {
   justifyContent: 'flex-start',
@@ -31,7 +31,6 @@ export const Root = styled.div`
   :hover {
     background-color: ${CONCRETE};
   }
-
   ${MEDIA_QUERY_SMALL} {
     flex: 1;
     max-width: 100%;
@@ -61,7 +60,7 @@ export const Input = styled.input`
     color: transparent;
   }
   :placeholder {
-    color: ${SILVER}
+    color: ${SILVER};
   }
 `;
 

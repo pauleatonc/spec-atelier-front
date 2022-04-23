@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Button from '../buttons/Button';
+import Button from 'components/buttons/Button';
+import {
+  CHECKBOX_OFF_SOURCE,
+  CHECKBOX_ON_SECONDARY,
+  CHECKBOX_ON_SOURCE,
+} from 'assets/Images';
+import { VARIANTS_BUTTON } from 'config/constants/button-variants';
 import {
   Root,
   Label,
@@ -13,12 +19,6 @@ import {
   OptionText,
   Actions,
 } from './ComboBox.styles';
-import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import {
-  CHECKBOX_OFF_SOURCE,
-  CHECKBOX_ON_SECONDARY,
-  CHECKBOX_ON_SOURCE,
-} from '../../assets/Images';
 
 /** The ComboBox's component */
 const ComboBox = (props) => {
@@ -91,9 +91,7 @@ const ComboBox = (props) => {
       ? CHECKBOX_ON_SOURCE
       : CHECKBOX_ON_SECONDARY;
 
-  useEffect(() => {
-    setSelectedOptions(values);
-  }, [values]);
+  useEffect(() => setSelectedOptions(values), [values]);
 
   return (
     <Root>
@@ -131,7 +129,6 @@ const ComboBox = (props) => {
           const selected = selectedOptions.find(
             (selectedOption) => selectedOption.value === option.value,
           );
-
           return (
             <Option
               key={option.value}

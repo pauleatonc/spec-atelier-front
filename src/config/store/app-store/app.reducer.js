@@ -1,8 +1,4 @@
-import {
-  GET_DEFAULT_DATA,
-  GET_DEFAULT_DATA_ERROR,
-} from './app.actions';
-
+import { GET_DEFAULT_DATA, GET_DEFAULT_DATA_ERROR } from './app.actions';
 
 const initialProject = {
   cities: [],
@@ -12,15 +8,13 @@ const initialProject = {
   loaded: false,
 };
 
-/**
- * App data reducer.
- */
+/** App data reducer */
 const appReducer = (state = initialProject, { payload, type }) => {
   switch (type) {
     case GET_DEFAULT_DATA:
       return {
         ...state,
-        cities: payload.cities.map(c => ({ id: c, name: c, label: c })),
+        cities: payload.cities.map((c) => ({ id: c, name: c, label: c })),
         project_types: payload.project_types,
         room_types: payload.room_types,
         work_types: payload.work_types,

@@ -1,12 +1,14 @@
 import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import Collapsible from '../../components/basics/Collapsible';
-import { onHideSpecContents } from './SpecContents.actions';
+import Collapsible from 'components/basics/Collapsible';
 import {
   ButtonBack,
   Overlay,
-} from '../../components/layouts/SpecProductsPanelLayout.styles';
+} from 'components/layouts/SpecProductsPanelLayout.styles';
+import { ARROW_BACK, ARROW_DOWN_SOURCE, ARROW_UP_SOURCE } from 'assets/Images';
+import { MAX_SCREEN_SMALL_NAV_JS } from 'config/constants/styled-vars';
+import { onHideSpecContents } from './SpecContents.actions';
 import {
   Root,
   PanelTitle,
@@ -14,12 +16,6 @@ import {
   ListItem,
   ArrowIcon,
 } from './SpecContents.styles';
-import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
-import {
-  ARROW_BACK,
-  ARROW_DOWN_SOURCE,
-  ARROW_UP_SOURCE,
-} from '../../assets/Images';
 
 /** The SpecContents' container */
 const SpecContents = () => {
@@ -27,6 +23,7 @@ const SpecContents = () => {
   const { show } = useSelector((state) => state.specContents);
   const { blocks } = useSelector((state) => state.specDocument);
   const { pathname } = useLocation();
+
   const sections = useMemo(() => {
     const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
     return sectionsBlocks.map((sectionBlock) => ({
@@ -45,6 +42,7 @@ const SpecContents = () => {
         })),
     }));
   }, [blocks]);
+
   const [selectedSection, setSelectedSection] = useState();
   const [selectedItem, setSelectedItem] = useState();
 

@@ -2,21 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import DatePicker from 'react-datepicker';
+import { formatDate } from 'helpers/helpers';
+import SelectorRelative from 'components/basics/SelectorRelative';
+import { SubHeaderProjectDescription } from 'components/sub-headers/ProjectSubHeaders';
+import Input from 'components/inputs/Input';
+import Textarea from 'components/inputs/Textarea';
+import { ICON_ARROW_DOWN } from 'assets/Images';
 import {
   changeView,
   createProject,
   modifyProject,
 } from './ProjectCreate.actions';
-import { formatDate } from '../../helpers/helpers';
-import SelectorRelative from '../../components/basics/SelectorRelative';
-import { TextArea, Input } from '../../components/SpecComponents';
-import { SubHeaderProjectDescription } from '../../components/sub-headers/ProjectSubHeaders';
 import {
   ContentData,
   Title,
   Row,
   ButtonContainer,
-  Button,
+  ButtonItem,
   Label,
   Text,
   InputContent,
@@ -28,7 +30,6 @@ import {
   TextValue,
   DropIcon,
 } from './ProjectCreate.styles';
-import { ICON_ARROW_DOWN } from '../../assets/Images';
 
 const ProjectDetails = () => {
   const { view, newProject } = useSelector((state) => state.newProject);
@@ -58,7 +59,6 @@ const ProjectDetails = () => {
       delivery_date,
     });
   };
-  // const onSave = () => dispatch(changeView('permission', tempNewProject));
 
   const onSave = () => {
     if (id) dispatch(modifyProject(tempNewProject));
@@ -75,9 +75,7 @@ const ProjectDetails = () => {
     ...c,
   }));
 
-  useEffect(() => {
-    setNewProject(newProject);
-  }, [newProject]);
+  useEffect(() => setNewProject(newProject), [newProject]);
 
   if (view !== 'details') {
     return <SubHeaderProjectDescription {...newProject} />;
@@ -136,21 +134,21 @@ const ProjectDetails = () => {
         />
       </Section>
       <Text>Detalla un poco más el proyecto</Text>
-      <TextArea
+      <Textarea
         name="description"
         value={tempNewProject.description}
         onChange={onChangeProjectData}
       />
       <Row>
         <ButtonContainer>
-          <Button variant="gray" onClick={onBack}>
+          <ButtonItem variant="gray" onClick={onBack}>
             Atrás
-          </Button>
+          </ButtonItem>
         </ButtonContainer>
         <ButtonContainer>
-          <Button variant="primary" onClick={onSave} disabled={!canSave}>
+          <ButtonItem variant="primary" onClick={onSave} disabled={!canSave}>
             Guardar
-          </Button>
+          </ButtonItem>
         </ButtonContainer>
       </Row>
     </ContentData>

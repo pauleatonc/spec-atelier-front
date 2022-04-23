@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
+  Card,
+  TitleContainer,
+  Line,
+  DescriptionContainer,
+} from 'components/card/Card';
+import Button from 'components/buttons/Button';
+import {
   Name,
   Quantity,
   Description,
@@ -10,36 +17,14 @@ import {
   Country,
 } from './ClientCard.styles';
 
-import {
-  Card,
-  TitleContainer,
-  Line,
-  DescriptionContainer,
-} from '../card/Card';
-
-import {
-  Button,
-} from '../SpecComponents';
-
-const ClientCard = ({
-  client,
-  onClickClient,
-  onClickContact,
-}) => {
-  const {
-    name,
-    logo,
-    products_count,
-    description,
-    country,
-  } = client;
-
+const ClientCard = ({ client, onClickClient, onClickContact }) => {
+  const { name, logo, products_count, description, country } = client;
   const onSelectClient = () => onClickClient(client);
   const onSelectContact = () => onClickContact(client);
 
   return (
     <Card>
-      <CardImg onClick={onSelectClient} >
+      <CardImg onClick={onSelectClient}>
         <ImageClient src={logo} />
         <Country>{country}</Country>
       </CardImg>
@@ -49,9 +34,7 @@ const ClientCard = ({
       </TitleContainer>
       <Line />
       <DescriptionContainer>
-        <Description>
-         {description}
-        </Description>
+        <Description>{description}</Description>
       </DescriptionContainer>
       <ButtonContainer>
         <Button variant="secondary" onClick={onSelectContact}>

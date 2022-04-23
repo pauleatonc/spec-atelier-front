@@ -1,10 +1,12 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
-import ModalLayout from '../layouts/ModalLayout';
-import Button from '../buttons/Button';
+import ModalLayout from 'components/layouts/ModalLayout';
+import CloseButton from 'components/buttons/CloseButton';
+import Button from 'components/buttons/Button';
+import { DOCUMENTS_UPLOAD_SOURCE } from 'assets/Images';
+import { VARIANTS_BUTTON } from 'config/constants/button-variants';
 import DocumentItem from './DocumentItem';
-import CloseButton from '../buttons/CloseButton';
 import {
   Root,
   Label,
@@ -22,8 +24,6 @@ import {
   DropZoneSection,
   DropZoneText,
 } from './AttachedDocuments.styles';
-import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import { DOCUMENTS_UPLOAD_SOURCE } from '../../assets/Images';
 
 /** The AttachedFiles' component */
 const AttachedFiles = (props) => {
@@ -92,9 +92,7 @@ const AttachedFiles = (props) => {
     [documents],
   );
 
-  useEffect(() => {
-    setShow(showModal);
-  }, [showModal]);
+  useEffect(() => setShow(showModal), [showModal]);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: '.pdf, .dwg, .rvt, .rfa',
@@ -129,9 +127,11 @@ const AttachedFiles = (props) => {
                   <EmptyAction onClick={handleOpen}>
                     Sube documentos
                   </EmptyAction>
-                  <EmptyText>{`Puedes subir hasta ${maxSize} documentos: ${
-                    maxSize - 2
-                  } PDF, 1 DWG y 1 RVT o 1 RFA`}</EmptyText>
+                  <EmptyText>
+                    {`Puedes subir hasta ${maxSize} documentos: ${
+                      maxSize - 2
+                    } PDF, 1 DWG y 1 RVT o 1 RFA`}
+                  </EmptyText>
                 </EmptyBody>
               </Empty>
             )}

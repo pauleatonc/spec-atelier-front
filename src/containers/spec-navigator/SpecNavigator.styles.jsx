@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {
-  BLACK,
-	MEDIA_QUERY_SMALL, WHITE,
-} from '../../config/constants/styled-vars';
+import { BLACK, MEDIA_QUERY_SMALL, WHITE } from 'config/constants/styled-vars';
 
 export const Root = styled.div`
   align-items: center;
@@ -15,7 +12,6 @@ export const Root = styled.div`
   justify-content: center;
   width: 56px;
   z-index: 2;
-
   ${MEDIA_QUERY_SMALL} {
     grid-row: 2;
     width: 100%;
@@ -29,7 +25,6 @@ export const Root = styled.div`
 
 export const Section = styled.section`
   width: 100%;
-
   ${MEDIA_QUERY_SMALL} {
     width: auto;
   }
@@ -43,7 +38,6 @@ export const NavIcon = styled.span`
   display: block;
   height: 28px;
   width: 28px;
-
   &:hover {
     background-image: url('${({ srcActive }) => srcActive}');
   }

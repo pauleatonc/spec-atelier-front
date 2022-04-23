@@ -14,10 +14,8 @@ const transitionStyles = {
   entered: { transform: 'scaleY(1)' },
 };
 
-/**
- * The Collapsible' component.
- */
-const Collapsible = props => {
+/** The Collapsible' component */
+const Collapsible = (props) => {
   const { children, show } = props;
 
   return (
@@ -27,8 +25,8 @@ const Collapsible = props => {
       in={show}
       timeout={TRANSITION_DURATION}
     >
-      {state => (
-        <Root style={{ ...defaultStyle, ...transitionStyles[state]}}>
+      {(state) => (
+        <Root style={{ ...defaultStyle, ...transitionStyles[state] }}>
           {children}
         </Root>
       )}

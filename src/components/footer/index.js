@@ -1,8 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LOGO_SPEC_SMALL, LOGO_CCHC, LOGO_CENTRO_INNOVACION, LOGO_CORFO } from '../../assets/Images';
-import { Image } from '../SpecComponents';
-import { Container, Content, ImageConainer, LeftContent, RightContent, Menu } from './Footer.styles';
+import Image from 'components/image/Image';
+import {
+  LOGO_SPEC_SMALL,
+  LOGO_CCHC,
+  LOGO_CENTRO_INNOVACION,
+  LOGO_CORFO,
+} from 'assets/Images';
+import {
+  Container,
+  Content,
+  ImageConainer,
+  LeftContent,
+  RightContent,
+  Menu,
+} from './Footer.styles';
 
 const Footer = () => (
   <Container>
@@ -22,7 +34,10 @@ const Footer = () => (
           <Link className="footer__inner__menu__container__link" to="/products">
             Productos
           </Link>
-          <Link className="footer__inner__menu__container__link" to="/collaborators">
+          <Link
+            className="footer__inner__menu__container__link"
+            to="/collaborators"
+          >
             Marcas
           </Link>
         </Menu>
@@ -66,10 +81,16 @@ const Footer = () => (
             <h3 className="footer__inner__info__container__social_network__title">
               Síguenos en
             </h3>
-            <a href="https://www.instagram.com/specatelier/" className="footer__inner__info__container__social_network__link">
+            <a
+              href="https://www.instagram.com/specatelier/"
+              className="footer__inner__info__container__social_network__link"
+            >
               <i className="fab fa-instagram footer__inner__info__container__social_network__link__icon" />
             </a>
-            <a href="https://www.linkedin.com/company/specatelier" className="footer__inner__info__container__social_network__link">
+            <a
+              href="https://www.linkedin.com/company/specatelier"
+              className="footer__inner__info__container__social_network__link"
+            >
               <i className="fab fa-linkedin footer__inner__info__container__social_network__link__icon" />
             </a>
           </div>

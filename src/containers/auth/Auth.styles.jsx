@@ -7,7 +7,7 @@ import {
   MEDIA_QUERY_SMALL,
   MINE_SHAFT,
   JAVA,
-} from '../../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 export const Container = styled.section`
   height: 100%;
@@ -111,7 +111,11 @@ export const ButtonLogin = styled.button`
   padding-right: 20px;
   text-decoration: none;
   outilne: none;
-  &:focus, &:hover, &:visited, &:link, &:active {
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
     text-decoration: none;
     outline: none;
   }
@@ -122,7 +126,7 @@ export const KeepSessionContainer = styled.section`
   justify-content: flex-end;
   margin-top: 12px;
   margin-bottom: 22px;
-`; 
+`;
 
 export const ButtonText = styled.div`
   white-space: nowrap;

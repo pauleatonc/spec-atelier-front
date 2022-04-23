@@ -7,7 +7,7 @@ import {
   GALLERY,
   ALTO,
   MINE_SHAFT_RGB,
-} from '../../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 export const Root = styled.div`
   width: ${({ width = '100%' }) => width};
@@ -37,13 +37,11 @@ export const Input = styled.input`
   letter-spacing: 1px;
   padding: 11px 23px;
   width: 100%;
-
   &:active,
   &:focus {
     outline: 0;
     color: ${MINE_SHAFT};
   }
-
   &::placeholder {
     color: rgba(${MINE_SHAFT_RGB}, 0.46);
   }
@@ -58,8 +56,7 @@ export const InputUnderline = styled.input`
   padding: 10px ${({ textAlign }) => (textAlign === 'right' ? '0' : '10px')}
     10px ${({ textAlign }) => (textAlign === 'right' ? '10px' : '0px')};
   flex: 1;
-  border-bottom: 1px solid
-    ${({ colorUnderline }) => colorUnderline || SILVER};
+  border-bottom: 1px solid ${({ colorUnderline }) => colorUnderline || SILVER};
   font-family: Lato;
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '14px')};
   font-weight: normal;
@@ -81,7 +78,6 @@ export const InputUnderline = styled.input`
 export const InputForm = styled.input`
   background-color: transparent;
   height: 40px;
-
   border: 1px solid ${ALTO};
   outline: 0;
   min-width: 100px;

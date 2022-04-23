@@ -1,21 +1,22 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
   DARKESTGREY,
   MEDIA_QUERY_MAX,
   MINE_SHAFT,
   NAVBAR_HEIGHT,
-  PRIMARY, SHADOW_GREY,
+  PRIMARY,
+  SHADOW_GREY,
   SILVER,
   SILVER_CHALICE,
   WHITE,
-  Z_INDEX_NAVBAR
-} from "../../../config/constants/styled-vars";
+  Z_INDEX_NAVBAR,
+} from 'config/constants/styled-vars';
 
 export const SectionPictureMenu = styled.section`
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-end;
-  align-self: center
+  align-self: center;
 `;
 
 export const PictureLoginRegisterContainer = styled.div`
@@ -30,10 +31,9 @@ export const PictureLoginRegisterContainer = styled.div`
   font-size: 30px;
   color: ${DARKESTGREY};
   cursor: pointer;
-
   ${MEDIA_QUERY_MAX} {
-      display: none;
-    }
+    display: none;
+  }
 `;
 
 export const MenuLoginRegisterDropdownContainer = styled.div`
@@ -57,7 +57,7 @@ export const MenuLoginRegisterDropdownContent = styled.section`
   width: 260px;
   transition: right 0.3s linear;
   z-index: ${Z_INDEX_NAVBAR};
-  display: ${props => (props.open ? 'flex' : 'none')};
+  display: ${(props) => (props.open ? 'flex' : 'none')};
 `;
 
 export const LinksContainer = styled.section`
@@ -87,7 +87,7 @@ export const LinkItem = styled.div`
 `;
 
 export const LinkRegister = styled(LinkItem)`
-  display:flex;
+  display: flex;
   background-color: ${PRIMARY};
   color: ${WHITE};
   :hover {
@@ -96,7 +96,7 @@ export const LinkRegister = styled(LinkItem)`
 `;
 
 export const LinkLogin = styled(LinkItem)`
-  display:flex;
+  display: flex;
   background-color: ${WHITE};
   color: ${SILVER_CHALICE};
   :hover {

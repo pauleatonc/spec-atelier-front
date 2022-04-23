@@ -16,15 +16,16 @@ import {
 const createProductState = {
   brandsCollection: [],
   stepOne: { show: false },
-  stepTwo: { show: false, },
+  stepTwo: { show: false },
   stepThree: { show: false },
   systemsCollection: [],
 };
 
-/**
- * The create product's reducer.
- */
-const createProductReducer = (state = createProductState, { payload, type }) => {
+/** The create product's reducer */
+const createProductReducer = (
+  state = createProductState,
+  { payload, type },
+) => {
   switch (type) {
     case CREATE_SPEC_PRODUCT: {
       return { ...state, loading: true };
@@ -60,7 +61,6 @@ const createProductReducer = (state = createProductState, { payload, type }) => 
         stepOne: { ...state.stepOne, show: true },
       };
     }
-
     case SHOW_SPEC_CREATE_PRODUCT_FROM_ITEM_SUCCESS: {
       return {
         ...state,
@@ -71,7 +71,6 @@ const createProductReducer = (state = createProductState, { payload, type }) => 
         },
       };
     }
-
     case SHOW_SPEC_CREATE_PRODUCT_STEP_TWO_SUCCESS: {
       return {
         ...state,

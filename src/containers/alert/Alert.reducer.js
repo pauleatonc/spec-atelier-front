@@ -5,9 +5,7 @@ const specAlertState = {
   show: false,
 };
 
-/**
- * The alert's reducer.
- */
+/** The alert's reducer */
 const alertReducer = (state = specAlertState, { payload, type }) => {
   switch (type) {
     case HIDE_ALERT_SUCCESS: {

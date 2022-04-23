@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { WHITE } from '../../config/constants/styled-vars';
+import { WHITE } from 'config/constants/styled-vars';
 
 export const Text = styled.span`
   font-family: Lato;

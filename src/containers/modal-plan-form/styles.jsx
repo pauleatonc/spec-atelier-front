@@ -9,7 +9,7 @@ import {
   ALABASTER,
   SCORPION,
   GALLERY,
-} from '../../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 export const Container = styled.section`
   width: 100%;
@@ -191,7 +191,6 @@ export const InputCost = styled.input`
   font-family: Lato;
   font-size: 18px;
   font-weight: bold;
-
   :focus-visible {
     outline: none;
   }
@@ -325,11 +324,9 @@ export const InputForm = styled.input`
   font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
-
   :focus-visible {
     outline: none;
   }
-
   ${MEDIA_QUERY_SMALL} {
     margin-bottom: 13px;
     width: 100%;
@@ -348,11 +345,9 @@ export const TextAreaForm = styled.textarea`
   font-size: 12px;
   letter-spacing: 1px;
   resize: none;
-
   :focus-visible {
     outline: none;
   }
-
   ${MEDIA_QUERY_SMALL} {
     width: 100%;
     max-width: 300px;
@@ -365,7 +360,6 @@ export const ContainerButtons = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 50px;
-
   button {
     margin 0 5px;
   }

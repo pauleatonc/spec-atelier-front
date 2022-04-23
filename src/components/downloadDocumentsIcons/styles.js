@@ -7,7 +7,7 @@ import {
   DWG_ICON,
   TECH_ACTIVE_SOURCE,
   TECH_ICON,
-} from '../../assets/Images';
+} from 'assets/Images';
 
 const icons = {
   dwg: `url('${DWG_ICON}')`,

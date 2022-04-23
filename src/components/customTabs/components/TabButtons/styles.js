@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-
 import {
   GALLERY,
   SILVER,
   PRIMARY,
   WHITE,
   ALABASTER,
-} from '../../../../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 export const ContainerTabs = styled.div`
   display: flex;
@@ -63,6 +62,5 @@ export const ProfileStatsButtonTab = styled.div`
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  background-color: ${({ isActive }) =>
-    isActive ? PRIMARY : 'transparent'};
+  background-color: ${({ isActive }) => (isActive ? PRIMARY : 'transparent')};
 `;

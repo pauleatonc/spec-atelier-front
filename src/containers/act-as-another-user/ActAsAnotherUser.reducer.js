@@ -8,14 +8,15 @@ const actAsUserState = {
   params: {
     page: 0,
     limit: 10,
-    keyword: ''
-  }
+    keyword: '',
+  },
 };
 
-/**
- * The alert's reducer.
- */
-const actAsAnotherUserListReducer = (state = actAsUserState, { payload, type }) => {
+/** The alert's reducer */
+const actAsAnotherUserListReducer = (
+  state = actAsUserState,
+  { payload, type },
+) => {
   switch (type) {
     case GET_USERS_TO_ACT_AS: {
       const users = payload?.users || [];
@@ -23,7 +24,7 @@ const actAsAnotherUserListReducer = (state = actAsUserState, { payload, type }) 
         ...state,
         users,
         loading: false,
-      }
+      };
     }
     case GET_USERS_TO_ACT_AS_ERROR: {
       return { ...state, message: payload.message };
@@ -31,7 +32,6 @@ const actAsAnotherUserListReducer = (state = actAsUserState, { payload, type }) 
     default: {
       return state;
     }
-
   }
 };
 
