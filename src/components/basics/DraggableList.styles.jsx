@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { PRIMARY, WHITE_OPACITY } from '../../config/constants/styled-vars';
+import { PRIMARY, WHITE_OPACITY } from 'config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;

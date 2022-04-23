@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useDropdown from '../basics/Dropdown.hooks';
-import Dropdown from '../basics/Dropdown';
+import useDropdown from 'components/basics/Dropdown.hooks';
+import Dropdown from 'components/basics/Dropdown';
+import { ICON_ARROW_DOWN } from 'assets/Images';
 import {
   Root,
   Label,
@@ -11,7 +12,6 @@ import {
   DropIcon,
   Option,
 } from './Select.styles';
-import { ICON_ARROW_DOWN } from '../../assets/Images';
 
 /** The Select' component */
 const Select = (props) => {

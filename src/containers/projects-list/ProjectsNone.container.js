@@ -1,22 +1,26 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
-import { Button } from '../../components/SpecComponents';
+import ICON_NEW_PROJECT from 'assets/images/project/design_project.png';
+import Button from 'components/buttons/Button';
 import {
   Container,
-  ButtonSection, 
+  ButtonSection,
   IconContent,
   Icon,
   TextContent,
   Text,
- } from './ProjectsNone.styles';
-import ICON_NEW_PROJECT from '../../assets/images/project/design_project.png'
+} from './ProjectsNone.styles';
 
 const ProjectsNone = () => {
-  const { projects, loading, params } = useSelector(state => state.projectsList);
+  const { projects, loading, params } = useSelector(
+    (state) => state.projectsList,
+  );
+
   const history = useHistory();
   const goToNewProject = () => history.push('./projects/project');
   if (projects.length || loading || params.keyword) return null;
+
   return (
     <Container>
       <IconContent>
@@ -25,7 +29,7 @@ const ProjectsNone = () => {
       <TextContent>
         <Text>¡Bienvenido!</Text>
         <Text>Administrar tus proyectos es muy sencillo,</Text>
-        <Text>empieza creando uno.</Text> 
+        <Text>empieza creando uno.</Text>
       </TextContent>
       <ButtonSection justify="center">
         <Button variant="primary" onClick={goToNewProject}>

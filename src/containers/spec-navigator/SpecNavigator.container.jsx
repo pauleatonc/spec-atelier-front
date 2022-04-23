@@ -3,16 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   onHideSpecProducts,
   onShowSpecProducts,
-} from '../spec-products/SpecProducts.actions';
+} from 'containers/spec-products/SpecProducts.actions';
 import {
   onHideSpecContents,
   onShowSpecContents,
-} from '../spec-contents/SpecContents.actions';
+} from 'containers/spec-contents/SpecContents.actions';
 import {
   onHideSpecAdmin,
   onShowSpecAdminn,
-} from '../spec-admin/SpecAdmin.actions';
-import { Root, Section, NavIcon } from './SpecNavigator.styles';
+} from 'containers/spec-admin/SpecAdmin.actions';
 import {
   DOC_ACTIVE_SOURCE,
   DOC_SOURCE,
@@ -20,7 +19,8 @@ import {
   ITEMS_SOURCE,
   SETTING_LINES,
   SETTING_LINES_ACTIVE,
-} from '../../assets/Images';
+} from 'assets/Images';
+import { Root, Section, NavIcon } from './SpecNavigator.styles';
 
 /** The SpecNavigator's container */
 const SpecNavigator = () => {

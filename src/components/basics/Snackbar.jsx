@@ -14,14 +14,13 @@ const transitionStyles = {
   entered: { opacity: 1 },
 };
 
-/**
- * The Snackbar' component.
- */
-const Snackbar = props => {
+/** The Snackbar' component */
+const Snackbar = (props) => {
   const { children, show, onClose = () => undefined, timeout } = props;
   const [showSnackBar, setShowSnackBar] = useState(show);
   const handleEntered = () => setTimeout(() => onClose(), 5000);
   const handleClick = () => onClose();
+
   useEffect(() => {
     if (!show) return;
     setShowSnackBar(true);
@@ -30,11 +29,21 @@ const Snackbar = props => {
       onClose();
     }, timeout);
   }, [show]);
+
   const content = (
-    <Transition mountOnEnter unmountOnExit in={showSnackBar} timeout={TRANSITION_DURATION} onEntered={handleEntered}>
-      {state => (
+    <Transition
+      mountOnEnter
+      unmountOnExit
+      in={showSnackBar}
+      timeout={TRANSITION_DURATION}
+      onEntered={handleEntered}
+    >
+      {(state) => (
         <Root>
-          <Content style={{ ...defaultStyle, ...transitionStyles[state] }} onClick={handleClick}>
+          <Content
+            style={{ ...defaultStyle, ...transitionStyles[state] }}
+            onClick={handleClick}
+          >
             {children}
           </Content>
         </Root>

@@ -1,5 +1,4 @@
-/* eslint-disable import/no-unresolved */
-import { mapFrontUrls, handleGetEnvironment } from '@Configurations/config';
+import { handleGetEnvironment, mapFrontUrls } from 'config/config';
 
 export const redirectToProjectsWhenIsLogin = () => {
   window.location.href = `${window.location.origin}/projects`;

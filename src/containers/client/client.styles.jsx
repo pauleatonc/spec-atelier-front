@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { MEDIA_QUERY_MEDIUM, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import {
+  MEDIA_QUERY_MEDIUM,
+  MEDIA_QUERY_SMALL,
+} from 'config/constants/styled-vars';
 
 export const Container = styled.section`
   display: grid;
@@ -16,4 +19,3 @@ export const Container = styled.section`
     row-gap: 32px;
   }
 `;
-

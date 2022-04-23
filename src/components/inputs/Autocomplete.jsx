@@ -1,25 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import useDropdown from '../basics/Dropdown.hooks';
-import Dropdown from '../basics/Dropdown';
-import { Root, Label, Section, Input, AddOption, AddAction, AddText, Option } from './Autocomplete.styles';
+import useDropdown from 'components/basics/Dropdown.hooks';
+import Dropdown from 'components/basics/Dropdown';
+import {
+  Root,
+  Label,
+  Section,
+  Input,
+  AddOption,
+  AddAction,
+  AddText,
+  Option,
+} from './Autocomplete.styles';
 
-/**
- * The Autocomplete' component.
- */
-const Autocomplete = props => {
-  const { disabled, label, options, placeholder, value: selectedOption, onChange } = props;
+/** The Autocomplete' component */
+const Autocomplete = (props) => {
+  const {
+    disabled,
+    label,
+    options,
+    placeholder,
+    value: selectedOption,
+    onChange,
+  } = props;
   const {
     anchor,
     width,
     onClick: handleClick,
     onClose: handleClose,
     onOpen: handleOpen,
-  } = useDropdown({ clickCallback: option => onChange(option) });
+  } = useDropdown({ clickCallback: (option) => onChange(option) });
+
   const [innerValue, setInnerValue] = useState(selectedOption.label || '');
-  const handleChange = event => {
+
+  const handleChange = (event) => {
     onChange({ label: event.target.value, value: event.target.value });
-  
     if (event.target.value === '') {
       handleClose();
     } else {
@@ -50,17 +65,21 @@ const Autocomplete = props => {
         width={width}
         onClose={handleClose}
       >
-        {!options.find(option => option.label === innerValue) && (
+        {!options.find((option) => option.label === innerValue) && (
           <AddOption>
             <AddAction onClick={handleClose}>Añadir</AddAction>
             <AddText>{innerValue}</AddText>
           </AddOption>
         )}
         {options
-          .filter(option => option.label?.toLowerCase().includes(innerValue?.toLowerCase()))
-          .map(option => (
-          <Option key={option.value} onClick={handleClick(option)}>{option.label}</Option>
-        ))}
+          .filter((option) =>
+            option.label?.toLowerCase().includes(innerValue?.toLowerCase()),
+          )
+          .map((option) => (
+            <Option key={option.value} onClick={handleClick(option)}>
+              {option.label}
+            </Option>
+          ))}
       </Dropdown>
     </Root>
   );
@@ -77,7 +96,8 @@ Autocomplete.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        .isRequired,
     }),
   ).isRequired,
   placeholder: PropTypes.string,

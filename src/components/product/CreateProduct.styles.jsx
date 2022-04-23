@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MINE_SHAFT } from '../../config/constants/styled-vars';
+import { MINE_SHAFT } from 'config/constants/styled-vars';
 
 export const Container = styled.section`
   min-height: 200px;
@@ -30,7 +30,7 @@ export const InfoContainer = styled.section`
   text-align: center;
   color: ${MINE_SHAFT};
   margin: 16px 0;
-`
+`;
 
 export const Title = styled.div`
   font-weight: bold;

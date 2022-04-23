@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ARROW_LEFT_SOURCE } from '../../assets/Images';
+import { ARROW_LEFT_SOURCE } from 'assets/Images';
 import {
   BOULDER,
   MEDIA_QUERY_SMALL,
   PUERTO_RICO,
-} from '../../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 export const Root = styled.div`
   align-items: center;

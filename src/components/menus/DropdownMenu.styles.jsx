@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GALLERY, MINE_SHAFT } from '../../config/constants/styled-vars';
+import { GALLERY, MINE_SHAFT } from 'config/constants/styled-vars';
 
 export const Root = styled.div`
   width: 100%;
@@ -38,15 +38,12 @@ export const Option = styled.section`
   letter-spacing: 0.86px;
   padding: 10px 23px;
   width: 100%;
-
   &:hover {
     background-color: ${GALLERY};
   }
-
   &:first-child {
     margin: 6px 0 0;
   }
-
   &:last-child {
     margin: 0 0 6px;
   }

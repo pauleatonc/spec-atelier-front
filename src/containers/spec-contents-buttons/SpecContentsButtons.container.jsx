@@ -1,12 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeOption } from './SpecContentsButtons.actions';
-import { AddIcon, ContentButton } from './SpecContentsButtons.styles';
 import {
   SPEC_DOCUMENT,
   SPEC_TABLE,
   SPEC_HISTORY,
-} from '../../config/constants/button-variants';
+} from 'config/constants/button-variants';
 import {
   CHANGE_HISTORY_SELECTED,
   CHANGE_HISTORY_UNSELECTED,
@@ -14,7 +12,9 @@ import {
   SPEC_ADD_SOURCE_W_SELECTED,
   SPEC_PAGE_SOURCE,
   SPEC_PAGE_SOURCE_SELECTED,
-} from '../../assets/Images';
+} from 'assets/Images';
+import { changeOption } from './SpecContentsButtons.actions';
+import { AddIcon, ContentButton } from './SpecContentsButtons.styles';
 
 const SpecContentButtons = () => {
   const dispatch = useDispatch();

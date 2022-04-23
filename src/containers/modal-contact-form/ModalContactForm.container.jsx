@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Modal } from '../../components/SpecComponents';
+import Contact from 'components/forms/contact/Contact';
+import CloseButton from 'components/buttons/CloseButton';
+import ModalLayout from 'components/layouts/ModalLayout';
+import Button from 'components/buttons/Button';
+import Login from 'containers/auth/login/Login.container';
 import {
   Container,
   BottonContainer,
   ContentLogin,
 } from './ModalContactForm.styles';
 import { sendContactData, closeContactModal } from './ModalContactForm.actions';
-import { Contact } from '../../components/forms/Forms';
-import Login from '../auth/login/Login.container';
-import CloseButton from '../../components/buttons/CloseButton';
 
 const propTypes = {
   type: PropTypes.string,
@@ -67,7 +68,7 @@ const ContactForm = ({ type }) => {
   }, [showContactModal]);
 
   return (
-    <Modal show={showContactModal} onClose={onCloseModal}>
+    <ModalLayout show={showContactModal} onClose={onCloseModal}>
       <Container width="50%">
         {isLogin ? (
           <>
@@ -91,8 +92,8 @@ const ContactForm = ({ type }) => {
             <Login />
           </ContentLogin>
         )}
-      </Container >
-    </Modal >
+      </Container>
+    </ModalLayout>
   );
 };
 

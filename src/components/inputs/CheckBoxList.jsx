@@ -1,6 +1,6 @@
 import React from 'react';
+import { CHECKBOX_OFF_SOURCE, CHECKBOX_ON_SOURCE } from 'assets/Images';
 import { Option, OptionCheckboxIcon, OptionText } from './CheckBoxList.styles';
-import { CHECKBOX_OFF_SOURCE, CHECKBOX_ON_SOURCE } from '../../assets/Images';
 
 function CheckBoxList({ options, onItemClick, values }) {
   return (

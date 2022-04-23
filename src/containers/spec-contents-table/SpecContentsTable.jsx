@@ -3,10 +3,11 @@ import { useTable, useExpanded } from 'react-table';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
-import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
-import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
-import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
-import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
+import { handleUpdateProduct } from 'containers/spec-document/SpecDocument.actions';
+import { getProduct } from 'containers/spec-modal-quote/SpecModalQuote.actions';
+import { downloadBudgetDocument } from 'containers/spec-header/SpecHeader.actions';
+import SpecModalQuote from 'containers/spec-modal-quote/SpecModalQuote.container';
+import { SPEC_DOWNLOAD_SOURCE } from 'assets/Images';
 import CurrentInputTable from './components/CurrentInputTable';
 import {
   Root,
@@ -28,7 +29,6 @@ import {
   TableTotal,
   ContainerTotalTable,
 } from './SpecContentsTable.styles';
-import { SPEC_DOWNLOAD_SOURCE } from '../../assets/Images';
 
 const SpecContentsTable = () => {
   const { id } = useParams();

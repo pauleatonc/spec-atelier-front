@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { onAddSpecBlockImage } from '../spec-document/SpecDocument.actions';
+import { onAddSpecBlockImage } from 'containers/spec-document/SpecDocument.actions';
+import useModal from 'components/layouts/ModalLayout.hooks';
+import ModalLayout from 'components/layouts/ModalLayout';
+import Button from 'components/buttons/Button';
+import CloseButton from 'components/buttons/CloseButton';
+import { CHECK_SOURCE } from 'assets/Images';
+import { VARIANTS_BUTTON } from 'config/constants/button-variants';
 import { onHideSpecImagesModalSuccess } from './SpecImagesModal.actions';
-import useModal from '../../components/layouts/ModalLayout.hooks';
-import ModalLayout from '../../components/layouts/ModalLayout';
-import Button from '../../components/buttons/Button';
-import CloseButton from '../../components/buttons/CloseButton';
 import {
   Root,
   Header,
@@ -18,22 +20,24 @@ import {
   CheckIcon,
   Footer,
 } from './SpecImagesModal.styles';
-import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import { CHECK_SOURCE } from '../../assets/Images';
 
 /** The SpecImagesModal's container */
 const SpecImagesModal = () => {
   const { id: specID } = useParams();
   const { blocks } = useSelector((state) => state.specDocument);
+  const dispatch = useDispatch();
+
   const { selectedBlockID, show } = useSelector(
     (state) => state.specImagesModal,
   );
-  const dispatch = useDispatch();
+
   const selectedProductBlock =
     blocks.find((block) => block.id === selectedBlockID) || {};
+
   const [selectedImage, setSelectedImage] = useState(
     selectedProductBlock.element?.product_block_image || '',
   );
+
   const { onClose: handleClose } = useModal({
     closeCallback: () => dispatch(onHideSpecImagesModalSuccess()),
   });

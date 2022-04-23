@@ -2,18 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Root, Main } from './AppLayout.styles';
 
-/**
- * The AppLayout's component.
- */
-const AppLayout = props => {
+/** The AppLayout's component */
+const AppLayout = (props) => {
   const { children, footer, header } = props;
 
   return (
     <Root>
       {header && header}
-      <Main>
-        {children}
-      </Main>
+      <Main>{children}</Main>
       {footer && footer}
     </Root>
   );

@@ -5,8 +5,8 @@ import {
   MINE_SHAFT,
   MEDIA_QUERY_SMALL,
   WHITE,
-} from '../../config/constants/styled-vars';
-import { CLOSE_ICON } from '../../assets/Images';
+} from 'config/constants/styled-vars';
+import { CLOSE_ICON } from 'assets/Images';
 
 export const Root = styled.div`
   background-color: ${WHITE};

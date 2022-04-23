@@ -5,7 +5,7 @@ import {
   ICON_LOCATION,
   ICON_TWITTER,
   ICON_WEB,
-} from '../../assets/Images';
+} from 'assets/Images';
 import {
   MINE_SHAFT,
   PRIMARY,
@@ -13,7 +13,7 @@ import {
   DARKESTGREY,
   TERTIARY,
   SILVER_CHALICE,
-} from '../../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 const mapVariantsToColors = {
   default: MINE_SHAFT,

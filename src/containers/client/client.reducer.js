@@ -1,8 +1,4 @@
-import {
-  GET_CLIENT,
-  GET_CLIENT_ERROR,
-  CLEAN_STORE,
-} from './client.actions';
+import { GET_CLIENT, GET_CLIENT_ERROR, CLEAN_STORE } from './client.actions';
 
 const initialClient = {
   client: undefined,
@@ -13,9 +9,7 @@ const initialClient = {
   message: undefined,
 };
 
-/**
- * client reducer.
- */
+/** client reducer */
 const clientReducer = (state = initialClient, { payload, type }) => {
   switch (type) {
     case GET_CLIENT:

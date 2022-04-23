@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
-import { CLOSE_ICON} from '../../assets/Images';
+import { CLOSE_ICON } from 'assets/Images';
+import { MEDIA_QUERY_SMALL } from 'config/constants/styled-vars';
 
 export const CloseIcon = styled.i`
   display: flex;

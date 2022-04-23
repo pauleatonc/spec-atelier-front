@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-
 import {
   ALABASTER,
   MERCURY,
   BLACK_OPACITY,
   BLACK_OPACITY_DARK,
-} from '../../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 export const Table = styled.table`
   width: 100%;

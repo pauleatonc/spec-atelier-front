@@ -1,13 +1,11 @@
 import React from 'react';
-import AppLayout from '../components/layouts/AppLayout';
-import NavBar from '../containers/navbar/Navbar.container';
-import Footer from '../components/footer';
+import NavBar from 'containers/navbar/Navbar.container';
+import AppLayout from 'components/layouts/AppLayout';
+import Footer from 'components/footer';
 
-/**
- * The Us' view.
- */
+/** The Us' view */
 const Us = () => {
-	return (
+  return (
     <AppLayout footer={<Footer />} header={<NavBar />}>
       <h1>Nosotros</h1>
     </AppLayout>

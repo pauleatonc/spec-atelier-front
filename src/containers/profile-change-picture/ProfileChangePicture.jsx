@@ -1,18 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AvatarEditor from 'react-avatar-editor';
-import { PROFILE_PHOTO_DEFAULT } from '../../assets/Images';
-import useModal from '../../components/layouts/ModalLayout.hooks';
-import ModalLayout from '../../components/layouts/ModalLayout';
-import Button from '../../components/buttons/Button';
-import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import { DUSTY_GRAY } from '../../config/constants/styled-vars';
-
+import useModal from 'components/layouts/ModalLayout.hooks';
+import ModalLayout from 'components/layouts/ModalLayout';
+import Button from 'components/buttons/Button';
+import CloseButton from 'components/buttons/CloseButton';
+import { VARIANTS_BUTTON } from 'config/constants/button-variants';
+import { PROFILE_PHOTO_DEFAULT } from 'assets/Images';
+import { DUSTY_GRAY } from 'config/constants/styled-vars';
 import {
   onHideEditProfilePicture,
   onChangeProfilePicture,
 } from '../profile-header/ProfileHeader.actions';
-
 import {
   Root,
   Header,
@@ -23,7 +22,6 @@ import {
   EditorPicture,
   ButtonZoomPicture,
 } from './ProfileChangePicture.styles';
-import CloseButton from '../../components/buttons/CloseButton';
 
 const ProfileChangePicture = () => {
   const { showEditProfilePicture, user, loading } = useSelector(

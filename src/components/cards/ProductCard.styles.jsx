@@ -11,7 +11,7 @@ import {
   PLUS_SOURCE,
   TECH_ACTIVE_SOURCE,
   TECH_ICON,
-} from '../../assets/Images';
+} from 'assets/Images';
 import {
   MINE_SHAFT,
   MEDIA_QUERY_SMALL,
@@ -26,7 +26,7 @@ import {
   ALTO_OPACITY,
   MINE_SHAFT_RGB,
   BLACK,
-} from '../../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 const hoverDefaultProps = {
   hover: false,

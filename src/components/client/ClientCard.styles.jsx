@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { PRIMARY, DARKESTGREY, MINE_SHAFT } from '../../config/constants/styled-vars';
+import { PRIMARY, DARKESTGREY, MINE_SHAFT } from 'config/constants/styled-vars';
 
 export const Name = styled.div`
   font-family: Lato;

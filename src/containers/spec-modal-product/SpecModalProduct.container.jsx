@@ -2,12 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import {
-  Loading,
-  Modal,
-  Button,
-  Image,
-  DownloadDocumentsIcons,
-} from '../../components/SpecComponents';
+  onAttachSpecProduct,
+  onDetachSpecProduct,
+} from 'containers/spec-document/SpecDocument.actions';
+import {
+  onShowAttachModal,
+  onHideAttachModal,
+} from 'containers/spec-products/SpecProducts.actions';
+import { openContactModal } from 'containers/modal-contact-form/ModalContactForm.actions';
+import CloseButton from 'components/buttons/CloseButton';
+import Loading from 'components/basics/loading';
+import ModalLayout from 'components/layouts/ModalLayout';
+import DownloadDocumentsIcons from 'components/downloadDocumentsIcons/index';
+import Button from 'components/buttons/Button';
+import Image from 'components/image/Image';
+import { VARIANTS_BUTTON } from 'config/constants/button-variants';
+import { closeModal, getImageSizeData } from './SpecModalProduct.actions';
 import {
   Container,
   Content,
@@ -26,12 +36,6 @@ import {
   Actions,
   AddButtonContainer,
 } from './SpecModalProduct.styles';
-import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import { closeModal, getImageSizeData } from './SpecModalProduct.actions';
-import { onAttachSpecProduct, onDetachSpecProduct } from '../spec-document/SpecDocument.actions';
-import { onShowAttachModal, onHideAttachModal } from '../spec-products/SpecProducts.actions';
-import { openContactModal } from '../modal-contact-form/ModalContactForm.actions';
-import CloseButton from '../../components/buttons/CloseButton';
 
 const SpecModalProduct = () => {
   const { id: specID } = useParams();
@@ -102,7 +106,7 @@ const SpecModalProduct = () => {
   };
 
   return (
-    <Modal show={showModalProduct} onClose={onCloseModal}>
+    <ModalLayout show={showModalProduct} onClose={onCloseModal}>
       <Container>
         <Content>
           <Header>
@@ -154,8 +158,9 @@ const SpecModalProduct = () => {
                 <ProductName>{product.reference}</ProductName>
                 <ProductDescription>{product.long_desc}</ProductDescription>
                 <ProductBrand>
-                  {`Referencia: ${product?.systems?.first?.name || ''}: ${product?.brand?.name || ''
-                    }`}
+                  {`Referencia: ${product?.systems?.first?.name || ''}: ${
+                    product?.brand?.name || ''
+                  }`}
                 </ProductBrand>
                 <Actions>
                   {isRegisteredClient && (
@@ -188,7 +193,7 @@ const SpecModalProduct = () => {
           </Button>
         </AddButtonContainer>
       </Container>
-    </Modal>
+    </ModalLayout>
   );
 };
 

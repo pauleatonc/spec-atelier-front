@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ButtonContainer, ButtonIcon } from './ButtonSocialMedia.styles';
 
-/**
- * The ButtonSocialMedia's component.
- */
-const ButtonSocialMedia = props => {
+/** The ButtonSocialMedia's component */
+const ButtonSocialMedia = (props) => {
   const { variant, type, to, ...buttonProps } = props;
 
   return (
@@ -13,10 +11,9 @@ const ButtonSocialMedia = props => {
       {...buttonProps}
       variant={variant}
       target="_blank"
-      href={to} >
-      <ButtonIcon
-        type={type}
-      />
+      href={to}
+    >
+      <ButtonIcon type={type} />
     </ButtonContainer>
   );
 };
@@ -34,7 +31,13 @@ ButtonSocialMedia.propTypes = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
   type: PropTypes.oneOf(['twitter', 'facebook']).isRequired,
-  variant: PropTypes.oneOf(['primary', 'secondary', 'default', 'gray', 'disabled']),
+  variant: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'default',
+    'gray',
+    'disabled',
+  ]),
   width: PropTypes.string,
   target: PropTypes.string,
   to: PropTypes.string,

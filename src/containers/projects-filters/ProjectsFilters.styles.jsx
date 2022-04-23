@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { DARKESTGREY, MINE_SHAFT, SILVER, GALLERY } from '../../config/constants/styled-vars';
+import {
+  DARKESTGREY,
+  MINE_SHAFT,
+  SILVER,
+  GALLERY,
+} from 'config/constants/styled-vars';
 
 export const Container = styled.section`
   width: 100%;
@@ -32,14 +37,14 @@ export const SortContainer = styled.section`
   color: ${MINE_SHAFT};
   display: flex;
   align-items: center;
-`
+`;
 
 export const Filters = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex: 1;
-`
+`;
 
 export const FilterSelect = styled.select`
   border-radius: 22px;
@@ -49,8 +54,8 @@ export const FilterSelect = styled.select`
   padding-left: 40px;
   width: 490px;
   margin-bottom: 23px;
-  opacity: .5;
-  font-family: "Lato";
+  opacity: 0.5;
+  font-family: 'Lato';
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -58,7 +63,6 @@ export const FilterSelect = styled.select`
   line-height: normal;
   letter-spacing: 1px;
   color: ${MINE_SHAFT};
-
   &:focus {
     outline: none;
   }
@@ -66,9 +70,9 @@ export const FilterSelect = styled.select`
 
 export const FilterOptions = styled.section`
   margin-left: 45px;
-`
+`;
 export const FilterOption = styled.option`
-  font-family: "Lato";
+  font-family: 'Lato';
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -79,10 +83,10 @@ export const FilterOption = styled.option`
 `;
 
 export const Selector = styled.select`
-  border: 0; 
+  border: 0;
   outline: 0;
   min-width: 140px;
-  display:flex;
+  display: flex;
   flex: 1;
   justify-content: space-between;
   padding: 8px 0;
@@ -100,7 +104,7 @@ export const Selector = styled.select`
 export const FilterSortText = styled.div`
   white-space: nowrap;
   padding: 4px 16px 8px 16px;
-  border: 0; 
+  border: 0;
   outline: 0;
   display: flex;
   flex: 1;
@@ -113,7 +117,7 @@ export const FilterSortText = styled.div`
   border-radius: 0;
   width: 240px;
   align-items: center;
-`
+`;
 export const DropIcon = styled.img`
   cursor: pointer;
 `;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MINE_SHAFT } from '../../config/constants/styled-vars';
+import { MINE_SHAFT } from 'config/constants/styled-vars';
 
 export const Container = styled.section`
   padding: 16px;
@@ -35,5 +35,5 @@ export const ButtonSection = styled.section`
   margin: 16px 0 38px;
   display: flex;
   flex: 1;
-  justify-content: ${({ justify }) => justify || 'flex-star' };
+  justify-content: ${({ justify }) => justify || 'flex-star'};
 `;

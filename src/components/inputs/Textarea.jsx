@@ -1,60 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-	Root,
-	Label,
-	Textarea as TextareaBase,
-	CountCharacter,
+  Root,
+  Label,
+  Textarea as TextareaBase,
+  CountCharacter,
 } from './Textarea.styles';
 
-/**
- * The Textarea' component.
- */
+/** The Textarea' component */
 const Textarea = (props) => {
-	const {
-		label,
-		placeholder,
-		value,
-		onChange,
-		name,
-		minHeightTextArea,
-		maxlength,
-	} = props;
+  const {
+    label,
+    placeholder,
+    value,
+    onChange,
+    name,
+    minHeightTextArea,
+    maxlength,
+  } = props;
 
-	const handleChange = (e) => {
-		if (maxlength && value.length === maxlength) return;
-		onChange(e);
-	};
+  const handleChange = (e) => {
+    if (maxlength && value.length === maxlength) return;
+    onChange(e);
+  };
 
-	return (
-		<Root>
-			{label && <Label>{label}</Label>}
-			<TextareaBase
-				name={name}
-				placeholder={placeholder}
-				value={value}
-				onChange={handleChange}
-				minHeightTextArea={minHeightTextArea}
-			/>
-
-			{maxlength && (
-				<CountCharacter>{`${value.length}/${maxlength}`}</CountCharacter>
-			)}
-		</Root>
-	);
+  return (
+    <Root>
+      {label && <Label>{label}</Label>}
+      <TextareaBase
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={handleChange}
+        minHeightTextArea={minHeightTextArea}
+      />
+      {maxlength && (
+        <CountCharacter>{`${value.length}/${maxlength}`}</CountCharacter>
+      )}
+    </Root>
+  );
 };
 
 Textarea.defaultProps = {
-	label: '',
-	placeholder: '',
-	minHeightTextArea: '152px',
+  label: '',
+  placeholder: '',
+  minHeightTextArea: '152px',
 };
 Textarea.propTypes = {
-	label: PropTypes.string,
-	placeholder: PropTypes.string,
-	value: PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired,
-	minHeightTextArea: PropTypes.string,
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  minHeightTextArea: PropTypes.string,
 };
 
 export default Textarea;

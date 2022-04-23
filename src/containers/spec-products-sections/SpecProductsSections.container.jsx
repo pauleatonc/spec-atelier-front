@@ -1,12 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onGetSpecProductsBySection, onUpdateFilterSection } from '../spec-products/SpecProducts.actions';
-import { onHideSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
-import { setFilters } from '../products-list/ProductsList.actions';
-import useSpecProductsPanelLayout from '../../components/layouts/SpecProductsPanelLayout.hook';
-import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
-import Breadcrumbs from '../../components/basics/Breadcrumbs';
-import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
+import { useDidUpdateEffect } from 'helpers/custom-hooks.helper';
+import {
+  onGetSpecProductsBySection,
+  onUpdateFilterSection,
+} from 'containers/spec-products/SpecProducts.actions';
+import { onHideSpecProductsItemsSuccess } from 'containers/spec-products-items/SpecProductsItems.actions';
+import { setFilters } from 'containers/products-list/ProductsList.actions';
+import useSpecProductsPanelLayout from 'components/layouts/SpecProductsPanelLayout.hook';
+import Breadcrumbs from 'components/basics/Breadcrumbs';
+import { MAX_SCREEN_SMALL_NAV_JS } from 'config/constants/styled-vars';
 import {
   Root,
   Body,
@@ -18,10 +21,7 @@ import {
   CloseIcon,
 } from './SpecProductsSections.styles';
 
-
-/**
- * The SpecProductsSections' container.
- */
+/** The SpecProductsSections' container */
 const SpecProductsSections = ({
   setShowFilters,
   selectedSection,
@@ -30,12 +30,15 @@ const SpecProductsSections = ({
   const { section: selectedSectionID } = useSelector(
     (state) => state.specProducts.filters,
   );
+
   const { collection: sections, show } = useSelector(
     (state) => state.specProductsSections,
   );
+
   const { isSelectedAll } = useSelector((state) => state.productsList);
 
   const dispatch = useDispatch();
+
   const handleSectionClick = (section) => () => {
     dispatch(setFilters({ section: [section.id] }));
     dispatch(onGetSpecProductsBySection({ section: section.id }));
@@ -46,6 +49,7 @@ const SpecProductsSections = ({
   };
 
   useSpecProductsPanelLayout(show);
+
   useDidUpdateEffect(() => {
     if (isSelectedAll) {
       dispatch(onUpdateFilterSection({ section: '', item: '', subitem: '' }));

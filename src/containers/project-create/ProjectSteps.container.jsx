@@ -1,33 +1,22 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {
-  ROUTE_PROJECTS,
-} from '../../config/constants/routes';
-import {
-  StepBubbles,
-} from '../../components/SpecComponents';
-import {
-  Container,
-  StepperContainer,
-} from './ProjectCreate.styles';
+import StepsBubbles from 'components/basics/StepsBubbles';
+import { ROUTE_PROJECTS } from 'config/constants/routes';
 import { cleanStore } from './ProjectCreate.actions';
+import { Container, StepperContainer } from './ProjectCreate.styles';
 
 const ProjectSteps = () => {
-  const { view, created } = useSelector(state => state.newProject);
-
+  const { view, created } = useSelector((state) => state.newProject);
   const history = useHistory();
   const dispatch = useDispatch();
 
   const steps = [
-    { active: true, },
+    { active: true },
     { active: view === 'details' || view === 'permission' },
-    // { active: view === 'permission' },
   ];
 
-  useEffect(() => {
-    return () => dispatch(cleanStore());
-  }, []);
+  useEffect(() => () => dispatch(cleanStore()), []);
 
   useEffect(() => {
     if (created) {
@@ -38,10 +27,7 @@ const ProjectSteps = () => {
   return (
     <Container>
       <StepperContainer>
-        <StepBubbles
-          prefix="step-create"
-          steps={steps}
-        />
+        <StepsBubbles prefix="step-create" steps={steps} />
       </StepperContainer>
     </Container>
   );

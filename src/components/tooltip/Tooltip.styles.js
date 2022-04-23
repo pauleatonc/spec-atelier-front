@@ -1,7 +1,5 @@
-/* Custom properties */
 import styled from 'styled-components';
-
-import { MINE_SHAFT, WHITE } from '../../config/constants/styled-vars';
+import { MINE_SHAFT, WHITE } from 'config/constants/styled-vars';
 
 const TOOLTIP_MARGIN = '30px';
 const TOOLTIP_ARROW_SIZE = '6px';
@@ -49,8 +47,8 @@ export const Content = styled.div`
         return `top: calc(${TOOLTIP_MARGIN} * -1);`;
     }
   }};
-  ::before{
-    content: " ";
+  ::before {
+    content: ' ';
     left: 50%;
     border: solid transparent;
     height: 0;

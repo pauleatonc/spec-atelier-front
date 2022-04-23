@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button } from '../../components/SpecComponents';
-import CloseButton from '../../components/buttons/CloseButton';
+import ModalLayout from 'components/layouts/ModalLayout';
+import Button from 'components/buttons/Button';
+import CloseButton from 'components/buttons/CloseButton';
+import { CHECKBOX_OFF_SOURCE, CHECKBOX_ON_SOURCE } from 'assets/Images';
 import {
   Container,
   Header,
@@ -14,17 +16,15 @@ import {
   OptionCheckboxIcon,
   OptionText,
 } from './SpecModalAttachProduct.styles';
-import { CHECKBOX_OFF_SOURCE, CHECKBOX_ON_SOURCE } from '../../assets/Images';
 
-function SpecModalAttachProduct({
+const SpecModalAttachProduct = ({
   showAttachModal,
   onAttach,
   onDetach,
   onClose,
   product,
-}) {
+}) => {
   const { items = [], sections = [], project_spec_info } = product;
-
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [deselectedOptions, setDeselectedOptions] = useState([]);
   const [toAttachOptions, setToAttachOptions] = useState([]);
@@ -72,7 +72,7 @@ function SpecModalAttachProduct({
   }, [project_spec_info]);
 
   return (
-    <Modal show={showAttachModal} onClose={onClose}>
+    <ModalLayout show={showAttachModal} onClose={onClose}>
       <Container>
         <Header>
           <Title>¿Dónde quieres añadir la información?</Title>
@@ -118,8 +118,8 @@ function SpecModalAttachProduct({
           </Button>
         </Section>
       </Container>
-    </Modal>
+    </ModalLayout>
   );
-}
+};
 
 export default SpecModalAttachProduct;

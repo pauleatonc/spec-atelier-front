@@ -8,7 +8,7 @@ import {
   MERCURY,
   SILVER,
   WHITE,
-} from '../../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 export const Root = styled.div`
   box-sizing: border-box;
@@ -83,6 +83,7 @@ export const ButtonsHeader = styled.div`
   display: flex;
   float: right;
 `;
+
 export const Button = styled.div`
   cursor: pointer;
   font-family: Lato;
@@ -100,6 +101,7 @@ export const Button = styled.div`
   top: ${({ isExpandButton }) => isExpandButton && '20px'};
   right: ${({ isExpandButton }) => isExpandButton && '150px'};
 `;
+
 export const ImgButton = styled.img`
   margin: 0px 5px 0px 39px;
 `;
@@ -113,6 +115,7 @@ export const Table = styled.table`
   background-color: ${WHITE};
   position: relative;
 `;
+
 export const TableThead = styled.thead`
   padding: 8px;
   height: 46px;
@@ -120,6 +123,7 @@ export const TableThead = styled.thead`
   border-radius: 2px;
   border: solid 1px ${MERCURY};
 `;
+
 export const TableTbody = styled.tbody`
   width: 2px;
   text-align: left;

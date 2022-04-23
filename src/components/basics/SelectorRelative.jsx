@@ -1,35 +1,47 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Content, Option, Section, NoOptions } from './SelectorRelative.styles';
+import {
+  Container,
+  Content,
+  Option,
+  Section,
+  NoOptions,
+} from './SelectorRelative.styles';
 
 const propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-    name: PropTypes.string,
-  })),
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      name: PropTypes.string,
+    }),
+  ),
   onChange: PropTypes.func,
   right: PropTypes.bool,
 };
 
 const defaultProps = {
   options: [],
-  onChange: () => { },
+  onChange: () => {},
   right: false,
 };
 
-const SelectorRelative = ({ options, onChange, renderInput, width, maxHeight, right }) => {
+const SelectorRelative = ({
+  options,
+  onChange,
+  renderInput,
+  width,
+  maxHeight,
+  right,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
-  const onChangeOption = value => () => {
+  const onChangeOption = (value) => () => {
     onChange(value);
     toggle();
-  }
+  };
 
-  const onClickOusite = callback => {
+  const onClickOusite = (callback) => {
     const innerRef = useRef();
     const callbackRef = useRef();
 
@@ -38,7 +50,7 @@ const SelectorRelative = ({ options, onChange, renderInput, width, maxHeight, ri
     });
 
     useEffect(() => {
-      const handleClick = e => {
+      const handleClick = (e) => {
         if (
           innerRef.current &&
           callbackRef.current &&
@@ -46,27 +58,35 @@ const SelectorRelative = ({ options, onChange, renderInput, width, maxHeight, ri
         ) {
           callbackRef.current(e);
         }
-      }
-      document.addEventListener("click", handleClick);
-      return () => document.removeEventListener("click", handleClick);
+      };
+      document.addEventListener('click', handleClick);
+      return () => document.removeEventListener('click', handleClick);
     }, []);
     return innerRef;
   };
 
   const innerRef = onClickOusite(() => {
-    if (!isOpen) return
+    if (!isOpen) return;
     setIsOpen(false);
   });
 
-
   return (
     <Container isOpen={isOpen} ref={innerRef} width={width}>
-      <Section onClick={toggle}>
-        {renderInput}
-      </Section>
-      <Content isOpen={isOpen} width={width} maxHeight={maxHeight} right={right}>
-        {options.map(option => (
-          <Option key={option.id} onClick={onChangeOption(option)} value={option.id}>{option.label}</Option>
+      <Section onClick={toggle}>{renderInput}</Section>
+      <Content
+        isOpen={isOpen}
+        width={width}
+        maxHeight={maxHeight}
+        right={right}
+      >
+        {options.map((option) => (
+          <Option
+            key={option.id}
+            onClick={onChangeOption(option)}
+            value={option.id}
+          >
+            {option.label}
+          </Option>
         ))}
         {!options.length && <NoOptions>No hay Opciones Disponibles</NoOptions>}
       </Content>

@@ -1,7 +1,10 @@
 import { batch } from 'react-redux';
-import onActionCreator from '../../config/store/helpers';
-import { postContactProduct, postContactClient } from '../../services/contact.service';
-import { onShowAlertSuccess } from '../alert/Alert.actions';
+import onActionCreator from 'config/store/helpers';
+import {
+  postContactProduct,
+  postContactClient,
+} from 'services/contact.service';
+import { onShowAlertSuccess } from 'containers/alert/Alert.actions';
 
 export const POST_CONTACT_FORM = 'POST_CONTACT_FORM';
 export const POST_CONTACT_FORM_ERROR = 'POST_CONTACT_FORM_ERROR';
@@ -9,29 +12,50 @@ export const OPEN_CONTACT_FORM_MODAL = 'OPEN_CONTACT_FORM_MODAL';
 export const CLOSE_CONTACT_FORM_MODAL = 'CLOSE_CONTACT_FORM_MODAL';
 
 // async calls
-export const sendContactData = (newContact, type) => async dispatch => {
+export const sendContactData = (newContact, type) => async (dispatch) => {
   try {
     if (type === 'product') {
-      await postContactProduct({ productId: newContact.product_id, contact: newContact });
+      await postContactProduct({
+        productId: newContact.product_id,
+        contact: newContact,
+      });
     } else {
-      await postContactClient({ clientId: newContact.client_id, contact: newContact });
+      await postContactClient({
+        clientId: newContact.client_id,
+        contact: newContact,
+      });
     }
     const message = 'Hemos enviado la información al colaborador.';
     batch(() => {
       dispatch(onShowAlertSuccess({ message }));
-      dispatch(onActionCreator(POST_CONTACT_FORM, { sended: true, loading: false }));
+      dispatch(
+        onActionCreator(POST_CONTACT_FORM, { sended: true, loading: false }),
+      );
     });
   } catch (error) {
     const message = 'Error al enviar formulario.';
     batch(() => {
       dispatch(onShowAlertSuccess({ message }));
-      dispatch(onActionCreator(POST_CONTACT_FORM_ERROR, { loading: false, error: true }));
+      dispatch(
+        onActionCreator(POST_CONTACT_FORM_ERROR, {
+          loading: false,
+          error: true,
+        }),
+      );
     });
   }
 };
 
 // sync calls
-export const openContactModal = ({ selectedClient, selectedProduct }) => dispatch =>
-  dispatch(onActionCreator(OPEN_CONTACT_FORM_MODAL, { selectedClient, selectedProduct }));
+export const openContactModal = ({ selectedClient, selectedProduct }) => (
+  dispatch,
+) =>
+  dispatch(
+    onActionCreator(OPEN_CONTACT_FORM_MODAL, {
+      selectedClient,
+      selectedProduct,
+    }),
+  );
 
-export const closeContactModal = () => dispatch => dispatch(onActionCreator(CLOSE_CONTACT_FORM_MODAL, {}));
+export const closeContactModal = () => (dispatch) =>
+  dispatch(onActionCreator(CLOSE_CONTACT_FORM_MODAL, {}));

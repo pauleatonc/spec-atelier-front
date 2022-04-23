@@ -4,13 +4,15 @@ import {
   onGetSpecProductsByItem,
   onUpdateFilterSection,
   onUpdateFilterSubitem,
-} from '../spec-products/SpecProducts.actions';
-import { setFilters } from '../products-list/ProductsList.actions';
+} from 'containers/spec-products/SpecProducts.actions';
+import { setFilters } from 'containers/products-list/ProductsList.actions';
+import Breadcrumbs from 'components/basics/Breadcrumbs';
+import Collapsible from 'components/basics/Collapsible';
+import CloseButton from 'components/buttons/CloseButton';
+import { Header } from 'containers/spec-products-sections/SpecProductsSections.styles';
+import { ARROW_DOWN_SOURCE, ARROW_UP_ACIVE_SOURCE } from 'assets/Images';
+import { MAX_SCREEN_SMALL_NAV_JS } from 'config/constants/styled-vars';
 import { onHideSpecProductsItemsSuccess } from './SpecProductsItems.actions';
-import Breadcrumbs from '../../components/basics/Breadcrumbs';
-import Collapsible from '../../components/basics/Collapsible';
-import CloseButton from '../../components/buttons/CloseButton';
-import { Header } from '../spec-products-sections/SpecProductsSections.styles';
 import {
   Root,
   Body,
@@ -19,8 +21,6 @@ import {
   ArrowIcon,
   Divisor,
 } from './SpecProductsItems.styles';
-import { ARROW_DOWN_SOURCE, ARROW_UP_ACIVE_SOURCE } from '../../assets/Images';
-import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 
 /** The SpecProductsItems' container */
 const SpecProductsItems = ({
@@ -32,9 +32,11 @@ const SpecProductsItems = ({
   const { item: selectedItemID, subitem: selectedSubitemID } = useSelector(
     (state) => state.specProducts.filters,
   );
+
   const { collection: items, show } = useSelector(
     (state) => state.specProductsItems,
   );
+
   const dispatch = useDispatch();
 
   const handleCloseSpecItems = () => {

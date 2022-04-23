@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { MINE_SHAFT, GALLERY, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../../config/constants/styled-vars';
+import {
+  MINE_SHAFT,
+  GALLERY,
+  MEDIA_QUERY_SMALL,
+  MEDIA_QUERY_MEDIUM,
+} from 'config/constants/styled-vars';
 
 export const SubHeader = styled.section`
   width: 100%;

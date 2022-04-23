@@ -2,9 +2,11 @@ import React, { useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import ModalLayout from '../layouts/ModalLayout';
-import Button from '../buttons/Button';
-import CloseButton from '../buttons/CloseButton';
+import ModalLayout from 'components/layouts/ModalLayout';
+import CloseButton from 'components/buttons/CloseButton';
+import Button from 'components/buttons/Button';
+import { IMAGES_UPLOAD_SOURCE, REMOVE_SOURCE } from 'assets/Images';
+import { VARIANTS_BUTTON } from 'config/constants/button-variants';
 import {
   Root,
   Label,
@@ -24,8 +26,6 @@ import {
   DropZoneSection,
   DropZoneText,
 } from './AttachedImages.styles';
-import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-import { IMAGES_UPLOAD_SOURCE, REMOVE_SOURCE } from '../../assets/Images';
 
 /** The AttachedImages' component */
 const AttachedImages = (props) => {
@@ -85,9 +85,7 @@ const AttachedImages = (props) => {
     onChange(updatedAttachedImages);
   };
 
-  useEffect(() => {
-    setShow(showModal);
-  }, [showModal]);
+  useEffect(() => setShow(showModal), [showModal]);
 
   return (
     <Root>

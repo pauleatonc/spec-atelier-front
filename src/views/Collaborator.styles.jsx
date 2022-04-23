@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { SILVER_CHALICE, MEDIA_QUERY_SMALL, MEDIA_QUERY_MEDIUM } from '../config/constants/styled-vars';
+import {
+  SILVER_CHALICE,
+  MEDIA_QUERY_SMALL,
+  MEDIA_QUERY_MEDIUM,
+} from 'config/constants/styled-vars';
 
 export const Container = styled.section`
   padding: 16px 80px;

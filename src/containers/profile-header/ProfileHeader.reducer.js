@@ -6,21 +6,17 @@ import {
   HIDE_EDIT_PROFILE_PICTURE,
   CHANGE_PROFILE_PICTURE_LOADING,
   CHANGE_PROFILE_PICTURE_SUCCESS,
-  CHANGE_PROFILE_PICTURE_ERROR
+  CHANGE_PROFILE_PICTURE_ERROR,
 } from './ProfileHeader.actions';
 
 const Profile = {
-  user: {
-
-  },
+  user: {},
   loading: false,
   error: false,
-  showEditProfilePicture: false
+  showEditProfilePicture: false,
 };
 
-/**
- * The products' reducer.
- */
+/** The products' reducer */
 const ProfileReducer = (state = { ...Profile }, { payload, type }) => {
   switch (type) {
     case GET_PROFILE: {
@@ -43,40 +39,40 @@ const ProfileReducer = (state = { ...Profile }, { payload, type }) => {
       return {
         ...state,
         loading: true,
-      }
+      };
     }
     case SHOW_EDIT_PROFILE_PICTURE: {
       return {
         ...state,
-        showEditProfilePicture: true
-      }
+        showEditProfilePicture: true,
+      };
     }
     case HIDE_EDIT_PROFILE_PICTURE: {
       return {
         ...state,
-        showEditProfilePicture: false
-      }
+        showEditProfilePicture: false,
+      };
     }
     case CHANGE_PROFILE_PICTURE_LOADING: {
       return {
         ...state,
-        loading: true
-      }
+        loading: true,
+      };
     }
     case CHANGE_PROFILE_PICTURE_SUCCESS: {
       return {
         ...state,
         loading: false,
         error: false,
-        user: { ...payload.user }
-      }
+        user: { ...payload.user },
+      };
     }
     case CHANGE_PROFILE_PICTURE_ERROR: {
       return {
         ...state,
         loading: false,
         error: true,
-      }
+      };
     }
     default: {
       return state;

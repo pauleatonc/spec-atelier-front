@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getMyProjects } from '../projects-list/ProjectsList.actions';
-import { SearchBar } from '../../components/SpecComponents';
-import SelectorRelative from '../../components/basics/SelectorRelative';
+import { getMyProjects } from 'containers/projects-list/ProjectsList.actions';
+import SearchBar from 'components/filters/SearchBar';
+import SelectorRelative from 'components/basics/SelectorRelative';
+import { ICON_ARROW_DOWN } from 'assets/Images';
 import {
   Container,
   SortContainer,
   FilterSortText,
   DropIcon,
 } from './ProjectsFilters.styles';
-import { ICON_ARROW_DOWN } from '../../assets/Images';
 
 const ProjectsFilters = () => {
   const dispatch = useDispatch();

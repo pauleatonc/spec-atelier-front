@@ -22,17 +22,17 @@ const initialModalContactFormState = {
   error: undefined,
 };
 
-/**
- * The contactForms reducer.
- */
-const modalContactFormReducer = (state = initialModalContactFormState, { payload, type }) => {
+/** The contactForms reducer */
+const modalContactFormReducer = (
+  state = initialModalContactFormState,
+  { payload, type },
+) => {
   switch (type) {
     case POST_CONTACT_FORM:
       return {
         ...initialModalContactFormState,
         sended: true,
         loading: false,
-
       };
     case POST_CONTACT_FORM_ERROR:
       return {

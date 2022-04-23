@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 import {
   onHideSpecProducts,
   onUpdateFilterSection,
-} from '../../containers/spec-products/SpecProducts.actions';
+} from 'containers/spec-products/SpecProducts.actions';
 import {
   onShowSpecProductsItems,
   onHideSpecProductsItemsSuccess,
-} from '../../containers/spec-products-items/SpecProductsItems.actions';
-import { onShowAlertSuccess } from '../../containers/alert/Alert.actions';
-import { setFilters } from '../../containers/products-list/ProductsList.actions';
+} from 'containers/spec-products-items/SpecProductsItems.actions';
+import { onShowAlertSuccess } from 'containers/alert/Alert.actions';
+import { setFilters } from 'containers/products-list/ProductsList.actions';
+import CloseButton from 'components/buttons/CloseButton';
+import Breadcrumbs from 'components/basics/Breadcrumbs';
+import { ARROW_BACK } from 'assets/Images';
 import Context from './SpecProductsPanelLayout.context';
-import Breadcrumbs from '../basics/Breadcrumbs';
-import CloseButton from '../buttons/CloseButton';
 import {
   Root,
   Filters,
@@ -23,7 +24,6 @@ import {
   Overlay,
   ButtonBack,
 } from './SpecProductsPanelLayout.styles';
-import { ARROW_BACK } from '../../assets/Images';
 
 /** The SpecProductsPanelLayout's component */
 const SpecProductsPanelLayout = ({

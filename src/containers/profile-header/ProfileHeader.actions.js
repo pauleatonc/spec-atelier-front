@@ -1,10 +1,10 @@
-import onActionCreator from '../../config/store/helpers';
 import {
   setProfile,
   getProfile,
   setProfileImage,
-} from '../../services/profile.service';
-import { onShowAlertSuccess } from '../alert/Alert.actions';
+} from 'services/profile.service';
+import onActionCreator from 'config/store/helpers';
+import { onShowAlertSuccess } from 'containers/alert/Alert.actions';
 
 export const SET_PROFILE = 'SET_PROFILE';
 export const GET_PROFILE = 'GET_PROFILE';
@@ -43,7 +43,10 @@ export const getUserProfile = () => async (dispatch, getState) => {
   }
 };
 
-export const setUserProfile = ({ user: profile }) => async (dispatch, getState) => {
+export const setUserProfile = ({ user: profile }) => async (
+  dispatch,
+  getState,
+) => {
   try {
     const { user } = getState().auth;
     dispatch(onActionCreator(PROFILE_LOADING));
@@ -52,7 +55,9 @@ export const setUserProfile = ({ user: profile }) => async (dispatch, getState) 
       return dispatch(
         onActionCreator(GET_PROFILE, { loading: false, error: true }),
       );
-    dispatch(onShowAlertSuccess({ message: 'Se editó el perfil correctamente' }));
+    dispatch(
+      onShowAlertSuccess({ message: 'Se editó el perfil correctamente' }),
+    );
     return dispatch(
       onActionCreator(GET_PROFILE, { loading: false, user: response.user }),
     );
@@ -61,20 +66,27 @@ export const setUserProfile = ({ user: profile }) => async (dispatch, getState) 
   }
 };
 
-export const onShowEditProfilePicture = () => ({ type: SHOW_EDIT_PROFILE_PICTURE });
-export const onHideEditProfilePicture = () => ({ type: HIDE_EDIT_PROFILE_PICTURE });
+export const onShowEditProfilePicture = () => ({
+  type: SHOW_EDIT_PROFILE_PICTURE,
+});
+export const onHideEditProfilePicture = () => ({
+  type: HIDE_EDIT_PROFILE_PICTURE,
+});
 
-export const onChangeProfilePicture = image => (dispatch, getState) => {
+export const onChangeProfilePicture = (image) => (dispatch, getState) => {
   const { user } = getState().auth;
   dispatch(onActionCreator(CHANGE_PROFILE_PICTURE_LOADING));
   setProfileImage({ id: user.id, image }).then(
     (response) => {
       dispatch(onHideEditProfilePicture());
-      dispatch(onActionCreator(CHANGE_PROFILE_PICTURE_SUCCESS, { user: response.user }));
+      dispatch(
+        onActionCreator(CHANGE_PROFILE_PICTURE_SUCCESS, {
+          user: response.user,
+        }),
+      );
     },
-    (error) => {
-      console.error(error);
+    () => {
       return dispatch(onActionCreator(CHANGE_PROFILE_PICTURE_ERROR));
     },
   );
-}
+};

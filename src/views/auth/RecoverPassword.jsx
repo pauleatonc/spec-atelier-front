@@ -1,7 +1,7 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
-import RecoverPasswordContainer from '../../containers/auth/recover-password/RecoverPassword.container';
+import RecoverPasswordContainer from 'containers/auth/recover-password/RecoverPassword.container';
+import Alert from 'containers/alert/Alert.container';
 import {
   Container,
   Content,
@@ -10,16 +10,14 @@ import {
   Image,
   Logo,
 } from './Auth.styles';
-import Alert from '../../containers/alert/Alert.container';
-/**
- * The Recovery Password view.
- */
+
+/** The Recovery Password view */
 const RecoverPassword = () => {
   return (
-    <Container >
+    <Container>
       <SectionLeft>
         <Image>
-          <Link to="/" data-view="home" >
+          <Link to="/" data-view="home">
             <Logo />
           </Link>
         </Image>

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { WHITE, SHADOW_GREY, SILVER } from '../../config/constants/styled-vars';
+import { WHITE, SHADOW_GREY, SILVER } from 'config/constants/styled-vars';
 
 export const Container = styled.div`
   position: relative;
-  ${({ isOpen }) => isOpen ? 'block' : 'inline-block'}
+  ${({ isOpen }) => (isOpen ? 'block' : 'inline-block')}
 `;
 
 export const Content = styled.div`
@@ -15,6 +15,6 @@ export const Content = styled.div`
   max-width: 300px;
   padding: 12px 16px;
   z-index: 1;
-  display: ${({ isOpen }) => isOpen ? 'block' : 'none'}
-  ${({ isOpen }) => isOpen ? `box-shadow: ${SHADOW_GREY}` : ''}
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')}
+    ${({ isOpen }) => (isOpen ? `box-shadow: ${SHADOW_GREY}` : '')};
 `;

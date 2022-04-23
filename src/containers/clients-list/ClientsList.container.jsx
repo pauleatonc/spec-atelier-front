@@ -1,23 +1,26 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { Loading, ErrorMessage } from '../../components/SpecComponents';
-import { Container } from './ClientsList.style';
-import ClientCard from '../../components/client/ClientCard';
-
+import { openContactModal } from 'containers/modal-contact-form/ModalContactForm.actions';
+import Loading from 'components/basics/loading';
+import ErrorMessage from 'components/basics/ErrorMessage';
+import ClientCard from 'components/client/ClientCard';
 import { getClients } from './ClientsList.actions';
-import { openContactModal } from '../modal-contact-form/ModalContactForm.actions';
+import { Container } from './ClientsList.style';
 
 const ClientsList = () => {
-  const { clients, error, loading, params } = useSelector(state => state.clientsList);
+  const { clients, error, loading, params } = useSelector(
+    (state) => state.clientsList,
+  );
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onClickClient = selectedClient => {
+  const onClickClient = (selectedClient) => {
     history.push(`/collaborators/${selectedClient.id}`);
   };
 
-  const onClickContact = selectedClient => dispatch(openContactModal({ selectedClient }));
+  const onClickContact = (selectedClient) =>
+    dispatch(openContactModal({ selectedClient }));
 
   useEffect(() => {
     if (!clients.length) dispatch(getClients(params));
@@ -29,7 +32,7 @@ const ClientsList = () => {
 
   return (
     <Container>
-      {clients.map(client => (
+      {clients.map((client) => (
         <ClientCard
           key={client.id}
           client={client}

@@ -2,12 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
-import { Button } from '../../components/SpecComponents';
-import ModalLayout from '../../components/layouts/ModalLayout';
-import useModal from '../../components/layouts/ModalLayout.hooks';
-import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
-
+import Button from 'components/buttons/Button';
+import ModalLayout from 'components/layouts/ModalLayout';
+import useModal from 'components/layouts/ModalLayout.hooks';
+import CloseButton from 'components/buttons/CloseButton';
+import { VARIANTS_BUTTON } from 'config/constants/button-variants';
 import { onHideModalStepTwo, sendContactData, onHideModal } from './actions';
 import {
   Container,
@@ -25,7 +24,6 @@ import {
   ContainerButtons,
   FormPlan,
 } from './styles';
-import CloseButton from '../../components/buttons/CloseButton';
 
 const PlanFormStepTwo = () => {
   const {

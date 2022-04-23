@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import ModalLayout from 'components/layouts/ModalLayout';
+import useModal from 'components/layouts/ModalLayout.hooks';
+import CloseButton from 'components/buttons/CloseButton';
+import { SUCCESS_ICON } from 'assets/Images';
 import { onHideModal } from './actions';
-import ModalLayout from '../../components/layouts/ModalLayout';
-import useModal from '../../components/layouts/ModalLayout.hooks';
-import CloseButton from '../../components/buttons/CloseButton';
 import {
   Container,
   ContainerModalSuccess,
@@ -12,7 +13,6 @@ import {
   TextBodySuccess,
   ButtonCloseContainer,
 } from './styles';
-import { SUCCESS_ICON } from '../../assets/Images';
 
 const ModalSuccess = () => {
   const { showSuccessModal } = useSelector((state) => state.modalPlanForm);

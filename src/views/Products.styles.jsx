@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GALLERY } from '../config/constants/styled-vars';
+import { GALLERY } from 'config/constants/styled-vars';
 
 export const Container = styled.section`
   padding: 16px 81px;

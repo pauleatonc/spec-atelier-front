@@ -2,10 +2,13 @@ import React from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
+import { onShowAlertSuccess } from 'containers/alert/Alert.actions';
+import { BottonContainer } from 'containers/modal-contact-form/ModalContactForm.styles';
+import ModalLayout from 'components/layouts/ModalLayout';
+import Loading from 'components/basics/loading';
+import CloseButton from 'components/buttons/CloseButton';
+import { NO_PHOTO } from 'assets/Images';
 import { closeModal, sendQuoteA } from './SpecModalQuote.actions';
-import { onShowAlertSuccess } from '../alert/Alert.actions';
-import { Loading, Modal } from '../../components/SpecComponents';
-import CloseButton from '../../components/buttons/CloseButton';
 import {
   Container,
   Content,
@@ -32,15 +35,14 @@ import {
   Category,
   Reference,
 } from './SpecModalQuote.styles';
-import { BottonContainer } from '../modal-contact-form/ModalContactForm.styles';
-import { NO_PHOTO } from '../../assets/Images';
 
 const SpecModalQuote = ({ initialValues }) => {
   const dispatch = useDispatch();
+  const { project } = useSelector((state) => state.specDocument);
+
   const { product, showModalQuote } = useSelector(
     (state) => state.specModalQuote,
   );
-  const { project } = useSelector((state) => state.specDocument);
 
   const FormContactSchema = Yup.object().shape({
     name: Yup.string().required('El nombre es requerido'),
@@ -87,7 +89,7 @@ const SpecModalQuote = ({ initialValues }) => {
   if (!showModalQuote) return null;
 
   return (
-    <Modal show={showModalQuote} onClose={onCloseModal}>
+    <ModalLayout show={showModalQuote} onClose={onCloseModal}>
       {!product || !product.id ? (
         <Loading />
       ) : (
@@ -193,7 +195,7 @@ const SpecModalQuote = ({ initialValues }) => {
           </Content>
         </Container>
       )}
-    </Modal>
+    </ModalLayout>
   );
 };
 

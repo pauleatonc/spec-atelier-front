@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
+  DOCUMENT_UPLOAD_SOURCE,
+  DWG_ICON,
+  REMOVE_SOURCE,
+  TECH_ICON,
+} from 'assets/Images';
+import {
   Item,
   ItemDetails,
   ItemText,
   RemoveIcon,
 } from './AttachedDocuments.styles';
-import {
-  DOCUMENT_UPLOAD_SOURCE,
-  DWG_ICON,
-  REMOVE_SOURCE,
-  TECH_ICON,
-} from '../../assets/Images';
 
 /** The DocumentItem' component */
 const DocumentItem = ({ onClickRemove, document, bordered, onClick }) => {

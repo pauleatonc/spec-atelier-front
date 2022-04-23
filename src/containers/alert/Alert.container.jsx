@@ -1,13 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Snackbar from 'components/basics/Snackbar';
 import { onHideAlertSuccess } from './Alert.actions';
-import Snackbar from '../../components/basics/Snackbar';
 
-/**
- * The Alert's container.
- */
+/** The Alert's container */
 const Alert = () => {
-  const { message, show } = useSelector(state => state.alert);
+  const { message, show } = useSelector((state) => state.alert);
   const dispatch = useDispatch();
   const handleClose = () => dispatch(onHideAlertSuccess());
 

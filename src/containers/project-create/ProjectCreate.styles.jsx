@@ -1,18 +1,5 @@
 import styled from 'styled-components';
-import { Button as ButtonItem } from '../../components/SpecComponents';
-import {
-  BORDER_GREY,
-  MINE_SHAFT,
-  MEDIA_QUERY_SMALL,
-  MEDIA_QUERY_MEDIUM,
-  WHITE,
-  GALLERY,
-  PRIMARY,
-  DARKESTGREY,
-  SILVER_CHALICE,
-  SILVER,
-  ALTO,
-} from '../../config/constants/styled-vars';
+import Button from 'components/buttons/Button';
 import {
   INSTITUTIONAL,
   HOSPITAL,
@@ -33,7 +20,20 @@ import {
   OFFICE_ACTIVE,
   INDUSTRIAL_ACTIVE,
   CHECK_SOURCE,
-} from '../../assets/Images';
+} from 'assets/Images';
+import {
+  BORDER_GREY,
+  MINE_SHAFT,
+  MEDIA_QUERY_SMALL,
+  MEDIA_QUERY_MEDIUM,
+  WHITE,
+  GALLERY,
+  PRIMARY,
+  DARKESTGREY,
+  SILVER_CHALICE,
+  SILVER,
+  ALTO,
+} from 'config/constants/styled-vars';
 
 const types = {
   INSTITUTIONAL,
@@ -114,7 +114,7 @@ export const ButtonContainer = styled.div`
   position: relative;
 `;
 
-export const Button = styled(ButtonItem)`
+export const ButtonItem = styled(Button)`
   text-transform: capitalize;
   width: 100%;
 `;

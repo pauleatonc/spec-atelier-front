@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { ICON_FACEBOOK, ICON_TWITTER } from '../../assets/Images';
+import { ICON_FACEBOOK, ICON_TWITTER } from 'assets/Images';
 import {
   MINE_SHAFT,
   PRIMARY,
   SECONDARY,
   DARKESTGREY,
   TERTIARY,
-} from '../../config/constants/styled-vars';
+} from 'config/constants/styled-vars';
 
 const mapVariantsToColors = {
   default: MINE_SHAFT,
@@ -39,6 +39,6 @@ export const ButtonIcon = styled.div`
   background-size: cover;
   :hover {
     color: ${({ disabled }) =>
-      disabled ? mapVariantsToColors.disabled : mapVariantsToColors['primary']};
+      disabled ? mapVariantsToColors.disabled : mapVariantsToColors.primary};
   }
 `;
