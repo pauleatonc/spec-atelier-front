@@ -62,6 +62,11 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         blocks: payload.blocks,
         sections: getSections(payload.blocks),
         changedBlocks: payload.changedBlocks,
+        ownerBlocks: payload.blocks.filter(
+          (block) =>
+            block.status === 'accepted' ||
+            (block.status === 'accepted' && block.change.action === 'remove'),
+        ),
       };
     }
     case SORT_SPEC_BLOCKS_SUCCESS: {
