@@ -178,7 +178,7 @@ const SpecDocument = () => {
               Editar
             </BlockMenuItem>
           )}
-          {(userOwner || userID === blockCreator) && (
+          {typeBlock === 'Product' || elementUserOwner && (
             <BlockMenuItem onClick={handleRemoveBlock(selectedBlockID)}>
               Eliminar
             </BlockMenuItem>

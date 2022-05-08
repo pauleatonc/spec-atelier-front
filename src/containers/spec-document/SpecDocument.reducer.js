@@ -45,7 +45,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         ownerBlocks: payload.blocks.filter(
           (block) =>
             block.status === 'accepted' ||
-            (block.status === 'accepted' && block.change.action === 'remove'),
+            (block.status === 'waiting' && block.change.action === 'remove'),
         ),
         project: { ...state.project, ...payload.project },
         quoteTable: getFormatedTableData(payload.blocks),
@@ -65,7 +65,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         ownerBlocks: payload.blocks.filter(
           (block) =>
             block.status === 'accepted' ||
-            (block.status === 'accepted' && block.change.action === 'remove'),
+            (block.status === 'waiting' && block.change.action === 'remove'),
         ),
       };
     }
