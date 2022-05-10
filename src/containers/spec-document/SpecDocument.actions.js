@@ -11,6 +11,7 @@ import {
   updateSpecBlockText,
   deleteSpecBlockText,
   updateProduct,
+  saveSpecChanges,
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { updateProductsWithProduct } from '../products-list/ProductsList.actions';
@@ -410,3 +411,20 @@ export const handleSaveTeamMembers = (invitations) => (dispatch) =>
 
 export const handleDeleteMemberTeam = (permissionId) => (dispatch) =>
   dispatch(onActionCreator(DELETE_MEMBER_TEAM, { permissionId }));
+
+export const SAVE_SPEC_CHANGES = 'SAVE_SPEC_CHANGES';
+export const SAVE_SPEC_CHANGES_SUCCESS = 'SAVE_SPEC_CHANGES_SUCCESS';
+export const SAVE_SPEC_CHANGES_ERROR = 'SAVE_SPEC_CHANGES_ERROR';
+export const onSaveSpecChanges = (specID, params) => async (
+  dispatch,
+  getState,
+) => {
+  console.log(params);
+  const { auth } = getState();
+  dispatch(onActionCreator(SAVE_SPEC_CHANGES));
+  saveSpecChanges({ specID, userID: auth.user?.id })
+    .then((response) => console.log(response))
+    .catch((error) =>
+      dispatch(onActionCreator(SAVE_SPEC_CHANGES_ERROR, { error })),
+    );
+};

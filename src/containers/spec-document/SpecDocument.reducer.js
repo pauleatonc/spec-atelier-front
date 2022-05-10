@@ -13,6 +13,9 @@ import {
   UPDATE_TEAM_DATA,
   SAVE_TEAM_MEMBERS,
   DELETE_MEMBER_TEAM,
+  SAVE_SPEC_CHANGES,
+  SAVE_SPEC_CHANGES_SUCCESS,
+  SAVE_SPEC_CHANGES_ERROR,
 } from './SpecDocument.actions';
 import {
   getFormatedTableData,
@@ -27,6 +30,9 @@ const specDocumentState = {
   quoteTable: [],
   totalExpandManual: 0,
   sections: [],
+  changesCount: 0,
+  changesLoading: false,
+  changesError: null,
 };
 
 /**
@@ -45,6 +51,11 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         quoteTable: getFormatedTableData(payload.blocks),
         totalExpandManual: getTotalExpandManual(payload.blocks),
         sections: getSections(payload.blocks),
+        changesCount: payload.blocks.reduce(
+          (prevValue, currentValue) =>
+            currentValue.status === 'waiting' ? prevValue + 1 : prevValue + 0,
+          0,
+        ),
       };
     case REMOVE_SPEC_BLOCK_SUCCESS:
     case REMOVE_SPEC_BLOCK_IMAGE_SUCCESS:
@@ -111,6 +122,26 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
             (member) => member.permission.id !== payload.permissionId,
           ),
         },
+      };
+    }
+    case SAVE_SPEC_CHANGES: {
+      return {
+        ...state,
+        changesLoading: true,
+      };
+    }
+    case SAVE_SPEC_CHANGES_SUCCESS: {
+      return {
+        ...state,
+        changesLoading: false,
+        changesError: null,
+      };
+    }
+    case SAVE_SPEC_CHANGES_ERROR: {
+      return {
+        ...state,
+        changesLoading: false,
+        changesError: payload.error,
       };
     }
     default: {

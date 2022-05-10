@@ -95,6 +95,7 @@ import CHECKBOX_ON_SECONDARY from './images/icons/checkbox-on-secondary.svg';
 import ARROW_BACK from './images/icons/arrow_back.svg';
 import DROPDOWN_ARROW from './images/icons/dropdown-arrow.svg';
 import SUCCESS_ICON from './images/businessPlan/icon_phone.svg';
+import SPEC_ICON_ALERT_CIRCLE from './images/icons/spec-icon-circle-alert.svg';
 
 import INSTITUTIONAL from './images/project/project_type/ic-institutional_grey.svg';
 import HOSPITAL from './images/project/project_type/ic-hospitaler_grey.svg';
@@ -257,4 +258,5 @@ export {
   SPEC_DOCUMENT_SELECTED,
   SPEC_TABLE_UNSELECTED,
   SPEC_TABLE_SELECTED,
+  SPEC_ICON_ALERT_CIRCLE,
 };

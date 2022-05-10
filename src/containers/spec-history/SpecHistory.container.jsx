@@ -11,6 +11,7 @@ import { SPEC_HISTORY_TABLE } from '../../config/constants/button-variants';
 import StructureTableChangeHistory from './components/StructureTableChangeHistory';
 import ButtonsHistoryChangesManagement from './components/ButtonsHistoryChangesManagement';
 import IconUser from '../../components/IconUser';
+import SpecChangeManagement from './components/spec-change-management';
 import { ADD_ICON, DELETE_ICON, EDIT_ICON } from '../../assets/Images';
 import {
   ActionText,
@@ -137,9 +138,7 @@ const ChangeHistoryContainer = () => {
           />
         )
       ) : (
-        <h2 style={{ textAlign: 'center', margin: '40px' }}>
-          Gestión de Cambios
-        </h2>
+        <SpecChangeManagement actionsIcons={actionsIcons} />
       )}
     </ContainerTable>
   );

@@ -60,6 +60,14 @@ export const LOADING_ACCEPT_INITIAL = 'rbg(156 221 212)';
 export const TORCH_RED = '#FD0E35';
 export const WHITE_SMOKE = 'rgba(235, 234, 234, 0.5)';
 export const PRIMARY_OPACITY = 'rgba(58, 192, 172, 0.08)';
+export const BACKGROUND_ADD = 'rgba(66, 191, 173, 0.2)';
+export const BACKGROUND_ADD_HOVER = 'rgba(66, 191, 173, 0.3)';
+export const BACKGROUND_REMOVE = 'rgba(233, 119, 86, 0.2)';
+export const BACKGROUND_REMOVE_HOVER = 'rgba(233, 119, 86, 0.3)';
+export const BACKGROUND_EDIT = 'rgba(255, 199, 0, 0.2)';
+export const BACKGROUND_EDIT_HOVER = 'rgba(255, 199, 0, 0.3)';
+export const SUPERNOVA = '#FFC700';
+export const BURNT_SIENNA = '#E97756';
 
 // Media Queries
 export const MAX_SCREEN_SMALL = 768;

@@ -22,7 +22,7 @@ export const ContainerTable = styled.div`
   background-color: ${WHITE};
   height: fit-content;
   width: 65%;
-  height: 630px;
+  min-height: 630px;
 `;
 
 export const HistoryChangeManagementContent = styled.div`
