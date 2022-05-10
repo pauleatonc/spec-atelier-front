@@ -1,4 +1,9 @@
 import {
+  getFormatedTableData,
+  getTotalExpandManual,
+  getSections,
+} from './utils';
+import {
   ADD_SPEC_BLOCK_SUCCESS,
   ADD_SPEC_BLOCK_IMAGE_SUCCESS,
   ADD_SPEC_BLOCK_TEXT_SUCCESS,
@@ -16,15 +21,12 @@ import {
   SAVE_SPEC_CHANGES,
   SAVE_SPEC_CHANGES_SUCCESS,
   SAVE_SPEC_CHANGES_ERROR,
+  SEND_CHANGED_BLOCKS_SUCCESS,
 } from './SpecDocument.actions';
-import {
-  getFormatedTableData,
-  getTotalExpandManual,
-  getSections,
-} from './utils';
 
 const specDocumentState = {
   blocks: [],
+  ownerBlocks: [],
   loading: false,
   project: {},
   quoteTable: [],
@@ -33,11 +35,10 @@ const specDocumentState = {
   changesCount: 0,
   changesLoading: false,
   changesError: null,
+  changedBlocks: [],
 };
 
-/**
- * The spec document' reducer.
- */
+/** The spec document' reducer */
 const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
   switch (type) {
     case ADD_SPEC_BLOCK_SUCCESS:
@@ -47,6 +48,11 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
       return {
         ...state,
         blocks: payload.blocks,
+        ownerBlocks: payload.blocks.filter(
+          (block) =>
+            block.status === 'accepted' ||
+            (block.status === 'waiting' && block.change.action === 'remove'),
+        ),
         project: { ...state.project, ...payload.project },
         quoteTable: getFormatedTableData(payload.blocks),
         totalExpandManual: getTotalExpandManual(payload.blocks),
@@ -56,6 +62,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
             currentValue.status === 'waiting' ? prevValue + 1 : prevValue + 0,
           0,
         ),
+        changedBlocks: payload.changedBlocks,
       };
     case REMOVE_SPEC_BLOCK_SUCCESS:
     case REMOVE_SPEC_BLOCK_IMAGE_SUCCESS:
@@ -65,6 +72,12 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         ...state,
         blocks: payload.blocks,
         sections: getSections(payload.blocks),
+        changedBlocks: payload.changedBlocks,
+        ownerBlocks: payload.blocks.filter(
+          (block) =>
+            block.status === 'accepted' ||
+            (block.status === 'waiting' && block.change.action === 'remove'),
+        ),
       };
     }
     case SORT_SPEC_BLOCKS_SUCCESS: {
@@ -142,6 +155,13 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         ...state,
         changesLoading: false,
         changesError: payload.error,
+      };
+    }
+    case SEND_CHANGED_BLOCKS_SUCCESS: {
+      return {
+        ...state,
+        changedBlocks: [],
+        blocks: payload.blocks,
       };
     }
     default: {
