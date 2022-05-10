@@ -10,6 +10,7 @@ import {
   CONCRETE,
   CONCRETE_OPACITY,
   MINE_SHAFT_RGB,
+  BOULDER,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -56,6 +57,9 @@ export const AddMenuItem = styled.section`
 `;
 
 export const Page = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
   background-color: ${WHITE};
   border: 1px solid ${DUSTY_GRAY};
   margin: 0 0 5px;
@@ -73,18 +77,16 @@ export const Group = styled.section`
 
 export const Block = styled.section`
   margin: ${({ margin = 'initial' }) => margin};
+  border: ${({ color }) => color && `solid 2px ${color}`};
+  text-decoration: ${({ strikethrough }) => strikethrough && 'line-through'};
   width: 100%;
   &:last-child {
     margin: 0;
   }
 `;
 
-Block.defaultProps = {
-  margin: 'initial',
-};
-Block.propTypes = {
-  margin: PropTypes.string,
-};
+Block.defaultProps = { margin: 'initial' };
+Block.propTypes = { margin: PropTypes.string };
 
 export const BlockEditor = styled.section`
   background-color: ${CONCRETE};
@@ -279,4 +281,19 @@ export const ProductBrand = styled.p`
   font-size: 11px;
   letter-spacing: 1px;
   line-height: 1.6;
+`;
+
+export const ContentButton = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 28px;
+`;
+
+export const SubmittedChanges = styled.p`
+  font-family: 'Lato';
+  font-size: 12px;
+  margin-top: 37px;
+  color: ${BOULDER};
 `;

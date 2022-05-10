@@ -12,9 +12,7 @@ import {
   formatParams,
 } from '../modules/services';
 
-/**
- * Add a block to the spec.
- */
+/** Add a block to the spec */
 export const addSpecBlock = factoryService(
   ({ specID, userID, productID, systemID, params }) =>
     postJsonRequest(
@@ -28,9 +26,7 @@ export const addSpecBlock = factoryService(
     ),
 );
 
-/**
- * Add a block's text to the given block.
- */
+/** Add a block's text to the given block */
 export const addSpecBlockText = factoryService(
   ({ blockID, specID, textValue, userID }) =>
     postJsonRequest(
@@ -39,9 +35,7 @@ export const addSpecBlockText = factoryService(
     ),
 );
 
-/**
- * Delete a block from the spec.
- */
+/** Delete a block from the spec */
 export const deleteSpecBlock = factoryService(({ block, specID, userID }) => {
   return deleteJsonRequest(
     `${API_BASE_URL}/users/${userID}/project_specs/${specID}/remove_block`,
@@ -49,9 +43,7 @@ export const deleteSpecBlock = factoryService(({ block, specID, userID }) => {
   );
 });
 
-/**
- * Delete the image of the given block.
- */
+/** Delete the image of the given block */
 export const deleteSpecBlockImage = factoryService(
   ({ blockID, specID, userID }) =>
     patchJsonRequest(
@@ -60,9 +52,7 @@ export const deleteSpecBlockImage = factoryService(
     ),
 );
 
-/**
- * Delete the given block's text.
- */
+/** Delete the given block's text */
 export const deleteSpecBlockText = factoryService(
   ({ specID, textID, userID }) =>
     deleteJsonRequest(
@@ -71,16 +61,15 @@ export const deleteSpecBlockText = factoryService(
     ),
 );
 
-/**
- * Get the spec blocks.
- */
+/** Get the spec blocks */
 export const getSpecBlocks = factoryService(({ specID, userID }) =>
   getJsonRequest(`${API_BASE_URL}/users/${userID}/project_specs/${specID}`),
 );
+// export const getSpecBlocks = factoryService(()=>
+// 	getJsonRequest(`http://demo2875701.mockable.io/`),
+// );
 
-/**
- * Sort the spec blocks.
- */
+/** Sort the spec blocks */
 export const sortSpecBlocks = factoryService(
   ({ blocks, block, specID, userID }) =>
     patchJsonRequest(
@@ -89,9 +78,7 @@ export const sortSpecBlocks = factoryService(
     ),
 );
 
-/**
- * Update the image of the given block.
- */
+/** Update the image of the given block */
 export const updateSpecBlockImage = factoryService(
   ({ blockID, imageID, specID, userID }) =>
     patchJsonRequest(
@@ -100,9 +87,7 @@ export const updateSpecBlockImage = factoryService(
     ),
 );
 
-/**
- * Update the given block's text.
- */
+/** Update the given block's text */
 export const updateSpecBlockText = factoryService(
   ({ specID, textID, textValue, userID }) =>
     patchJsonRequest(
@@ -111,29 +96,21 @@ export const updateSpecBlockText = factoryService(
     ),
 );
 
-/**
- * Download current specification.
- */
-
+/** Download current specification */
 export const downloadSpec = factoryService(({ specID, userID }) =>
   getJsonRequest(
     `${API_BASE_URL}/users/${userID}/project_specs/${specID}/download_word`,
   ),
 );
 
-/**
- * getMySpecifications
- */
-
+/** getMySpecifications */
 export const getMySpecs = factoryService((params) =>
   getJsonRequest(
     `${API_BASE_URL}/project_specs/my_specifications${formatParams(params)}`,
   ),
 );
 
-/**
- * get room types by params
- */
+/** get room types by params */
 export const getRoomTypes = factoryService(({ params }) =>
   getJsonRequest(
     `${API_BASE_URL}/configs/room_types${formatParams(
@@ -148,10 +125,7 @@ export const downloadBudged = factoryService(({ specID, userID }) =>
   ),
 );
 
-/**
- * update project configuration
- */
-
+/** update project configuration */
 export const updateProjectConfig = factoryService(
   ({ specID, project_config, userID }) =>
     postJsonRequest(
@@ -220,3 +194,20 @@ export const getChangesAuthor = factoryService(({ specID, userID, params }) =>
     )}`,
   ),
 );
+
+/** Send block changes */
+export const submitChanges = factoryService(({ blocks, specID, userID }) => {
+  return patchJsonRequest(
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/submit_changes`,
+    { blocks },
+  );
+});
+
+/** Delete block changes */
+// por ahora este endpoint no está funcionando
+// export const removeChanges = factoryService(({ blockID, specID, userID }) =>
+//   patchJsonRequest(
+//     `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/${blockID}/undo_change`,
+//     { block: blockID },
+//   ),
+// );
