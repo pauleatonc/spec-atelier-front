@@ -91,7 +91,7 @@ const BlockSpecDocument = ({
   const actionsColors = {
     add: PUERTO_RICO,
     remove: BURNT_SIENNA,
-    edit_text: SUPERNOVA,
+    edit: SUPERNOVA,
     move: SUPERNOVA,
   };
 

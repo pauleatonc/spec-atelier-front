@@ -74,7 +74,7 @@ const ChangeHistoryContainer = () => {
   const actionsIcons = {
     add: ADD_ICON,
     remove: DELETE_ICON,
-    edit_text: EDIT_ICON,
+    edit: EDIT_ICON,
     move: EDIT_ICON,
   };
 
@@ -99,8 +99,8 @@ const ChangeHistoryContainer = () => {
         Header: 'Fecha',
         Cell: ({ row }) => (
           <ContentDate>
-            <div>{(row?.original?.date.split(' '))[0]}</div>
-            <div>{(row?.original?.date.split(' '))[1]}</div>
+            <div>{(row?.original.created_at.split(' '))[0]}</div>
+            <div>{(row?.original.created_at.split(' '))[1]}</div>
           </ContentDate>
         ),
       },
