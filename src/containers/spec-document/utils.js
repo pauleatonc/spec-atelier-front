@@ -160,3 +160,24 @@ export const getSections = (blocks) => {
       })),
   }));
 };
+
+export const getOwnerBlocks = (blocks) => {
+  return blocks.filter(
+    (block) =>
+      block.status === 'accepted' ||
+      (block.status === 'accepted' && block.change.action === 'remove'),
+  );
+};
+
+export const getChangesBlocks = (blocks) => {
+  return blocks.filter((block) => {
+    const blockAccepted = block.status === 'accepted';
+    const unsentBlocks = block?.change?.sent === false;
+    const blockTextAccepted = block?.text?.status === 'accepted';
+    const unsentBlocksText = block?.text?.change?.sent === false;
+    return (
+      (unsentBlocks && !blockAccepted) ||
+      (!blockTextAccepted && unsentBlocksText)
+    );
+  });
+};

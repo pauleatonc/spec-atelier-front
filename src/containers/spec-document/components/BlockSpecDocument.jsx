@@ -3,11 +3,14 @@ import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { onAddSpecBlockText } from '../SpecDocument.actions';
 import Editor from '../../../components/inputs/Editor';
-import { THREE_DOTS_VERTICAL_SOURCE } from '../../../assets/Images';
+import { THREE_DOTS_VERTICAL_SOURCE, WATCH_ICON } from '../../../assets/Images';
 import {
   BURNT_SIENNA,
+  BURNT_SIENNA_OPACITY,
   PUERTO_RICO,
+  PUERTO_RICO_OPACITY,
   SUPERNOVA,
+  SUPERNOVA_OPACITY,
 } from '../../../config/constants/styled-vars';
 import {
   Block,
@@ -27,6 +30,8 @@ import {
   ProductSystem,
   ProductTitle,
   Section,
+  TextContainer,
+  Watch,
 } from '../SpecDocument.styles';
 
 const BlockSpecDocument = ({
@@ -43,12 +48,18 @@ const BlockSpecDocument = ({
   const { id: specID } = useParams();
   const { localConfig } = useSelector((state) => state.specAdmin);
   const { project } = useSelector((state) => state.specDocument);
-  const { text, type, product_block_image, status, id } = block;
+  const { text, type, product_block_image, id } = block;
   // const { action, sent, user } = block.change;
+  // const status = block?.status || text?.status;
+  // const action = block?.change?.action || text?.change?.action;
+  // const sent = block?.change?.sent || text?.change?.sent;
+  const status = block?.status;
   const action = block?.change?.action;
   const sent = block?.change?.sent;
+  const statusText = text?.status;
+  const actionText = text?.change?.action;
+  const sentText = text?.change?.sent;
   const user = block?.change?.user;
-  const blockAccepted = status === 'accepted';
   const userOwner = project.user_owner;
   const { images, short_desc, name, long_desc, system, brand, reference } =
     block.element;
@@ -95,14 +106,22 @@ const BlockSpecDocument = ({
     move: SUPERNOVA,
   };
 
-  const color = actionsColors[action];
-  const unsentCollaboratorBlock = !userOwner && !sent && !blockAccepted;
+  const actionsColorsOpacity = {
+    add: PUERTO_RICO_OPACITY,
+    remove: BURNT_SIENNA_OPACITY,
+    edit: SUPERNOVA_OPACITY,
+    move: SUPERNOVA_OPACITY,
+  };
+
+  const color =
+    sent || sentText ? actionsColorsOpacity[action] : actionsColors[action];
+  const unsentCollaboratorBlock = !userOwner && !sent && status !== 'accepted';
 
   return (
     <Block
       disabled={type === 'Section' || type === 'Item'}
       margin={getBlockMarginByType()}
-      color={unsentCollaboratorBlock ? color : undefined}
+      color={!userOwner && status !== 'accepted' ? color : undefined}
       strikethrough={unsentCollaboratorBlock && action === 'remove'}
     >
       {getBlockWrapperByType(
@@ -174,6 +193,12 @@ const BlockSpecDocument = ({
             onClick={handleShowBlockTextMenu(text?.id)}
           />
         </BlockText>
+      )}
+      {!userOwner && sent && status === 'waiting' && (
+        <TextContainer>
+          <p>Pendiente de revisión</p>
+          <Watch alt="watch" src={WATCH_ICON} />
+        </TextContainer>
       )}
     </Block>
   );

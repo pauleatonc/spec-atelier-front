@@ -204,8 +204,7 @@ export const submitChanges = factoryService(({ blocks, specID, userID }) => {
 });
 
 /** Delete block changes */
-// por ahora este endpoint no está funcionando
-// export const removeChanges = factoryService(({ blockID, specID, userID }) =>
+// export const undoRemove = factoryService(({ blockID, specID, userID }) =>
 //   patchJsonRequest(
 //     `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/${blockID}/undo_change`,
 //     { block: blockID },

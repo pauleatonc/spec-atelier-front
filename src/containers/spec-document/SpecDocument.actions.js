@@ -18,6 +18,7 @@ import { updateProductsWithProduct } from '../products-list/ProductsList.actions
 import { closeModal } from '../spec-modal-product/SpecModalProduct.actions';
 import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 import { onGetChangeHistory } from '../spec-history/SpecHistory.actions';
+import { getChangesBlocks } from './utils';
 
 const matchMedia = window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches;
 export const GET_SPEC_BLOCKS = 'GET_SPEC_BLOCKS';
@@ -25,14 +26,6 @@ export const GET_SPEC_BLOCKS_SUCCESS = 'GET_SPEC_BLOCKS_SUCCESS';
 export const UPDATE_TEAM_DATA = 'UPDATE_TEAM_DATA';
 export const SAVE_TEAM_MEMBERS = 'SAVE_TEAM_MEMBERS';
 export const DELETE_MEMBER_TEAM = 'DELETE_MEMBER_TEAM';
-
-const getChangesBlocks = (blocks) => {
-  return blocks.filter((block) => {
-    const blockAccepted = block.status === 'accepted';
-    const unsentBlocks = block?.change?.sent === false;
-    return unsentBlocks && !blockAccepted;
-  });
-};
 
 export const onGetSpecBlocks = (specID) => async (dispatch, getState) => {
   dispatch(onActionCreator(GET_SPEC_BLOCKS));
@@ -422,7 +415,9 @@ export const handleSubmitChanges =
     submitChanges({ blocks, specID, userID }).then(
       (response) => {
         dispatch(onActionCreator(SEND_CHANGED_BLOCKS_SUCCESS, response));
-        dispatch(onShowAlertSuccess({ message: 'Cambios enviados' }));
+        dispatch(
+          onShowAlertSuccess({ message: 'Se enviaron cambios a tu proyecto' }),
+        );
         if (matchMedia) dispatch(closeModal());
       },
       (error) => {

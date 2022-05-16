@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { handleSubmitChanges } from '../SpecDocument.actions';
 import BlocksSpecDocument from './BlocksSpecDocument';
 import Confirm from '../../../components/confirm/Confirm';
 import { Button } from '../../../components/SpecComponents';
-import { ContentButton, Page, SubmittedChanges } from '../SpecDocument.styles';
-import { handleSubmitChanges } from '../SpecDocument.actions';
+import Editor from '../../../components/inputs/Editor';
+import {
+  Page,
+  Footer,
+  SubmittedChanges,
+  InvalidInput,
+  Comment,
+} from '../SpecDocument.styles';
 
 const PageSpecDocument = ({
   showBlockEditor,
@@ -19,14 +26,15 @@ const PageSpecDocument = ({
   const dispatch = useDispatch();
   const { id: specID } = useParams();
   const { project, changedBlocks } = useSelector((state) => state.specDocument);
-  const [showSendChangesModal, setShowSendChangesModal] = useState(false);
   const userOwner = project?.user_owner;
+  const [showSendChangesModal, setShowSendChangesModal] = useState(false);
   const handleCloseModal = () => setShowSendChangesModal(false);
   const handleSendChanges = () => setShowSendChangesModal(true);
 
   const handleConfirm = () => {
-    handleCloseModal();
     const changedBlockIDs = changedBlocks.map((block) => block.id);
+    handleCloseModal();
+    // Agregar el comentario que está en el editor para enviarlo cuando se envien los cambios
     dispatch(handleSubmitChanges({ blocks: changedBlockIDs, specID }));
   };
 
@@ -43,19 +51,28 @@ const PageSpecDocument = ({
           handleShowBlockTextMenu={handleShowBlockTextMenu}
         />
         {!userOwner && (
-          <ContentButton>
+          <Footer>
             {changedBlocks.length > 0 ? (
-              <Button
-                variant="primary"
-                fontSize="14px"
-                onClick={handleSendChanges}
-              >
-                Enviar {changedBlocks.length} cambios
-              </Button>
+              <>
+                <Comment placeholder="¿Quieres agregar algún comentario?" />
+                <Button
+                  variant="primary"
+                  fontSize="14px"
+                  onClick={handleSendChanges}
+                >
+                  Enviar {changedBlocks.length} cambios
+                </Button>
+              </>
             ) : (
-              <SubmittedChanges>Cambios enviados</SubmittedChanges>
+              <>
+                <Comment
+                  disabled
+                  placeholder="Realiza cambios para agregar comentarios"
+                />
+                <SubmittedChanges>Cambios enviados</SubmittedChanges>
+              </>
             )}
-          </ContentButton>
+          </Footer>
         )}
       </Page>
       <Confirm

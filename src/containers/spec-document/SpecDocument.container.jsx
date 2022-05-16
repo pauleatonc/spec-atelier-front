@@ -28,17 +28,18 @@ import {
 const SpecDocument = () => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
-  const { blocks } = useSelector((state) => state.specDocument);
+  const { blocks, project } = useSelector((state) => state.specDocument);
   const [selectedBlockID, setSelectedBlockID] = useState('');
   const [selectedBlockTextID, setSelectedBlockTextID] = useState('');
   const [showBlockEditor, setShowBlockEditor] = useState('');
   const [showBlockTextEditor, setShowBlockTextEditor] = useState('');
   const windowSize = window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches;
   const selectedBlock = blocks.find((block) => block.id === selectedBlockID);
+  const userOwner = project.user_owner;
   const typeBlock = selectedBlock?.type;
   const productImage = selectedBlock?.product_block_image;
   const elementUserOwner = selectedBlock?.element.user_owner;
-
+  console.log(blocks);
   useEffect(() => {
     dispatch(onGetSpecBlocks(specID));
   }, []);
@@ -76,9 +77,11 @@ const SpecDocument = () => {
     dispatch(onShowSpecEditProduct({ id: block.element.id || 1 }));
   };
 
-  const handleUndoRemove = () => (event) => {
+  const handleUndoRemove = (blockID) => (event) => {
     // TODO
-  }
+    //   handleBlockMenuClose();
+    //   dispatch(undoRemove({ blockID, specID, userID }));
+  };
 
   const handleShowBlockMenu = (blockID) => (event) => {
     handleBlockMenuOpen(event);
@@ -104,7 +107,7 @@ const SpecDocument = () => {
 
   const handleHideBlockTextEditor = () => setShowBlockTextEditor('');
 
-  const handleShowBlockTextEditor = (textID) => () => {
+  const handleShowTextEditor = (textID) => () => {
     handleBlockTextMenuClose();
     setShowBlockTextEditor(textID);
   };
@@ -114,16 +117,13 @@ const SpecDocument = () => {
     dispatch(onUpdateSpecBlockText({ textID, specID, textValue }));
   };
 
-  const canEdit = () => (
-    selectedBlock.change.action !== "remove"
-  );
+  const canEdit = () => selectedBlock.change.action !== 'remove';
 
   const handleRemoveBlock = (blockID) => () => {
-    handleHideBlockEditor();
-    // Nota de Nelida, preguntar a Sergio
-    // Si el userID === blockCreator pero el bloque ya fue aceptado y tiene
-    // status = accepted, no se debe eliminar de una sino que va a submitChanges
-    // para que el owner lo revise y apruebe la eliminación.
+    // if(!userOwner && selectedBlock.status === "accepted"){
+    //    Aquí va la función que al eliminar el bloque lo cambie de block.status = "waiting"
+    //    y change.action = "delete"
+    // } else {la funcion que esta aqui abajo}
     dispatch(onRemoveSpecBlock({ block: [blockID], specID }));
   };
 
@@ -139,46 +139,45 @@ const SpecDocument = () => {
 
   const availableOptions = () => {
     if (canEdit())
-      return <>
-        {!selectedBlock?.text && (
-          <BlockMenuItem onClick={handleShowBlockEditor(selectedBlockID)}>
-            Añadir texto
-          </BlockMenuItem>
-        )}
-        {typeBlock === 'Product' && (
-          <BlockMenuItem onClick={handleShowImagesModal(selectedBlockID)}>
-            {productImage ? 'Editar imagen' : 'Añadir una imagen'}
-          </BlockMenuItem>)
-        }
-        {typeBlock === 'Product' && productImage && (
-          <BlockMenuItem onClick={handleBlockImageRemove(selectedBlockID)}>
-            Eliminar imagen
-          </BlockMenuItem>
-        )}
-        {typeBlock === 'Product' && elementUserOwner && (
-          <BlockMenuItem onClick={handleEditProduct(selectedBlock)}>
-            Editar
-          </BlockMenuItem>
-        )}
-        {typeBlock === 'Product' && (
-          <BlockMenuItem onClick={handleRemoveBlock(selectedBlockID)}>
-            Eliminar
+      return (
+        <>
+          {!selectedBlock?.text && (
+            <BlockMenuItem onClick={handleShowBlockEditor(selectedBlockID)}>
+              Añadir texto
+            </BlockMenuItem>
+          )}
+          {typeBlock === 'Product' && (
+            <BlockMenuItem onClick={handleShowImagesModal(selectedBlockID)}>
+              {productImage ? 'Editar imagen' : 'Añadir una imagen'}
+            </BlockMenuItem>
+          )}
+          {typeBlock === 'Product' && productImage && (
+            <BlockMenuItem onClick={handleBlockImageRemove(selectedBlockID)}>
+              Eliminar imagen
+            </BlockMenuItem>
+          )}
+          {typeBlock === 'Product' && elementUserOwner && (
+            <BlockMenuItem onClick={handleEditProduct(selectedBlock)}>
+              Editar
+            </BlockMenuItem>
+          )}
+          {typeBlock === 'Product' && (
+            <BlockMenuItem onClick={handleRemoveBlock(selectedBlockID)}>
+              Eliminar
+            </BlockMenuItem>
+          )}
+        </>
+      );
+    return (
+      <>
+        {!userOwner && selectedBlock.change.action === 'remove' && (
+          <BlockMenuItem onClick={handleUndoRemove(selectedBlockID)}>
+            Deshacer Eliminar
           </BlockMenuItem>
         )}
       </>
-    return <>
-      {selectedBlock.change.action === "remove" && (
-        <BlockMenuItem onClick={handleUndoRemove(selectedBlockID)}>
-          Deshacer Eliminar
-        </BlockMenuItem>
-      )}
-    </>
-  }
-
-  // const handleBlockChangeRemove = (blockID) => () => {
-  //   handleBlockMenuClose();
-  //   dispatch(removeChanges({ blockID, specID, userID })); // por ahora no esta funcionando este endpoint
-  // };
+    );
+  };
 
   return (
     <Root>
@@ -200,7 +199,7 @@ const SpecDocument = () => {
           origin={{ x: 'right', y: 'top' }}
           onClose={handleBlockMenuClose}
         >
-          { availableOptions() }
+          {availableOptions()}
         </Dropdown>
       )}
       {Boolean(blockTextAnchor) && (
@@ -211,9 +210,7 @@ const SpecDocument = () => {
           origin={{ x: 'right', y: 'top' }}
           onClose={handleBlockTextMenuClose}
         >
-          <BlockMenuItem
-            onClick={handleShowBlockTextEditor(selectedBlockTextID)}
-          >
+          <BlockMenuItem onClick={handleShowTextEditor(selectedBlockTextID)}>
             Editar texto
           </BlockMenuItem>
           <BlockMenuItem onClick={handleBlockTextRemove(selectedBlockTextID)}>

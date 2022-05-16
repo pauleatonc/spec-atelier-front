@@ -11,6 +11,8 @@ import {
   CONCRETE_OPACITY,
   MINE_SHAFT_RGB,
   BOULDER,
+  ALTO_OPACITY,
+  DOVE_GRAY,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -283,17 +285,38 @@ export const ProductBrand = styled.p`
   line-height: 1.6;
 `;
 
-export const ContentButton = styled.div`
+export const Footer = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin-top: 28px;
 `;
 
 export const SubmittedChanges = styled.p`
-  font-family: 'Lato';
   font-size: 12px;
-  margin-top: 37px;
   color: ${BOULDER};
+`;
+
+export const Comment = styled.input`
+  width: 300px;
+  height: 38px;
+  padding-left: 11px;
+  font-size: 12px;
+  border-radius: 5px;
+  :disabled {
+    background-color: ${ALTO_OPACITY};
+  }
+`;
+
+export const TextContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  font-size: 10px;
+  padding: 12px 0 15px 0;
+`;
+
+export const Watch = styled.img`
+  padding: 0 12px 0 6px;
 `;
