@@ -50,14 +50,10 @@ const BlockSpecDocument = ({
   const { project } = useSelector((state) => state.specDocument);
   const { text: blockText, image: blockImage, type, status, id } = block;
   const { user } = useSelector((state) => state.auth);
-  // const { action, sent, user } = block.change;
   const action = block?.change?.action;
   const sent = block?.change?.sent;
-  const statusText = blockText?.status;
-  const actionText = blockText?.change?.action;
   const sentText = blockText?.change?.sent;
   const blockUser = block?.change?.user;
-  const blockAccepted = status === 'accepted';
   const userOwner = project.user_owner;
   const { images, short_desc, name, long_desc, system, brand, reference } =
     block.element;
