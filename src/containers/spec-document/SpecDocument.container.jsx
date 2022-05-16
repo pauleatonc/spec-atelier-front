@@ -37,9 +37,9 @@ const SpecDocument = () => {
   const selectedBlock = blocks.find((block) => block.id === selectedBlockID);
   const userOwner = project.user_owner;
   const typeBlock = selectedBlock?.type;
-  const productImage = selectedBlock?.product_block_image;
-  const elementUserOwner = selectedBlock?.element.user_owner;
-  console.log(blocks);
+  const productImage = selectedBlock?.image?.image?.id;
+  const elementUserOwned = selectedBlock?.element.user_owned;
+
   useEffect(() => {
     dispatch(onGetSpecBlocks(specID));
   }, []);
@@ -117,7 +117,15 @@ const SpecDocument = () => {
     dispatch(onUpdateSpecBlockText({ textID, specID, textValue }));
   };
 
-  const canEdit = () => selectedBlock.change.action !== 'remove';
+  const canEdit =
+    selectedBlock?.change?.action !== 'remove' || elementUserOwned;
+  const canAddText = selectedBlock?.text?.user_owned
+    ? !selectedBlock?.text
+    : !selectedBlock?.text ||
+      (selectedBlock?.text && selectedBlock?.text?.status !== 'accepted');
+  const canRemoveImage = selectedBlock?.image?.user_owned
+    ? true
+    : selectedBlock?.image?.status === 'accepted';
 
   const handleRemoveBlock = (blockID) => () => {
     // if(!userOwner && selectedBlock.status === "accepted"){
@@ -138,10 +146,10 @@ const SpecDocument = () => {
   };
 
   const availableOptions = () => {
-    if (canEdit())
+    if (canEdit)
       return (
         <>
-          {!selectedBlock?.text && (
+          {canAddText && (
             <BlockMenuItem onClick={handleShowBlockEditor(selectedBlockID)}>
               Añadir texto
             </BlockMenuItem>
@@ -151,12 +159,12 @@ const SpecDocument = () => {
               {productImage ? 'Editar imagen' : 'Añadir una imagen'}
             </BlockMenuItem>
           )}
-          {typeBlock === 'Product' && productImage && (
+          {canRemoveImage && (
             <BlockMenuItem onClick={handleBlockImageRemove(selectedBlockID)}>
               Eliminar imagen
             </BlockMenuItem>
           )}
-          {typeBlock === 'Product' && elementUserOwner && (
+          {typeBlock === 'Product' && elementUserOwned && (
             <BlockMenuItem onClick={handleEditProduct(selectedBlock)}>
               Editar
             </BlockMenuItem>
@@ -170,7 +178,7 @@ const SpecDocument = () => {
       );
     return (
       <>
-        {!userOwner && selectedBlock.change.action === 'remove' && (
+        {selectedBlock.change?.action === 'remove' && (
           <BlockMenuItem onClick={handleUndoRemove(selectedBlockID)}>
             Deshacer Eliminar
           </BlockMenuItem>

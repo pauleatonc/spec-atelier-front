@@ -48,18 +48,16 @@ const BlockSpecDocument = ({
   const { id: specID } = useParams();
   const { localConfig } = useSelector((state) => state.specAdmin);
   const { project } = useSelector((state) => state.specDocument);
-  const { text, type, product_block_image, id } = block;
+  const { text: blockText, image: blockImage, type, status, id } = block;
+  const { user } = useSelector((state) => state.auth);
   // const { action, sent, user } = block.change;
-  // const status = block?.status || text?.status;
-  // const action = block?.change?.action || text?.change?.action;
-  // const sent = block?.change?.sent || text?.change?.sent;
-  const status = block?.status;
   const action = block?.change?.action;
   const sent = block?.change?.sent;
-  const statusText = text?.status;
-  const actionText = text?.change?.action;
-  const sentText = text?.change?.sent;
-  const user = block?.change?.user;
+  const statusText = blockText?.status;
+  const actionText = blockText?.change?.action;
+  const sentText = blockText?.change?.sent;
+  const blockUser = block?.change?.user;
+  const blockAccepted = status === 'accepted';
   const userOwner = project.user_owner;
   const { images, short_desc, name, long_desc, system, brand, reference } =
     block.element;
@@ -70,34 +68,38 @@ const BlockSpecDocument = ({
   };
 
   const getBlockMarginByType = () => {
-    if (type === 'Section') {
-      return '0 0 4px 0';
-    }
-    if (type === 'Item') {
-      return '0 0 7px 0';
-    }
+    if (type === 'Section') return '0 0 4px 0';
+    if (type === 'Item') return '0 0 7px 0';
     return '0 0 15px 0';
   };
 
   const getBlockWrapperByType = (content) => {
-    if (type === 'Section') {
-      return <Section>{content}</Section>;
-    }
-    if (type === 'Item') {
-      return <Item>{content}</Item>;
-    }
+    if (type === 'Section') return <Section>{content}</Section>;
+    if (type === 'Item') return <Item>{content}</Item>;
     return <Product>{content}</Product>;
   };
 
   const imageSize = () => {
-    const imageSmall = images.find((image) => image.id === product_block_image)
-      .urls.small;
+    const imageSmall = images.find(
+      (image) => image.id === blockImage?.image?.id,
+    ).urls.small;
     const imageOriginal = images.find(
-      (image) => image.id === product_block_image,
+      (image) => image.id === blockImage?.image?.id,
     ).urls.original;
     const imageType = imageSmall || imageOriginal;
     return imageType;
   };
+
+  const showBlockImage =
+    type === 'Product' &&
+    blockImage?.image?.id &&
+    (user.id === blockImage?.change?.user.id ||
+      blockImage?.status === 'accepted');
+
+  const showBlockText =
+    blockText &&
+    (user.id === blockText?.change?.user.id ||
+      blockText?.status === 'accepted');
 
   const actionsColors = {
     add: PUERTO_RICO,
@@ -139,9 +141,9 @@ const BlockSpecDocument = ({
           )}
           <BlockDotsIcon
             src={THREE_DOTS_VERTICAL_SOURCE}
-            onClick={handleShowBlockMenu(id, user?.id, sent)}
+            onClick={handleShowBlockMenu(id, blockUser?.id, sent)}
           />
-          {type === 'Product' && product_block_image && (
+          {showBlockImage && (
             <BlockImage>
               <ProductImage alt="Imagen del Producto" src={imageSize()} />
             </BlockImage>
@@ -173,24 +175,26 @@ const BlockSpecDocument = ({
           )}
         </>,
       )}
-      {block?.text && (
+      {showBlockText && (
         <BlockText>
-          <BlockTextContent dangerouslySetInnerHTML={{ __html: text?.text }} />
-          {showBlockTextEditor === text?.id && (
+          <BlockTextContent
+            dangerouslySetInnerHTML={{ __html: blockText?.text }}
+          />
+          {showBlockTextEditor === blockText?.id && (
             <BlockEditor>
               <Editor
                 actions
-                initialValue={text?.text}
+                initialValue={blockText?.text}
                 label="Texto"
                 placeholder="Ingresa el texto"
                 onCancel={handleHideBlockTextEditor}
-                onSubmit={handleEditBlockText(text?.id)}
+                onSubmit={handleEditBlockText(blockText?.id)}
               />
             </BlockEditor>
           )}
           <BlockDotsIcon
             src={THREE_DOTS_VERTICAL_SOURCE}
-            onClick={handleShowBlockTextMenu(text?.id)}
+            onClick={handleShowBlockTextMenu(blockText?.id)}
           />
         </BlockText>
       )}

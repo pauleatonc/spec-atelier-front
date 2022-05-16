@@ -32,7 +32,7 @@ const SpecImagesModal = () => {
   const selectedProductBlock =
     blocks.find((block) => block.id === selectedBlockID) || {};
   const [selectedImage, setSelectedImage] = useState(
-    selectedProductBlock.element?.product_block_image || '',
+    selectedProductBlock.element?.image?.image?.id || '',
   );
   const { onClose: handleClose } = useModal({
     closeCallback: () => dispatch(onHideSpecImagesModalSuccess()),
@@ -56,7 +56,7 @@ const SpecImagesModal = () => {
     selectedImage === '';
 
   useEffect(() => {
-    setSelectedImage(selectedProductBlock.element?.product_block_image);
+    setSelectedImage(selectedProductBlock.element?.image?.id);
   }, [selectedProductBlock.image]);
 
   return (

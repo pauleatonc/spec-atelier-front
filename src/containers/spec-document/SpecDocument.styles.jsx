@@ -139,6 +139,9 @@ export const BlockContent = styled.section`
 `;
 
 export const BlockText = styled.section`
+  min-height: 33px;
+  display: flex;
+  align-items: center;
   background-color: ${CONCRETE_OPACITY};
   font-size: 12px;
   margin: 0 0 3px 0;
