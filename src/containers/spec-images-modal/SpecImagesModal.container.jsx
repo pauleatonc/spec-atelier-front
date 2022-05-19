@@ -34,6 +34,8 @@ const SpecImagesModal = () => {
   const [selectedImage, setSelectedImage] = useState(
     selectedProductBlock.element?.image?.image?.id || '',
   );
+  const currentImage = selectedProductBlock?.image?.image.id;
+
   const { onClose: handleClose } = useModal({
     closeCallback: () => dispatch(onHideSpecImagesModalSuccess()),
   });
@@ -47,7 +49,8 @@ const SpecImagesModal = () => {
 
   const handleSubmit = (blockID, imageID) => (event) => {
     handleClose(event);
-    dispatch(onAddSpecBlockImage({ blockID, imageID, specID }));
+    if (currentImage !== imageID)
+      dispatch(onAddSpecBlockImage({ blockID, imageID, specID }));
   };
 
   const disableSubmit =
