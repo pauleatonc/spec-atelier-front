@@ -10,9 +10,7 @@ import {
   CONCRETE,
   CONCRETE_OPACITY,
   MINE_SHAFT_RGB,
-  BOULDER,
   ALTO_OPACITY,
-  DOVE_GRAY,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -82,6 +80,7 @@ export const Block = styled.section`
   border: ${({ color }) => color && `solid 2px ${color}`};
   text-decoration: ${({ strikethrough }) => strikethrough && 'line-through'};
   width: 100%;
+  background-color: ${CONCRETE_OPACITY};
   &:last-child {
     margin: 0;
   }
@@ -142,12 +141,13 @@ export const BlockText = styled.section`
   min-height: 33px;
   display: flex;
   align-items: center;
-  background-color: ${CONCRETE_OPACITY};
   font-size: 12px;
   margin: 0 0 3px 0;
   padding: 4px 30px 4px 9px;
   position: relative;
   width: 100%;
+  border: ${({ color }) => color && `solid 2px ${color}`};
+  text-decoration: ${({ strikethrough }) => strikethrough && 'line-through'};
   &:hover ${BlockDotsIcon} {
     visibility: visible;
   }
@@ -191,7 +191,6 @@ export const BlockTitle = styled.span`
 
 export const Section = styled.section`
   align-items: center;
-  background-color: ${CONCRETE_OPACITY};
   color: ${MINE_SHAFT};
   display: flex;
   font-size: 16px;
@@ -210,7 +209,6 @@ export const Section = styled.section`
 
 export const Item = styled.section`
   align-items: center;
-  background-color: ${CONCRETE_OPACITY};
   color: ${MINE_SHAFT};
   display: flex;
   font-size: 14px;
@@ -228,7 +226,6 @@ export const Item = styled.section`
 `;
 
 export const Product = styled.section`
-  background-color: ${CONCRETE_OPACITY};
   display: flex;
   margin: 0 0 3px 0;
   min-height: 116px;
@@ -295,11 +292,6 @@ export const Footer = styled.div`
   align-items: center;
   width: 100%;
   margin-top: 28px;
-`;
-
-export const SubmittedChanges = styled.p`
-  font-size: 12px;
-  color: ${BOULDER};
 `;
 
 export const Comment = styled.input`

@@ -172,12 +172,15 @@ export const getOwnerBlocks = (blocks) => {
 export const getChangesBlocks = (blocks) => {
   return blocks.filter((block) => {
     const blockAccepted = block.status === 'accepted';
-    const unsentBlocks = block?.change?.sent === false;
     const blockTextAccepted = block?.text?.status === 'accepted';
+    const imageAccepted = block?.image?.status === 'accepted';
+    const unsentBlocks = block?.change?.sent === false;
     const unsentBlocksText = block?.text?.change?.sent === false;
+    const unsentBlocksImage = block?.image?.change?.sent === false;
     return (
       (unsentBlocks && !blockAccepted) ||
-      (!blockTextAccepted && unsentBlocksText)
+      (unsentBlocksText && !blockTextAccepted) ||
+      (unsentBlocksImage && !imageAccepted)
     );
   });
 };

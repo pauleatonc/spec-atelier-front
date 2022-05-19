@@ -48,12 +48,15 @@ const BlockSpecDocument = ({
   const { id: specID } = useParams();
   const { localConfig } = useSelector((state) => state.specAdmin);
   const { project } = useSelector((state) => state.specDocument);
-  const { text: blockText, image: blockImage, type, status, id } = block;
+  const {
+    text: blockText,
+    image: blockImage,
+    type,
+    status,
+    id,
+    change,
+  } = block;
   const { user } = useSelector((state) => state.auth);
-  const action = block?.change?.action;
-  const sent = block?.change?.sent;
-  const sentText = blockText?.change?.sent;
-  const blockUser = block?.change?.user;
   const userOwner = project.user_owner;
   const { images, short_desc, name, long_desc, system, brand, reference } =
     block.element;
@@ -111,16 +114,37 @@ const BlockSpecDocument = ({
     move: SUPERNOVA_OPACITY,
   };
 
-  const color =
-    sent || sentText ? actionsColorsOpacity[action] : actionsColors[action];
-  const unsentCollaboratorBlock = !userOwner && !sent && status !== 'accepted';
+  const blockColor = () => {
+    const color = change.sent
+      ? actionsColorsOpacity[change.action]
+      : actionsColors[change.action];
+    return status !== 'accepted' ? color : undefined;
+  };
+
+  const imageColor = () => {
+    const color = blockImage?.change.sent
+      ? actionsColorsOpacity[blockImage?.change.action]
+      : actionsColors[blockImage?.change.action];
+    return blockImage?.status !== 'accepted' ? color : undefined;
+  };
+
+  const textColor = () => {
+    const color = blockText?.change.sent
+      ? actionsColorsOpacity[blockText?.change.action]
+      : actionsColors[blockText?.change.action];
+    return blockText?.status !== 'accepted' ? color : undefined;
+  };
+
+  const unsentBlock = !userOwner && !change.sent && status !== 'accepted';
+  const unsentText =
+    !userOwner && !blockText?.change.sent && blockText?.status !== 'accepted';
 
   return (
     <Block
       disabled={type === 'Section' || type === 'Item'}
       margin={getBlockMarginByType()}
-      color={!userOwner && status !== 'accepted' ? color : undefined}
-      strikethrough={unsentCollaboratorBlock && action === 'remove'}
+      color={!userOwner ? blockColor() || imageColor() : undefined}
+      strikethrough={unsentBlock && change.action === 'remove'}
     >
       {getBlockWrapperByType(
         <>
@@ -137,7 +161,7 @@ const BlockSpecDocument = ({
           )}
           <BlockDotsIcon
             src={THREE_DOTS_VERTICAL_SOURCE}
-            onClick={handleShowBlockMenu(id, blockUser?.id, sent)}
+            onClick={handleShowBlockMenu(id, change.user.id, change.sent)}
           />
           {showBlockImage && (
             <BlockImage>
@@ -172,7 +196,10 @@ const BlockSpecDocument = ({
         </>,
       )}
       {showBlockText && (
-        <BlockText>
+        <BlockText
+          color={textColor()}
+          strikethrough={unsentText && blockText?.change.action === 'remove'}
+        >
           <BlockTextContent
             dangerouslySetInnerHTML={{ __html: blockText?.text }}
           />
@@ -194,7 +221,7 @@ const BlockSpecDocument = ({
           />
         </BlockText>
       )}
-      {!userOwner && sent && status === 'waiting' && (
+      {!userOwner && change.sent && status === 'waiting' && (
         <TextContainer>
           <p>Pendiente de revisión</p>
           <Watch alt="watch" src={WATCH_ICON} />

@@ -5,14 +5,7 @@ import { handleSubmitChanges } from '../SpecDocument.actions';
 import BlocksSpecDocument from './BlocksSpecDocument';
 import Confirm from '../../../components/confirm/Confirm';
 import { Button } from '../../../components/SpecComponents';
-import Editor from '../../../components/inputs/Editor';
-import {
-  Page,
-  Footer,
-  SubmittedChanges,
-  InvalidInput,
-  Comment,
-} from '../SpecDocument.styles';
+import { Page, Footer, Comment } from '../SpecDocument.styles';
 
 const PageSpecDocument = ({
   showBlockEditor,
@@ -52,7 +45,7 @@ const PageSpecDocument = ({
         />
         {!userOwner && (
           <Footer>
-            {changedBlocks.length > 0 ? (
+            {changedBlocks.length > 0 && (
               <>
                 <Comment placeholder="¿Quieres agregar algún comentario?" />
                 <Button
@@ -62,14 +55,6 @@ const PageSpecDocument = ({
                 >
                   Enviar {changedBlocks.length} cambios
                 </Button>
-              </>
-            ) : (
-              <>
-                <Comment
-                  disabled
-                  placeholder="Realiza cambios para agregar comentarios"
-                />
-                <SubmittedChanges>Cambios enviados</SubmittedChanges>
               </>
             )}
           </Footer>

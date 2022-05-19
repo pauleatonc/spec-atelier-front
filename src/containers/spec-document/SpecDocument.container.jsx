@@ -28,17 +28,18 @@ import {
 const SpecDocument = () => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
-  const { blocks, project } = useSelector((state) => state.specDocument);
+  const { blocks } = useSelector((state) => state.specDocument);
   const [selectedBlockID, setSelectedBlockID] = useState('');
   const [selectedBlockTextID, setSelectedBlockTextID] = useState('');
   const [showBlockEditor, setShowBlockEditor] = useState('');
   const [showBlockTextEditor, setShowBlockTextEditor] = useState('');
   const windowSize = window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches;
   const selectedBlock = blocks.find((block) => block.id === selectedBlockID);
-  const userOwner = project.user_owner;
   const typeBlock = selectedBlock?.type;
   const productImage = selectedBlock?.image?.image?.id;
   const elementUserOwned = selectedBlock?.element.user_owned;
+  const action = selectedBlock?.change?.action;
+  const productImages = selectedBlock?.element.images;
 
   useEffect(() => {
     dispatch(onGetSpecBlocks(specID));
@@ -117,12 +118,13 @@ const SpecDocument = () => {
     dispatch(onUpdateSpecBlockText({ textID, specID, textValue }));
   };
 
-  const canEdit =
-    selectedBlock?.change?.action !== 'remove' || elementUserOwned;
+  const canEdit = action !== 'remove' || elementUserOwned;
+
   const canAddText = selectedBlock?.text?.user_owned
     ? !selectedBlock?.text
     : !selectedBlock?.text ||
       (selectedBlock?.text && selectedBlock?.text?.status !== 'accepted');
+
   const canRemoveImage = selectedBlock?.image?.user_owned
     ? true
     : selectedBlock?.image?.status === 'accepted';
@@ -154,7 +156,7 @@ const SpecDocument = () => {
               Añadir texto
             </BlockMenuItem>
           )}
-          {typeBlock === 'Product' && (
+          {typeBlock === 'Product' && productImages.length > 0 && (
             <BlockMenuItem onClick={handleShowImagesModal(selectedBlockID)}>
               {productImage ? 'Editar imagen' : 'Añadir una imagen'}
             </BlockMenuItem>
