@@ -25,7 +25,9 @@ const PageSpecDocument = ({
   const handleSendChanges = () => setShowSendChangesModal(true);
 
   const handleConfirm = () => {
-    const changedBlockIDs = changedBlocks.map((block) => block.id);
+    const changedBlockIDs = changedBlocks.map((block) =>
+      block.status !== 'accepted' ? block.id : block.text?.id,
+    );
     handleCloseModal();
     // Agregar el comentario que está en el editor para enviarlo cuando se envien los cambios
     dispatch(handleSubmitChanges({ blocks: changedBlockIDs, specID }));

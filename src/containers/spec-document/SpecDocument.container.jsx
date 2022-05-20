@@ -130,10 +130,6 @@ const SpecDocument = () => {
     : selectedBlock?.image?.status === 'accepted';
 
   const handleRemoveBlock = (blockID) => () => {
-    // if(!userOwner && selectedBlock.status === "accepted"){
-    //    Aquí va la función que al eliminar el bloque lo cambie de block.status = "waiting"
-    //    y change.action = "delete"
-    // } else {la funcion que esta aqui abajo}
     dispatch(onRemoveSpecBlock({ block: [blockID], specID }));
   };
 

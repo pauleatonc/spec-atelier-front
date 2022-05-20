@@ -138,12 +138,13 @@ export const BlockContent = styled.section`
 `;
 
 export const BlockText = styled.section`
+  flex-direction: column;
   min-height: 33px;
   display: flex;
   align-items: center;
   font-size: 12px;
   margin: 0 0 3px 0;
-  padding: 4px 30px 4px 9px;
+  padding: 7px 4px 4px 9px;
   position: relative;
   width: 100%;
   border: ${({ color }) => color && `solid 2px ${color}`};
@@ -154,6 +155,7 @@ export const BlockText = styled.section`
 `;
 
 export const BlockTextContent = styled.section`
+  align-self: flex-start;
   & p {
     color: ${MINE_SHAFT};
     letter-spacing: 1px;
@@ -308,8 +310,10 @@ export const Comment = styled.input`
 export const TextContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-self: flex-end;
   font-size: 10px;
-  padding: 12px 0 15px 0;
+  padding: 12px 0 12px 0;
+  color: rgba(${MINE_SHAFT_RGB}, 0.5);
 `;
 
 export const Watch = styled.img`

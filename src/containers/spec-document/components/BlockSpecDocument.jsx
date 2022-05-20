@@ -3,7 +3,8 @@ import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { onAddSpecBlockText } from '../SpecDocument.actions';
 import Editor from '../../../components/inputs/Editor';
-import { THREE_DOTS_VERTICAL_SOURCE, WATCH_ICON } from '../../../assets/Images';
+import PendingReviewText from './PendingReview';
+import { THREE_DOTS_VERTICAL_SOURCE } from '../../../assets/Images';
 import {
   BURNT_SIENNA,
   BURNT_SIENNA_OPACITY,
@@ -30,8 +31,6 @@ import {
   ProductSystem,
   ProductTitle,
   Section,
-  TextContainer,
-  Watch,
 } from '../SpecDocument.styles';
 
 const BlockSpecDocument = ({
@@ -219,13 +218,13 @@ const BlockSpecDocument = ({
             src={THREE_DOTS_VERTICAL_SOURCE}
             onClick={handleShowBlockTextMenu(blockText?.id)}
           />
+          {!userOwner &&
+            blockText?.change.sent &&
+            blockText?.status === 'waiting' && <PendingReviewText />}
         </BlockText>
       )}
       {!userOwner && change.sent && status === 'waiting' && (
-        <TextContainer>
-          <p>Pendiente de revisión</p>
-          <Watch alt="watch" src={WATCH_ICON} />
-        </TextContainer>
+        <PendingReviewText />
       )}
     </Block>
   );
