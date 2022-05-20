@@ -39,7 +39,7 @@ export const ACTION_TYPE_BACKGROUND = {
     hover: BACKGROUND_REMOVE_HOVER,
     border: BURNT_SIENNA,
   },
-  edit_text: {
+  edit: {
     normal: BACKGROUND_EDIT,
     hover: BACKGROUND_EDIT_HOVER,
     border: SUPERNOVA,
@@ -49,9 +49,9 @@ export const ACTION_TYPE_BACKGROUND = {
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  background-color: ${({ action, status, isExpanded }) => {
+  background-color: ${({ action, status, isExpanded, isOwner }) => {
     const isExpandedBackground = isExpanded ? WHITE : CONCRETE;
-    return status === 'waiting' && !isExpanded
+    return status === 'waiting' && !isExpanded && isOwner
       ? `${ACTION_TYPE_BACKGROUND[action].normal}`
       : isExpandedBackground;
   }};
@@ -62,15 +62,16 @@ export const Container = styled.div`
     isExpanded ? `solid 2px ${ACTION_TYPE_BACKGROUND[action].border}` : 'none'};
 
   &:hover {
-    background-color: ${({ action, status, isExpanded }) => {
+    background-color: ${({ action, status, isExpanded, isOwner }) => {
       const isExpandedBackground = isExpanded ? WHITE : CONCRETE;
-      return status === 'waiting' && !isExpanded
+      return status === 'waiting' && !isExpanded && isOwner
         ? `${ACTION_TYPE_BACKGROUND[action].hover}`
         : isExpandedBackground;
     }};
-    box-shadow: ${({ type, status }) =>
+    box-shadow: ${({ type, status, isOwner }) =>
       type === TYPES.PRODUCT &&
       status === 'waiting' &&
+      isOwner &&
       '0 1px 4px 0 rgba(0, 0, 0, 0.25)'};
   }
 `;
@@ -89,8 +90,10 @@ export const HeaderChange = styled.div`
   font-family: Lato;
   font-size: ${({ type }) => `${SIZES[type]}px`};
   font-weight: ${({ type }) => (type !== TYPES.PRODUCT ? 'bold' : 'normal')};
-  cursor: ${({ type, status }) =>
-    type === TYPES.PRODUCT && status === 'waiting' ? 'pointer' : 'initial'};
+  cursor: ${({ type, status, isOwner }) =>
+    type === TYPES.PRODUCT && status === 'waiting' && isOwner
+      ? 'pointer'
+      : 'initial'};
 `;
 
 export const IconTypeChange = styled.img`
@@ -185,4 +188,10 @@ export const TextDesc = styled.span`
   width: ${(fullwidth) => (fullwidth ? '100%' : 'auto')};
   max-height: 150px;
   overflow: ${({ withOverFlow }) => withOverFlow && 'auto'};
+`;
+
+export const IconCheck = styled.i`
+  color: ${JAVA};
+  font-size: 16px;
+  margin-right: 90px;
 `;

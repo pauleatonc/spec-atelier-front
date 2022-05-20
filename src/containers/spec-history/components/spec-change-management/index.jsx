@@ -7,6 +7,7 @@ import { Button } from '../../../../components/SpecComponents';
 import { VARIANTS_BUTTON } from '../../../../config/constants/button-variants';
 import { onSaveSpecChanges } from '../../../spec-document/SpecDocument.actions';
 import ChangeItem from './components/ChangeItem';
+import ModalConfirmChanges from './components/ModalConfirmChanges';
 
 import {
   Container,
@@ -21,13 +22,16 @@ import {
 
 const SpecChangeManagement = ({ actionsIcons }) => {
   const { id: specID } = useParams();
+  const [showModal, setShowModal] = useState(false);
   const [blocksAccepted, setBlocksAccepted] = useState([]);
   const [blocksRejected, setBlocksRejected] = useState([]);
   const changes = blocksAccepted.length + blocksRejected.length;
   const dispatch = useDispatch();
-  const { blocks, changesCount, project } = useSelector(
-    (state) => state.specDocument,
-  );
+  const {
+    blocks,
+    changesCount,
+    project: { user_owner, name },
+  } = useSelector((state) => state.specDocument);
 
   const handleSaveChanges = () => {
     const params = {
@@ -46,34 +50,40 @@ const SpecChangeManagement = ({ actionsIcons }) => {
             {`Tienes ${changesCount - changes} cambios pendientes de revisión`}
           </TextDisclaimer>
           <TextDisclaimer>
-            {`Hay ${changesCount - changes} cambios en el proyecto ${
-              project.name
-            }.`}
+            {`Hay ${changesCount - changes} cambios en el proyecto ${name}.`}
           </TextDisclaimer>
         </DescDisclaimer>
       </DisclaimerContainer>
       <ContainerChanges>
-        {blocks.map((block) => (
-          <ChangeItem
-            key={`${block.type}-${block.change.action}-${block.id}`}
-            blockId={block.id}
-            type={block.type}
-            change={block.change}
-            status={block.status}
-            element={block.element}
-            icon={actionsIcons[block.change.action]}
-            blocksAccepted={blocksAccepted}
-            blocksRejected={blocksRejected}
-            setBlocksAccepted={setBlocksAccepted}
-            setBlocksRejected={setBlocksRejected}
-          />
-        ))}
+        {blocks.map((block) => {
+          const action =
+            block.change.action === 'edit_text' ||
+            block.change.action === 'move'
+              ? 'edit'
+              : block.change.action;
+          return (
+            <ChangeItem
+              key={`${block.type}-${block.change.action}-${block.id}`}
+              isOwner={user_owner}
+              blockId={block.id}
+              type={block.type}
+              change={block.change}
+              status={block.status}
+              element={block.element}
+              icon={actionsIcons[action]}
+              blocksAccepted={blocksAccepted}
+              blocksRejected={blocksRejected}
+              setBlocksAccepted={setBlocksAccepted}
+              setBlocksRejected={setBlocksRejected}
+            />
+          );
+        })}
       </ContainerChanges>
       <ContainerButton>
-        {changesCount ? (
+        {changesCount && user_owner ? (
           <Button
             variant={VARIANTS_BUTTON.PRIMARY}
-            onClick={handleSaveChanges}
+            onClick={() => setShowModal(true)}
             disabled={!changes}
           >
             {`Confirmar ${changes || ''} cambios`}
@@ -82,6 +92,11 @@ const SpecChangeManagement = ({ actionsIcons }) => {
           <ChangesConfirmed>Cambios confirmados</ChangesConfirmed>
         )}
       </ContainerButton>
+      <ModalConfirmChanges
+        show={showModal}
+        setShowModal={setShowModal}
+        onAccept={handleSaveChanges}
+      />
     </Container>
   );
 };

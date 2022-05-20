@@ -23,10 +23,12 @@ import {
   ProductImageContainer,
   ImageProduct,
   GoToProduct,
+  IconCheck,
 } from './styles';
 
 const ChangeItem = ({
   type,
+  isOwner,
   blockId,
   change,
   status,
@@ -39,6 +41,10 @@ const ChangeItem = ({
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isChange = type === TYPES.PRODUCT && status === 'waiting';
+  const action =
+    change.action === 'edit_text' || change.action === 'move'
+      ? 'edit'
+      : change.action;
   const isAccepted = !!blocksAccepted.find((block) => block === blockId);
   const isRejected = !!blocksRejected.find((block) => block === blockId);
   const handleAcceptChange = () => {
@@ -56,24 +62,29 @@ const ChangeItem = ({
 
   return (
     <Container
+      isOwner={isOwner}
       type={type}
-      action={change.action}
+      action={action}
       status={status}
       isExpanded={isExpanded}
     >
       <HeaderChange
+        isOwner={isOwner}
         type={type}
-        action={change.action}
+        action={action}
         status={status}
-        onClick={() => isChange && setIsExpanded(!isExpanded)}
+        onClick={() => isChange && isOwner && setIsExpanded(!isExpanded)}
         isExpanded={isExpanded}
       >
-        {isChange && <IconTypeChange src={icon} alt="icon_action" />}
+        {isChange && isOwner && <IconTypeChange src={icon} alt="icon_action" />}
         {!isExpanded && <span>{element.name}</span>}
         {type === TYPES.PRODUCT && (
           <DateContainer>
-            <Date>{change.date}</Date>
-            {status === 'waiting' ? (
+            {isAccepted && !isExpanded && (
+              <IconCheck className="fas fa-check" />
+            )}
+            <Date>{change.created_at}</Date>
+            {status === 'waiting' && isOwner ? (
               <IconExpan
                 className={`fas fa-chevron-${isExpanded ? 'up' : 'down'}`}
               />
@@ -85,36 +96,50 @@ const ChangeItem = ({
       </HeaderChange>
       {isExpanded && (
         <DetailsChange>
-          <ChangeInfo>
-            <DescChange>
-              <ImgContainerChange>
-                <IconUser user={change.user} size="56" />
-                <TextDesc mleft="10px">
-                  {change.user.name}{' '}
-                  <TextDesc bold>{change.description} </TextDesc>
-                </TextDesc>
-              </ImgContainerChange>
-              <ProductDescContainer>
-                <TextDesc fullwidth bold mBottom="15px">
-                  {element.item_title}
-                </TextDesc>
-                <TextDesc fullwidth mBottom="15px" withOverFlow>
-                  {element.long_desc}
-                </TextDesc>
-                <TextDesc fullwidth bold>
-                  Marca: {element?.brand?.name}
-                </TextDesc>
-              </ProductDescContainer>
-            </DescChange>
-            <ProductImageContainer>
-              <ImageProduct
-                src={element?.images[0]?.urls?.medium || NO_PHOTO}
-              />
-              <GoToProduct onClick={() => console.log('ver')}>
-                Ver producto
-              </GoToProduct>
-            </ProductImageContainer>
-          </ChangeInfo>
+          {action === 'edit' ? (
+            <ChangeInfo>
+              <DescChange>
+                <ImgContainerChange>
+                  <IconUser user={change.user} size="56" />
+                  <TextDesc mleft="10px">
+                    {change.user.name}{' '}
+                    <TextDesc bold>{change.description} </TextDesc>
+                  </TextDesc>
+                </ImgContainerChange>
+              </DescChange>
+            </ChangeInfo>
+          ) : (
+            <ChangeInfo>
+              <DescChange>
+                <ImgContainerChange>
+                  <IconUser user={change.user} size="56" />
+                  <TextDesc mleft="10px">
+                    {change.user.name}{' '}
+                    <TextDesc bold>{change.description} </TextDesc>
+                  </TextDesc>
+                </ImgContainerChange>
+                <ProductDescContainer>
+                  <TextDesc fullwidth bold mBottom="15px">
+                    {element.item_title}
+                  </TextDesc>
+                  <TextDesc fullwidth mBottom="15px" withOverFlow>
+                    {element.long_desc}
+                  </TextDesc>
+                  <TextDesc fullwidth bold>
+                    Marca: {element?.brand?.name}
+                  </TextDesc>
+                </ProductDescContainer>
+              </DescChange>
+              <ProductImageContainer>
+                <ImageProduct
+                  src={element?.images[0]?.urls?.medium || NO_PHOTO}
+                />
+                <GoToProduct onClick={() => console.log('ver')}>
+                  Ver producto
+                </GoToProduct>
+              </ProductImageContainer>
+            </ChangeInfo>
+          )}
           <ContainerButtons>
             <Button
               margin="0 10px 0 0"
