@@ -25,9 +25,21 @@ const PageSpecDocument = ({
   const handleSendChanges = () => setShowSendChangesModal(true);
 
   const handleConfirm = () => {
-    const changedBlockIDs = changedBlocks.map((block) =>
-      block.status !== 'accepted' ? block.id : block.text?.id,
-    );
+    const changedBlockIDs = changedBlocks.map((block) => {
+      const blockAccepted = block.status !== 'accepted';
+      const blockTextAccepted = block?.text?.status !== 'accepted';
+      const imageAccepted = block?.image?.status !== 'accepted';
+      const unsentBlocks = block?.change?.sent === false;
+      const unsentBlocksText = block?.text?.change?.sent === false;
+      const unsentBlocksImage = block?.image?.change?.sent === false;
+      return (
+        (unsentBlocks && blockAccepted && block.id) ||
+        (unsentBlocksText && blockTextAccepted && block.text?.id) ||
+        (unsentBlocksImage && imageAccepted && block.image?.image.id)
+      );
+      // block.status !== 'accepted' ? block.id : block.text?.id
+    });
+
     handleCloseModal();
     // Agregar el comentario que está en el editor para enviarlo cuando se envien los cambios
     dispatch(handleSubmitChanges({ blocks: changedBlockIDs, specID }));

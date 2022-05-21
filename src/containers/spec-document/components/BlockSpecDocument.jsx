@@ -142,7 +142,8 @@ const BlockSpecDocument = ({
     <Block
       disabled={type === 'Section' || type === 'Item'}
       margin={getBlockMarginByType()}
-      color={!userOwner ? blockColor() || imageColor() : undefined}
+      // color={!userOwner ? blockColor() || imageColor() : undefined}
+      color={!userOwner ? blockColor() : undefined}
       strikethrough={unsentBlock && change.action === 'remove'}
     >
       {getBlockWrapperByType(
@@ -164,7 +165,11 @@ const BlockSpecDocument = ({
           />
           {showBlockImage && (
             <BlockImage>
-              <ProductImage alt="Imagen del Producto" src={imageSize()} />
+              <ProductImage
+                alt="Imagen del Producto"
+                src={imageSize()}
+                color={!userOwner ? imageColor() : undefined}
+              />
             </BlockImage>
           )}
           {type !== 'Product' && <BlockTitle>{name}</BlockTitle>}

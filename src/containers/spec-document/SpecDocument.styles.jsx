@@ -240,10 +240,11 @@ export const Product = styled.section`
 `;
 
 export const ProductImage = styled.img`
-  height: 150px;
+  height: fit-content;
   object-fit: contain;
   object-position: top;
   width: 98px;
+  border: ${({ color }) => color && `solid 2px ${color}`};
 `;
 
 export const ProductTitle = styled.p`

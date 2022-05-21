@@ -130,6 +130,7 @@ const SpecDocument = () => {
     : selectedBlock?.image?.status === 'accepted';
 
   const handleRemoveBlock = (blockID) => () => {
+    handleBlockMenuClose();
     dispatch(onRemoveSpecBlock({ block: [blockID], specID }));
   };
 
