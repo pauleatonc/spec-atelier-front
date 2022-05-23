@@ -160,3 +160,10 @@ export const getSections = (blocks) => {
       })),
   }));
 };
+
+export const getChangesCounts = (blocks) =>
+  blocks.reduce(
+    (prevValue, currentValue) =>
+      currentValue.status === 'waiting' ? prevValue + 1 : prevValue + 0,
+    0,
+  );

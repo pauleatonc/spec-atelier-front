@@ -55,29 +55,22 @@ const SpecChangeManagement = ({ actionsIcons }) => {
         </DescDisclaimer>
       </DisclaimerContainer>
       <ContainerChanges>
-        {blocks.map((block) => {
-          const action =
-            block.change.action === 'edit_text' ||
-            block.change.action === 'move'
-              ? 'edit'
-              : block.change.action;
-          return (
-            <ChangeItem
-              key={`${block.type}-${block.change.action}-${block.id}`}
-              isOwner={user_owner}
-              blockId={block.id}
-              type={block.type}
-              change={block.change}
-              status={block.status}
-              element={block.element}
-              icon={actionsIcons[action]}
-              blocksAccepted={blocksAccepted}
-              blocksRejected={blocksRejected}
-              setBlocksAccepted={setBlocksAccepted}
-              setBlocksRejected={setBlocksRejected}
-            />
-          );
-        })}
+        {blocks.map((block) => (
+          <ChangeItem
+            key={`${block.type}-${block.change.action}-${block.id}`}
+            isOwner={user_owner}
+            blockId={block.id}
+            type={block.type}
+            change={block.change}
+            status={block.status}
+            element={block.element}
+            icon={actionsIcons[block.change.action]}
+            blocksAccepted={blocksAccepted}
+            blocksRejected={blocksRejected}
+            setBlocksAccepted={setBlocksAccepted}
+            setBlocksRejected={setBlocksRejected}
+          />
+        ))}
       </ContainerChanges>
       <ContainerButton>
         {changesCount && user_owner ? (

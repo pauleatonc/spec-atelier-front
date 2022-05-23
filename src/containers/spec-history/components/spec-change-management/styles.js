@@ -43,7 +43,6 @@ export const ContainerButton = styled.div`
 `;
 
 export const ChangesConfirmed = styled.span`
-  font-family: Lato;
   font-size: 12px;
   color: ${BOULDER};
 `;

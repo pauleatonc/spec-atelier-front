@@ -21,7 +21,6 @@ export const ContainerTextBody = styled.div`
 `;
 
 export const TextBody = styled.p`
-  font-family: Lato;
   font-size: 14px;
   color: ${MINE_SHAFT};
 `;

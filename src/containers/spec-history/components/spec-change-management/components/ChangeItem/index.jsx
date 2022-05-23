@@ -41,10 +41,6 @@ const ChangeItem = ({
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isChange = type === TYPES.PRODUCT && status === 'waiting';
-  const action =
-    change.action === 'edit_text' || change.action === 'move'
-      ? 'edit'
-      : change.action;
   const isAccepted = !!blocksAccepted.find((block) => block === blockId);
   const isRejected = !!blocksRejected.find((block) => block === blockId);
   const handleAcceptChange = () => {
@@ -64,14 +60,14 @@ const ChangeItem = ({
     <Container
       isOwner={isOwner}
       type={type}
-      action={action}
+      action={change.action}
       status={status}
       isExpanded={isExpanded}
     >
       <HeaderChange
         isOwner={isOwner}
         type={type}
-        action={action}
+        action={change.action}
         status={status}
         onClick={() => isChange && isOwner && setIsExpanded(!isExpanded)}
         isExpanded={isExpanded}
@@ -96,7 +92,7 @@ const ChangeItem = ({
       </HeaderChange>
       {isExpanded && (
         <DetailsChange>
-          {action === 'edit' ? (
+          {change.action === 'edit' ? (
             <ChangeInfo>
               <DescChange>
                 <ImgContainerChange>

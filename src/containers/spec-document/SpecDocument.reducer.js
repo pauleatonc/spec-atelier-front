@@ -2,6 +2,7 @@ import {
   getFormatedTableData,
   getTotalExpandManual,
   getSections,
+  getChangesCounts,
 } from './utils';
 import {
   ADD_SPEC_BLOCK_SUCCESS,
@@ -57,11 +58,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         quoteTable: getFormatedTableData(payload.blocks),
         totalExpandManual: getTotalExpandManual(payload.blocks),
         sections: getSections(payload.blocks),
-        changesCount: payload.blocks.reduce(
-          (prevValue, currentValue) =>
-            currentValue.status === 'waiting' ? prevValue + 1 : prevValue + 0,
-          0,
-        ),
+        changesCount: getChangesCounts(payload.blocks),
         changedBlocks: payload.changedBlocks,
       };
     case REMOVE_SPEC_BLOCK_SUCCESS:

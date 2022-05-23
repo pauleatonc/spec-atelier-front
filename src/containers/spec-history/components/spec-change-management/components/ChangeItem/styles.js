@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import {
   CONCRETE,
-  BACKGROUND_ADD,
-  BACKGROUND_ADD_HOVER,
-  BACKGROUND_REMOVE,
-  BACKGROUND_REMOVE_HOVER,
-  BACKGROUND_EDIT,
-  BACKGROUND_EDIT_HOVER,
+  PUERTO_RICO_RGBA_OPACITY,
+  PUERTO_RICO_RGBA_OPACITY_HOVER,
+  BURN_SIENNA_RGBA_OPACITY,
+  BURN_SIENNA_RGBA_OPACITY_HOVER,
+  SUPERNOVA_RGBA_OPACITY,
+  SUPERNOVA_RGBA_OPACITY_HOVER,
   JAVA,
   PUERTO_RICO,
   SUPERNOVA,
@@ -14,6 +14,7 @@ import {
   BOULDER,
   HEX_BLACK,
   WHITE,
+  BLACK_OPACITY,
 } from '../../../../../../config/constants/styled-vars';
 
 export const TYPES = {
@@ -30,18 +31,18 @@ export const SIZES = {
 
 export const ACTION_TYPE_BACKGROUND = {
   add: {
-    normal: BACKGROUND_ADD,
-    hover: BACKGROUND_ADD_HOVER,
+    normal: PUERTO_RICO_RGBA_OPACITY,
+    hover: PUERTO_RICO_RGBA_OPACITY_HOVER,
     border: PUERTO_RICO,
   },
   remove: {
-    normal: BACKGROUND_REMOVE,
-    hover: BACKGROUND_REMOVE_HOVER,
+    normal: BURN_SIENNA_RGBA_OPACITY,
+    hover: BURN_SIENNA_RGBA_OPACITY_HOVER,
     border: BURNT_SIENNA,
   },
   edit: {
-    normal: BACKGROUND_EDIT,
-    hover: BACKGROUND_EDIT_HOVER,
+    normal: SUPERNOVA_RGBA_OPACITY,
+    hover: SUPERNOVA_RGBA_OPACITY_HOVER,
     border: SUPERNOVA,
   },
 };
@@ -72,7 +73,7 @@ export const Container = styled.div`
       type === TYPES.PRODUCT &&
       status === 'waiting' &&
       isOwner &&
-      '0 1px 4px 0 rgba(0, 0, 0, 0.25)'};
+      `0 1px 4px 0 ${BLACK_OPACITY}`};
   }
 `;
 
@@ -87,7 +88,6 @@ export const HeaderChange = styled.div`
   padding-left: ${({ type }) => (type !== TYPES.PRODUCT ? '35px' : '53px')};
   width: 100%;
   height: 32px;
-  font-family: Lato;
   font-size: ${({ type }) => `${SIZES[type]}px`};
   font-weight: ${({ type }) => (type !== TYPES.PRODUCT ? 'bold' : 'normal')};
   cursor: ${({ type, status, isOwner }) =>
