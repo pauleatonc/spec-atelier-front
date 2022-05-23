@@ -170,6 +170,9 @@ const BlockSpecDocument = ({
                 src={imageSize()}
                 color={!userOwner ? imageColor() : undefined}
               />
+              {!userOwner &&
+                blockImage?.change.sent &&
+                blockImage?.status === 'waiting' && <PendingReviewText />}
             </BlockImage>
           )}
           {type !== 'Product' && <BlockTitle>{name}</BlockTitle>}
