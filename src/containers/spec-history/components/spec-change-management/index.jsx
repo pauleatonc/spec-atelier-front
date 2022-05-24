@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom';
 
 import { SPEC_ICON_ALERT_CIRCLE } from '../../../../assets/Images';
 import { Button } from '../../../../components/SpecComponents';
+import Confirm from '../../../../components/confirm/Confirm';
 import { VARIANTS_BUTTON } from '../../../../config/constants/button-variants';
 import { onSaveSpecChanges } from '../../../spec-document/SpecDocument.actions';
 import ChangeItem from './components/ChangeItem';
-import ModalConfirmChanges from './components/ModalConfirmChanges';
 
 import {
   Container,
@@ -40,6 +40,8 @@ const SpecChangeManagement = ({ actionsIcons }) => {
     };
     dispatch(onSaveSpecChanges(specID, params));
   };
+
+  const handleCloseModal = () => setShowModal(false);
 
   return (
     <Container>
@@ -85,10 +87,14 @@ const SpecChangeManagement = ({ actionsIcons }) => {
           <ChangesConfirmed>Cambios confirmados</ChangesConfirmed>
         )}
       </ContainerButton>
-      <ModalConfirmChanges
+      <Confirm
         show={showModal}
-        setShowModal={setShowModal}
-        onAccept={handleSaveChanges}
+        onClose={handleCloseModal}
+        onExit={handleCloseModal}
+        question="¿Estás seguro que deseas confirmar los cambios?"
+        cancelText="Volver"
+        confirmText="Aceptar"
+        onConfirm={handleSaveChanges}
       />
     </Container>
   );

@@ -3,7 +3,16 @@ import useModal from '../layouts/ModalLayout.hooks';
 import { Modal, Button } from '../SpecComponents';
 import { Root, Text, Buttons } from './Confirm.styles';
 
-const Confirm = ({ show, onClose, onExit, description, question, onConfirm }) => {
+const Confirm = ({
+  show,
+  onClose,
+  onExit,
+  description,
+  question,
+  onConfirm,
+  cancelText = 'Cancelar',
+  confirmText = 'Si, seguro',
+}) => {
   const { onClose: handleClose, onExiting: handleExiting } = useModal({
     closeCallback: () => onClose(),
     exitingCallback: () => onExit(),
@@ -15,11 +24,11 @@ const Confirm = ({ show, onClose, onExit, description, question, onConfirm }) =>
         <Text>{description}</Text>
         <Text>{question}</Text>
         <Buttons>
-          <Button inverse variant='gray' onClick={handleClose}>
-            Cancelar
+          <Button inverse variant="gray" onClick={handleClose}>
+            {cancelText}
           </Button>
-          <Button variant='primary' onClick={onConfirm}>
-            Sí, seguro
+          <Button variant="primary" onClick={onConfirm}>
+            {confirmText}
           </Button>
         </Buttons>
       </Root>
