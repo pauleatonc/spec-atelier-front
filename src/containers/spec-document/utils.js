@@ -164,6 +164,8 @@ export const getSections = (blocks) => {
 export const getChangesCounts = (blocks) =>
   blocks.reduce(
     (prevValue, currentValue) =>
-      currentValue.status === 'waiting' ? prevValue + 1 : prevValue + 0,
+      currentValue.status === 'waiting' && currentValue.type === 'Product'
+        ? prevValue + 1
+        : prevValue + 0,
     0,
   );
