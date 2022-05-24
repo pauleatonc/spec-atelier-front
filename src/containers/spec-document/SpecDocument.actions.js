@@ -431,10 +431,9 @@ export const onSaveSpecChanges = (specID, params) => async (
   dispatch,
   getState,
 ) => {
-  console.log(params);
   const { auth } = getState();
   dispatch(onActionCreator(SAVE_SPEC_CHANGES));
-  saveSpecChanges({ specID, userID: auth.user?.id })
+  saveSpecChanges({ specID, userID: auth.user?.id, params })
     .then((response) => console.log(response))
     .catch((error) =>
       dispatch(onActionCreator(SAVE_SPEC_CHANGES_ERROR, { error })),
