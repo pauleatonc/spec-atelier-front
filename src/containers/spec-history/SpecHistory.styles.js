@@ -15,9 +15,11 @@ import {
   PUERTO_RICO_OPACITY,
   SILVER,
   WHITE,
+  MAX_SCREEN_MEDIUM,
 } from '../../config/constants/styled-vars';
 
 export const ContainerTable = styled.div`
+  max-width: ${MAX_SCREEN_MEDIUM}px;
   border: solid 1px ${MERCURY};
   background-color: ${WHITE};
   height: fit-content;
