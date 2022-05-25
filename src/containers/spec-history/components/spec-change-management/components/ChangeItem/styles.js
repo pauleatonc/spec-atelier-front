@@ -15,6 +15,7 @@ import {
   HEX_BLACK,
   WHITE,
   BLACK_OPACITY,
+  GRAY_OPACITY,
 } from '../../../../../../config/constants/styled-vars';
 
 export const TYPES = {
@@ -50,9 +51,12 @@ export const ACTION_TYPE_BACKGROUND = {
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  background-color: ${({ action, status, isExpanded, isOwner }) => {
+  background-color: ${({ action, status, isExpanded, isOwner, type }) => {
     const isExpandedBackground = isExpanded ? WHITE : CONCRETE;
-    return status === 'waiting' && !isExpanded && isOwner
+    return type === TYPES.PRODUCT &&
+      status === 'waiting' &&
+      !isExpanded &&
+      isOwner
       ? `${ACTION_TYPE_BACKGROUND[action].normal}`
       : isExpandedBackground;
   }};
@@ -63,9 +67,12 @@ export const Container = styled.div`
     isExpanded ? `solid 2px ${ACTION_TYPE_BACKGROUND[action].border}` : 'none'};
 
   &:hover {
-    background-color: ${({ action, status, isExpanded, isOwner }) => {
+    background-color: ${({ action, status, isExpanded, isOwner, type }) => {
       const isExpandedBackground = isExpanded ? WHITE : CONCRETE;
-      return status === 'waiting' && !isExpanded && isOwner
+      return type === TYPES.PRODUCT &&
+        status === 'waiting' &&
+        !isExpanded &&
+        isOwner
         ? `${ACTION_TYPE_BACKGROUND[action].hover}`
         : isExpandedBackground;
     }};
@@ -126,6 +133,7 @@ export const Spacer = styled.div`
 
 export const ChangeInfo = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 export const DetailsChange = styled.div`
@@ -139,11 +147,11 @@ export const ContainerButtons = styled.div`
   display: flex;
   width: 100%;
   justify-content: flex-end;
+  margin-top: 20px;
 `;
 
 export const DescChange = styled.div`
   width: 75%;
-  margin-bottom: 30px;
   padding-right: 40px;
 `;
 
@@ -159,6 +167,7 @@ export const ProductDescContainer = styled.div`
 `;
 
 export const ProductImageContainer = styled.div`
+  width: 25%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -170,6 +179,7 @@ export const ImageProduct = styled.img`
   max-height: 260px;
   border-radius: 4px;
   margin-bottom: 5px;
+  background-color: ${GRAY_OPACITY};
 `;
 
 export const GoToProduct = styled.span`

@@ -116,7 +116,7 @@ const ChangeItem = ({
                 </ImgContainerChange>
                 <ProductDescContainer>
                   <TextDesc fullwidth bold mBottom="15px">
-                    {element.item_title}
+                    {element.name}
                   </TextDesc>
                   <TextDesc fullwidth mBottom="15px" withOverFlow>
                     {element.long_desc}
@@ -138,6 +138,7 @@ const ChangeItem = ({
           )}
           <ContainerButtons>
             <Button
+              width="120px"
               margin="0 10px 0 0"
               onClick={handleRejectChange}
               disabled={isRejected}
@@ -145,6 +146,7 @@ const ChangeItem = ({
               Rechazar
             </Button>
             <Button
+              width="120px"
               variant={VARIANTS_BUTTON.PRIMARY}
               onClick={handleAcceptChange}
               disabled={isAccepted}
