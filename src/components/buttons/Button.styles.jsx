@@ -73,7 +73,7 @@ export const SecondaryButton = styled(BaseButton)`
 
 export const DefaultButton = styled(BaseButton)`
   background-color: transparent;
-  border: 1px solid rgba(${MINE_SHAFT_RGB}, 0.23);
+  border: 2px solid rgba(${MINE_SHAFT_RGB}, 0.23);
   color: rgba(${MINE_SHAFT_RGB}, 0.45);
 `;
 
