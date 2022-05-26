@@ -70,7 +70,7 @@ const UserTeamEmail = ({ member, onClick }) => {
             options={OPTIONS_PERMISSIONS}
             value={permission.id}
             onChange={updatePermission}
-            position="right"
+            position="top"
             renderInput={
               <>
                 <PermissionLabel>{permission.label}</PermissionLabel>
