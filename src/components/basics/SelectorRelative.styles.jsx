@@ -6,7 +6,6 @@ import {
   GALLERY,
   PUERTO_RICO,
   PUERTO_RICO_BACKGROUND,
-  MINE_SHAFT,
 } from '../../config/constants/styled-vars';
 
 export const Container = styled.div`
@@ -40,7 +39,7 @@ export const Section = styled.div`
 
 export const ContentOption = styled.div`
   display: block;
-  padding-left: 9px;
+  padding: 0 9px;
   cursor: pointer;
   &:hover {
     background-color: ${({ backgroundPuertoRico }) =>
@@ -76,6 +75,8 @@ export const OptionNameSection = styled.option`
   width: 100%;
   display: flex;
   align-items: center;
+  letter-spacing: 1px;
+  font-size: 12px;
 `;
 
 export const NoOptions = styled.div`

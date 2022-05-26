@@ -13,7 +13,6 @@ import {
   ContentOption,
   OptionNameSection,
   IconInfo,
-  OptionLabel,
 } from './SelectorRelative.styles';
 
 const propTypes = {
@@ -43,6 +42,7 @@ const SelectorRelative = ({
   hoverPrimaryColor,
   backgroundPuertoRico,
   showIconInfo,
+  position,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -90,6 +90,7 @@ const SelectorRelative = ({
         width={width}
         maxHeight={maxHeight}
         right={right}
+        showIconInfo={showIconInfo}
       >
         {options.map((option) => (
           <ContentOption
@@ -112,7 +113,7 @@ const SelectorRelative = ({
                 </OptionNameSection>
               )}
               {showIconInfo && option?.tooltip && (
-                <ToolTip content={option.tooltip}>
+                <ToolTip content={option.tooltip} position={position}>
                   <IconInfo className="fas fa-info-circle" />
                 </ToolTip>
               )}
