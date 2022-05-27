@@ -11,7 +11,15 @@ import { SPEC_HISTORY_TABLE } from '../../config/constants/button-variants';
 import StructureTableChangeHistory from './components/StructureTableChangeHistory';
 import ButtonsHistoryChangesManagement from './components/ButtonsHistoryChangesManagement';
 import IconUser from '../../components/IconUser';
-import { ADD_ICON, DELETE_ICON, EDIT_ICON } from '../../assets/Images';
+import {
+  ACCEPTED_ICON,
+  ADD_ICON,
+  COMMENTS_ICON,
+  DELETE_ICON,
+  EDIT_ICON,
+  REFUSED_ICON,
+  WATCH_ICON,
+} from '../../assets/Images';
 import {
   ActionText,
   ContainerTable,
@@ -19,7 +27,11 @@ import {
   ContentDate,
   ActionIcon,
   SectionName,
+  CommentsIcon,
+  SectionContainer,
+  StatusIcon,
 } from './SpecHistory.styles';
+import Tooltip from '../../components/tooltip/Tooltip';
 
 const ChangeHistoryContainer = () => {
   const {
@@ -78,6 +90,18 @@ const ChangeHistoryContainer = () => {
     move: EDIT_ICON,
   };
 
+  const statusIcons = {
+    accepted: ACCEPTED_ICON,
+    waiting: WATCH_ICON,
+    refused: REFUSED_ICON,
+  };
+
+  const statusText = {
+    accepted: 'Aceptado',
+    waiting: 'Pendiente',
+    refused: 'Rechazado',
+  };
+
   const columns = useMemo(
     () => [
       {
@@ -89,9 +113,38 @@ const ChangeHistoryContainer = () => {
           };
           return (
             <Content>
-              <ActionIcon src={icon} alt="icon_action" row={row} />
+              <ActionIcon src={icon} alt="action_icon" row={row} />
               <ActionText dangerouslySetInnerHTML={actionTextHTML()} />
             </Content>
+          );
+        },
+      },
+      {
+        Header: 'Comentario',
+        Cell: ({ row }) => {
+          return (
+            <>
+              <SectionContainer>
+                {row?.original?.comment && (
+                  <Tooltip content={row?.original?.comment} position="right">
+                    <CommentsIcon src={COMMENTS_ICON} alt="comments_icon" />
+                  </Tooltip>
+                )}
+              </SectionContainer>
+            </>
+          );
+        },
+      },
+      {
+        Header: 'Estado',
+        Cell: ({ row }) => {
+          const icon = statusIcons[row?.original?.status];
+          const text = statusText[row?.original?.status];
+          return (
+            <SectionContainer>
+              <p>{text}</p>
+              <StatusIcon src={icon} alt="status_icon" />
+            </SectionContainer>
           );
         },
       },
@@ -99,8 +152,8 @@ const ChangeHistoryContainer = () => {
         Header: 'Fecha',
         Cell: ({ row }) => (
           <ContentDate>
-            <div>{(row?.original.created_at.split(' '))[0]}</div>
-            <div>{(row?.original.created_at.split(' '))[1]}</div>
+            <p>{(row?.original.created_at.split(' '))[0]}</p>
+            <p>{(row?.original.created_at.split(' '))[1]}</p>
           </ContentDate>
         ),
       },

@@ -323,4 +323,5 @@ export const TextContainer = styled.div`
 
 export const Watch = styled.img`
   padding: 0 12px 0 6px;
+  opacity: 0.5;
 `;
