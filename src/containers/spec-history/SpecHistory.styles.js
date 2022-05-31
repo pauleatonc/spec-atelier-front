@@ -216,7 +216,7 @@ export const PaginationContent = styled.div`
   flex-wrap: nowrap;
   bottom: 70px;
   position: absolute;
-  width: 65%;
+  width: 80%;
   margin-bottom: 49px;
   align-items: center;
   justify-content: center;
