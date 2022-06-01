@@ -31,7 +31,8 @@ export const Textarea = styled.textarea`
   min-height: ${({ minHeightTextArea }) => minHeightTextArea};
   padding: 11px 19px;
   resize: none;
-  width: 100%;
+  width: ${({ width = '100%' }) => width};
+  height: ${({ height }) => height};
   &:active,
   &:focus {
     outline: 0;
