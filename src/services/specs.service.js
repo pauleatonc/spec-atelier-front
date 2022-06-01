@@ -193,12 +193,14 @@ export const getChangesAuthor = factoryService(({ specID, userID, params }) =>
 );
 
 /** Send block changes */
-export const submitChanges = factoryService(({ blocks, specID, userID }) => {
-  return patchJsonRequest(
-    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/submit_changes`,
-    { blocks },
-  );
-});
+export const submitChanges = factoryService(
+  ({ blocks, specID, userID, comment }) => {
+    return patchJsonRequest(
+      `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/submit_changes`,
+      { blocks, comment },
+    );
+  },
+);
 
 /** Delete block changes */
 // export const undoRemove = factoryService(({ blockID, specID, userID }) =>

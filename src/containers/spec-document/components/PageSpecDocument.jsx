@@ -5,7 +5,9 @@ import { handleSubmitChanges } from '../SpecDocument.actions';
 import BlocksSpecDocument from './BlocksSpecDocument';
 import Confirm from '../../../components/confirm/Confirm';
 import { Button } from '../../../components/SpecComponents';
-import { Page, Footer, Comment } from '../SpecDocument.styles';
+import { Page, Footer } from '../SpecDocument.styles';
+import Textarea from '../../../components/inputs/Textarea';
+import { useTextarea } from '../../../components/inputs/Inputs.hooks';
 
 const PageSpecDocument = ({
   showBlockEditor,
@@ -23,6 +25,7 @@ const PageSpecDocument = ({
   const [showSendChangesModal, setShowSendChangesModal] = useState(false);
   const handleCloseModal = () => setShowSendChangesModal(false);
   const handleSendChanges = () => setShowSendChangesModal(true);
+  const { onChange: handleComment, value: comment } = useTextarea('');
 
   const handleConfirm = () => {
     const changedBlockIDs = changedBlocks.map((block) => {
@@ -35,14 +38,12 @@ const PageSpecDocument = ({
       return (
         (unsentBlocks && blockAccepted && block.id) ||
         (unsentBlocksText && blockTextAccepted && block.text?.id) ||
-        (unsentBlocksImage && imageAccepted && block.image?.image.id)
+        (unsentBlocksImage && imageAccepted && block.image?.id)
       );
-      // block.status !== 'accepted' ? block.id : block.text?.id
     });
 
     handleCloseModal();
-    // Agregar el comentario que está en el editor para enviarlo cuando se envien los cambios
-    dispatch(handleSubmitChanges({ blocks: changedBlockIDs, specID }));
+    dispatch(handleSubmitChanges({ blocks: changedBlockIDs, specID, comment }));
   };
 
   return (
@@ -61,7 +62,15 @@ const PageSpecDocument = ({
           <Footer>
             {changedBlocks.length > 0 && (
               <>
-                <Comment placeholder="¿Quieres agregar algún comentario?" />
+                <Textarea
+                  placeholder="¿Quieres agregar algún comentario?"
+                  minHeightTextArea="38px"
+                  height="40px"
+                  width="300px"
+                  value={comment || ''}
+                  onChange={handleComment}
+                  maxlength={80}
+                />
                 <Button
                   variant="primary"
                   fontSize="14px"

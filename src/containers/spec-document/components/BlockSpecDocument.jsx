@@ -59,6 +59,8 @@ const BlockSpecDocument = ({
   const userOwner = project.user_owner;
   const { images, short_desc, name, long_desc, system, brand, reference } =
     block.element;
+  const unsentBlock = !userOwner && status !== 'accepted';
+  const unsentText = !userOwner && blockText?.status !== 'accepted';
 
   const handleAddBlockText = (blockID) => (textValue) => {
     handleHideBlockEditor();
@@ -74,7 +76,11 @@ const BlockSpecDocument = ({
   const getBlockWrapperByType = (content) => {
     if (type === 'Section') return <Section>{content}</Section>;
     if (type === 'Item') return <Item>{content}</Item>;
-    return <Product>{content}</Product>;
+    return (
+      <Product strikethrough={unsentBlock && change.action === 'remove'}>
+        {content}
+      </Product>
+    );
   };
 
   const imageSize = () => {
@@ -113,38 +119,35 @@ const BlockSpecDocument = ({
     move: SUPERNOVA_OPACITY,
   };
 
-  const blockColor = () => {
-    const color = change.sent
-      ? actionsColorsOpacity[change.action]
-      : actionsColors[change.action];
-    return status !== 'accepted' ? color : undefined;
-  };
+  const borderBlockColor = change.sent
+    ? actionsColorsOpacity[change.action]
+    : actionsColors[change.action];
 
-  const imageColor = () => {
-    const color = blockImage?.change.sent
-      ? actionsColorsOpacity[blockImage?.change.action]
-      : actionsColors[blockImage?.change.action];
-    return blockImage?.status !== 'accepted' ? color : undefined;
-  };
+  const borderTextcolor = blockText?.change.sent
+    ? actionsColorsOpacity[blockText?.change.action]
+    : actionsColors[blockText?.change.action];
+
+  const borderImagecolor = blockImage?.change.sent
+    ? actionsColorsOpacity[blockImage?.change.action]
+    : actionsColors[blockImage?.change.action];
+
+  const blockColor = () =>
+    status !== 'accepted' ? borderBlockColor : undefined;
 
   const textColor = () => {
-    const color = blockText?.change.sent
-      ? actionsColorsOpacity[blockText?.change.action]
-      : actionsColors[blockText?.change.action];
-    return blockText?.status !== 'accepted' ? color : undefined;
+    const borderBlock = status !== 'accepted' && borderBlockColor;
+    const borderText = blockText?.status !== 'accepted' && borderTextcolor;
+    return borderBlock ? undefined : borderText;
   };
 
-  const unsentBlock = !userOwner && !change.sent && status !== 'accepted';
-  const unsentText =
-    !userOwner && !blockText?.change.sent && blockText?.status !== 'accepted';
+  const imageColor = () =>
+    blockImage?.status !== 'accepted' ? borderImagecolor : undefined;
 
   return (
     <Block
       disabled={type === 'Section' || type === 'Item'}
       margin={getBlockMarginByType()}
-      // color={!userOwner ? blockColor() || imageColor() : undefined}
       color={!userOwner ? blockColor() : undefined}
-      strikethrough={unsentBlock && change.action === 'remove'}
     >
       {getBlockWrapperByType(
         <>
@@ -205,7 +208,10 @@ const BlockSpecDocument = ({
       {showBlockText && (
         <BlockText
           color={textColor()}
-          strikethrough={unsentText && blockText?.change.action === 'remove'}
+          strikethrough={
+            (unsentBlock && change.action === 'remove') ||
+            (unsentText && blockText?.change.action === 'remove')
+          }
         >
           <BlockTextContent
             dangerouslySetInnerHTML={{ __html: blockText?.text }}

@@ -406,13 +406,13 @@ export const SEND_CHANGED_BLOCKS = 'SEND_CHANGED_BLOCKS';
 export const SEND_CHANGED_BLOCKS_SUCCESS = 'SEND_CHANGED_BLOCKS_SUCCESS';
 export const SEND_CHANGED_BLOCKS_ERROR = 'SEND_CHANGED_BLOCKS_ERROR';
 export const handleSubmitChanges =
-  ({ blocks, specID }) =>
+  ({ blocks, specID, comment }) =>
   async (dispatch, getState) => {
     dispatch(onShowAlertSuccess({ message: 'Enviando cambios...' }));
     dispatch(onActionCreator(SEND_CHANGED_BLOCKS));
     const { auth } = getState();
     const userID = auth.user?.id;
-    submitChanges({ blocks, specID, userID }).then(
+    submitChanges({ blocks, specID, userID, comment }).then(
       (response) => {
         dispatch(onActionCreator(SEND_CHANGED_BLOCKS_SUCCESS, response));
         dispatch(

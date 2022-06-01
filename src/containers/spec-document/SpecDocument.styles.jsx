@@ -78,7 +78,6 @@ export const Group = styled.section`
 export const Block = styled.section`
   margin: ${({ margin = 'initial' }) => margin};
   border: ${({ color }) => color && `solid 2px ${color}`};
-  text-decoration: ${({ strikethrough }) => strikethrough && 'line-through'};
   width: 100%;
   background-color: ${CONCRETE_OPACITY};
   &:last-child {
@@ -128,7 +127,7 @@ export const BlockDotsIcon = styled.img`
 `;
 
 export const BlockImage = styled.section`
-  display: flex;
+  display: block;
   width: 98px;
   margin: 10px 0px 10px 10px;
 `;
@@ -234,6 +233,7 @@ export const Product = styled.section`
   padding: 0 30px 0 0;
   position: relative;
   width: 100%;
+  text-decoration: ${({ strikethrough }) => strikethrough && 'line-through'};
   &:hover ${BlockDotsIcon} {
     visibility: visible;
   }
