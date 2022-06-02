@@ -12,6 +12,7 @@ import {
   deleteSpecBlockText,
   updateProduct,
   submitChanges,
+  editSpecBlockImage,
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { updateProductsWithProduct } from '../products-list/ProductsList.actions';
@@ -183,6 +184,38 @@ export const onAddSpecBlockImage =
     } catch (error) {
       return dispatch(
         onActionCreator(ADD_SPEC_BLOCK_IMAGE_ERROR, {
+          error: true,
+          nativeError: error,
+        }),
+      );
+    }
+  };
+
+export const EDIT_SPEC_BLOCK_IMAGE = 'EDIT_SPEC_BLOCK_IMAGE';
+export const EDIT_SPEC_BLOCK_IMAGE_SUCCESS = 'EDIT_SPEC_BLOCK_IMAGE_SUCCESS';
+export const EDIT_SPEC_BLOCK_IMAGE_ERROR = 'EDIT_SPEC_BLOCK_IMAGE_ERROR';
+export const onEditSpecBlockImage =
+  ({ blockImageID, imageID, specID }) =>
+  async (dispatch, getState) => {
+    dispatch(onActionCreator(EDIT_SPEC_BLOCK_IMAGE));
+    try {
+      const { auth } = getState();
+      const { blocks: updatedBlocks } = await editSpecBlockImage({
+        blockImageID,
+        imageID,
+        specID,
+        userID: auth.user?.id,
+      });
+      const changedBlocks = getChangesBlocks(updatedBlocks);
+      return dispatch(
+        onActionCreator(EDIT_SPEC_BLOCK_IMAGE_SUCCESS, {
+          blocks: updatedBlocks,
+          changedBlocks,
+        }),
+      );
+    } catch (error) {
+      return dispatch(
+        onActionCreator(EDIT_SPEC_BLOCK_IMAGE_ERROR, {
           error: true,
           nativeError: error,
         }),

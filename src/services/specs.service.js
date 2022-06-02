@@ -84,6 +84,15 @@ export const updateSpecBlockImage = factoryService(
     ),
 );
 
+/** Edit the image of the given block */
+export const editSpecBlockImage = factoryService(
+  ({ blockImageID, imageID, specID, userID }) =>
+    patchJsonRequest(
+      `${API_BASE_URL}/users/${userID}/project_specs/${specID}/edit_product_image`,
+      { block: blockImageID, image: imageID },
+    ),
+);
+
 /** Update the given block's text */
 export const updateSpecBlockText = factoryService(
   ({ specID, textID, textValue, userID }) =>

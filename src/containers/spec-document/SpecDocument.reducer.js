@@ -20,6 +20,7 @@ import {
   SAVE_TEAM_MEMBERS,
   DELETE_MEMBER_TEAM,
   SEND_CHANGED_BLOCKS_SUCCESS,
+  EDIT_SPEC_BLOCK_IMAGE_SUCCESS,
 } from './SpecDocument.actions';
 
 const specDocumentState = {
@@ -38,6 +39,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
   switch (type) {
     case ADD_SPEC_BLOCK_SUCCESS:
     case ADD_SPEC_BLOCK_IMAGE_SUCCESS:
+    case EDIT_SPEC_BLOCK_IMAGE_SUCCESS:
     case ADD_SPEC_BLOCK_TEXT_SUCCESS:
     case GET_SPEC_BLOCKS_SUCCESS:
       return {
