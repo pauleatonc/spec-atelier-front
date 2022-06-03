@@ -57,7 +57,7 @@ export const deleteSpecBlockText = factoryService(
   ({ specID, textID, userID }) =>
     deleteJsonRequest(
       `${API_BASE_URL}/users/${userID}/project_specs/${specID}/remove_text`,
-      { text: textID },
+      { block: textID },
     ),
 );
 
@@ -98,7 +98,7 @@ export const updateSpecBlockText = factoryService(
   ({ specID, textID, textValue, userID }) =>
     patchJsonRequest(
       `${API_BASE_URL}/users/${userID}/project_specs/${specID}/edit_text`,
-      { text: textID, updated_text: textValue },
+      { block: textID, updated_text: textValue },
     ),
 );
 
