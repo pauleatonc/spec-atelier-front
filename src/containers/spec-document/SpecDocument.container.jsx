@@ -79,7 +79,6 @@ const SpecDocument = () => {
   };
 
   const handleUndoRemove = (blockID) => (event) => {
-    // TODO
     //   handleBlockMenuClose();
     //   dispatch(undoRemove({ blockID, specID, userID }));
   };
@@ -134,9 +133,9 @@ const SpecDocument = () => {
     dispatch(onRemoveSpecBlock({ block: [blockID], specID }));
   };
 
-  const handleBlockImageRemove = (blockID) => () => {
+  const handleBlockImageRemove = (imageBlockID) => () => {
     handleBlockMenuClose();
-    dispatch(onRemoveSpecBlockImage({ blockID, specID }));
+    dispatch(onRemoveSpecBlockImage({ imageBlockID, specID }));
   };
 
   const handleBlockTextRemove = (textID) => () => {
@@ -159,7 +158,9 @@ const SpecDocument = () => {
             </BlockMenuItem>
           )}
           {canRemoveImage && (
-            <BlockMenuItem onClick={handleBlockImageRemove(selectedBlockID)}>
+            <BlockMenuItem
+              onClick={handleBlockImageRemove(selectedBlock?.image?.id)}
+            >
               Eliminar imagen
             </BlockMenuItem>
           )}

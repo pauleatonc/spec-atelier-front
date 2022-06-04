@@ -228,13 +228,13 @@ export const REMOVE_SPEC_BLOCK_IMAGE_ERROR = 'REMOVE_SPEC_BLOCK_IMAGE_ERROR';
 export const REMOVE_SPEC_BLOCK_IMAGE_SUCCESS =
   'REMOVE_SPEC_BLOCK_IMAGE_SUCCESS';
 export const onRemoveSpecBlockImage =
-  ({ blockID, specID }) =>
+  ({ imageBlockID, specID }) =>
   async (dispatch, getState) => {
     dispatch(onActionCreator(REMOVE_SPEC_BLOCK_IMAGE));
     try {
       const { auth } = getState();
       const { blocks: updatedBlocks } = await deleteSpecBlockImage({
-        blockID,
+        imageBlockID,
         specID,
         userID: auth.user?.id,
       });

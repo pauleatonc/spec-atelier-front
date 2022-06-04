@@ -45,10 +45,10 @@ export const deleteSpecBlock = factoryService(({ block, specID, userID }) => {
 
 /** Delete the image of the given block */
 export const deleteSpecBlockImage = factoryService(
-  ({ blockID, specID, userID }) =>
+  ({ imageBlockID, specID, userID }) =>
     patchJsonRequest(
       `${API_BASE_URL}/users/${userID}/project_specs/${specID}/remove_product_image`,
-      { block: blockID },
+      { block: imageBlockID },
     ),
 );
 
