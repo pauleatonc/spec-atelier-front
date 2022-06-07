@@ -51,16 +51,16 @@ const BlockSpecDocument = ({
     text: blockText,
     image: blockImage,
     type,
-    status,
     id,
     change,
   } = block;
+  const { status } = block.change;
   const { user } = useSelector((state) => state.auth);
   const userOwner = project.user_owner;
   const { images, short_desc, name, long_desc, system, brand, reference } =
     block.element;
   const unsentBlock = !userOwner && status !== 'accepted';
-  const unsentText = !userOwner && blockText?.status !== 'accepted';
+  const unsentText = !userOwner && blockText?.change?.status !== 'accepted';
 
   const handleAddBlockText = (blockID) => (textValue) => {
     handleHideBlockEditor();
@@ -98,12 +98,12 @@ const BlockSpecDocument = ({
     type === 'Product' &&
     blockImage?.image?.id &&
     (user.id === blockImage?.change?.user.id ||
-      blockImage?.status === 'accepted');
+      blockImage?.change?.status === 'accepted');
 
   const showBlockText =
     blockText &&
     (user.id === blockText?.change?.user.id ||
-      blockText?.status === 'accepted');
+      blockText?.chnage?.status === 'accepted');
 
   const actionsColors = {
     add: PUERTO_RICO,
@@ -141,7 +141,7 @@ const BlockSpecDocument = ({
   };
 
   const imageColor = () =>
-    blockImage?.status !== 'accepted' ? borderImagecolor : undefined;
+    blockImage?.change?.status !== 'accepted' ? borderImagecolor : undefined;
 
   return (
     <Block
@@ -175,7 +175,7 @@ const BlockSpecDocument = ({
               />
               {!userOwner &&
                 blockImage?.change.sent &&
-                blockImage?.status === 'waiting' && <PendingReviewText />}
+                blockImage?.change?.status === 'waiting' && <PendingReviewText />}
             </BlockImage>
           )}
           {type !== 'Product' && <BlockTitle>{name}</BlockTitle>}
@@ -234,7 +234,7 @@ const BlockSpecDocument = ({
           />
           {!userOwner &&
             blockText?.change.sent &&
-            blockText?.status === 'waiting' && <PendingReviewText />}
+            blockText?.change?.status === 'waiting' && <PendingReviewText />}
         </BlockText>
       )}
       {!userOwner && change.sent && status === 'waiting' && (
