@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { undoRemove } from '../../services/specs.service';
 import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import { onShowSpecEditProduct } from '../spec-edit-product/SpecEditProduct.actions';
 import { onShowSpecImagesModalSuccess } from '../spec-images-modal/SpecImagesModal.actions';
@@ -28,6 +29,7 @@ import {
 const SpecDocument = () => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
+  const { user } = useSelector((state) => state.auth);
   const { blocks } = useSelector((state) => state.specDocument);
   const [selectedBlockID, setSelectedBlockID] = useState('');
   const [selectedBlockTextID, setSelectedBlockTextID] = useState('');
@@ -78,9 +80,13 @@ const SpecDocument = () => {
     dispatch(onShowSpecEditProduct({ id: block.element.id || 1 }));
   };
 
-  const handleUndoRemove = (blockID) => (event) => {
-    //   handleBlockMenuClose();
-    //   dispatch(undoRemove({ blockID, specID, userID }));
+  const handleUndoRemove = () => (event) => {
+    const blockId =
+      selectedBlock.change?.id ||
+      selectedBlock.text?.change.id ||
+      selectedBlock.image?.change.id;
+    handleBlockMenuClose(event);
+    dispatch(undoRemove({ changeID: blockId, specID, userID: user.id }));
   };
 
   const handleShowBlockMenu = (blockID) => (event) => {
@@ -179,7 +185,7 @@ const SpecDocument = () => {
     return (
       <>
         {selectedBlock.change?.action === 'remove' && (
-          <BlockMenuItem onClick={handleUndoRemove(selectedBlockID)}>
+          <BlockMenuItem onClick={handleUndoRemove()}>
             Deshacer Eliminar
           </BlockMenuItem>
         )}

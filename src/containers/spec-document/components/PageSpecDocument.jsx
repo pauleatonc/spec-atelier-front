@@ -36,9 +36,9 @@ const PageSpecDocument = ({
       const unsentBlocksText = block?.text?.change?.sent === false;
       const unsentBlocksImage = block?.image?.change?.sent === false;
       return (
-        (unsentBlocks && blockAccepted && block.id) ||
-        (unsentBlocksText && blockTextAccepted && block.text?.id) ||
-        (unsentBlocksImage && imageAccepted && block.image?.id)
+        (unsentBlocks && blockAccepted && block.change.id) ||
+        (unsentBlocksText && blockTextAccepted && block.text?.change.id) ||
+        (unsentBlocksImage && imageAccepted && block.image?.change.id)
       );
     });
 

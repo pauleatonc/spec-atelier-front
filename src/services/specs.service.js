@@ -211,10 +211,10 @@ export const submitChanges = factoryService(
   },
 );
 
-/** Delete block changes */
-// export const undoRemove = factoryService(({ blockID, specID, userID }) =>
-//   patchJsonRequest(
-//     `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/${blockID}/undo_change`,
-//     { block: blockID },
-//   ),
-// );
+/** Remove block change */
+export const undoRemove = factoryService(({ changeID, specID, userID }) =>
+  patchJsonRequest(
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/${changeID}/undo_change`,
+    { change: changeID },
+  ),
+);

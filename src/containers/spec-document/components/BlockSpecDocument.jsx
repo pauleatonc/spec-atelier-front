@@ -47,13 +47,7 @@ const BlockSpecDocument = ({
   const { id: specID } = useParams();
   const { localConfig } = useSelector((state) => state.specAdmin);
   const { project } = useSelector((state) => state.specDocument);
-  const {
-    text: blockText,
-    image: blockImage,
-    type,
-    id,
-    change,
-  } = block;
+  const { text: blockText, image: blockImage, type, id, change } = block;
   const { status } = block.change;
   const { user } = useSelector((state) => state.auth);
   const userOwner = project.user_owner;
@@ -103,7 +97,7 @@ const BlockSpecDocument = ({
   const showBlockText =
     blockText &&
     (user.id === blockText?.change?.user.id ||
-      blockText?.chnage?.status === 'accepted');
+      blockText?.change?.status === 'accepted');
 
   const actionsColors = {
     add: PUERTO_RICO,
@@ -136,7 +130,8 @@ const BlockSpecDocument = ({
 
   const textColor = () => {
     const borderBlock = status !== 'accepted' && borderBlockColor;
-    const borderText = blockText?.status !== 'accepted' && borderTextcolor;
+    const borderText =
+      blockText?.change?.status !== 'accepted' && borderTextcolor;
     return borderBlock ? undefined : borderText;
   };
 
@@ -175,7 +170,9 @@ const BlockSpecDocument = ({
               />
               {!userOwner &&
                 blockImage?.change.sent &&
-                blockImage?.change?.status === 'waiting' && <PendingReviewText />}
+                blockImage?.change?.status === 'waiting' && (
+                  <PendingReviewText />
+                )}
             </BlockImage>
           )}
           {type !== 'Product' && <BlockTitle>{name}</BlockTitle>}
@@ -207,7 +204,7 @@ const BlockSpecDocument = ({
       )}
       {showBlockText && (
         <BlockText
-          color={textColor()}
+          color={!userOwner ? textColor() : undefined}
           strikethrough={
             (unsentBlock && change.action === 'remove') ||
             (unsentText && blockText?.change.action === 'remove')
