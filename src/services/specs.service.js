@@ -203,10 +203,10 @@ export const getChangesAuthor = factoryService(({ specID, userID, params }) =>
 
 /** Send block changes */
 export const submitChanges = factoryService(
-  ({ blocks, specID, userID, comment }) => {
+  ({ changes, specID, userID, comment }) => {
     return patchJsonRequest(
       `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/submit_changes`,
-      { blocks, comment },
+      { changes, comment },
     );
   },
 );

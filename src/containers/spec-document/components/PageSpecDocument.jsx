@@ -20,7 +20,7 @@ const PageSpecDocument = ({
 }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
-  const { project, changedBlocks } = useSelector((state) => state.specDocument);
+  const { project, changes } = useSelector((state) => state.specDocument);
   const userOwner = project?.user_owner;
   const [showSendChangesModal, setShowSendChangesModal] = useState(false);
   const handleCloseModal = () => setShowSendChangesModal(false);
@@ -28,22 +28,10 @@ const PageSpecDocument = ({
   const { onChange: handleComment, value: comment } = useTextarea('');
 
   const handleConfirm = () => {
-    const changedBlockIDs = changedBlocks.map((block) => {
-      const blockAccepted = block.change?.status !== 'accepted';
-      const blockTextAccepted = block?.text?.change?.status !== 'accepted';
-      const imageAccepted = block?.image?.change?.status !== 'accepted';
-      const unsentBlocks = block?.change?.sent === false;
-      const unsentBlocksText = block?.text?.change?.sent === false;
-      const unsentBlocksImage = block?.image?.change?.sent === false;
-      return (
-        (unsentBlocks && blockAccepted && block.change.id) ||
-        (unsentBlocksText && blockTextAccepted && block.text?.change.id) ||
-        (unsentBlocksImage && imageAccepted && block.image?.change.id)
-      );
-    });
+    const changedBlockIDs = changes.map(change => change.id);
 
     handleCloseModal();
-    dispatch(handleSubmitChanges({ blocks: changedBlockIDs, specID, comment }));
+    dispatch(handleSubmitChanges({ changes: changedBlockIDs, specID, comment }));
   };
 
   return (
@@ -60,7 +48,7 @@ const PageSpecDocument = ({
         />
         {!userOwner && (
           <Footer>
-            {changedBlocks.length > 0 && (
+            {changes.length > 0 && (
               <>
                 <Textarea
                   placeholder="¿Quieres agregar algún comentario?"
@@ -76,7 +64,7 @@ const PageSpecDocument = ({
                   fontSize="14px"
                   onClick={handleSendChanges}
                 >
-                  Enviar {changedBlocks.length} cambios
+                  Enviar {changes.length} cambios
                 </Button>
               </>
             )}
