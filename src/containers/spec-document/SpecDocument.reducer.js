@@ -31,7 +31,7 @@ const specDocumentState = {
   quoteTable: [],
   totalExpandManual: 0,
   sections: [],
-  changedBlocks: [],
+  changes: [],
 };
 
 /** The spec document' reducer */
@@ -50,7 +50,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         quoteTable: getFormatedTableData(payload.blocks),
         totalExpandManual: getTotalExpandManual(payload.blocks),
         sections: getSections(payload.blocks),
-        changedBlocks: payload.changedBlocks,
+        changes: payload.changes,
       };
     case REMOVE_SPEC_BLOCK_SUCCESS:
     case REMOVE_SPEC_BLOCK_IMAGE_SUCCESS:
@@ -60,7 +60,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         ...state,
         blocks: payload.blocks,
         sections: getSections(payload.blocks),
-        changedBlocks: payload.changedBlocks,
+        changes: payload.changes,
         ownerBlocks: getOwnerBlocks(payload.blocks),
       };
     }
@@ -124,7 +124,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
     case SEND_CHANGED_BLOCKS_SUCCESS: {
       return {
         ...state,
-        changedBlocks: [],
+        changes: [],
         blocks: payload.blocks,
       };
     }

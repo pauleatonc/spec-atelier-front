@@ -128,11 +128,11 @@ const SpecDocument = () => {
   const canAddText = selectedBlock?.text?.user_owned
     ? !selectedBlock?.text
     : !selectedBlock?.text ||
-      (selectedBlock?.text && selectedBlock?.text?.status !== 'accepted');
+      (selectedBlock?.text && selectedBlock?.text?.change?.status !== 'accepted');
 
   const canRemoveImage = selectedBlock?.image?.user_owned
     ? true
-    : selectedBlock?.image?.status === 'accepted';
+    : selectedBlock?.image?.change?.status === 'accepted';
 
   const handleRemoveBlock = (blockID) => () => {
     handleBlockMenuClose();

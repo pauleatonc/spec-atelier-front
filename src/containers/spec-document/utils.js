@@ -169,18 +169,21 @@ export const getOwnerBlocks = (blocks) => {
   );
 };
 
-export const getChangesBlocks = (blocks) => {
-  return blocks.filter((block) => {
+export const getChanges = (blocks) => {
+  const changes = [];
+  blocks.forEach((block) => {
     const blockAccepted = block.change?.status !== 'accepted';
     const blockTextAccepted = block?.text?.change?.status !== 'accepted';
     const imageAccepted = block?.image?.change?.status !== 'accepted';
     const unsentBlocks = block?.change?.sent === false;
     const unsentBlocksText = block?.text?.change?.sent === false;
     const unsentBlocksImage = block?.image?.change?.sent === false;
-    return (
-      (unsentBlocks && blockAccepted) ||
-      (unsentBlocksText && blockTextAccepted) ||
-      (unsentBlocksImage && imageAccepted)
-    );
+    if (unsentBlocks && blockAccepted)
+      changes.push(block.change)
+    if (unsentBlocksText && blockTextAccepted)
+      changes.push(block.text.change)
+    if (unsentBlocksImage && imageAccepted)
+      changes.push(block.image.change)
   });
+  return changes;
 };
