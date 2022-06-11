@@ -79,7 +79,6 @@ export const Block = styled.section`
   margin: ${({ margin = 'initial' }) => margin};
   border: ${({ color }) => color && `solid 2px ${color}`};
   width: 100%;
-  background-color: ${CONCRETE_OPACITY};
   &:last-child {
     margin: 0;
   }
@@ -138,6 +137,7 @@ export const BlockContent = styled.section`
 
 export const BlockText = styled.section`
   flex-direction: column;
+  background-color: ${CONCRETE_OPACITY};
   min-height: 33px;
   display: flex;
   align-items: center;
@@ -192,6 +192,7 @@ export const BlockTitle = styled.span`
 
 export const Section = styled.section`
   align-items: center;
+  background-color: ${CONCRETE_OPACITY};
   color: ${MINE_SHAFT};
   display: flex;
   font-size: 16px;
@@ -210,6 +211,7 @@ export const Section = styled.section`
 
 export const Item = styled.section`
   align-items: center;
+  background-color: ${CONCRETE_OPACITY};
   color: ${MINE_SHAFT};
   display: flex;
   font-size: 14px;
@@ -227,6 +229,7 @@ export const Item = styled.section`
 `;
 
 export const Product = styled.section`
+  background-color: ${CONCRETE_OPACITY};
   display: flex;
   margin: 0 0 3px 0;
   min-height: 116px;
@@ -315,6 +318,7 @@ export const TextContainer = styled.div`
   font-size: 10px;
   padding: 12px 0 12px 0;
   color: rgba(${MINE_SHAFT_RGB}, 0.5);
+  background-color: ${CONCRETE_OPACITY};
 `;
 
 export const Watch = styled.img`

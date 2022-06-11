@@ -28,10 +28,9 @@ const PageSpecDocument = ({
   const { onChange: handleComment, value: comment } = useTextarea('');
 
   const handleConfirm = () => {
-    const changedBlockIDs = changes.map(change => change.id);
-
+    const changedIDs = changes.map((change) => change.id);
     handleCloseModal();
-    dispatch(handleSubmitChanges({ changes: changedBlockIDs, specID, comment }));
+    dispatch(handleSubmitChanges({ changes: changedIDs, specID, comment }));
   };
 
   return (

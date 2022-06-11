@@ -48,7 +48,7 @@ const BlockSpecDocument = ({
   const { localConfig } = useSelector((state) => state.specAdmin);
   const { project } = useSelector((state) => state.specDocument);
   const { text: blockText, image: blockImage, type, id, change } = block;
-  const { status } = block.change;
+  const { status, sent } = block.change;
   const { user } = useSelector((state) => state.auth);
   const userOwner = project.user_owner;
   const { images, short_desc, name, long_desc, system, brand, reference } =
@@ -113,7 +113,7 @@ const BlockSpecDocument = ({
     move: SUPERNOVA_OPACITY,
   };
 
-  const borderBlockColor = change.sent
+  const borderBlockColor = sent
     ? actionsColorsOpacity[change.action]
     : actionsColors[change.action];
 
@@ -125,14 +125,18 @@ const BlockSpecDocument = ({
     ? actionsColorsOpacity[blockImage?.change.action]
     : actionsColors[blockImage?.change.action];
 
-  const blockColor = () =>
-    status !== 'accepted' ? borderBlockColor : undefined;
+  const borderBlock = status !== 'accepted' ? borderBlockColor : undefined;
 
+  // eslint-disable-next-line consistent-return
   const textColor = () => {
-    const borderBlock = status !== 'accepted' && borderBlockColor;
+    const blockSentAndPending = status === 'waiting' && sent;
+    const textPendingAndSent =
+      !blockText?.change?.sent && blockText?.change?.status === 'waiting';
     const borderText =
-      blockText?.change?.status !== 'accepted' && borderTextcolor;
-    return borderBlock ? undefined : borderText;
+      blockText?.change?.status !== 'accepted' ? borderTextcolor : undefined;
+
+    if (blockSentAndPending && textPendingAndSent) return borderText;
+    if (status === 'accepted' && textPendingAndSent) return borderText;
   };
 
   const imageColor = () =>
@@ -142,7 +146,7 @@ const BlockSpecDocument = ({
     <Block
       disabled={type === 'Section' || type === 'Item'}
       margin={getBlockMarginByType()}
-      color={!userOwner ? blockColor() : undefined}
+      color={!userOwner ? borderBlock : undefined}
     >
       {getBlockWrapperByType(
         <>
@@ -159,7 +163,7 @@ const BlockSpecDocument = ({
           )}
           <BlockDotsIcon
             src={THREE_DOTS_VERTICAL_SOURCE}
-            onClick={handleShowBlockMenu(id, change.user.id, change.sent)}
+            onClick={handleShowBlockMenu(id, change.user.id, sent)}
           />
           {showBlockImage && (
             <BlockImage>
@@ -168,8 +172,7 @@ const BlockSpecDocument = ({
                 src={imageSize()}
                 color={!userOwner ? imageColor() : undefined}
               />
-              {!userOwner &&
-                blockImage?.change.sent &&
+              {blockImage?.change.sent &&
                 blockImage?.change?.status === 'waiting' && (
                   <PendingReviewText />
                 )}
@@ -229,14 +232,12 @@ const BlockSpecDocument = ({
             src={THREE_DOTS_VERTICAL_SOURCE}
             onClick={handleShowBlockTextMenu(blockText?.id)}
           />
-          {!userOwner &&
+          {!(sent && status === 'waiting') &&
             blockText?.change.sent &&
             blockText?.change?.status === 'waiting' && <PendingReviewText />}
         </BlockText>
       )}
-      {!userOwner && change.sent && status === 'waiting' && (
-        <PendingReviewText />
-      )}
+      {sent && status === 'waiting' && <PendingReviewText />}
     </Block>
   );
 };
