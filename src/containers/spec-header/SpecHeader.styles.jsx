@@ -44,6 +44,10 @@ export const Section = styled.section`
 `;
 
 export const ProjectName = styled(Section)`
+  max-width: 200px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   color: ${MINE_SHAFT};
   font-size: 16px;
   font-weight: bold;
