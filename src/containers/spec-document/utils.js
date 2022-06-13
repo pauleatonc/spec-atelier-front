@@ -160,3 +160,30 @@ export const getSections = (blocks) => {
       })),
   }));
 };
+
+export const getOwnerBlocks = (blocks) => {
+  return blocks.filter(
+    (block) =>
+      block.change?.status === 'accepted' ||
+      (block.change?.status === 'waiting' && block.change.action === 'remove'),
+  );
+};
+
+export const getChanges = (blocks) => {
+  const changes = [];
+  blocks.forEach((block) => {
+    const blockAccepted = block.change?.status !== 'accepted';
+    const blockTextAccepted = block?.text?.change?.status !== 'accepted';
+    const imageAccepted = block?.image?.change?.status !== 'accepted';
+    const unsentBlocks = block?.change?.sent === false;
+    const unsentBlocksText = block?.text?.change?.sent === false;
+    const unsentBlocksImage = block?.image?.change?.sent === false;
+    if (unsentBlocks && blockAccepted)
+      changes.push(block.change)
+    if (unsentBlocksText && blockTextAccepted)
+      changes.push(block.text.change)
+    if (unsentBlocksImage && imageAccepted)
+      changes.push(block.image.change)
+  });
+  return changes;
+};

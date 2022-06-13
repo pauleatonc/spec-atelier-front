@@ -133,6 +133,7 @@ import ARROW_UP_ACIVE_SOURCE from './images/icons/arrow-up-active.svg';
 import ADD_ICON from './images/icons/ic_add.svg';
 import EDIT_ICON from './images/icons/ic_edit.svg';
 import DELETE_ICON from './images/icons/ic_delete.svg';
+import WATCH_ICON from './images/icons/watch-icon.svg';
 
 export {
   LOGO_CCHC,
@@ -257,4 +258,5 @@ export {
   SPEC_DOCUMENT_SELECTED,
   SPEC_TABLE_UNSELECTED,
   SPEC_TABLE_SELECTED,
+  WATCH_ICON,
 };

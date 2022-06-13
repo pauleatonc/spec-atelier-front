@@ -2,6 +2,7 @@ import {
   getFormatedTableData,
   getTotalExpandManual,
   getSections,
+  getOwnerBlocks,
 } from './utils';
 import {
   ADD_SPEC_BLOCK_SUCCESS,
@@ -19,6 +20,7 @@ import {
   SAVE_TEAM_MEMBERS,
   DELETE_MEMBER_TEAM,
   SEND_CHANGED_BLOCKS_SUCCESS,
+  EDIT_SPEC_BLOCK_IMAGE_SUCCESS,
 } from './SpecDocument.actions';
 
 const specDocumentState = {
@@ -29,7 +31,7 @@ const specDocumentState = {
   quoteTable: [],
   totalExpandManual: 0,
   sections: [],
-  changedBlocks: [],
+  changes: [],
 };
 
 /** The spec document' reducer */
@@ -37,21 +39,18 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
   switch (type) {
     case ADD_SPEC_BLOCK_SUCCESS:
     case ADD_SPEC_BLOCK_IMAGE_SUCCESS:
+    case EDIT_SPEC_BLOCK_IMAGE_SUCCESS:
     case ADD_SPEC_BLOCK_TEXT_SUCCESS:
     case GET_SPEC_BLOCKS_SUCCESS:
       return {
         ...state,
         blocks: payload.blocks,
-        ownerBlocks: payload.blocks.filter(
-          (block) =>
-            block.status === 'accepted' ||
-            (block.status === 'waiting' && block.change.action === 'remove'),
-        ),
+        ownerBlocks: getOwnerBlocks(payload.blocks),
         project: { ...state.project, ...payload.project },
         quoteTable: getFormatedTableData(payload.blocks),
         totalExpandManual: getTotalExpandManual(payload.blocks),
         sections: getSections(payload.blocks),
-        changedBlocks: payload.changedBlocks,
+        changes: payload.changes,
       };
     case REMOVE_SPEC_BLOCK_SUCCESS:
     case REMOVE_SPEC_BLOCK_IMAGE_SUCCESS:
@@ -61,12 +60,8 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         ...state,
         blocks: payload.blocks,
         sections: getSections(payload.blocks),
-        changedBlocks: payload.changedBlocks,
-        ownerBlocks: payload.blocks.filter(
-          (block) =>
-            block.status === 'accepted' ||
-            (block.status === 'waiting' && block.change.action === 'remove'),
-        ),
+        changes: payload.changes,
+        ownerBlocks: getOwnerBlocks(payload.blocks),
       };
     }
     case SORT_SPEC_BLOCKS_SUCCESS: {
@@ -129,7 +124,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
     case SEND_CHANGED_BLOCKS_SUCCESS: {
       return {
         ...state,
-        changedBlocks: [],
+        changes: [],
         blocks: payload.blocks,
       };
     }

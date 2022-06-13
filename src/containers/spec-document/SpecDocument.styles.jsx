@@ -10,7 +10,7 @@ import {
   CONCRETE,
   CONCRETE_OPACITY,
   MINE_SHAFT_RGB,
-  BOULDER,
+  ALTO_OPACITY,
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
@@ -78,7 +78,6 @@ export const Group = styled.section`
 export const Block = styled.section`
   margin: ${({ margin = 'initial' }) => margin};
   border: ${({ color }) => color && `solid 2px ${color}`};
-  text-decoration: ${({ strikethrough }) => strikethrough && 'line-through'};
   width: 100%;
   &:last-child {
     margin: 0;
@@ -127,7 +126,7 @@ export const BlockDotsIcon = styled.img`
 `;
 
 export const BlockImage = styled.section`
-  display: flex;
+  display: block;
   width: 98px;
   margin: 10px 0px 10px 10px;
 `;
@@ -137,18 +136,25 @@ export const BlockContent = styled.section`
 `;
 
 export const BlockText = styled.section`
+  flex-direction: column;
   background-color: ${CONCRETE_OPACITY};
+  min-height: 33px;
+  display: flex;
+  align-items: center;
   font-size: 12px;
   margin: 0 0 3px 0;
-  padding: 4px 30px 4px 9px;
+  padding: 7px 4px 4px 9px;
   position: relative;
   width: 100%;
+  border: ${({ color }) => color && `solid 2px ${color}`};
+  text-decoration: ${({ strikethrough }) => strikethrough && 'line-through'};
   &:hover ${BlockDotsIcon} {
     visibility: visible;
   }
 `;
 
 export const BlockTextContent = styled.section`
+  align-self: flex-start;
   & p {
     color: ${MINE_SHAFT};
     letter-spacing: 1px;
@@ -230,16 +236,18 @@ export const Product = styled.section`
   padding: 0 30px 0 0;
   position: relative;
   width: 100%;
+  text-decoration: ${({ strikethrough }) => strikethrough && 'line-through'};
   &:hover ${BlockDotsIcon} {
     visibility: visible;
   }
 `;
 
 export const ProductImage = styled.img`
-  height: 150px;
+  height: fit-content;
   object-fit: contain;
   object-position: top;
   width: 98px;
+  border: ${({ color }) => color && `solid 2px ${color}`};
 `;
 
 export const ProductTitle = styled.p`
@@ -283,17 +291,36 @@ export const ProductBrand = styled.p`
   line-height: 1.6;
 `;
 
-export const ContentButton = styled.div`
+export const Footer = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin-top: 28px;
 `;
 
-export const SubmittedChanges = styled.p`
-  font-family: 'Lato';
+export const Comment = styled.input`
+  width: 300px;
+  height: 38px;
+  padding-left: 11px;
   font-size: 12px;
-  margin-top: 37px;
-  color: ${BOULDER};
+  border-radius: 5px;
+  :disabled {
+    background-color: ${ALTO_OPACITY};
+  }
+`;
+
+export const TextContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-self: flex-end;
+  font-size: 10px;
+  padding: 12px 0 12px 0;
+  color: rgba(${MINE_SHAFT_RGB}, 0.5);
+  background-color: ${CONCRETE_OPACITY};
+`;
+
+export const Watch = styled.img`
+  padding: 0 12px 0 6px;
 `;

@@ -19,8 +19,7 @@ const BlocksSpecDocument = ({
   const { blocks, project, ownerBlocks } = useSelector(
     (state) => state.specDocument,
   );
-  const userOwner = project.user_owner;
-  const correspondingBlocks = userOwner ? ownerBlocks : blocks;
+  const correspondingBlocks = project.user_owner ? ownerBlocks : blocks;
 
   const handleBlocksSortChange = (blocksIDs) =>
     dispatch(onSortSpecBlocks({ blocksIDs, specID }));
