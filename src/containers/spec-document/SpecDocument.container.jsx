@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { undoRemove } from '../../services/specs.service';
 import { onShowSpecCreateProductSuccess } from '../spec-create-product/SpecCreateProduct.actions';
 import { onShowSpecEditProduct } from '../spec-edit-product/SpecEditProduct.actions';
 import { onShowSpecImagesModalSuccess } from '../spec-images-modal/SpecImagesModal.actions';
@@ -11,6 +10,8 @@ import {
   onRemoveSpecBlock,
   onRemoveSpecBlockImage,
   onRemoveSpecBlockText,
+  onUndoChange,
+  onUndoSend,
   onUpdateSpecBlockText,
 } from './SpecDocument.actions';
 import useDropdown from '../../components/basics/Dropdown.hooks';
@@ -29,19 +30,33 @@ import {
 const SpecDocument = () => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
-  const { user } = useSelector((state) => state.auth);
   const { blocks } = useSelector((state) => state.specDocument);
   const [selectedBlockID, setSelectedBlockID] = useState('');
   const [selectedBlockTextID, setSelectedBlockTextID] = useState('');
+  const [selectedBlockImageID, setSelectedBlockImageID] = useState('');
   const [showBlockEditor, setShowBlockEditor] = useState('');
   const [showBlockTextEditor, setShowBlockTextEditor] = useState('');
   const windowSize = window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches;
   const selectedBlock = blocks.find((block) => block.id === selectedBlockID);
+  const selectedBlockText = blocks.find(
+    (block) => block.text?.id === selectedBlockTextID,
+  );
+  const selectedBlockImage = blocks.find(
+    (block) => block.image?.id === selectedBlockImageID,
+  );
   const typeBlock = selectedBlock?.type;
   const productImage = selectedBlock?.image?.image?.id;
   const elementUserOwned = selectedBlock?.element.user_owned;
   const action = selectedBlock?.change?.action;
+  const actionText = selectedBlockText?.text?.change?.action;
+  const actionImage = selectedBlockImage?.image?.change?.action;
   const productImages = selectedBlock?.element.images;
+  const sent = selectedBlock?.change?.sent;
+  const sentText = selectedBlockText?.text?.change?.sent;
+  const sentImage = selectedBlockImage?.image?.change?.sent;
+  const status = selectedBlock?.change?.status;
+  const statusText = selectedBlockText?.text?.change?.status;
+  const statusImage = selectedBlockImage?.image?.change?.status;
 
   useEffect(() => {
     dispatch(onGetSpecBlocks(specID));
@@ -65,6 +80,12 @@ const SpecDocument = () => {
     onOpen: handleBlockTextMenuOpen,
   } = useDropdown({ closeCallback: () => setSelectedBlockTextID('') });
 
+  const {
+    anchor: blockImageAnchor,
+    onClose: handleBlockImageMenuClose,
+    onOpen: handleBlockImageMenuOpen,
+  } = useDropdown({ closeCallback: () => setSelectedBlockImageID('') });
+
   const handleShowProducts = () => {
     handleAddMenuClose();
     dispatch(onShowSpecProducts());
@@ -80,13 +101,23 @@ const SpecDocument = () => {
     dispatch(onShowSpecEditProduct({ id: block.element.id || 1 }));
   };
 
-  const handleUndoRemove = () => (event) => {
-    const blockId =
-      selectedBlock.change?.id ||
-      selectedBlock.text?.change.id ||
-      selectedBlock.image?.change.id;
+  const changeID =
+    selectedBlock?.change.id ||
+    selectedBlockText?.text?.change.id ||
+    selectedBlockImage?.image?.change.id;
+
+  const handleUndoChange = () => (event) => {
     handleBlockMenuClose(event);
-    dispatch(undoRemove({ changeID: blockId, specID, userID: user.id }));
+    handleBlockTextMenuClose(event);
+    handleBlockImageMenuClose(event);
+    dispatch(onUndoChange({ changeID, specID }));
+  };
+
+  const handleUndoSend = () => (event) => {
+    handleBlockMenuClose(event);
+    handleBlockTextMenuClose(event);
+    handleBlockImageMenuClose(event);
+    dispatch(onUndoSend({ changeID, specID }));
   };
 
   const handleShowBlockMenu = (blockID) => (event) => {
@@ -99,8 +130,14 @@ const SpecDocument = () => {
     setSelectedBlockTextID(textID);
   };
 
+  const handleShowBlockTImageMenu = (imageID) => (event) => {
+    handleBlockImageMenuOpen(event);
+    setSelectedBlockImageID(imageID);
+  };
+
   const handleShowImagesModal = (blockID) => () => {
     handleBlockMenuClose();
+    handleBlockImageMenuClose();
     dispatch(onShowSpecImagesModalSuccess({ blockID }));
   };
 
@@ -123,21 +160,22 @@ const SpecDocument = () => {
     dispatch(onUpdateSpecBlockText({ textID, specID, textValue }));
   };
 
-  const canEdit = action !== 'remove' || elementUserOwned;
-
+  const canEdit = (action !== 'remove' && !sent) || elementUserOwned;
+  const canEditText = actionText !== 'remove' && !sentText;
+  const canEditImage = actionImage !== 'remove' && !sentImage;
   const canAddText = !selectedBlock?.text;
 
-  const canRemoveImage = selectedBlock?.image?.user_owned
+  const canRemoveImage = selectedBlockImage?.image?.user_owned
     ? true
-    : selectedBlock?.image?.change?.status === 'accepted';
+    : selectedBlockImage?.image?.change?.status === 'accepted';
 
   const handleRemoveBlock = (blockID) => () => {
     handleBlockMenuClose();
     dispatch(onRemoveSpecBlock({ block: [blockID], specID }));
   };
 
-  const handleBlockImageRemove = (imageBlockID) => () => {
-    handleBlockMenuClose();
+  const handleImageRemove = (imageBlockID) => () => {
+    handleBlockImageMenuClose();
     dispatch(onRemoveSpecBlockImage({ imageBlockID, specID }));
   };
 
@@ -150,41 +188,124 @@ const SpecDocument = () => {
     if (canEdit)
       return (
         <>
-          {canAddText && (
+          {canAddText && !sent && (
             <BlockMenuItem onClick={handleShowBlockEditor(selectedBlockID)}>
               Añadir texto
             </BlockMenuItem>
           )}
-          {typeBlock === 'Product' && productImages.length > 0 && (
-            <BlockMenuItem onClick={handleShowImagesModal(selectedBlockID)}>
-              {productImage ? 'Editar imagen' : 'Añadir una imagen'}
-            </BlockMenuItem>
-          )}
-          {canRemoveImage && (
-            <BlockMenuItem
-              onClick={handleBlockImageRemove(selectedBlock?.image?.id)}
-            >
-              Eliminar imagen
-            </BlockMenuItem>
-          )}
-          {typeBlock === 'Product' && elementUserOwned && (
+          {typeBlock === 'Product' &&
+            productImages.length > 0 &&
+            !productImage &&
+            !sent && (
+              <BlockMenuItem onClick={handleShowImagesModal(selectedBlockID)}>
+                Añadir una imagen
+              </BlockMenuItem>
+            )}
+          {typeBlock === 'Product' && elementUserOwned && !sent && (
             <BlockMenuItem onClick={handleEditProduct(selectedBlock)}>
               Editar
             </BlockMenuItem>
           )}
-          {typeBlock === 'Product' && (
+          {typeBlock === 'Product' && !sent && (
             <BlockMenuItem onClick={handleRemoveBlock(selectedBlockID)}>
               Eliminar
+            </BlockMenuItem>
+          )}
+          {action === 'edit' && status !== 'accepted' && !sent && (
+            <BlockMenuItem onClick={handleUndoChange()}>
+              Deshacer Edición
             </BlockMenuItem>
           )}
         </>
       );
     return (
       <>
-        {selectedBlock.change?.action === 'remove' && (
-          <BlockMenuItem onClick={handleUndoRemove()}>
+        {!sent && (
+          <BlockMenuItem onClick={handleUndoChange()}>
             Deshacer Eliminar
           </BlockMenuItem>
+        )}
+        {sent && (
+          <BlockMenuItem onClick={handleUndoSend()}>
+            Deshacer Enviar
+          </BlockMenuItem>
+        )}
+      </>
+    );
+  };
+
+  const availableOptionsText = () => {
+    if (canEditText)
+      return (
+        <>
+          <BlockMenuItem onClick={handleShowTextEditor(selectedBlockTextID)}>
+            Editar texto
+          </BlockMenuItem>
+          <BlockMenuItem onClick={handleBlockTextRemove(selectedBlockTextID)}>
+            Eliminar texto
+          </BlockMenuItem>
+          {actionText === 'edit' && statusText !== 'accepted' && (
+            <BlockMenuItem onClick={handleUndoChange()}>
+              Deshacer Edición
+            </BlockMenuItem>
+          )}
+        </>
+      );
+    return (
+      <>
+        {!sentText && (
+          <BlockMenuItem onClick={handleUndoChange()}>
+            Deshacer Eliminar
+          </BlockMenuItem>
+        )}
+        {sentText && (
+          <BlockMenuItem onClick={handleUndoSend()}>
+            Deshacer Enviar
+          </BlockMenuItem>
+        )}
+      </>
+    );
+  };
+
+  const availableOptionsImage = () => {
+    if (canEditImage)
+      return (
+        <>
+          {selectedBlockImage?.image?.image?.id && (
+            <BlockMenuItem
+              onClick={handleShowImagesModal(selectedBlockImage?.id)}
+            >
+              Editar imagen
+            </BlockMenuItem>
+          )}
+          {canRemoveImage && (
+            <BlockMenuItem
+              onClick={handleImageRemove(selectedBlockImage?.image?.id)}
+            >
+              Eliminar imagen
+            </BlockMenuItem>
+          )}
+          {actionImage === 'edit' && statusImage !== 'accepted' && (
+            <BlockMenuItem onClick={handleUndoChange()}>
+              Deshacer Edición
+            </BlockMenuItem>
+          )}
+        </>
+      );
+    return (
+      <>
+        {!sentImage && (
+          <BlockMenuItem onClick={handleUndoChange()}>
+            Deshacer Eliminar
+          </BlockMenuItem>
+        )}
+        {sentImage && selectedBlockImage?.change?.action !== 'remove' && (
+          <BlockMenuItem onClick={handleUndoSend()}>
+            Deshacer Enviar
+          </BlockMenuItem>
+        )}
+        {selectedBlockImage?.change?.action === 'remove' && (
+          <BlockMenuItem>No puedes editar</BlockMenuItem>
         )}
       </>
     );
@@ -221,12 +342,18 @@ const SpecDocument = () => {
           origin={{ x: 'right', y: 'top' }}
           onClose={handleBlockTextMenuClose}
         >
-          <BlockMenuItem onClick={handleShowTextEditor(selectedBlockTextID)}>
-            Editar texto
-          </BlockMenuItem>
-          <BlockMenuItem onClick={handleBlockTextRemove(selectedBlockTextID)}>
-            Eliminar texto
-          </BlockMenuItem>
+          {availableOptionsText()}
+        </Dropdown>
+      )}
+      {Boolean(blockImageAnchor) && (
+        <Dropdown
+          anchorRef={blockImageAnchor}
+          offset={{ x: -5, y: -4 }}
+          open={Boolean(blockImageAnchor)}
+          origin={{ x: 'right', y: 'top' }}
+          onClose={handleBlockImageMenuClose}
+        >
+          {availableOptionsImage()}
         </Dropdown>
       )}
       <PageSpecDocument
@@ -237,6 +364,7 @@ const SpecDocument = () => {
         handleHideBlockTextEditor={handleHideBlockTextEditor}
         handleEditBlockText={handleEditBlockText}
         handleShowBlockTextMenu={handleShowBlockTextMenu}
+        handleShowBlockTImageMenu={handleShowBlockTImageMenu}
       />
       <AddIcon
         alt="Agregar sección"
