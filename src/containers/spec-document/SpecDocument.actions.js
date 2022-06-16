@@ -13,12 +13,14 @@ import {
   updateProduct,
   saveSpecChanges,
   submitChanges,
+  editSpecBlockImage,
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { updateProductsWithProduct } from '../products-list/ProductsList.actions';
 import { closeModal } from '../spec-modal-product/SpecModalProduct.actions';
 import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 import { onGetChangeHistory } from '../spec-history/SpecHistory.actions';
+import { getChanges } from './utils';
 
 const matchMedia = window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches;
 export const GET_SPEC_BLOCKS = 'GET_SPEC_BLOCKS';
@@ -27,26 +29,18 @@ export const UPDATE_TEAM_DATA = 'UPDATE_TEAM_DATA';
 export const SAVE_TEAM_MEMBERS = 'SAVE_TEAM_MEMBERS';
 export const DELETE_MEMBER_TEAM = 'DELETE_MEMBER_TEAM';
 
-const getChangesBlocks = (blocks) => {
-  return blocks.filter((block) => {
-    const blockAccepted = block.status === 'accepted';
-    const unsentBlocks = block?.change?.sent === false;
-    return unsentBlocks && !blockAccepted;
-  });
-};
-
 export const onGetSpecBlocks = (specID) => async (dispatch, getState) => {
   dispatch(onActionCreator(GET_SPEC_BLOCKS));
   try {
     const { auth } = getState();
     const { blocks = [], project = {} } =
       (await getSpecBlocks({ specID, userID: auth.user?.id })) || {};
-    const changedBlocks = getChangesBlocks(blocks);
+    const changes = getChanges(blocks);
     return dispatch(
       onActionCreator(GET_SPEC_BLOCKS_SUCCESS, {
         blocks,
         project,
-        changedBlocks,
+        changes,
       }),
     );
   } catch (error) {
@@ -79,12 +73,12 @@ export const onAddSpecBlock = ({
       },
       ADD_SPEC_BLOCK,
     );
-    const changedBlocks = getChangesBlocks(updatedBlocks);
+    const changes = getChanges(updatedBlocks);
     dispatch(updateProductsWithProduct(product));
     dispatch(
       onActionCreator(ADD_SPEC_BLOCK_SUCCESS, {
         blocks: updatedBlocks,
-        changedBlocks,
+        changes,
       }),
     );
     dispatch(
@@ -125,12 +119,12 @@ export const onRemoveSpecBlock = ({ block, specID }) => async (
       specID,
       userID: auth.user?.id,
     });
-    const changedBlocks = getChangesBlocks(updatedBlocks);
+    const changes = getChanges(updatedBlocks);
     if (product) dispatch(updateProductsWithProduct(product));
     dispatch(
       onActionCreator(REMOVE_SPEC_BLOCK_SUCCESS, {
         blocks: updatedBlocks,
-        changedBlocks,
+        changes,
       }),
     );
     dispatch(
@@ -187,11 +181,11 @@ export const onAddSpecBlockImage = ({ blockID, imageID, specID }) => async (
       specID,
       userID: auth.user?.id,
     });
-    const changedBlocks = getChangesBlocks(updatedBlocks);
+    const changes = getChanges(updatedBlocks);
     return dispatch(
       onActionCreator(ADD_SPEC_BLOCK_IMAGE_SUCCESS, {
         blocks: updatedBlocks,
-        changedBlocks,
+        changes,
       }),
     );
   } catch (error) {
@@ -204,11 +198,45 @@ export const onAddSpecBlockImage = ({ blockID, imageID, specID }) => async (
   }
 };
 
+export const EDIT_SPEC_BLOCK_IMAGE = 'EDIT_SPEC_BLOCK_IMAGE';
+export const EDIT_SPEC_BLOCK_IMAGE_SUCCESS = 'EDIT_SPEC_BLOCK_IMAGE_SUCCESS';
+export const EDIT_SPEC_BLOCK_IMAGE_ERROR = 'EDIT_SPEC_BLOCK_IMAGE_ERROR';
+export const onEditSpecBlockImage = ({
+  blockImageID,
+  imageID,
+  specID,
+}) => async (dispatch, getState) => {
+  dispatch(onActionCreator(EDIT_SPEC_BLOCK_IMAGE));
+  try {
+    const { auth } = getState();
+    const { blocks: updatedBlocks } = await editSpecBlockImage({
+      blockImageID,
+      imageID,
+      specID,
+      userID: auth.user?.id,
+    });
+    const changes = getChanges(updatedBlocks);
+    return dispatch(
+      onActionCreator(EDIT_SPEC_BLOCK_IMAGE_SUCCESS, {
+        blocks: updatedBlocks,
+        changes,
+      }),
+    );
+  } catch (error) {
+    return dispatch(
+      onActionCreator(EDIT_SPEC_BLOCK_IMAGE_ERROR, {
+        error: true,
+        nativeError: error,
+      }),
+    );
+  }
+};
+
 export const REMOVE_SPEC_BLOCK_IMAGE = 'REMOVE_SPEC_BLOCK_IMAGE';
 export const REMOVE_SPEC_BLOCK_IMAGE_ERROR = 'REMOVE_SPEC_BLOCK_IMAGE_ERROR';
 export const REMOVE_SPEC_BLOCK_IMAGE_SUCCESS =
   'REMOVE_SPEC_BLOCK_IMAGE_SUCCESS';
-export const onRemoveSpecBlockImage = ({ blockID, specID }) => async (
+export const onRemoveSpecBlockImage = ({ imageBlockID, specID }) => async (
   dispatch,
   getState,
 ) => {
@@ -216,15 +244,15 @@ export const onRemoveSpecBlockImage = ({ blockID, specID }) => async (
   try {
     const { auth } = getState();
     const { blocks: updatedBlocks } = await deleteSpecBlockImage({
-      blockID,
+      imageBlockID,
       specID,
       userID: auth.user?.id,
     });
-    const changedBlocks = getChangesBlocks(updatedBlocks);
+    const changes = getChanges(updatedBlocks);
     return dispatch(
       onActionCreator(REMOVE_SPEC_BLOCK_IMAGE_SUCCESS, {
         blocks: updatedBlocks,
-        changedBlocks,
+        changes,
       }),
     );
   } catch (error) {
@@ -253,11 +281,11 @@ export const onAddSpecBlockText = ({ blockID, specID, textValue }) => async (
       textValue,
       userID: auth.user?.id,
     });
-    const changedBlocks = getChangesBlocks(updatedBlocks);
+    const changes = getChanges(updatedBlocks);
     return dispatch(
       onActionCreator(ADD_SPEC_BLOCK_TEXT_SUCCESS, {
         blocks: updatedBlocks,
-        changedBlocks,
+        changes,
       }),
     );
   } catch (error) {
@@ -285,11 +313,11 @@ export const onRemoveSpecBlockText = ({ textID, specID }) => async (
       textID,
       userID: auth.user?.id,
     });
-    const changedBlocks = getChangesBlocks(updatedBlocks);
+    const changes = getChanges(updatedBlocks);
     return dispatch(
       onActionCreator(REMOVE_SPEC_BLOCK_TEXT_SUCCESS, {
         blocks: updatedBlocks,
-        changedBlocks,
+        changes,
       }),
     );
   } catch (error) {
@@ -321,11 +349,11 @@ export const onUpdateSpecBlockText = ({
       textValue,
       userID: auth.user?.id,
     });
-    const changedBlocks = getChangesBlocks(updatedBlocks);
+    const changes = getChanges(updatedBlocks);
     return dispatch(
       onActionCreator(UPDATE_SPEC_BLOCK_TEXT_SUCCESS, {
         blocks: updatedBlocks,
-        changedBlocks,
+        changes,
       }),
     );
   } catch (error) {
@@ -443,7 +471,7 @@ export const onSaveSpecChanges = (specID, params) => async (
 export const SEND_CHANGED_BLOCKS = 'SEND_CHANGED_BLOCKS';
 export const SEND_CHANGED_BLOCKS_SUCCESS = 'SEND_CHANGED_BLOCKS_SUCCESS';
 export const SEND_CHANGED_BLOCKS_ERROR = 'SEND_CHANGED_BLOCKS_ERROR';
-export const handleSubmitChanges = ({ blocks, specID }) => async (
+export const handleSubmitChanges = ({ changes, specID, comment }) => async (
   dispatch,
   getState,
 ) => {
@@ -451,10 +479,12 @@ export const handleSubmitChanges = ({ blocks, specID }) => async (
   dispatch(onActionCreator(SEND_CHANGED_BLOCKS));
   const { auth } = getState();
   const userID = auth.user?.id;
-  submitChanges({ blocks, specID, userID }).then(
+  submitChanges({ changes, specID, userID, comment }).then(
     (response) => {
       dispatch(onActionCreator(SEND_CHANGED_BLOCKS_SUCCESS, response));
-      dispatch(onShowAlertSuccess({ message: 'Cambios enviados' }));
+      dispatch(
+        onShowAlertSuccess({ message: 'Se enviaron cambios a tu proyecto' }),
+      );
       if (matchMedia) dispatch(closeModal());
     },
     (error) => {

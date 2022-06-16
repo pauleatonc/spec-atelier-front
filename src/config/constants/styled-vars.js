@@ -69,7 +69,9 @@ export const BURN_SIENNA_RGBA_OPACITY_HOVER = 'rgba(233, 119, 86, 0.3)';
 export const SUPERNOVA_RGBA_OPACITY = 'rgba(255, 199, 0, 0.2)';
 export const SUPERNOVA_RGBA_OPACITY_HOVER = 'rgba(255, 199, 0, 0.3)';
 export const SUPERNOVA = '#FFC700';
+export const SUPERNOVA_OPACITY = 'rgba(255, 199, 0, 0.5)';
 export const BURNT_SIENNA = '#E97756';
+export const BURNT_SIENNA_OPACITY = 'rgba(233, 119, 86, 0.5)';
 
 // Media Queries
 export const MAX_SCREEN_SMALL = 768;

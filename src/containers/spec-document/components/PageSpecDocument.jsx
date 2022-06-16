@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { handleSubmitChanges } from '../SpecDocument.actions';
 import BlocksSpecDocument from './BlocksSpecDocument';
 import Confirm from '../../../components/confirm/Confirm';
 import { Button } from '../../../components/SpecComponents';
-import { ContentButton, Page, SubmittedChanges } from '../SpecDocument.styles';
-import { handleSubmitChanges } from '../SpecDocument.actions';
+import { Page, Footer } from '../SpecDocument.styles';
+import Textarea from '../../../components/inputs/Textarea';
+import { useTextarea } from '../../../components/inputs/Inputs.hooks';
 
 const PageSpecDocument = ({
   showBlockEditor,
@@ -18,16 +20,17 @@ const PageSpecDocument = ({
 }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
-  const { project, changedBlocks } = useSelector((state) => state.specDocument);
-  const [showSendChangesModal, setShowSendChangesModal] = useState(false);
+  const { project, changes } = useSelector((state) => state.specDocument);
   const userOwner = project?.user_owner;
+  const [showSendChangesModal, setShowSendChangesModal] = useState(false);
   const handleCloseModal = () => setShowSendChangesModal(false);
   const handleSendChanges = () => setShowSendChangesModal(true);
+  const { onChange: handleComment, value: comment } = useTextarea('');
 
   const handleConfirm = () => {
+    const changedIDs = changes.map((change) => change.id);
     handleCloseModal();
-    const changedBlockIDs = changedBlocks.map((block) => block.id);
-    dispatch(handleSubmitChanges({ blocks: changedBlockIDs, specID }));
+    dispatch(handleSubmitChanges({ changes: changedIDs, specID, comment }));
   };
 
   return (
@@ -43,19 +46,28 @@ const PageSpecDocument = ({
           handleShowBlockTextMenu={handleShowBlockTextMenu}
         />
         {!userOwner && (
-          <ContentButton>
-            {changedBlocks.length > 0 ? (
-              <Button
-                variant="primary"
-                fontSize="14px"
-                onClick={handleSendChanges}
-              >
-                Enviar {changedBlocks.length} cambios
-              </Button>
-            ) : (
-              <SubmittedChanges>Cambios enviados</SubmittedChanges>
+          <Footer>
+            {changes.length > 0 && (
+              <>
+                <Textarea
+                  placeholder="¿Quieres agregar algún comentario?"
+                  minHeightTextArea="38px"
+                  height="40px"
+                  width="300px"
+                  value={comment || ''}
+                  onChange={handleComment}
+                  maxlength={80}
+                />
+                <Button
+                  variant="primary"
+                  fontSize="14px"
+                  onClick={handleSendChanges}
+                >
+                  Enviar {changes.length} cambios
+                </Button>
+              </>
             )}
-          </ContentButton>
+          </Footer>
         )}
       </Page>
       <Confirm
