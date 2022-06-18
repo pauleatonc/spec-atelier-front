@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { Button } from '../../../../../../components/SpecComponents';
 import { VARIANTS_BUTTON } from '../../../../../../config/constants/button-variants';
 import IconUser from '../../../../../../components/IconUser';
 import { NO_PHOTO } from '../../../../../../assets/Images';
+import { getProduct } from '../../../../../spec-modal-product/SpecModalProduct.actions';
 
 import {
   TYPES,
@@ -39,6 +42,7 @@ const ChangeItem = ({
   setBlocksAccepted,
   setBlocksRejected,
 }) => {
+  const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
   const isChange = type === TYPES.PRODUCT && status === 'waiting';
   const isAccepted = !!blocksAccepted.find((block) => block === blockId);
@@ -54,6 +58,11 @@ const ChangeItem = ({
       setBlocksAccepted(blocksAccepted.filter((block) => block !== blockId));
     }
     setBlocksRejected([...blocksRejected, blockId]);
+  };
+
+  const handleShowProduct = () => (event) => {
+    event.stopPropagation();
+    dispatch(getProduct({ id: element.id }));
   };
 
   return (
@@ -130,7 +139,7 @@ const ChangeItem = ({
                 <ImageProduct
                   src={element?.images[0]?.urls?.medium || NO_PHOTO}
                 />
-                <GoToProduct onClick={() => console.log('ver')}>
+                <GoToProduct onClick={handleShowProduct}>
                   Ver producto
                 </GoToProduct>
               </ProductImageContainer>

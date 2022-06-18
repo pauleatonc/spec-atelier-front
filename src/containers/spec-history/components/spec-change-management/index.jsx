@@ -49,10 +49,14 @@ const SpecChangeManagement = ({ actionsIcons }) => {
         <IcDisclaimer src={SPEC_ICON_ALERT_CIRCLE} alt="icon circle alert" />
         <DescDisclaimer>
           <TextDisclaimer bold>
-            {`Tienes ${changesCount - changes} cambios pendientes de revisión`}
+            {`Tienes ${changesCount - changes} cambio${
+              changesCount - changes === 1 ? '' : 's'
+            } pendientes de revisión`}
           </TextDisclaimer>
           <TextDisclaimer>
-            {`Hay ${changesCount - changes} cambios en el proyecto ${name}.`}
+            {`Hay ${changesCount - changes} cambio${
+              changesCount - changes === 1 ? '' : 's'
+            } en el proyecto ${name}.`}
           </TextDisclaimer>
         </DescDisclaimer>
       </DisclaimerContainer>
