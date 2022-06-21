@@ -16,6 +16,7 @@ import {
   UndoSpan,
   ContentPrimary,
 } from './Notification.styles';
+import { getMyProjects } from '../../containers/projects-list/ProjectsList.actions';
 import Button from '../buttons/Button';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 import {
@@ -102,6 +103,7 @@ const Notifications = (props) => {
         setAccionStatus(r?.notification?.item?.status);
         setWatchedStatus(r?.notification?.watched);
         setTriggeredStatus(r?.notification?.triggered);
+        dispatch(getMyProjects({page: 0, limit: 6, sort: 'created_at_desc'}));
       });
     });
   };
