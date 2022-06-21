@@ -134,6 +134,9 @@ import ADD_ICON from './images/icons/ic_add.svg';
 import EDIT_ICON from './images/icons/ic_edit.svg';
 import DELETE_ICON from './images/icons/ic_delete.svg';
 import WATCH_ICON from './images/icons/watch-icon.svg';
+import COMMENTS_ICON from './images/icons/ic_comment.svg';
+import ACCEPTED_ICON from './images/icons/ic_accepted.svg';
+import REFUSED_ICON from './images/icons/ic_refused.svg';
 
 export {
   LOGO_CCHC,
@@ -259,4 +262,7 @@ export {
   SPEC_TABLE_UNSELECTED,
   SPEC_TABLE_SELECTED,
   WATCH_ICON,
+  COMMENTS_ICON,
+  ACCEPTED_ICON,
+  REFUSED_ICON,
 };
