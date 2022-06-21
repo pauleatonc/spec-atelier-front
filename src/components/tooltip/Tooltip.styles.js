@@ -19,15 +19,18 @@ export const Content = styled.div`
   padding: 8px 12px;
   color: ${WHITE};
   background: ${MINE_SHAFT};
-  line-height: 1;
   z-index: 100;
   font-size: 12px;
   letter-spacing: 1px;
-  white-space: nowrap;
+  min-width: 200px;
+  text-align: center;
   ${({ position }) => {
     switch (position) {
       case 'top':
-        return `top: calc(${TOOLTIP_MARGIN} * -1);`;
+        return `
+          top: calc(${TOOLTIP_MARGIN} * -1);
+          transform: translateX(-50%) translateY(-50%);
+        `;
       case 'right':
         return `
           left: calc(100% + ${TOOLTIP_MARGIN});
@@ -35,7 +38,10 @@ export const Content = styled.div`
           transform: translateX(0) translateY(-50%);
         `;
       case 'bottom':
-        return `bottom: calc(${TOOLTIP_MARGIN} * -1);`;
+        return `
+          bottom: calc(${TOOLTIP_MARGIN} * -1);
+          transform: translateX(-50%) translateY(50%);
+        `;
       case 'left':
         return `
           left: auto;

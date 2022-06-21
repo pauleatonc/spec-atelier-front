@@ -120,7 +120,7 @@ export const IconArrowDown = styled.img`
 export const TitleConfigContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  padding-bottom: 13px;
+  padding: 13px 0;
   border-bottom: 1px solid ${MERCURY};
   width: 100%;
 `;
@@ -224,4 +224,14 @@ export const ErrorInput = styled.p`
   color: ${TORCH_RED};
   bottom: -15px;
   left: 5px;
+`;
+
+export const ContainerOwner = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 12px;
+  font-size: 12px;
+  cursor: default;
 `;

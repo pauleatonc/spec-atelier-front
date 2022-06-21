@@ -39,7 +39,7 @@ export const Section = styled.div`
 
 export const ContentOption = styled.div`
   display: block;
-  padding-left: 9px;
+  padding: 0 9px;
   cursor: pointer;
   &:hover {
     background-color: ${({ backgroundPuertoRico }) =>
@@ -75,6 +75,8 @@ export const OptionNameSection = styled.option`
   width: 100%;
   display: flex;
   align-items: center;
+  letter-spacing: 1px;
+  font-size: 12px;
 `;
 
 export const NoOptions = styled.div`
@@ -82,4 +84,8 @@ export const NoOptions = styled.div`
   letter-spacing: 1px;
   padding: 10px 23px;
   color: ${SILVER};
+`;
+
+export const IconInfo = styled.i`
+  font-size: 13px;
 `;

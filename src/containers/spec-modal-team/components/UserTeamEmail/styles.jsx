@@ -12,14 +12,14 @@ export const Container = styled.section`
 export const ContainerMail = styled.div`
   display: flex;
   align-items: center;
-  cursor: pointer;
+  cursor: ${({ owner }) => (owner ? 'pointer' : 'default')};
+  font-size: 12px;
 `;
 
 export const Email = styled.p`
-  font-size: 12px;
-  margin-left: 14px;
+  margin: 0 14px;
   &:hover {
-    color: ${PUERTO_RICO};
+    color: ${({ owner }) => (owner ? PUERTO_RICO : undefined)};
   }
 `;
 

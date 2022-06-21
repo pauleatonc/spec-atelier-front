@@ -10,9 +10,11 @@ import CloseButton from '../../components/buttons/CloseButton';
 
 import ProjectInfoShare from './components/ProjectInfoShare';
 import UserTeamEmail from './components/UserTeamEmail';
+import IconUser from '../../components/IconUser';
 import { onHideModal, onShowModal, setDetailMember } from './actions';
 import { TYPE_MODALS } from './constants';
 import { getCheckListData } from './utils';
+import { Email } from './components/UserTeamEmail/styles';
 import {
   Container,
   ButtonCloseContainer,
@@ -24,13 +26,14 @@ import {
   AddIcon,
   AddMemberLabel,
   ContainerTeam,
+  ContainerOwner,
 } from './styles';
 
 const SpecModalTeam = ({ sections }) => {
   const dispatch = useDispatch();
   const { teamModal: show } = useSelector((state) => state.specModalTeam);
   const {
-    project: { team },
+    project: { team, user_owner, owner },
   } = useSelector((state) => state.specDocument);
   const [checklistData, setChecklistData] = useState(
     getCheckListData(sections, null, team),
@@ -38,12 +41,13 @@ const SpecModalTeam = ({ sections }) => {
   const { onClose: handleClose, onExiting: handleExiting } = useModal({
     closeCallback: () => dispatch(onHideModal(TYPE_MODALS.TEAM_MODAL)),
   });
+
   const showNewMemberModal = () => {
     dispatch(onShowModal(TYPE_MODALS.NEW_MEMBER_MODAL));
   };
 
   const handleClickMember = (member) => {
-    dispatch(setDetailMember(member));
+    if (user_owner) dispatch(setDetailMember(member));
   };
 
   useEffect(() => {
@@ -59,6 +63,11 @@ const SpecModalTeam = ({ sections }) => {
         </ButtonCloseContainer>
         {team && (
           <ContainerTeam>
+            <ContainerOwner>
+              <IconUser user={owner} />
+              <Email>{owner.email}</Email>
+              (propietario)
+            </ContainerOwner>
             {team.map((member) => (
               <UserTeamEmail
                 key={`${member?.permission?.id}-${member?.user?.email}-${member?.user?.id}`}
@@ -68,10 +77,12 @@ const SpecModalTeam = ({ sections }) => {
             ))}
           </ContainerTeam>
         )}
-        <NewMemberButton onClick={showNewMemberModal}>
-          <AddIcon alt="Agregar nuevo miembro" src={addIconSource} />
-          <AddMemberLabel>Nuevo miembro</AddMemberLabel>
-        </NewMemberButton>
+        {user_owner && (
+          <NewMemberButton onClick={showNewMemberModal}>
+            <AddIcon alt="Agregar nuevo miembro" src={addIconSource} />
+            <AddMemberLabel>Nuevo miembro</AddMemberLabel>
+          </NewMemberButton>
+        )}
         <TitleConfigContainer>
           <TitleConfig>Partidas compartidas</TitleConfig>
         </TitleConfigContainer>
