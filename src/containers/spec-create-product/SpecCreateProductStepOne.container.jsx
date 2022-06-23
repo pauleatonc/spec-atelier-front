@@ -28,7 +28,7 @@ import CloseButton from '../../components/buttons/CloseButton';
 /**
  * The SpecCreateProductStepOne's container.
  */
-const SpecCreateProductStepOne = () => {
+const SpecCreateProductStepOne = ({specID}) => {
 	const { name, show } = useSelector(
 		(state) => state.specCreateProduct.stepOne,
 	);
@@ -114,11 +114,8 @@ const SpecCreateProductStepOne = () => {
 	const disabledNext = !nameValue || !itemValues.length || disableSection;
 
 	useEffect(() => {
-		if (!show) {
-			return;
-		}
-
-		dispatch(onGetSpecProductsSections());
+		if (!show) return;
+		dispatch(onGetSpecProductsSections({ specID }));
 	}, [show]);
 
 	const mapToSelector = (sectionOption) => ({

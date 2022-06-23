@@ -88,7 +88,7 @@ const SpecDocument = () => {
 
   const handleShowProducts = () => {
     handleAddMenuClose();
-    dispatch(onShowSpecProducts());
+    dispatch(onShowSpecProducts({ specID }));
   };
 
   const handleCreateProduct = () => {
