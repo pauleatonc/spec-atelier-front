@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { onAddSpecBlockText } from '../SpecDocument.actions';
 import Editor from '../../../components/inputs/Editor';
 import PendingReviewText from './PendingReview';
-import { THREE_DOTS_VERTICAL_SOURCE } from '../../../assets/Images';
+import DotDropDownMenu from '../../../components/dotDropDownMenu/DotDropDownMenu';
 import {
   BURNT_SIENNA,
   BURNT_SIENNA_OPACITY,
@@ -16,7 +16,6 @@ import {
 import {
   Block,
   BlockContent,
-  BlockDotsIcon,
   BlockEditor,
   BlockImage,
   BlockText,
@@ -42,13 +41,14 @@ const BlockSpecDocument = ({
   handleHideBlockTextEditor,
   handleEditBlockText,
   handleShowBlockTextMenu,
+  handleShowBlockTImageMenu,
 }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
   const { localConfig } = useSelector((state) => state.specAdmin);
   const { project } = useSelector((state) => state.specDocument);
   const { text: blockText, image: blockImage, type, id, change } = block;
-  const { status, sent } = block.change;
+  const { status, sent, action } = block.change;
   const { user } = useSelector((state) => state.auth);
   const userOwner = project.user_owner;
   const { images, short_desc, name, long_desc, system, brand, reference } =
@@ -126,21 +126,33 @@ const BlockSpecDocument = ({
     : actionsColors[blockImage?.change.action];
 
   const borderBlock = status !== 'accepted' ? borderBlockColor : undefined;
+  const blockSentAndPending = status === 'waiting' && sent;
 
-  // eslint-disable-next-line consistent-return
   const textColor = () => {
-    const blockSentAndPending = status === 'waiting' && sent;
     const textPendingAndSent =
       !blockText?.change?.sent && blockText?.change?.status === 'waiting';
     const borderText =
       blockText?.change?.status !== 'accepted' ? borderTextcolor : undefined;
-
+    if (action === 'remove') return undefined;
     if (blockSentAndPending && textPendingAndSent) return borderText;
     if (status === 'accepted' && textPendingAndSent) return borderText;
+    if (blockText?.change?.sent && blockText?.change?.status === 'waiting')
+      return borderText;
+    return undefined;
   };
 
-  const imageColor = () =>
-    blockImage?.change?.status !== 'accepted' ? borderImagecolor : undefined;
+  const imageColor = () => {
+    const imagePendingAndSent =
+      !blockImage?.change?.sent && blockImage?.change?.status === 'waiting';
+    const borderImage =
+      blockImage?.change?.status !== 'accepted' ? borderImagecolor : undefined;
+    if (action === 'remove') return undefined;
+    if (blockSentAndPending && imagePendingAndSent) return borderImage;
+    if (status === 'accepted' && imagePendingAndSent) return borderImage;
+    if (blockImage?.change?.sent && blockImage?.change?.status === 'waiting')
+      return borderImage;
+    return undefined;
+  };
 
   return (
     <Block
@@ -161,18 +173,22 @@ const BlockSpecDocument = ({
               />
             </BlockEditor>
           )}
-          <BlockDotsIcon
-            src={THREE_DOTS_VERTICAL_SOURCE}
+          <DotDropDownMenu
             onClick={handleShowBlockMenu(id, change.user.id, sent)}
           />
           {showBlockImage && (
-            <BlockImage>
+            <BlockImage visibility={action === 'remove' ? 'hidden' : 'visible'}>
+              <DotDropDownMenu
+                onClick={handleShowBlockTImageMenu(blockImage?.id)}
+                right="-72px"
+              />
               <ProductImage
                 alt="Imagen del Producto"
                 src={imageSize()}
                 color={!userOwner ? imageColor() : undefined}
               />
-              {blockImage?.change.sent &&
+              {action !== 'remove' &&
+                blockImage?.change.sent &&
                 blockImage?.change?.status === 'waiting' && (
                   <PendingReviewText />
                 )}
@@ -212,7 +228,9 @@ const BlockSpecDocument = ({
             (unsentBlock && change.action === 'remove') ||
             (unsentText && blockText?.change.action === 'remove')
           }
+          visibility={action === 'remove' ? 'hidden' : 'visible'}
         >
+          <DotDropDownMenu onClick={handleShowBlockTextMenu(blockText?.id)} />
           <BlockTextContent
             dangerouslySetInnerHTML={{ __html: blockText?.text }}
           />
@@ -228,10 +246,6 @@ const BlockSpecDocument = ({
               />
             </BlockEditor>
           )}
-          <BlockDotsIcon
-            src={THREE_DOTS_VERTICAL_SOURCE}
-            onClick={handleShowBlockTextMenu(blockText?.id)}
-          />
           {!(sent && status === 'waiting') &&
             blockText?.change.sent &&
             blockText?.change?.status === 'waiting' && <PendingReviewText />}

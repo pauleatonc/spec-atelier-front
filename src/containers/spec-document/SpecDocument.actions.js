@@ -13,27 +13,35 @@ import {
   updateProduct,
   submitChanges,
   editSpecBlockImage,
+  undoRemove,
+  undoSend,
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { updateProductsWithProduct } from '../products-list/ProductsList.actions';
 import { closeModal } from '../spec-modal-product/SpecModalProduct.actions';
 import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
 import { onGetChangeHistory } from '../spec-history/SpecHistory.actions';
-import { getChanges } from './utils';
+import {
+  filteredBlocks,
+  getChanges,
+  getSpecDocument,
+  getUserID,
+} from './utils';
 
 const matchMedia = window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches;
+const specDocument = (getState) => getSpecDocument(getState);
+const userID = (getState) => getUserID(getState);
+
 export const GET_SPEC_BLOCKS = 'GET_SPEC_BLOCKS';
 export const GET_SPEC_BLOCKS_SUCCESS = 'GET_SPEC_BLOCKS_SUCCESS';
 export const UPDATE_TEAM_DATA = 'UPDATE_TEAM_DATA';
 export const SAVE_TEAM_MEMBERS = 'SAVE_TEAM_MEMBERS';
 export const DELETE_MEMBER_TEAM = 'DELETE_MEMBER_TEAM';
-
 export const onGetSpecBlocks = (specID) => async (dispatch, getState) => {
   dispatch(onActionCreator(GET_SPEC_BLOCKS));
   try {
-    const { auth } = getState();
     const { blocks = [], project = {} } =
-      (await getSpecBlocks({ specID, userID: auth.user?.id })) || {};
+      (await getSpecBlocks({ specID, userID: userID(getState) })) || {};
     const changes = getChanges(blocks);
     return dispatch(
       onActionCreator(GET_SPEC_BLOCKS_SUCCESS, {
@@ -58,14 +66,13 @@ export const onAddSpecBlock =
     dispatch(onShowAlertSuccess({ message: 'Añadiendo producto...' }));
     dispatch(onActionCreator(ADD_SPEC_BLOCK));
     try {
-      const { auth } = getState();
       const { blocks: updatedBlocks, product } = await addSpecBlock(
         {
           params: { ...rest },
           productID,
           systemID,
           specID,
-          userID: auth.user?.id,
+          userID: userID(getState),
         },
         ADD_SPEC_BLOCK,
       );
@@ -108,11 +115,10 @@ export const onRemoveSpecBlock =
     dispatch(onShowAlertSuccess({ message: 'Removiendo producto...' }));
     dispatch(onActionCreator(REMOVE_SPEC_BLOCK));
     try {
-      const { auth } = getState();
       const { blocks: updatedBlocks, product } = await deleteSpecBlock({
         block,
         specID,
-        userID: auth.user?.id,
+        userID: userID(getState),
       });
       const changes = getChanges(updatedBlocks);
       if (product) dispatch(updateProductsWithProduct(product));
@@ -141,11 +147,10 @@ export const onDetachSpecProduct =
   ({ product, specID, items }) =>
   (dispatch, getState) => {
     const blocks = [];
-    const { specDocument } = getState();
     if (items) {
       items.forEach(({ id }) => {
-        specDocument.blocks
-          .filter(
+        specDocument(getState)
+          .blocks.filter(
             (block) =>
               block.item === id &&
               block.element?.original_product_id === product.id,
@@ -153,8 +158,10 @@ export const onDetachSpecProduct =
           .forEach((filterBlocks) => blocks.push(filterBlocks.id));
       });
     } else
-      specDocument.blocks
-        .filter((block) => block.element?.original_product_id === product.id)
+      specDocument(getState)
+        .blocks.filter(
+          (block) => block.element?.original_product_id === product.id,
+        )
         .forEach((filterBlocks) => blocks.push(filterBlocks.id));
     return dispatch(onRemoveSpecBlock({ specID, block: blocks }));
   };
@@ -167,12 +174,11 @@ export const onAddSpecBlockImage =
   async (dispatch, getState) => {
     dispatch(onActionCreator(ADD_SPEC_BLOCK_IMAGE));
     try {
-      const { auth } = getState();
       const { blocks: updatedBlocks } = await updateSpecBlockImage({
         blockID,
         imageID,
         specID,
-        userID: auth.user?.id,
+        userID: userID(getState),
       });
       const changes = getChanges(updatedBlocks);
       return dispatch(
@@ -199,12 +205,11 @@ export const onEditSpecBlockImage =
   async (dispatch, getState) => {
     dispatch(onActionCreator(EDIT_SPEC_BLOCK_IMAGE));
     try {
-      const { auth } = getState();
       const { blocks: updatedBlocks } = await editSpecBlockImage({
         blockImageID,
         imageID,
         specID,
-        userID: auth.user?.id,
+        userID: userID(getState),
       });
       const changes = getChanges(updatedBlocks);
       return dispatch(
@@ -232,11 +237,10 @@ export const onRemoveSpecBlockImage =
   async (dispatch, getState) => {
     dispatch(onActionCreator(REMOVE_SPEC_BLOCK_IMAGE));
     try {
-      const { auth } = getState();
       const { blocks: updatedBlocks } = await deleteSpecBlockImage({
         imageBlockID,
         specID,
-        userID: auth.user?.id,
+        userID: userID(getState),
       });
       const changes = getChanges(updatedBlocks);
       return dispatch(
@@ -263,12 +267,11 @@ export const onAddSpecBlockText =
   async (dispatch, getState) => {
     dispatch(onActionCreator(ADD_SPEC_BLOCK_TEXT));
     try {
-      const { auth } = getState();
       const { blocks: updatedBlocks } = await addSpecBlockText({
         blockID,
         specID,
         textValue,
-        userID: auth.user?.id,
+        userID: userID(getState),
       });
       const changes = getChanges(updatedBlocks);
       return dispatch(
@@ -295,11 +298,10 @@ export const onRemoveSpecBlockText =
   async (dispatch, getState) => {
     dispatch(onActionCreator(REMOVE_SPEC_BLOCK_TEXT));
     try {
-      const { auth } = getState();
       const { blocks: updatedBlocks } = await deleteSpecBlockText({
         specID,
         textID,
-        userID: auth.user?.id,
+        userID: userID(getState),
       });
       const changes = getChanges(updatedBlocks);
       return dispatch(
@@ -326,13 +328,12 @@ export const onUpdateSpecBlockText =
   async (dispatch, getState) => {
     dispatch(onActionCreator(UPDATE_SPEC_BLOCK_TEXT));
     try {
-      const { auth } = getState();
       const { blocks: updatedBlocks } = await updateSpecBlockText({
         blockID,
         specID,
         textID,
         textValue,
-        userID: auth.user?.id,
+        userID: userID(getState),
       });
       const changes = getChanges(updatedBlocks);
       return dispatch(
@@ -359,9 +360,10 @@ export const onSortSpecBlocks =
   async (dispatch, getState) => {
     onActionCreator(SORT_SPEC_BLOCKS);
     try {
-      const { auth, specDocument } = getState();
       const sortedSpecBlocks = blocksIDs.reduce((blocks, blockID) => {
-        const found = specDocument.blocks.find((block) => block.id === blockID);
+        const found = specDocument(getState).blocks.find(
+          (block) => block.id === blockID,
+        );
         if (!found) {
           return blocks;
         }
@@ -375,7 +377,7 @@ export const onSortSpecBlocks =
         specID,
         blocks: sortedSpecBlocks,
         block: blockId,
-        userID: auth.user?.id,
+        userID: userID(getState),
       });
       return dispatch(
         onActionCreator(SORT_SPEC_BLOCKS_SUCCESS, { blocks: updatedBlocks }),
@@ -443,9 +445,7 @@ export const handleSubmitChanges =
   async (dispatch, getState) => {
     dispatch(onShowAlertSuccess({ message: 'Enviando cambios...' }));
     dispatch(onActionCreator(SEND_CHANGED_BLOCKS));
-    const { auth } = getState();
-    const userID = auth.user?.id;
-    submitChanges({ changes, specID, userID, comment }).then(
+    submitChanges({ changes, specID, userID: userID(getState), comment }).then(
       (response) => {
         dispatch(onActionCreator(SEND_CHANGED_BLOCKS_SUCCESS, response));
         dispatch(
@@ -461,6 +461,62 @@ export const handleSubmitChanges =
         );
         dispatch(onActionCreator(SEND_CHANGED_BLOCKS_ERROR));
         console.error(error);
+      },
+    );
+  };
+
+export const SEND_CHANGE_BLOCK_SUCCESS = 'SEND_CHANGE_BLOCK_SUCCESS';
+export const SEND_CHANGE_BLOCK_ERROR = 'SEND_CHANGE_BLOCK_ERROR';
+export const onUndoChange =
+  ({ changeID, specID }) =>
+  async (dispatch, getState) => {
+    dispatch(onShowAlertSuccess({ message: 'Enviando cambios...' }));
+    undoRemove({ changeID, specID, userID: userID(getState) }).then(
+      (response) => {
+        const blocks = filteredBlocks(specDocument(getState).blocks, response);
+        const changes = getChanges(blocks);
+        dispatch(
+          onActionCreator(SEND_CHANGE_BLOCK_SUCCESS, {
+            blocks,
+            changes,
+          }),
+        );
+        dispatch(onShowAlertSuccess({ message: 'Se deshizo el cambio' }));
+      },
+      () => {
+        dispatch(
+          onShowAlertSuccess({
+            message: 'Hubo un error al enviar sus cambios',
+          }),
+        );
+      },
+    );
+  };
+
+export const UNDO_SEND_BLOCK_SUCCESS = 'UNDO_SEND_BLOCK_SUCCESS';
+export const UNDO_SEND_BLOCK_ERROR = 'UNDO_SEND_BLOCK_ERROR';
+export const onUndoSend =
+  ({ changeID, specID }) =>
+  async (dispatch, getState) => {
+    dispatch(onShowAlertSuccess({ message: 'Deshaciendo el envío...' }));
+    undoSend({ changeID, specID, userID: userID(getState) }).then(
+      (response) => {
+        const blocks = filteredBlocks(specDocument(getState).blocks, response);
+        const changes = getChanges(blocks);
+        dispatch(
+          onActionCreator(UNDO_SEND_BLOCK_SUCCESS, {
+            blocks,
+            changes,
+          }),
+        );
+        dispatch(onShowAlertSuccess({ message: 'Se deshizo el envío' }));
+      },
+      () => {
+        dispatch(
+          onShowAlertSuccess({
+            message: 'Hubo un error al deshacer tu envío',
+          }),
+        );
       },
     );
   };

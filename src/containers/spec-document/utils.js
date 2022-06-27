@@ -178,12 +178,25 @@ export const getChanges = (blocks) => {
     const unsentBlocks = block?.change?.sent === false;
     const unsentBlocksText = block?.text?.change?.sent === false;
     const unsentBlocksImage = block?.image?.change?.sent === false;
-    if (unsentBlocks && blockAccepted)
-      changes.push(block.change)
-    if (unsentBlocksText && blockTextAccepted)
-      changes.push(block.text.change)
-    if (unsentBlocksImage && imageAccepted)
-      changes.push(block.image.change)
+    if (unsentBlocks && blockAccepted) changes.push(block.change);
+    if (unsentBlocksText && blockTextAccepted) changes.push(block.text.change);
+    if (unsentBlocksImage && imageAccepted) changes.push(block.image.change);
   });
   return changes;
+};
+
+export const filteredBlocks = (blocks, response) =>
+  blocks.map((block) =>
+    block.id === response.block.id ? response.block : block,
+  );
+
+export const getUserID = (getState) => {
+  const { auth } = getState();
+  const userID = auth.user?.id;
+  return userID;
+};
+
+export const getSpecDocument = (getState) => {
+  const { specDocument } = getState();
+  return specDocument;
 };

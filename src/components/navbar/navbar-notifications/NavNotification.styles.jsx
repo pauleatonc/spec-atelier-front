@@ -25,7 +25,7 @@ export const NotificationsOption = styled.section`
   width: 360px;
   max-height: 446px;
   position: absolute;
-  right: 75px;
+  right: 47px;
   display: ${({ show }) => !show && 'none'};
   top: 69px;
   z-index: 2;

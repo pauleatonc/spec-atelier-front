@@ -163,9 +163,9 @@ export const Table = styled.table`
 export const Thead = styled.thead`
   font-weight: 900;
   font-size: 14px;
-	height: 32px;
+  height: 32px;
   background-color: ${CONCRETE};
-  tr{
+  tr {
     border-bottom: solid 4.5px ${WHITE};
     th:first-child {
       padding-left: 36px;

@@ -17,6 +17,7 @@ const PageSpecDocument = ({
   handleHideBlockTextEditor,
   handleEditBlockText,
   handleShowBlockTextMenu,
+  handleShowBlockTImageMenu,
 }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
@@ -44,6 +45,7 @@ const PageSpecDocument = ({
           handleHideBlockTextEditor={handleHideBlockTextEditor}
           handleEditBlockText={handleEditBlockText}
           handleShowBlockTextMenu={handleShowBlockTextMenu}
+          handleShowBlockTImageMenu={handleShowBlockTImageMenu}
         />
         {!userOwner && (
           <Footer>
