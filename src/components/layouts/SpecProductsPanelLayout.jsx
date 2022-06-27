@@ -1,5 +1,6 @@
 import React, { Children, cloneElement, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   onHideSpecProducts,
@@ -41,6 +42,7 @@ const SpecProductsPanelLayout = ({
   const handleShow = (updatedValue) => setShow(updatedValue);
   const contextPayload = { show, onShow: handleShow };
   const dispatch = useDispatch();
+  const { id: specID } = useParams();
 
   return (
     <Context.Provider value={contextPayload}>
@@ -89,7 +91,7 @@ const SpecProductsPanelLayout = ({
                 label: selectedItem || 'Partidas',
                 onClick: () => {
                   if (section) {
-                    dispatch(onShowSpecProductsItems({ section }));
+                    dispatch(onShowSpecProductsItems({ section, specID }));
                     setShowFilters(true);
                   } else
                     dispatch(

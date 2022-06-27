@@ -73,7 +73,7 @@ const SpecCreateProductStepOne = ({specID}) => {
 	};
 
 	const onSubmitSection = () => {
-		dispatch(onGetSpecProductsItems({ sections: sectionValues }));
+		dispatch(onGetSpecProductsItems({ sections: sectionValues, specID }));
 		setItemValue([]);
 		setSystemValues([]);
 	};

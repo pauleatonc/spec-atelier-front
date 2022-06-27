@@ -37,7 +37,7 @@ export const onGetSpecProductsBySection = (payload) => (dispatch) =>
 	batch(() => {
 		dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SECTION, payload));
 		if (!window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches)
-			dispatch(onShowSpecProductsItems({ section: payload.section }));
+			dispatch(onShowSpecProductsItems({ section: payload.section, specID: payload.specID }));
 	});
 
 export const onHideSpecProducts = () => (dispatch) =>
