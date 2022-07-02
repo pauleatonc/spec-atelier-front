@@ -45,3 +45,10 @@ export const Text = styled.span`
   padding: 2px;
   margin: 2px;
 `;
+
+export const EmptyContainer = styled.div`
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  width: 100%;
+`;

@@ -2,24 +2,22 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getClients } from '../clients-list/ClientsList.actions';
 import { SearchBar } from '../../components/SpecComponents';
-import {
-  Container,
-} from './ClientsSearch.style';
+import { Container } from './ClientsSearch.style';
 
 const ClientsFilters = () => {
   const dispatch = useDispatch();
-  const { params, clients } = useSelector(state => state.clientsList);
+  const { params } = useSelector((state) => state.clientsList);
   const [keyword, setKeywords] = useState(params.keyword || '');
 
   const onChangeParams = ({ target: { name, value } }) => {
     setKeywords(value);
-    dispatch(getClients({
-      ...params,
-      [name]: value,
-    }));
-  }
-
-  if (!clients.length && !params.keyword) return null;
+    dispatch(
+      getClients({
+        ...params,
+        [name]: value,
+      }),
+    );
+  };
 
   return (
     <Container>
