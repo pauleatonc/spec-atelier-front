@@ -13,19 +13,19 @@ import {
 } from '../../../config/constants/styled-vars';
 
 export const NotificationsButton = styled.div`
-  color: ${({ isOpen }) => (!isOpen ? HEX_BLACK : PRIMARY)};
   display: flex;
   height: 57px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  position: relative;
 `;
 
 export const NotificationsOption = styled.section`
   width: 360px;
   max-height: 446px;
   position: absolute;
-  right: 47px;
+  right: -6px;
   display: ${({ show }) => !show && 'none'};
   top: 69px;
   z-index: 2;
