@@ -15,6 +15,7 @@ import {
   editSpecBlockImage,
   undoRemove,
   undoSend,
+  getUpdated,
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { updateProductsWithProduct } from '../products-list/ProductsList.actions';
@@ -48,6 +49,7 @@ export const onGetSpecBlocks = (specID) => async (dispatch, getState) => {
         blocks,
         project,
         changes,
+        updateSuccess: true,
       }),
     );
   } catch (error) {
@@ -519,4 +521,31 @@ export const onUndoSend =
         );
       },
     );
+  };
+
+export const STOP_UPDATE = 'STOP_UPDATE';
+export const stopGetUpdate = () => async (dispatch) => {
+  dispatch(onActionCreator(STOP_UPDATE));
+};
+
+export const UNDO_STOP_UPDATE = 'UNDO_STOP_UPDATE';
+export const undoStopGetUpdate = () => async (dispatch) => {
+  dispatch(onActionCreator(UNDO_STOP_UPDATE));
+};
+
+export const GET_UPDATE_SUCCESS = 'GET_UPDATE_SUCCESS';
+export const onGetUpdate =
+  ({ specID, date }) =>
+  async (dispatch, getState) => {
+    try {
+      const response = await getUpdated({
+        specID,
+        userID: userID(getState),
+        date,
+      });
+      if (response) dispatch(stopGetUpdate());
+      return dispatch(onActionCreator(GET_UPDATE_SUCCESS, response));
+    } catch (error) {
+      return console.error(error);
+    }
   };

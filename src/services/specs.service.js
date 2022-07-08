@@ -225,3 +225,11 @@ export const undoSend = factoryService(({ changeID, specID, userID }) =>
     { change: changeID },
   ),
 );
+
+/** Get updated */
+export const getUpdated = factoryService(({ specID, userID, date }) =>
+  getJsonRequest(
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/updated`,
+    { updated_at: date },
+  ),
+);
