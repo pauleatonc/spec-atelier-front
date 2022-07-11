@@ -64,7 +64,6 @@ const SpecDocument = () => {
   const status = selectedBlock?.change?.status;
   const statusText = selectedBlockText?.text?.change?.status;
   const statusImage = selectedBlockImage?.image?.change?.status;
-  const handleClose = () => !update;
 
   useEffect(() => {
     dispatch(onGetSpecBlocks(specID));
@@ -344,7 +343,6 @@ const SpecDocument = () => {
       {update && (
         <Snackbar
           show={update}
-          onClose={handleClose}
           onhandleClick={updateBlocks}
           timeout={update && 3600000}
         >

@@ -24,6 +24,7 @@ import {
   SEND_CHANGE_BLOCK_SUCCESS,
   UNDO_SEND_BLOCK_SUCCESS,
   GET_UPDATE_SUCCESS,
+  SET_UPDATE_FALSE,
   STOP_UPDATE,
   UNDO_STOP_UPDATE,
 } from './SpecDocument.actions';
@@ -150,6 +151,9 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         ...state,
         update: payload,
       };
+    }
+    case SET_UPDATE_FALSE: {
+      return { ...state, update: false }
     }
     case STOP_UPDATE:
       return { ...state, actionGet: false };

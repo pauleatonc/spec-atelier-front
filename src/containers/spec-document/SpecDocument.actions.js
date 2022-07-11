@@ -33,12 +33,14 @@ const matchMedia = window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches;
 const specDocument = (getState) => getSpecDocument(getState);
 const userID = (getState) => getUserID(getState);
 
+export const SET_UPDATE_FALSE = 'SET_UPDATE_FALSE';
 export const GET_SPEC_BLOCKS = 'GET_SPEC_BLOCKS';
 export const GET_SPEC_BLOCKS_SUCCESS = 'GET_SPEC_BLOCKS_SUCCESS';
 export const UPDATE_TEAM_DATA = 'UPDATE_TEAM_DATA';
 export const SAVE_TEAM_MEMBERS = 'SAVE_TEAM_MEMBERS';
 export const DELETE_MEMBER_TEAM = 'DELETE_MEMBER_TEAM';
 export const onGetSpecBlocks = (specID) => async (dispatch, getState) => {
+  dispatch(onActionCreator(SET_UPDATE_FALSE));
   dispatch(onActionCreator(GET_SPEC_BLOCKS));
   try {
     const { blocks = [], project = {} } =
