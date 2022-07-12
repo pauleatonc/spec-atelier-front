@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 export const getFormatedTableData = (blocks) => {
   const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
 
@@ -200,3 +202,6 @@ export const getSpecDocument = (getState) => {
   const { specDocument } = getState();
   return specDocument;
 };
+
+export const getTeamUser = (team, user) =>
+  team?.find((member) => member?.user.id === user?.id);

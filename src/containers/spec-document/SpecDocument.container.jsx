@@ -25,17 +25,20 @@ import {
   AddMenuItem,
   BlockMenuItem,
 } from './SpecDocument.styles';
+import { getTeamUser } from './utils';
 
 /** The SpecDocument's container */
 const SpecDocument = () => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
-  const { blocks } = useSelector((state) => state.specDocument);
+  const { user } = useSelector((state) => state.auth);
+  const { blocks, project } = useSelector((state) => state.specDocument);
   const [selectedBlockID, setSelectedBlockID] = useState('');
   const [selectedBlockTextID, setSelectedBlockTextID] = useState('');
   const [selectedBlockImageID, setSelectedBlockImageID] = useState('');
   const [showBlockEditor, setShowBlockEditor] = useState('');
   const [showBlockTextEditor, setShowBlockTextEditor] = useState('');
+  const [teamUser, setTeamUser] = useState('');
   const windowSize = window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches;
   const selectedBlock = blocks.find((block) => block.id === selectedBlockID);
   const selectedBlockText = blocks.find(
@@ -57,10 +60,15 @@ const SpecDocument = () => {
   const status = selectedBlock?.change?.status;
   const statusText = selectedBlockText?.text?.change?.status;
   const statusImage = selectedBlockImage?.image?.change?.status;
+  const userEdit = teamUser?.permission?.ability === 'write';
 
   useEffect(() => {
     dispatch(onGetSpecBlocks(specID));
   }, []);
+
+  useEffect(() => {
+    setTeamUser(getTeamUser(project.team, user));
+  }, [project.team]);
 
   const {
     anchor: addAnchor,
@@ -366,11 +374,13 @@ const SpecDocument = () => {
         handleShowBlockTextMenu={handleShowBlockTextMenu}
         handleShowBlockTImageMenu={handleShowBlockTImageMenu}
       />
-      <AddIcon
-        alt="Agregar sección"
-        src={SPEC_ADD_SOURCE}
-        onClick={windowSize ? handleShowProducts : handleAddMenuOpen}
-      />
+      {userEdit && (
+        <AddIcon
+          alt="Agregar sección"
+          src={SPEC_ADD_SOURCE}
+          onClick={windowSize ? handleShowProducts : handleAddMenuOpen}
+        />
+      )}
     </Root>
   );
 };

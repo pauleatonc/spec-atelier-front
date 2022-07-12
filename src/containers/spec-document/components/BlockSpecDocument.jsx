@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { onAddSpecBlockText } from '../SpecDocument.actions';
@@ -31,6 +31,7 @@ import {
   ProductTitle,
   Section,
 } from '../SpecDocument.styles';
+import { getTeamUser } from '../utils';
 
 const BlockSpecDocument = ({
   block,
@@ -46,15 +47,23 @@ const BlockSpecDocument = ({
   const dispatch = useDispatch();
   const { id: specID } = useParams();
   const { localConfig } = useSelector((state) => state.specAdmin);
-  const { project } = useSelector((state) => state.specDocument);
+  const { team, user_owner } = useSelector(
+    (state) => state.specDocument.project,
+  );
   const { text: blockText, image: blockImage, type, id, change } = block;
   const { status, sent, action } = block.change;
   const { user } = useSelector((state) => state.auth);
-  const userOwner = project.user_owner;
   const { images, short_desc, name, long_desc, system, brand, reference } =
     block.element;
-  const unsentBlock = !userOwner && status !== 'accepted';
-  const unsentText = !userOwner && blockText?.change?.status !== 'accepted';
+  const unsentBlock = !user_owner && status !== 'accepted';
+  const unsentText = !user_owner && blockText?.change?.status !== 'accepted';
+  const [teamUser, setTeamUser] = useState('');
+  const userEdit = teamUser?.permission?.ability === 'write';
+
+  useEffect(() => {
+    setTeamUser(getTeamUser(team, user));
+  }, [team]);
+  console.log(teamUser);
 
   const handleAddBlockText = (blockID) => (textValue) => {
     handleHideBlockEditor();
@@ -158,7 +167,7 @@ const BlockSpecDocument = ({
     <Block
       disabled={type === 'Section' || type === 'Item'}
       margin={getBlockMarginByType()}
-      color={!userOwner ? borderBlock : undefined}
+      color={!user_owner ? borderBlock : undefined}
     >
       {getBlockWrapperByType(
         <>
@@ -173,19 +182,23 @@ const BlockSpecDocument = ({
               />
             </BlockEditor>
           )}
-          <DotDropDownMenu
-            onClick={handleShowBlockMenu(id, change.user.id, sent)}
-          />
+          {userEdit && (
+            <DotDropDownMenu
+              onClick={handleShowBlockMenu(id, change.user.id, sent)}
+            />
+          )}
           {showBlockImage && (
             <BlockImage visibility={action === 'remove' ? 'hidden' : 'visible'}>
-              <DotDropDownMenu
-                onClick={handleShowBlockTImageMenu(blockImage?.id)}
-                right="-72px"
-              />
+              {userEdit && (
+                <DotDropDownMenu
+                  onClick={handleShowBlockTImageMenu(blockImage?.id)}
+                  right="-72px"
+                />
+              )}
               <ProductImage
                 alt="Imagen del Producto"
                 src={imageSize()}
-                color={!userOwner ? imageColor() : undefined}
+                color={!user_owner ? imageColor() : undefined}
               />
               {action !== 'remove' &&
                 blockImage?.change.sent &&
@@ -223,14 +236,16 @@ const BlockSpecDocument = ({
       )}
       {showBlockText && (
         <BlockText
-          color={!userOwner ? textColor() : undefined}
+          color={!user_owner ? textColor() : undefined}
           strikethrough={
             (unsentBlock && change.action === 'remove') ||
             (unsentText && blockText?.change.action === 'remove')
           }
           visibility={action === 'remove' ? 'hidden' : 'visible'}
         >
-          <DotDropDownMenu onClick={handleShowBlockTextMenu(blockText?.id)} />
+          {userEdit && (
+            <DotDropDownMenu onClick={handleShowBlockTextMenu(blockText?.id)} />
+          )}
           <BlockTextContent
             dangerouslySetInnerHTML={{ __html: blockText?.text }}
           />
