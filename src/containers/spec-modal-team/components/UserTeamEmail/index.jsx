@@ -10,9 +10,9 @@ import { onUpdatePermission } from '../../actions';
 import { Container, ContainerMail, Email, WaitingDisclaimer } from './styles';
 
 const UserTeamEmail = ({ member, onClick }) => {
-  const {
-    project: { user_owner },
-  } = useSelector((state) => state.specDocument);
+  const { user_owner: userOwner } = useSelector(
+    (state) => state.specDocument.project,
+  );
   const { id: specID } = useParams();
   const dispatch = useDispatch();
   const { user, permission: memberPermission, status } = member;
@@ -48,18 +48,25 @@ const UserTeamEmail = ({ member, onClick }) => {
       );
   };
 
+  const showPermissions = () => {
+    if (memberPermission.ability === 'write') return <p>(permiso de editar)</p>;
+    if (memberPermission.ability === 'watch') return <p>(permiso de ver)</p>;
+    return null;
+  };
+
   return (
     <Container>
-      <ContainerMail owner={user_owner} onClick={() => onClick(member)}>
+      <ContainerMail owner={userOwner} onClick={() => onClick(member)}>
         <IconUser user={user} waiting={waiting} />
-        <Email owner={user_owner}>{user.email}</Email>
+        <Email owner={userOwner}>{user.email}</Email>
         {waiting && (
           <WaitingDisclaimer>
             (no ha aceptado aún la invitación a colaborar.)
           </WaitingDisclaimer>
         )}
+        {showPermissions()}
       </ContainerMail>
-      {user_owner && (
+      {userOwner && (
         <div>
           <SelectorRelative
             name="sort"

@@ -366,7 +366,6 @@ export const onSortSpecBlocks =
         block: blockId,
         userID: userID(getState),
       });
-      console.log(blocks)
       return dispatch(
         onActionCreator(SORT_SPEC_BLOCKS_SUCCESS, { blocks }),
       );

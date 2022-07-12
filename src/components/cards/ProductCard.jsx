@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { onDeleteProduct } from '../../containers/products-list/ProductsList.actions';
 import { onShowSpecEditProduct } from '../../containers/spec-edit-product/SpecEditProduct.actions';
 import { DownloadDocumentsIcons } from '../SpecComponents';
@@ -25,6 +25,7 @@ import {
   ActionsMenuItem,
 } from './ProductCard.styles';
 import { NO_PHOTO, THREE_DOTS_VERTICAL_SOURCE } from '../../assets/Images';
+import { getTeamUser } from '../../containers/spec-document/utils';
 
 /** The ProductCard's component */
 const ProductCard = (props) => {
@@ -46,9 +47,21 @@ const ProductCard = (props) => {
     canDelete,
     itemsUsed,
   } = props;
+  const { team, user_owner: userOwner } = useSelector(
+    (state) => state.specDocument.project,
+  );
+  const { user } = useSelector((state) => state.auth);
   const [hover, setHover] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [teamUser, setTeamUser] = useState('');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setTeamUser(getTeamUser(team, user));
+  }, [team]);
+
+  const canEditOwnerUser =
+    userOwner || teamUser?.permission?.ability === 'write';
 
   const {
     anchor: actionsAnchor,
@@ -134,7 +147,7 @@ const ProductCard = (props) => {
             Ver más
           </SeeMore>
         </Footer>
-        {(hover || itemsUsed) && !selected && canAdd && (
+        {(hover || itemsUsed) && !selected && canAdd && canEditOwnerUser && (
           <Add onClick={onClickCard} />
         )}
         {selected && <Check onClick={onClickCard} />}

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { onAddSpecBlockText } from '../SpecDocument.actions';
+import { getTeamUser } from '../utils';
 import Editor from '../../../components/inputs/Editor';
 import PendingReviewText from './PendingReview';
 import DotDropDownMenu from '../../../components/dotDropDownMenu/DotDropDownMenu';
@@ -46,15 +47,30 @@ const BlockSpecDocument = ({
   const dispatch = useDispatch();
   const { id: specID } = useParams();
   const { localConfig } = useSelector((state) => state.specAdmin);
-  const { project } = useSelector((state) => state.specDocument);
+  const { team, user_owner: userOwner } = useSelector(
+    (state) => state.specDocument.project,
+  );
   const { text: blockText, image: blockImage, type, id, change } = block;
   const { status, sent, action } = block.change;
   const { user } = useSelector((state) => state.auth);
-  const userOwner = project.user_owner;
-  const { images, short_desc, name, long_desc, system, brand, reference } =
-    block.element;
+  const {
+    images,
+    short_desc,
+    name,
+    long_desc,
+    system,
+    brand,
+    reference,
+  } = block.element;
   const unsentBlock = !userOwner && status !== 'accepted';
   const unsentText = !userOwner && blockText?.change?.status !== 'accepted';
+  const [teamUser, setTeamUser] = useState('');
+
+  useEffect(() => {
+    setTeamUser(getTeamUser(team, user));
+  }, [team]);
+
+  const canEdit = userOwner || teamUser?.permission?.ability === 'write';
 
   const handleAddBlockText = (blockID) => (textValue) => {
     handleHideBlockEditor();
@@ -173,15 +189,19 @@ const BlockSpecDocument = ({
               />
             </BlockEditor>
           )}
-          <DotDropDownMenu
-            onClick={handleShowBlockMenu(id, change.user.id, sent)}
-          />
+          {canEdit && (
+            <DotDropDownMenu
+              onClick={handleShowBlockMenu(id, change.user.id, sent)}
+            />
+          )}
           {showBlockImage && (
             <BlockImage visibility={action === 'remove' ? 'hidden' : 'visible'}>
-              <DotDropDownMenu
-                onClick={handleShowBlockTImageMenu(blockImage?.id)}
-                right="-72px"
-              />
+              {canEdit && (
+                <DotDropDownMenu
+                  onClick={handleShowBlockTImageMenu(blockImage?.id)}
+                  right="-72px"
+                />
+              )}
               <ProductImage
                 alt="Imagen del Producto"
                 src={imageSize()}
@@ -230,7 +250,9 @@ const BlockSpecDocument = ({
           }
           visibility={action === 'remove' ? 'hidden' : 'visible'}
         >
-          <DotDropDownMenu onClick={handleShowBlockTextMenu(blockText?.id)} />
+          {canEdit && (
+            <DotDropDownMenu onClick={handleShowBlockTextMenu(blockText?.id)} />
+          )}
           <BlockTextContent
             dangerouslySetInnerHTML={{ __html: blockText?.text }}
           />
