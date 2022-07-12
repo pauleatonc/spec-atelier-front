@@ -76,7 +76,7 @@ const SpecDocument = () => {
       }
     }, 5000);
     return () => clearInterval(interval);
-  }, [actionGet]);
+  }, [actionGet, project]);
 
   const updateBlocks = () => {
     dispatch(onGetSpecBlocks(specID));
