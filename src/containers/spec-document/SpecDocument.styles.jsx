@@ -191,7 +191,7 @@ export const Section = styled.section`
   display: flex;
   font-size: 16px;
   font-weight: bold;
-  height: 36px;
+  min-height: 36px;
   letter-spacing: 1px;
   line-height: 1.6;
   margin: 0 0 3px 0;
@@ -210,7 +210,7 @@ export const Item = styled.section`
   display: flex;
   font-size: 14px;
   font-weight: bold;
-  height: 36px;
+  min-height: 36px;
   letter-spacing: 1px;
   line-height: 1.6;
   margin: 0 0 3px 0;
