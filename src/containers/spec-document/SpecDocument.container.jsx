@@ -13,6 +13,7 @@ import {
   onUndoChange,
   onUndoSend,
   onUpdateSpecBlockText,
+  onGetProjectStructure,
 } from './SpecDocument.actions';
 import useDropdown from '../../components/basics/Dropdown.hooks';
 import Dropdown from '../../components/basics/Dropdown';
@@ -60,6 +61,7 @@ const SpecDocument = () => {
 
   useEffect(() => {
     dispatch(onGetSpecBlocks(specID));
+    dispatch(onGetProjectStructure(specID));
   }, []);
 
   const {

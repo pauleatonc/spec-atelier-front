@@ -44,14 +44,14 @@ import {
   ResendLabel,
 } from './styles';
 
-const DetailMemberModal = ({ sections }) => {
+const DetailMemberModal = ({ projectStructure }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
   const {
     project: { team },
   } = useSelector((state) => state.specDocument);
   const [checklistData, setChecklistData] = useState(
-    getCheckListData(sections),
+    getCheckListData(projectStructure),
   );
   const { detailMemberModal: show, detailMember } = useSelector(
     (state) => state.specModalTeam,
@@ -110,10 +110,10 @@ const DetailMemberModal = ({ sections }) => {
         ),
       );
       setChecklistData(
-        getCheckListData(sections, detailMember?.permission, team),
+        getCheckListData(projectStructure, detailMember?.permission),
       );
     }
-  }, [detailMember, team, sections]);
+  }, [detailMember, team, projectStructure]);
 
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>

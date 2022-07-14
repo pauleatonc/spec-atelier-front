@@ -43,7 +43,7 @@ import {
   ErrorInput,
 } from './styles';
 
-const SpecModalNewMember = ({ sections }) => {
+const SpecModalNewMember = ({ projectStructure }) => {
   const dispatch = useDispatch();
   const { id: projectID } = useParams();
   const [listEmails, setListEmails] = useState([]);
@@ -54,7 +54,7 @@ const SpecModalNewMember = ({ sections }) => {
     project: { team },
   } = useSelector((state) => state.specDocument);
   const [checklistData, setChecklistData] = useState(
-    getCheckListData(sections, null, team),
+    getCheckListData(projectStructure),
   );
   const {
     onChange: handleMailChange,
@@ -77,7 +77,7 @@ const SpecModalNewMember = ({ sections }) => {
     exitingCallback: () => {
       setMessageValue('');
       setEmailValue('');
-      setChecklistData(getCheckListData(sections, null, team));
+      setChecklistData(getCheckListData(projectStructure));
     },
   });
 
@@ -117,8 +117,8 @@ const SpecModalNewMember = ({ sections }) => {
   };
 
   useEffect(() => {
-    setChecklistData(getCheckListData(sections, null, team));
-  }, [team, sections]);
+    setChecklistData(getCheckListData(projectStructure));
+  }, [projectStructure]);
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
       <Container>

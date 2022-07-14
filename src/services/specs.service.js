@@ -225,3 +225,9 @@ export const undoSend = factoryService(({ changeID, specID, userID }) =>
     { change: changeID },
   ),
 );
+
+export const getProjectStructure = factoryService(({ specID }) =>
+  getJsonRequest(
+    `${API_BASE_URL}/configs/project_structure?project_spec_id=${specID}`,
+  ),
+);

@@ -23,6 +23,7 @@ import {
   EDIT_SPEC_BLOCK_IMAGE_SUCCESS,
   SEND_CHANGE_BLOCK_SUCCESS,
   UNDO_SEND_BLOCK_SUCCESS,
+  SAVE_PROJECT_STRUCTURE,
 } from './SpecDocument.actions';
 
 const specDocumentState = {
@@ -34,6 +35,7 @@ const specDocumentState = {
   totalExpandManual: 0,
   sections: [],
   changes: [],
+  projectStructure: [],
 };
 
 /** The spec document' reducer */
@@ -136,6 +138,12 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         ...state,
         blocks: payload.blocks,
         changes: payload.changes,
+      };
+    }
+    case SAVE_PROJECT_STRUCTURE: {
+      return {
+        ...state,
+        projectStructure: payload.sections,
       };
     }
     default: {

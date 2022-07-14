@@ -36,7 +36,7 @@ const Specification = () => {
   const [selectedItem, setSelectedItem] = useState('');
   const { dataSection } = useSelector((state) => state);
   const { option } = dataSection;
-  const { sections } = useSelector((state) => state.specDocument);
+  const { projectStructure } = useSelector((state) => state.specDocument);
   const { id: specID } = useParams();
 
   useEffect(() => {
@@ -91,16 +91,16 @@ const Specification = () => {
           </Navigation>
         </Main>
       </Root>
-      <SpecCreateProductOneContainer specID={specID}/>
+      <SpecCreateProductOneContainer specID={specID} />
       <SpecCreateProductTwoContainer />
       <SpecCreateProductThreeContainer />
       <SpecEditProductContainer />
       <SpecImagesModalContainer />
       <AlertContainer />
       <SpecModalProduct />
-      <SpecModalTeam sections={sections} />
-      <SpecModalTeamNewMember sections={sections} />
-      <DetailMemberModal sections={sections} />
+      <SpecModalTeam projectStructure={projectStructure} />
+      <SpecModalTeamNewMember projectStructure={projectStructure} />
+      <DetailMemberModal projectStructure={projectStructure} />
       <ContactFormContainer type="product" />
     </>
   );
