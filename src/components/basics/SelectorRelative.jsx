@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import IconUser from '../IconUser';
+import ToolTip from '../tooltip/Tooltip';
 import {
   Container,
   Content,
@@ -11,6 +12,7 @@ import {
   NameSection,
   ContentOption,
   OptionNameSection,
+  IconInfo,
 } from './SelectorRelative.styles';
 
 const propTypes = {
@@ -39,6 +41,8 @@ const SelectorRelative = ({
   right,
   hoverPrimaryColor,
   backgroundPuertoRico,
+  showIconInfo,
+  position,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -86,6 +90,7 @@ const SelectorRelative = ({
         width={width}
         maxHeight={maxHeight}
         right={right}
+        showIconInfo={showIconInfo}
       >
         {options.map((option) => (
           <ContentOption
@@ -106,6 +111,11 @@ const SelectorRelative = ({
                 <OptionNameSection>
                   {option.label || option.name}
                 </OptionNameSection>
+              )}
+              {showIconInfo && option?.tooltip && (
+                <ToolTip content={option.tooltip} position={position}>
+                  <IconInfo className="fas fa-info-circle" />
+                </ToolTip>
               )}
             </Option>
           </ContentOption>

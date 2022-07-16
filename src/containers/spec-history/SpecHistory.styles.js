@@ -6,9 +6,7 @@ import {
   CONCRETE,
   CONCRETE_OPACITY,
   DUSTY_GRAY_RGB,
-  MEDIA_QUERY_MEDIUM_MAX,
   MEDIA_QUERY_SMALL,
-  MEDIA_QUERY_SMALL_MAX,
   MERCURY,
   MINE_SHAFT,
   PUERTO_RICO,
@@ -22,9 +20,8 @@ export const ContainerTable = styled.div`
   max-width: ${MAX_SCREEN_MEDIUM}px;
   border: solid 1px ${MERCURY};
   background-color: ${WHITE};
-  height: fit-content;
-  width: 65%;
-  min-height: 630px;
+  height: 630px;
+  width: 80%;
 `;
 
 export const HistoryChangeManagementContent = styled.div`
@@ -168,12 +165,15 @@ export const Table = styled.table`
 export const Thead = styled.thead`
   font-weight: 900;
   font-size: 14px;
-	height: 32px;
+  height: 32px;
   background-color: ${CONCRETE};
-  tr{
+  tr {
     border-bottom: solid 4.5px ${WHITE};
     th:first-child {
       padding-left: 36px;
+    }
+    th:second-child {
+      text-align: center;
     }
 `;
 
@@ -189,8 +189,8 @@ export const Tbody = styled.tbody`
 `;
 
 export const Th = styled.th`
-  padding-left: 8px;
   vertical-align: middle;
+  padding: 0 8px;
 `;
 
 export const Td = styled.td`
@@ -204,19 +204,8 @@ export const Td = styled.td`
 export const ActionText = styled.div`
   max-height: 43px;
   padding-left: 11px;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 530px;
-  ${MEDIA_QUERY_SMALL} {
-    width: 200px;
-  }
-  ${MEDIA_QUERY_SMALL_MAX} {
-    width: 280px;
-  }
-  ${MEDIA_QUERY_MEDIUM_MAX} {
-    width: 480px;
-  }
 `;
 
 export const ActionIcon = styled.img`
@@ -229,7 +218,7 @@ export const PaginationContent = styled.div`
   flex-wrap: nowrap;
   bottom: 70px;
   position: absolute;
-  width: 65%;
+  width: 80%;
   margin-bottom: 49px;
   align-items: center;
   justify-content: center;
@@ -263,5 +252,25 @@ export const LiPagination = styled.div`
 `;
 
 export const SectionName = styled.section`
-  padding-left: 11px;
+  width: max-content;
+  padding-left: 10px;
+`;
+
+export const CommentsIcon = styled.img`
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  z-index: 200;
+`;
+
+export const SectionContainer = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  max-height: 43px;
+`;
+
+export const StatusIcon = styled.img`
+  padding: 0 8px;
 `;

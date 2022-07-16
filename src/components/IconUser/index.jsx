@@ -27,8 +27,8 @@ const IconUser = ({
         />
       ) : (
         <LetterNameUser fontSize={fontSize}>
-          {user.name.charAt(0).toUpperCase() ||
-            user.email.charAt(0).toUpperCase()}
+          {user.name?.charAt(0)?.toUpperCase() ||
+            user.email?.charAt(0)?.toUpperCase()}
         </LetterNameUser>
       )}
     </Container>

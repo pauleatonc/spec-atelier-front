@@ -13,6 +13,7 @@ const BlocksSpecDocument = ({
   handleHideBlockTextEditor,
   handleEditBlockText,
   handleShowBlockTextMenu,
+  handleShowBlockTImageMenu,
 }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
@@ -40,6 +41,7 @@ const BlocksSpecDocument = ({
             handleHideBlockTextEditor={handleHideBlockTextEditor}
             handleEditBlockText={handleEditBlockText}
             handleShowBlockTextMenu={handleShowBlockTextMenu}
+            handleShowBlockTImageMenu={handleShowBlockTImageMenu}
           />
         </div>
       ))}

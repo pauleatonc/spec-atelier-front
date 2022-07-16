@@ -116,19 +116,13 @@ export const BlockMenuItem = styled.section`
   }
 `;
 
-export const BlockDotsIcon = styled.img`
-  cursor: pointer;
-  position: absolute;
-  right: 5px;
-  top: 4px;
-  user-select: none;
-  visibility: hidden;
-`;
-
 export const BlockImage = styled.section`
   display: block;
   width: 98px;
-  margin: 10px 0px 10px 10px;
+  margin-top: 10px;
+  &:hover div {
+    visibility: ${({ visibility }) => visibility};
+  }
 `;
 
 export const BlockContent = styled.section`
@@ -143,13 +137,13 @@ export const BlockText = styled.section`
   align-items: center;
   font-size: 12px;
   margin: 0 0 3px 0;
-  padding: 7px 4px 4px 9px;
+  padding: 7px 0px 4px 9px;
   position: relative;
   width: 100%;
   border: ${({ color }) => color && `solid 2px ${color}`};
   text-decoration: ${({ strikethrough }) => strikethrough && 'line-through'};
-  &:hover ${BlockDotsIcon} {
-    visibility: visible;
+  &:hover div {
+    visibility: ${({ visibility }) => visibility};
   }
 `;
 
@@ -197,14 +191,14 @@ export const Section = styled.section`
   display: flex;
   font-size: 16px;
   font-weight: bold;
-  height: 36px;
+  min-height: 36px;
   letter-spacing: 1px;
   line-height: 1.6;
   margin: 0 0 3px 0;
   padding: 4px 30px 4px 9px;
   position: relative;
   width: 100%;
-  &:hover ${BlockDotsIcon} {
+  &:hover div {
     visibility: visible;
   }
 `;
@@ -216,14 +210,14 @@ export const Item = styled.section`
   display: flex;
   font-size: 14px;
   font-weight: bold;
-  height: 36px;
+  min-height: 36px;
   letter-spacing: 1px;
   line-height: 1.6;
   margin: 0 0 3px 0;
   padding: 4px 30px 4px 9px;
   position: relative;
   width: 100%;
-  &:hover ${BlockDotsIcon} {
+  &:hover div {
     visibility: visible;
   }
 `;
@@ -233,11 +227,11 @@ export const Product = styled.section`
   display: flex;
   margin: 0 0 3px 0;
   min-height: 116px;
-  padding: 0 30px 0 0;
+  padding: 0 30px 0 9px;
   position: relative;
   width: 100%;
   text-decoration: ${({ strikethrough }) => strikethrough && 'line-through'};
-  &:hover ${BlockDotsIcon} {
+  &:hover div {
     visibility: visible;
   }
 `;
@@ -323,4 +317,5 @@ export const TextContainer = styled.div`
 
 export const Watch = styled.img`
   padding: 0 12px 0 6px;
+  opacity: 0.5;
 `;

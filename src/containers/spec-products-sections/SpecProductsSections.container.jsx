@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { onGetSpecProductsBySection, onUpdateFilterSection } from '../spec-products/SpecProducts.actions';
 import { onHideSpecProductsItemsSuccess } from '../spec-products-items/SpecProductsItems.actions';
 import { setFilters } from '../products-list/ProductsList.actions';
@@ -34,11 +35,11 @@ const SpecProductsSections = ({
     (state) => state.specProductsSections,
   );
   const { isSelectedAll } = useSelector((state) => state.productsList);
-
+  const { id: specID } = useParams();
   const dispatch = useDispatch();
   const handleSectionClick = (section) => () => {
     dispatch(setFilters({ section: [section.id] }));
-    dispatch(onGetSpecProductsBySection({ section: section.id }));
+    dispatch(onGetSpecProductsBySection({ section: section.id, specID }));
     if (window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches) {
       setSelectedSection(section.name);
       setShowFilters(false);

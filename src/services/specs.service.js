@@ -213,18 +213,25 @@ export const saveSpecChanges = factoryService(({ specID, userID, params }) =>
 
 /** Send block changes */
 export const submitChanges = factoryService(
-  ({ changes, specID, userID, comment }) => {
-    return patchJsonRequest(
+  ({ changes, specID, userID, comment }) =>
+    patchJsonRequest(
       `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/submit_changes`,
       { changes, comment },
-    );
-  },
+    ),
 );
 
 /** Remove block change */
 export const undoRemove = factoryService(({ changeID, specID, userID }) =>
   patchJsonRequest(
-    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/${changeID}/undo_change`,
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/changes/${changeID}/undo_change`,
+    { change: changeID },
+  ),
+);
+
+/** Undo send block change */
+export const undoSend = factoryService(({ changeID, specID, userID }) =>
+  patchJsonRequest(
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/changes/${changeID}/unsent_change`,
     { change: changeID },
   ),
 );

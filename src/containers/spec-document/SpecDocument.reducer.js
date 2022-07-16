@@ -25,6 +25,8 @@ import {
   SAVE_SPEC_CHANGES_ERROR,
   SEND_CHANGED_BLOCKS_SUCCESS,
   EDIT_SPEC_BLOCK_IMAGE_SUCCESS,
+  SEND_CHANGE_BLOCK_SUCCESS,
+  UNDO_SEND_BLOCK_SUCCESS,
 } from './SpecDocument.actions';
 
 const specDocumentState = {
@@ -154,6 +156,14 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         ...state,
         changes: [],
         blocks: payload.blocks,
+      };
+    }
+    case SEND_CHANGE_BLOCK_SUCCESS:
+    case UNDO_SEND_BLOCK_SUCCESS: {
+      return {
+        ...state,
+        blocks: payload.blocks,
+        changes: payload.changes,
       };
     }
     default: {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   onHideSpecProducts,
@@ -28,13 +29,12 @@ const SpecNavigator = () => {
   const { show: showContents } = useSelector((state) => state.specContents);
   const { show: showAdmin } = useSelector((state) => state.specAdmin);
   const dispatch = useDispatch();
+  const { id: specID } = useParams();
 
   const handleProductsClick = () => {
-    if (showProducts) {
-      return dispatch(onHideSpecProducts());
-    }
+    if (showProducts) return dispatch(onHideSpecProducts());
     return (() => {
-      dispatch(onShowSpecProducts());
+      dispatch(onShowSpecProducts({ specID }));
       dispatch(onHideSpecContents());
       dispatch(onHideSpecAdmin());
     })();

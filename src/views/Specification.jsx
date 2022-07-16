@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import AlertContainer from '../containers/alert/Alert.container';
 import SpecHeaderContainer from '../containers/spec-header/SpecHeader.container';
 import SpecContentButtons from '../containers/spec-contents-buttons/SpecContentsButtons.container';
@@ -36,6 +37,7 @@ const Specification = () => {
   const { dataSection } = useSelector((state) => state);
   const { option } = dataSection;
   const { sections } = useSelector((state) => state.specDocument);
+  const { id: specID } = useParams();
 
   useEffect(() => {
     dispatch(changeOption(SPEC_DOCUMENT));
@@ -89,7 +91,7 @@ const Specification = () => {
           </Navigation>
         </Main>
       </Root>
-      <SpecCreateProductOneContainer />
+      <SpecCreateProductOneContainer specID={specID}/>
       <SpecCreateProductTwoContainer />
       <SpecCreateProductThreeContainer />
       <SpecEditProductContainer />

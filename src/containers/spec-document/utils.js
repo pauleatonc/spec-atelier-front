@@ -193,3 +193,19 @@ export const getChanges = (blocks) => {
   });
   return changes;
 };
+
+export const filteredBlocks = (blocks, response) =>
+  blocks.map((block) =>
+    block.id === response.block.id ? response.block : block,
+  );
+
+export const getUserID = (getState) => {
+  const { auth } = getState();
+  const userID = auth.user?.id;
+  return userID;
+};
+
+export const getSpecDocument = (getState) => {
+  const { specDocument } = getState();
+  return specDocument;
+};
