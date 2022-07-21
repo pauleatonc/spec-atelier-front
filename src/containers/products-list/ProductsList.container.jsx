@@ -47,6 +47,7 @@ const ProductList = ({
   onClickCreate,
   isSpec,
   viewKey,
+  canEditOwnerUser,
 }) => {
   const defaultFilters = {
     page: 0,
@@ -198,7 +199,6 @@ const ProductList = ({
               />
             </MobileFilters>
           )}
-
           <Separator />
         </>
       )}
@@ -270,6 +270,7 @@ const ProductList = ({
                 product?.project_spec_info?.items_used.length <
                   product.items.length
               }
+              canEditOwnerUser={canEditOwnerUser}
             />
           );
         })}

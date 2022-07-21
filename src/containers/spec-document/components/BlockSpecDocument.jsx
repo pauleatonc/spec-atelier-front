@@ -6,14 +6,6 @@ import Editor from '../../../components/inputs/Editor';
 import PendingReviewText from './PendingReview';
 import DotDropDownMenu from '../../../components/dotDropDownMenu/DotDropDownMenu';
 import {
-  BURNT_SIENNA,
-  BURNT_SIENNA_OPACITY,
-  PUERTO_RICO,
-  PUERTO_RICO_OPACITY,
-  SUPERNOVA,
-  SUPERNOVA_OPACITY,
-} from '../../../config/constants/styled-vars';
-import {
   Block,
   BlockContent,
   BlockEditor,
@@ -31,6 +23,14 @@ import {
   ProductTitle,
   Section,
 } from '../SpecDocument.styles';
+import {
+  BURNT_SIENNA,
+  BURNT_SIENNA_OPACITY,
+  PUERTO_RICO,
+  PUERTO_RICO_OPACITY,
+  SUPERNOVA,
+  SUPERNOVA_OPACITY,
+} from '../../../config/constants/styled-vars';
 
 const BlockSpecDocument = ({
   block,
@@ -42,17 +42,26 @@ const BlockSpecDocument = ({
   handleEditBlockText,
   handleShowBlockTextMenu,
   handleShowBlockTImageMenu,
+  canEditOwnerUser,
 }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
   const { localConfig } = useSelector((state) => state.specAdmin);
-  const { project } = useSelector((state) => state.specDocument);
+  const { user_owner: userOwner } = useSelector(
+    (state) => state.specDocument.project,
+  );
   const { text: blockText, image: blockImage, type, id, change } = block;
   const { status, sent, action } = block.change;
   const { user } = useSelector((state) => state.auth);
-  const userOwner = project.user_owner;
-  const { images, short_desc, name, long_desc, system, brand, reference } =
-    block.element;
+  const {
+    images,
+    short_desc,
+    name,
+    long_desc,
+    system,
+    brand,
+    reference,
+  } = block.element;
   const unsentBlock = !userOwner && status !== 'accepted';
   const unsentText = !userOwner && blockText?.change?.status !== 'accepted';
 
@@ -173,15 +182,19 @@ const BlockSpecDocument = ({
               />
             </BlockEditor>
           )}
-          <DotDropDownMenu
-            onClick={handleShowBlockMenu(id, change.user.id, sent)}
-          />
+          {canEditOwnerUser && (
+            <DotDropDownMenu
+              onClick={handleShowBlockMenu(id, change.user.id, sent)}
+            />
+          )}
           {showBlockImage && (
             <BlockImage visibility={action === 'remove' ? 'hidden' : 'visible'}>
-              <DotDropDownMenu
-                onClick={handleShowBlockTImageMenu(blockImage?.id)}
-                right="-72px"
-              />
+              {canEditOwnerUser && (
+                <DotDropDownMenu
+                  onClick={handleShowBlockTImageMenu(blockImage?.id)}
+                  right="-72px"
+                />
+              )}
               <ProductImage
                 alt="Imagen del Producto"
                 src={imageSize()}
@@ -230,7 +243,9 @@ const BlockSpecDocument = ({
           }
           visibility={action === 'remove' ? 'hidden' : 'visible'}
         >
-          <DotDropDownMenu onClick={handleShowBlockTextMenu(blockText?.id)} />
+          {canEditOwnerUser && (
+            <DotDropDownMenu onClick={handleShowBlockTextMenu(blockText?.id)} />
+          )}
           <BlockTextContent
             dangerouslySetInnerHTML={{ __html: blockText?.text }}
           />

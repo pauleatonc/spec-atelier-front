@@ -33,7 +33,7 @@ const SpecModalTeam = ({ sections }) => {
   const dispatch = useDispatch();
   const { teamModal: show } = useSelector((state) => state.specModalTeam);
   const {
-    project: { team, user_owner, owner },
+    project: { team, user_owner: userOwner, owner },
   } = useSelector((state) => state.specDocument);
   const [checklistData, setChecklistData] = useState(
     getCheckListData(sections, null, team),
@@ -47,7 +47,7 @@ const SpecModalTeam = ({ sections }) => {
   };
 
   const handleClickMember = (member) => {
-    if (user_owner) dispatch(setDetailMember(member));
+    if (userOwner) dispatch(setDetailMember(member));
   };
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const SpecModalTeam = ({ sections }) => {
             ))}
           </ContainerTeam>
         )}
-        {user_owner && (
+        {userOwner && (
           <NewMemberButton onClick={showNewMemberModal}>
             <AddIcon alt="Agregar nuevo miembro" src={addIconSource} />
             <AddMemberLabel>Nuevo miembro</AddMemberLabel>

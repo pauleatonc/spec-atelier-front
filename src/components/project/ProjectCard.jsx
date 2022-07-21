@@ -4,7 +4,8 @@ import {
   firstLetterToUppercase,
   handleChangeToPrettyFormat,
 } from '../../helpers/pretty-format.helper';
-
+import SelectorRelative from '../basics/SelectorRelative';
+import { Img } from './ProjectStyles';
 import {
   IMAGE_COMMERCIAL_COLOR,
   IMAGE_EDUCATIONAL_COLOR,
@@ -25,9 +26,6 @@ import {
   ICON_OFFICE_GREY,
   ICON_RESIDENTIAL_GREY,
 } from '../../assets/Images';
-import SelectorRelative from '../basics/SelectorRelative';
-
-import { Img } from './ProjectStyles';
 
 const mapImages = {
   commercial: IMAGE_COMMERCIAL_COLOR,
@@ -72,7 +70,6 @@ const mapWorkType = {
 };
 
 const hanlePrintImage = (type) => mapImages[type];
-
 const handlePrintProyectType = (type) => mapProjectType[type];
 
 const handlePrintProjectTypeIcon = (type) => (
@@ -117,10 +114,10 @@ const Project = (props) => {
     onClick,
     onChangeMenuOption,
     id,
+    owner,
   } = props;
   const [showOptions, setShowOptions] = useState(false);
   const toggleOptions = () => setShowOptions(!showOptions);
-
   const onSelect = (project) => () => onClick(project);
 
   return (
@@ -137,7 +134,7 @@ const Project = (props) => {
         <div className="project__content__header">
           <div className="project__content__header__top">
             <p className="project__content__header__top__title">{name}</p>
-            <div>
+            {owner && (
               <SelectorRelative
                 onChange={onChangeMenuOption}
                 open={showOptions}
@@ -150,7 +147,7 @@ const Project = (props) => {
                 maxHeight="300px"
                 options={options}
               />
-            </div>
+            )}
           </div>
           <div className="project__content__header__bottom">
             <p className="project__content__header__bottom__project">

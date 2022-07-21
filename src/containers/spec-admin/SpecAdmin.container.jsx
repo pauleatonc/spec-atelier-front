@@ -1,14 +1,15 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import CheckBoxList from '../../components/inputs/CheckBoxList';
-import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
+
 import {
   onSetLocalConfig,
   onEditConfig,
   onUpdateProductConfig,
   onHideSpecAdmin,
 } from './SpecAdmin.actions';
+import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
+import CheckBoxList from '../../components/inputs/CheckBoxList';
 import {
   ButtonBack,
   Overlay,
@@ -25,15 +26,17 @@ import { ARROW_BACK } from '../../assets/Images';
 
 /** The SpecAdmin' container */
 const SpecAdmin = () => {
+  const dispatch = useDispatch();
+  const { id: specID } = useParams();
+  const { config } = useSelector((state) => state.specDocument.project);
   const { show, initialConfig, localConfig } = useSelector(
     (state) => state.specAdmin,
   );
-  const { config } = useSelector((state) => state.specDocument.project);
-  const { id: specID } = useParams();
+
   const options = [
     { key: 'default', text: 'Predeterminado' },
     { key: 'short_desc', text: 'Descripción corta' },
-    { key: 'long_desc', text: 'Descriptción larga' },
+    { key: 'long_desc', text: 'Descripción larga' },
     { key: 'reference', text: 'Referencia' },
     { key: 'brand', text: 'Marca' },
   ];
@@ -60,8 +63,6 @@ const SpecAdmin = () => {
       default: false,
     }),
   };
-
-  const dispatch = useDispatch();
 
   const handleItemClick = (key) => {
     const newConfig = calculatedOptions[key]?.(!localConfig[key]) || {

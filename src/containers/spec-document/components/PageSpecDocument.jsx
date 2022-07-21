@@ -18,11 +18,12 @@ const PageSpecDocument = ({
   handleEditBlockText,
   handleShowBlockTextMenu,
   handleShowBlockTImageMenu,
+  canEditOwnerUser,
 }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
-  const { project, changes } = useSelector((state) => state.specDocument);
-  const userOwner = project?.user_owner;
+  const { changes, project } = useSelector((state) => state.specDocument);
+  const { user_owner: userOwner } = project;
   const [showSendChangesModal, setShowSendChangesModal] = useState(false);
   const handleCloseModal = () => setShowSendChangesModal(false);
   const handleSendChanges = () => setShowSendChangesModal(true);
@@ -46,8 +47,9 @@ const PageSpecDocument = ({
           handleEditBlockText={handleEditBlockText}
           handleShowBlockTextMenu={handleShowBlockTextMenu}
           handleShowBlockTImageMenu={handleShowBlockTImageMenu}
+          canEditOwnerUser={canEditOwnerUser}
         />
-        {!userOwner && (
+        {!userOwner && canEditOwnerUser && (
           <Footer>
             {changes.length > 0 && (
               <>

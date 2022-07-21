@@ -2,11 +2,11 @@ import React, { useMemo } from 'react';
 import { useTable, useExpanded } from 'react-table';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { RotatingLines } from 'react-loader-spinner';
+import { Circles } from 'react-loader-spinner';
 import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
 import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
-import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
 import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
+import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
 import CurrentInputTable from './components/CurrentInputTable';
 import {
   Root,
@@ -30,16 +30,15 @@ import {
 } from './SpecContentsTable.styles';
 import { SPEC_DOWNLOAD_SOURCE } from '../../assets/Images';
 
-const SpecContentsTable = () => {
-  const { id } = useParams();
+const SpecContentsTable = ({ canEditOwnerUser }) => {
   const dispatch = useDispatch();
+  const { id } = useParams();
+  const { user } = useSelector((state) => state.auth);
+  const { first_name, last_name, company, email } = user;
   const { project, quoteTable, totalExpandManual } = useSelector(
     (state) => state.specDocument,
   );
-  const { user } = useSelector((state) => state.profile);
-  const { first_name, last_name, company, email } = useSelector(
-    (state) => state.profile.user,
-  );
+
   const initialValues = {
     name: `${first_name} ${last_name}`,
     company: company || '',
@@ -144,12 +143,13 @@ const SpecContentsTable = () => {
                 />
               );
             case 'Product':
-              return !row?.original?.price ? (
-                <ButtonConsult onClick={onClickProduct(row?.original)}>
-                  Consultar precio
-                </ButtonConsult>
-              ) : (
-                ''
+              return (
+                !row?.original?.price &&
+                canEditOwnerUser && (
+                  <ButtonConsult onClick={onClickProduct(row?.original)}>
+                    Consultar precio
+                  </ButtonConsult>
+                )
               );
             default:
               return '';
@@ -251,7 +251,7 @@ const SpecContentsTable = () => {
       <SpecModalQuote initialValues={initialValues} />
     </Root>
   ) : (
-    <RotatingLines width="50" />
+    <Circles width="50" />
   );
 };
 

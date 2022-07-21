@@ -32,7 +32,7 @@ import {
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 /** The SpecDocument's container */
-const SpecDocument = () => {
+const SpecDocument = ({ canEditOwnerUser }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
   const { blocks, project, update, updateSuccess, actionGet } = useSelector(
@@ -402,12 +402,15 @@ const SpecDocument = () => {
         handleEditBlockText={handleEditBlockText}
         handleShowBlockTextMenu={handleShowBlockTextMenu}
         handleShowBlockTImageMenu={handleShowBlockTImageMenu}
+        canEditOwnerUser={canEditOwnerUser}
       />
-      <AddIcon
-        alt="Agregar sección"
-        src={SPEC_ADD_SOURCE}
-        onClick={windowSize ? handleShowProducts : handleAddMenuOpen}
-      />
+      {canEditOwnerUser && (
+        <AddIcon
+          alt="Agregar sección"
+          src={SPEC_ADD_SOURCE}
+          onClick={windowSize ? handleShowProducts : handleAddMenuOpen}
+        />
+      )}
     </Root>
   );
 };
