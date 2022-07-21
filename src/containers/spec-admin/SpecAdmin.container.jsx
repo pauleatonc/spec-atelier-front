@@ -1,14 +1,15 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
-import CheckBoxList from '../../components/inputs/CheckBoxList';
+
 import {
   onSetLocalConfig,
   onEditConfig,
   onUpdateProductConfig,
   onHideSpecAdmin,
 } from './SpecAdmin.actions';
+import { useDidUpdateEffect } from '../../helpers/custom-hooks.helper';
+import CheckBoxList from '../../components/inputs/CheckBoxList';
 import {
   ButtonBack,
   Overlay,
@@ -35,7 +36,7 @@ const SpecAdmin = () => {
   const options = [
     { key: 'default', text: 'Predeterminado' },
     { key: 'short_desc', text: 'Descripción corta' },
-    { key: 'long_desc', text: 'Descriptción larga' },
+    { key: 'long_desc', text: 'Descripción larga' },
     { key: 'reference', text: 'Referencia' },
     { key: 'brand', text: 'Marca' },
   ];

@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux';
-
 export const getFormatedTableData = (blocks) => {
   const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
 
@@ -161,14 +159,6 @@ export const getSections = (blocks) => {
         ),
       })),
   }));
-};
-
-export const getOwnerBlocks = (blocks) => {
-  return blocks.filter(
-    (block) =>
-      block.change?.status === 'accepted' ||
-      (block.change?.status === 'waiting' && block.change.action === 'remove'),
-  );
 };
 
 export const getChanges = (blocks) => {

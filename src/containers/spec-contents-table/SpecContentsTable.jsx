@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useTable, useExpanded } from 'react-table';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -6,7 +6,6 @@ import { Circles } from 'react-loader-spinner';
 import { handleUpdateProduct } from '../spec-document/SpecDocument.actions';
 import { downloadBudgetDocument } from '../spec-header/SpecHeader.actions';
 import { getProduct } from '../spec-modal-quote/SpecModalQuote.actions';
-import { getTeamUser } from '../spec-document/utils';
 import SpecModalQuote from '../spec-modal-quote/SpecModalQuote.container';
 import CurrentInputTable from './components/CurrentInputTable';
 import {
@@ -31,7 +30,7 @@ import {
 } from './SpecContentsTable.styles';
 import { SPEC_DOWNLOAD_SOURCE } from '../../assets/Images';
 
-const SpecContentsTable = () => {
+const SpecContentsTable = ({ canEditOwnerUser }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { user } = useSelector((state) => state.auth);
@@ -39,16 +38,6 @@ const SpecContentsTable = () => {
   const { project, quoteTable, totalExpandManual } = useSelector(
     (state) => state.specDocument,
   );
-  const { team, user_owner: userOwner } = useSelector(
-    (state) => state.specDocument.project,
-  );
-  const [teamUser, setTeamUser] = useState('');
-
-  useEffect(() => {
-    setTeamUser(getTeamUser(team, user));
-  }, [team]);
-
-  const canEdit = userOwner || teamUser?.permission?.ability === 'write';
 
   const initialValues = {
     name: `${first_name} ${last_name}`,
@@ -156,7 +145,7 @@ const SpecContentsTable = () => {
             case 'Product':
               return (
                 !row?.original?.price &&
-                canEdit && (
+                canEditOwnerUser && (
                   <ButtonConsult onClick={onClickProduct(row?.original)}>
                     Consultar precio
                   </ButtonConsult>
@@ -168,7 +157,7 @@ const SpecContentsTable = () => {
         },
       },
     ],
-    [teamUser, userOwner],
+    [],
   );
 
   const {

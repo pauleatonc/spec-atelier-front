@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleSubmitChanges } from '../SpecDocument.actions';
@@ -8,7 +8,6 @@ import { Button } from '../../../components/SpecComponents';
 import { Page, Footer } from '../SpecDocument.styles';
 import Textarea from '../../../components/inputs/Textarea';
 import { useTextarea } from '../../../components/inputs/Inputs.hooks';
-import { getTeamUser } from '../utils';
 
 const PageSpecDocument = ({
   showBlockEditor,
@@ -19,22 +18,16 @@ const PageSpecDocument = ({
   handleEditBlockText,
   handleShowBlockTextMenu,
   handleShowBlockTImageMenu,
+  canEditOwnerUser,
 }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
-  const { user } = useSelector((state) => state.auth);
   const { changes, project } = useSelector((state) => state.specDocument);
-  const { team, user_owner: userOwner } = project;
+  const { user_owner: userOwner } = project;
   const [showSendChangesModal, setShowSendChangesModal] = useState(false);
-  const [teamUser, setTeamUser] = useState('');
   const handleCloseModal = () => setShowSendChangesModal(false);
   const handleSendChanges = () => setShowSendChangesModal(true);
   const { onChange: handleComment, value: comment } = useTextarea('');
-  const userEdit = teamUser?.permission?.ability === 'write';
-
-  useEffect(() => {
-    setTeamUser(getTeamUser(team, user));
-  }, [team]);
 
   const handleConfirm = () => {
     const changedIDs = changes.map((change) => change.id);
@@ -54,8 +47,9 @@ const PageSpecDocument = ({
           handleEditBlockText={handleEditBlockText}
           handleShowBlockTextMenu={handleShowBlockTextMenu}
           handleShowBlockTImageMenu={handleShowBlockTImageMenu}
+          canEditOwnerUser={canEditOwnerUser}
         />
-        {!userOwner && userEdit && (
+        {!userOwner && canEditOwnerUser && (
           <Footer>
             {changes.length > 0 && (
               <>

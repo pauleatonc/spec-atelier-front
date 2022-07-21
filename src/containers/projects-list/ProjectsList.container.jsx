@@ -29,20 +29,6 @@ const ProjectsList = () => {
   const token = getLocalStorage('isAcceptStore');
   const resMessage = getLocalStorage('messageAcceptStore');
 
-  // const { team, user_owner: userOwner } = useSelector(
-  //   (state) => state.specDocument.project,
-  // );
-  // const { user } = useSelector((state) => state.auth);
-  // const [teamUser, setTeamUser] = useState('');
-
-  // useEffect(() => {
-  //   setTeamUser(getTeamUser(team, user));
-  // }, [team]);
-
-  // const canEdit = userOwner || teamUser?.permission?.ability === 'write';
-  // const toggleOptions = () => setShowOptions(!showOptions);
-  // const onSelect = (project) => () => onClick(project);
-  // console.log(projects);
   useEffect(() => {
     if (!projects.length) dispatch(getMyProjects(params));
   }, []);
@@ -57,12 +43,8 @@ const ProjectsList = () => {
   };
 
   useEffect(() => {
-    if (action === 'accept_invitation') {
-      dispatch(acceptNotificationsAC2(data));
-    }
-    if (action === 'refuse_invitation') {
-      dispatch(rejectNotificationsAC(data));
-    }
+    if (action === 'accept_invitation') dispatch(acceptNotificationsAC2(data));
+    if (action === 'refuse_invitation') dispatch(rejectNotificationsAC(data));
   }, [action]);
 
   useEffect(() => {
@@ -95,7 +77,6 @@ const ProjectsList = () => {
   if (loading) return <Loading />;
   if (error) return <ErrorMessage />;
   if (!projects.length && !params.keyword) return null;
-
   if (!projects.length && params.keyword)
     return <div className="projects__inner__body" />;
 

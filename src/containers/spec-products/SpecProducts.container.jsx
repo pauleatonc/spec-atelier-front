@@ -18,7 +18,7 @@ import CreateProduct from '../../components/product/CreateProduct';
 import { Root, Body } from './SpecProducts.styles';
 
 /* The SpecProductsList's container */
-const SpecProductsList = () => {
+const SpecProductsList = ({ canEditOwnerUser }) => {
   const { id: specID } = useParams();
   const selectedProducts =
     useSelector((state) =>
@@ -94,6 +94,7 @@ const SpecProductsList = () => {
               onActionCard={handleCardClick}
               onClickCreate={handleCreateProduct}
               viewKey="spec_products"
+              canEditOwnerUser={canEditOwnerUser}
             />
           )}
         </Body>

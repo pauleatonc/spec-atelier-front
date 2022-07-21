@@ -25,21 +25,17 @@ import {
   AddMenuItem,
   BlockMenuItem,
 } from './SpecDocument.styles';
-import { getTeamUser } from './utils';
 
 /** The SpecDocument's container */
-const SpecDocument = () => {
+const SpecDocument = ({ canEditOwnerUser }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
-  const { user } = useSelector((state) => state.auth);
-  const { blocks, project } = useSelector((state) => state.specDocument);
-  const { team, user_owner: userOwner } = project;
+  const { blocks } = useSelector((state) => state.specDocument);
   const [selectedBlockID, setSelectedBlockID] = useState('');
   const [selectedBlockTextID, setSelectedBlockTextID] = useState('');
   const [selectedBlockImageID, setSelectedBlockImageID] = useState('');
   const [showBlockEditor, setShowBlockEditor] = useState('');
   const [showBlockTextEditor, setShowBlockTextEditor] = useState('');
-  const [teamUser, setTeamUser] = useState('');
   const windowSize = window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches;
   const selectedBlock = blocks.find((block) => block.id === selectedBlockID);
   const selectedBlockText = blocks.find(
@@ -65,13 +61,6 @@ const SpecDocument = () => {
   useEffect(() => {
     dispatch(onGetSpecBlocks(specID));
   }, []);
-
-  useEffect(() => {
-    setTeamUser(getTeamUser(team, user));
-  }, [team]);
-
-  const canEditOwnerUser =
-    userOwner || teamUser?.permission?.ability === 'write';
 
   const {
     anchor: addAnchor,
@@ -376,6 +365,7 @@ const SpecDocument = () => {
         handleEditBlockText={handleEditBlockText}
         handleShowBlockTextMenu={handleShowBlockTextMenu}
         handleShowBlockTImageMenu={handleShowBlockTImageMenu}
+        canEditOwnerUser={canEditOwnerUser}
       />
       {canEditOwnerUser && (
         <AddIcon

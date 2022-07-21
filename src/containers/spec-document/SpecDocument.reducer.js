@@ -2,7 +2,6 @@ import {
   getFormatedTableData,
   getTotalExpandManual,
   getSections,
-  getOwnerBlocks,
 } from './utils';
 import {
   ADD_SPEC_BLOCK_SUCCESS,
@@ -47,7 +46,6 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
       return {
         ...state,
         blocks: payload.blocks,
-        ownerBlocks: getOwnerBlocks(payload.blocks),
         project: { ...state.project, ...payload.project },
         quoteTable: getFormatedTableData(payload.blocks),
         totalExpandManual: getTotalExpandManual(payload.blocks),
@@ -63,7 +61,6 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         blocks: payload.blocks,
         sections: getSections(payload.blocks),
         changes: payload.changes,
-        ownerBlocks: getOwnerBlocks(payload.blocks),
       };
     }
     case SORT_SPEC_BLOCKS_SUCCESS: {

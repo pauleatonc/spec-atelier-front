@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { onAddSpecBlockText } from '../SpecDocument.actions';
-import { getTeamUser } from '../utils';
 import Editor from '../../../components/inputs/Editor';
 import PendingReviewText from './PendingReview';
 import DotDropDownMenu from '../../../components/dotDropDownMenu/DotDropDownMenu';
-import {
-  BURNT_SIENNA,
-  BURNT_SIENNA_OPACITY,
-  PUERTO_RICO,
-  PUERTO_RICO_OPACITY,
-  SUPERNOVA,
-  SUPERNOVA_OPACITY,
-} from '../../../config/constants/styled-vars';
 import {
   Block,
   BlockContent,
@@ -32,6 +23,14 @@ import {
   ProductTitle,
   Section,
 } from '../SpecDocument.styles';
+import {
+  BURNT_SIENNA,
+  BURNT_SIENNA_OPACITY,
+  PUERTO_RICO,
+  PUERTO_RICO_OPACITY,
+  SUPERNOVA,
+  SUPERNOVA_OPACITY,
+} from '../../../config/constants/styled-vars';
 
 const BlockSpecDocument = ({
   block,
@@ -43,11 +42,12 @@ const BlockSpecDocument = ({
   handleEditBlockText,
   handleShowBlockTextMenu,
   handleShowBlockTImageMenu,
+  canEditOwnerUser,
 }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
   const { localConfig } = useSelector((state) => state.specAdmin);
-  const { team, user_owner: userOwner } = useSelector(
+  const { user_owner: userOwner } = useSelector(
     (state) => state.specDocument.project,
   );
   const { text: blockText, image: blockImage, type, id, change } = block;
@@ -64,13 +64,6 @@ const BlockSpecDocument = ({
   } = block.element;
   const unsentBlock = !userOwner && status !== 'accepted';
   const unsentText = !userOwner && blockText?.change?.status !== 'accepted';
-  const [teamUser, setTeamUser] = useState('');
-
-  useEffect(() => {
-    setTeamUser(getTeamUser(team, user));
-  }, [team]);
-
-  const canEdit = userOwner || teamUser?.permission?.ability === 'write';
 
   const handleAddBlockText = (blockID) => (textValue) => {
     handleHideBlockEditor();
@@ -189,14 +182,14 @@ const BlockSpecDocument = ({
               />
             </BlockEditor>
           )}
-          {canEdit && (
+          {canEditOwnerUser && (
             <DotDropDownMenu
               onClick={handleShowBlockMenu(id, change.user.id, sent)}
             />
           )}
           {showBlockImage && (
             <BlockImage visibility={action === 'remove' ? 'hidden' : 'visible'}>
-              {canEdit && (
+              {canEditOwnerUser && (
                 <DotDropDownMenu
                   onClick={handleShowBlockTImageMenu(blockImage?.id)}
                   right="-72px"
@@ -250,7 +243,7 @@ const BlockSpecDocument = ({
           }
           visibility={action === 'remove' ? 'hidden' : 'visible'}
         >
-          {canEdit && (
+          {canEditOwnerUser && (
             <DotDropDownMenu onClick={handleShowBlockTextMenu(blockText?.id)} />
           )}
           <BlockTextContent
