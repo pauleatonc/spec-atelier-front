@@ -67,7 +67,11 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
       };
     }
     case SORT_SPEC_BLOCKS_SUCCESS: {
-      return { ...state, blocks: payload.blocks };
+      return {
+        ...state,
+        blocks: payload.blocks,
+        ownerBlocks: getOwnerBlocks(payload.blocks),
+      };
     }
     case UPDATE_PRODUCT: {
       return { ...state };
