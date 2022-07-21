@@ -376,28 +376,13 @@ export const onSortSpecBlocks = ({ blocksIDs, blockId, specID }) => async (
 ) => {
   onActionCreator(SORT_SPEC_BLOCKS);
   try {
-    const sortedSpecBlocks = blocksIDs.reduce((blocks, blockID) => {
-      const found = specDocument(getState).blocks.find(
-        (block) => block.id === blockID,
-      );
-      if (!found) {
-        return blocks;
-      }
-      return blocks.concat({
-        block: found.id,
-        product_item: found.type === 'Product' ? found.item : null,
-        type: found.type,
-      });
-    }, []);
-    const { blocks: updatedBlocks } = await sortSpecBlocks({
+    const { blocks } = await sortSpecBlocks({
       specID,
-      blocks: sortedSpecBlocks,
+      blocks: blocksIDs,
       block: blockId,
       userID: userID(getState),
     });
-    return dispatch(
-      onActionCreator(SORT_SPEC_BLOCKS_SUCCESS, { blocks: updatedBlocks }),
-    );
+    return dispatch(onActionCreator(SORT_SPEC_BLOCKS_SUCCESS, { blocks }));
   } catch (error) {
     return dispatch(
       onActionCreator(SORT_SPEC_BLOCKS_ERROR, {
