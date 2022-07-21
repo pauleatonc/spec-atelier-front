@@ -23,6 +23,10 @@ import {
   EDIT_SPEC_BLOCK_IMAGE_SUCCESS,
   SEND_CHANGE_BLOCK_SUCCESS,
   UNDO_SEND_BLOCK_SUCCESS,
+  GET_UPDATE_SUCCESS,
+  SET_UPDATE_FALSE,
+  STOP_UPDATE,
+  UNDO_STOP_UPDATE,
 } from './SpecDocument.actions';
 
 const specDocumentState = {
@@ -34,6 +38,9 @@ const specDocumentState = {
   totalExpandManual: 0,
   sections: [],
   changes: [],
+  update: false,
+  updateSuccess: false,
+  actionGet: true,
 };
 
 /** The spec document' reducer */
@@ -53,6 +60,7 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         totalExpandManual: getTotalExpandManual(payload.blocks),
         sections: getSections(payload.blocks),
         changes: payload.changes,
+        updateSuccess: payload.updateSuccess,
       };
     case REMOVE_SPEC_BLOCK_SUCCESS:
     case REMOVE_SPEC_BLOCK_IMAGE_SUCCESS:
@@ -142,6 +150,19 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         changes: payload.changes,
       };
     }
+    case GET_UPDATE_SUCCESS: {
+      return {
+        ...state,
+        update: payload,
+      };
+    }
+    case SET_UPDATE_FALSE: {
+      return { ...state, update: false }
+    }
+    case STOP_UPDATE:
+      return { ...state, actionGet: false };
+    case UNDO_STOP_UPDATE:
+      return { ...state, actionGet: true };
     default: {
       return state;
     }
