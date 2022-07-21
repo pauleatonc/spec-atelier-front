@@ -22,8 +22,8 @@ const BlocksSpecDocument = ({
   );
   const correspondingBlocks = project.user_owner ? ownerBlocks : blocks;
 
-  const handleBlocksSortChange = (blocksIDs) =>
-    dispatch(onSortSpecBlocks({ blocksIDs, specID }));
+  const handleBlocksSortChange = (blocksIDs, blockId) =>
+    dispatch(onSortSpecBlocks({ blocksIDs, blockId, specID }));
 
   return (
     <DraggableList
