@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.section`
   width: 100%;
   margin: 30px 0;
+  max-height: 300px;
+  overflow-y: auto;
 `;
 
 export const SelectAllProject = styled.div`
