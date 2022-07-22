@@ -27,26 +27,41 @@ import DetailMemberModal from '../containers/spec-modal-team/detailMember';
 import { changeOption } from '../containers/spec-contents-buttons/SpecContentsButtons.actions';
 import { SPEC_DOCUMENT } from '../config/constants/button-variants';
 import { Root, Main, Navigation, Panels } from './Specification.styles';
+import { getTeamUser } from '../containers/spec-document/utils';
 
 /** The Specification's view */
 const Specification = () => {
   const dispatch = useDispatch();
+  const { id: specID } = useParams();
   const [showFilters, setShowFilters] = useState(false);
   const [selectedSection, setSelectedSection] = useState('');
   const [selectedItem, setSelectedItem] = useState('');
+  const [teamUser, setTeamUser] = useState('');
   const { dataSection } = useSelector((state) => state);
+  const { user } = useSelector((state) => state.auth);
   const { option } = dataSection;
   const { projectStructure } = useSelector((state) => state.specDocument);
-  const { id: specID } = useParams();
+  const { team, user_owner: userOwner } = useSelector(
+    (state) => state.specDocument.project,
+  );
+
+  useEffect(() => {
+    setTeamUser(getTeamUser(team, user));
+  }, [team]);
 
   useEffect(() => {
     dispatch(changeOption(SPEC_DOCUMENT));
   }, []);
 
+  const canEditOwnerUser =
+    userOwner || teamUser?.permission?.ability === 'write';
+
   const mainPage = () => {
     const content = {
-      SPEC_TABLE: <SpecContentsTable />,
-      SPEC_DOCUMENT: <SpecDocumentContainer />,
+      SPEC_TABLE: <SpecContentsTable canEditOwnerUser={canEditOwnerUser} />,
+      SPEC_DOCUMENT: (
+        <SpecDocumentContainer canEditOwnerUser={canEditOwnerUser} />
+      ),
       SPEC_HISTORY: <SpecHistoryContainer />,
     };
     return content[option];
@@ -60,7 +75,7 @@ const Specification = () => {
         <Main>
           {mainPage()}
           <Navigation>
-            <SpecNavigatorContainer />
+            <SpecNavigatorContainer canEditOwnerUser={canEditOwnerUser} />
             <Panels>
               <SpecProductsPanelLayout
                 showFilters={showFilters}
@@ -83,7 +98,7 @@ const Specification = () => {
                   />,
                 ]}
               >
-                <SpecProductsContainer />
+                <SpecProductsContainer canEditOwnerUser={canEditOwnerUser} />
               </SpecProductsPanelLayout>
               <SpecContentsContainer />
               <SpecAdminContainer />

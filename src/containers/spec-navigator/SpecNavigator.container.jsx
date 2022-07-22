@@ -22,14 +22,15 @@ import {
   SETTING_LINES,
   SETTING_LINES_ACTIVE,
 } from '../../assets/Images';
+import Tooltip from '../../components/tooltip/Tooltip';
 
 /** The SpecNavigator's container */
-const SpecNavigator = () => {
+const SpecNavigator = ({ canEditOwnerUser }) => {
+  const dispatch = useDispatch();
+  const { id: specID } = useParams();
   const { show: showProducts } = useSelector((state) => state.specProducts);
   const { show: showContents } = useSelector((state) => state.specContents);
   const { show: showAdmin } = useSelector((state) => state.specAdmin);
-  const dispatch = useDispatch();
-  const { id: specID } = useParams();
 
   const handleProductsClick = () => {
     if (showProducts) return dispatch(onHideSpecProducts());
@@ -56,7 +57,7 @@ const SpecNavigator = () => {
       return dispatch(onHideSpecAdmin());
     }
     return (() => {
-      dispatch(onShowSpecAdminn());
+      if (canEditOwnerUser) dispatch(onShowSpecAdminn());
       dispatch(onHideSpecProducts());
       dispatch(onHideSpecContents());
     })();
@@ -79,11 +80,21 @@ const SpecNavigator = () => {
         />
       </Section>
       <Section>
-        <NavIcon
-          src={showAdmin ? SETTING_LINES_ACTIVE : SETTING_LINES}
-          srcActive={SETTING_LINES_ACTIVE}
-          onClick={handleAdminClick}
-        />
+        {canEditOwnerUser ? (
+          <NavIcon
+            src={showAdmin ? SETTING_LINES_ACTIVE : SETTING_LINES}
+            srcActive={SETTING_LINES_ACTIVE}
+            onClick={handleAdminClick}
+          />
+        ) : (
+          <Tooltip content="No puedes editar" position="right">
+            <NavIcon
+              src={showAdmin ? SETTING_LINES_ACTIVE : SETTING_LINES}
+              srcActive={SETTING_LINES_ACTIVE}
+              onClick={handleAdminClick}
+            />
+          </Tooltip>
+        )}
       </Section>
     </Root>
   );

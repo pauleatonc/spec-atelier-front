@@ -7,6 +7,7 @@ import { onShowSpecImagesModalSuccess } from '../spec-images-modal/SpecImagesMod
 import { onShowSpecProducts } from '../spec-products/SpecProducts.actions';
 import {
   onGetSpecBlocks,
+  onGetUpdate,
   onRemoveSpecBlock,
   onRemoveSpecBlockImage,
   onRemoveSpecBlockText,
@@ -14,24 +15,30 @@ import {
   onUndoSend,
   onUpdateSpecBlockText,
   onGetProjectStructure,
+  undoStopGetUpdate,
 } from './SpecDocument.actions';
 import useDropdown from '../../components/basics/Dropdown.hooks';
 import Dropdown from '../../components/basics/Dropdown';
 import PageSpecDocument from './components/PageSpecDocument';
+import Snackbar from '../../components/basics/Snackbar';
 import { MAX_SCREEN_SMALL_NAV_JS } from '../../config/constants/styled-vars';
-import { SPEC_ADD_SOURCE } from '../../assets/Images';
+import { SPEC_ADD_SOURCE, UPDATE_ICON } from '../../assets/Images';
 import {
   Root,
   AddIcon,
   AddMenuItem,
   BlockMenuItem,
+  UpdateIcon,
 } from './SpecDocument.styles';
+import { onShowAlertSuccess } from '../alert/Alert.actions';
 
 /** The SpecDocument's container */
-const SpecDocument = () => {
+const SpecDocument = ({ canEditOwnerUser }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
-  const { blocks } = useSelector((state) => state.specDocument);
+  const { blocks, project, update, updateSuccess, actionGet } = useSelector(
+    (state) => state.specDocument,
+  );
   const [selectedBlockID, setSelectedBlockID] = useState('');
   const [selectedBlockTextID, setSelectedBlockTextID] = useState('');
   const [selectedBlockImageID, setSelectedBlockImageID] = useState('');
@@ -63,6 +70,26 @@ const SpecDocument = () => {
     dispatch(onGetSpecBlocks(specID));
     dispatch(onGetProjectStructure(specID));
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!project.user_owner && actionGet) {
+        dispatch(onGetUpdate({ specID, date: project.updated_at }));
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [actionGet, project]);
+
+  const updateBlocks = () => {
+    dispatch(onGetSpecBlocks(specID));
+    if (updateSuccess)
+      dispatch(
+        onShowAlertSuccess({
+          message: 'El documento se actualizó correctamente',
+        }),
+      );
+    dispatch(undoStopGetUpdate());
+  };
 
   const {
     anchor: addAnchor,
@@ -315,6 +342,16 @@ const SpecDocument = () => {
 
   return (
     <Root>
+      {update && (
+        <Snackbar
+          show={update}
+          onhandleClick={updateBlocks}
+          timeout={update && 3600000}
+        >
+          Hay nuevos cambios, actualiza para verlos&nbsp;&nbsp;&nbsp;
+          <UpdateIcon src={UPDATE_ICON} alt="update" />
+        </Snackbar>
+      )}
       <Dropdown
         anchorRef={addAnchor}
         offset={windowSize ? { x: 0, y: -80 } : { x: -7, y: -7 }}
@@ -367,12 +404,15 @@ const SpecDocument = () => {
         handleEditBlockText={handleEditBlockText}
         handleShowBlockTextMenu={handleShowBlockTextMenu}
         handleShowBlockTImageMenu={handleShowBlockTImageMenu}
+        canEditOwnerUser={canEditOwnerUser}
       />
-      <AddIcon
-        alt="Agregar sección"
-        src={SPEC_ADD_SOURCE}
-        onClick={windowSize ? handleShowProducts : handleAddMenuOpen}
-      />
+      {canEditOwnerUser && (
+        <AddIcon
+          alt="Agregar sección"
+          src={SPEC_ADD_SOURCE}
+          onClick={windowSize ? handleShowProducts : handleAddMenuOpen}
+        />
+      )}
     </Root>
   );
 };

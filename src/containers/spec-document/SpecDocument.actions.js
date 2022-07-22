@@ -16,6 +16,7 @@ import {
   undoRemove,
   undoSend,
   getProjectStructure,
+  getUpdated,
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { updateProductsWithProduct } from '../products-list/ProductsList.actions';
@@ -33,12 +34,14 @@ const matchMedia = window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches;
 const specDocument = (getState) => getSpecDocument(getState);
 const userID = (getState) => getUserID(getState);
 
+export const SET_UPDATE_FALSE = 'SET_UPDATE_FALSE';
 export const GET_SPEC_BLOCKS = 'GET_SPEC_BLOCKS';
 export const GET_SPEC_BLOCKS_SUCCESS = 'GET_SPEC_BLOCKS_SUCCESS';
 export const UPDATE_TEAM_DATA = 'UPDATE_TEAM_DATA';
 export const SAVE_TEAM_MEMBERS = 'SAVE_TEAM_MEMBERS';
 export const DELETE_MEMBER_TEAM = 'DELETE_MEMBER_TEAM';
 export const onGetSpecBlocks = (specID) => async (dispatch, getState) => {
+  dispatch(onActionCreator(SET_UPDATE_FALSE));
   dispatch(onActionCreator(GET_SPEC_BLOCKS));
   try {
     const { blocks = [], project = {} } =
@@ -49,6 +52,7 @@ export const onGetSpecBlocks = (specID) => async (dispatch, getState) => {
         blocks,
         project,
         changes,
+        updateSuccess: true,
       }),
     );
   } catch (error) {
@@ -524,6 +528,31 @@ export const onUndoSend = ({ changeID, specID }) => async (
       );
     },
   );
+};
+
+export const STOP_UPDATE = 'STOP_UPDATE';
+export const stopGetUpdate = () => async (dispatch) => {
+  dispatch(onActionCreator(STOP_UPDATE));
+};
+
+export const UNDO_STOP_UPDATE = 'UNDO_STOP_UPDATE';
+export const undoStopGetUpdate = () => async (dispatch) => {
+  dispatch(onActionCreator(UNDO_STOP_UPDATE));
+};
+
+export const GET_UPDATE_SUCCESS = 'GET_UPDATE_SUCCESS';
+export const onGetUpdate = ({ specID, date }) => async (dispatch, getState) => {
+  try {
+    const response = await getUpdated({
+      specID,
+      userID: userID(getState),
+      date,
+    });
+    if (response) dispatch(stopGetUpdate());
+    return dispatch(onActionCreator(GET_UPDATE_SUCCESS, response));
+  } catch (error) {
+    return console.error(error);
+  }
 };
 
 export const SAVE_PROJECT_STRUCTURE = 'SAVE_PROJECT_STRUCTURE';

@@ -226,6 +226,18 @@ export const undoSend = factoryService(({ changeID, specID, userID }) =>
   ),
 );
 
+/** Get updated */
+export const getUpdated = factoryService(({ specID, userID, date }) =>
+  getJsonRequest(
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/updated${formatParams(
+      { updated_at: date },
+    )}`,
+  ),
+);
+
+/**
+ * get project structure
+ */
 export const getProjectStructure = factoryService(({ specID }) =>
   getJsonRequest(
     `${API_BASE_URL}/configs/project_structure?project_spec_id=${specID}`,

@@ -161,14 +161,6 @@ export const getSections = (blocks) => {
   }));
 };
 
-export const getOwnerBlocks = (blocks) => {
-  return blocks.filter(
-    (block) =>
-      block.change?.status === 'accepted' ||
-      (block.change?.status === 'waiting' && block.change.action === 'remove'),
-  );
-};
-
 export const getChanges = (blocks) => {
   const changes = [];
   blocks.forEach((block) => {
@@ -200,3 +192,6 @@ export const getSpecDocument = (getState) => {
   const { specDocument } = getState();
   return specDocument;
 };
+
+export const getTeamUser = (team, user) =>
+  team?.find((member) => member?.user.id === user?.id);

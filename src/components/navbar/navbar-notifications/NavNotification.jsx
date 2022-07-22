@@ -109,7 +109,7 @@ const NavNotification = () => {
                   <LinkHeader>Ver todo</LinkHeader>
                 </ListHeader>
                 {data.map((notification) =>
-                  notification.list.map((detail) => (
+                  notification?.list?.map((detail) => (
                     <Notification
                       key={detail?.item?.item_id}
                       itemType={detail?.item?.item_type}

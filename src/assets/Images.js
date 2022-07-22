@@ -137,6 +137,7 @@ import WATCH_ICON from './images/icons/watch-icon.svg';
 import COMMENTS_ICON from './images/icons/ic_comment.svg';
 import ACCEPTED_ICON from './images/icons/ic_accepted.svg';
 import REFUSED_ICON from './images/icons/ic_refused.svg';
+import UPDATE_ICON from './images/icons/arrow-update.svg';
 
 export {
   LOGO_CCHC,
@@ -265,4 +266,5 @@ export {
   COMMENTS_ICON,
   ACCEPTED_ICON,
   REFUSED_ICON,
+  UPDATE_ICON,
 };
