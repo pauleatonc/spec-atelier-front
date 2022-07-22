@@ -20,30 +20,32 @@ const BlocksSpecDocument = ({
   const { id: specID } = useParams();
   const { blocks } = useSelector((state) => state.specDocument);
 
-  const handleBlocksSortChange = (blocksIDs, blockId) => {
-    if (canEditOwnerUser)
-      dispatch(onSortSpecBlocks({ blocksIDs, blockId, specID }));
-  };
+  const handleBlocksSortChange = (blocksIDs, blockId) =>
+    dispatch(onSortSpecBlocks({ blocksIDs, blockId, specID }));
 
-  return (
+  const blocksDocument = blocks.map((block) => (
+    <div id={block.id} key={block.id}>
+      <BlockSpecDocument
+        block={block}
+        showBlockEditor={showBlockEditor}
+        handleHideBlockEditor={handleHideBlockEditor}
+        handleShowBlockMenu={handleShowBlockMenu}
+        showBlockTextEditor={showBlockTextEditor}
+        handleHideBlockTextEditor={handleHideBlockTextEditor}
+        handleEditBlockText={handleEditBlockText}
+        handleShowBlockTextMenu={handleShowBlockTextMenu}
+        handleShowBlockTImageMenu={handleShowBlockTImageMenu}
+        canEditOwnerUser={canEditOwnerUser}
+      />
+    </div>
+  ));
+
+  return canEditOwnerUser ? (
     <DraggableList onChange={handleBlocksSortChange} blocks={blocks}>
-      {blocks.map((block) => (
-        <div id={block.id} key={block.id}>
-          <BlockSpecDocument
-            block={block}
-            showBlockEditor={showBlockEditor}
-            handleHideBlockEditor={handleHideBlockEditor}
-            handleShowBlockMenu={handleShowBlockMenu}
-            showBlockTextEditor={showBlockTextEditor}
-            handleHideBlockTextEditor={handleHideBlockTextEditor}
-            handleEditBlockText={handleEditBlockText}
-            handleShowBlockTextMenu={handleShowBlockTextMenu}
-            handleShowBlockTImageMenu={handleShowBlockTImageMenu}
-            canEditOwnerUser={canEditOwnerUser}
-          />
-        </div>
-      ))}
+      {blocksDocument}
     </DraggableList>
+  ) : (
+    blocksDocument
   );
 };
 

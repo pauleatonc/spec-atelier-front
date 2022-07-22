@@ -30,7 +30,6 @@ import {
 
 const specDocumentState = {
   blocks: [],
-  ownerBlocks: [],
   loading: false,
   project: {},
   quoteTable: [],
@@ -75,7 +74,6 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
       return {
         ...state,
         blocks: payload.blocks,
-        ownerBlocks: getOwnerBlocks(payload.blocks),
       };
     }
     case UPDATE_PRODUCT: {
