@@ -110,7 +110,7 @@ const DetailMemberModal = ({ projectStructure }) => {
         ),
       );
       setChecklistData(
-        getCheckListData(projectStructure, detailMember?.permission),
+        getCheckListData(projectStructure, detailMember?.permission, team),
       );
     }
   }, [detailMember, team, projectStructure]);

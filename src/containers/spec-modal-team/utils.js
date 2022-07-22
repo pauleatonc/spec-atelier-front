@@ -1,4 +1,31 @@
-export const getCheckListData = (sections, permission) => ({
+const getUsersSection = (usersData, section, item) => {
+  const users = [];
+  let usr = {};
+  usersData.forEach((user) => {
+    user.permission.sections.forEach((userSection) => {
+      if (item) {
+        userSection.items.forEach((userItem) => {
+          if (userItem.id === item.id) {
+            usr = {
+              ...user.user,
+              status: user.status,
+            };
+            users.push(usr);
+          }
+        });
+      } else if (userSection.id === section.id) {
+        usr = {
+          ...user.user,
+          status: user.status,
+        };
+        users.push(usr);
+      }
+    });
+  });
+  return users;
+};
+
+export const getCheckListData = (sections, permission, usersData) => ({
   label: 'root',
   value: 'root',
   isSelected: permission ? permission?.all : false,
@@ -6,7 +33,7 @@ export const getCheckListData = (sections, permission) => ({
     id: section.id,
     label: section.name,
     value: `${section.id}-${section.name}`,
-    users: section.users,
+    users: usersData ? getUsersSection(usersData, section) : section.users,
     isSelected: permission?.sections.length
       ? permission.sections.some((sec) => sec.id === section.id)
       : false,
@@ -14,7 +41,7 @@ export const getCheckListData = (sections, permission) => ({
       id: item.id,
       label: item.name,
       value: `${item.id}-${item.name}`,
-      users: item.users,
+      users: usersData ? getUsersSection(usersData, section, item) : item.users,
       isSelected: permission?.sections.length
         ? permission.sections
             .find((sec) => sec.id === section.id)

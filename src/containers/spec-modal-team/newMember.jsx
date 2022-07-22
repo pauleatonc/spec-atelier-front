@@ -54,7 +54,7 @@ const SpecModalNewMember = ({ projectStructure }) => {
     project: { team },
   } = useSelector((state) => state.specDocument);
   const [checklistData, setChecklistData] = useState(
-    getCheckListData(projectStructure),
+    getCheckListData(projectStructure, null, team),
   );
   const {
     onChange: handleMailChange,
@@ -77,7 +77,7 @@ const SpecModalNewMember = ({ projectStructure }) => {
     exitingCallback: () => {
       setMessageValue('');
       setEmailValue('');
-      setChecklistData(getCheckListData(projectStructure));
+      setChecklistData(getCheckListData(projectStructure, null, team));
     },
   });
 
@@ -117,8 +117,8 @@ const SpecModalNewMember = ({ projectStructure }) => {
   };
 
   useEffect(() => {
-    setChecklistData(getCheckListData(projectStructure));
-  }, [projectStructure]);
+    setChecklistData(getCheckListData(projectStructure, null, team));
+  }, [projectStructure, team]);
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
       <Container>
