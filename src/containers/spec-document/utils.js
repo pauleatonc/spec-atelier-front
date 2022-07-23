@@ -209,3 +209,6 @@ export const getSpecDocument = (getState) => {
   const { specDocument } = getState();
   return specDocument;
 };
+
+export const getTeamUser = (team, user) =>
+  team?.find((member) => member?.user.id === user?.id);

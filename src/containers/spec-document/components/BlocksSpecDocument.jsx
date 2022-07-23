@@ -14,23 +14,20 @@ const BlocksSpecDocument = ({
   handleEditBlockText,
   handleShowBlockTextMenu,
   handleShowBlockTImageMenu,
+  canEditOwnerUser,
 }) => {
   const dispatch = useDispatch();
   const { id: specID } = useParams();
-  const { blocks, project, ownerBlocks } = useSelector(
-    (state) => state.specDocument,
-  );
-  const correspondingBlocks = project.user_owner ? ownerBlocks : blocks;
+  const { blocks } = useSelector((state) => state.specDocument);
 
-  const handleBlocksSortChange = (blocksIDs) =>
-    dispatch(onSortSpecBlocks({ blocksIDs, specID }));
+  const handleBlocksSortChange = (blocksIDs, blockId) => {
+    if (canEditOwnerUser)
+      dispatch(onSortSpecBlocks({ blocksIDs, blockId, specID }));
+  };
 
   return (
-    <DraggableList
-      onChange={handleBlocksSortChange}
-      blocks={correspondingBlocks}
-    >
-      {correspondingBlocks.map((block) => (
+    <DraggableList onChange={handleBlocksSortChange} blocks={blocks}>
+      {blocks.map((block) => (
         <div id={block.id} key={block.id}>
           <BlockSpecDocument
             block={block}
@@ -42,6 +39,7 @@ const BlocksSpecDocument = ({
             handleEditBlockText={handleEditBlockText}
             handleShowBlockTextMenu={handleShowBlockTextMenu}
             handleShowBlockTImageMenu={handleShowBlockTImageMenu}
+            canEditOwnerUser={canEditOwnerUser}
           />
         </div>
       ))}

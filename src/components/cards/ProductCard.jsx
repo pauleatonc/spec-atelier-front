@@ -45,6 +45,7 @@ const ProductCard = (props) => {
     canEdit,
     canDelete,
     itemsUsed,
+    canEditOwnerUser,
   } = props;
   const [hover, setHover] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -134,7 +135,7 @@ const ProductCard = (props) => {
             Ver más
           </SeeMore>
         </Footer>
-        {(hover || itemsUsed) && !selected && canAdd && (
+        {(hover || itemsUsed) && !selected && canAdd && canEditOwnerUser && (
           <Add onClick={onClickCard} />
         )}
         {selected && <Check onClick={onClickCard} />}

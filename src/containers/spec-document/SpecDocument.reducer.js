@@ -27,6 +27,10 @@ import {
   EDIT_SPEC_BLOCK_IMAGE_SUCCESS,
   SEND_CHANGE_BLOCK_SUCCESS,
   UNDO_SEND_BLOCK_SUCCESS,
+  GET_UPDATE_SUCCESS,
+  SET_UPDATE_FALSE,
+  STOP_UPDATE,
+  UNDO_STOP_UPDATE,
 } from './SpecDocument.actions';
 
 const specDocumentState = {
@@ -41,6 +45,9 @@ const specDocumentState = {
   changesLoading: false,
   changesError: null,
   changes: [],
+  update: false,
+  updateSuccess: false,
+  actionGet: true,
 };
 
 /** The spec document' reducer */
@@ -54,13 +61,13 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
       return {
         ...state,
         blocks: payload.blocks,
-        ownerBlocks: getOwnerBlocks(payload.blocks),
         project: { ...state.project, ...payload.project },
         quoteTable: getFormatedTableData(payload.blocks),
         totalExpandManual: getTotalExpandManual(payload.blocks),
         sections: getSections(payload.blocks),
         changesCount: getChangesCounts(payload.blocks),
         changes: payload.changes,
+        updateSuccess: payload.updateSuccess,
       };
     case REMOVE_SPEC_BLOCK_SUCCESS:
     case REMOVE_SPEC_BLOCK_IMAGE_SUCCESS:
@@ -71,11 +78,14 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         blocks: payload.blocks,
         sections: getSections(payload.blocks),
         changes: payload.changes,
-        ownerBlocks: getOwnerBlocks(payload.blocks),
       };
     }
     case SORT_SPEC_BLOCKS_SUCCESS: {
-      return { ...state, blocks: payload.blocks };
+      return {
+        ...state,
+        blocks: payload.blocks,
+        ownerBlocks: getOwnerBlocks(payload.blocks),
+      };
     }
     case UPDATE_PRODUCT: {
       return { ...state };
@@ -166,6 +176,19 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         changes: payload.changes,
       };
     }
+    case GET_UPDATE_SUCCESS: {
+      return {
+        ...state,
+        update: payload,
+      };
+    }
+    case SET_UPDATE_FALSE: {
+      return { ...state, update: false };
+    }
+    case STOP_UPDATE:
+      return { ...state, actionGet: false };
+    case UNDO_STOP_UPDATE:
+      return { ...state, actionGet: true };
     default: {
       return state;
     }
