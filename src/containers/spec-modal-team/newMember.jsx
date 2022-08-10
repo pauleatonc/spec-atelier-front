@@ -66,9 +66,11 @@ const SpecModalNewMember = ({ projectStructure }) => {
     set: setMessageValue,
     value: messageValue,
   } = useTextarea('');
-  const { newMemberModal: show, nonExistentEmails } = useSelector(
-    (state) => state.specModalTeam,
-  );
+  const {
+    newMemberModal: show,
+    nonExistentEmails,
+    detailMemberModal,
+  } = useSelector((state) => state.specModalTeam);
 
   const showDisclaimer = nonExistentEmails.length;
 
@@ -118,7 +120,8 @@ const SpecModalNewMember = ({ projectStructure }) => {
 
   useEffect(() => {
     setChecklistData(getCheckListData(projectStructure, null, team));
-  }, [projectStructure, team]);
+  }, [projectStructure, team, detailMemberModal]);
+
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
       <Container>

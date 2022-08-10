@@ -31,7 +31,9 @@ import {
 
 const SpecModalTeam = ({ projectStructure }) => {
   const dispatch = useDispatch();
-  const { teamModal: show } = useSelector((state) => state.specModalTeam);
+  const { teamModal: show, detailMemberModal } = useSelector(
+    (state) => state.specModalTeam,
+  );
   const {
     project: { team, user_owner: userOwner, owner },
   } = useSelector((state) => state.specDocument);
@@ -52,7 +54,7 @@ const SpecModalTeam = ({ projectStructure }) => {
 
   useEffect(() => {
     setChecklistData(getCheckListData(projectStructure, null, team));
-  }, [projectStructure, team]);
+  }, [projectStructure, team, detailMemberModal]);
 
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
