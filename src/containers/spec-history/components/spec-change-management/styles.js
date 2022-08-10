@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BOULDER } from '../../../../config/constants/styled-vars';
+import { BOULDER, MINE_SHAFT } from '../../../../config/constants/styled-vars';
 
 export const Container = styled.section`
   width: 95%;
@@ -45,4 +45,30 @@ export const ContainerButton = styled.div`
 export const ChangesConfirmed = styled.span`
   font-size: 12px;
   color: ${BOULDER};
+`;
+
+export const FilterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  color: ${MINE_SHAFT};
+`;
+
+export const FilterContent = styled.div`
+  width: 237px;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+`;
+
+export const Label = styled.span`
+  font-weight: bold;
+  padding: 4px 0 12px;
+  font-size: 12px;
+`;
+
+export const UserNameLabel = styled.p`
+  margin-left: 6px;
+  font-size: 12px;
 `;

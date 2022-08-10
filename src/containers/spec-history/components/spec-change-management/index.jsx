@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { SPEC_ICON_ALERT_CIRCLE } from '../../../../assets/Images';
+import {
+  SPEC_ICON_ALERT_CIRCLE,
+  ICON_ARROW_DOWN,
+} from '../../../../assets/Images';
 import { Button } from '../../../../components/SpecComponents';
 import Confirm from '../../../../components/confirm/Confirm';
+import SelectorRelative from '../../../../components/basics/SelectorRelative';
+import IconUser from '../../../../components/IconUser';
 import { VARIANTS_BUTTON } from '../../../../config/constants/button-variants';
-import { onSaveSpecChanges } from '../../../spec-document/SpecDocument.actions';
+import {
+  onSaveSpecChanges,
+  onGetApproveRequest,
+  onGetApproveRequestBlocks,
+} from '../../../spec-document/SpecDocument.actions';
 import ChangeItem from './components/ChangeItem';
+
+import { getDataSelecUser } from './utils';
 
 import {
   Container,
@@ -18,17 +29,29 @@ import {
   ContainerChanges,
   ContainerButton,
   ChangesConfirmed,
+  FilterContainer,
+  FilterContent,
+  Label,
 } from './styles';
+
+import {
+  ContentUser,
+  NameSection,
+} from '../../../../components/basics/SelectorRelative.styles';
+
+import { FilterSelectBox } from '../../SpecHistory.styles';
 
 const SpecChangeManagement = ({ actionsIcons }) => {
   const { id: specID } = useParams();
   const [showModal, setShowModal] = useState(false);
+  const [approveRequestSelected, setApproveRequestSelected] = useState();
   const [blocksAccepted, setBlocksAccepted] = useState([]);
   const [blocksRejected, setBlocksRejected] = useState([]);
   const changes = blocksAccepted.length + blocksRejected.length;
   const dispatch = useDispatch();
   const {
-    blocks,
+    approveRequest,
+    approveRequestBlocks,
     changesCount,
     project: { user_owner, name },
   } = useSelector((state) => state.specDocument);
@@ -42,6 +65,21 @@ const SpecChangeManagement = ({ actionsIcons }) => {
   };
 
   const handleCloseModal = () => setShowModal(false);
+
+  const onChangeApproveRequestSelected = (request) => {
+    onGetApproveRequestBlocks(specID, request.id, () => {
+      setApproveRequestSelected(request);
+    });
+  };
+
+  useEffect(() => {
+    dispatch(onGetApproveRequest(specID));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (approveRequest.length && !approveRequestSelected)
+      setApproveRequestSelected(approveRequest[0]);
+  }, [approveRequest, approveRequestSelected]);
 
   return (
     <Container>
@@ -60,24 +98,52 @@ const SpecChangeManagement = ({ actionsIcons }) => {
           </TextDisclaimer>
         </DescDisclaimer>
       </DisclaimerContainer>
-      <ContainerChanges>
-        {blocks.map((block) => (
-          <ChangeItem
-            key={`${block.type}-${block.change.action}-${block.id}`}
-            isOwner={user_owner}
-            blockId={block.id}
-            type={block.type}
-            change={block.change}
-            status={block.status}
-            element={block.element}
-            icon={actionsIcons[block.change.action]}
-            blocksAccepted={blocksAccepted}
-            blocksRejected={blocksRejected}
-            setBlocksAccepted={setBlocksAccepted}
-            setBlocksRejected={setBlocksRejected}
-          />
-        ))}
-      </ContainerChanges>
+      {approveRequest.length && approveRequestSelected && (
+        <FilterContainer>
+          <FilterContent>
+            <Label>Filtras por autor</Label>
+            <SelectorRelative
+              width="237px"
+              maxHeight="152px"
+              options={getDataSelecUser(approveRequest)}
+              onChange={onChangeApproveRequestSelected}
+              backgroundPuertoRico
+              renderInput={
+                <FilterSelectBox>
+                  <ContentUser>
+                    <IconUser user={approveRequestSelected.user} />
+                    <NameSection>{`${approveRequestSelected.user.first_name} ${approveRequestSelected.user.last_name}`}</NameSection>
+                  </ContentUser>
+                  <img alt="icon-arrow-down" src={ICON_ARROW_DOWN} />
+                </FilterSelectBox>
+              }
+            />
+          </FilterContent>
+        </FilterContainer>
+      )}
+      {approveRequestBlocks && (
+        <ContainerChanges>
+          {approveRequestBlocks.map(
+            (block) =>
+              block.change && (
+                <ChangeItem
+                  key={`${block.type}-${block.change.action}-${block.id}`}
+                  isOwner={user_owner}
+                  blockId={block.id}
+                  type={block.type}
+                  change={block.change}
+                  status={block.status}
+                  element={block.element}
+                  icon={actionsIcons[block.change.action]}
+                  blocksAccepted={blocksAccepted}
+                  blocksRejected={blocksRejected}
+                  setBlocksAccepted={setBlocksAccepted}
+                  setBlocksRejected={setBlocksRejected}
+                />
+              ),
+          )}
+        </ContainerChanges>
+      )}
       <ContainerButton>
         {changesCount && user_owner ? (
           <Button

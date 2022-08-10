@@ -31,6 +31,8 @@ import {
   SET_UPDATE_FALSE,
   STOP_UPDATE,
   UNDO_STOP_UPDATE,
+  GET_APPROVE_REQUEST_SUCCESS,
+  GET_APPROVE_REQUEST_BLOCKS_SUCCESS,
 } from './SpecDocument.actions';
 
 const specDocumentState = {
@@ -48,6 +50,8 @@ const specDocumentState = {
   update: false,
   updateSuccess: false,
   actionGet: true,
+  approveRequest: [],
+  approveRequestBlocks: [],
 };
 
 /** The spec document' reducer */
@@ -189,6 +193,16 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
       return { ...state, actionGet: false };
     case UNDO_STOP_UPDATE:
       return { ...state, actionGet: true };
+    case GET_APPROVE_REQUEST_SUCCESS:
+      return {
+        ...state,
+        approveRequest: payload.approve_requests,
+      };
+    case GET_APPROVE_REQUEST_BLOCKS_SUCCESS:
+      return {
+        ...state,
+        approveRequestBlocks: payload.blocks,
+      };
     default: {
       return state;
     }

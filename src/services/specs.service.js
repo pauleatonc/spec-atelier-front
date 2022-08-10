@@ -240,7 +240,26 @@ export const undoSend = factoryService(({ changeID, specID, userID }) =>
 export const getUpdated = factoryService(({ specID, userID, date }) =>
   getJsonRequest(
     `${API_BASE_URL}/users/${userID}/project_specs/${specID}/updated${formatParams(
-      { updated_at: date }
+      { updated_at: date },
     )}`,
-  )
+  ),
+);
+
+/**
+ * Get Approve request
+ */
+export const getApproveRequest = factoryService(({ userId, projectId }) =>
+  getJsonRequest(
+    `${API_BASE_URL}/users/${userId}/project_specs/${projectId}/approve_requests`,
+  ),
+);
+
+/**
+ * Get Approve request blocks
+ */
+export const getApproveRequestBlocks = factoryService(
+  ({ userId, projectId, approveId }) =>
+    getJsonRequest(
+      `${API_BASE_URL}/users/${userId}/project_specs/${projectId}/approve_requests/${approveId}/blocks`,
+    ),
 );

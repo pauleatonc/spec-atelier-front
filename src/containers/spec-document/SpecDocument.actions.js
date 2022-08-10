@@ -17,6 +17,8 @@ import {
   undoRemove,
   undoSend,
   getUpdated,
+  getApproveRequest,
+  getApproveRequestBlocks,
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { updateProductsWithProduct } from '../products-list/ProductsList.actions';
@@ -567,4 +569,34 @@ export const onGetUpdate = ({ specID, date }) => async (dispatch, getState) => {
   } catch (error) {
     return console.error(error);
   }
+};
+
+export const GET_APPROVE_REQUEST_BLOCKS_SUCCESS =
+  'GET_APPROVE_REQUEST_BLOCKS_SUCCESS';
+export const onGetApproveRequestBlocks = (projectId, approveId, callback) => (
+  dispatch,
+  getState,
+) => {
+  const { user } = getState().auth;
+  getApproveRequestBlocks({ userId: user.id, projectId, approveId }).then(
+    (response) => {
+      dispatch(onActionCreator(GET_APPROVE_REQUEST_BLOCKS_SUCCESS, response));
+      if (callback) callback();
+    },
+    (error) => console.error(error),
+  );
+};
+
+export const GET_APPROVE_REQUEST_SUCCESS = 'GET_APPROVE_REQUEST_SUCCESS';
+export const onGetApproveRequest = (projectId) => (dispatch, getState) => {
+  const { user } = getState().auth;
+  getApproveRequest({ userId: user.id, projectId }).then(
+    (response) => {
+      dispatch(onActionCreator(GET_APPROVE_REQUEST_SUCCESS, response));
+      dispatch(
+        onGetApproveRequestBlocks(projectId, response.approve_requests[0].id),
+      );
+    },
+    (error) => console.error(error),
+  );
 };
