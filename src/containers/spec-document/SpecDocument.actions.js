@@ -16,6 +16,7 @@ import {
   editSpecBlockImage,
   undoRemove,
   undoSend,
+  getProjectStructure,
   getUpdated,
   getApproveRequest,
   getApproveRequestBlocks,
@@ -156,12 +157,13 @@ export const onRemoveSpecBlock = ({ block, specID }) => async (
 export const DETACH_SPEC_PRODUCT = 'DETACH_SPEC_PRODUCT';
 export const onDetachSpecProduct = ({ product, specID, items }) => (
   dispatch,
+  getState,
 ) => {
   const blocks = [];
   if (items) {
     items.forEach(({ id }) => {
-      specDocument.blocks
-        .filter(
+      specDocument(getState)
+        .blocks.filter(
           (block) =>
             block.item === id &&
             block.element?.original_product_id === product.id,
@@ -169,10 +171,11 @@ export const onDetachSpecProduct = ({ product, specID, items }) => (
         .forEach((filterBlocks) => blocks.push(filterBlocks.id));
     });
   } else
-    specDocument.blocks
-      .filter((block) => block.element?.original_product_id === product.id)
+    specDocument(getState)
+      .blocks.filter(
+        (block) => block.element?.original_product_id === product.id,
+      )
       .forEach((filterBlocks) => blocks.push(filterBlocks.id));
-
   return dispatch(onRemoveSpecBlock({ specID, block: blocks }));
 };
 
@@ -569,6 +572,20 @@ export const onGetUpdate = ({ specID, date }) => async (dispatch, getState) => {
   } catch (error) {
     return console.error(error);
   }
+};
+
+export const SAVE_PROJECT_STRUCTURE = 'SAVE_PROJECT_STRUCTURE';
+
+export const onGetProjectStructure = (specID) => (dispatch) => {
+  getProjectStructure({ specID }).then(
+    ({ sections }) =>
+      dispatch(
+        onActionCreator(SAVE_PROJECT_STRUCTURE, {
+          sections,
+        }),
+      ),
+    (error) => console.error(error),
+  );
 };
 
 export const GET_APPROVE_REQUEST_BLOCKS_SUCCESS =

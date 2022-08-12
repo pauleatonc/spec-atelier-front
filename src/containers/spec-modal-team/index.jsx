@@ -29,14 +29,16 @@ import {
   ContainerOwner,
 } from './styles';
 
-const SpecModalTeam = ({ sections }) => {
+const SpecModalTeam = ({ projectStructure }) => {
   const dispatch = useDispatch();
-  const { teamModal: show } = useSelector((state) => state.specModalTeam);
+  const { teamModal: show, detailMemberModal } = useSelector(
+    (state) => state.specModalTeam,
+  );
   const {
     project: { team, user_owner: userOwner, owner },
   } = useSelector((state) => state.specDocument);
   const [checklistData, setChecklistData] = useState(
-    getCheckListData(sections, null, team),
+    getCheckListData(projectStructure, null, team),
   );
   const { onClose: handleClose, onExiting: handleExiting } = useModal({
     closeCallback: () => dispatch(onHideModal(TYPE_MODALS.TEAM_MODAL)),
@@ -51,8 +53,8 @@ const SpecModalTeam = ({ sections }) => {
   };
 
   useEffect(() => {
-    setChecklistData(getCheckListData(sections, null, team));
-  }, [team, sections]);
+    setChecklistData(getCheckListData(projectStructure, null, team));
+  }, [projectStructure, team, detailMemberModal]);
 
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>

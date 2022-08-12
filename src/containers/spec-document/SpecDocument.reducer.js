@@ -27,6 +27,7 @@ import {
   EDIT_SPEC_BLOCK_IMAGE_SUCCESS,
   SEND_CHANGE_BLOCK_SUCCESS,
   UNDO_SEND_BLOCK_SUCCESS,
+  SAVE_PROJECT_STRUCTURE,
   GET_UPDATE_SUCCESS,
   SET_UPDATE_FALSE,
   STOP_UPDATE,
@@ -47,6 +48,7 @@ const specDocumentState = {
   changesLoading: false,
   changesError: null,
   changes: [],
+  projectStructure: [],
   update: false,
   updateSuccess: false,
   actionGet: true,
@@ -193,6 +195,12 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
       return { ...state, actionGet: false };
     case UNDO_STOP_UPDATE:
       return { ...state, actionGet: true };
+    case SAVE_PROJECT_STRUCTURE: {
+      return {
+        ...state,
+        projectStructure: payload.sections,
+      };
+    }
     case GET_APPROVE_REQUEST_SUCCESS:
       return {
         ...state,

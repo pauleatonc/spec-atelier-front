@@ -246,6 +246,15 @@ export const getUpdated = factoryService(({ specID, userID, date }) =>
 );
 
 /**
+ * get project structure
+ */
+export const getProjectStructure = factoryService(({ specID }) =>
+  getJsonRequest(
+    `${API_BASE_URL}/configs/project_structure?project_spec_id=${specID}`,
+  ),
+);
+
+/**
  * Get Approve request
  */
 export const getApproveRequest = factoryService(({ userId, projectId }) =>
