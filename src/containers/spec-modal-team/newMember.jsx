@@ -43,7 +43,7 @@ import {
   ErrorInput,
 } from './styles';
 
-const SpecModalNewMember = ({ sections }) => {
+const SpecModalNewMember = ({ projectStructure }) => {
   const dispatch = useDispatch();
   const { id: projectID } = useParams();
   const [listEmails, setListEmails] = useState([]);
@@ -54,7 +54,7 @@ const SpecModalNewMember = ({ sections }) => {
     project: { team },
   } = useSelector((state) => state.specDocument);
   const [checklistData, setChecklistData] = useState(
-    getCheckListData(sections, null, team),
+    getCheckListData(projectStructure, null, team),
   );
   const {
     onChange: handleMailChange,
@@ -66,9 +66,11 @@ const SpecModalNewMember = ({ sections }) => {
     set: setMessageValue,
     value: messageValue,
   } = useTextarea('');
-  const { newMemberModal: show, nonExistentEmails } = useSelector(
-    (state) => state.specModalTeam,
-  );
+  const {
+    newMemberModal: show,
+    nonExistentEmails,
+    detailMemberModal,
+  } = useSelector((state) => state.specModalTeam);
 
   const showDisclaimer = nonExistentEmails.length;
 
@@ -77,7 +79,7 @@ const SpecModalNewMember = ({ sections }) => {
     exitingCallback: () => {
       setMessageValue('');
       setEmailValue('');
-      setChecklistData(getCheckListData(sections, null, team));
+      setChecklistData(getCheckListData(projectStructure, null, team));
     },
   });
 
@@ -117,8 +119,9 @@ const SpecModalNewMember = ({ sections }) => {
   };
 
   useEffect(() => {
-    setChecklistData(getCheckListData(sections, null, team));
-  }, [team, sections]);
+    setChecklistData(getCheckListData(projectStructure, null, team));
+  }, [projectStructure, team, detailMemberModal]);
+
   return (
     <ModalLayout show={show} onClose={handleClose} onExiting={handleExiting}>
       <Container>

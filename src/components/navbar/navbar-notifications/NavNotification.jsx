@@ -12,7 +12,6 @@ import {
   TitleHeader,
   LinkHeader,
   CountNoti,
-  ContentPrimary,
 } from './NavNotification.styles';
 import IconNoti from '../../../assets/images/icons/spec-notifications.svg';
 import {
@@ -97,15 +96,12 @@ const NavNotification = () => {
           type="button"
           onClick={togglOptions}
           onKeyPress={togglOptions}
-          isOpen={showOptions}
         >
           <NotificationsIcon>
             <ProfilePictureImage src={IconNoti} alt="notifications icon" />
             {totalNews > 0 && <CountNoti>{totalNews}</CountNoti>}
           </NotificationsIcon>
-        </NotificationsButton>
-        <ClickAwayListener onClickAway={handleClickAway}>
-          <ContentPrimary>
+          <ClickAwayListener onClickAway={handleClickAway}>
             <NotificationsOption show={showOptions}>
               <OptionsContent>
                 <ListHeader>
@@ -133,8 +129,8 @@ const NavNotification = () => {
                 <Separator />
               </OptionsContent>
             </NotificationsOption>
-          </ContentPrimary>
-        </ClickAwayListener>
+          </ClickAwayListener>
+        </NotificationsButton>
       </>
     )
   );

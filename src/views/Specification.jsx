@@ -40,7 +40,7 @@ const Specification = () => {
   const { dataSection } = useSelector((state) => state);
   const { user } = useSelector((state) => state.auth);
   const { option } = dataSection;
-  const { sections } = useSelector((state) => state.specDocument);
+  const { projectStructure } = useSelector((state) => state.specDocument);
   const { team, user_owner: userOwner } = useSelector(
     (state) => state.specDocument.project,
   );
@@ -113,9 +113,9 @@ const Specification = () => {
       <SpecImagesModalContainer />
       <AlertContainer />
       <SpecModalProduct />
-      <SpecModalTeam sections={sections} />
-      <SpecModalTeamNewMember sections={sections} />
-      <DetailMemberModal sections={sections} />
+      <SpecModalTeam projectStructure={projectStructure} />
+      <SpecModalTeamNewMember projectStructure={projectStructure} />
+      <DetailMemberModal projectStructure={projectStructure} />
       <ContactFormContainer type="product" />
     </>
   );

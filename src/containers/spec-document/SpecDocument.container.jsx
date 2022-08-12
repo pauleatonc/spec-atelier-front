@@ -14,6 +14,7 @@ import {
   onUndoChange,
   onUndoSend,
   onUpdateSpecBlockText,
+  onGetProjectStructure,
   undoStopGetUpdate,
 } from './SpecDocument.actions';
 import useDropdown from '../../components/basics/Dropdown.hooks';
@@ -67,6 +68,7 @@ const SpecDocument = ({ canEditOwnerUser }) => {
 
   useEffect(() => {
     dispatch(onGetSpecBlocks(specID));
+    dispatch(onGetProjectStructure(specID));
   }, []);
 
   useEffect(() => {
