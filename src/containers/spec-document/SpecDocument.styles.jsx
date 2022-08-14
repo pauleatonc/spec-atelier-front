@@ -58,6 +58,7 @@ export const AddMenuItem = styled.section`
 
 export const Page = styled.section`
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   align-content: space-between;
   background-color: ${WHITE};
