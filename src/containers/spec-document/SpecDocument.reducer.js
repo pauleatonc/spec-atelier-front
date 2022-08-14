@@ -2,7 +2,6 @@ import {
   getFormatedTableData,
   getTotalExpandManual,
   getSections,
-  getChangesCounts,
   getOwnerBlocks,
 } from './utils';
 import {
@@ -32,8 +31,12 @@ import {
   SET_UPDATE_FALSE,
   STOP_UPDATE,
   UNDO_STOP_UPDATE,
+  GET_APPROVE_REQUEST_LOADING,
   GET_APPROVE_REQUEST_SUCCESS,
+  GET_APPROVE_REQUEST_ERROR,
+  GET_APPROVE_REQUEST_BLOCKS_LOADING,
   GET_APPROVE_REQUEST_BLOCKS_SUCCESS,
+  GET_APPROVE_REQUEST_BLOCKS_ERROR,
 } from './SpecDocument.actions';
 
 const specDocumentState = {
@@ -53,6 +56,8 @@ const specDocumentState = {
   updateSuccess: false,
   actionGet: true,
   approveRequest: [],
+  approveRequestLoading: false,
+  approveRequestError: null,
   approveRequestBlocks: [],
 };
 
@@ -71,7 +76,6 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         quoteTable: getFormatedTableData(payload.blocks),
         totalExpandManual: getTotalExpandManual(payload.blocks),
         sections: getSections(payload.blocks),
-        changesCount: getChangesCounts(payload.blocks),
         changes: payload.changes,
         updateSuccess: payload.updateSuccess,
       };
@@ -206,11 +210,27 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         ...state,
         approveRequest: payload.approve_requests,
       };
+    case GET_APPROVE_REQUEST_LOADING:
+    case GET_APPROVE_REQUEST_BLOCKS_LOADING:
+      return {
+        ...state,
+        approveRequestLoading: true,
+      };
+    case GET_APPROVE_REQUEST_ERROR:
+    case GET_APPROVE_REQUEST_BLOCKS_ERROR:
+      return {
+        ...state,
+        approveRequestLoading: false,
+        approveRequestError: payload.error,
+      };
     case GET_APPROVE_REQUEST_BLOCKS_SUCCESS:
       return {
         ...state,
+        changesCount: payload.approve_request.count,
         approveRequestBlocks: payload.blocks,
+        approveRequestLoading: false,
       };
+
     default: {
       return state;
     }

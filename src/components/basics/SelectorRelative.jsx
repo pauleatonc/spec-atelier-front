@@ -15,6 +15,13 @@ import {
   IconInfo,
 } from './SelectorRelative.styles';
 
+export const getDetailsText = (option) => {
+  let detail = '';
+  if (option.count) detail = detail.concat(' ', `(${option.count})`);
+  if (option.date) detail = detail.concat(' - ', `${option.date}`);
+  return detail;
+};
+
 const propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
@@ -105,7 +112,9 @@ const SelectorRelative = ({
               {Object.keys(option).includes('profile_image') ? (
                 <ContentUser>
                   <IconUser user={option} size="28" />
-                  <NameSection>{option.name}</NameSection>
+                  <NameSection>{`${option.name} ${getDetailsText(
+                    option,
+                  )}`}</NameSection>
                 </ContentUser>
               ) : (
                 <OptionNameSection>

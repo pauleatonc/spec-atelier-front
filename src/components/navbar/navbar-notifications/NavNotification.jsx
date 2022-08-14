@@ -111,7 +111,7 @@ const NavNotification = () => {
                 {data.map((notification) =>
                   notification?.list?.map((detail) => (
                     <Notification
-                      key={detail?.item?.item_id}
+                      key={`key-${detail?.id}`}
                       itemType={detail?.item?.item_type}
                       triggered={detail?.triggered}
                       watched={detail?.watched}

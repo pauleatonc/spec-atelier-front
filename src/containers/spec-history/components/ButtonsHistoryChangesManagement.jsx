@@ -12,7 +12,7 @@ import {
   Separator,
 } from '../SpecHistory.styles';
 
-const ButtonsHistoryChangesManagement = () => {
+const ButtonsHistoryChangesManagement = ({ showHistory }) => {
   const { option_changes_management } = useSelector(
     (state) => state.specHistory,
   );
@@ -37,18 +37,20 @@ const ButtonsHistoryChangesManagement = () => {
               Gestión de cambios
             </ItemText>
           </Item>
-          <Separator />
+          {showHistory && <Separator />}
         </>
       )}
-      <Item
-        active={option_changes_management === SPEC_HISTORY_TABLE}
-        onClick={handleShowTable(SPEC_HISTORY_TABLE)}
-      >
-        <ItemText active={option_changes_management === SPEC_HISTORY_TABLE}>
-          {' '}
-          Historial
-        </ItemText>
-      </Item>
+      {showHistory && (
+        <Item
+          active={option_changes_management === SPEC_HISTORY_TABLE}
+          onClick={handleShowTable(SPEC_HISTORY_TABLE)}
+        >
+          <ItemText active={option_changes_management === SPEC_HISTORY_TABLE}>
+            {' '}
+            Historial
+          </ItemText>
+        </Item>
+      )}
     </HistoryChangeManagementContent>
   );
 };

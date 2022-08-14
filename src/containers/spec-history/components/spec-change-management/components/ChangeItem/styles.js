@@ -205,3 +205,7 @@ export const IconCheck = styled.i`
   font-size: 16px;
   margin-right: 90px;
 `;
+
+export const ElementTitle = styled.span`
+  color: ${({ opacity }) => (opacity ? BLACK_OPACITY : HEX_BLACK)};
+`;

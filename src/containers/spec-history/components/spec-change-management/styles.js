@@ -56,7 +56,7 @@ export const FilterContainer = styled.div`
 `;
 
 export const FilterContent = styled.div`
-  width: 237px;
+  width: ${({ width }) => width || '237px'};
   display: flex;
   flex-direction: column;
   font-size: 12px;

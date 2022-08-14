@@ -27,6 +27,7 @@ import {
   ImageProduct,
   GoToProduct,
   IconCheck,
+  ElementTitle,
 } from './styles';
 
 const ChangeItem = ({
@@ -60,10 +61,7 @@ const ChangeItem = ({
     setBlocksRejected([...blocksRejected, blockId]);
   };
 
-  const handleShowProduct = () => (event) => {
-    event.stopPropagation();
-    dispatch(getProduct({ id: element.id }));
-  };
+  const handleShowProduct = () => dispatch(getProduct({ id: element.id }));
 
   return (
     <Container
@@ -82,7 +80,14 @@ const ChangeItem = ({
         isExpanded={isExpanded}
       >
         {isChange && isOwner && <IconTypeChange src={icon} alt="icon_action" />}
-        {!isExpanded && <span>{element.name}</span>}
+        {!isExpanded && (
+          <ElementTitle>
+            <ElementTitle
+              opacity={change.sent}
+            >{`${element.item_id} `}</ElementTitle>
+            {element.item_title}
+          </ElementTitle>
+        )}
         {type === TYPES.PRODUCT && (
           <DateContainer>
             {isAccepted && !isExpanded && (
@@ -120,12 +125,17 @@ const ChangeItem = ({
                   <IconUser user={change.user} size="56" />
                   <TextDesc mleft="10px">
                     {change.user.name}{' '}
-                    <TextDesc bold>{change.description} </TextDesc>
+                    <TextDesc bold>
+                      {`${change.title} ${element.item_title}`}{' '}
+                    </TextDesc>
                   </TextDesc>
                 </ImgContainerChange>
                 <ProductDescContainer>
                   <TextDesc fullwidth bold mBottom="15px">
-                    {element.name}
+                    <ElementTitle
+                      opacity={change.sent}
+                    >{`${element.item_id} `}</ElementTitle>
+                    {element.item_title}
                   </TextDesc>
                   <TextDesc fullwidth mBottom="15px" withOverFlow>
                     {element.long_desc}

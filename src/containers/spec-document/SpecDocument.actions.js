@@ -588,25 +588,36 @@ export const onGetProjectStructure = (specID) => (dispatch) => {
   );
 };
 
+export const GET_APPROVE_REQUEST_BLOCKS_LOADING =
+  'GET_APPROVE_REQUEST_BLOCKS_LOADING';
 export const GET_APPROVE_REQUEST_BLOCKS_SUCCESS =
   'GET_APPROVE_REQUEST_BLOCKS_SUCCESS';
+export const GET_APPROVE_REQUEST_BLOCKS_ERROR =
+  'GET_APPROVE_REQUEST_BLOCKS_ERROR';
 export const onGetApproveRequestBlocks = (projectId, approveId, callback) => (
   dispatch,
   getState,
 ) => {
   const { user } = getState().auth;
+  dispatch(onActionCreator(GET_APPROVE_REQUEST_BLOCKS_LOADING));
   getApproveRequestBlocks({ userId: user.id, projectId, approveId }).then(
     (response) => {
       dispatch(onActionCreator(GET_APPROVE_REQUEST_BLOCKS_SUCCESS, response));
       if (callback) callback();
     },
-    (error) => console.error(error),
+    (error) => {
+      dispatch(onActionCreator(GET_APPROVE_REQUEST_BLOCKS_ERROR, error));
+      console.error(error);
+    },
   );
 };
 
+export const GET_APPROVE_REQUEST_LOADING = 'GET_APPROVE_REQUEST_LOADING';
 export const GET_APPROVE_REQUEST_SUCCESS = 'GET_APPROVE_REQUEST_SUCCESS';
+export const GET_APPROVE_REQUEST_ERROR = 'GET_APPROVE_REQUEST_ERROR';
 export const onGetApproveRequest = (projectId) => (dispatch, getState) => {
   const { user } = getState().auth;
+  dispatch(onActionCreator(GET_APPROVE_REQUEST_LOADING));
   getApproveRequest({ userId: user.id, projectId }).then(
     (response) => {
       dispatch(onActionCreator(GET_APPROVE_REQUEST_SUCCESS, response));
@@ -614,6 +625,9 @@ export const onGetApproveRequest = (projectId) => (dispatch, getState) => {
         onGetApproveRequestBlocks(projectId, response.approve_requests[0].id),
       );
     },
-    (error) => console.error(error),
+    (error) => {
+      dispatch(onActionCreator(GET_APPROVE_REQUEST_ERROR, error));
+      console.error(error);
+    },
   );
 };

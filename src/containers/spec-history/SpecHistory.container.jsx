@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  changeOptionHistory,
   onGetChangeHistory,
   onGetChangesAuthor,
   onSetAuthor,
@@ -53,7 +52,6 @@ const ChangeHistoryContainer = () => {
   useEffect(() => {
     dispatch(onGetChangeHistory(specID, { limit: 7, page: 0 }));
     dispatch(onGetChangesAuthor(specID, { limit: 7, page: 0 }));
-    dispatch(changeOptionHistory(SPEC_HISTORY_TABLE));
   }, []);
 
   const pagesCounter = useCallback(({ pageSize }) => {

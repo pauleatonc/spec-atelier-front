@@ -103,7 +103,7 @@ const Notifications = (props) => {
         setAccionStatus(r?.notification?.item?.status);
         setWatchedStatus(r?.notification?.watched);
         setTriggeredStatus(r?.notification?.triggered);
-        dispatch(getMyProjects({page: 0, limit: 6, sort: 'created_at_desc'}));
+        dispatch(getMyProjects({ page: 0, limit: 6, sort: 'created_at_desc' }));
       });
     });
   };
@@ -219,7 +219,7 @@ Notifications.defaultProps = {
   status: '',
   itemId: 0,
   projectId: 0,
-  userData: [],
+  userData: {},
 };
 Notifications.propTypes = {
   itemType: PropTypes.string,
@@ -228,9 +228,9 @@ Notifications.propTypes = {
   date: PropTypes.string,
   message: PropTypes.string,
   status: PropTypes.string,
-  itemId: PropTypes.number,
+  itemId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   projectId: PropTypes.number,
-  userData: PropTypes.arrayOf(PropTypes.object),
+  userData: PropTypes.shape({}),
 };
 
 export default Notifications;
