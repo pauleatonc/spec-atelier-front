@@ -207,5 +207,5 @@ export const IconCheck = styled.i`
 `;
 
 export const ElementTitle = styled.span`
-  color: ${({ opacity }) => (opacity ? BLACK_OPACITY : HEX_BLACK)};
+  color: ${({ withOpacity }) => (withOpacity ? BLACK_OPACITY : HEX_BLACK)};
 `;

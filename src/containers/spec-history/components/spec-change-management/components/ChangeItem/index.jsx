@@ -83,7 +83,7 @@ const ChangeItem = ({
         {!isExpanded && (
           <ElementTitle>
             <ElementTitle
-              opacity={change.sent}
+              withOpacity={change.sent}
             >{`${element.item_id} `}</ElementTitle>
             {element.item_title}
           </ElementTitle>
@@ -133,7 +133,7 @@ const ChangeItem = ({
                 <ProductDescContainer>
                   <TextDesc fullwidth bold mBottom="15px">
                     <ElementTitle
-                      opacity={change.sent}
+                      withOpacity={change.sent}
                     >{`${element.item_id} `}</ElementTitle>
                     {element.item_title}
                   </TextDesc>
