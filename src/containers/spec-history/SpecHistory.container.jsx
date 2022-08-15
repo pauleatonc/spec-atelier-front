@@ -44,6 +44,7 @@ const ChangeHistoryContainer = () => {
     author,
     page,
   } = useSelector((state) => state.specHistory);
+  const { approveRequestLoading } = useSelector((state) => state.specDocument);
   const [pageCount, setPageCount] = useState(0);
   const [keyword, setKeyword] = useState(params.keyword);
   const dispatch = useDispatch();
@@ -171,7 +172,7 @@ const ChangeHistoryContainer = () => {
 
   return (
     <ContainerTable>
-      <ButtonsHistoryChangesManagement />
+      {!approveRequestLoading && <ButtonsHistoryChangesManagement />}
       {option_changes_management === SPEC_HISTORY_TABLE ? (
         !loading && (
           <StructureTableChangeHistory
