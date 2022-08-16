@@ -61,10 +61,12 @@ const SpecChangeManagement = ({ actionsIcons }) => {
 
   const handleSaveChanges = () => {
     const params = {
+      specID,
       blocks_accepted: blocksAccepted,
       blocks_rejected: blocksRejected,
+      approve_request_id: approveRequestSelected.id
     };
-    dispatch(onSaveSpecChanges(specID, params));
+    dispatch(onSaveSpecChanges(params));
   };
 
   const handleCloseModal = () => setShowModal(false);
