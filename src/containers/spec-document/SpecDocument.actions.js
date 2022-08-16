@@ -463,8 +463,11 @@ export const onSaveSpecChanges = (
     approve_request_id,
   })
     .then((response) => {
-      console.log(response);
       if (callback) callback();
+      dispatch(
+        onActionCreator(SAVE_SPEC_CHANGES_SUCCESS, { blocks: response.blocks }),
+      );
+      dispatch(onShowAlertSuccess({ message: response.message }));
     })
     .catch((error) =>
       dispatch(onActionCreator(SAVE_SPEC_CHANGES_ERROR, { error })),

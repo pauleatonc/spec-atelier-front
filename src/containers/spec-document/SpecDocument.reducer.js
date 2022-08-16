@@ -3,6 +3,7 @@ import {
   getTotalExpandManual,
   getSections,
   getOwnerBlocks,
+  getChangesCounts,
 } from './utils';
 import {
   ADD_SPEC_BLOCK_SUCCESS,
@@ -162,6 +163,8 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         ...state,
         changesLoading: false,
         changesError: null,
+        approveRequestBlocks: payload.blocks,
+        changesCount: getChangesCounts(payload.blocks),
       };
     }
     case SAVE_SPEC_CHANGES_ERROR: {
