@@ -621,9 +621,17 @@ export const onGetApproveRequest = (projectId) => (dispatch, getState) => {
   getApproveRequest({ userId: user.id, projectId }).then(
     (response) => {
       dispatch(onActionCreator(GET_APPROVE_REQUEST_SUCCESS, response));
-      dispatch(
-        onGetApproveRequestBlocks(projectId, response.approve_requests[0].id),
-      );
+      if (response.approve_requests.lenght)
+        dispatch(
+          onGetApproveRequestBlocks(projectId, response.approve_requests[0].id),
+        );
+      else
+        dispatch(
+          onActionCreator(
+            GET_APPROVE_REQUEST_ERROR,
+            'No hay solicitudes pendientes',
+          ),
+        );
     },
     (error) => {
       dispatch(onActionCreator(GET_APPROVE_REQUEST_ERROR, error));

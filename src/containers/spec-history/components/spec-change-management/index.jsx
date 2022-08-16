@@ -107,7 +107,7 @@ const SpecChangeManagement = ({ actionsIcons }) => {
           </TextDisclaimer>
         </DescDisclaimer>
       </DisclaimerContainer>
-      {approveRequest.length && approveRequestSelected && (
+      {!!approveRequest.length && approveRequestSelected && (
         <FilterContainer>
           <FilterContent width="300px">
             <Label>Filtras por autor</Label>
@@ -154,19 +154,21 @@ const SpecChangeManagement = ({ actionsIcons }) => {
           ))}
         </ContainerChanges>
       )}
-      <ContainerButton>
-        {changesCount && user_owner ? (
-          <Button
-            variant={VARIANTS_BUTTON.PRIMARY}
-            onClick={() => setShowModal(true)}
-            disabled={!changes}
-          >
-            {`Confirmar ${changes || ''} cambios`}
-          </Button>
-        ) : (
-          <ChangesConfirmed>Cambios confirmados</ChangesConfirmed>
-        )}
-      </ContainerButton>
+      {!!approveRequest.length && (
+        <ContainerButton>
+          {changesCount && user_owner ? (
+            <Button
+              variant={VARIANTS_BUTTON.PRIMARY}
+              onClick={() => setShowModal(true)}
+              disabled={!changes}
+            >
+              {`Confirmar ${changes || ''} cambios`}
+            </Button>
+          ) : (
+            <ChangesConfirmed>Cambios confirmados</ChangesConfirmed>
+          )}
+        </ContainerButton>
+      )}
       <Confirm
         show={showModal}
         onClose={handleCloseModal}
