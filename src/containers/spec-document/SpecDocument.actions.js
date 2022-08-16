@@ -449,14 +449,23 @@ export const handleDeleteMemberTeam = (permissionId) => (dispatch) =>
 export const SAVE_SPEC_CHANGES = 'SAVE_SPEC_CHANGES';
 export const SAVE_SPEC_CHANGES_SUCCESS = 'SAVE_SPEC_CHANGES_SUCCESS';
 export const SAVE_SPEC_CHANGES_ERROR = 'SAVE_SPEC_CHANGES_ERROR';
-export const onSaveSpecChanges = ({specID, blocks_accepted, blocks_rejected, approve_request_id}) => async (
-  dispatch,
-  getState,
-) => {
+export const onSaveSpecChanges = (
+  { specID, blocks_accepted, blocks_rejected, approve_request_id },
+  callback,
+) => async (dispatch, getState) => {
   const { auth } = getState();
   dispatch(onActionCreator(SAVE_SPEC_CHANGES));
-  saveSpecChanges({ specID, userID: auth.user?.id, blocks_accepted, blocks_rejected, approve_request_id })
-    .then((response) => console.log(response))
+  saveSpecChanges({
+    specID,
+    userID: auth.user?.id,
+    blocks_accepted,
+    blocks_rejected,
+    approve_request_id,
+  })
+    .then((response) => {
+      console.log(response);
+      if (callback) callback();
+    })
     .catch((error) =>
       dispatch(onActionCreator(SAVE_SPEC_CHANGES_ERROR, { error })),
     );

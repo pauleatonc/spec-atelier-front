@@ -59,17 +59,17 @@ const SpecChangeManagement = ({ actionsIcons }) => {
     project: { user_owner, name },
   } = useSelector((state) => state.specDocument);
 
+  const handleCloseModal = () => setShowModal(false);
+
   const handleSaveChanges = () => {
     const params = {
       specID,
       blocks_accepted: blocksAccepted,
       blocks_rejected: blocksRejected,
-      approve_request_id: approveRequestSelected.id
+      approve_request_id: approveRequestSelected.id,
     };
-    dispatch(onSaveSpecChanges(params));
+    dispatch(onSaveSpecChanges(params, () => handleCloseModal()));
   };
-
-  const handleCloseModal = () => setShowModal(false);
 
   const onChangeApproveRequestSelected = (request) => {
     if (request.id !== approveRequestSelected.id) {
