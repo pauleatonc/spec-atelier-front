@@ -207,5 +207,10 @@ export const IconCheck = styled.i`
 `;
 
 export const ElementTitle = styled.span`
-  color: ${({ withOpacity }) => (withOpacity ? BLACK_OPACITY : HEX_BLACK)};
+  color: ${HEX_BLACK};
+`;
+
+export const BlurryTitle = styled.span`
+  color: transparent;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 `;

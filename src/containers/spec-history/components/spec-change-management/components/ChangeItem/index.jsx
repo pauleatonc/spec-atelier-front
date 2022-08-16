@@ -28,6 +28,7 @@ import {
   GoToProduct,
   IconCheck,
   ElementTitle,
+  BlurryTitle
 } from './styles';
 
 const ChangeItem = ({
@@ -82,9 +83,7 @@ const ChangeItem = ({
         {isChange && isOwner && <IconTypeChange src={icon} alt="icon_action" />}
         {!isExpanded && (
           <ElementTitle>
-            <ElementTitle
-              withOpacity={change.sent}
-            >{`${element.item_id} `}</ElementTitle>
+            {change.sent ? <BlurryTitle>{`${element.item_id} `}</BlurryTitle> : `${element.item_id} ` }
             {element.item_title}
           </ElementTitle>
         )}
@@ -132,9 +131,7 @@ const ChangeItem = ({
                 </ImgContainerChange>
                 <ProductDescContainer>
                   <TextDesc fullwidth bold mBottom="15px">
-                    <ElementTitle
-                      withOpacity={change.sent}
-                    >{`${element.item_id} `}</ElementTitle>
+                    {change.sent ? <BlurryTitle>{`${element.item_id} `}</BlurryTitle> : `${element.item_id} ` }
                     {element.item_title}
                   </TextDesc>
                   <TextDesc fullwidth mBottom="15px" withOverFlow>
