@@ -19,6 +19,9 @@ import {
 const SpecContentButtons = () => {
   const dispatch = useDispatch();
   const { dataSection } = useSelector((state) => state);
+  const {
+    project: { user_owner },
+  } = useSelector((state) => state.specDocument);
   const { option } = dataSection;
   const handdleShowTable = (opt) => dispatch(changeOption(opt));
 
@@ -33,15 +36,17 @@ const SpecContentButtons = () => {
         }
         onClick={() => handdleShowTable(SPEC_DOCUMENT)}
       />
-      <AddIcon
-        alt="Listar historial de cambios"
-        src={
-          option === SPEC_HISTORY
-            ? CHANGE_HISTORY_SELECTED
-            : CHANGE_HISTORY_UNSELECTED
-        }
-        onClick={() => handdleShowTable(SPEC_HISTORY)}
-      />
+      {user_owner && (
+        <AddIcon
+          alt="Listar historial de cambios"
+          src={
+            option === SPEC_HISTORY
+              ? CHANGE_HISTORY_SELECTED
+              : CHANGE_HISTORY_UNSELECTED
+          }
+          onClick={() => handdleShowTable(SPEC_HISTORY)}
+        />
+      )}
       <AddIcon
         alt="Listar tabla"
         src={
