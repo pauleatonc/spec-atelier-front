@@ -131,9 +131,7 @@ const ChangeItem = ({
                 </ImgContainerChange>
                 <ProductDescContainer>
                   <TextDesc fullwidth bold mBottom="15px">
-                    <ElementTitle
-                      withOpacity={change.sent}
-                    >{`${element.item_id} `}</ElementTitle>
+                    {change.sent ? <BlurryTitle>{`${element.item_id} `}</BlurryTitle> : `${element.item_id} ` }
                     {element.item_title}
                   </TextDesc>
                   <TextDesc fullwidth mBottom="15px" withOverFlow>
