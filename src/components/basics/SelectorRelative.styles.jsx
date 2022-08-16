@@ -40,10 +40,11 @@ export const Section = styled.div`
 export const ContentOption = styled.div`
   display: block;
   padding: 0 9px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'initial' : 'pointer')};
+  opacity: ${({ disabled }) => (disabled ? '0.8' : 'initial')};
   &:hover {
-    background-color: ${({ backgroundPuertoRico }) =>
-      backgroundPuertoRico ? PUERTO_RICO_BACKGROUND : GALLERY};
+    background-color: ${({ backgroundPuertoRico, disabled }) =>
+      backgroundPuertoRico && !disabled ? PUERTO_RICO_BACKGROUND : GALLERY};
   }
 `;
 

@@ -50,13 +50,18 @@ const SelectorRelative = ({
   backgroundPuertoRico,
   showIconInfo,
   position,
+  disabledSelected,
+  itemSelected,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   const onChangeOption = (value) => () => {
-    onChange(value);
-    toggle();
+    const isDisabledOption = disabledSelected && value.id === itemSelected.id;
+    if (!isDisabledOption) {
+      onChange(value);
+      toggle();
+    }
   };
 
   const onClickOusite = (callback) => {
@@ -103,6 +108,7 @@ const SelectorRelative = ({
           <ContentOption
             key={option.id}
             backgroundPuertoRico={backgroundPuertoRico}
+            disabled={disabledSelected && itemSelected.id === option.id}
           >
             <Option
               value={option.id}

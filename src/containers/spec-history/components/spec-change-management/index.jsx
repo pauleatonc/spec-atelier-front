@@ -112,11 +112,13 @@ const SpecChangeManagement = ({ actionsIcons }) => {
           <FilterContent width="300px">
             <Label>Filtras por autor</Label>
             <SelectorRelative
+              disabledSelected
               width="300px"
               maxHeight="152px"
               options={getDataSelectUser(approveRequest)}
               onChange={onChangeApproveRequestSelected}
               backgroundPuertoRico
+              itemSelected={approveRequestSelected}
               renderInput={
                 <FilterSelectBox width="300px">
                   <ContentUser>
