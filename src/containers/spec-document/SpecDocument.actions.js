@@ -633,7 +633,7 @@ export const onGetApproveRequest = (projectId) => (dispatch, getState) => {
   getApproveRequest({ userId: user.id, projectId }).then(
     (response) => {
       dispatch(onActionCreator(GET_APPROVE_REQUEST_SUCCESS, response));
-      if (response.approve_requests.lenght)
+      if (response.approve_requests.length)
         dispatch(
           onGetApproveRequestBlocks(projectId, response.approve_requests[0].id),
         );
