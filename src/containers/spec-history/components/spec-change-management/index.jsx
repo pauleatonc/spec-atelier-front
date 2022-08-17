@@ -68,7 +68,13 @@ const SpecChangeManagement = ({ actionsIcons }) => {
       blocks_rejected: blocksRejected,
       approve_request_id: approveRequestSelected.id,
     };
-    dispatch(onSaveSpecChanges(params, () => handleCloseModal()));
+    dispatch(
+      onSaveSpecChanges(params, () => {
+        setBlocksAccepted([]);
+        setBlocksRejected([]);
+        handleCloseModal();
+      }),
+    );
   };
 
   const onChangeApproveRequestSelected = (request) => {
