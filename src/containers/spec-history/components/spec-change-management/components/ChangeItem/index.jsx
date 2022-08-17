@@ -26,10 +26,14 @@ import {
   ProductImageContainer,
   ImageProduct,
   GoToProduct,
-  IconCheck,
+  IconAction,
   ElementTitle,
-  BlurryTitle
+  BlurryTitle,
 } from './styles';
+import {
+  JAVA,
+  BURNT_SIENNA,
+} from '../../../../../../config/constants/styled-vars';
 
 const ChangeItem = ({
   type,
@@ -83,14 +87,21 @@ const ChangeItem = ({
         {isChange && isOwner && <IconTypeChange src={icon} alt="icon_action" />}
         {!isExpanded && (
           <ElementTitle>
-            {change.sent ? <BlurryTitle>{`${element.item_id} `}</BlurryTitle> : `${element.item_id} ` }
+            {change.sent && type === 'Product' ? (
+              <BlurryTitle>{`${element.item_id} `}</BlurryTitle>
+            ) : (
+              `${element.item_id} `
+            )}
             {element.item_title}
           </ElementTitle>
         )}
         {type === TYPES.PRODUCT && (
           <DateContainer>
-            {isAccepted && !isExpanded && (
-              <IconCheck className="fas fa-check" />
+            {(isAccepted || isRejected) && !isExpanded && (
+              <IconAction
+                color={isAccepted ? JAVA : BURNT_SIENNA}
+                className={`fas fa-${isAccepted ? 'check' : 'trash'}`}
+              />
             )}
             <Date>{change.created_at}</Date>
             {status === 'waiting' && isOwner ? (
@@ -131,7 +142,11 @@ const ChangeItem = ({
                 </ImgContainerChange>
                 <ProductDescContainer>
                   <TextDesc fullwidth bold mBottom="15px">
-                    {change.sent ? <BlurryTitle>{`${element.item_id} `}</BlurryTitle> : `${element.item_id} ` }
+                    {change.sent ? (
+                      <BlurryTitle>{`${element.item_id} `}</BlurryTitle>
+                    ) : (
+                      `${element.item_id} `
+                    )}
                     {element.item_title}
                   </TextDesc>
                   <TextDesc fullwidth mBottom="15px" withOverFlow>

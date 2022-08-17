@@ -200,8 +200,8 @@ export const TextDesc = styled.span`
   overflow: ${({ withOverFlow }) => withOverFlow && 'auto'};
 `;
 
-export const IconCheck = styled.i`
-  color: ${JAVA};
+export const IconAction = styled.i`
+  color: ${({ color }) => color};
   font-size: 16px;
   margin-right: 90px;
 `;

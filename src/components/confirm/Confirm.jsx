@@ -11,7 +11,7 @@ const Confirm = ({
   question,
   onConfirm,
   cancelText = 'Cancelar',
-  confirmText = 'Si, seguro',
+  confirmText = 'Sí, seguro',
 }) => {
   const { onClose: handleClose, onExiting: handleExiting } = useModal({
     closeCallback: () => onClose(),
