@@ -87,7 +87,7 @@ const ChangeItem = ({
         {isChange && isOwner && <IconTypeChange src={icon} alt="icon_action" />}
         {!isExpanded && (
           <ElementTitle>
-            {change.sent && type === 'Product' ? (
+            {change.status !== "accepted" && change.sent && type === 'Product' ? (
               <BlurryTitle>{`${element.item_id} `}</BlurryTitle>
             ) : (
               `${element.item_id} `
