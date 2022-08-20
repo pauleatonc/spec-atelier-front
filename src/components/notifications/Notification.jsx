@@ -143,7 +143,7 @@ const Notifications = (props) => {
       });
     });
   };
-  if (itemType === 'ProjectInvitation') {
+  if (itemType === 'ProjectInvitation' || itemType === 'ProjectSpec::ApproveRequest' ) {
     return (
       <ContentPrimary>
         <ContentPoint>
