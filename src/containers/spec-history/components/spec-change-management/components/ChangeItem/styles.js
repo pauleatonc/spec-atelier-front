@@ -22,12 +22,32 @@ export const TYPES = {
   SECTION: 'Section',
   ITEM: 'Item',
   PRODUCT: 'Product',
+  TEXT: 'Text',
+  IMAGE: 'Image'
 };
 
 export const SIZES = {
   [TYPES.SECTION]: '16',
   [TYPES.ITEM]: '14',
   [TYPES.PRODUCT]: '12',
+  [TYPES.TEXT]: '12',
+  [TYPES.IMAGE]: '12',
+};
+
+const headerPadingLeft = {
+  [TYPES.SECTION]: '35px',
+  [TYPES.ITEM]: '35px',
+  [TYPES.PRODUCT]: '53px',
+  [TYPES.TEXT]: '75px',
+  [TYPES.IMAGE]: '75px',
+};
+
+const headerFontWeight = {
+  [TYPES.SECTION]: 'bold',
+  [TYPES.ITEM]: 'bold',
+  [TYPES.PRODUCT]: 'normal',
+  [TYPES.TEXT]: 'normal',
+  [TYPES.IMAGE]: 'normal',
 };
 
 export const ACTION_TYPE_BACKGROUND = {
@@ -48,15 +68,15 @@ export const ACTION_TYPE_BACKGROUND = {
   },
 };
 
+export const expandableContainer = ({status, isOwner, type}) =>
+  [TYPES.PRODUCT, TYPES.TEXT, TYPES.IMAGE].includes(type) && status === 'waiting'  && isOwner
+
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   background-color: ${({ action, status, isExpanded, isOwner, type }) => {
     const isExpandedBackground = isExpanded ? WHITE : CONCRETE;
-    return type === TYPES.PRODUCT &&
-      status === 'waiting' &&
-      !isExpanded &&
-      isOwner
+    return expandableContainer({status, isOwner, type}) && !isExpanded
       ? `${ACTION_TYPE_BACKGROUND[action].normal}`
       : isExpandedBackground;
   }};
@@ -69,18 +89,12 @@ export const Container = styled.div`
   &:hover {
     background-color: ${({ action, status, isExpanded, isOwner, type }) => {
       const isExpandedBackground = isExpanded ? WHITE : CONCRETE;
-      return type === TYPES.PRODUCT &&
-        status === 'waiting' &&
-        !isExpanded &&
-        isOwner
+      return expandableContainer({status, isExpanded, isOwner, type}) && !isExpanded
         ? `${ACTION_TYPE_BACKGROUND[action].hover}`
         : isExpandedBackground;
     }};
     box-shadow: ${({ type, status, isOwner }) =>
-      type === TYPES.PRODUCT &&
-      status === 'waiting' &&
-      isOwner &&
-      `0 1px 4px 0 ${BLACK_OPACITY}`};
+      expandableContainer({status, isOwner, type}) && `0 1px 4px 0 ${BLACK_OPACITY}`};
   }
 `;
 
@@ -92,13 +106,13 @@ export const HeaderChange = styled.div`
   justify-content: ${({ isExpanded }) =>
     isExpanded ? 'flex-end' : 'space-between'};
   padding-right: 30px;
-  padding-left: ${({ type }) => (type !== TYPES.PRODUCT ? '35px' : '53px')};
+  padding-left: ${({ type }) => headerPadingLeft[type]};
   width: 100%;
   height: 32px;
   font-size: ${({ type }) => `${SIZES[type]}px`};
-  font-weight: ${({ type }) => (type !== TYPES.PRODUCT ? 'bold' : 'normal')};
+  font-weight: ${({ type }) => headerFontWeight[type]};
   cursor: ${({ type, status, isOwner }) =>
-    type === TYPES.PRODUCT && status === 'waiting' && isOwner
+    expandableContainer({status, isOwner, type})
       ? 'pointer'
       : 'initial'};
 `;

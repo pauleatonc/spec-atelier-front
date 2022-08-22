@@ -38,32 +38,33 @@ import {
 const ChangeItem = ({
   type,
   isOwner,
-  blockId,
+  changeId,
   change,
   status,
   element,
   icon,
-  blocksAccepted = [],
-  blocksRejected = [],
+  changesAccepted = [],
+  changesRejected = [],
   setBlocksAccepted,
   setBlocksRejected,
 }) => {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
-  const isChange = type === TYPES.PRODUCT && status === 'waiting';
-  const isAccepted = !!blocksAccepted.find((block) => block === blockId);
-  const isRejected = !!blocksRejected.find((block) => block === blockId);
+  const expandible = [TYPES.PRODUCT, TYPES.TEXT, TYPES.IMAGE].includes(type);
+  const isChange = expandible && status === 'waiting';
+  const isAccepted = !!changesAccepted.find(e => e === changeId);
+  const isRejected = !!changesRejected.find(e => e === changeId);
   const handleAcceptChange = () => {
     if (isRejected) {
-      setBlocksRejected(blocksRejected.filter((block) => block !== blockId));
+      setBlocksRejected(changesRejected.filter((block) => block !== changeId));
     }
-    setBlocksAccepted([...blocksAccepted, blockId]);
+    setBlocksAccepted([...changesAccepted, changeId]);
   };
   const handleRejectChange = () => {
     if (isAccepted) {
-      setBlocksAccepted(blocksAccepted.filter((block) => block !== blockId));
+      setBlocksAccepted(changesAccepted.filter(e => e !== changeId));
     }
-    setBlocksRejected([...blocksRejected, blockId]);
+    setBlocksRejected([...changesRejected, changeId]);
   };
 
   const handleShowProduct = () => dispatch(getProduct({ id: element.id }));
@@ -87,7 +88,7 @@ const ChangeItem = ({
         {isChange && isOwner && <IconTypeChange src={icon} alt="icon_action" />}
         {!isExpanded && (
           <ElementTitle>
-            {change.status !== "accepted" && change.sent && type === 'Product' ? (
+            {change.status !== "accepted" && change.sent && expandible ? (
               <BlurryTitle>{`${element.item_id} `}</BlurryTitle>
             ) : (
               `${element.item_id} `
@@ -95,7 +96,7 @@ const ChangeItem = ({
             {element.item_title}
           </ElementTitle>
         )}
-        {type === TYPES.PRODUCT && (
+        {expandible && (
           <DateContainer>
             {(isAccepted || isRejected) && !isExpanded && (
               <IconAction
@@ -157,14 +158,14 @@ const ChangeItem = ({
                   </TextDesc>
                 </ProductDescContainer>
               </DescChange>
-              <ProductImageContainer>
+              {TYPES.PRODUCT === type && <ProductImageContainer>
                 <ImageProduct
                   src={element?.images[0]?.urls?.medium || NO_PHOTO}
                 />
                 <GoToProduct onClick={handleShowProduct}>
                   Ver producto
                 </GoToProduct>
-              </ProductImageContainer>
+              </ProductImageContainer>}
             </ChangeInfo>
           )}
           <ContainerButtons>

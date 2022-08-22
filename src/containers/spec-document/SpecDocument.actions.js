@@ -450,7 +450,7 @@ export const SAVE_SPEC_CHANGES = 'SAVE_SPEC_CHANGES';
 export const SAVE_SPEC_CHANGES_SUCCESS = 'SAVE_SPEC_CHANGES_SUCCESS';
 export const SAVE_SPEC_CHANGES_ERROR = 'SAVE_SPEC_CHANGES_ERROR';
 export const onSaveSpecChanges = (
-  { specID, blocks_accepted, blocks_rejected, approve_request_id },
+  { specID, changes_accepted, changes_rejected, approve_request_id },
   callback,
 ) => async (dispatch, getState) => {
   const { auth } = getState();
@@ -458,8 +458,8 @@ export const onSaveSpecChanges = (
   saveSpecChanges({
     specID,
     userID: auth.user?.id,
-    blocks_accepted,
-    blocks_rejected,
+    changes_accepted,
+    changes_rejected,
     approve_request_id,
   })
     .then((response) => {

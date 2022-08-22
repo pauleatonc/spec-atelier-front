@@ -204,10 +204,10 @@ export const getChangesAuthor = factoryService(({ specID, userID, params }) =>
 /**
  * Get the list changes.
  */
-export const saveSpecChanges = factoryService(({ specID, userID, blocks_accepted, blocks_rejected, approve_request_id }) =>
+export const saveSpecChanges = factoryService(({ specID, userID, changes_accepted, changes_rejected, approve_request_id }) =>
   postJsonRequest(
     `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/save_changes`,
-    { blocks_accepted, blocks_rejected, approve_request_id },
+    { changes_accepted, changes_rejected, approve_request_id },
   ),
 );
 

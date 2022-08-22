@@ -47,9 +47,9 @@ const SpecChangeManagement = ({ actionsIcons }) => {
   const { id: specID } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [approveRequestSelected, setApproveRequestSelected] = useState();
-  const [blocksAccepted, setBlocksAccepted] = useState([]);
-  const [blocksRejected, setBlocksRejected] = useState([]);
-  const changes = blocksAccepted.length + blocksRejected.length;
+  const [changesAccepted, setChangesAccepted] = useState([]);
+  const [changesRejected, setChangesRejected] = useState([]);
+  const changes = changesAccepted.length + changesRejected.length;
   const dispatch = useDispatch();
   const {
     approveRequest,
@@ -64,14 +64,14 @@ const SpecChangeManagement = ({ actionsIcons }) => {
   const handleSaveChanges = () => {
     const params = {
       specID,
-      blocks_accepted: blocksAccepted,
-      blocks_rejected: blocksRejected,
+      changes_accepted: changesAccepted,
+      changes_rejected: changesRejected,
       approve_request_id: approveRequestSelected.id,
     };
     dispatch(
       onSaveSpecChanges(params, () => {
-        setBlocksAccepted([]);
-        setBlocksRejected([]);
+        setChangesAccepted([]);
+        setChangesRejected([]);
         handleCloseModal();
       }),
     );
@@ -145,20 +145,52 @@ const SpecChangeManagement = ({ actionsIcons }) => {
       {approveRequestBlocks && (
         <ContainerChanges>
           {approveRequestBlocks.map((block) => (
+            <>
             <ChangeItem
               key={`${block.type}-${block.change.action}-${block.id}`}
               isOwner={user_owner}
-              blockId={block.id}
+              changeId={block.change.id}
               type={block.type}
               change={block.change}
               status={block.change.status}
               element={block.element}
               icon={actionsIcons[block.change.action]}
-              blocksAccepted={blocksAccepted}
-              blocksRejected={blocksRejected}
-              setBlocksAccepted={setBlocksAccepted}
-              setBlocksRejected={setBlocksRejected}
+              changesAccepted={changesAccepted}
+              changesRejected={changesRejected}
+              setBlocksAccepted={setChangesAccepted}
+              setBlocksRejected={setChangesRejected}
             />
+            { block.text && <ChangeItem
+                key={`${block.text.type}-${block.text.change.action}-${block.text.id}`}
+                isOwner={user_owner}
+                changeId={block.text.change.id}
+                type={block.text.type}
+                change={block.text.change}
+                status={block.text.change.status}
+                element={block.text}
+                icon={actionsIcons[block.text.change.action]}
+                changesAccepted={changesAccepted}
+                changesRejected={changesRejected}
+                setBlocksAccepted={setChangesAccepted}
+                setBlocksRejected={setChangesRejected}
+              />
+            }
+            { block.image && <ChangeItem
+                key={`${block.image.type}-${block.image.change.action}-${block.image.id}`}
+                isOwner={user_owner}
+                changeId={block.image.change.id}
+                type={block.image.type}
+                change={block.image.change}
+                status={block.image.change.status}
+                element={block.image}
+                icon={actionsIcons[block.image.change.action]}
+                changesAccepted={changesAccepted}
+                changesRejected={changesRejected}
+                setBlocksAccepted={setChangesAccepted}
+                setBlocksRejected={setChangesRejected}
+              />
+            }
+            </>
           ))}
         </ContainerChanges>
       )}
