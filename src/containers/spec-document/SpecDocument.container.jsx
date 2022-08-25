@@ -189,7 +189,7 @@ const SpecDocument = ({ canEditOwnerUser }) => {
     dispatch(onUpdateSpecBlockText({ textID, specID, textValue }));
   };
 
-  const canEdit = (action !== 'remove' && !sent) || elementUserOwned;
+  const canEdit = (action !== 'remove' && !sent) || elementUserOwned || (status === 'accepted' && sent);
   const canEditText = actionText !== 'remove' && !sentText;
   const canEditImage = actionImage !== 'remove' && !sentImage;
   const canAddText = !selectedBlock?.text;
@@ -217,30 +217,29 @@ const SpecDocument = ({ canEditOwnerUser }) => {
     if (canEdit)
       return (
         <>
-          {canAddText && !sent && (
+          {canAddText && (
             <BlockMenuItem onClick={handleShowBlockEditor(selectedBlockID)}>
               Añadir texto
             </BlockMenuItem>
           )}
           {typeBlock === 'Product' &&
             productImages.length > 0 &&
-            !productImage &&
-            !sent && (
+            !productImage && (
               <BlockMenuItem onClick={handleShowImagesModal(selectedBlockID)}>
                 Añadir una imagen
               </BlockMenuItem>
             )}
-          {typeBlock === 'Product' && elementUserOwned && !sent && (
+          {typeBlock === 'Product' && elementUserOwned && (
             <BlockMenuItem onClick={handleEditProduct(selectedBlock)}>
               Editar
             </BlockMenuItem>
           )}
-          {typeBlock === 'Product' && !sent && (
+          {typeBlock === 'Product' && (
             <BlockMenuItem onClick={handleRemoveBlock(selectedBlockID)}>
               Eliminar
             </BlockMenuItem>
           )}
-          {action === 'edit' && status !== 'accepted' && !sent && (
+          {action === 'edit' && status !== 'accepted' && (
             <BlockMenuItem onClick={handleUndoChange()}>
               Deshacer Edición
             </BlockMenuItem>
@@ -254,7 +253,7 @@ const SpecDocument = ({ canEditOwnerUser }) => {
             Deshacer Eliminar
           </BlockMenuItem>
         )}
-        {sent && (
+        {sent && status !== 'accepted' && (
           <BlockMenuItem onClick={handleUndoSend()}>
             Deshacer Enviar
           </BlockMenuItem>
@@ -287,7 +286,7 @@ const SpecDocument = ({ canEditOwnerUser }) => {
             Deshacer Eliminar
           </BlockMenuItem>
         )}
-        {sentText && (
+        {sentText && statusText !== 'accepted' && (
           <BlockMenuItem onClick={handleUndoSend()}>
             Deshacer Enviar
           </BlockMenuItem>
@@ -328,7 +327,7 @@ const SpecDocument = ({ canEditOwnerUser }) => {
             Deshacer Eliminar
           </BlockMenuItem>
         )}
-        {sentImage && selectedBlockImage?.change?.action !== 'remove' && (
+        {sentImage && selectedBlockImage?.change?.action !== 'remove' && statusImage !== 'accepted' && (
           <BlockMenuItem onClick={handleUndoSend()}>
             Deshacer Enviar
           </BlockMenuItem>
