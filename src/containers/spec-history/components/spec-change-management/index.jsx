@@ -20,7 +20,7 @@ import {
 } from '../../../spec-document/SpecDocument.actions';
 import ChangeItem from './components/ChangeItem';
 
-import { getDataSelectUser } from './utils';
+import { getDataSelectUser, getDataChange } from './utils';
 
 import {
   Container,
@@ -142,56 +142,29 @@ const SpecChangeManagement = ({ actionsIcons }) => {
           </FilterContent>
         </FilterContainer>
       )}
-      {approveRequestBlocks && (
+      {!!approveRequestBlocks && (
         <ContainerChanges>
-          {approveRequestBlocks.map((block) => (
-            <>
-            <ChangeItem
-              key={`${block.type}-${block.change.action}-${block.id}`}
-              isOwner={user_owner}
-              changeId={block.change.id}
-              type={block.type}
-              change={block.change}
-              status={block.change.status}
-              element={block.element}
-              icon={actionsIcons[block.change.action]}
-              changesAccepted={changesAccepted}
-              changesRejected={changesRejected}
-              setBlocksAccepted={setChangesAccepted}
-              setBlocksRejected={setChangesRejected}
-            />
-            { block.text && <ChangeItem
-                key={`${block.text.type}-${block.text.change.action}-${block.text.id}`}
+          {approveRequestBlocks.map((block) => {
+            const { blockId, blockType, element, change } = getDataChange(
+              block,
+            );
+            return (
+              <ChangeItem
+                key={`${blockType}-${change.action}-${blockId}`}
                 isOwner={user_owner}
-                changeId={block.text.change.id}
-                type={block.text.type}
-                change={block.text.change}
-                status={block.text.change.status}
-                element={block.text}
-                icon={actionsIcons[block.text.change.action]}
+                changeId={change.id}
+                type={blockType}
+                change={change}
+                status={change.status}
+                element={element}
+                icon={actionsIcons[change.action]}
                 changesAccepted={changesAccepted}
                 changesRejected={changesRejected}
                 setBlocksAccepted={setChangesAccepted}
                 setBlocksRejected={setChangesRejected}
               />
-            }
-            { block.image && <ChangeItem
-                key={`${block.image.type}-${block.image.change.action}-${block.image.id}`}
-                isOwner={user_owner}
-                changeId={block.image.change.id}
-                type={block.image.type}
-                change={block.image.change}
-                status={block.image.change.status}
-                element={block.image}
-                icon={actionsIcons[block.image.change.action]}
-                changesAccepted={changesAccepted}
-                changesRejected={changesRejected}
-                setBlocksAccepted={setChangesAccepted}
-                setBlocksRejected={setChangesRejected}
-              />
-            }
-            </>
-          ))}
+            );
+          })}
         </ContainerChanges>
       )}
       {!!approveRequest.length && (

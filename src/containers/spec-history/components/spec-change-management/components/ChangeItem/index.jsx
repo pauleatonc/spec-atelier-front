@@ -52,17 +52,17 @@ const ChangeItem = ({
   const [isExpanded, setIsExpanded] = useState(false);
   const expandible = [TYPES.PRODUCT, TYPES.TEXT, TYPES.IMAGE].includes(type);
   const isChange = expandible && status === 'waiting';
-  const isAccepted = !!changesAccepted.find(e => e === changeId);
-  const isRejected = !!changesRejected.find(e => e === changeId);
+  const isAccepted = !!changesAccepted.find((e) => e === changeId);
+  const isRejected = !!changesRejected.find((e) => e === changeId);
   const handleAcceptChange = () => {
     if (isRejected) {
-      setBlocksRejected(changesRejected.filter((block) => block !== changeId));
+      setBlocksRejected(changesRejected.filter((e) => e !== changeId));
     }
     setBlocksAccepted([...changesAccepted, changeId]);
   };
   const handleRejectChange = () => {
     if (isAccepted) {
-      setBlocksAccepted(changesAccepted.filter(e => e !== changeId));
+      setBlocksAccepted(changesAccepted.filter((e) => e !== changeId));
     }
     setBlocksRejected([...changesRejected, changeId]);
   };
@@ -88,7 +88,7 @@ const ChangeItem = ({
         {isChange && isOwner && <IconTypeChange src={icon} alt="icon_action" />}
         {!isExpanded && (
           <ElementTitle>
-            {change.status !== "accepted" && change.sent && expandible ? (
+            {change.status !== 'accepted' && change.sent && expandible ? (
               <BlurryTitle>{`${element.item_id} `}</BlurryTitle>
             ) : (
               `${element.item_id} `
@@ -158,14 +158,16 @@ const ChangeItem = ({
                   </TextDesc>
                 </ProductDescContainer>
               </DescChange>
-              {TYPES.PRODUCT === type && <ProductImageContainer>
-                <ImageProduct
-                  src={element?.images[0]?.urls?.medium || NO_PHOTO}
-                />
-                <GoToProduct onClick={handleShowProduct}>
-                  Ver producto
-                </GoToProduct>
-              </ProductImageContainer>}
+              {TYPES.PRODUCT === type && (
+                <ProductImageContainer>
+                  <ImageProduct
+                    src={element?.images[0]?.urls?.medium || NO_PHOTO}
+                  />
+                  <GoToProduct onClick={handleShowProduct}>
+                    Ver producto
+                  </GoToProduct>
+                </ProductImageContainer>
+              )}
             </ChangeInfo>
           )}
           <ContainerButtons>
