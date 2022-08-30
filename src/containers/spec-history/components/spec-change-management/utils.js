@@ -28,5 +28,11 @@ export const getDataChange = (block) => {
     ? block[approveRequestType]
     : block.element;
 
-  return { blockId, blockType, element, change };
+  return {
+    isApproveRequestType,
+    blockId,
+    blockType,
+    element,
+    change,
+  };
 };

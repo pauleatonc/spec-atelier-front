@@ -23,7 +23,7 @@ export const TYPES = {
   ITEM: 'Item',
   PRODUCT: 'Product',
   TEXT: 'Text',
-  IMAGE: 'Image'
+  IMAGE: 'Image',
 };
 
 export const SIZES = {
@@ -68,15 +68,17 @@ export const ACTION_TYPE_BACKGROUND = {
   },
 };
 
-export const expandableContainer = ({status, isOwner, type}) =>
-  [TYPES.PRODUCT, TYPES.TEXT, TYPES.IMAGE].includes(type) && status === 'waiting'  && isOwner
+export const expandableContainer = ({ status, isOwner, type }) =>
+  [TYPES.PRODUCT, TYPES.TEXT, TYPES.IMAGE].includes(type) &&
+  status === 'waiting' &&
+  isOwner;
 
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   background-color: ${({ action, status, isExpanded, isOwner, type }) => {
     const isExpandedBackground = isExpanded ? WHITE : CONCRETE;
-    return expandableContainer({status, isOwner, type}) && !isExpanded
+    return expandableContainer({ status, isOwner, type }) && !isExpanded
       ? `${ACTION_TYPE_BACKGROUND[action].normal}`
       : isExpandedBackground;
   }};
@@ -89,12 +91,14 @@ export const Container = styled.div`
   &:hover {
     background-color: ${({ action, status, isExpanded, isOwner, type }) => {
       const isExpandedBackground = isExpanded ? WHITE : CONCRETE;
-      return expandableContainer({status, isExpanded, isOwner, type}) && !isExpanded
+      return expandableContainer({ status, isExpanded, isOwner, type }) &&
+        !isExpanded
         ? `${ACTION_TYPE_BACKGROUND[action].hover}`
         : isExpandedBackground;
     }};
     box-shadow: ${({ type, status, isOwner }) =>
-      expandableContainer({status, isOwner, type}) && `0 1px 4px 0 ${BLACK_OPACITY}`};
+      expandableContainer({ status, isOwner, type }) &&
+      `0 1px 4px 0 ${BLACK_OPACITY}`};
   }
 `;
 
@@ -112,9 +116,7 @@ export const HeaderChange = styled.div`
   font-size: ${({ type }) => `${SIZES[type]}px`};
   font-weight: ${({ type }) => headerFontWeight[type]};
   cursor: ${({ type, status, isOwner }) =>
-    expandableContainer({status, isOwner, type})
-      ? 'pointer'
-      : 'initial'};
+    expandableContainer({ status, isOwner, type }) ? 'pointer' : 'initial'};
 `;
 
 export const IconTypeChange = styled.img`
@@ -189,7 +191,7 @@ export const ProductImageContainer = styled.div`
 `;
 
 export const ImageProduct = styled.img`
-  width: 200px;
+  width: ${({ width }) => (width ? `${width}px` : '200px')};
   max-height: 260px;
   border-radius: 4px;
   margin-bottom: 5px;

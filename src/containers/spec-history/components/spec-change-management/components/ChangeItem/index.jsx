@@ -47,6 +47,8 @@ const ChangeItem = ({
   changesRejected = [],
   setBlocksAccepted,
   setBlocksRejected,
+  isApproveRequestType,
+  parentElement,
 }) => {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -54,6 +56,10 @@ const ChangeItem = ({
   const isChange = expandible && status === 'waiting';
   const isAccepted = !!changesAccepted.find((e) => e === changeId);
   const isRejected = !!changesRejected.find((e) => e === changeId);
+  const itemId = isApproveRequestType ? parentElement.item_id : element.item_id;
+  const itemTitle = isApproveRequestType
+    ? `${parentElement.item_title} (${element.item_title})`
+    : element.item_title;
   const handleAcceptChange = () => {
     if (isRejected) {
       setBlocksRejected(changesRejected.filter((e) => e !== changeId));
@@ -68,6 +74,20 @@ const ChangeItem = ({
   };
 
   const handleShowProduct = () => dispatch(getProduct({ id: element.id }));
+
+  const getTitleChange = () => {
+    const actionsText = {
+      add: 'añadió',
+      remove: 'eliminó',
+      edit: 'editó',
+    };
+    const changeComplementText = {
+      [TYPES.IMAGE]: 'la siguiente imagen:',
+      [TYPES.TEXT]: 'el siguiente texto:',
+    };
+
+    return `${actionsText[change.action]} ${changeComplementText[type]}`;
+  };
 
   return (
     <Container
@@ -89,11 +109,11 @@ const ChangeItem = ({
         {!isExpanded && (
           <ElementTitle>
             {change.status !== 'accepted' && change.sent && expandible ? (
-              <BlurryTitle>{`${element.item_id} `}</BlurryTitle>
+              <BlurryTitle>{`${itemId} `}</BlurryTitle>
             ) : (
-              `${element.item_id} `
+              `${itemId} `
             )}
-            {element.item_title}
+            {itemTitle}
           </ElementTitle>
         )}
         {expandible && (
@@ -117,16 +137,39 @@ const ChangeItem = ({
       </HeaderChange>
       {isExpanded && (
         <DetailsChange>
-          {change.action === 'edit' ? (
+          {isApproveRequestType ? (
             <ChangeInfo>
               <DescChange>
                 <ImgContainerChange>
                   <IconUser user={change.user} size="56" />
                   <TextDesc mleft="10px">
                     {change.user.name}{' '}
-                    <TextDesc bold>{change.description} </TextDesc>
+                    <TextDesc bold>{getTitleChange()}</TextDesc>
                   </TextDesc>
                 </ImgContainerChange>
+                <ProductDescContainer>
+                  <TextDesc fullwidth bold mBottom="15px">
+                    {change.sent ? (
+                      <BlurryTitle>{`${parentElement.item_id} `}</BlurryTitle>
+                    ) : (
+                      `${parentElement.item_id} `
+                    )}
+                    {parentElement.item_title}
+                  </TextDesc>
+                  {type === 'Text' && (
+                    <TextDesc
+                      fullwidth
+                      mBottom="15px"
+                      dangerouslySetInnerHTML={{ __html: element.text }}
+                    />
+                  )}
+                  {type === 'Image' && (
+                    <ImageProduct
+                      width={300}
+                      src={element?.image?.urls?.medium || NO_PHOTO}
+                    />
+                  )}
+                </ProductDescContainer>
               </DescChange>
             </ChangeInfo>
           ) : (
@@ -137,7 +180,7 @@ const ChangeItem = ({
                   <TextDesc mleft="10px">
                     {change.user.name}{' '}
                     <TextDesc bold>
-                      {`${change.title} ${element.item_title}`}{' '}
+                      {`${change.title} ${element.item_title}`}
                     </TextDesc>
                   </TextDesc>
                 </ImgContainerChange>

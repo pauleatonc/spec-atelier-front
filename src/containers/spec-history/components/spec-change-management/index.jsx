@@ -145,9 +145,13 @@ const SpecChangeManagement = ({ actionsIcons }) => {
       {!!approveRequestBlocks && (
         <ContainerChanges>
           {approveRequestBlocks.map((block) => {
-            const { blockId, blockType, element, change } = getDataChange(
-              block,
-            );
+            const {
+              isApproveRequestType,
+              blockId,
+              blockType,
+              element,
+              change,
+            } = getDataChange(block);
             return (
               <ChangeItem
                 key={`${blockType}-${change.action}-${blockId}`}
@@ -162,6 +166,8 @@ const SpecChangeManagement = ({ actionsIcons }) => {
                 changesRejected={changesRejected}
                 setBlocksAccepted={setChangesAccepted}
                 setBlocksRejected={setChangesRejected}
+                isApproveRequestType={isApproveRequestType}
+                parentElement={block.element}
               />
             );
           })}
