@@ -45,10 +45,13 @@ const ChangeItem = ({
   icon,
   changesAccepted = [],
   changesRejected = [],
-  setBlocksAccepted,
-  setBlocksRejected,
+  setChangesAccepted,
+  setChangesRejected,
   isApproveRequestType,
+  parentChangeId,
   parentElement,
+  textChange,
+  imageChange,
 }) => {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -60,17 +63,62 @@ const ChangeItem = ({
   const itemTitle = isApproveRequestType
     ? `${parentElement.item_title} (${element.item_title})`
     : element.item_title;
+
   const handleAcceptChange = () => {
+    const idsToAccept = [changeId];
+    if (
+      type === TYPES.PRODUCT &&
+      textChange &&
+      !changesAccepted.includes(textChange.change.id)
+    )
+      idsToAccept.push(textChange.change.id);
+    if (
+      type === TYPES.PRODUCT &&
+      imageChange &&
+      !changesAccepted.includes(imageChange.change.id)
+    )
+      idsToAccept.push(imageChange.change.id);
+    if (isApproveRequestType && !changesAccepted.includes(parentChangeId))
+      idsToAccept.push(parentChangeId);
+
     if (isRejected) {
-      setBlocksRejected(changesRejected.filter((e) => e !== changeId));
+      const idsToAcceptSet = new Set(idsToAccept);
+      setChangesRejected(
+        changesRejected.filter(
+          (idChangeRejected) => !idsToAcceptSet.has(idChangeRejected),
+        ),
+      );
     }
-    setBlocksAccepted([...changesAccepted, changeId]);
+
+    setChangesAccepted([...changesAccepted, ...idsToAccept]);
+    setIsExpanded(false);
   };
+
   const handleRejectChange = () => {
+    const idsToReject = [changeId];
+    if (
+      type === TYPES.PRODUCT &&
+      textChange &&
+      !changesRejected.includes(textChange.change.id)
+    )
+      idsToReject.push(textChange.change.id);
+    if (
+      type === TYPES.PRODUCT &&
+      imageChange &&
+      !changesRejected.includes(imageChange.change.id)
+    )
+      idsToReject.push(imageChange.change.id);
     if (isAccepted) {
-      setBlocksAccepted(changesAccepted.filter((e) => e !== changeId));
+      const idsToRejectSet = new Set(idsToReject);
+      setChangesAccepted(
+        changesAccepted.filter(
+          (idChangeAccepted) => !idsToRejectSet.has(idChangeAccepted),
+        ),
+      );
     }
-    setBlocksRejected([...changesRejected, changeId]);
+
+    setChangesRejected([...changesRejected, ...idsToReject]);
+    setIsExpanded(false);
   };
 
   const handleShowProduct = () => dispatch(getProduct({ id: element.id }));
