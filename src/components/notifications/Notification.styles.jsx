@@ -131,6 +131,7 @@ export const ListItem = styled.div`
 
 export const ContentActions = styled.div`
   display: flex;
+  justify-content: flex-end;
 `;
 
 export const ContentPoint = styled.div`

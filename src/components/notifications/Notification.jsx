@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import {
   Separator,
@@ -12,24 +11,25 @@ import {
   ContentPoint,
   NewPoint,
   ActionPerformed,
-  LinkSeeAll,
+  // LinkSeeAll,
   UndoSpan,
   ContentPrimary,
 } from './Notification.styles';
+import {
+  acceptNotificationsAC,
+  rejectNotifications,
+  undoRejectNotifications,
+} from '../../containers/spec-header/SpecHeader.actions';
 import { getMyProjects } from '../../containers/projects-list/ProjectsList.actions';
 import Button from '../buttons/Button';
+import IconUser from '../IconUser/index';
+import GoProject from './components/GoProject';
 import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 import {
   EBB,
   LOADING_ACCEPT,
   LOADING_ACCEPT_INITIAL,
 } from '../../config/constants/styled-vars';
-import {
-  acceptNotificationsAC,
-  rejectNotifications,
-  undoRejectNotifications,
-} from '../../containers/spec-header/SpecHeader.actions';
-import IconUser from '../IconUser/index';
 
 const Notifications = (props) => {
   const {
@@ -45,7 +45,8 @@ const Notifications = (props) => {
     projectSpecId,
   } = props;
   const dispatch = useDispatch();
-  const history = useHistory();
+  const itemTypePI = itemType === 'ProjectInvitation';
+  const itemTypePAR = itemType === 'ProjectSpec::ApproveRequest';
   const { loadingNoti, notificationsList } = useSelector(
     (state) => state.specHeader,
   );
@@ -143,11 +144,12 @@ const Notifications = (props) => {
       });
     });
   };
-  if (itemType === 'ProjectInvitation' || itemType === 'ProjectSpec::ApproveRequest' ) {
+
+  if (itemTypePI || itemTypePAR) {
     return (
       <ContentPrimary>
         <ContentPoint>
-          {triggeredStatus === false && <NewPoint />}
+          {!triggeredStatus && itemTypePI && <NewPoint />}
           <ListItem watchedStatus={watchedStatus}>
             <ProfilePictureContainer>
               <IconUser user={userData} size={56} fontSize={24} />
@@ -159,15 +161,19 @@ const Notifications = (props) => {
                 dangerouslySetInnerHTML={{ __html: message }}
               />
               <ContentActions>
+                {itemTypePAR && (
+                  <GoProject
+                    loadingNoti={loadingNoti}
+                    projectSpecId={projectSpecId}
+                  />
+                )}
                 {accionStatus === 'Proyecto Aceptado' && (
                   <>
                     <ActionPerformed>Proyecto aceptado</ActionPerformed>
-                    <LinkSeeAll
+                    <GoProject
                       loadingNoti={loadingNoti}
-                      onClick={() => history.push(`/specs/${projectSpecId}`)}
-                    >
-                      Ir al proyecto
-                    </LinkSeeAll>
+                      projectSpecId={projectSpecId}
+                    />
                   </>
                 )}
                 {accionStatus === 'Proyecto Rechazado' && (
@@ -221,6 +227,7 @@ Notifications.defaultProps = {
   projectId: 0,
   userData: {},
 };
+
 Notifications.propTypes = {
   itemType: PropTypes.string,
   triggered: PropTypes.bool,
