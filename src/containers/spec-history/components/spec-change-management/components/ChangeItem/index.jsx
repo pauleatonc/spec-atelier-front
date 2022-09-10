@@ -66,18 +66,6 @@ const ChangeItem = ({
 
   const handleAcceptChange = () => {
     const idsToAccept = [changeId];
-    if (
-      type === TYPES.PRODUCT &&
-      textChange &&
-      !changesAccepted.includes(textChange.change.id)
-    )
-      idsToAccept.push(textChange.change.id);
-    if (
-      type === TYPES.PRODUCT &&
-      imageChange &&
-      !changesAccepted.includes(imageChange.change.id)
-    )
-      idsToAccept.push(imageChange.change.id);
     if (isApproveRequestType && !changesAccepted.includes(parentChangeId))
       idsToAccept.push(parentChangeId);
 
