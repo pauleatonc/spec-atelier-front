@@ -4,7 +4,7 @@ import {
   CHANGE_OPTION_CHANGES_MANAGEMENT,
   SET_AUTHOR,
 } from './SpecHistory.actions';
-import { SPEC_HISTORY_TABLE } from '../../config/constants/button-variants';
+import { SPEC_CHANGE_MANAGEMENT } from '../../config/constants/button-variants';
 
 const specHistoryState = {
   loading: true,
@@ -13,7 +13,7 @@ const specHistoryState = {
   total: 0,
   error: false,
   authors: [],
-  option_changes_management: SPEC_HISTORY_TABLE,
+  option_changes_management: SPEC_CHANGE_MANAGEMENT,
   author: { id: 'allAuthors', name: 'Todos los autores' },
   params: {
     keyword: '',

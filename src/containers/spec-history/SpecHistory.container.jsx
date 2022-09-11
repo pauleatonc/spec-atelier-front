@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  changeOptionHistory,
   onGetChangeHistory,
   onGetChangesAuthor,
   onSetAuthor,
@@ -11,6 +10,7 @@ import { SPEC_HISTORY_TABLE } from '../../config/constants/button-variants';
 import StructureTableChangeHistory from './components/StructureTableChangeHistory';
 import ButtonsHistoryChangesManagement from './components/ButtonsHistoryChangesManagement';
 import IconUser from '../../components/IconUser';
+import SpecChangeManagement from './components/spec-change-management';
 import {
   ACCEPTED_ICON,
   ADD_ICON,
@@ -44,6 +44,7 @@ const ChangeHistoryContainer = () => {
     author,
     page,
   } = useSelector((state) => state.specHistory);
+  const { approveRequestLoading } = useSelector((state) => state.specDocument);
   const [pageCount, setPageCount] = useState(0);
   const [keyword, setKeyword] = useState(params.keyword);
   const dispatch = useDispatch();
@@ -52,7 +53,6 @@ const ChangeHistoryContainer = () => {
   useEffect(() => {
     dispatch(onGetChangeHistory(specID, { limit: 7, page: 0 }));
     dispatch(onGetChangesAuthor(specID, { limit: 7, page: 0 }));
-    dispatch(changeOptionHistory(SPEC_HISTORY_TABLE));
   }, []);
 
   const pagesCounter = useCallback(({ pageSize }) => {
@@ -172,7 +172,7 @@ const ChangeHistoryContainer = () => {
 
   return (
     <ContainerTable>
-      <ButtonsHistoryChangesManagement />
+      {!approveRequestLoading && <ButtonsHistoryChangesManagement />}
       {option_changes_management === SPEC_HISTORY_TABLE ? (
         !loading && (
           <StructureTableChangeHistory
@@ -190,9 +190,7 @@ const ChangeHistoryContainer = () => {
           />
         )
       ) : (
-        <h2 style={{ textAlign: 'center', margin: '40px' }}>
-          Gestión de Cambios
-        </h2>
+        <SpecChangeManagement actionsIcons={actionsIcons} />
       )}
     </ContainerTable>
   );

@@ -11,12 +11,15 @@ import {
   updateSpecBlockText,
   deleteSpecBlockText,
   updateProduct,
+  saveSpecChanges,
   submitChanges,
   editSpecBlockImage,
   undoRemove,
   undoSend,
   getProjectStructure,
   getUpdated,
+  getApproveRequest,
+  getApproveRequestBlocks,
 } from '../../services/specs.service';
 import { onShowAlertSuccess } from '../alert/Alert.actions';
 import { updateProductsWithProduct } from '../products-list/ProductsList.actions';
@@ -443,6 +446,34 @@ export const handleSaveTeamMembers = (invitations) => (dispatch) =>
 export const handleDeleteMemberTeam = (permissionId) => (dispatch) =>
   dispatch(onActionCreator(DELETE_MEMBER_TEAM, { permissionId }));
 
+export const SAVE_SPEC_CHANGES = 'SAVE_SPEC_CHANGES';
+export const SAVE_SPEC_CHANGES_SUCCESS = 'SAVE_SPEC_CHANGES_SUCCESS';
+export const SAVE_SPEC_CHANGES_ERROR = 'SAVE_SPEC_CHANGES_ERROR';
+export const onSaveSpecChanges = (
+  { specID, changes_accepted, changes_rejected, approve_request_id },
+  callback,
+) => async (dispatch, getState) => {
+  const { auth } = getState();
+  dispatch(onActionCreator(SAVE_SPEC_CHANGES));
+  saveSpecChanges({
+    specID,
+    userID: auth.user?.id,
+    changes_accepted,
+    changes_rejected,
+    approve_request_id,
+  })
+    .then((response) => {
+      if (callback) callback();
+      dispatch(
+        onActionCreator(SAVE_SPEC_CHANGES_SUCCESS, { blocks: response.blocks }),
+      );
+      dispatch(onShowAlertSuccess({ message: response.message }));
+    })
+    .catch((error) =>
+      dispatch(onActionCreator(SAVE_SPEC_CHANGES_ERROR, { error })),
+    );
+};
+
 export const SEND_CHANGED_BLOCKS = 'SEND_CHANGED_BLOCKS';
 export const SEND_CHANGED_BLOCKS_SUCCESS = 'SEND_CHANGED_BLOCKS_SUCCESS';
 export const SEND_CHANGED_BLOCKS_ERROR = 'SEND_CHANGED_BLOCKS_ERROR';
@@ -566,5 +597,57 @@ export const onGetProjectStructure = (specID) => (dispatch) => {
         }),
       ),
     (error) => console.error(error),
+  );
+};
+
+export const GET_APPROVE_REQUEST_BLOCKS_LOADING =
+  'GET_APPROVE_REQUEST_BLOCKS_LOADING';
+export const GET_APPROVE_REQUEST_BLOCKS_SUCCESS =
+  'GET_APPROVE_REQUEST_BLOCKS_SUCCESS';
+export const GET_APPROVE_REQUEST_BLOCKS_ERROR =
+  'GET_APPROVE_REQUEST_BLOCKS_ERROR';
+export const onGetApproveRequestBlocks = (projectId, approveId, callback) => (
+  dispatch,
+  getState,
+) => {
+  const { user } = getState().auth;
+  dispatch(onActionCreator(GET_APPROVE_REQUEST_BLOCKS_LOADING));
+  getApproveRequestBlocks({ userId: user.id, projectId, approveId }).then(
+    (response) => {
+      dispatch(onActionCreator(GET_APPROVE_REQUEST_BLOCKS_SUCCESS, response));
+      if (callback) callback();
+    },
+    (error) => {
+      dispatch(onActionCreator(GET_APPROVE_REQUEST_BLOCKS_ERROR, error));
+      console.error(error);
+    },
+  );
+};
+
+export const GET_APPROVE_REQUEST_LOADING = 'GET_APPROVE_REQUEST_LOADING';
+export const GET_APPROVE_REQUEST_SUCCESS = 'GET_APPROVE_REQUEST_SUCCESS';
+export const GET_APPROVE_REQUEST_ERROR = 'GET_APPROVE_REQUEST_ERROR';
+export const onGetApproveRequest = (projectId) => (dispatch, getState) => {
+  const { user } = getState().auth;
+  dispatch(onActionCreator(GET_APPROVE_REQUEST_LOADING));
+  getApproveRequest({ userId: user.id, projectId }).then(
+    (response) => {
+      dispatch(onActionCreator(GET_APPROVE_REQUEST_SUCCESS, response));
+      if (response.approve_requests.length)
+        dispatch(
+          onGetApproveRequestBlocks(projectId, response.approve_requests[0].id),
+        );
+      else
+        dispatch(
+          onActionCreator(
+            GET_APPROVE_REQUEST_ERROR,
+            'No hay solicitudes pendientes',
+          ),
+        );
+    },
+    (error) => {
+      dispatch(onActionCreator(GET_APPROVE_REQUEST_ERROR, error));
+      console.error(error);
+    },
   );
 };

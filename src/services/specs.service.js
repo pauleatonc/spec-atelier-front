@@ -201,6 +201,16 @@ export const getChangesAuthor = factoryService(({ specID, userID, params }) =>
   ),
 );
 
+/**
+ * Get the list changes.
+ */
+export const saveSpecChanges = factoryService(({ specID, userID, changes_accepted, changes_rejected, approve_request_id }) =>
+  postJsonRequest(
+    `${API_BASE_URL}/users/${userID}/project_specs/${specID}/blocks/save_changes`,
+    { changes_accepted, changes_rejected, approve_request_id },
+  ),
+);
+
 /** Send block changes */
 export const submitChanges = factoryService(
   ({ changes, specID, userID, comment }) =>
@@ -242,4 +252,23 @@ export const getProjectStructure = factoryService(({ specID }) =>
   getJsonRequest(
     `${API_BASE_URL}/configs/project_structure?project_spec_id=${specID}`,
   ),
+);
+
+/**
+ * Get Approve request
+ */
+export const getApproveRequest = factoryService(({ userId, projectId }) =>
+  getJsonRequest(
+    `${API_BASE_URL}/users/${userId}/project_specs/${projectId}/approve_requests`,
+  ),
+);
+
+/**
+ * Get Approve request blocks
+ */
+export const getApproveRequestBlocks = factoryService(
+  ({ userId, projectId, approveId }) =>
+    getJsonRequest(
+      `${API_BASE_URL}/users/${userId}/project_specs/${projectId}/approve_requests/${approveId}/blocks`,
+    ),
 );

@@ -1,3 +1,5 @@
+import { saveSpecChanges } from "../../services/specs.service";
+
 export const getFormatedTableData = (blocks) => {
   const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
 
@@ -161,6 +163,23 @@ export const getSections = (blocks) => {
   }));
 };
 
+export const getChangesCounts = (blocks) =>
+  blocks.reduce(
+    (prevValue, currentValue) =>
+      currentValue.status === 'waiting' && currentValue.type === 'Product'
+        ? prevValue + 1
+        : prevValue + 0,
+    0,
+  );
+
+export const getOwnerBlocks = (blocks) => {
+  return blocks.filter(
+    (block) =>
+      block.change?.status === 'accepted' ||
+      (block.change?.status === 'waiting' && block.change.action === 'remove'),
+  );
+};
+
 export const getChanges = (blocks) => {
   const changes = [];
   blocks.forEach((block) => {
@@ -178,9 +197,17 @@ export const getChanges = (blocks) => {
 };
 
 export const filteredBlocks = (blocks, response) =>
-  blocks.map((block) =>
-    block.id === response.block.id ? response.block : block,
-  );
+  blocks.map((block) => {
+    let _block;
+    if (response.block) {
+      _block = block.id === response.block.id ? response.block : block
+    }
+    if (response.blocks) {
+      const returned_blocks = response.blocks.filter((b) => block.id === b.id)
+      _block = returned_blocks.length > 0 ? returned_blocks[0] : block
+    }
+    return _block;
+  });
 
 export const getUserID = (getState) => {
   const { auth } = getState();

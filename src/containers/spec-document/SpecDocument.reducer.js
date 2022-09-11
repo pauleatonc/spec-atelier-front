@@ -2,6 +2,8 @@ import {
   getFormatedTableData,
   getTotalExpandManual,
   getSections,
+  getOwnerBlocks,
+  getChangesCounts,
 } from './utils';
 import {
   ADD_SPEC_BLOCK_SUCCESS,
@@ -18,6 +20,9 @@ import {
   UPDATE_TEAM_DATA,
   SAVE_TEAM_MEMBERS,
   DELETE_MEMBER_TEAM,
+  SAVE_SPEC_CHANGES,
+  SAVE_SPEC_CHANGES_SUCCESS,
+  SAVE_SPEC_CHANGES_ERROR,
   SEND_CHANGED_BLOCKS_SUCCESS,
   EDIT_SPEC_BLOCK_IMAGE_SUCCESS,
   SEND_CHANGE_BLOCK_SUCCESS,
@@ -27,6 +32,12 @@ import {
   SET_UPDATE_FALSE,
   STOP_UPDATE,
   UNDO_STOP_UPDATE,
+  GET_APPROVE_REQUEST_LOADING,
+  GET_APPROVE_REQUEST_SUCCESS,
+  GET_APPROVE_REQUEST_ERROR,
+  GET_APPROVE_REQUEST_BLOCKS_LOADING,
+  GET_APPROVE_REQUEST_BLOCKS_SUCCESS,
+  GET_APPROVE_REQUEST_BLOCKS_ERROR,
 } from './SpecDocument.actions';
 
 const specDocumentState = {
@@ -36,11 +47,18 @@ const specDocumentState = {
   quoteTable: [],
   totalExpandManual: 0,
   sections: [],
+  changesCount: 0,
+  changesLoading: false,
+  changesError: null,
   changes: [],
   projectStructure: [],
   update: false,
   updateSuccess: false,
   actionGet: true,
+  approveRequest: [],
+  approveRequestLoading: false,
+  approveRequestError: null,
+  approveRequestBlocks: [],
 };
 
 /** The spec document' reducer */
@@ -132,6 +150,28 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         },
       };
     }
+    case SAVE_SPEC_CHANGES: {
+      return {
+        ...state,
+        changesLoading: true,
+      };
+    }
+    case SAVE_SPEC_CHANGES_SUCCESS: {
+      return {
+        ...state,
+        changesLoading: false,
+        changesError: null,
+        approveRequestBlocks: payload.blocks,
+        changesCount: getChangesCounts(payload.blocks),
+      };
+    }
+    case SAVE_SPEC_CHANGES_ERROR: {
+      return {
+        ...state,
+        changesLoading: false,
+        changesError: payload.error,
+      };
+    }
     case SEND_CHANGED_BLOCKS_SUCCESS: {
       return {
         ...state,
@@ -166,6 +206,32 @@ const specDocumentReducer = (state = specDocumentState, { payload, type }) => {
         projectStructure: payload.sections,
       };
     }
+    case GET_APPROVE_REQUEST_SUCCESS:
+      return {
+        ...state,
+        approveRequest: payload.approve_requests,
+      };
+    case GET_APPROVE_REQUEST_LOADING:
+    case GET_APPROVE_REQUEST_BLOCKS_LOADING:
+      return {
+        ...state,
+        approveRequestLoading: true,
+      };
+    case GET_APPROVE_REQUEST_ERROR:
+    case GET_APPROVE_REQUEST_BLOCKS_ERROR:
+      return {
+        ...state,
+        approveRequestLoading: false,
+        approveRequestError: payload.error,
+      };
+    case GET_APPROVE_REQUEST_BLOCKS_SUCCESS:
+      return {
+        ...state,
+        changesCount: payload.approve_request.count,
+        approveRequestBlocks: payload.blocks,
+        approveRequestLoading: false,
+      };
+
     default: {
       return state;
     }

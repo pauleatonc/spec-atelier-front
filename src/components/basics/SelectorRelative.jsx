@@ -15,6 +15,13 @@ import {
   IconInfo,
 } from './SelectorRelative.styles';
 
+export const getDetailsText = (option) => {
+  let detail = '';
+  if (option.count) detail = detail.concat(' ', `(${option.count})`);
+  if (option.date) detail = detail.concat(' - ', `${option.date}`);
+  return detail;
+};
+
 const propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
@@ -43,13 +50,18 @@ const SelectorRelative = ({
   backgroundPuertoRico,
   showIconInfo,
   position,
+  disabledSelected,
+  itemSelected,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   const onChangeOption = (value) => () => {
-    onChange(value);
-    toggle();
+    const isDisabledOption = disabledSelected && value.id === itemSelected.id;
+    if (!isDisabledOption) {
+      onChange(value);
+      toggle();
+    }
   };
 
   const onClickOusite = (callback) => {
@@ -96,6 +108,7 @@ const SelectorRelative = ({
           <ContentOption
             key={option.id}
             backgroundPuertoRico={backgroundPuertoRico}
+            disabled={disabledSelected && itemSelected.id === option.id}
           >
             <Option
               value={option.id}
@@ -105,7 +118,9 @@ const SelectorRelative = ({
               {Object.keys(option).includes('profile_image') ? (
                 <ContentUser>
                   <IconUser user={option} size="28" />
-                  <NameSection>{option.name}</NameSection>
+                  <NameSection>{`${option.name} ${getDetailsText(
+                    option,
+                  )}`}</NameSection>
                 </ContentUser>
               ) : (
                 <OptionNameSection>

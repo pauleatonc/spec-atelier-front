@@ -13,12 +13,14 @@ import {
   PUERTO_RICO_OPACITY,
   SILVER,
   WHITE,
+  MAX_SCREEN_MEDIUM,
 } from '../../config/constants/styled-vars';
 
 export const ContainerTable = styled.div`
+  max-width: ${MAX_SCREEN_MEDIUM}px;
   border: solid 1px ${MERCURY};
   background-color: ${WHITE};
-  height: 630px;
+  min-height: 630px;
   width: 80%;
 `;
 
@@ -126,7 +128,7 @@ export const ContentDate = styled.div`
 
 export const FilterSelectBox = styled.div`
   position: relative;
-  width: 237px;
+  width: ${({ width }) => width || '237px'};
   display: flex;
   flex-wrap: nowrap;
   align-items: center;

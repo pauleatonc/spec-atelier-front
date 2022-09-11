@@ -12,34 +12,45 @@ import {
   Separator,
 } from '../SpecHistory.styles';
 
-const ButtonsHistoryChangesManagement = () => {
+const ButtonsHistoryChangesManagement = ({ showHistory }) => {
   const { option_changes_management } = useSelector(
     (state) => state.specHistory,
   );
+  const {
+    project: { user_owner },
+  } = useSelector((state) => state.specDocument);
   const dispatch = useDispatch();
   const handleShowTable = (option) => () =>
     dispatch(changeOptionHistory(option));
 
   return (
     <HistoryChangeManagementContent>
-      <Item
-        active={option_changes_management === SPEC_CHANGE_MANAGEMENT}
-        onClick={handleShowTable(SPEC_CHANGE_MANAGEMENT)}
-      >
-        <ItemText active={option_changes_management === SPEC_CHANGE_MANAGEMENT}>
-          Gestión de cambios
-        </ItemText>
-      </Item>
-      <Separator />
-      <Item
-        active={option_changes_management === SPEC_HISTORY_TABLE}
-        onClick={handleShowTable(SPEC_HISTORY_TABLE)}
-      >
-        <ItemText active={option_changes_management === SPEC_HISTORY_TABLE}>
-          {' '}
-          Historial
-        </ItemText>
-      </Item>
+      {user_owner && (
+        <>
+          <Item
+            active={option_changes_management === SPEC_CHANGE_MANAGEMENT}
+            onClick={handleShowTable(SPEC_CHANGE_MANAGEMENT)}
+          >
+            <ItemText
+              active={option_changes_management === SPEC_CHANGE_MANAGEMENT}
+            >
+              Gestión de cambios
+            </ItemText>
+          </Item>
+          {showHistory && <Separator />}
+        </>
+      )}
+      {showHistory && (
+        <Item
+          active={option_changes_management === SPEC_HISTORY_TABLE}
+          onClick={handleShowTable(SPEC_HISTORY_TABLE)}
+        >
+          <ItemText active={option_changes_management === SPEC_HISTORY_TABLE}>
+            {' '}
+            Historial
+          </ItemText>
+        </Item>
+      )}
     </HistoryChangeManagementContent>
   );
 };
