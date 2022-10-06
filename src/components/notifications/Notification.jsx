@@ -159,9 +159,9 @@ const Notifications = (props) => {
                 dangerouslySetInnerHTML={{ __html: message }}
               />
               <ContentActions>
-                {accionStatus === 'Proyecto Aceptado' && (
+                {(accionStatus === 'Proyecto aceptado' || accionStatus === 'Cambios revisados' || accionStatus === 'Cambios a aprobar') && (
                   <>
-                    <ActionPerformed>Proyecto aceptado</ActionPerformed>
+                    <ActionPerformed>{accionStatus}</ActionPerformed>
                     <LinkSeeAll
                       loadingNoti={loadingNoti}
                       onClick={() => history.push(`/specs/${projectSpecId}`)}
