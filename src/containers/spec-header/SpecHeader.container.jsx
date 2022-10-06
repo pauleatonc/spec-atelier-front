@@ -7,9 +7,11 @@ import {
   downloadBudgetDocument,
 } from './SpecHeader.actions';
 import { onShowModal } from '../spec-modal-team/actions';
-import { TYPE_MODALS } from '../spec-modal-team/constants';
+import { TYPE_MODALS, STATUS_INVITATIONS } from '../spec-modal-team/constants';
+import { ContainerUsers } from '../spec-modal-team/components/ProjectInfoShare/components/CheckItem/styles';
 import ItemsNavBar from '../../components/navbar/navbar-app/Components/ItemsNavBar';
 import { Button } from '../../components/SpecComponents';
+import IconUser from '../../components/IconUser';
 import { MAX_SCREEN_MEDIUM_WIDTH } from '../../config/constants/styled-vars';
 import { LOGO_MOBILE, LOGO_SMALL_COLOR } from '../../assets/Images';
 import {
@@ -101,15 +103,19 @@ const SpecHeader = () => {
                 <TextButton>Equipo</TextButton>
               </Button>
             </PermissionsButtonContainer>
-            {/*
-            TODO: validate in next hito
-             {project?.team.map((member, index) => (
-              <IconUser
-                horizontalList
-                user={member.user}
-                zIndex={project?.team.length - index}
-              />
-            ))} */}
+            <ContainerUsers>
+                {
+                  project?.team.map((el, index) => (
+                    <IconUser
+                      key={`${index}-${el.user.email}`}
+                      horizontalList
+                      user={el.user}
+                      zIndex={el.length - index}
+                      waiting={el.user?.status === STATUS_INVITATIONS.WAITING}
+                    />
+                  ))
+                }
+            </ContainerUsers>
           </ContainerTeam>
         )}
       </SpecOptions>
