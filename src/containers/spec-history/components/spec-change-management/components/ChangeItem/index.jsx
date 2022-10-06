@@ -202,7 +202,7 @@ const ChangeItem = ({
                   {type === 'Image' && (
                     <ImageProduct
                       width={300}
-                      src={element?.image?.urls?.medium || NO_PHOTO}
+                      src={element?.image?.urls?.medium || element?.image?.urls?.original ||  NO_PHOTO}
                     />
                   )}
                 </ProductDescContainer>
@@ -240,7 +240,7 @@ const ChangeItem = ({
               {TYPES.PRODUCT === type && (
                 <ProductImageContainer>
                   <ImageProduct
-                    src={element?.images[0]?.urls?.medium || NO_PHOTO}
+                    src={element?.images[0]?.urls?.medium || element?.images[0]?.urls?.original || NO_PHOTO}
                   />
                   <GoToProduct onClick={handleShowProduct}>
                     Ver producto
