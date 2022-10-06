@@ -190,8 +190,8 @@ const SpecDocument = ({ canEditOwnerUser }) => {
   };
 
   const canEdit = (action !== 'remove' && !sent) || elementUserOwned || (status === 'accepted' && sent);
-  const canEditText = actionText !== 'remove' && !sentText;
-  const canEditImage = actionImage !== 'remove' && !sentImage;
+  const canEditText = actionText !== 'remove' && (!sentText || statusText === 'accepted');
+  const canEditImage = actionImage !== 'remove' && (!sentImage || statusImage === 'accepted');
   const canAddText = !selectedBlock?.text;
 
   const canRemoveImage = selectedBlockImage?.image?.user_owned
