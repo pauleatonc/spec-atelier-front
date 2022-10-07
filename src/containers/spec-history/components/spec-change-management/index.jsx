@@ -180,7 +180,7 @@ const SpecChangeManagement = ({ actionsIcons }) => {
                     changesRejected={changesRejected}
                     setChangesAccepted={setChangesAccepted}
                     setChangesRejected={setChangesRejected}
-                    parentChangeId={block.change.id}
+                    parentChange={block.change}
                     parentElement={block.element}
                   />
                 )}
@@ -199,7 +199,7 @@ const SpecChangeManagement = ({ actionsIcons }) => {
                     changesRejected={changesRejected}
                     setChangesAccepted={setChangesAccepted}
                     setChangesRejected={setChangesRejected}
-                    parentChangeId={block.change.id}
+                    parentChange={block.change}
                     parentElement={block.element}
                   />
                 )}

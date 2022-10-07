@@ -2,7 +2,6 @@ import {
   getFormatedTableData,
   getTotalExpandManual,
   getSections,
-  getOwnerBlocks,
   getChangesCounts,
 } from './utils';
 import {

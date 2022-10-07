@@ -48,7 +48,7 @@ const ChangeItem = ({
   setChangesAccepted,
   setChangesRejected,
   isApproveRequestType,
-  parentChangeId,
+  parentChange,
   parentElement,
   textChange,
   imageChange,
@@ -66,8 +66,12 @@ const ChangeItem = ({
 
   const handleAcceptChange = () => {
     const idsToAccept = [changeId];
-    if (isApproveRequestType && !changesAccepted.includes(parentChangeId))
-      idsToAccept.push(parentChangeId);
+    if (
+      isApproveRequestType &&
+      !changesAccepted.includes(parentChange.id) &&
+      parentChange.status === 'waiting'
+    )
+      idsToAccept.push(parentChange.id);
 
     if (isRejected) {
       const idsToAcceptSet = new Set(idsToAccept);
