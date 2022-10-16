@@ -100,7 +100,6 @@ export const Row = styled.div`
 
 export const Title = styled.section`
   margin: 24px 0;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -133,7 +132,6 @@ export const IconCheck = styled.span`
 `;
 
 export const ButtonIcon = styled.div`
-  font-family: Lato;
   font-size: 12px;
   background-image: url('${({ type, active }) =>
     active ? activeTypes[type] : types[type]}');
@@ -150,7 +148,6 @@ export const SubHeader = styled.section`
   height: 62px;
   border-radius: 9px;
   background-color: ${SILVER_CHALICE};
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -168,7 +165,6 @@ export const SubHeader = styled.section`
 
 export const Text = styled.div`
   height: 16px;
-  font-family: Lato;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -181,7 +177,6 @@ export const Text = styled.div`
 
 export const TextButton = styled.div`
   height: 16px;
-  font-family: Lato;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -197,7 +192,6 @@ export const TextButton = styled.div`
 
 export const Label = styled.div`
   height: 16px;
-  font-family: Lato;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -228,7 +222,6 @@ export const PermissionOption = styled.section`
 
 export const PermissionTitle = styled.p`
   height: 16px;
-  font-family: Lato;
   font-size: 12px;
   font-weight: bold;
   font-stretch: normal;
@@ -241,7 +234,6 @@ export const PermissionTitle = styled.p`
 export const PermissionDescription = styled.p`
   padding: 16px 0;
   width: 100%;
-  font-family: Lato;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -259,7 +251,6 @@ export const Suffix = styled.span`
   position: absolute;
   right: 16px;
   top: 12px;
-  font-family: Lato;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -275,7 +266,6 @@ export const Section = styled.section`
 
 export const SelectorDate = styled.div`
   opacity: 0.62;
-  font-family: Lato;
   font-size: 12px;
   color: ${MINE_SHAFT};
   width: 100%;
@@ -293,7 +283,7 @@ export const SelectorDate = styled.div`
   white-space: nowrap;
   width: 100%;
   min-width: 140px;
-  &:active,
+  <<<<<<< HEAD =======>>>>>>>890587f (fix: format prettier) &:active,
   &:focus {
     outline: 0;
   }
@@ -324,14 +314,12 @@ export const InputText = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid ${SILVER};
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   color: ${MINE_SHAFT};
   border-radius: 0;
   width: 240px;
 `;
-
 export const DropIcon = styled.img`
   cursor: pointer;
 `;

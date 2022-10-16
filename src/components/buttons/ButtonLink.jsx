@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ButtonContainer, ButtonIcon, ButtonText, TextContainer } from './ButtonLink.styles';
-import { useState } from 'react';
+
 
 const mapTypesToName = {
   address: 'Dirección',
@@ -22,11 +22,9 @@ const ButtonLink = props => {
   return (
     <ButtonContainer variant={variant} {...buttonProps} >
       <ButtonIcon
-        type="button"
-        type={type}
+        type={type || "button"}
         onClick={toggle}
-      >
-      </ButtonIcon>
+       />
       <TextContainer>
         <ButtonText
           type="button"

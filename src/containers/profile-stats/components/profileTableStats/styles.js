@@ -31,7 +31,6 @@ const types = {
 
 export const Table = styled.table`
   width: 100%;
-  font-family: Lato;
 `;
 
 export const TableHead = styled.thead`
@@ -67,12 +66,12 @@ export const TableTd = styled.td`
 `;
 
 export const IconType = styled.i`
-	width: 20px;
-	height: 20px;
-	background-image: url('${({ type }) => (type ? types[type] : '')}');
-	background-repeat: no-repeat;
-	background-size: cover;
-	margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  background-image: url('${({ type }) => (type ? types[type] : '')}');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-right: 5px;
 `;
 
 export const IconSort = styled.i`

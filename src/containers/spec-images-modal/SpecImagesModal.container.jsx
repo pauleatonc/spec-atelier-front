@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { onAddSpecBlockImage } from '../spec-document/SpecDocument.actions';
+import {
+  onAddSpecBlockImage,
+  onEditSpecBlockImage,
+} from '../spec-document/SpecDocument.actions';
 import { onHideSpecImagesModalSuccess } from './SpecImagesModal.actions';
 import useModal from '../../components/layouts/ModalLayout.hooks';
 import ModalLayout from '../../components/layouts/ModalLayout';
@@ -32,8 +35,10 @@ const SpecImagesModal = () => {
   const selectedProductBlock =
     blocks.find((block) => block.id === selectedBlockID) || {};
   const [selectedImage, setSelectedImage] = useState(
-    selectedProductBlock.element?.product_block_image || '',
+    selectedProductBlock.element?.image?.image?.id || '',
   );
+  const currentImage = selectedProductBlock?.image?.image.id;
+
   const { onClose: handleClose } = useModal({
     closeCallback: () => dispatch(onHideSpecImagesModalSuccess()),
   });
@@ -45,9 +50,14 @@ const SpecImagesModal = () => {
     return setSelectedImage(selected);
   };
 
-  const handleSubmit = (blockID, imageID) => (event) => {
+  const handleSubmit = (block, imageID) => (event) => {
     handleClose(event);
-    dispatch(onAddSpecBlockImage({ blockID, imageID, specID }));
+    if (!currentImage)
+      dispatch(onAddSpecBlockImage({ blockID: block.id, imageID, specID }));
+    else if (currentImage !== imageID)
+      dispatch(
+        onEditSpecBlockImage({ blockImageID: block.image.id, imageID, specID }),
+      );
   };
 
   const disableSubmit =
@@ -56,7 +66,7 @@ const SpecImagesModal = () => {
     selectedImage === '';
 
   useEffect(() => {
-    setSelectedImage(selectedProductBlock.element?.product_block_image);
+    setSelectedImage(selectedProductBlock.element?.image?.id);
   }, [selectedProductBlock.image]);
 
   return (
@@ -87,7 +97,7 @@ const SpecImagesModal = () => {
           <Button
             disabled={disableSubmit}
             variant={VARIANTS_BUTTON.PRIMARY}
-            onClick={handleSubmit(selectedProductBlock.id, selectedImage)}
+            onClick={handleSubmit(selectedProductBlock, selectedImage)}
           >
             Añadir
           </Button>

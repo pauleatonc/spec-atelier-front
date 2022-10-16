@@ -1,11 +1,15 @@
 import styled from 'styled-components';
-import { MINE_SHAFT, MEDIA_QUERY_SMALL, ALABASTER, BLACK } from '../../config/constants/styled-vars';
+import {
+  MINE_SHAFT,
+  MEDIA_QUERY_SMALL,
+  ALABASTER,
+  BLACK,
+} from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   display: flex;
   justify-content: center;
   padding: 8px 0 16px;
-
   ${MEDIA_QUERY_SMALL} {
     margin: 0 8px;
     padding: 0;
@@ -19,7 +23,6 @@ export const Content = styled.div`
   grid-gap: 24px;
   grid-template-columns: repeat(7, max-content);
   justify-items: center;
-
   ${MEDIA_QUERY_SMALL} {
     overflow-x: scroll;
   }
@@ -29,17 +32,13 @@ export const Loading = styled.span`
   align-items: center;
   color: ${MINE_SHAFT};
   display: inline-flex;
-  font-family: Lato;
   font-size: 16px;
   height: 34px;
 `;
 
 export const Text = styled.span`
-  font-family: Lato;
   font-size: 14px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.71;
   letter-spacing: 1px;
   white-space: nowrap;

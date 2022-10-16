@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import AlertContainer from '../containers/alert/Alert.container';
 import SpecHeaderContainer from '../containers/spec-header/SpecHeader.container';
 import SpecContentButtons from '../containers/spec-contents-buttons/SpecContentsButtons.container';
@@ -20,29 +21,47 @@ import SpecContentsContainer from '../containers/spec-contents/SpecContents.cont
 import SpecAdminContainer from '../containers/spec-admin/SpecAdmin.container';
 import SpecProductsPanelLayout from '../components/layouts/SpecProductsPanelLayout';
 import ContactFormContainer from '../containers/modal-contact-form/ModalContactForm.container';
+import SpecModalTeam from '../containers/spec-modal-team';
+import SpecModalTeamNewMember from '../containers/spec-modal-team/newMember';
+import DetailMemberModal from '../containers/spec-modal-team/detailMember';
 import { changeOption } from '../containers/spec-contents-buttons/SpecContentsButtons.actions';
 import { SPEC_DOCUMENT } from '../config/constants/button-variants';
 import { Root, Main, Navigation, Panels } from './Specification.styles';
+import { getTeamUser } from '../containers/spec-document/utils';
 
-/**
- * The Specification's view.
- */
+/** The Specification's view */
 const Specification = () => {
   const dispatch = useDispatch();
+  const { id: specID } = useParams();
   const [showFilters, setShowFilters] = useState(false);
   const [selectedSection, setSelectedSection] = useState('');
   const [selectedItem, setSelectedItem] = useState('');
+  const [teamUser, setTeamUser] = useState('');
   const { dataSection } = useSelector((state) => state);
+  const { user } = useSelector((state) => state.auth);
   const { option } = dataSection;
+  const { projectStructure } = useSelector((state) => state.specDocument);
+  const { team, user_owner: userOwner } = useSelector(
+    (state) => state.specDocument.project,
+  );
+
+  useEffect(() => {
+    setTeamUser(getTeamUser(team, user));
+  }, [team]);
 
   useEffect(() => {
     dispatch(changeOption(SPEC_DOCUMENT));
   }, []);
 
+  const canEditOwnerUser =
+    userOwner || teamUser?.permission?.ability === 'write';
+
   const mainPage = () => {
     const content = {
-      SPEC_TABLE: <SpecContentsTable />,
-      SPEC_DOCUMENT: <SpecDocumentContainer />,
+      SPEC_TABLE: <SpecContentsTable canEditOwnerUser={canEditOwnerUser} />,
+      SPEC_DOCUMENT: (
+        <SpecDocumentContainer canEditOwnerUser={canEditOwnerUser} />
+      ),
       SPEC_HISTORY: <SpecHistoryContainer />,
     };
     return content[option];
@@ -56,7 +75,7 @@ const Specification = () => {
         <Main>
           {mainPage()}
           <Navigation>
-            <SpecNavigatorContainer />
+            <SpecNavigatorContainer canEditOwnerUser={canEditOwnerUser} />
             <Panels>
               <SpecProductsPanelLayout
                 showFilters={showFilters}
@@ -79,7 +98,7 @@ const Specification = () => {
                   />,
                 ]}
               >
-                <SpecProductsContainer />
+                <SpecProductsContainer canEditOwnerUser={canEditOwnerUser} />
               </SpecProductsPanelLayout>
               <SpecContentsContainer />
               <SpecAdminContainer />
@@ -87,13 +106,16 @@ const Specification = () => {
           </Navigation>
         </Main>
       </Root>
-      <SpecCreateProductOneContainer />
+      <SpecCreateProductOneContainer specID={specID} />
       <SpecCreateProductTwoContainer />
       <SpecCreateProductThreeContainer />
       <SpecEditProductContainer />
       <SpecImagesModalContainer />
       <AlertContainer />
       <SpecModalProduct />
+      <SpecModalTeam projectStructure={projectStructure} />
+      <SpecModalTeamNewMember projectStructure={projectStructure} />
+      <DetailMemberModal projectStructure={projectStructure} />
       <ContactFormContainer type="product" />
     </>
   );

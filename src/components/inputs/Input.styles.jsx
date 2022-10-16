@@ -20,7 +20,6 @@ Root.propTypes = {
 export const Label = styled.label`
   color: ${MINE_SHAFT};
   display: block;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -32,18 +31,15 @@ export const Input = styled.input`
   background-color: ${GALLERY};
   border: 0;
   border-radius: 21.5px;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   padding: 11px 23px;
   width: 100%;
-
   &:active,
   &:focus {
     outline: 0;
     color: ${MINE_SHAFT};
   }
-
   &::placeholder {
     color: rgba(${MINE_SHAFT_RGB}, 0.46);
   }
@@ -58,9 +54,7 @@ export const InputUnderline = styled.input`
   padding: 10px ${({ textAlign }) => (textAlign === 'right' ? '0' : '10px')}
     10px ${({ textAlign }) => (textAlign === 'right' ? '10px' : '0px')};
   flex: 1;
-  border-bottom: 1px solid
-    ${({ colorUnderline }) => colorUnderline || SILVER};
-  font-family: Lato;
+  border-bottom: 1px solid ${({ colorUnderline }) => colorUnderline || SILVER};
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '14px')};
   font-weight: normal;
   font-stretch: normal;
@@ -81,13 +75,11 @@ export const InputUnderline = styled.input`
 export const InputForm = styled.input`
   background-color: transparent;
   height: 40px;
-
   border: 1px solid ${ALTO};
   outline: 0;
   min-width: 100px;
   width: 100%;
   padding: 0 31px 0 21px;
-  font-family: Lato;
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '12px')};
   letter-spacing: 1.17px;
   border-radius: 9px;

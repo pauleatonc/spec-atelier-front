@@ -11,7 +11,7 @@ const NavbarApp = () => {
   return (
     <NavbarContainer>
       <NavbarContent>
-        <LogoContent to='/' data-view='home'>
+        <LogoContent to="/" data-view="home">
           <ImgLogo />
         </LogoContent>
         <ItemsNavBar />

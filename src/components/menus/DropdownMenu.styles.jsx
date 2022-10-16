@@ -17,7 +17,6 @@ export const Text = styled.span`
   color: ${MINE_SHAFT};
   cursor: pointer;
   display: inline-flex;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   margin: 0 5px 0 0;
@@ -30,10 +29,8 @@ export const DropdownIcon = styled.img`
 `;
 
 export const Option = styled.section`
-  box-sizing: border-box;
   color: ${MINE_SHAFT};
   cursor: pointer;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 0.86px;
   padding: 10px 23px;

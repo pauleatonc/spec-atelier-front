@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import DatePicker from 'react-datepicker';
+import { TextArea, Input } from '../../components/SpecComponents';
 import {
   changeView,
   createProject,
@@ -9,7 +10,6 @@ import {
 } from './ProjectCreate.actions';
 import { formatDate } from '../../helpers/helpers';
 import SelectorRelative from '../../components/basics/SelectorRelative';
-import { TextArea, Input } from '../../components/SpecComponents';
 import { SubHeaderProjectDescription } from '../../components/sub-headers/ProjectSubHeaders';
 import {
   ContentData,

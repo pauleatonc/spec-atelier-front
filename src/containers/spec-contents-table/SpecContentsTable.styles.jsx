@@ -11,7 +11,6 @@ import {
 } from '../../config/constants/styled-vars';
 
 export const Root = styled.div`
-  box-sizing: border-box;
   display: -webkit-box;
   height: 100%;
   width: 100%;
@@ -29,11 +28,8 @@ export const Header = styled.td`
   width: 100%;
   height: 46px;
   padding: 20px;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 0.94;
   letter-spacing: normal;
   background-color: ${WHITE};
@@ -47,7 +43,6 @@ export const ContentFooter = styled.div`
 `;
 
 export const TableElements = styled.h1`
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   line-height: 1.07;
@@ -56,7 +51,6 @@ export const TableElements = styled.h1`
 
 export const TableTotal = styled.h1`
   height: 17px;
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   line-height: 1.07;
@@ -65,7 +59,6 @@ export const TableTotal = styled.h1`
 `;
 
 export const Title = styled.div`
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   line-height: 0.94;
@@ -73,23 +66,16 @@ export const Title = styled.div`
 `;
 
 export const ButtonsHeader = styled.div`
-  font-family: Lato;
-  font-size: 16px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 0.94;
   letter-spacing: normal;
   display: flex;
   float: right;
 `;
+
 export const Button = styled.div`
   cursor: pointer;
-  font-family: Lato;
   font-size: 14px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
   line-height: normal;
   letter-spacing: normal;
   text-align: center;
@@ -100,6 +86,7 @@ export const Button = styled.div`
   top: ${({ isExpandButton }) => isExpandButton && '20px'};
   right: ${({ isExpandButton }) => isExpandButton && '150px'};
 `;
+
 export const ImgButton = styled.img`
   margin: 0px 5px 0px 39px;
 `;
@@ -113,6 +100,7 @@ export const Table = styled.table`
   background-color: ${WHITE};
   position: relative;
 `;
+
 export const TableThead = styled.thead`
   padding: 8px;
   height: 46px;
@@ -120,6 +108,7 @@ export const TableThead = styled.thead`
   border-radius: 2px;
   border: solid 1px ${MERCURY};
 `;
+
 export const TableTbody = styled.tbody`
   width: 2px;
   text-align: left;
@@ -129,11 +118,9 @@ export const TableTd = styled.td`
   padding: ${({ isTypeUnity }) => (isTypeUnity ? '16.5px' : '20px')} 15px;
   border-top: 1px solid ${ALTO};
   border-bottom: 1px solid ${ALTO};
-  font-family: Lato;
   font-size: 13px;
   font-weight: ${({ isTypeUnity }) => (isTypeUnity ? 'normal' : 'bold')};
   line-height: 0.92;
-  letter-spacing: normal;
   color: rgba(${BLACK}, 0.87);
   text-align: ${({ isDesc }) => (isDesc ? 'left' : 'center')};
   width: ${({ width }) => width};
@@ -144,10 +131,8 @@ export const TableTd = styled.td`
 `;
 
 export const TableTh = styled.th`
-  font-family: Lato;
   font-size: 13px;
   line-height: 1.25;
-  letter-spacing: normal;
   color: rgba(${BLACK}, 0.54);
   padding: 20px 15px;
   text-align: ${({ isDesc }) => (isDesc ? 'left' : 'center')};
@@ -160,7 +145,6 @@ export const TableInput = styled.input`
 `;
 
 export const ButtonConsult = styled.div`
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   color: ${CARIBBEAN_GREEN};

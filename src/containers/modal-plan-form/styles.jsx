@@ -56,7 +56,6 @@ export const PlanDescription = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   color: ${CARIBBEAN_GREEN};
@@ -64,7 +63,6 @@ export const Title = styled.h1`
 `;
 
 export const Subtitle = styled.h2`
-  font-family: Lato;
   font-size: 16px;
   letter-spacing: 1px;
   margin-bottom: 20px;
@@ -79,7 +77,6 @@ export const Separator = styled.div`
 `;
 
 export const TitleInfo = styled.p`
-  font-family: Lato;
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 10px;
@@ -98,14 +95,12 @@ export const IconCheck = styled.i`
 `;
 
 export const ItemDesc = styled.p`
-  font-family: Lato;
   font-size: 12px;
   line-height: 14px;
 `;
 
 export const FooterInfo = styled.p`
   margin-top: 25px;
-  font-family: Lato;
   font-size: 12px;
   max-width: 280px;
 `;
@@ -170,14 +165,12 @@ export const Cost = styled.div`
 `;
 
 export const PlanCost = styled.h1`
-  font-family: Lato;
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 3px;
 `;
 
 export const PlanPeriod = styled.p`
-  font-family: Lato;
   font-size: 12px;
 `;
 
@@ -188,7 +181,6 @@ export const InputCost = styled.input`
   border: solid 1px ${ALTO};
   text-align: center;
   margin-bottom: 20px;
-  font-family: Lato;
   font-size: 18px;
   font-weight: bold;
 
@@ -198,7 +190,6 @@ export const InputCost = styled.input`
 `;
 
 export const InputCostLabel = styled.p`
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 0.72px;
   text-align: center;
@@ -230,7 +221,6 @@ export const Step = styled.div`
 `;
 
 export const StepText = styled.h1`
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
 `;
@@ -244,7 +234,6 @@ export const StepNumber = styled.div`
   border: solid 1px MINE_SHAFT;
   border-radius: 40px;
   margin-right: 5px;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   ${MEDIA_QUERY_SMALL} {
@@ -261,7 +250,6 @@ export const ContainerFormPlan = styled.div`
 `;
 
 export const TitleForm = styled.h1`
-  font-family: Lato;
   font-size: 17px;
   font-weight: bold;
   text-align: center;
@@ -273,7 +261,6 @@ export const TitleForm = styled.h1`
 `;
 
 export const SubtitleForm = styled.h3`
-  font-family: Lato;
   font-size: 12px;
   text-align: center;
   color: ${SCORPION};
@@ -322,7 +309,6 @@ export const InputForm = styled.input`
   padding-left: 27px;
   margin-bottom: ${({ withoutMarginBottom }) =>
     withoutMarginBottom ? '0px' : '25px'};
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
 
@@ -344,7 +330,6 @@ export const TextAreaForm = styled.textarea`
   padding-left: 27px;
   padding-top: 9px;
   flex: 1;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   resize: none;
@@ -388,7 +373,6 @@ export const IconSuccess = styled.img`
 
 export const TitleSuccess = styled.h1`
   width: 100%;
-  font-family: Lato;
   font-size: 17px;
   font-weight: bold;
   text-align: center;
@@ -397,7 +381,6 @@ export const TitleSuccess = styled.h1`
 `;
 
 export const TextBodySuccess = styled.p`
-  font-family: Lato;
   font-size: 14px;
   text-align: center;
   color: ${SCORPION};

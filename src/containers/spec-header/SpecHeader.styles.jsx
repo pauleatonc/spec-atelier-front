@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import {
+  SPEC_DOWNLOAD_ACTIVE,
+  SPEC_DOWNLOAD_SOURCE,
+  SPEC_MONETIZATION_ACTIVE,
+  SPEC_MONETIZATION,
+} from '../../assets/Images';
+import {
   MINE_SHAFT,
   MEDIA_QUERY_SMALL,
   NAVBAR_HEIGHT,
   WHITE,
   DUSTY_GRAY_RGB,
 } from '../../config/constants/styled-vars';
-import {
-  SPEC_DOWNLOAD,
-  SPEC_DOWNLOAD_ACTIVE,
-  SPEC_MONETIZATION,
-  SPEC_MONETIZATION_ACTIVE,
-} from '../../assets/Images';
 
 export const Root = styled.div`
   display: flex;
@@ -20,13 +20,9 @@ export const Root = styled.div`
   background-color: ${WHITE};
   border-bottom-right-radius: 2px;
   border-top-right-radius: 2px;
-  padding: 4px 20px 4px 36px;
+  padding: 5px;
   align-items: flex-end;
-  ${MEDIA_QUERY_SMALL} {
-    padding: 0px;
-    width: 100%;
-    justify-content: space-around;
-  }
+  position: relative;
 `;
 
 export const Separator = styled.span`
@@ -48,8 +44,11 @@ export const Section = styled.section`
 `;
 
 export const ProjectName = styled(Section)`
+  max-width: 200px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   color: ${MINE_SHAFT};
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -69,7 +68,7 @@ const Span = styled.span`
 `;
 
 export const Download = styled(Span)`
-  background-image: url('${SPEC_DOWNLOAD}');
+  background-image: url('${SPEC_DOWNLOAD_SOURCE}');
   &:hover {
     background-image: url('${SPEC_DOWNLOAD_ACTIVE}');
   }
@@ -94,6 +93,7 @@ export const MobileLogo = styled.div`
     display: flex;
   }
 `;
+
 export const SpecOptions = styled.div`
   height: 100%;
   display: flex;
@@ -101,10 +101,19 @@ export const SpecOptions = styled.div`
   flex: 1;
 `;
 
+export const ContainerTeam = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const PermissionsButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding: 0 23px;
+  padding: 0 15px 0 23px;
+`;
+
+export const TextButton = styled.div`
+  padding-left: 8px;
 `;

@@ -20,7 +20,6 @@ export const IconContainer = styled.div`
 `;
 
 export const InfoContainer = styled.section`
-  font-family: Lato;
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -30,7 +29,7 @@ export const InfoContainer = styled.section`
   text-align: center;
   color: ${MINE_SHAFT};
   margin: 16px 0;
-`
+`;
 
 export const Title = styled.div`
   font-weight: bold;

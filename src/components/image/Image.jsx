@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Img, Content } from './Image.styles';
 import { NO_PHOTO } from '../../assets/Images';
+import { Container, Img, Content } from './Image.styles';
 
 const Image = (props) => {
   const {
@@ -18,12 +18,15 @@ const Image = (props) => {
   } = props;
   const [displayedImg, setDisplayedImg] = useState(src || NO_PHOTO);
   const imgRef = useRef(null);
+
   const onError = () => {
     imgRef.current.src = NO_PHOTO;
   };
+
   useEffect(() => {
     setDisplayedImg(src);
   }, [src]);
+
   return (
     <Container
       width={containerWidth || width}

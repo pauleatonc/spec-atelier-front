@@ -1,4 +1,6 @@
-html, body {
+html,
+body {
+  font-family: Lato, 'Open Sans';
   background-color: $white-color;
   height: 100%;
   margin: 0;
@@ -11,9 +13,11 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
+  display: flex;
 }
 
-#__alerts, #__modals {
+#__alerts,
+#__modals {
   height: auto;
   left: 0;
   position: absolute;
@@ -30,7 +34,9 @@ html, body {
 }
 
 .main-section {
-  min-height: calc(#{$total-height-view} - (#{$navbar-height} + #{$footer-height}));
+  min-height: calc(
+    #{$total-height-view} - (#{$navbar-height} + #{$footer-height})
+  );
 }
 
 .error_container {

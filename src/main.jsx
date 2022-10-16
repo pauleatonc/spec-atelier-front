@@ -41,23 +41,54 @@ const Main = () => {
       <PersistGate loading={null} persistor={persistor}>
         <Router>
           <Switch>
-            <PublicRoute exact component={Home} path='/' />
-            <PublicRoute exact restricted component={Login} path='/login' />
-            <PublicRoute exact restricted component={Registration} path='/registration' />
-            <PublicRoute exact restricted component={RecoverPassword} path='/recover_password' />
-            <PublicRoute exact restricted component={NewPassword} path='/new_password/:token' />
-            <PublicRoute exact component={Products} path='/products' />
-            <PublicRoute exact component={Us} path='/us' />
-            <PublicRoute exact component={Collaborators} path='/collaborators' />
-            <PublicRoute exact component={Collaborator} path='/collaborators/:id' />
-            <PublicRoute exact component={BusinessPlan} path='/business_plan' />
-            <PrivateRoute exact component={Projects} path='/projects' />
-            <PrivateRoute exact component={Project} path='/projects/project' />
-            <PrivateRoute exact component={Project} path='/projects/project/:id' />
-            <PrivateRoute exact component={Profile} path='/profile' />
-            <PrivateRoute exact component={Specification} path='/specs/:id' />
-            <PrivateRoute exact component={ActAsAnotherUser} path='/act-as-another-user' />
-            <Redirect to='/projects' />
+            <PublicRoute exact component={Home} path="/" />
+            <PublicRoute exact restricted component={Login} path="/login" />
+            <PublicRoute
+              exact
+              restricted
+              component={Registration}
+              path="/registration"
+            />
+            <PublicRoute
+              exact
+              restricted
+              component={RecoverPassword}
+              path="/recover_password"
+            />
+            <PublicRoute
+              exact
+              restricted
+              component={NewPassword}
+              path="/new_password/:token"
+            />
+            <PublicRoute exact component={Products} path="/products" />
+            <PublicRoute exact component={Us} path="/us" />
+            <PublicRoute
+              exact
+              component={Collaborators}
+              path="/collaborators"
+            />
+            <PublicRoute
+              exact
+              component={Collaborator}
+              path="/collaborators/:id"
+            />
+            <PublicRoute exact component={BusinessPlan} path="/business_plan" />
+            <PrivateRoute exact component={Projects} path="/projects" />
+            <PrivateRoute exact component={Project} path="/projects/project" />
+            <PrivateRoute
+              exact
+              component={Project}
+              path="/projects/project/:id"
+            />
+            <PrivateRoute exact component={Profile} path="/profile" />
+            <PrivateRoute exact component={Specification} path="/specs/:id" />
+            <PrivateRoute
+              exact
+              component={ActAsAnotherUser}
+              path="/act-as-another-user"
+            />
+            <Redirect to="/projects" />
           </Switch>
         </Router>
       </PersistGate>
