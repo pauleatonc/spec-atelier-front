@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { MINE_SHAFT, MEDIA_QUERY_MEDIUM, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
+import {
+  MINE_SHAFT,
+  MEDIA_QUERY_MEDIUM,
+  MEDIA_QUERY_SMALL,
+} from '../../config/constants/styled-vars';
 
 export const Container = styled.section`
   padding: 16px 80px;
@@ -31,7 +35,6 @@ export const Icon = styled.img`
 export const TextContent = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: Lato;
   font-size: 14px;
   letter-spacing: 1px;
   text-align: center;
@@ -41,4 +44,11 @@ export const TextContent = styled.div`
 export const Text = styled.span`
   padding: 2px;
   margin: 2px;
+`;
+
+export const EmptyContainer = styled.div`
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  width: 100%;
 `;

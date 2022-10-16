@@ -5,7 +5,9 @@ import {
   ADD_PROJECT_TO_LIST,
   DELETE_PROJECT,
   DELETE_PROJECT_ERROR,
-  CLEAR_PROJECTS
+  CLEAR_PROJECTS,
+  ACCEPT_NOTIFICATION,
+  REJECT_NOTIFICATION
 } from './ProjectsList.actions';
 
 const sortFilters = [
@@ -22,7 +24,7 @@ const sortFilters = [
 
 const initialProjectState = {
   projects: [],
-  loading: true,
+  loading: false,
   show: false,
   sortFilters,
   params: {
@@ -84,6 +86,10 @@ const projectsReducer = (state = initialProjectState, { payload, type }) => {
         ...state,
         projects: state.projects.unshift(payload.project),
       }
+    case ACCEPT_NOTIFICATION:
+      return { ...state, loading: false };
+    case REJECT_NOTIFICATION:
+      return { ...state, loading: false };
     default: {
       return state;
     }

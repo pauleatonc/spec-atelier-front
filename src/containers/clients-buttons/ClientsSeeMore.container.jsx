@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { Button } from '../../components/SpecComponents';
 import { ButtonSection } from './ClientsSeeMore.styles';
-import { useSelector, useDispatch } from 'react-redux';
 import { getMoreClients } from '../clients-list/ClientsList.actions';
 
 const ClientsSeeMoreButton = () => {
-  const { clients, loading, params, total } = useSelector(state => state.clientsList);
+  const { clients, loading, params, total } = useSelector(
+    (state) => state.clientsList,
+  );
   const [showButton, setShowButton] = useState(true);
 
   const dispatch = useDispatch();
 
   const onClickSeeMore = () => {
-    dispatch(getMoreClients({
-      ...params,
-      page: params.page + 1,
-    }))
+    dispatch(
+      getMoreClients({
+        ...params,
+        page: params.page + 1,
+      }),
+    );
   };
 
   useEffect(() => {

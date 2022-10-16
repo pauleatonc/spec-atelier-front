@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { WHITE } from '../../config/constants/styled-vars';
 
 export const Text = styled.span`
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;

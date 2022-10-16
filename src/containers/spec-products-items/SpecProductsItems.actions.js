@@ -7,7 +7,7 @@ export const GET_SPEC_PRODUCTS_ITEMS_ERROR = 'GET_SPEC_PRODUCTS_ITEMS_ERROR';
 export const GET_SPEC_PRODUCTS_ITEMS_SUCCESS =
 	'GET_SPEC_PRODUCTS_ITEMS_SUCCESS';
 export const onGetSpecProductsItems = (
-	{ sections } = { sections: [] },
+	{ sections, specID } = { sections: [] },
 ) => async (dispatch, getState) => {
 	dispatch(onActionCreator(GET_SPEC_PRODUCTS_ITEMS));
 
@@ -15,6 +15,7 @@ export const onGetSpecProductsItems = (
 		const { specProducts } = getState();
 		const response = await getProductsItems({
 			section: sections || specProducts.filters.sections,
+      project_spec_id: specID
 		});
 		return dispatch(
 			onActionCreator(GET_SPEC_PRODUCTS_ITEMS_SUCCESS, {
@@ -38,5 +39,5 @@ export const SHOW_SPEC_PRODUCTS_ITEMS_SUCCESS =
 export const onShowSpecProductsItems = (obj) => (dispatch) =>
 	batch(() => {
 		dispatch(onActionCreator(SHOW_SPEC_PRODUCTS_ITEMS_SUCCESS));
-		dispatch(onGetSpecProductsItems({ sections: [obj.section] }));
+		dispatch(onGetSpecProductsItems({ sections: [obj.section], specID: obj.specID }));
 	});

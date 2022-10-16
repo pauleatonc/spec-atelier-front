@@ -4,15 +4,13 @@ import {
   MINE_SHAFT,
   WHITE,
   PRIMARY,
-  MEDIA_QUERY_SMALL,
-  MEDIA_QUERY_MEDIUM,
   Z_INDEX_NAVBAR,
   SILVER_CHALICE,
   BLACK,
+  MEDIA_QUERY_STANDAR_MEDIUM,
+  WHITE_RGB,
+  DOVE_GRAY,
 } from '../../../config/constants/styled-vars';
-
-import LOGO from '../../../assets/images/logo.png';
-import LOGO_MOBILE from '../../../assets/images/full_logo.png';
 
 export const NavbarContainer = styled.nav`
   top: 0;
@@ -21,7 +19,6 @@ export const NavbarContainer = styled.nav`
   background-color: ${({ transparent }) =>
     transparent ? 'transparent' : WHITE};
   display: flex;
-  font-family: 'Lato', sans-serif;
   height: ${NAVBAR_HEIGHT};
   position: ${({ fixed }) => fixed && 'fixed'};
   width: 100%;
@@ -46,13 +43,8 @@ export const LogoContent = styled.section`
   display: flex;
 `;
 
-export const ImgLogo = styled.div`
-  border: 0;
-  width: 150px;
-  height: 30px;
-  background-repeat: no-repeat;
-  background-image: ${({ transparent }) =>
-    `url('${transparent ? LOGO : LOGO_MOBILE}')`};
+export const ImgLogo = styled.img`
+  width: 100%;
 `;
 
 export const ItemsContainer = styled.section`
@@ -60,10 +52,8 @@ export const ItemsContainer = styled.section`
   align-items: center;
   flex: 1;
   justify-content: flex-end;
-  ${MEDIA_QUERY_SMALL} {
-    display: none;
-  }
-  ${MEDIA_QUERY_MEDIUM} {
+
+  ${MEDIA_QUERY_STANDAR_MEDIUM} {
     display: none;
   }
 `;
@@ -83,7 +73,6 @@ export const Item = styled.div`
 
 export const ItemText = styled.span`
   height: 18px;
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   font-stretch: normal;
@@ -107,7 +96,6 @@ export const LinkItem = styled.div`
   justify-content: center;
   margin: 8px 0px;
   padding: 4px 8px;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -130,7 +118,6 @@ export const LinkItem = styled.div`
 export const LinkRegister = styled(LinkItem)`
   border-radius: 20px;
   background-color: ${PRIMARY};
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -139,6 +126,14 @@ export const LinkRegister = styled(LinkItem)`
   letter-spacing: normal;
   color: ${WHITE};
   width: 130px;
+  :hover {
+    border: 1px solid;
+    box-shadow: inset 0 0 20px rgba(${WHITE_RGB}, 0.5),
+      0 0 20px rgba(${WHITE_RGB}, 0.2);
+    outline-color: red;
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px ${DOVE_GRAY};
+  }
 `;
 
 export const LinkLogin = styled(LinkItem)`
@@ -152,4 +147,13 @@ export const LinkLogin = styled(LinkItem)`
   background-color: ${({ transparentize }) =>
     transparentize ? 'transparent' : WHITE};
   color: ${({ transparentize }) => (transparentize ? WHITE : SILVER_CHALICE)};
+`;
+
+export const LoginRegisterBurgerMenuContent = styled.div`
+  display: none;
+  align-self: center;
+
+  ${MEDIA_QUERY_STANDAR_MEDIUM} {
+    display: flex;
+  }
 `;

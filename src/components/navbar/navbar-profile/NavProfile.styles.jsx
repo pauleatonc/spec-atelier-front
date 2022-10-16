@@ -28,7 +28,6 @@ export const ProfileOptions = styled.section`
 
 export const Option = styled.div`
   height: 60px;
-  font-family: Lato;
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -51,16 +50,18 @@ export const Option = styled.div`
 export const OptionsContent = styled.section`
   width: 260px;
   background-color: ${WHITE};
-  box-shadow: 0 1px 3px 0 rgba(${BLACK}, 0.2), 0 2px 1px -1px rgba(${BLACK}, 0.12), 0 1px 1px 0 rgba(${BLACK}, 0.14);
+  box-shadow: 0 1px 3px 0 rgba(${BLACK}, 0.2),
+    0 2px 1px -1px rgba(${BLACK}, 0.12), 0 1px 1px 0 rgba(${BLACK}, 0.14);
 `;
 
 export const Separator = styled.div`
   background-color: ${GALLERY};
-  height: 1px;
+  height: 1.2px;
   width: 100%;
 `;
 
 export const ProfilePictureContainer = styled.div`
+  margin: 9px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -91,7 +92,6 @@ export const ContainerNameUser = styled.div`
 `;
 
 export const InfoUserName = styled.p`
-  font-family: Lato;
   font-size: 14px;
   margin-bottom: 2px;
   color: ${({ gray }) => (gray ? SILVER_CHALICE : MINE_SHAFT)};

@@ -15,8 +15,8 @@ import {
 /**
  * Gets the list of products' sections available.
  */
-export const getProductsSections = factoryService(() =>
-	getJsonRequest(`${API_BASE_URL}/sections`),
+export const getProductsSections = factoryService((params) =>
+	getJsonRequest(`${API_BASE_URL}/sections${formatParams(params)}`),
 );
 
 /**

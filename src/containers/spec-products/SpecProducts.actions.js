@@ -1,4 +1,5 @@
 import { batch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import onActionCreator from '../../config/store/helpers';
 import {
 	HIDE_SPEC_PRODUCTS_SECTIONS_SUCCESS,
@@ -36,7 +37,7 @@ export const onGetSpecProductsBySection = (payload) => (dispatch) =>
 	batch(() => {
 		dispatch(onActionCreator(UPDATE_SPEC_PRODUCTS_FILTER_SECTION, payload));
 		if (!window.matchMedia(MAX_SCREEN_SMALL_NAV_JS).matches)
-			dispatch(onShowSpecProductsItems({ section: payload.section }));
+			dispatch(onShowSpecProductsItems({ section: payload.section, specID: payload.specID }));
 	});
 
 export const onHideSpecProducts = () => (dispatch) =>
@@ -46,9 +47,9 @@ export const onHideSpecProducts = () => (dispatch) =>
 		dispatch(onActionCreator(HIDE_SPEC_PRODUCTS_SUCCESS));
 	});
 
-export const onShowSpecProducts = () => (dispatch) =>
+export const onShowSpecProducts = ({ specID }) => (dispatch) =>
 	batch(() => {
-		dispatch(onShowSpecProductsSections());
+		dispatch(onShowSpecProductsSections({ specID }));
 		dispatch(onActionCreator(SHOW_SPEC_PRODUCTS_SUCCESS));
 	});
 

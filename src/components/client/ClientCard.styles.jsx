@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-import { PRIMARY, DARKESTGREY, MINE_SHAFT } from '../../config/constants/styled-vars';
+import {
+  PRIMARY,
+  DARKESTGREY,
+  MINE_SHAFT,
+} from '../../config/constants/styled-vars';
 
 export const Name = styled.div`
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -33,7 +36,6 @@ export const Quantity = styled.div`
 
 export const Description = styled.p`
   min-height: 120px;
-  font-family: Lato;
   font-size: 12px;
   line-height: 2.25;
   letter-spacing: 1px;
@@ -51,7 +53,6 @@ export const Country = styled.div`
   width: 38px;
   height: 24px;
   margin: 0 0 1px 4px;
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   font-stretch: normal;

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import {
-    MINE_SHAFT,
-} from '../../config/constants/styled-vars';
+import { MINE_SHAFT } from '../../config/constants/styled-vars';
 
 const HEADER_HEIGHT = '140px';
 
@@ -38,7 +36,6 @@ export const Title = styled.h1`
 export const Description = styled.p`
   font-size: 24px;
   text-transform: uppercase;
-  font-family: Lato;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;

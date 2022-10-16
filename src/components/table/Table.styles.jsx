@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import {
   ALABASTER,
   MERCURY,
@@ -9,7 +8,6 @@ import {
 
 export const Table = styled.table`
   width: 100%;
-  font-family: Lato;
 `;
 
 export const TableHead = styled.thead`

@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { SILVER_CHALICE, MINE_SHAFT, BOULDER } from '../../../config/constants/styled-vars';
+import {
+  SILVER_CHALICE,
+  MINE_SHAFT,
+  BOULDER,
+} from '../../../config/constants/styled-vars';
 
 export const Container = styled.section`
   display: flex;
@@ -8,7 +12,6 @@ export const Container = styled.section`
 `;
 
 export const Title = styled.p`
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -28,19 +31,17 @@ export const InputContainer = styled.div`
 `;
 
 export const Label = styled.p`
-  font-family: Lato;
   font-size: 12px;
-  font-weight: ${strong => strong ? 'bold' : 'normal'};
+  font-weight: ${(strong) => (strong ? 'bold' : 'normal')};
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: 1px;
-  color: ${strong => strong ? MINE_SHAFT : SILVER_CHALICE};
+  color: ${(strong) => (strong ? MINE_SHAFT : SILVER_CHALICE)};
 `;
 
 export const CodeNumber = styled.span`
   font-size: 14px;
-  font-family: Lato;
   display: flex;
   align-items: center;
   margin-right: 8px;
@@ -48,6 +49,6 @@ export const CodeNumber = styled.span`
 `;
 
 export const CellPhone = styled.div`
-  flexDirection: row;
+  flexdirection: row;
   display: flex;
 `;

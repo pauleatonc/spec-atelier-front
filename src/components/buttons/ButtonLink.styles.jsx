@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 import {
+  ICON_CELLPHONE,
+  ICON_FACEBOOK,
+  ICON_LOCATION,
+  ICON_TWITTER,
+  ICON_WEB,
+} from '../../assets/Images';
+import {
   MINE_SHAFT,
   PRIMARY,
   SECONDARY,
@@ -7,12 +14,6 @@ import {
   TERTIARY,
   SILVER_CHALICE,
 } from '../../config/constants/styled-vars';
-
-import ICON_FACEBOOK from '../../assets/images/icons/socialmedia/facebook.svg';
-import ICON_TWITTER from '../../assets/images/icons/socialmedia/twitter.svg';
-import ICON_LOCATION from '../../assets/images/icons/location.svg';
-import ICON_CELLPHONE from '../../assets/images/icons/cellphone.svg';
-import ICON_WEB from '../../assets/images/icons/word.svg';
 
 const mapVariantsToColors = {
   default: MINE_SHAFT,
@@ -43,11 +44,12 @@ export const ButtonIcon = styled.div`
   height: 18px;
   width: 18px;
   margin: 2px 4px 2px 2px;
-  background: url(${({ type }) => type ? mapTypeToIcon[type] : ''});
+  background: url(${({ type }) => (type ? mapTypeToIcon[type] : '')});
   background-repeat: no-repeat;
   background-size: cover;
   :hover {
-    color: ${({ disabled }) => disabled ? mapVariantsToColors.disabled :  mapVariantsToColors['primary']};
+    color: ${({ disabled }) =>
+      disabled ? mapVariantsToColors.disabled : mapVariantsToColors.primary};
   }
 `;
 
@@ -55,7 +57,6 @@ export const ButtonText = styled.span`
   align-items: center;
   display: flex;
   text-decoration: none;
-  font-family: Lato;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -64,13 +65,14 @@ export const ButtonText = styled.span`
   letter-spacing: 1px;
   color: ${SILVER_CHALICE};
   :hover {
-    color: ${({ disabled }) => disabled ?  mapVariantsToColors[disabled] :  mapVariantsToColors['primary']};
+    color: ${({ disabled }) =>
+      disabled ? mapVariantsToColors[disabled] : mapVariantsToColors.primary};
   }
   margin-right: 2px;
-  height: ${({ show }) => show ? '12px' : '0'};
-  opacity: ${({ show }) => show ? 1 : 0};
-  transition: all 0.2s ${({ show }) => show ? 'ease-in' : 'ease-out'};
-  pointer-events: ${({ show }) => show ? 'initial': 'none'};
+  height: ${({ show }) => (show ? '12px' : '0')};
+  opacity: ${({ show }) => (show ? 1 : 0)};
+  transition: all 0.2s ${({ show }) => (show ? 'ease-in' : 'ease-out')};
+  pointer-events: ${({ show }) => (show ? 'initial' : 'none')};
 `;
 
 export const TextContainer = styled.div`
@@ -79,4 +81,3 @@ export const TextContainer = styled.div`
   justify-content: center;
   max-width: 99px;
 `;
-

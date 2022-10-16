@@ -1,6 +1,11 @@
 import styled from 'styled-components';
-import { MINE_SHAFT, SILVER, MEDIA_QUERY_MEDIUM, MEDIA_QUERY_SMALL } from '../../config/constants/styled-vars';
-import ICON_CHILE from '../../assets/images/icons/countries/chile.svg'
+import { ICON_CHILE } from '../../assets/Images';
+import {
+  MINE_SHAFT,
+  SILVER,
+  MEDIA_QUERY_MEDIUM,
+  MEDIA_QUERY_SMALL,
+} from '../../config/constants/styled-vars';
 
 const icons = {
   Chile: ICON_CHILE,
@@ -49,7 +54,6 @@ export const CountryIcon = styled.div`
 `;
 
 export const CountryName = styled.div`
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   font-stretch: normal;
@@ -62,7 +66,6 @@ export const CountryName = styled.div`
 
 export const Description = styled.div`
   min-height: 260px;
-  font-family: Lato;
   font-size: 14px;
   line-height: 1.71;
   letter-spacing: 1px;

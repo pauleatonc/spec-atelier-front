@@ -1,11 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { onHideModal } from './actions';
 import ModalLayout from '../../components/layouts/ModalLayout';
 import useModal from '../../components/layouts/ModalLayout.hooks';
-import iconSuccess from '../../assets/images/businessPlan/icon_phone.svg';
-
-import { onHideModal } from './actions';
+import CloseButton from '../../components/buttons/CloseButton';
 import {
   Container,
   ContainerModalSuccess,
@@ -14,7 +12,7 @@ import {
   TextBodySuccess,
   ButtonCloseContainer,
 } from './styles';
-import CloseButton from '../../components/buttons/CloseButton';
+import { SUCCESS_ICON } from '../../assets/Images';
 
 const ModalSuccess = () => {
   const { showSuccessModal } = useSelector((state) => state.modalPlanForm);
@@ -34,7 +32,7 @@ const ModalSuccess = () => {
           <CloseButton onClick={handleClose} />
         </ButtonCloseContainer>
         <ContainerModalSuccess>
-          <IconSuccess src={iconSuccess} />
+          <IconSuccess src={SUCCESS_ICON} />
           <TitleSuccess>¡Muy bien, recibimos tu solicitud!</TitleSuccess>
           <TextBodySuccess>
             tomaremos contacto en los próximos minutos para agendar una
