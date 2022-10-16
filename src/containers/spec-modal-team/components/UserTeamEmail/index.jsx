@@ -48,12 +48,6 @@ const UserTeamEmail = ({ member, onClick }) => {
       );
   };
 
-  const showPermissions = () => {
-    if (memberPermission.ability === 'write') return <p>(permiso de editar)</p>;
-    if (memberPermission.ability === 'watch') return <p>(permiso de ver)</p>;
-    return null;
-  };
-
   return (
     <Container>
       <ContainerMail owner={userOwner} onClick={() => onClick(member)}>
@@ -61,10 +55,9 @@ const UserTeamEmail = ({ member, onClick }) => {
         <Email owner={userOwner}>{user.email}</Email>
         {waiting && (
           <WaitingDisclaimer>
-            (no ha aceptado aún la invitación a colaborar.)
+            (no ha aceptado aún la invitación a colaborar)
           </WaitingDisclaimer>
         )}
-        {showPermissions()}
       </ContainerMail>
       {userOwner && (
         <div>
