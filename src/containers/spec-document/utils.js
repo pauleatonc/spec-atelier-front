@@ -176,7 +176,7 @@ export const getOwnerBlocks = (blocks) => {
   return blocks.filter(
     (block) =>
       block.change?.status === 'accepted' ||
-      (block.change?.status === 'waiting' && block.change.action === 'remove'),
+      (block.change?.status === 'waiting' && block.change?.action === 'remove'),
   );
 };
 

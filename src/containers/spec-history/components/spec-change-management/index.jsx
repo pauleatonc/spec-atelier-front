@@ -147,17 +147,17 @@ const SpecChangeManagement = ({ actionsIcons }) => {
           {approveRequestBlocks.map((block) => {
             return (
               <div
-                key={`container-changes-${block.type}-${block.change.action}-${block.id}`}
+                key={`container-changes-${block.type}-${block.change?.action}-${block.id}`}
               >
                 <ChangeItem
-                  key={`${block.type}-${block.change.action}-${block.id}`}
+                  key={`${block.type}-${block.change?.action}-${block.id}`}
                   isOwner={user_owner}
-                  changeId={block.change.id}
+                  changeId={block.change?.id}
                   type={block.type}
                   change={block.change}
                   status={block.change.status}
                   element={block.element}
-                  icon={actionsIcons[block.change.action]}
+                  icon={actionsIcons[block.change?.action]}
                   changesAccepted={changesAccepted}
                   changesRejected={changesRejected}
                   setChangesAccepted={setChangesAccepted}
@@ -180,7 +180,7 @@ const SpecChangeManagement = ({ actionsIcons }) => {
                     changesRejected={changesRejected}
                     setChangesAccepted={setChangesAccepted}
                     setChangesRejected={setChangesRejected}
-                    parentChangeId={block.change.id}
+                    parentChangeId={block.change?.id}
                     parentElement={block.element}
                   />
                 )}
@@ -199,7 +199,7 @@ const SpecChangeManagement = ({ actionsIcons }) => {
                     changesRejected={changesRejected}
                     setChangesAccepted={setChangesAccepted}
                     setChangesRejected={setChangesRejected}
-                    parentChangeId={block.change.id}
+                    parentChangeId={block.change?.id}
                     parentElement={block.element}
                   />
                 )}
