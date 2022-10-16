@@ -1,25 +1,37 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { PropTypes } from 'prop-types';
-import { Root, Input, Placeholder, SearchIcon } from './SearchBar.styles';
-import searchIconSource from '../../assets/images/icons/spec-search.svg';
+import { Root, Input, SearchIcon } from './SearchBar.styles';
+import { SEARCH_COLOR_ICON, SEARCH_ICON } from '../../assets/Images';
+import { useFocus } from '../../helpers/custom-hooks.helper';
 
-/**
- * The SearchBar's component.
- */
-const SearchBar = props => {
-  const { justifyContent, maxWidth, placeholder, value, onChange, name } = props;
-  const showPlaceholder = value === '';
+/** The SearchBar's component */
+const SearchBar = (props) => {
+  const {
+    justifyContent,
+    maxWidth,
+    placeholder,
+    value,
+    onChange,
+    name,
+  } = props;
+  const ref = useRef();
+  const focused = useFocus(ref);
 
   return (
     <Root maxWidth={maxWidth}>
-      <Input name={name} justifyContent={justifyContent} type="search" value={value} onChange={onChange} />
-      {justifyContent !== 'center' && <SearchIcon src={searchIconSource} />}
-      {showPlaceholder && (
-        <Placeholder justifyContent={justifyContent}>
-          {justifyContent === 'center' && <SearchIcon justifyContent={justifyContent} src={searchIconSource} />}
-          {placeholder}
-        </Placeholder>
-      )}
+      <Input
+        type="search"
+        placeholder={placeholder}
+        name={name}
+        justifyContent={justifyContent}
+        value={value}
+        onChange={onChange}
+        ref={ref}
+      />
+      <SearchIcon
+        src={focused ? SEARCH_COLOR_ICON : SEARCH_ICON}
+        justifyContent={justifyContent}
+      />
     </Root>
   );
 };

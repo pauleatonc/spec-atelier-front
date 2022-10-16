@@ -1,6 +1,18 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
+  BIM_ACTIVE_SOURCE,
+  BIM_SOURCE,
+  CERT_ACTIVE_SOURCE,
+  CERT_SOURCE,
+  CHECK_SOURCE,
+  DWG_ACTIVE_SOURCE,
+  DWG_ICON,
+  PLUS_SOURCE,
+  TECH_ACTIVE_SOURCE,
+  TECH_ICON,
+} from '../../assets/Images';
+import {
   MINE_SHAFT,
   MEDIA_QUERY_SMALL,
   WHITE,
@@ -15,20 +27,11 @@ import {
   MINE_SHAFT_RGB,
   BLACK,
 } from '../../config/constants/styled-vars';
-import dwgSource from '../../assets/images/icons/dwg.svg';
-import dwgActiveSource from '../../assets/images/icons/dwg_active.svg';
-import bimSource from '../../assets/images/icons/bim.svg';
-import bimActiveSource from '../../assets/images/icons/bim_active.svg';
-import techSource from '../../assets/images/icons/tech.svg';
-import techActiveSource from '../../assets/images/icons/tech_active.svg';
-import certSource from '../../assets/images/icons/cert.svg';
-import certActiveSource from '../../assets/images/icons/cert_active.svg';
-import plusSource from '../../assets/images/icons/plus.svg';
-import checkSource from '../../assets/images/icons/check.svg';
 
 const hoverDefaultProps = {
   hover: false,
 };
+
 const hoverPropTypes = {
   hover: PropTypes.bool,
 };
@@ -43,7 +46,7 @@ export const DotsIcon = styled.img`
 `;
 
 export const Root = styled.div`
-  background-color: ${({ selected = false }) => selected ? CONCRETE : WHITE };
+  background-color: ${({ selected = false }) => (selected ? CONCRETE : WHITE)};
   border: 1px solid
     ${({ hover = false, selected = false, isItemsUsed }) =>
       (hover && !selected) || isItemsUsed ? TURQUOISE : ALTO};
@@ -57,14 +60,12 @@ export const Root = styled.div`
   overflow: visible;
   position: relative;
   width: 100%;
-
   &:hover {
     box-shadow: rgba(${BLACK}, 0.1) 1px 1px 30px;
   }
   &:hover ${DotsIcon} {
     visibility: visible;
   }
-
   ${MEDIA_QUERY_SMALL} {
     margin-bottom: 13px;
   }
@@ -74,6 +75,7 @@ Root.defaultProps = {
   ...hoverDefaultProps,
   selected: false,
 };
+
 Root.propTypes = {
   ...hoverPropTypes,
   selected: PropTypes.bool,
@@ -101,7 +103,6 @@ export const Details = styled.section`
 const BaseDetails = styled.p`
   -webkit-box-orient: vertical;
   display: -webkit-box;
-  font-family: Lato;
   -webkit-line-clamp: 2;
   margin: 0 0 10px;
   overflow: hidden;
@@ -123,7 +124,6 @@ export const Description = styled(BaseDetails)`
 
 export const Category = styled.p`
   color: ${MINE_SHAFT};
-  font-family: Lato;
   font-size: 10px;
   letter-spacing: 0.83px;
   margin: auto 0 7px;
@@ -134,7 +134,6 @@ export const Category = styled.p`
 
 export const Reference = styled.p`
   color: ${MINE_SHAFT};
-  font-family: Lato;
   font-size: 10px;
   letter-spacing: 0.83px;
   margin: 0;
@@ -165,7 +164,7 @@ const BaseIcon = styled.span`
 
 export const DwgIcon = styled(BaseIcon)`
   background-image: url('${({ hover = false }) =>
-    hover ? dwgActiveSource : dwgSource}');
+    hover ? DWG_ACTIVE_SOURCE : DWG_ICON}');
 `;
 
 DwgIcon.defaultProps = hoverDefaultProps;
@@ -173,7 +172,7 @@ DwgIcon.propTypes = hoverPropTypes;
 
 export const BimIcon = styled(BaseIcon)`
   background-image: url('${({ hover = false }) =>
-    hover ? bimActiveSource : bimSource}');
+    hover ? BIM_ACTIVE_SOURCE : BIM_SOURCE}');
 `;
 
 BimIcon.defaultProps = hoverDefaultProps;
@@ -181,7 +180,7 @@ BimIcon.propTypes = hoverPropTypes;
 
 export const TechIcon = styled(BaseIcon)`
   background-image: url('${({ hover = false }) =>
-    hover ? techActiveSource : techSource}');
+    hover ? TECH_ACTIVE_SOURCE : TECH_ICON}');
 `;
 
 TechIcon.defaultProps = hoverDefaultProps;
@@ -189,7 +188,7 @@ TechIcon.propTypes = hoverPropTypes;
 
 export const CertIcon = styled(BaseIcon)`
   background-image: url('${({ hover = false }) =>
-    hover ? certActiveSource : certSource}');
+    hover ? CERT_ACTIVE_SOURCE : CERT_SOURCE}');
 `;
 
 CertIcon.defaultProps = hoverDefaultProps;
@@ -200,11 +199,9 @@ export const SeeMore = styled.section`
   color: ${({ hover = false }) => (hover ? JAVA : BOULDER)};
   display: flex;
   justify-content: flex-end;
-  font-family: Lato;
   font-size: 12px;
   font-weight: bold;
   visibility: ${({ show = false }) => (show ? 'visible' : 'hidden')};
-
   &:hover {
     text-decoration: ${({ show = false }) => (show ? 'underline' : 'none')};
   }
@@ -214,6 +211,7 @@ SeeMore.defaultTypes = {
   ...hoverDefaultProps,
   show: false,
 };
+
 SeeMore.propTypes = {
   ...hoverPropTypes,
   show: PropTypes.bool,
@@ -230,11 +228,11 @@ const BaseStates = styled.section`
 `;
 
 export const Add = styled(BaseStates)`
-  background-image: url('${plusSource}');
+  background-image: url('${PLUS_SOURCE}');
 `;
 
 export const Check = styled(BaseStates)`
-  background-image: url('${checkSource}');
+  background-image: url('${CHECK_SOURCE}');
 `;
 
 export const ActionsMenuItem = styled.section`
@@ -242,16 +240,13 @@ export const ActionsMenuItem = styled.section`
   border-bottom: 1px solid ${NOBEL};
   color: ${MINE_SHAFT};
   cursor: pointer;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
   padding: 14px 0px 16px 35px;
   width: 187px;
-
   &:hover {
     background-color: ${GALLERY};
   }
-
   &:last-child {
     border-bottom: 0;
   }

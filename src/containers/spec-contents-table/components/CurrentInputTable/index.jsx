@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import CurrencyInput from './CurrencyInput'
+import CurrencyInput from './CurrencyInput';
 
 const CurrentInputTable = ({
   value,
@@ -28,16 +28,20 @@ const CurrentInputTable = ({
     let formattedValue = inputValue.replace('$', '');
     formattedValue = formattedValue.replaceAll('.', '');
     if (tableInputType === 'price_user') {
-      if (Number(formattedValue) <= 99)
-        setCurrentValue(100);
-      if (Number(formattedValue) > 99 && prevValueP !== parseInt(formattedValue, 10)) {
+      if (Number(formattedValue) <= 99) setCurrentValue(100);
+      if (
+        Number(formattedValue) > 99 &&
+        prevValueP !== parseInt(formattedValue, 10)
+      ) {
         onBlurInput(tableInputType, formattedValue, row);
         setPrevValueP(parseInt(formattedValue, 10));
       }
     } else if (tableInputType === 'quantity') {
-      if (Number(formattedValue) <= 0)
-        setCurrentValue(1);
-      if (Number(formattedValue) > 0 && prevValueQ !== parseInt(formattedValue, 10)) {
+      if (Number(formattedValue) <= 0) setCurrentValue(1);
+      if (
+        Number(formattedValue) > 0 &&
+        prevValueQ !== parseInt(formattedValue, 10)
+      ) {
         onBlurInput(tableInputType, formattedValue, row);
         setPrevValueQ(parseInt(formattedValue, 10));
       }
@@ -45,7 +49,7 @@ const CurrentInputTable = ({
   };
   return (
     <>
-      {tableInputType === "quantity" ?
+      {tableInputType === 'quantity' ? (
         <CurrencyInput
           type="text"
           value={currentValue}
@@ -53,7 +57,7 @@ const CurrentInputTable = ({
           onBlur={handleBlur}
           {...restProps}
         />
-        :
+      ) : (
         <CurrencyInput
           placeholder="$0"
           type="text"
@@ -61,7 +65,8 @@ const CurrentInputTable = ({
           onChange={onChangeCurrentValue}
           onBlur={handleBlur}
           {...restProps}
-        />}
+        />
+      )}
     </>
   );
 };

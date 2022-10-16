@@ -1,6 +1,12 @@
 import styled from 'styled-components';
-import { WHITE, SHADOW_GREY, MINE_SHAFT, SILVER, GALLERY } from '../../config/constants/styled-vars';
-
+import {
+  WHITE,
+  SHADOW_GREY,
+  SILVER,
+  GALLERY,
+  PUERTO_RICO,
+  PUERTO_RICO_BACKGROUND,
+} from '../../config/constants/styled-vars';
 
 export const Container = styled.div`
   position: relative;
@@ -8,20 +14,19 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  max-height: ${({ maxHeight }) => maxHeight || '100%'};
-  margin-top: 8px;
   position: absolute;
   border: 1px solid ${SILVER};
   background-color: ${WHITE};
   min-width: 160px;
   min-height: 30px;
-  width: ${({ width }) => width || '100%'};
-  padding: 4px 4px;
-  z-index: 1;
+  z-index: 3;
   overflow-y: auto;
-  display: ${({ isOpen }) => isOpen ? 'block' : 'none'};
-  ${({ isOpen }) => isOpen ? `box-shadow: ${SHADOW_GREY}` : ''};
-  ${({ right }) => right ? 'right: 0' : 'left: 0'};
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  width: ${({ width }) => width || '100%'};
+  max-height: ${({ maxHeight }) => maxHeight || '100%'};
+  ${({ showIconInfo }) => showIconInfo && 'overflow: visible'};
+  ${({ isOpen }) => (isOpen ? `box-shadow: ${SHADOW_GREY}` : '')};
+  ${({ right }) => (right ? 'right: 0' : 'left: 0')};
 `;
 
 export const Section = styled.div`
@@ -32,33 +37,56 @@ export const Section = styled.div`
   align-items: center;
 `;
 
-export const Option = styled.section`
-  box-sizing: border-box;
-  color: ${MINE_SHAFT};
-  cursor: pointer;
-  font-family: Lato;
-  font-size: 12px;
-  letter-spacing: 0.86px;
-  padding: 10px 23px;
-  width: 100%;
-
+export const ContentOption = styled.div`
+  display: block;
+  padding: 0 9px;
+  cursor: ${({ disabled }) => (disabled ? 'initial' : 'pointer')};
+  opacity: ${({ disabled }) => (disabled ? '0.8' : 'initial')};
   &:hover {
-    background-color: ${GALLERY};
-  }
-
-  &:first-child {
-    margin: 6px 0 0;
-  }
-
-  &:last-child {
-    margin: 0 0 6px;
+    background-color: ${({ backgroundPuertoRico, disabled }) =>
+      backgroundPuertoRico && !disabled ? PUERTO_RICO_BACKGROUND : GALLERY};
   }
 `;
 
-export const NoOptions = styled.div`
-  font-family: Lato;
+export const Option = styled.div`
+  width: 100%;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  &:hover {
+    ${({ hoverPrimaryColor }) => hoverPrimaryColor && `color: ${PUERTO_RICO}`};
+  }
+`;
+
+export const ContentUser = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+`;
+
+export const NameSection = styled.option`
+  padding-left: 6px;
+  display: flex;
+  align-items: center;
+`;
+
+export const OptionNameSection = styled.option`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
   font-size: 12px;
-  letter-spacing: 0.86px;
+`;
+
+export const NoOptions = styled.div`
+  font-size: 12px;
+  letter-spacing: 1px;
   padding: 10px 23px;
   color: ${SILVER};
-`
+`;
+
+export const IconInfo = styled.i`
+  font-size: 13px;
+`;

@@ -1,6 +1,5 @@
 /* Custom properties */
 import styled from 'styled-components';
-
 import { MINE_SHAFT, WHITE } from '../../config/constants/styled-vars';
 
 const TOOLTIP_MARGIN = '30px';
@@ -20,16 +19,18 @@ export const Content = styled.div`
   padding: 8px 12px;
   color: ${WHITE};
   background: ${MINE_SHAFT};
-  line-height: 1;
   z-index: 100;
-  font-family: Lato;
   font-size: 12px;
   letter-spacing: 1px;
-  white-space: nowrap;
+  min-width: 200px;
+  text-align: center;
   ${({ position }) => {
     switch (position) {
       case 'top':
-        return `top: calc(${TOOLTIP_MARGIN} * -1);`;
+        return `
+          top: calc(${TOOLTIP_MARGIN} * -1);
+          transform: translateX(-50%) translateY(-50%);
+        `;
       case 'right':
         return `
           left: calc(100% + ${TOOLTIP_MARGIN});
@@ -37,7 +38,10 @@ export const Content = styled.div`
           transform: translateX(0) translateY(-50%);
         `;
       case 'bottom':
-        return `bottom: calc(${TOOLTIP_MARGIN} * -1);`;
+        return `
+          bottom: calc(${TOOLTIP_MARGIN} * -1);
+          transform: translateX(-50%) translateY(50%);
+        `;
       case 'left':
         return `
           left: auto;
@@ -49,8 +53,8 @@ export const Content = styled.div`
         return `top: calc(${TOOLTIP_MARGIN} * -1);`;
     }
   }};
-  ::before{
-    content: " ";
+  ::before {
+    content: ' ';
     left: 50%;
     border: solid transparent;
     height: 0;
@@ -87,6 +91,8 @@ export const Content = styled.div`
             transform: translateX(0) translateY(-50%);
             border-left-color: ${MINE_SHAFT};
           `;
+        default:
+          return ``;
       }
     }}
   }

@@ -20,7 +20,7 @@ export const Icon = styled.div`
 export const InfoContainer = styled.div`
   diplay: flex;
   flex-direction: column;
-`
+`;
 
 export const Name = styled.div`
   font-family: Lato;

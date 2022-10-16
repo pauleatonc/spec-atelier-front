@@ -8,15 +8,17 @@ import {
   SILVER_CHALICE,
   BLACK,
   MEDIA_QUERY_STANDAR_MEDIUM,
+  WHITE_RGB,
+  DOVE_GRAY,
 } from '../../../config/constants/styled-vars';
 
 export const NavbarContainer = styled.nav`
   top: 0;
   left: 0;
   align-items: center;
-  background-color: ${({ transparent }) => transparent ? 'transparent' : WHITE};
+  background-color: ${({ transparent }) =>
+    transparent ? 'transparent' : WHITE};
   display: flex;
-  font-family: 'Lato', sans-serif;
   height: ${NAVBAR_HEIGHT};
   position: ${({ fixed }) => fixed && 'fixed'};
   width: 100%;
@@ -71,7 +73,6 @@ export const Item = styled.div`
 
 export const ItemText = styled.span`
   height: 18px;
-  font-family: Lato;
   font-size: 14px;
   font-weight: bold;
   font-stretch: normal;
@@ -95,7 +96,6 @@ export const LinkItem = styled.div`
   justify-content: center;
   margin: 8px 0px;
   padding: 4px 8px;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -118,7 +118,6 @@ export const LinkItem = styled.div`
 export const LinkRegister = styled(LinkItem)`
   border-radius: 20px;
   background-color: ${PRIMARY};
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   font-stretch: normal;
@@ -127,16 +126,26 @@ export const LinkRegister = styled(LinkItem)`
   letter-spacing: normal;
   color: ${WHITE};
   width: 130px;
+  :hover {
+    border: 1px solid;
+    box-shadow: inset 0 0 20px rgba(${WHITE_RGB}, 0.5),
+      0 0 20px rgba(${WHITE_RGB}, 0.2);
+    outline-color: red;
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px ${DOVE_GRAY};
+  }
 `;
 
 export const LinkLogin = styled(LinkItem)`
   margin-left: 16px;
   border-radius: 20px;
-  border: 1px solid ${({ transparentize }) => (transparentize ? WHITE : SILVER_CHALICE)};
+  border: 1px solid
+    ${({ transparentize }) => (transparentize ? WHITE : SILVER_CHALICE)};
   display: flex;
   justify-content: space-between;
   min-width: 150px;
-  background-color: ${({ transparentize }) => transparentize ? 'transparent' : WHITE};
+  background-color: ${({ transparentize }) =>
+    transparentize ? 'transparent' : WHITE};
   color: ${({ transparentize }) => (transparentize ? WHITE : SILVER_CHALICE)};
 `;
 

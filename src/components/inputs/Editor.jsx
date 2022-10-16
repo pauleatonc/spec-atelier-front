@@ -4,11 +4,8 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import InlineEditor from '@ckeditor/ckeditor5-build-inline';
 import Button from '../buttons/Button';
 import { Root, Label, Section, Actions, EditorStyles } from './Editor.styles';
-import { VARIANTS_BUTTON } from '../../config/constants/button-variants';
 
-/**
- * The Editor's component.
- */
+/** The Editor's component */
 const Editor = props => {
   const { actions, initialValue, label, placeholder, onCancel, onSubmit } = props;
   const [editor, setEditor] = useState();
@@ -46,12 +43,15 @@ const Editor = props => {
       </Section>
       {actions && (
         <Actions>
-          <Button size="sm" onClick={handleCancel}>Cancelar</Button>
+          <Button fontSize='12px' height='21px' onClick={handleCancel}>
+            Cancelar
+          </Button>
           <Button
             disabled={!canSubmit}
             margin="0 0 0 8px"
-            size="sm"
-            variant={canSubmit ? VARIANTS_BUTTON.PRIMARY : VARIANTS_BUTTON.GRAY}
+            fontSize='12px'
+            height='21px'
+            variant={canSubmit ? 'primary' : 'gray'}
             onClick={handleSubmit}
           >
             Guardar

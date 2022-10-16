@@ -1,23 +1,20 @@
 import { CHANGE_OPTION } from './SpecContentsButtons.actions';
-import {
-	ESPEC_DOCUMENT,
-	SPEC_TABLE
-  } from '../../config/constants/button-variants';
+import { SPEC_DOCUMENT } from '../../config/constants/button-variants';
 
 const dataSectionState = {
-	option: ESPEC_DOCUMENT,
+  option: SPEC_DOCUMENT,
 };
 
 const dataSectionsReducer = (state = dataSectionState, { payload, type }) => {
-	switch (type) {
-		case CHANGE_OPTION:
-			return {
-				...state,
-				option: payload.option,
-			};
+  switch (type) {
+    case CHANGE_OPTION:
+      return {
+        ...state,
+        option: payload.option,
+      };
 
-		default:
-			return state;
-	}
+    default:
+      return state;
+  }
 };
 export default dataSectionsReducer;
