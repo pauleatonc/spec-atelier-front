@@ -70,7 +70,7 @@ const SpecContents = () => {
           </ButtonBack>
           Tabla de contenidos
         </PanelTitle>
-        <ListTitle>Indice de Partidas</ListTitle>
+        <ListTitle>Índice de Partidas</ListTitle>
         {sections.map((section) => (
           <Fragment key={section.id}>
             <ListItem
