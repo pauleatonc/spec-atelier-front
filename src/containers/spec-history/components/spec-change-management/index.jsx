@@ -214,7 +214,7 @@ const SpecChangeManagement = ({ actionsIcons }) => {
             <Button
               variant={VARIANTS_BUTTON.PRIMARY}
               onClick={() => setShowModal(true)}
-              disabled={!changes || changesCount > changes}
+              disabled={!changes}
             >
               {`Confirmar ${changes || ''} cambios`}
             </Button>

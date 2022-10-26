@@ -99,7 +99,7 @@ export const watchNotifications = (body) => async (dispatch) => {
 }
 
 export const acceptNotificationsAC = (body) => async (dispatch) => {
-	dispatch(onActionCreator(ACCEPT_NOTIFICATION));	
+	dispatch(onActionCreator(ACCEPT_NOTIFICATION));
 	return acceptNotification(body).then((response) => {
 		const {resp, codeStatus} = response;
 		if(codeStatus !== 401 && response.codeStatus !== 404 && response.codeStatus !== 500 && response.codeStatus !== 200){
@@ -283,7 +283,7 @@ export const acceptNotificationsAC2 = (body) => async (dispatch) => {
 	  }))
 	})
 }
-  
+
 export const rejectNotificationsAC = (body) => async (dispatch) => {
 	rejectNotification(body).then((response) => {
 	  const {resp, codeStatus} = response;

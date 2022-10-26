@@ -1,5 +1,3 @@
-import { saveSpecChanges } from "../../services/specs.service";
-
 export const getFormatedTableData = (blocks) => {
   const sectionsBlocks = blocks.filter((block) => block.type === 'Section');
 
