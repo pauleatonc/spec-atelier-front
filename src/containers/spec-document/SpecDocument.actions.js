@@ -465,7 +465,7 @@ export const onSaveSpecChanges = (
     .then((response) => {
       if (callback) callback();
       dispatch(
-        onActionCreator(SAVE_SPEC_CHANGES_SUCCESS, { blocks: response.blocks }),
+        onActionCreator(SAVE_SPEC_CHANGES_SUCCESS, { blocks: response.blocks, count: response.approve_request.count }),
       );
       dispatch(onShowAlertSuccess({ message: response.message }));
     })
